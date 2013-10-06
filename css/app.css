@@ -1,7 +1,12 @@
 /* app.css */
-
 body {
   padding-top: 50px;
 }
 .content {
+<<<<<<< HEAD
+=======
+  padding: 40px 15px;
+  text-align: center;
+  background: #0000ff;
+>>>>>>> d30dbd2913785da587e93c4ab52d98ae27977de3
 }
