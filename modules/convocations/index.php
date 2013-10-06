@@ -1,5 +1,5 @@
-<?php require('parts/header.php'); ?>
-<?php require('parts/menu.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 
 	<div class="container">
 
@@ -10,4 +10,4 @@
 	</div><!-- /.container -->
 
 
-<?php require('parts/footer.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
