@@ -23,7 +23,7 @@
 	</div>
 </div>
 
-fdfdsf
+bonjour
 	Gite-des-cimes
 	==============
 
