@@ -22,12 +22,6 @@
       <script src="../../assets/js/respond.min.js"></script>
     <![endif]-->
 	</head>
-
-<<<<<<< HEAD
-=======
-odhvhj f çuf vuf - clement 
-- clement 2
->>>>>>> 52e23dc82cf4f0c652d09ddeaa6622205772b2d3
 	<body>
 
 
