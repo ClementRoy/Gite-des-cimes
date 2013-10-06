@@ -23,7 +23,15 @@
 	</div>
 </div>
 
-fdfdsf
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+bonjour
+=======
+>>>>>>> 084fdd0a8bc621d2722894048e28f4e5915ac58d
+=======
+>>>>>>> 084fdd0a8bc621d2722894048e28f4e5915ac58d
+bonjour
 	Gite-des-cimes
 	==============
 
