@@ -24,7 +24,6 @@
 	</head>
 
 
-bonjour
 	<body>
 
 
