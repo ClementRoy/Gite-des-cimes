@@ -22,7 +22,7 @@
 	  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css">
 	<![endif]-->
 
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="/assets/css/app.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
