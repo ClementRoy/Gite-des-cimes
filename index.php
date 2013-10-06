@@ -2,6 +2,7 @@
 	require 'config/settings.php';
 	require 'config/mysql.php';
 ?>
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -35,4 +36,20 @@
     <script src="../../assets/js/jquery.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>
   </body>
+=======
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+
+	</div>
+</div>
+
+</body>
+>>>>>>> 6bd24ef97343e7f49326ab4af025d7753d294f9a
 </html>
