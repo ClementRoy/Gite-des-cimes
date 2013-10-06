@@ -1,6 +1,4 @@
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
 	require 'config/settings.php';
 	require 'config/mysql.php';
 ?>
@@ -45,10 +43,8 @@ echo "hello";
 echo "hello";
 
 ?>
->>>>>>> ee0546c2da4f1fff4308ffd2c29030eb3aae2ad7
 =======
 
 echo "hello";
 
 ?>
->>>>>>> ee0546c2da4f1fff4308ffd2c29030eb3aae2ad7
