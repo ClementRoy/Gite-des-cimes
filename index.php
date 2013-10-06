@@ -23,40 +23,6 @@
 	</div>
 </div>
 
-
-fdfdsf ds ds ds dedit 2
-=======
-bonjour
-=======
-bonjour
-=======
-
-bonjour
-	Gite-des-cimes
-	==============
-
-
-	Gîte des Cîmes
-	tdhdhd
-
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
-=======
-
-echo "hello";
-
-?>
-=======
-
-echo "hello";
-
-?>
-=======
-
-echo "hello";
-
-?>
-
-
-bonjour
