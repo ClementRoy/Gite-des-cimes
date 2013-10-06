@@ -2,3 +2,37 @@
 [06-Oct-2013 17:21:12 Europe/Berlin] PHP Fatal error:  require(): Failed opening required '/parts/menu.php' (include_path='.:/Applications/MAMP/bin/php/php5.4.10/lib/php') in /Users/royclement/Desktop/Gite-des-cimes/modules/enfants/index.php on line 2
 [06-Oct-2013 17:21:12 Europe/Berlin] PHP Warning:  require(/parts/menu.php): failed to open stream: No such file or directory in /Users/royclement/Desktop/Gite-des-cimes/modules/enfants/index.php on line 2
 [06-Oct-2013 17:21:12 Europe/Berlin] PHP Fatal error:  require(): Failed opening required '/parts/menu.php' (include_path='.:/Applications/MAMP/bin/php/php5.4.10/lib/php') in /Users/royclement/Desktop/Gite-des-cimes/modules/enfants/index.php on line 2
+[06-Oct-2013 18:23:40 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:23:46 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:24:41 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:24:44 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:24:51 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:24:57 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:24:57 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:24:59 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:25:01 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:25:02 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:25:03 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:25:04 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:25:05 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:25:05 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:25:43 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:25:43 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:26:21 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:26:21 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:26:32 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:26:32 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:26:52 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:26:52 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:27:06 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:27:06 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:27:12 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:27:12 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:27:24 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:27:24 Europe/Berlin] PHP Notice:  Undefined index: PATH_INFO in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 14
+[06-Oct-2013 18:33:44 Europe/Berlin] PHP Parse error:  syntax error, unexpected ':' in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 29
+[06-Oct-2013 18:33:52 Europe/Berlin] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 29
+[06-Oct-2013 18:33:52 Europe/Berlin] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 29
+[06-Oct-2013 18:34:10 Europe/Berlin] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 29
+[06-Oct-2013 18:34:10 Europe/Berlin] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 29
+[06-Oct-2013 18:34:32 Europe/Berlin] PHP Parse error:  syntax error, unexpected ';' in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 29
