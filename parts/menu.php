@@ -30,7 +30,36 @@ $path_array = explode('/', $_SERVER['SCRIPT_FILENAME']);
 	        	<?php echo $module; ?></a>
 	        </li>
 	    	<?php endforeach; ?>
+			<li class="dropdown">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="#">Action</a></li>
+	          <li><a href="#">Another action</a></li>
+	          <li><a href="#">Something else here</a></li>
+	          <li><a href="#">Separated link</a></li>
+	          <li><a href="#">One more separated link</a></li>
+	        </ul>
+	      </li>
+
 	      </ul>
+
+    <form class="navbar-form navbar-right" role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Mots clefs">
+      </div>
+    </form>
+
 	    </div><!--/.nav-collapse -->
 	  </div>
 	</div>
+
+
+<div class="container">
+	<ol class="breadcrumb">
+		<li><a href="#">Home</a></li>
+		<li><a href="#">Library</a></li>
+		<li class="active">Data</li>
+	</ol>	
+	
+</div>
+
