@@ -1,3 +1,5 @@
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/config/config.inc.php'); ?>
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
