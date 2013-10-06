@@ -12,7 +12,7 @@
 			<div class="col-md-6 col-s-4">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title"><i class="glyphicon glyphicon-user"></i> Fiche enfant incomplète</h3>
+						<h3 class="panel-title"><i class="icon icon-user"></i> Fiche enfant incomplète</h3>
 					</div>
 
 						<a href="#" class="list-group-item"><span class="badge">14</span>Clément Roy</a>
