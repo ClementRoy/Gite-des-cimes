@@ -14,6 +14,8 @@
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
 
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 	<!--[if IE 7]>
@@ -42,7 +44,7 @@
 	    </div>
 	    <div class="collapse navbar-collapse">
 	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="#">Acceuil</a></li>
+	        <li class="active"><a href="#">Accueil</a></li>
 	         <li><a href="#">Enfants</a></li>
 	        <li><a href="#">Séjours</a></li>
 	        <li><a href="#">Structures</a></li>
