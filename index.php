@@ -1,27 +1,3 @@
-<<<<<<< HEAD
-<?php
-	require 'config/settings.php';
-	require 'config/mysql.php';
-?>
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-</head>
-<body>
-<div class="container">
-	<div class="row">
-
-	</div>
-</div>
-
-</body>
-</html>
-
-
-bonjour
-=======
 <?php 
  ?>
 <!DOCTYPE html>
@@ -58,4 +34,3 @@ bonjour
     <script src="../../dist/js/bootstrap.min.js"></script>
   </body>
 </html>
->>>>>>> 681624370c7cb5c940a284ff7b685fe7c1b93b5b
