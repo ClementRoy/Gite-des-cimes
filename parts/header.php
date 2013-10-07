@@ -14,7 +14,7 @@
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
 
-    <link href="/assets/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap-flatly.css" rel="stylesheet">
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
