@@ -1,6 +1,6 @@
 <?php
 
-class contact
+class facture
 {
 	
 	function __construct()

@@ -1,12 +1,17 @@
 <?php
 
-class contact
+class user
 {
 	
 	function __construct()
 	{
 		# code...
 	}
+
+
+
+
+
 }
 
 ?>

@@ -1,4 +1,14 @@
 
+<?php 
+/*
+Utiliser ce fichier comme un routeur
+Il doit contrôler si l'user est identifié
+	Si oui il route vers le bon module (dashborad par défaut)
+	Si non il demande la connexion
+*/
+?>
+
+
 <?php require('parts/header.php'); ?>
 <?php require('parts/menu.php'); ?>
 

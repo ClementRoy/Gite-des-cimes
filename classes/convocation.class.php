@@ -1,5 +1,6 @@
 <?php
-class Child
+
+class convocation
 {
 	
 	function __construct()

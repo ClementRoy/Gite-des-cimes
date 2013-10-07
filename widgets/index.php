@@ -1,7 +1,6 @@
 
 <?php require('parts/header.php'); ?>
 <?php require('parts/menu.php'); ?>
-<?php require('parts/breadcrumb.php'); ?>
 
 	<div class="container">
 

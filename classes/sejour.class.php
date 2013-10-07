@@ -1,6 +1,6 @@
 <?php
 
-class contact
+class sejour
 {
 	
 	function __construct()
