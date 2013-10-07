@@ -36,3 +36,10 @@
 [06-Oct-2013 18:34:10 Europe/Berlin] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 29
 [06-Oct-2013 18:34:10 Europe/Berlin] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 29
 [06-Oct-2013 18:34:32 Europe/Berlin] PHP Parse error:  syntax error, unexpected ';' in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 29
+[07-Oct-2013 17:32:52 Europe/Berlin] PHP Notice:  Use of undefined constant php - assumed 'php' in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 53
+[07-Oct-2013 17:32:52 Europe/Berlin] PHP Notice:  Use of undefined constant php - assumed 'php' in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 53
+[07-Oct-2013 17:33:04 Europe/Berlin] PHP Notice:  Use of undefined constant php - assumed 'php' in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 53
+[07-Oct-2013 17:33:13 Europe/Berlin] PHP Notice:  Use of undefined constant php - assumed 'php' in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 53
+[07-Oct-2013 17:33:13 Europe/Berlin] PHP Notice:  Use of undefined constant php - assumed 'php' in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 53
+[07-Oct-2013 17:33:21 Europe/Berlin] PHP Notice:  Use of undefined constant php - assumed 'php' in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 53
+[07-Oct-2013 17:33:21 Europe/Berlin] PHP Notice:  Use of undefined constant php - assumed 'php' in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 53

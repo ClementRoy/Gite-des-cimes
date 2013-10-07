@@ -43,13 +43,21 @@ $path_array = explode('/', $_SERVER['SCRIPT_FILENAME']);
 
 	      </ul>
 
+<?php
+/*
     <form class="navbar-form navbar-right" role="search">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Mots clefs">
       </div>
     </form>
+*/
+   ?>
+		   <div class="navbar-right">
+		   	<p class="navbar-text">Salut, <a href="#" class="navbar-link">Marie-Christine Behlouli</a> !</p>
+		   </div>
 
 	    </div><!--/.nav-collapse -->
+
 	  </div>
 	</div>
 
