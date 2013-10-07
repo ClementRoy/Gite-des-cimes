@@ -1,6 +1,6 @@
 
 	<div class="container" role="contentinfo">
-		<p>Designed and built with all the ♥ in the world by @C_Beghin and @ClementRoy.</p>
+		<p>Conçu et développé avec tout l'♥ du monde part <a href="https://twitter.com/C_Beghin">@C_Beghin</a> and <a href="https://twitter.com/ClementRoy">@ClementRoy</a>.</p>
 	</div>
 
 	<!-- Bootstrap core JavaScript

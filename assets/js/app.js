@@ -1,4 +1,7 @@
 
+$('.tooltip').tooltip();
+$('.popover').popover();
+
 	var sorter = new TINY.table.sorter('sorter','table',{
 		headclass:'head',
 		ascclass:'asc',
