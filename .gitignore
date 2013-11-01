@@ -7,3 +7,5 @@ config/mysql.php
 # Ignore default text files
 .htaccess
 robots.txt
+
+/ressources
