@@ -1,9 +1,12 @@
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
+    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
+    <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
-    <div class="container">
+  <!-- main container -->
+    <div class="content">
+      <div id="pad-wrapper">
 
         <div class="page-header">
           <h1>Les enfants <small>en résumé</small></h1>
