@@ -1,117 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Gîte des Cîmes - Outil de gestion</title>
 
-<?php 
-/*
-Utiliser ce fichier comme un routeur
-Il doit contrôler si l'user est identifié
-	Si oui il route vers le bon module (dashborad par défaut)
-	Si non il demande la connexion
-*/
-?>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon.png">
 
 
-<?php require('parts/header.php'); ?>
-<?php require('parts/menu.php'); ?>
 
-	<div class="container">
+	<!-- open sans font -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-		<div class="row content">
-			<h1>Display homepage widgets here</h1>
+	<!-- lato font -->
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+	<!-- navbar -->
+	<header class="navbar navbar-inverse" role="banner">
+		<div class="navbar-header">
+			<button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html">Gîte des cimes</a>
 		</div>
-
-		<div class="row">
-			<div class="col-md-6 col-s-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title"><i class="icon icon-user"></i> Fiche enfant incomplète</h3>
-					</div>
-
-						<a href="#" class="list-group-item"><span class="badge">14</span>Clément Roy</a>
-						<a href="#" class="list-group-item">Christophe Béghin</a>
-						<a href="#" class="list-group-item">Nedjma Behlouli</a>
-						<a href="#" class="list-group-item">Coraline Assimon</a>
-					</ul>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Panel title</h3>
-					</div>
-					<div class="panel-body">
-						Panel content
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-		<div class="row">
-			<div class="col-md-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Panel title</h3>
-					</div>
-					<div class="panel-body">
-						Panel content
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Panel title</h3>
-					</div>
-					<div class="panel-body">
-						Panel content
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Panel title</h3>
-					</div>
-					<div class="panel-body">
-						Panel content
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Panel title</h3>
-					</div>
-					<div class="panel-body">
-						<div class="progress">
-						  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="10" aria-valuemax="100" style="width: 30%">
-						    <span class="sr-only">40% Complete (success)</span>
-						  </div>
-						</div>
-						<div class="progress">
-						  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-						    <span class="sr-only">20% Complete</span>
-						  </div>
-						</div>
-						<div class="progress">
-						  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-						    <span class="sr-only">60% Complete (warning)</span>
-						  </div>
-						</div>
-						<div class="progress">
-						  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-						    <span class="sr-only">80% Complete</span>
-						  </div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</div><!-- /.container -->
-
-
-<?php require('parts/footer.php'); ?>
+    </header>
+    <!-- / navbar -->
+<body>
+</html>
