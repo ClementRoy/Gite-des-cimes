@@ -19,12 +19,7 @@
     <link href="/assets/css/lib/font-awesome.css" type="text/css" rel="stylesheet" />
 
     <!-- global styles -->
-    <link rel="stylesheet" type="text/css" href="/assets/css/compiled/layout.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/compiled/elements.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/compiled/icons.css">
-
-    <!-- this page specific styles -->
-    <link rel="stylesheet" href="/assets/css/compiled/index.css" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/app.css">
     
 	<!-- open sans font -->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
