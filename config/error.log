@@ -162,3 +162,5 @@ Stack trace:
 [03-Nov-2013 18:40:45 Europe/Berlin] PHP Fatal error:  Cannot redeclare __autoload() in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 25
 [03-Nov-2013 18:40:46 Europe/Berlin] PHP Fatal error:  Cannot redeclare __autoload() in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 25
 [03-Nov-2013 18:41:35 Europe/Berlin] PHP Fatal error:  Cannot redeclare __autoload() in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 25
+[03-Nov-2013 18:47:44 Europe/Berlin] PHP Notice:  Undefined variable: pdo in /Users/christophe/Dropbox/Dev/Gite-des-cimes/classes/user.class.php on line 26
+[03-Nov-2013 18:47:44 Europe/Berlin] PHP Fatal error:  Call to a member function prepare() on a non-object in /Users/christophe/Dropbox/Dev/Gite-des-cimes/classes/user.class.php on line 26
