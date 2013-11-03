@@ -15,42 +15,23 @@ class user
 		# code...
 	}
 
-	public function login($identifier = '', $password = ''){
-		try {
-			$pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
-			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		} catch (PDOException $e) {
-			echo 'erreur de connexion';
+	public function login( $identifier = '', $password = '', $remember = false, $redirect = '' ){
+
+		global $db;
+
+		$user = $db->row('SELECT * FROM users WHERE identifier=:identifier AND password=:password', array(
+		        'identifier' => $identifier,
+		        'password' => md5($password)
+		    	));
+
+		if($user){
+		    $_SESSION['Auth'] = (array)$user;
+		    // if $remember
+		    	// create cookie
+		    header('Location:'.$redirect);
+		}else{
+		    $error = true;
 		}
-
-		$q = array('identifier' => $identifier, 'password' => md5($password) );
-
-		$sql = "SELECT * FROM users WHERE identifier= :identifier AND password= :password";
-
-		$req = $pdo->prepare($sql);
-		$req->execute($q);
-
-		$count = $req->rowCount($sql);
-
-		if ($count == 1) {
-			while( $user = $req->fetch(PDO::FETCH_OBJ) ) {
-				$_SESSION['Auth'] = array(
-					'identifier' => $identifier,
-					'password' => $password,
-					'id' => $user->id,
-					'firstname' => $user->firstname,
-					'lastname' => $user->lastname,
-					'rank' => $user->rank
-				);
-			}
-
-			//print_r($_SESSION['Auth']);
-		}
-
-		
-
-
-			// create a global var user here with all infos ?
 		
 	}
 
