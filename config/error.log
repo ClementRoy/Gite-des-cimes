@@ -161,3 +161,4 @@ Stack trace:
 [03-Nov-2013 18:40:38 Europe/Berlin] PHP Warning:  include(): Failed opening '/Users/royclement/Desktop/Gite-des-cimesmodules/dashboard/index.php' for inclusion (include_path='.:/Applications/MAMP/bin/php/php5.4.10/lib/php') in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 32
 [03-Nov-2013 18:40:45 Europe/Berlin] PHP Fatal error:  Cannot redeclare __autoload() in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 25
 [03-Nov-2013 18:40:46 Europe/Berlin] PHP Fatal error:  Cannot redeclare __autoload() in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 25
+[03-Nov-2013 18:41:35 Europe/Berlin] PHP Fatal error:  Cannot redeclare __autoload() in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 25

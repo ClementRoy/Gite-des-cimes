@@ -2,7 +2,7 @@
 # sites/*/*settings*.php
 
 config/mysql.php
-
+config/error.log
 
 # Ignore default text files
 .htaccess
