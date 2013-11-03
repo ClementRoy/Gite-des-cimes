@@ -18,6 +18,9 @@
     <!-- open sans font -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
+    <!-- lato font -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -25,28 +28,23 @@
 <body>
 
     <div class="login-wrapper">
-        <h1>Gîte des cîmes</h1>
+        <h1 class="logo">Gîte des cîmes</h1>
 
         <div class="box">
             <div class="content-wrap">
                 <h6>Connexion</h6>
-                <input class="form-control" type="text" placeholder="E-mail address">
-                <input class="form-control" type="password" placeholder="Your password">
-                <a href="#" class="forgot">Mot de passe oublié ?</a>
+                <input class="form-control" type="text" placeholder="Votre identifiant">
+                <input class="form-control" type="password" placeholder="Votre mot de passe">
+                <!--<a href="#" class="forgot">Mot de passe oublié ?</a>-->
+                <!--
                 <div class="remember">
                     <input id="remember-me" type="checkbox">
                     <label for="remember-me">Se souvenir de moi</label>
                 </div>
+                -->
                 <a class="btn-glow primary login" href="index.php">Connexion</a>
             </div>
         </div>
-
-        <!--
-        <div class="no-account">
-            <p>Don't have an account?</p>
-            <a href="signup.html">Sign up</a>
-        </div>
-        -->
 
     </div>
 

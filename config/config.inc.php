@@ -18,7 +18,11 @@ Toutes les classes doivent être dans le dossiers /classes
  */
 function __autoload($class_name) {  
     $class_name = strtolower($class_name);  
-    include_once (dirname(__FILE__) . '/classes/' . $class_name . '.class.php');  
+    if(file_exists(dirname(__FILE__) . '/classes/' . $class_name . '.class.php')) {
+        include_once (dirname(__FILE__) . '/classes/' . $class_name . '.class.php');  
+    } else {
+        throw new Exception("Unable to load $class_name.");
+    }
 } 
 
 
