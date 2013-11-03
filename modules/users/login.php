@@ -29,7 +29,7 @@
 <body>
 
     <div class="login-wrapper">
-        <h1 class="logo">Gîte des cîmes</h1>
+        <h1 class="logo">Gîte des cimes</h1>
 
         <div class="box">
             <div class="content-wrap">

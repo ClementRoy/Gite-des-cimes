@@ -29,7 +29,7 @@ $path_array = explode('/', $_SERVER['SCRIPT_FILENAME']);
     <div id="sidebar-nav">
         <ul id="dashboard-menu">
 	        <li>
-	        	<a href="../../">
+	        	<a href="/">
 	        		<i class="icon-dashboard"></i>
 	        		<span>Accueil</span>
 	        	</a>
@@ -47,7 +47,7 @@ $path_array = explode('/', $_SERVER['SCRIPT_FILENAME']);
 			<?php else: ?>
 				<li>
 			<?php endif; ?>
-		        	<a href="/modules/<?php echo $key; ?>/">
+		        	<a href="/<?php echo $key; ?>/">
 			        	<i class="icon-<?php echo $module['icon']; ?>"></i>
 			        	<span><?php echo $module['name']; ?></span>
 		        	</a>
