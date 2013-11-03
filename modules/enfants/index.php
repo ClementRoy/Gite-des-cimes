@@ -8,13 +8,10 @@
     <div class="content">
 <div id="pad-wrapper" class="users-list">
             <div class="row header">
-                <h3>Users</h3>
+                <h3>Les enfants</h3>
                 <div class="col-md-10 col-sm-12 col-xs-12 pull-right">
-                    <input type="text" class="col-md-5 search" placeholder="Type a user's name...">
+                    <input type="text" class="col-md-5 search" placeholder="Tapez le nom d'un enfant...">
                     
-                    <!-- custom popup filter -->
-                    <!-- styles are located in css/elements.css -->
-                    <!-- script that enables this dropdown is located in js/theme.js -->
                     <div class="ui-dropdown">
                         <div class="head" data-toggle="tooltip" title="" data-original-title="Click me!">
                             Filter users
@@ -51,9 +48,9 @@
                         </div>
                     </div>
 
-                    <a href="new-user.html" class="btn-flat success pull-right">
+                    <a href="add.php" class="btn-flat success pull-right">
                         <span>+</span>
-                        NEW USER
+                        Ajouter un enfant
                     </a>
                 </div>
             </div>

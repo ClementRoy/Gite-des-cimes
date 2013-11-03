@@ -25,7 +25,7 @@
             </li>
             <li class="settings hidden-xs hidden-sm">
                 <a href="signin.html" role="button">
-                    <i class="icon-signout"></i>
+                    <i class="icon-signin"></i>
                 </a>
             </li>
         </ul>
