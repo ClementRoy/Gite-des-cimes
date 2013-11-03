@@ -34,7 +34,7 @@
         <div class="box">
             <div class="content-wrap">
                 <h6>Connexion</h6>
-                <form action="index.php" method="post">
+                <form action="/" method="post">
                     
 
                 
