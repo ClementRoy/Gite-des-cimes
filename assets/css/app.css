@@ -19,3 +19,29 @@
 @import url('compiled/user-list.css');
 @import url('compiled/user-profile.css');
 @import url('compiled/web-app-icons.css');
+
+
+#pad-wrapper h4 {
+	margin-bottom: 35px;
+}
+
+.form-page .form-wrapper .select2-container {
+	margin-left: 0px;
+	margin-top: 4px;
+}
+.select2-container .select2-choice {
+	height: 29px;
+	line-height: 28px;
+}
+.ui-select{
+	margin-top: 3px;
+	width: auto;
+	padding-right: 30px;
+	height: 30px;
+	line-height: 27px;
+	min-width: 270px;
+}
+.ui-select select {
+	width: 125%;
+	height: auto;
+}

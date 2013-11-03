@@ -6,7 +6,7 @@
 
     <!-- main container -->
     <div class="content">
-<div id="pad-wrapper" class="users-list">
+        <div id="pad-wrapper" class="form-page">
             <div class="row header">
                 <h3>Ajouter un enfant</h3>
             </div>
@@ -14,83 +14,168 @@
             <div class="row form-wrapper">
                 <!-- left column -->
                 <div class="col-md-8 column">
+
                     <form>
+                        <h4>Informations sur l'enfant</h4>
                         <div class="field-box">
-                            <label>Normal input:</label>
+                            <label>Prénom :</label>
                             <div class="col-md-7">
                                 <input class="form-control" type="text">
                             </div>                            
                         </div>
                         <div class="field-box">
-                            <label>Inline input:</label>
+                            <label>Nom :</label>
                             <div class="col-md-7">
-                                <input class="form-control inline-input" placeholder=".inline-input" type="text">
-                            </div>
-                        </div>                            
-                        <div class="field-box">
-                            <label>Inline Password:</label>
-                            <div class="col-md-7">
-                                <input class="form-control inline-input" type="password" value="blablabla">
-                            </div>
+                                <input class="form-control" type="text">
+                            </div>                            
                         </div>
                         <div class="field-box">
-                            <label>Read only:</label>
+                            <label>Date de naissance :</label>
                             <div class="col-md-7">
-                                <input class="form-control inline-input" type="text" readonly="readonly" value="read only input">
-                            </div>
+                                <input type="text" class="form-control input-datepicker" value="01/01/2000">
+                            </div>                            
                         </div>
                         <div class="field-box">
-                            <label>With tooltip:</label>
+                            <label>Sexe de l'enfant :</label>
                             <div class="col-md-7">
-                                <input class="form-control inline-input" data-toggle="tooltip" data-trigger="focus" title="" data-placement="top" type="text" data-original-title="Please insert a valid email address">
-                            </div>
+                                <label class="radio">
+                                    <div class="radio" id="uniform-optionsRadios1"><span class="checked"><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=""></span></div>
+                                    Masculin
+                                </label>
+                                <label class="radio">
+                                    <div class="radio" id="uniform-optionsRadios2"><span><input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"></span></div>
+                                    Féminin
+                                </label>
+                            </div>                            
                         </div>
-                        <div class="field-box">
-                            <label>Predefined value:</label>
+
+                        <h4>Informations administratives</h4>
+                         <div class="field-box">
+                            <label>L'enfant est inscrit par :</label>
                             <div class="col-md-7">
-                                <div class="predefined">
-                                    <span class="value">http://</span>
-                                    <input class="form-control inline-input" type="text">
+                                <label class="radio">
+                                    <div class="radio" id="uniform-optionsRadios3"><span class="checked"><input type="radio" name="optionsRadios2" id="optionsRadios3" value="option1" checked=""></span></div>
+                                    Une structure
+                                </label>
+                                <label class="radio">
+                                    <div class="radio" id="uniform-optionsRadios4"><span><input type="radio" name="optionsRadios2" id="optionsRadios4" value="option2"></span></div>
+                                    Un particulier
+                                </label>
+                            </div>                            
+                        </div>
+
+                    <!-- Si Strucutre coché -->
+                        <div class="field-box">
+                            <label>Nom de la structure</label>
+                            <div class="col-md-7">
+                                <div class="ui-select">
+                                    <select>
+                                        <option selected="">Choisissez une structure</option>
+                                        <option>Custom selects</option>
+                                        <option>Pure css styles</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="field-box">
-                            <label>With max length:</label>
+                            <label>Nom du contact</label>
                             <div class="col-md-7">
-                                <input class="form-control inline-input" type="text" placeholder="max 20 characters here" maxlength="20">
-                            </div>
-                        </div>                            
-                        <div class="field-box">
-                            <label>Textarea:</label>
-                            <div class="col-md-7">
-                                <textarea class="form-control" rows="4" style="margin: 0px -42.171875px 0px 0px; width: 451px; height: 94px;"></textarea>
+                                <div class="ui-select">
+                                    <select>
+                                        <option selected="">Choisissez un contact</option>
+                                        <option>Custom selects</option>
+                                        <option>Pure css styles</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
+                    <!-- / Si Strucutre coché -->
+                    
+                    <!-- Si Particulier coché -->
                         <div class="field-box">
-                            <label>Checkboxes:</label>
-                            <label class="checkbox-inline">
-                              <div class="checker" id="uniform-inlineCheckbox1"><span class="checked"><input type="checkbox" id="inlineCheckbox1" value="option1"></span></div> Option 1
-                            </label>
-                            <label class="checkbox-inline">
-                              <div class="checker" id="uniform-inlineCheckbox2"><span><input type="checkbox" id="inlineCheckbox2" value="option1"></span></div> Option 2
-                            </label>
-                            <label class="checkbox-inline">
-                              <div class="checker" id="uniform-inlineCheckbox3"><span><input type="checkbox" id="inlineCheckbox3" value="option1"></span></div> Option 3
-                            </label>
-                        </div>
-                        <div class="field-box">
-                            <label>Radiobuttons:</label>
-                            <div class="col-md-8">
+                            <label>Responsable légal de l'enfant :</label>
+                            <div class="col-md-7">
                                 <label class="radio">
-                                    <div class="radio" id="uniform-optionsRadios1"><span class=""><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=""></span></div>
-                                    Option one is this and that—be sure to include why it's great
+                                    <div class="radio" id="uniform-optionsRadios3"><span class="checked"><input type="radio" name="optionsRadios3" id="optionsRadios5" value="option1" checked=""></span></div>
+                                    Parents
                                 </label>
                                 <label class="radio">
-                                    <div class="radio" id="uniform-optionsRadios2"><span class="checked"><input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"></span></div>
-                                    Option two can be something else and selecting it will deselect option one
+                                    <div class="radio" id="uniform-optionsRadios4"><span><input type="radio" name="optionsRadios3" id="optionsRadios6" value="option2"></span></div>
+                                    Père
                                 </label>
-                            </div>                                
+                                <label class="radio">
+                                    <div class="radio" id="uniform-optionsRadios4"><span><input type="radio" name="optionsRadios3" id="optionsRadios7" value="option2"></span></div>
+                                    Mère
+                                </label>
+                                <label class="radio">
+                                    <div class="radio" id="uniform-optionsRadios4"><span><input type="radio" name="optionsRadios3" id="optionsRadios8" value="option2"></span></div>
+                                    Tuteur
+                                </label>
+                            </div>                            
                         </div>
+
+                        <div class="field-box">
+                            <label>Nom du père :</label>
+                            <div class="col-md-7">
+                                <input class="form-control" type="text">
+                            </div>                            
+                        </div>
+                        <div class="field-box">
+                            <label>Téléphone du père :</label>
+                            <div class="col-md-7">
+                                <input class="form-control" type="text">
+                            </div>                            
+                        </div>
+
+                        <div class="field-box">
+                            <label>Nom de la mère :</label>
+                            <div class="col-md-7">
+                                <input class="form-control" type="text">
+                            </div>                            
+                        </div>
+                        <div class="field-box">
+                            <label>Téléphone de la mère :</label>
+                            <div class="col-md-7">
+                                <input class="form-control" type="text">
+                            </div>                            
+                        </div>
+
+                        <div class="field-box">
+                            <label>Nom du tuteur :</label>
+                            <div class="col-md-7">
+                                <input class="form-control" type="text">
+                            </div>                            
+                        </div>
+                        <div class="field-box">
+                            <label>Téléphone du tuteur :</label>
+                            <div class="col-md-7">
+                                <input class="form-control" type="text">
+                            </div>                            
+                        </div>
+
+                        <div class="field-box">
+                            <label>Contact d'urgence :</label>
+                            <div class="col-md-7">
+                                <input class="form-control" type="text">
+                            </div>                            
+                        </div>
+                        <div class="field-box">
+                            <label>Téléphone d'urgence :</label>
+                            <div class="col-md-7">
+                                <input class="form-control" type="text">
+                            </div>                            
+                        </div>
+
+                        <div class="field-box">
+                            <label>Adresse du responsable légal :</label>
+                            <div class="col-md-7">
+                                <input class="form-control" type="text">
+                                
+                            </div>                            
+                        </div>
+
+
+                    <!-- Si Particulier coché -->
                     </form>
                 </div>
             </div>
@@ -98,6 +183,4 @@
         </div>
     </div><!-- /.container -->
 
-<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/scripts.php'); ?>
-
-<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
+    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

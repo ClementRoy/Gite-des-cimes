@@ -15,6 +15,7 @@
   font-size: 12px;
   width: 140px;
   text-align: left;
+  margin-top: 7px;
 }
 .form-page .form-wrapper input:-moz-placeholder {
   font-style: italic;

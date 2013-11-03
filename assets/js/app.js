@@ -1,29 +1,24 @@
+$(function () {
 
-$('.tooltip').tooltip();
-$('.popover').popover();
+// add uniform plugin styles to html elements
+$('input:checkbox, input:radio').uniform();
 
-	var sorter = new TINY.table.sorter('sorter','table',{
-		headclass:'head',
-		ascclass:'asc',
-		descclass:'desc',
-		evenclass:'evenrow',
-		oddclass:'oddrow',
-		evenselclass:'evenselected',
-		oddselclass:'oddselected',
-		paginate:true,
-		size:10,
-		colddid:'columns',
-		currentid:'currentpage',
-		totalid:'totalpages',
-		startingrecid:'startrecord',
-		endingrecid:'endrecord',
-		totalrecid:'totalrecords',
-		hoverid:'selectedrow',
-		pageddid:'pagedropdown',
-		navid:'tablenav',
-		sortcolumn:1,
-		sortdir:1,
-		columns:[{index:7, format:'%', decimals:1},{index:8, format:'$', decimals:0}],
-		init:true
-	});
-  
+// select2 plugin for select elements
+$('.select2').select2();
+
+// datepicker plugin
+$('.input-datepicker').datepicker().on('changeDate', function () {
+    $(this).datepicker('hide');
+});
+
+
+
+// build all tooltips from data-attributes
+$('[data-toggle="tooltip"]').each(function (index, el) {
+    $(el).tooltip({
+        placement: $(this).data("placement") || 'right'
+    });
+});
+
+
+});

@@ -11,47 +11,8 @@
                 <h3>Les enfants</h3>
                 <div class="col-md-10 col-sm-12 col-xs-12 pull-right">
                     <input type="text" class="col-md-5 search" placeholder="Tapez le nom d'un enfant...">
-                    
-                    <div class="ui-dropdown">
-                        <div class="head" data-toggle="tooltip" title="" data-original-title="Click me!">
-                            Filter users
-                            <i class="arrow-down"></i>
-                        </div>  
-                        <div class="dialog">
-                            <div class="pointer">
-                                <div class="arrow"></div>
-                                <div class="arrow_border"></div>
-                            </div>
-                            <div class="body">
-                                <p class="title">
-                                    Show users where:
-                                </p>
-                                <div class="form">
-                                    <select>
-                                        <option>Name</option>
-                                        <option>Email</option>
-                                        <option>Number of orders</option>
-                                        <option>Signed up</option>
-                                        <option>Last seen</option>
-                                    </select>
-                                    <select>
-                                        <option>is equal to</option>
-                                        <option>is not equal to</option>
-                                        <option>is greater than</option>
-                                        <option>starts with</option>
-                                        <option>contains</option>
-                                    </select>
-                                    <input type="text" class="form-control">
-                                    <a class="btn-flat small">Add filter</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="add.php" class="btn-flat success pull-right">
-                        <span>+</span>
-                        Ajouter un enfant
-                    </a>
+                    <a href="add.php" class="btn-flat primary pull-right"><span>+</span>
+                        Ajouter un enfant</a>
                 </div>
             </div>
 
@@ -119,7 +80,5 @@
             <!-- end users table -->
         </div>
     </div><!-- /.container -->
-
-<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/scripts.php'); ?>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

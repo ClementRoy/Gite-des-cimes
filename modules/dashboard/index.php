@@ -45,6 +45,5 @@
 
         </div>
     </div>
-
-<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/scripts.php'); ?>
+    
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

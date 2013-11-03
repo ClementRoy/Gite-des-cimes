@@ -16,10 +16,15 @@
 
     <!-- libraries -->
     <link href="/assets/css/lib/jquery-ui-1.10.2.custom.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/css/lib/font-awesome.css" type="text/css" rel="stylesheet" />
+
+    <link href="/assets/css/lib/uniform.default.css" type="text/css" rel="stylesheet">
+    <link href="/assets/css/lib/select2.css" type="text/css" rel="stylesheet">
+    <link href="/assets/css/lib/bootstrap.datepicker.css" type="text/css" rel="stylesheet">
+
 
     <!-- global styles -->
-    <link rel="stylesheet" type="text/css" href="/assets/css/app.css">
+    <link href="/assets/css/app.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/lib/font-awesome.css" type="text/css" rel="stylesheet" />
     
     <!-- open sans font -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
