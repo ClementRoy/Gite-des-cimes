@@ -27,7 +27,7 @@ function __autoload($class_name) {
     if(file_exists($_SERVER["DOCUMENT_ROOT"] . '/classes/' . $class_name . '.class.php')) {
         include_once ($_SERVER["DOCUMENT_ROOT"] . '/classes/' . $class_name . '.class.php');  
     } else {
-        throw new Exception("Unable to load $class_name.");
+        throw new Exception("Unable to load $class_name");
     }
 } 
 
@@ -43,7 +43,7 @@ Certains sont même abstrait
  */
 $modules = array(
 					'dashboard' => array( 'index'),
-					'enfants' => array('index','list','add'),
+					'enfants' => array('index','liste','ajouter', 'voir'),
 					'sejours' => array( 'index'),
 					'structures' => array( 'index'),
 					'contacts' => array( 'index'),

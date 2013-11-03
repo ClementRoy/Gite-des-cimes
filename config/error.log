@@ -1,0 +1,2 @@
+[03-Nov-2013 22:45:00 Europe/Berlin] PHP Warning:  include(/Users/christophe/Dropbox/Dev/Gite-des-cimes/modules/enfants/add.php): failed to open stream: No such file or directory in /Users/christophe/Dropbox/Dev/Gite-des-cimes/index.php on line 39
+[03-Nov-2013 22:45:00 Europe/Berlin] PHP Warning:  include(): Failed opening '/Users/christophe/Dropbox/Dev/Gite-des-cimes/modules/enfants/add.php' for inclusion (include_path='.:/Applications/MAMP/bin/php/php5.4.10/lib/php') in /Users/christophe/Dropbox/Dev/Gite-des-cimes/index.php on line 39

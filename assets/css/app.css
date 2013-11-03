@@ -59,3 +59,12 @@ width: 100%;
 	padding-left: 7px;
 	padding-right: 7px;
 }
+.radio-inline, .checkbox-inline {
+padding-left: 0;
+}
+.form-page .form-wrapper label.radio-inline {
+cursor: pointer;
+}
+.form-wrapper .field-box:last-child {
+margin-bottom: 30px;
+}
