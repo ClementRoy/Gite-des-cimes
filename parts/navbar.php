@@ -12,7 +12,7 @@
         <ul class="nav navbar-nav pull-right hidden-xs">
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
-                    Bonjour <strong>Marie-Christine Behlouli</strong>
+                    Bonjour <strong><?=$_SESSION['Auth']['firstname']; ?> <?=$_SESSION['Auth']['lastname']; ?></strong>
                     <strong class="caret"></strong>
                 </a>
                 <ul class="dropdown-menu">

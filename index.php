@@ -3,11 +3,20 @@
 
 require($_SERVER["DOCUMENT_ROOT"] . '/config/config.inc.php');
 
+
+/*
+ Initialisation et connexion à la base de données 
+ */
+$db = new DB();
+
+
 // Handle login system
 if( isset($_POST['login']) && !empty($_POST['identifier']) && !empty($_POST['password']) ) {
+    //print_r($_SERVER);
     extract($_POST);
     $user = new user();
-    $user->login($identifier, $password);
+    $remember = (isset($_POST['remember'])) ? true : false;
+    $user->login($identifier, $password, $remember, $_SERVER['HTTP_REFERER']);
 }
 
 /*

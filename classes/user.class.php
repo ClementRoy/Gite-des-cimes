@@ -5,36 +5,32 @@ class user
 	
 	//public
 	//private
+	public $identifier;
+	public $firstname;
+	public $lastname;
+	public $id;
 
 	function __construct()
 	{
 		# code...
 	}
 
-	public function login($identifier = '', $password = ''){
-		try {
-			$pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD);
-			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		} catch (PDOException $e) {
-			echo 'erreur de connexion';
-		}
+	public function login( $identifier = '', $password = '', $remember = false, $redirect = '' ){
 
-		$q = array('identifier' => $identifier, 'password' => md5($password) );
+		global $db;
 
-		$sql = "SELECT * FROM users WHERE identifier= :identifier AND password= :password";
+		$user = $db->row('SELECT * FROM users WHERE identifier=:identifier AND password=:password', array(
+		        'identifier' => $identifier,
+		        'password' => md5($password)
+		    	));
 
-		$req = $pdo->prepare($sql);
-		$req->execute($q);
-
-		$count = $req->rowCount($sql);
-
-		if ($count == 1) {
-			$_SESSION['Auth'] = array(
-				'identifier' => $identifier,
-				'password' => $password
-			);
-
-			// create a global var user here with all infos ?
+		if($user){
+		    $_SESSION['Auth'] = (array)$user;
+		    // if $remember
+		    	// create cookie
+		    header('Location:'.$redirect);
+		}else{
+		    $error = true;
 		}
 		
 	}
