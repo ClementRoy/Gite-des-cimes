@@ -1,18 +1,14 @@
 <?php session_start();
 
 
-require('config/config.inc.php');
+require($_SERVER["DOCUMENT_ROOT"] . '/config/config.inc.php');
 
-// DB TESTS
-
-$db = new db();
-
-$users = user::get_users();
-
-
-// END DB TEST
-
-
+// Handle login system
+if( isset($_POST['login']) && !empty($_POST['identifier']) && !empty($_POST['password']) ) {
+    extract($_POST);
+    $user = new user();
+    $user->login($identifier, $password);
+}
 
 /*
  * Il s'agit du controller principal, on vérifie que l'utilisateurs est connecté
@@ -26,16 +22,17 @@ if ( isset($_GET['logout']) ) {
 
 if ( user::is_logged() ) {
     // if ( isset($_GET['module']) && !empty($_GET['module']) && array_key_exists($_GET['module'], $availableModules) ) {
-    //     //include($availableModules[$_GET['module']]);
+    //     //include($_SERVER["DOCUMENT_ROOT"] . $availableModules[$_GET['module']]);
+    // handle module / function || default function is index 
     // }
     // else {
-    //     include('home.php');
+    //     include($_SERVER["DOCUMENT_ROOT"] . 'modules/dashboard/index.php');
     // }
 
-    echo 'hello Mr';
+    include($_SERVER["DOCUMENT_ROOT"] . '/modules/dashboard/index.php');
 }
 else {
-    include('login.php');
+    include($_SERVER["DOCUMENT_ROOT"] . '/modules/users/login.php');
 }
 
 

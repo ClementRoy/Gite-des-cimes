@@ -129,3 +129,35 @@ Stack trace:
 [03-Nov-2013 16:54:53 Europe/Berlin] PHP Fatal error:  Class 'db' not found in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 9
 [03-Nov-2013 17:01:09 Europe/Berlin] PHP Warning:  session_start(): Cannot send session cookie - headers already sent by (output started at /Users/royclement/Desktop/Gite-des-cimes/index.php:5) in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 6
 [03-Nov-2013 17:01:09 Europe/Berlin] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /Users/royclement/Desktop/Gite-des-cimes/index.php:5) in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 6
+[03-Nov-2013 17:17:31 Europe/Berlin] PHP Warning:  include(/modules/users/login.php): failed to open stream: No such file or directory in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 39
+[03-Nov-2013 17:17:31 Europe/Berlin] PHP Warning:  include(): Failed opening '/modules/users/login.php' for inclusion (include_path='.:/Applications/MAMP/bin/php/php5.4.10/lib/php') in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 39
+[03-Nov-2013 17:41:39 Europe/Berlin] PHP Notice:  Undefined variable: db in /Users/royclement/Desktop/Gite-des-cimes/classes/user.class.php on line 31
+[03-Nov-2013 17:41:39 Europe/Berlin] PHP Fatal error:  Call to a member function query() on a non-object in /Users/royclement/Desktop/Gite-des-cimes/classes/user.class.php on line 31
+[03-Nov-2013 17:42:35 Europe/Berlin] PHP Notice:  Undefined variable: db in /Users/royclement/Desktop/Gite-des-cimes/classes/db.class.php on line 22
+[03-Nov-2013 17:42:35 Europe/Berlin] PHP Fatal error:  Call to a member function query() on a non-object in /Users/royclement/Desktop/Gite-des-cimes/classes/db.class.php on line 22
+[03-Nov-2013 17:42:36 Europe/Berlin] PHP Notice:  Undefined variable: db in /Users/royclement/Desktop/Gite-des-cimes/classes/db.class.php on line 22
+[03-Nov-2013 17:42:36 Europe/Berlin] PHP Fatal error:  Call to a member function query() on a non-object in /Users/royclement/Desktop/Gite-des-cimes/classes/db.class.php on line 22
+[03-Nov-2013 17:43:47 Europe/Berlin] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 32 bytes) in /Users/royclement/Desktop/Gite-des-cimes/classes/db.class.php on line 11
+[03-Nov-2013 17:44:42 Europe/Berlin] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 32 bytes) in /Users/royclement/Desktop/Gite-des-cimes/classes/db.class.php on line 11
+[03-Nov-2013 17:51:24 Europe/Berlin] PHP Fatal error:  Call to undefined method db::query() in /Users/royclement/Desktop/Gite-des-cimes/classes/user.class.php on line 35
+[03-Nov-2013 17:51:54 Europe/Berlin] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /Users/royclement/Desktop/Gite-des-cimes/classes/db.class.php on line 25
+[03-Nov-2013 17:52:17 Europe/Berlin] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 130968 bytes) in /Users/royclement/Desktop/Gite-des-cimes/classes/db.class.php on line 25
+[03-Nov-2013 17:54:27 Europe/Berlin] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 130968 bytes) in /Users/royclement/Desktop/Gite-des-cimes/classes/db.class.php on line 25
+[03-Nov-2013 17:54:50 Europe/Berlin] PHP Fatal error:  Call to undefined method db::query() in /Users/royclement/Desktop/Gite-des-cimes/classes/db.class.php on line 25
+[03-Nov-2013 17:54:51 Europe/Berlin] PHP Fatal error:  Call to undefined method db::query() in /Users/royclement/Desktop/Gite-des-cimes/classes/db.class.php on line 25
+[03-Nov-2013 17:55:30 Europe/Berlin] PHP Fatal error:  Call to a member function fetch() on a non-object in /Users/royclement/Desktop/Gite-des-cimes/classes/user.class.php on line 40
+[03-Nov-2013 17:56:13 Europe/Berlin] PHP Fatal error:  Call to a member function fetch() on a non-object in /Users/royclement/Desktop/Gite-des-cimes/classes/user.class.php on line 40
+[03-Nov-2013 17:56:15 Europe/Berlin] PHP Fatal error:  Call to a member function fetch() on a non-object in /Users/royclement/Desktop/Gite-des-cimes/classes/user.class.php on line 40
+[03-Nov-2013 18:08:18 Europe/Berlin] PHP Fatal error:  Call to undefined method PDOStatement::fecth() in /Users/royclement/Desktop/Gite-des-cimes/classes/user.class.php on line 28
+[03-Nov-2013 18:22:01 Europe/Berlin] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in /Users/royclement/Desktop/Gite-des-cimes/classes/user.class.php:28
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/classes/user.class.php(28): PDOStatement->execute(Array)
+#1 /Users/royclement/Desktop/Gite-des-cimes/index.php(19): user->login('Cl??ment', 'mer02ma')
+#2 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/classes/user.class.php on line 28
+[03-Nov-2013 18:40:36 Europe/Berlin] PHP Warning:  include(/Users/royclement/Desktop/Gite-des-cimesmodules/dashboard/index.php): failed to open stream: No such file or directory in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 32
+[03-Nov-2013 18:40:36 Europe/Berlin] PHP Warning:  include(): Failed opening '/Users/royclement/Desktop/Gite-des-cimesmodules/dashboard/index.php' for inclusion (include_path='.:/Applications/MAMP/bin/php/php5.4.10/lib/php') in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 32
+[03-Nov-2013 18:40:38 Europe/Berlin] PHP Warning:  include(/Users/royclement/Desktop/Gite-des-cimesmodules/dashboard/index.php): failed to open stream: No such file or directory in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 32
+[03-Nov-2013 18:40:38 Europe/Berlin] PHP Warning:  include(): Failed opening '/Users/royclement/Desktop/Gite-des-cimesmodules/dashboard/index.php' for inclusion (include_path='.:/Applications/MAMP/bin/php/php5.4.10/lib/php') in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 32
+[03-Nov-2013 18:40:45 Europe/Berlin] PHP Fatal error:  Cannot redeclare __autoload() in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 25
+[03-Nov-2013 18:40:46 Europe/Berlin] PHP Fatal error:  Cannot redeclare __autoload() in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 25

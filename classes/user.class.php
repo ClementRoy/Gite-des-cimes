@@ -6,18 +6,45 @@ class user
 	//public
 	//private
 
-
 	function __construct()
 	{
 		# code...
 	}
 
-	function login(){
+	public function login($identifier = '', $password = ''){
+		try {
+			$pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD);
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		} catch (PDOException $e) {
+			echo 'erreur de connexion';
+		}
 
+		$q = array('identifier' => $identifier, 'password' => md5($password) );
+
+		$sql = "SELECT * FROM users WHERE identifier= :identifier AND password= :password";
+
+		$req = $pdo->prepare($sql);
+		$req->execute($q);
+
+		$count = $req->rowCount($sql);
+
+		if ($count == 1) {
+			$_SESSION['Auth'] = array(
+				'identifier' => $identifier,
+				'password' => $password
+			);
+
+			// create a global var user here with all infos ?
+		}
+		
 	}
 
 	static function is_logged() {
-		return true;
+		if( isset($_SESSION['Auth']) && isset($_SESSION['Auth']['identifier']) && isset($_SESSION['Auth']['password']) ){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	function get_user() {
@@ -25,8 +52,26 @@ class user
 	}
 
 	static function get_users() {
-		return array(1,2,3,4);
+		$pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD);
+		$sql = "SELECT * FROM users";
+		$users = $pdo->query($sql);
+		echo '<pre>';
+		while( $d = $users->fetch(PDO::FETCH_OBJ) ) { // PDO::FETCH_ASSOC PDO::FETCH_BOTH
+			print_r($d);
+		}
+		return $users;
 	}
+
+	public function create(){
+
+	}
+
+	static function logout() {
+		$_SESSION = array();
+		session_destroy();		
+	}
+
+
 
 
 
