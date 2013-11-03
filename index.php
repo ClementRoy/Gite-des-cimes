@@ -21,15 +21,22 @@ if ( isset($_GET['logout']) ) {
 }
 
 if ( user::is_logged() ) {
-    // if ( isset($_GET['module']) && !empty($_GET['module']) && array_key_exists($_GET['module'], $availableModules) ) {
-    //     //include($_SERVER["DOCUMENT_ROOT"] . $availableModules[$_GET['module']]);
-    // handle module / function || default function is index 
-    // }
-    // else {
-    //     include($_SERVER["DOCUMENT_ROOT"] . 'modules/dashboard/index.php');
-    // }
+    if ( isset($_GET['module']) && !empty($_GET['module']) && array_key_exists($_GET['module'], $modules) ) {
+        $module = $_GET['module'];
+         if ( isset($_GET['function']) && !empty($_GET['function']) && in_array($_GET['function'], $modules[$module]) ) {
+           $function = $_GET['function'];
+         }
+         else {
+            $function = 'index';
+         }
 
-    include($_SERVER["DOCUMENT_ROOT"] . '/modules/dashboard/index.php');
+    }
+    else {
+        $function = 'index';
+        $module = 'dashboard';
+    }
+    include($_SERVER["DOCUMENT_ROOT"] . '/modules/'.$module.'/'.$function.'.php');
+
 }
 else {
     include($_SERVER["DOCUMENT_ROOT"] . '/modules/users/login.php');

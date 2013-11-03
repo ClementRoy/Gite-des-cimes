@@ -42,16 +42,16 @@ Un module peut-être accessible via le menu principal ou à travers d'autres mod
 Certains sont même abstrait
  */
 $modules = array(
-					'dashboard',
-					'enfants',
-					'sejours',
-					'structures',
-					'contacts',
-					'convocations',
-					'factures',
-					'animateurs',
-					'vehicules',
-					'users'
+					'dashboard' => array( 'index'),
+					'enfants' => array('index','list','add'),
+					'sejours' => array( 'index'),
+					'structures' => array( 'index'),
+					'contacts' => array( 'index'),
+					'convocations' => array( 'index'),
+					'factures' => array( 'index'),
+					'animateurs' => array( 'index'),
+					'vehicules' => array( 'index'),
+					'users' => array( 'index')
 	);
 
 
