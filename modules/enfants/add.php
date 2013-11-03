@@ -169,23 +169,60 @@
                         <div class="field-box">
                             <label>Adresse du responsable légal :</label>
                             <div class="col-md-7">
-                                <input class="form-control" type="text">
-                                
+                                <div class="row">
+                                    <div class="col-md-2"><input class="form-control" type="text" placeholder="N°"></div>
+                                    <div class="col-md-10"><input class="form-control" type="text" placeholder="Nom de la voirie"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3"><input class="form-control" type="text" placeholder="Code postal"></div>
+                                    <div class="col-md-9"><input class="form-control" type="text" placeholder="Ville"></div>
+                                </div>
                             </div>                            
                         </div>
 
                         <div class="field-box">
-                            <label>Input prepend &amp; append:</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">@</span>
-                                <input type="text" class="form-control">
+                            <label>Domiciliation de l'enfant :</label>
+                            <div class="col-md-7">
+                                <label class="radio">
+                                    <div class="radio" id="uniform-optionsRadios3"><span class="checked"><input type="radio" name="optionsRadios4" id="optionsRadios7" value="option1" checked=""></span></div>
+                                    Responsable légal
+                                </label>
+                                <label class="radio">
+                                    <div class="radio" id="uniform-optionsRadios4"><span><input type="radio" name="optionsRadios4" id="optionsRadios8" value="option2"></span></div>
+                                    Famille d'accueil
+                                </label>
                             </div>                            
-                            <div class="input-group">
-                                <input type="text" class="form-control">
-                                <span class="input-group-addon">.00</span>
-                            </div>
                         </div>
 
+                        <div class="field-box">
+                            <label>Nom de la famille d'accueil :</label>
+                            <div class="col-md-7">
+                                <input class="form-control" type="text">
+                            </div>                            
+                        </div>
+                        <div class="field-box">
+                            <label>Téléphone de la famille d'accueil :</label>
+                            <div class="col-md-7">
+                                <input class="form-control" type="text">
+                            </div>                            
+                        </div>
+
+                        <div class="field-box">
+                            <label>Adresse de la famille d'accueil :</label>
+                            <div class="col-md-7">
+                                <div class="row">
+                                    <div class="col-md-2"><input class="form-control" type="text" placeholder="N°"></div>
+                                    <div class="col-md-10"><input class="form-control" type="text" placeholder="Nom de la voirie"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3"><input class="form-control" type="text" placeholder="Code postal"></div>
+                                    <div class="col-md-9"><input class="form-control" type="text" placeholder="Ville"></div>
+                                </div>
+                            </div>                            
+                        </div>
+                        
                     <!-- Si Particulier coché -->
                     </form>
                 </div>

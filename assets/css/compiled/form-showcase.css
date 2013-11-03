@@ -15,7 +15,7 @@
   font-size: 12px;
   width: 140px;
   text-align: left;
-  margin-top: 7px;
+  margin-top: 6px;
 }
 .form-page .form-wrapper input:-moz-placeholder {
   font-style: italic;
@@ -66,10 +66,10 @@
   display: block;
   width: 100%;
 }
-.form-page .form-wrapper .column.pull-right .ui-select {
+.form-page .form-wrapper .ui-select {
   width: 250px;
 }
-.form-page .form-wrapper .column.pull-right .input-group {
+.form-page .form-wrapper .input-group {
   margin-bottom: 10px;
   width: 250px;
 }

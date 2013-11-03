@@ -45,3 +45,17 @@
 	width: 125%;
 	height: auto;
 }
+
+.form-wrapper input[type="text"] {
+width: 100%;
+}
+.form-wrapper .field-box .row {
+	margin: 0 -7px 10px -7px;
+}
+.form-wrapper .field-box .row:last-child {
+	margin: 0 -7px 0 -7px;
+}
+.form-wrapper .field-box .row [class*="col-"] {
+	padding-left: 7px;
+	padding-right: 7px;
+}
