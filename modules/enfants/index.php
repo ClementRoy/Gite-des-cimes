@@ -6,88 +6,123 @@
 
     <!-- main container -->
     <div class="content">
-        <div id="pad-wrapper">
-
-            <h2>Les enfants</h2>
-
-            <div class="table-wrapper orders-table">
-
-
-                <div class="row filter-block">
-                    <div class="pull-right">
-                        <div class="ui-select">
-                            <select>
-                                <option>Filter users</option>
-                                <option>Signed last 30 days</option>
-                                <option>Active users</option>
-                            </select>
+<div id="pad-wrapper" class="users-list">
+            <div class="row header">
+                <h3>Users</h3>
+                <div class="col-md-10 col-sm-12 col-xs-12 pull-right">
+                    <input type="text" class="col-md-5 search" placeholder="Type a user's name...">
+                    
+                    <!-- custom popup filter -->
+                    <!-- styles are located in css/elements.css -->
+                    <!-- script that enables this dropdown is located in js/theme.js -->
+                    <div class="ui-dropdown">
+                        <div class="head" data-toggle="tooltip" title="" data-original-title="Click me!">
+                            Filter users
+                            <i class="arrow-down"></i>
+                        </div>  
+                        <div class="dialog">
+                            <div class="pointer">
+                                <div class="arrow"></div>
+                                <div class="arrow_border"></div>
+                            </div>
+                            <div class="body">
+                                <p class="title">
+                                    Show users where:
+                                </p>
+                                <div class="form">
+                                    <select>
+                                        <option>Name</option>
+                                        <option>Email</option>
+                                        <option>Number of orders</option>
+                                        <option>Signed up</option>
+                                        <option>Last seen</option>
+                                    </select>
+                                    <select>
+                                        <option>is equal to</option>
+                                        <option>is not equal to</option>
+                                        <option>is greater than</option>
+                                        <option>starts with</option>
+                                        <option>contains</option>
+                                    </select>
+                                    <input type="text" class="form-control">
+                                    <a class="btn-flat small">Add filter</a>
+                                </div>
+                            </div>
                         </div>
-                        <input type="text" id="query" class="search order-search" placeholder="Tapez votre recherche ici..." onkeyup="sorter.search('query')">
                     </div>
-                </div>
 
-
-
-
-
-                <div class="row">
-                    <table id="children" class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th class="asc">Prénom <i class="pull-right icon-sort"></i></th>
-                                <th class="head">Nom <i class="pull-right icon-sort"></i></th>
-                                <th class="head">Sexe <i class="pull-right icon-sort"></i></th>
-                                <th class="head">Date de naissance <i class="icon-sort"></i></th>
-                                <th class="head">Age <i class="icon-sort"></i></th>
-                                <th class="head">Structure/Tuteur <i class="icon-sort"></i></th>
-                                <th class="unsort">actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Christophe</td>
-                                <td>Béghin</td>
-                                <td><i class="icon-male"></i> Garçon</td>
-                                <td>02/01/1990</td>
-                                <td>23 ans</td>
-                                <td>-</td>
-                                <td>actions...</td>
-                            </tr>
-                            <tr>
-                                <td>Clément</td>
-                                <td>Roy</td>
-                                <td><i class="icon-male"></i> Garçon</td>
-                                <td>02/05/1990</td>
-                                <td>23 ans</td>
-                                <td>-</td>
-                                <td>actions...</td>
-                            </tr>
-                            <tr>
-                                <td>Nedjma</td>
-                                <td>Behlouli</td>
-                                <td><i class="icon-female"></i> Fille</td>
-                                <td>01/12/1989</td>
-                                <td>23 ans</td>
-                                <td>-</td>
-                                <td>actions...</td>
-                            </tr>
-                            <tr>
-                                <td>Coraline</td>
-                                <td>Assimon</td>
-                                <td><i class="icon-female"></i> Fille</td>
-                                <td>23/04/1989</td>
-                                <td>24 ans</td>
-                                <td>-</td>
-                                <td>actions...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <a href="new-user.html" class="btn-flat success pull-right">
+                        <span>+</span>
+                        NEW USER
+                    </a>
                 </div>
             </div>
 
+            <!-- Users table -->
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="sortable">Prénom
+                                &nbsp;&nbsp;&nbsp;<i class="icon-sort"></i></th>
+                                <th class="sortable">Nom
+                                &nbsp;&nbsp;&nbsp;<i class="icon-sort"></i></th>
+                                <th class="sortable">Sexe
+                                &nbsp;&nbsp;&nbsp;<i class="icon-sort"></i></th>
+                                <th class="sortable">
+                                    <span class="line"></span>Date de naissance
+                                    &nbsp;&nbsp;&nbsp;<i class="icon-sort"></i>
+                                </th>
+                                <th class="sortable">
+                                    <span class="line"></span>Age
+                                    &nbsp;&nbsp;&nbsp;<i class="icon-sort"></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <!-- row -->
+                        <tr class="first">
+                            <td>
+                                <a href="user-profile.html">Christophe</a>
+                            </td>
+                            <td>
+                                <a href="user-profile.html">Béghin</a>
+                            </td>
+                            <td>
+                                <i class="icon-male"></i> Homme
+                            </td>
+                            <td>
+                                02/01/1990
+                            </td>
+                            <td>
+                                23 ans
+                            </td>
+                        </tr>
+                        <!-- row -->
+                        <tr>
+                            <td>
+                                <a href="user-profile.html">Christophe Béghin</a>
+                            </td>
+                            <td>
+                                Mar 13, 2012
+                            </td>
+                            <td>
+                                $ 4,500.00
+                            </td>
+                            <td class="align-right">
+                                <a href="#">alejandra@canvas.com</a>
+                            </td>
+                        </tr>
 
+                        </tbody>
+                    </table>
+                </div>                
+            </div>
+            <!-- end users table -->
         </div>
     </div><!-- /.container -->
+
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/scripts.php'); ?>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
