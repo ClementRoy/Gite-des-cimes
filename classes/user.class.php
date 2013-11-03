@@ -5,6 +5,10 @@ class user
 	
 	//public
 	//private
+	public $identifier;
+	public $firstname;
+	public $lastname;
+	public $id;
 
 	function __construct()
 	{
@@ -13,7 +17,7 @@ class user
 
 	public function login($identifier = '', $password = ''){
 		try {
-			$pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD);
+			$pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		} catch (PDOException $e) {
 			echo 'erreur de connexion';
@@ -29,13 +33,24 @@ class user
 		$count = $req->rowCount($sql);
 
 		if ($count == 1) {
-			$_SESSION['Auth'] = array(
-				'identifier' => $identifier,
-				'password' => $password
-			);
+			while( $user = $req->fetch(PDO::FETCH_OBJ) ) {
+				$_SESSION['Auth'] = array(
+					'identifier' => $identifier,
+					'password' => $password,
+					'id' => $user->id,
+					'firstname' => $user->firstname,
+					'lastname' => $user->lastname,
+					'rank' => $user->rank
+				);
+			}
+
+			//print_r($_SESSION['Auth']);
+		}
+
+		
+
 
 			// create a global var user here with all infos ?
-		}
 		
 	}
 

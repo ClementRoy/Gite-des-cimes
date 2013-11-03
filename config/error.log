@@ -1,0 +1,5 @@
+[03-Nov-2013 22:03:55 Europe/Berlin] PHP Parse error:  syntax error, unexpected 'is_logged' (T_STRING), expecting '(' in /Users/royclement/Desktop/Gite-des-cimes/classes/user.class.php on line 56
+[03-Nov-2013 22:04:43 Europe/Berlin] PHP Notice:  Undefined index: firstname in /Users/royclement/Desktop/Gite-des-cimes/parts/navbar.php on line 15
+[03-Nov-2013 22:04:43 Europe/Berlin] PHP Notice:  Undefined index: lastname in /Users/royclement/Desktop/Gite-des-cimes/parts/navbar.php on line 15
+[03-Nov-2013 22:05:16 Europe/Berlin] PHP Notice:  Undefined index: firstname in /Users/royclement/Desktop/Gite-des-cimes/parts/navbar.php on line 15
+[03-Nov-2013 22:05:34 Europe/Berlin] PHP Notice:  Undefined index: firstname in /Users/royclement/Desktop/Gite-des-cimes/parts/navbar.php on line 15

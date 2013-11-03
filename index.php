@@ -36,7 +36,6 @@ if ( user::is_logged() ) {
         $function = 'index';
         $module = 'dashboard';
     }
-    echo $_SERVER["DOCUMENT_ROOT"] . '/modules/'.$module.'/'.$function.'.php';
     include($_SERVER["DOCUMENT_ROOT"] . '/modules/'.$module.'/'.$function.'.php');
 
 }
