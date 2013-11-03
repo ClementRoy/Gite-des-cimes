@@ -1,6 +1,12 @@
 <?php
 
 /*
+On inclue les identifiants de connexion MySQL
+*/
+require('mysql.php');
+
+
+/*
 Gestion d'affichage des erreurs
 Environnement de développement
 Attention à modifier les valeur lors du passage en production
@@ -18,8 +24,8 @@ Toutes les classes doivent être dans le dossiers /classes
  */
 function __autoload($class_name) {  
     $class_name = strtolower($class_name);  
-    if(file_exists(dirname(__FILE__) . '/classes/' . $class_name . '.class.php')) {
-        include_once (dirname(__FILE__) . '/classes/' . $class_name . '.class.php');  
+    if(file_exists($_SERVER["DOCUMENT_ROOT"] . '/classes/' . $class_name . '.class.php')) {
+        include_once ($_SERVER["DOCUMENT_ROOT"] . '/classes/' . $class_name . '.class.php');  
     } else {
         throw new Exception("Unable to load $class_name.");
     }

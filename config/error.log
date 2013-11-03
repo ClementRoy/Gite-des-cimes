@@ -43,3 +43,89 @@
 [07-Oct-2013 17:33:13 Europe/Berlin] PHP Notice:  Use of undefined constant php - assumed 'php' in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 53
 [07-Oct-2013 17:33:21 Europe/Berlin] PHP Notice:  Use of undefined constant php - assumed 'php' in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 53
 [07-Oct-2013 17:33:21 Europe/Berlin] PHP Notice:  Use of undefined constant php - assumed 'php' in /Users/royclement/Desktop/Gite-des-cimes/parts/menu.php on line 53
+[03-Nov-2013 16:51:44 Europe/Berlin] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to load db.' in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php:30
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/index.php(9): __autoload('db')
+#1 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 30
+[03-Nov-2013 16:52:23 Europe/Berlin] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to load db.' in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php:31
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/index.php(9): __autoload('db')
+#1 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 31
+[03-Nov-2013 16:53:31 Europe/Berlin] PHP Warning:  include_once(/Users/royclement/Desktop/Gite-des-cimes/config/classes/db.class.php): failed to open stream: No such file or directory in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 29
+[03-Nov-2013 16:53:31 Europe/Berlin] PHP Warning:  include_once(): Failed opening '/Users/royclement/Desktop/Gite-des-cimes/config/classes/db.class.php' for inclusion (include_path='.:/Applications/MAMP/bin/php/php5.4.10/lib/php') in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 29
+[03-Nov-2013 16:53:31 Europe/Berlin] PHP Fatal error:  Class 'db' not found in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 9
+[03-Nov-2013 16:53:55 Europe/Berlin] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to load db.' in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php:31
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/index.php(9): __autoload('db')
+#1 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 31
+[03-Nov-2013 16:54:14 Europe/Berlin] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to load db.' in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php:31
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/index.php(9): __autoload('db')
+#1 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 31
+[03-Nov-2013 16:54:15 Europe/Berlin] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to load db.' in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php:31
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/index.php(9): __autoload('db')
+#1 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 31
+[03-Nov-2013 16:54:15 Europe/Berlin] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to load db.' in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php:31
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/index.php(9): __autoload('db')
+#1 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 31
+[03-Nov-2013 16:54:15 Europe/Berlin] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to load db.' in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php:31
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/index.php(9): __autoload('db')
+#1 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 31
+[03-Nov-2013 16:54:16 Europe/Berlin] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to load db.' in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php:31
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/index.php(9): __autoload('db')
+#1 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 31
+[03-Nov-2013 16:54:16 Europe/Berlin] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to load db.' in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php:31
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/index.php(9): __autoload('db')
+#1 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 31
+[03-Nov-2013 16:54:16 Europe/Berlin] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to load db.' in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php:31
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/index.php(9): __autoload('db')
+#1 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 31
+[03-Nov-2013 16:54:16 Europe/Berlin] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to load db.' in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php:31
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/index.php(9): __autoload('db')
+#1 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 31
+[03-Nov-2013 16:54:16 Europe/Berlin] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to load db.' in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php:31
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/index.php(9): __autoload('db')
+#1 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 31
+[03-Nov-2013 16:54:16 Europe/Berlin] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to load db.' in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php:31
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/index.php(9): __autoload('db')
+#1 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 31
+[03-Nov-2013 16:54:25 Europe/Berlin] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to load db.' in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php:31
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/index.php(9): __autoload('db')
+#1 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 31
+[03-Nov-2013 16:54:38 Europe/Berlin] PHP Fatal error:  Uncaught exception 'Exception' with message 'Unable to load db.' in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php:31
+Stack trace:
+#0 /Users/royclement/Desktop/Gite-des-cimes/index.php(9): __autoload('db')
+#1 {main}
+  thrown in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 31
+[03-Nov-2013 16:54:52 Europe/Berlin] PHP Warning:  include_once(/classes/db.class.php): failed to open stream: No such file or directory in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 29
+[03-Nov-2013 16:54:52 Europe/Berlin] PHP Warning:  include_once(): Failed opening '/classes/db.class.php' for inclusion (include_path='.:/Applications/MAMP/bin/php/php5.4.10/lib/php') in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 29
+[03-Nov-2013 16:54:52 Europe/Berlin] PHP Fatal error:  Class 'db' not found in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 9
+[03-Nov-2013 16:54:53 Europe/Berlin] PHP Warning:  include_once(/classes/db.class.php): failed to open stream: No such file or directory in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 29
+[03-Nov-2013 16:54:53 Europe/Berlin] PHP Warning:  include_once(): Failed opening '/classes/db.class.php' for inclusion (include_path='.:/Applications/MAMP/bin/php/php5.4.10/lib/php') in /Users/royclement/Desktop/Gite-des-cimes/config/config.inc.php on line 29
+[03-Nov-2013 16:54:53 Europe/Berlin] PHP Fatal error:  Class 'db' not found in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 9
+[03-Nov-2013 17:01:09 Europe/Berlin] PHP Warning:  session_start(): Cannot send session cookie - headers already sent by (output started at /Users/royclement/Desktop/Gite-des-cimes/index.php:5) in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 6
+[03-Nov-2013 17:01:09 Europe/Berlin] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /Users/royclement/Desktop/Gite-des-cimes/index.php:5) in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 6
