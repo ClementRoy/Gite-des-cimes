@@ -174,6 +174,17 @@
                             </div>                            
                         </div>
 
+                        <div class="field-box">
+                            <label>Input prepend &amp; append:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">@</span>
+                                <input type="text" class="form-control">
+                            </div>                            
+                            <div class="input-group">
+                                <input type="text" class="form-control">
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </div>
 
                     <!-- Si Particulier coché -->
                     </form>
