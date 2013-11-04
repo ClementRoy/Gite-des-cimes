@@ -37,7 +37,7 @@ if ( isset($_GET['logout']) ) {
 }
 
 if ( user::is_logged() ) {
-    
+
     if ( isset($_GET['module']) && !empty($_GET['module']) && array_key_exists($_GET['module'], $modules) ) {
         $module = $_GET['module'];
          if ( isset($_GET['function']) && !empty($_GET['function']) && in_array($_GET['function'], $modules[$module]) ) {
