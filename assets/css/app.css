@@ -59,12 +59,26 @@ width: 100%;
 	padding-left: 7px;
 	padding-right: 7px;
 }
-.radio-inline, .checkbox-inline {
-padding-left: 0;
-}
 .form-page .form-wrapper label.radio-inline {
 cursor: pointer;
 }
 .form-wrapper .field-box:last-child {
 margin-bottom: 30px;
+}
+label {
+margin-bottom: 7px;
+}
+.navbar-inverse .navbar-brand {
+padding: 13px 20px;
+}
+.navbar-toggle {
+padding: 6px 8px 9px 6px;
+}
+#pad-wrapper .section {
+	margin-top: 25px;
+	box-shadow: inset 0px 3px 2px -1px #FAFAFA;
+}
+.form-page .form-wrapper label {
+width: 160px;
+padding-right: 5px;
 }

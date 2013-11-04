@@ -14,3 +14,7 @@
 [04-Nov-2013 00:08:40 Europe/Berlin] PHP Notice:  Undefined index: remember in /Users/royclement/Desktop/Gite-des-cimes/index.php on line 19
 [04-Nov-2013 00:13:50 Europe/Berlin] PHP Warning:  Cannot modify header information - headers already sent by (output started at /Users/royclement/Desktop/Gite-des-cimes/classes/user.class.php:21) in /Users/royclement/Desktop/Gite-des-cimes/classes/user.class.php on line 32
 >>>>>>> c254c8c69c89439572c53341f297cd6d09260e04
+[04-Nov-2013 00:41:34 Europe/Berlin] PHP Notice:  Undefined index: firstname in /Users/christophe/Dropbox/Dev/Gite-des-cimes/parts/navbar.php on line 15
+[04-Nov-2013 00:41:34 Europe/Berlin] PHP Notice:  Undefined index: lastname in /Users/christophe/Dropbox/Dev/Gite-des-cimes/parts/navbar.php on line 15
+[04-Nov-2013 00:49:26 Europe/Berlin] PHP Notice:  Undefined index: firstname in /Users/christophe/Dropbox/Dev/Gite-des-cimes/parts/navbar.php on line 15
+[04-Nov-2013 00:49:26 Europe/Berlin] PHP Notice:  Undefined index: lastname in /Users/christophe/Dropbox/Dev/Gite-des-cimes/parts/navbar.php on line 15
