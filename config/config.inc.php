@@ -51,11 +51,12 @@ $modules = array(
 					'factures' => array( 'index'),
 					'animateurs' => array( 'index'),
 					'vehicules' => array( 'index'),
-					'users' => array( 'index')
+					'users' => array( 'index', 'list', 'info'),
+					'app' => array('concat', 'index', 'info')
 	);
 
-define('DEFAULT_MODULE', 'dashboard')
-define('DEFAULT_FUNCTION', 'index')
+define('DEFAULT_MODULE', 'dashboard');
+define('DEFAULT_FUNCTION', 'index');
 
 /*
 Tous les widgets sont dans /widgets

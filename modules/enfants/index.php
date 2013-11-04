@@ -11,7 +11,7 @@
                 <h3>Les enfants</h3>
                 <div class="col-md-10 col-sm-12 col-xs-12 pull-right">
                     <input type="text" class="col-md-5 search" placeholder="Tapez le nom d'un enfant...">
-                    <a href="ajouter" class="btn-flat primary pull-right"><span>+</span>
+                    <a href="/enfants/ajouter" class="btn-flat primary pull-right"><span>+</span>
                         Ajouter un enfant</a>
                 </div>
             </div>

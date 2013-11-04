@@ -24,8 +24,6 @@ class DB {
         }catch(PDOException $e){
             die('Impossible de se connecter a la base de donnee');
         }
- 
- 
     }
  
     public function query($sql, $data = array()){

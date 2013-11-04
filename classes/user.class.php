@@ -67,14 +67,11 @@ class user
 		return $user;
 	}
 
-	static function get_users() {
-		$pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASSWORD);
-		$sql = "SELECT * FROM users";
-		$users = $pdo->query($sql);
-		echo '<pre>';
-		while( $d = $users->fetch(PDO::FETCH_OBJ) ) { // PDO::FETCH_ASSOC PDO::FETCH_BOTH
-			print_r($d);
-		}
+	public static function get_users() {
+		global $db;
+
+		$users = $db->query('SELECT * FROM users');
+		
 		return $users;
 	}
 
