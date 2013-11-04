@@ -38,7 +38,20 @@ class DB {
         $datas = $this->query($sql, $data);
         return empty($datas) ? false : $datas[0];
     }
- 
+
+    public function update($sql, $data = array()) {
+        $req = $this->db->prepare($sql);
+        $req->execute($data);   
+        return $req->rowCount();
+    }
+
+    public function remove($sql, $data = array()) {
+        $req = $this->db->prepare($sql);
+        $req->bindParam($data); 
+        $req->execute();  
+        return $req->rowCount();	
+    }
+
 }
 
 

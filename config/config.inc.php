@@ -54,6 +54,8 @@ $modules = array(
 					'users' => array( 'index')
 	);
 
+define('DEFAULT_MODULE', 'dashboard')
+define('DEFAULT_FUNCTION', 'index')
 
 /*
 Tous les widgets sont dans /widgets

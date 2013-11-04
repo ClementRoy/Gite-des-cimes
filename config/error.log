@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 [03-Nov-2013 22:45:00 Europe/Berlin] PHP Warning:  include(/Users/christophe/Dropbox/Dev/Gite-des-cimes/modules/enfants/add.php): failed to open stream: No such file or directory in /Users/christophe/Dropbox/Dev/Gite-des-cimes/index.php on line 39
 [03-Nov-2013 22:45:00 Europe/Berlin] PHP Warning:  include(): Failed opening '/Users/christophe/Dropbox/Dev/Gite-des-cimes/modules/enfants/add.php' for inclusion (include_path='.:/Applications/MAMP/bin/php/php5.4.10/lib/php') in /Users/christophe/Dropbox/Dev/Gite-des-cimes/index.php on line 39
 =======
@@ -18,3 +19,5 @@
 [04-Nov-2013 00:41:34 Europe/Berlin] PHP Notice:  Undefined index: lastname in /Users/christophe/Dropbox/Dev/Gite-des-cimes/parts/navbar.php on line 15
 [04-Nov-2013 00:49:26 Europe/Berlin] PHP Notice:  Undefined index: firstname in /Users/christophe/Dropbox/Dev/Gite-des-cimes/parts/navbar.php on line 15
 [04-Nov-2013 00:49:26 Europe/Berlin] PHP Notice:  Undefined index: lastname in /Users/christophe/Dropbox/Dev/Gite-des-cimes/parts/navbar.php on line 15
+=======
+>>>>>>> f4ab148d7a6ef9f254a15534f9134e1082451cd5

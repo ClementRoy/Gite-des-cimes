@@ -8,14 +8,28 @@ class user
 	public $identifier;
 	public $firstname;
 	public $lastname;
+	public $rank;
 	public $id;
 
-	function __construct()
-	{
-		# code...
+	function __construct( $identifier = '', $password = '') {
+
+		global $db;
+
+		$user = $db->row('SELECT * FROM users WHERE identifier=:identifier AND password=:password', array(
+		        'identifier' => $identifier,
+		        'password' => $password
+		    	));
+		//echo 'helo';
+		if($user){
+		    $this->identifier = $user->identifier;
+		    $this->firstname = $user->firstname;
+		    $this->lastname = $user->lastname;
+		    $this->rank = $user->rank;
+		    $this->id = $user->id;
+		}
 	}
 
-	public function login( $identifier = '', $password = '', $remember = false, $redirect = '' ){
+	public static function login( $identifier = '', $password = '', $remember = false, $redirect = '' ){
 
 		global $db;
 
@@ -43,8 +57,14 @@ class user
 		}
 	}
 
-	function get_user() {
+	function get_user($id) {
+		global $db;
 
+		$user = $db->row('SELECT * FROM users WHERE id=:id', array(
+		        'id' => $id
+		        ));
+
+		return $user;
 	}
 
 	static function get_users() {
