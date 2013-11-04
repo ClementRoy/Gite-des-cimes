@@ -42,7 +42,7 @@ Un module peut-être accessible via le menu principal ou à travers d'autres mod
 Certains sont même abstrait
  */
 $modules = array(
-					'dashboard' => array( 'index'),
+					'accueil' => array( 'index'),
 					'enfants' => array('index','liste','ajouter', 'voir'),
 					'sejours' => array( 'index'),
 					'structures' => array( 'index'),
@@ -51,11 +51,11 @@ $modules = array(
 					'factures' => array( 'index'),
 					'animateurs' => array( 'index'),
 					'vehicules' => array( 'index'),
-					'users' => array( 'index', 'list', 'info'),
-					'app' => array('contact', 'index', 'infos', 'debug')
+					'utilisateurs' => array( 'index', 'liste', 'infos', 'fiche', 'connexion'),
+					'infos' => array('contact', 'index', 'infos', 'debug')
 	);
 
-define('DEFAULT_MODULE', 'dashboard');
+define('DEFAULT_MODULE', 'accueil');
 define('DEFAULT_FUNCTION', 'index');
 
 /*

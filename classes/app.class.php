@@ -11,6 +11,10 @@ class app
 		# code...
 	}
 
+	public static function getVar(&$var) {
+		return self::$var;
+	}
+
 
 }
 

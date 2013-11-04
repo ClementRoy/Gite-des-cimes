@@ -49,7 +49,7 @@
                             </td>
                             <td>
                                 <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
-                                <a href="" class="name"><?=$user->firstname; ?></a>
+                                <a href="/utilisateurs/infos/<?=$user->id; ?>" class="name"><?=$user->firstname; ?></a>
                                 <span class="subtext"><?=$user->rank; ?></span>
                             </td>
                             <td>

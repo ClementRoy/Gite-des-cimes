@@ -28,7 +28,9 @@ if( isset($_POST['login']) && !empty($_POST['identifier']) && !empty($_POST['pas
  * Si il est connecté on vérifie la validité de la ressources et on le renvoi vers cette ressources
 */
 
-if ( isset($_GET['logout']) ) {
+//print_r($_SERVER);
+
+if ( isset($_GET['deconnexion']) ) {
     $user->logout();
 }
 
@@ -49,11 +51,12 @@ if ( user::is_logged() ) {
         $function = DEFAULT_FUNCTION;
         $module   = DEFAULT_MODULE;
     }
+    //echo $_SERVER["DOCUMENT_ROOT"] . '/modules/'.$module.'/'.$function.'.php';
     include($_SERVER["DOCUMENT_ROOT"] . '/modules/'.$module.'/'.$function.'.php');
 
 }
 else {
-    include($_SERVER["DOCUMENT_ROOT"] . '/modules/users/login.php');
+    include($_SERVER["DOCUMENT_ROOT"] . '/modules/utilisateurs/connexion.php');
 }
 
 

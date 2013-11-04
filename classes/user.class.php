@@ -49,7 +49,7 @@ class user
 		
 	}
 
-	static function is_logged() {
+	public static function is_logged() {
 		if( isset($_SESSION['Auth']) && isset($_SESSION['Auth']['identifier']) && isset($_SESSION['Auth']['password']) ){
 			return true;
 		} else {
@@ -57,7 +57,7 @@ class user
 		}
 	}
 
-	function get_user($id) {
+	public static function get_user($id) {
 		global $db;
 
 		$user = $db->row('SELECT * FROM users WHERE id=:id', array(

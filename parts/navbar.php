@@ -16,9 +16,9 @@
                     <strong class="caret"></strong>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="/users/fiche/<?=$user->id; ?>">Mes infos personnelles</a></li>
-                    <li><a href="/users/list/">Liste des utilisateurs</a></li>
-                    <li><a href="/app/contact">Repporter un bug</a></li>
+                    <li><a href="/utilisateurs/infos/<?=$user->id; ?>">Mes infos personnelles</a></li>
+                    <li><a href="/utilisateurs/liste/">Liste des utilisateurs</a></li>
+                    <li><a href="/infos/contact">Repporter un bug</a></li>
                 </ul>
             </li>
             <li class="dropdown hidden-xs hidden-sm">
@@ -27,13 +27,13 @@
                     <strong class="caret"></strong>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="/app/infos/">Infos</a></li>
-                    <li><a href="/app/debug/">Debug</a></li>
-                    <li><a href="/app/contact">Repporter un bug</a></li>
+                    <li><a href="/infos/infos/">Infos</a></li>
+                    <li><a href="/infos/debug/">Debug</a></li>
+                    <li><a href="/infos/contact">Repporter un bug</a></li>
                 </ul>
             </li>
             <li class="settings hidden-xs hidden-sm">
-                <a href="/?logout" role="button">
+                <a href="/?deconnexion" role="button">
                     <i class="icon-signin"></i>
                 </a>
             </li>

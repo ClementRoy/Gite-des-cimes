@@ -3,8 +3,13 @@ Options -Indexes
 
 RewriteEngine On
 
-RewriteCond %{SCRIPT_FILENAME} !-d
-RewriteCond %{SCRIPT_FILENAME} !-f
+#RewriteCond %{SCRIPT_FILENAME} !-d
+#RewriteCond %{SCRIPT_FILENAME} !-f
 
-RewriteRule ^([a-zA-Z0-9]+)/([a-zA-Z0-9]+) /index.php?module=$1&function=$2 [L]
-RewriteRule ^(dashboard|app|enfants|sejours|structures|contacts|convocations|factures|animateurs|vehicules|users)/ /index.php?module=$1 [L]
+
+#RewriteRule ^assets/(css|fonts|js|img)/.* - [NC,L]
+RewriteRule ^([a-zA-Z0-9-]+)/?$  /index\.php?module=$1 [L]
+RewriteRule ^([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/?$ /index\.php?module=$1&function=$2 [L]
+RewriteRule ^([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/?$ /index\.php?module=$1&function=$2&id=$3 [L]
+#RewriteRule .* index\.php [L]
+
