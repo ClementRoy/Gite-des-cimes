@@ -52,7 +52,7 @@ $modules = array(
 					'animateurs' => array( 'index'),
 					'vehicules' => array( 'index'),
 					'users' => array( 'index', 'list', 'info'),
-					'app' => array('concat', 'index', 'info')
+					'app' => array('contact', 'index', 'infos', 'debug')
 	);
 
 define('DEFAULT_MODULE', 'dashboard');
@@ -68,5 +68,11 @@ $widgets = array(
 		'incomplete_fiche',
 		'timeline_sejours'
 	);
+
+
+
+define('ADMIN', 'mail@clementroy.fr');
+
+
 
 ?>

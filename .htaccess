@@ -7,4 +7,4 @@ RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 
 RewriteRule ^([a-zA-Z0-9]+)/([a-zA-Z0-9]+) /index.php?module=$1&function=$2 [L]
-RewriteRule ^(dashboard|enfants|sejours|structures|contacts|convocations|factures|animateurs|vehicules|users|app)/ /index.php?module=$1 [L]
+RewriteRule ^(dashboard|app|enfants|sejours|structures|contacts|convocations|factures|animateurs|vehicules|users)/ /index.php?module=$1 [L]

@@ -21,6 +21,17 @@
                     <li><a href="/app/contact">Repporter un bug</a></li>
                 </ul>
             </li>
+            <li class="dropdown hidden-xs hidden-sm">
+                <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
+                    <i class="icon-cog"></i>
+                    <strong class="caret"></strong>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/app/infos/">Infos</a></li>
+                    <li><a href="/app/debug/">Debug</a></li>
+                    <li><a href="/app/contact">Repporter un bug</a></li>
+                </ul>
+            </li>
             <li class="settings hidden-xs hidden-sm">
                 <a href="/?logout" role="button">
                     <i class="icon-signin"></i>

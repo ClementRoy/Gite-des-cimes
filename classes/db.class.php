@@ -37,13 +37,19 @@ class DB {
         return empty($datas) ? false : $datas[0];
     }
 
+    public function insert() {
+        $req = $this->db->prepare($sql);
+        $req->execute($data);   
+        return $req->rowCount();  	
+    }
+
     public function update($sql, $data = array()) {
         $req = $this->db->prepare($sql);
         $req->execute($data);   
         return $req->rowCount();
     }
 
-    public function remove($sql, $data = array()) {
+    public function delete($sql, $data = array()) {
         $req = $this->db->prepare($sql);
         $req->bindParam($data); 
         $req->execute();  
