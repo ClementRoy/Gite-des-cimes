@@ -12,15 +12,13 @@
         <ul class="nav navbar-nav pull-right hidden-xs">
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
-                    Bonjour <strong><?=$_SESSION['Auth']['firstname']; ?> <?=$_SESSION['Auth']['lastname']; ?></strong>
+                    Bonjour <strong><?=$user->firstname; ?> <?=$user->lastname; ?></strong>
                     <strong class="caret"></strong>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="personal-info.html">Personal info</a></li>
-                    <li><a href="#">Account settings</a></li>
-                    <li><a href="#">Billing</a></li>
-                    <li><a href="#">Export your data</a></li>
-                    <li><a href="#">Send feedback</a></li>
+                    <li><a href="/users/fiche/<?=$user->id; ?>">Mes infos personnelles</a></li>
+                    <li><a href="/users/list/">Liste des utilisateurs</a></li>
+                    <li><a href="/app/contact">Repporter un bug</a></li>
                 </ul>
             </li>
             <li class="settings hidden-xs hidden-sm">
