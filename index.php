@@ -3,6 +3,27 @@
 
 require($_SERVER["DOCUMENT_ROOT"] . '/config/config.inc.php');
 
+$params = array_filter(explode('/', $_SERVER['REQUEST_URI']));
+
+foreach ($params as $key => $param) {
+    //echo $key.' =>'.$param."\n";
+    if( $key == 1) {
+        $_GET['module'] = $param;
+    }
+    elseif($key == 2) {
+        $_GET['function'] = $param;
+    }
+    else {
+        if($key%2 != 0) {
+            $_GET[$param] = $params[$key+1];
+        }
+    }
+}
+
+// echo '<hr />';
+// print_r($_GET);
+// echo '</pre>';
+
 
 /*
  Initialisation et connexion à la base de données 
@@ -28,7 +49,11 @@ if( isset($_POST['login']) && !empty($_POST['identifier']) && !empty($_POST['pas
  * Si il est connecté on vérifie la validité de la ressources et on le renvoi vers cette ressources
 */
 
-//print_r($_SERVER);
+// play with $_SERVER['REQUEST_URI']
+// [REQUEST_URI] => /utilisateurs/infos/1
+
+
+
 
 if ( isset($_GET['deconnexion']) ) {
     $user->logout();
