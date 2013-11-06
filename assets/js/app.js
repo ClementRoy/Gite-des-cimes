@@ -1,7 +1,25 @@
 $(function () {
 
-	$('input:checkbox, input:radio').uniform();
+	$("#wizard").steps({
+		headerTag: 'h2',
+		bodyTag: '.form-wrapper',
+		transitionEffect: $.fn.steps.transitionEffect.fade,
+		transitionEffectSpeed: 200,
+		labels: {
+			current: "Etape actuelle :",
+			pagination: "Pagination",
+			finish: "Valider",
+			next: "Suivant",
+			previous: "Précédent",
+			loading: "Chargement..."
+		},
+		onStepChanged: function (event, currentIndex, priorIndex) {
+			console.log($('#wizard-p-' + currentIndex).outerHeight());
+			return true;
+		}
+	});
 
+	$('input:checkbox, input:radio').uniform();
 	$('.select2').select2();
 
 	$('.input-datepicker').datepicker().on('changeDate', function () {
@@ -13,8 +31,6 @@ $(function () {
 			placement: $(this).data("placement") || 'right'
 		});
 	});
-
-
 
 	$('[data-group]').hide();
 	$('[data-group="structure"').show();
@@ -45,5 +61,4 @@ $(function () {
 			$('[data-domiciliation="famille"]').hide();
 		}
 	});
-
 });
