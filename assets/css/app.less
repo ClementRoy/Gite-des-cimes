@@ -1,0 +1,227 @@
+@import url('compiled/calendar.css');
+@import url('compiled/chart-showcase.css');
+@import url('compiled/code-editor.css');
+@import url('compiled/datatables.css');
+@import url('compiled/elements.css');
+@import url('compiled/form-showcase.css');
+@import url('compiled/form-wizard.css');
+@import url('compiled/gallery.css');
+@import url('compiled/grids.css');
+@import url('compiled/icons.css');
+@import url('compiled/index.css');
+@import url('compiled/layout.css');
+@import url('compiled/new-user.css');
+@import url('compiled/personal-info.css');
+@import url('compiled/signin.css');
+/*@import url('compiled/signup.css');*/
+@import url('compiled/tables.css');
+@import url('compiled/ui-elements.css');
+@import url('compiled/user-list.css');
+@import url('compiled/user-profile.css');
+@import url('compiled/web-app-icons.css');
+
+
+#pad-wrapper h4 {
+	margin-bottom: 35px;
+}
+
+.form-page .form-wrapper .select2-container {
+	margin-left: 0px;
+	margin-top: 4px;
+}
+.select2-container .select2-choice {
+	height: 29px;
+	line-height: 28px;
+}
+.ui-select{
+	margin-top: 3px;
+	width: auto;
+	padding-right: 30px;
+	height: 30px;
+	line-height: 27px;
+	min-width: 270px;
+	select {
+		width: 125%;
+		height: auto;
+		cursor: pointer;
+	}
+}
+.form-wrapper {
+	input[type="text"] {
+		width: 100%;
+	}
+	.field-box .row {
+		margin: 0 -7px 10px -7px;
+		
+		&:last-child {
+			margin: 0 -7px 0 -7px;
+		}
+		[class*="col-"] {
+			padding-left: 7px;
+			padding-right: 7px;
+		}
+	}
+}
+.form-page .form-wrapper label.radio-inline {
+	cursor: pointer;
+	width: inherit;
+	padding-left: 0;
+}
+.form-wrapper .field-box:last-child {
+	margin-bottom: 30px;
+}
+label {
+	margin-bottom: 7px;
+}
+.navbar-inverse .navbar-brand {
+	padding: 13px 20px;
+}
+.navbar-toggle {
+	padding: 6px 8px 9px 6px;
+}
+#pad-wrapper .section {
+	margin-top: 25px;
+	box-shadow: inset 0px 3px 2px -1px #FAFAFA;
+}
+.form-page .form-wrapper label {
+	width: 160px;
+	padding-right: 5px;
+}
+
+.wizard-steps {
+	&.in-3 li {
+		min-width: 33.33333%;
+		max-width: 33.33333%;
+	}
+	&.in-3 li:before {
+		top: 7px;
+	}
+	li.active:before,
+	li.complete:before,
+	li.active .step,
+	li.complete .step {
+		border-color: #34A0ED;
+		color: #34A0ED;
+	}
+}
+.header {
+	margin-bottom: 50px;
+}
+
+.wizard {
+	& > .steps-content > .form-wrapper {
+		margin-bottom: 20px;
+		padding-top: 30px;
+	}
+	h3 {
+		margin-bottom: 30px;
+	}
+	& > .steps > ul > li {
+		width: 33%;
+		float: left;
+		position: relative;
+		&:first-child a:before,
+		&:last-child a:after {
+			border:none;
+		}
+		a:before,
+		a:after {
+			display: block;
+			content: ' ';
+			background: rgba(0, 0, 0, 0);
+			position: absolute;
+			top: 50%;
+			margin-top: -21px;
+			width: 0;
+			height: 0;
+			border-top: 21px solid rgba(0, 0, 0, 0);
+			border-bottom: 21px solid rgba(0, 0, 0, 0);
+		}
+		&.done a:after {
+			border-left: 19px solid #9DC8E2;
+		}
+		&.current a:after {
+			border-left: 19px solid #2184BE;
+		}
+		a:before {
+			border-left: 24px solid white;
+			border-top: 29px solid rgba(0, 0, 0, 0);
+			border-bottom: 28px solid rgba(0, 0, 0, 0);
+			z-index: 2000;
+			left: -2px;
+			margin-top: -28px;
+		}
+		a:after {
+			border-left: 17px solid #EEE;
+			z-index: 3000;
+			right: -15px;
+		}
+	}
+	& > .steps > ul {
+		width: 100%;
+	}
+	& > .steps a,
+	& > .steps a:hover,
+	& > .steps a:active {
+		margin: 0;
+		padding: 8px 35px 9px;
+	}
+	& > .steps li:first-child a {
+		margin: 0;
+		padding: 8px 15px 9px;
+	}
+	& > .steps-content > .body {
+		width: 100%;
+		height: 100%;
+	}
+}
+.adresse-numero +  .tooltip.right {
+	margin-left: 279px;
+	}
+.adresse-postal +  .tooltip.right {
+	margin-left: 250px;
+	}
+.col-md-5 + .tooltip.right {
+	margin-left: 4px;
+	}
+.tooltip.right {
+	margin-left: 3px;
+	padding: 0 5px;
+	
+	width: 270px;
+	margin-left: 20px;
+	margin-top: -1px;
+	.tooltip-arrow {
+		border-right-color: #464646;
+	}
+}
+.tooltip-inner {
+	min-width: 0;
+	max-width: none;
+	padding: 5px 12px 5px 10px;
+	color: #FFF;
+	text-align: left;
+	text-decoration: none;
+	background-color: #464646;
+	border-radius: 4px;
+
+	display: block;
+	width: auto;
+	margin-top: 0;
+	float: left;
+}
+.tooltip-inner:before {
+	content: "\f059";
+	margin-right: 7px;
+	font-size: 14px;
+	line-height: 10px;
+	color: #999;
+	font-family: FontAwesome;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: inherit;
+	-webkit-font-smoothing: antialiased;
+}
+.wrap-radio-inline {
+
+}

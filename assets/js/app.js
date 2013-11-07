@@ -12,10 +12,6 @@ $(function () {
 			next: "Suivant",
 			previous: "Précédent",
 			loading: "Chargement..."
-		},
-		onStepChanged: function (event, currentIndex, priorIndex) {
-			console.log($('#wizard-p-' + currentIndex).outerHeight());
-			return true;
 		}
 	});
 
@@ -26,11 +22,40 @@ $(function () {
 		$(this).datepicker('hide');
 	});
 
-	$('[data-toggle="tooltip"]').each(function (index, el) {
+
+
+	$('input[type="text"]').each(function (index, el) {
 		$(el).tooltip({
-			placement: $(this).data("placement") || 'right'
+			placement: $(this).data("placement") || 'right',
+			trigger: $(this).data("trigger") || 'focus'
 		});
 	});
+	$('textarea').each(function (index, el) {
+		$(el).tooltip({
+			placement: $(this).data("placement") || 'right',
+			trigger: $(this).data("trigger") || 'focus'
+		});
+	});
+	$('label.radio').parent('div').each(function (index, el) {
+		$(el).tooltip({
+			placement: $(this).data("placement") || 'right',
+			trigger: $(this).data("trigger") || 'hover'
+		});
+	});
+	$('label.radio-inline').parent('div').each(function (index, el) {
+		$(el).tooltip({
+			placement: $(this).data("placement") || 'right',
+			trigger: $(this).data("trigger") || 'hover'
+		});
+	});
+	$('.ui-select').parent('div').each(function (index, el) {
+		$(el).tooltip({
+			placement: $(this).data("placement") || 'right',
+			trigger: $(this).data("trigger") || 'hover'
+		});
+	});
+
+
 
 	$('[data-group]').hide();
 	$('[data-group="structure"').show();
@@ -59,6 +84,14 @@ $(function () {
 			$('[data-domiciliation="famille"]').fadeIn(300);
 		} else {
 			$('[data-domiciliation="famille"]').hide();
+		}
+	});
+	$('[data-assurance="oui"]').hide();
+	$('input[name="form-enfant-assurance"]').on('change', function() {
+		if ($(this).val() === 'oui') {
+			$('[data-assurance="oui"]').fadeIn(300);
+		} else {
+			$('[data-assurance="oui"]').hide();
 		}
 	});
 });
