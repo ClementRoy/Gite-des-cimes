@@ -11,26 +11,27 @@
                     <h1>Ajouter un enfant</h1>
                 </div>
             </div>
-            <div id="wizard">
-                <h2>Informations sur l'enfant</h2>
-                <div class="row form-wrapper">
-                    <form>
+
+            <form id="wizard">
+                    <h2>Informations sur l'enfant</h2>
+                    <div class="row form-wrapper">
+
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-prenom">Prénom</label>
                             <div class="col-md-5">
-                                <input id="form-enfant-prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant.">
+                                <input id="form-enfant-prenom" name="form-enfant-prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant.">
                             </div>                            
                         </div>
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-nom">Nom</label>
                             <div class="col-md-5">
-                                <input id="form-enfant-nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'enfant.">
+                                <input id="form-enfant-nom" name="form-enfant-nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'enfant.">
                             </div>                            
                         </div>
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-naissance">Date de naissance</label>
                             <div class="col-md-5">
-                                <input id="form-enfant-naissance" type="text" class="form-control input-datepicker" value="01/01/2000" data-toggle="tooltip" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa).">
+                                <input id="form-enfant-naissance"  name="form-enfant-naissance" type="text" class="form-control input-datepicker" value="01/01/2000" data-toggle="tooltip" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa).">
                             </div>                            
                         </div>
                         <div class="field-box row">
@@ -54,12 +55,10 @@
                                 </label>
                             </div>                            
                         </div>
-                    </form>
-                </div>
+                    </div>
 
-                <h2>Informations administratives</h2>
-                <div class="row form-wrapper">
-                    <form>
+                    <h2>Informations administratives</h2>
+                    <div class="row form-wrapper">
                         <div class="field-box row">
                             <label class="col-md-2">L'enfant est inscrit par</label>
                             <div class="col-md-5" data-toggle="tooltip" title="Précisez qui a inscrit cet enfant au séjour/week-end.">
@@ -214,7 +213,7 @@
                                 <div class="col-md-5">
                                     <div class="row">
                                         <div class="col-md-3">
-                                        <input id="form-enfant-responsable-adresse-numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse du responsable légal.">
+                                            <input id="form-enfant-responsable-adresse-numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse du responsable légal.">
                                         </div>
                                         <div class="col-md-9"><input id="form-enfant-responsable-adresse-voirie" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse du responsable légal."></div>
                                     </div>
@@ -268,7 +267,7 @@
                                 <div class="col-md-5">
                                     <div class="row">
                                         <div class="col-md-3">
-                                        <input id="form-enfant-famille-adresse-numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse de la famille d'accueil.">
+                                            <input id="form-enfant-famille-adresse-numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse de la famille d'accueil.">
                                         </div>
                                         <div class="col-md-9"><input id="form-enfant-famille-adresse-voirie" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse de la famille d'accueil."></div>
                                     </div>
@@ -302,13 +301,10 @@
                                 </label>
                             </div>
                         </div>
+                    </div>
 
-                    </form>
-                </div>
-
-                <h2>Informations sanitaires</h2>
-                <div class="row form-wrapper">
-                    <form>
+                    <h2>Informations sanitaires</h2>
+                    <div class="row form-wrapper">
                         <div class="field-box row">
                             <label class="col-md-2">Traitement(s) médical(s)</label>
                             <div class="col-md-5" data-toggle="tooltip" title="Précisez si l'enfant suit un traitement médical.">
@@ -369,91 +365,90 @@
                         <div class="field-box row">
                             <label class="col-md-2">Attestation CPAM</label>
                             <div class="col-md-5" data-toggle="tooltip" title="Précisez si l'attestation CPAM est dans le dossier de l'enfant.">
-                            <label class="radio-inline col-md-7" for="form-enfant-attestation-cpam-oui">
-                                <div class="radio" id="uniform-form-enfant-attestation-cpam-oui">
-                                    <span class="checked">
-                                        <input type="radio" name="form-enfant-attestation-cpam" id="form-enfant-attestation-cpam-oui" value="oui">
-                                    </span>
-                                </div>
-                                Oui
-                            </label>
-                            <label class="radio-inline col-md-5">
-                                <div class="radio" id="uniform-form-enfant-attestation-cpam-non">
-                                    <span class="checked">
-                                        <input type="radio" name="form-enfant-attestation-cpam" id="form-enfant-attestation-cpam-non" value="non" checked="">
-                                    </span>
-                                </div>
-                                Non
-                            </label>
+                                <label class="radio-inline col-md-7" for="form-enfant-attestation-cpam-oui">
+                                    <div class="radio" id="uniform-form-enfant-attestation-cpam-oui">
+                                        <span class="checked">
+                                            <input type="radio" name="form-enfant-attestation-cpam" id="form-enfant-attestation-cpam-oui" value="oui">
+                                        </span>
+                                    </div>
+                                    Oui
+                                </label>
+                                <label class="radio-inline col-md-5">
+                                    <div class="radio" id="uniform-form-enfant-attestation-cpam-non">
+                                        <span class="checked">
+                                            <input type="radio" name="form-enfant-attestation-cpam" id="form-enfant-attestation-cpam-non" value="non" checked="">
+                                        </span>
+                                    </div>
+                                    Non
+                                </label>
                             </div>
                         </div>
 
                         <div class="field-box row">
                             <label class="col-md-2">Carnet de vaccination</label>
                             <div class="col-md-5" data-toggle="tooltip" title="Précisez si le carnet de vaccination est dans le dossier de l'enfant.">
-                            <label class="radio-inline col-md-7" for="form-enfant-carnet-vaccination-oui">
-                                <div class="radio" id="uniform-form-enfant-carnet-vaccination-oui">
-                                    <span class="checked">
-                                        <input type="radio" name="form-enfant-carnet-vaccination" id="form-enfant-carnet-vaccination-oui" value="oui">
-                                    </span>
-                                </div>
-                                Oui
-                            </label>
-                            <label class="radio-inline col-md-5" for="form-enfant-carnet-vaccination-non">
-                                <div class="radio" id="uniform-form-enfant-carnet-vaccination-non">
-                                    <span class="checked">
-                                        <input type="radio" name="form-enfant-carnet-vaccination" id="form-enfant-carnet-vaccination-non" value="non" checked="">
-                                    </span>
-                                </div>
-                                Non
-                            </label>
+                                <label class="radio-inline col-md-7" for="form-enfant-carnet-vaccination-oui">
+                                    <div class="radio" id="uniform-form-enfant-carnet-vaccination-oui">
+                                        <span class="checked">
+                                            <input type="radio" name="form-enfant-carnet-vaccination" id="form-enfant-carnet-vaccination-oui" value="oui">
+                                        </span>
+                                    </div>
+                                    Oui
+                                </label>
+                                <label class="radio-inline col-md-5" for="form-enfant-carnet-vaccination-non">
+                                    <div class="radio" id="uniform-form-enfant-carnet-vaccination-non">
+                                        <span class="checked">
+                                            <input type="radio" name="form-enfant-carnet-vaccination" id="form-enfant-carnet-vaccination-non" value="non" checked="">
+                                        </span>
+                                    </div>
+                                    Non
+                                </label>
                             </div>
                         </div>
                         <div class="field-box row">
                             <label class="col-md-2">Fiche sanitaire de liaison</label>
                             <div class="col-md-5" data-toggle="tooltip" title="Précisez si la fiche sanitaire de liaison est dans le dossier de l'enfant.">
-                            <label class="radio-inline col-md-7" for="form-enfant-fiche-sanitaire-oui">
-                                <div class="radio" id="uniform-form-enfant-fiche-sanitaire-oui">
-                                    <span class="checked">
-                                        <input type="radio" name="form-enfant-fiche-sanitaire" id="form-enfant-fiche-sanitaire-oui" value="oui">
-                                    </span>
-                                </div>
-                                Oui
-                            </label>
-                            <label class="radio-inline col-md-5" for="form-enfant-fiche-sanitaire-non">
-                                <div class="radio" id="uniform-form-enfant-fiche-sanitaire-non">
-                                    <span class="checked">
-                                        <input type="radio" name="form-enfant-fiche-sanitaire" id="form-enfant-fiche-sanitaire-non" value="non" checked="">
-                                    </span>
-                                </div>
-                                Non
-                            </label>
+                                <label class="radio-inline col-md-7" for="form-enfant-fiche-sanitaire-oui">
+                                    <div class="radio" id="uniform-form-enfant-fiche-sanitaire-oui">
+                                        <span class="checked">
+                                            <input type="radio" name="form-enfant-fiche-sanitaire" id="form-enfant-fiche-sanitaire-oui" value="oui">
+                                        </span>
+                                    </div>
+                                    Oui
+                                </label>
+                                <label class="radio-inline col-md-5" for="form-enfant-fiche-sanitaire-non">
+                                    <div class="radio" id="uniform-form-enfant-fiche-sanitaire-non">
+                                        <span class="checked">
+                                            <input type="radio" name="form-enfant-fiche-sanitaire" id="form-enfant-fiche-sanitaire-non" value="non" checked="">
+                                        </span>
+                                    </div>
+                                    Non
+                                </label>
                             </div>
                         </div>
                         <div class="field-box row">
                             <label class="col-md-2">Fiche de séjour</label>
                             <div class="col-md-5" data-toggle="tooltip" title="Précisez si la fiche de séjour est dans le dossier de l'enfant.">
-                            <label class="radio-inline col-md-7" for="form-enfant-fiche-sejour-oui">
-                                <div class="radio" id="uniform-form-enfant-fiche-sejour-oui">
-                                    <span class="checked">
-                                        <input type="radio" name="form-enfant-fiche-sejour" id="form-enfant-fiche-sejour-oui" value="oui">
-                                    </span>
-                                </div>
-                                Oui
-                            </label>
-                            <label class="radio-inline col-md-5" for="form-enfant-fiche-sejour-non">
-                                <div class="radio" id="uniform-form-enfant-fiche-sejour-non">
-                                    <span class="checked">
-                                        <input type="radio" name="form-enfant-fiche-sejour" id="form-enfant-fiche-sejour-non" value="non" checked="">
-                                    </span>
-                                </div>
-                                Non
-                            </label>
+                                <label class="radio-inline col-md-7" for="form-enfant-fiche-sejour-oui">
+                                    <div class="radio" id="uniform-form-enfant-fiche-sejour-oui">
+                                        <span class="checked">
+                                            <input type="radio" name="form-enfant-fiche-sejour" id="form-enfant-fiche-sejour-oui" value="oui">
+                                        </span>
+                                    </div>
+                                    Oui
+                                </label>
+                                <label class="radio-inline col-md-5" for="form-enfant-fiche-sejour-non">
+                                    <div class="radio" id="uniform-form-enfant-fiche-sejour-non">
+                                        <span class="checked">
+                                            <input type="radio" name="form-enfant-fiche-sejour" id="form-enfant-fiche-sejour-non" value="non" checked="">
+                                        </span>
+                                    </div>
+                                    Non
+                                </label>
                             </div>
                         </div>
-                    </form>
-                </div>
-            </div>
+                    </div>
+            </form>
         </div>
     </div>
 

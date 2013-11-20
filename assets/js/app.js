@@ -13,7 +13,25 @@ $(function () {
 			previous: "Précédent",
 			loading: "Chargement..."
 		}
+    });
+
+	$("#wizard2").steps({
+		headerTag: 'h2',
+		bodyTag: '.form-wrapper',
+		transitionEffect: $.fn.steps.transitionEffect.fade,
+		transitionEffectSpeed: 200,
+	    enableFinishButton: false,
+	    enablePagination: false,
+	    enableAllSteps: true,
+	    titleTemplate: "#title#" 
 	});
+
+    $('#table-enfant').tableSorter();
+
+    $('#enfant-recherche').on('keyup', function(event) {
+    	event.preventDefault();
+    	$('#table-enfant_filter input').val( $(this).val() );
+    });
 
 	$('input:checkbox, input:radio').uniform();
 	$('.select2').select2();
@@ -94,4 +112,5 @@ $(function () {
 			$('[data-assurance="oui"]').hide();
 		}
 	});
+
 });

@@ -10,7 +10,7 @@
             <div class="row header">
                 <h3>Les enfants</h3>
                 <div class="col-md-10 col-sm-12 col-xs-12 pull-right">
-                    <input type="text" class="col-md-5 search" placeholder="Tapez le nom d'un enfant...">
+                    <input type="text" id="table-enfant-search" class="col-md-5 search" placeholder="Tapez le nom d'un enfant...">
                     <a href="/enfants/ajouter" class="btn-flat primary pull-right"><span>+</span>
                         Ajouter un enfant</a>
                 </div>
@@ -19,22 +19,17 @@
             <!-- Users table -->
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-hover">
+                    <table id="table-enfant" class="table table-hover">
                         <thead>
                             <tr>
-                                <th class="sortable">Prénom
-                                &nbsp;&nbsp;&nbsp;<i class="icon-sort"></i></th>
-                                <th class="sortable">Nom
-                                &nbsp;&nbsp;&nbsp;<i class="icon-sort"></i></th>
-                                <th class="sortable">Sexe
-                                &nbsp;&nbsp;&nbsp;<i class="icon-sort"></i></th>
+                                <th class="sortable">Prénom <i class="icon-sort pull-right"></i></th>
+                                <th class="sortable">Nom <i class="icon-sort pull-right"></i></th>
+                                <th class="sortable">Sexe <i class="icon-sort pull-right"></i></th>
                                 <th class="sortable">
-                                    <span class="line"></span>Date de naissance
-                                    &nbsp;&nbsp;&nbsp;<i class="icon-sort"></i>
+                                    <span class="line"></span>Date de naissance <i class="icon-sort pull-right"></i>
                                 </th>
                                 <th class="sortable">
-                                    <span class="line"></span>Age
-                                    &nbsp;&nbsp;&nbsp;<i class="icon-sort"></i>
+                                    <span class="line"></span>Age <i class="icon-sort pull-right"></i>
                                 </th>
                             </tr>
                         </thead>
@@ -42,10 +37,10 @@
                         <!-- row -->
                         <tr class="first">
                             <td>
-                                <a href="user-profile.html">Christophe</a>
+                                <a href="infos">Christophe</a>
                             </td>
                             <td>
-                                <a href="user-profile.html">Béghin</a>
+                                <a href="infos">Béghin</a>
                             </td>
                             <td>
                                 <i class="icon-male"></i> Homme
@@ -57,21 +52,59 @@
                                 23 ans
                             </td>
                         </tr>
-                        <!-- row -->
                         <tr>
                             <td>
-                                <a href="user-profile.html">Christophe Béghin</a>
+                                <a href="infos">Nedjma</a>
                             </td>
                             <td>
-                                Mar 13, 2012
+                                <a href="infos">Behlouli</a>
                             </td>
                             <td>
-                                $ 4,500.00
+                                <i class="icon-female"></i> Femme
                             </td>
-                            <td class="align-right">
-                                <a href="#">alejandra@canvas.com</a>
+                            <td>
+                                01/12/1989
+                            </td>
+                            <td>
+                                23 ans
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <a href="infos">Clément</a>
+                            </td>
+                            <td>
+                                <a href="infos">Roy</a>
+                            </td>
+                            <td>
+                                <i class="icon-male"></i> Homme
+                            </td>
+                            <td>
+                                02/05/1990
+                            </td>
+                            <td>
+                                23 ans
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="infos">Coraline</a>
+                            </td>
+                            <td>
+                                <a href="infos">Assimon</a>
+                            </td>
+                            <td>
+                                <i class="icon-female"></i> Femme
+                            </td>
+                            <td>
+                                02/01/1989
+                            </td>
+                            <td>
+                                24 ans
+                            </td>
+                        </tr>
+                        <!-- row -->
+                       
 
                         </tbody>
                     </table>

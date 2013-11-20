@@ -192,14 +192,15 @@ label {
   margin-left: 4px;
 }
 .tooltip.right {
-  margin-left: 3px;
   padding: 0 5px;
+  -webkit-backface-visibility: hidden;
   width: 270px;
   margin-left: 20px;
   margin-top: -1px;
 }
 .tooltip.right .tooltip-arrow {
   border-right-color: #464646;
+  -webkit-transform: translateX(1px);
 }
 .tooltip-inner {
   min-width: 0;
@@ -226,4 +227,13 @@ label {
   font-style: normal;
   text-decoration: inherit;
   -webkit-font-smoothing: antialiased;
+}
+.btn-flat {
+  -webkit-backface-visibility: hidden;
+}
+.users-list .header input.search {
+  padding: 14px 12px;
+  display: block;
+  position: relative;
+  top: 3px;
 }
