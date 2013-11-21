@@ -7,6 +7,14 @@ class convocation
 	{
 		# code...
 	}
+
+	static function getAll(){
+
+	}
+
+	static function getConvocation($id) {
+		
+	}
 }
 
 ?>
