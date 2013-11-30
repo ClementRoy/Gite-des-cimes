@@ -15,7 +15,7 @@
                 </div>
             </div>
     
-            <?php $users = user::get_users(); ?>
+            <?php $users = user::getList(); ?>
 
             <!-- Users table -->
             <div class="row">

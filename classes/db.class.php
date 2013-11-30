@@ -8,6 +8,14 @@ class DB {
     private $database 	= DB_NAME;
     private $db;
  
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
     public function __construct($host = null, $username = null, $password = null, $database = null){
         if($host != null){
             $this->host = $host;
@@ -26,29 +34,70 @@ class DB {
         }
     }
  
-    public function query($sql, $data = array()){
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
+    public function query($sql, $data = array(), $type = PDO::FETCH_OBJ){
+        // Fetch Type: PDO::FETCH_BOTH|PDO::FETCH_ASSOC|PDO::FETCH_OBJ|PDO::FETCH_LAZ
         $req = $this->db->prepare($sql);
         $req->execute($data);
-        return $req->fetchAll(PDO::FETCH_OBJ);
+        return $req->fetchAll($type);
     }
- 
+
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
     public function row($sql, $data = array()){
         $datas = $this->query($sql, $data);
         return empty($datas) ? false : $datas[0];
     }
 
-    public function insert() {
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
+    public function insert($sql, $data = array()) {
         $req = $this->db->prepare($sql);
         $req->execute($data);   
         return $req->rowCount();  	
     }
 
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
     public function update($sql, $data = array()) {
         $req = $this->db->prepare($sql);
         $req->execute($data);   
         return $req->rowCount();
     }
 
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
     public function delete($sql, $data = array()) {
         $req = $this->db->prepare($sql);
         $req->bindParam($data); 
@@ -60,16 +109,11 @@ class DB {
 
 
 /*
-Ressources
-http://net.tutsplus.com/tutorials/php/pdo-vs-mysqli-which-should-you-use/
-http://net.tutsplus.com/tutorials/php/php-database-access-are-you-doing-it-correctly/
-http://net.tutsplus.com/tutorials/php/why-you-should-be-using-phps-pdo-for-database-access/
-http://net.tutsplus.com/tutorials/php/creating-a-web-poll-with-php/
-
-
-http://www.grafikart.fr/tutoriels/php/pdo-php-111
-
-
+@see: http://net.tutsplus.com/tutorials/php/pdo-vs-mysqli-which-should-you-use/
+@see: http://net.tutsplus.com/tutorials/php/php-database-access-are-you-doing-it-correctly/
+@see: http://net.tutsplus.com/tutorials/php/why-you-should-be-using-phps-pdo-for-database-access/
+@see: http://net.tutsplus.com/tutorials/php/creating-a-web-poll-with-php/
+@see: http://www.grafikart.fr/tutoriels/php/pdo-php-111
 */
 
 

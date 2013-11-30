@@ -20,6 +20,9 @@ foreach ($params as $key => $param) {
     }
 }
 
+extract($_GET);
+extract($_POST);
+
 // echo '<hr />';
 // print_r($_GET);
 // echo '</pre>';
@@ -33,7 +36,7 @@ $db = new DB();
 $user = new user();
 
 // Handle login system
-if( isset($_POST['login']) && !empty($_POST['identifier']) && !empty($_POST['password']) ) {
+if( isset($login) && !empty($identifier) && !empty($password) ) {
     //print_r($_SERVER);
     extract($_POST);
     $remember = (isset($remember)) ? true : false;
@@ -55,18 +58,18 @@ if( isset($_POST['login']) && !empty($_POST['identifier']) && !empty($_POST['pas
 
 
 
-if ( isset($_GET['deconnexion']) ) {
+if ( isset($deconnexion) ) {
     $user->logout();
 }
 
-if ( user::is_logged() ) {
+if ( user::isLogged() ) {
     
     $user = new user($_SESSION['Auth']['identifier'], $_SESSION['Auth']['password']);
 
-    if ( isset($_GET['module']) && !empty($_GET['module']) && array_key_exists($_GET['module'], $modules) ) {
-        $module = $_GET['module'];
-         if ( isset($_GET['function']) && !empty($_GET['function']) && in_array($_GET['function'], $modules[$module]) ) {
-           $function = $_GET['function'];
+    if ( isset($module) && !empty($module) && array_key_exists($module, $modules) ) {
+        $module = $module;
+         if ( isset($function) && !empty($function) && in_array($function, $modules[$module]) ) {
+           $function = $function;
          }
          else {
             $function = $modules[$module][0];

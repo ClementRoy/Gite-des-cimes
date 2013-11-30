@@ -16,6 +16,8 @@
                 </div>
             </div>
 
+            <?php $enfants = enfant::getList(); ?>
+
             <!-- Users table -->
             <div class="row">
                 <div class="col-md-12">
@@ -35,12 +37,13 @@
                         </thead>
                         <tbody>
                         <!-- row -->
-                        <tr class="first">
+                        <?php foreach($enfants as $key => $enfant): ?>
+                        <tr <?php if($key == 0): ?>class="first"<?php endif; ?>>
                             <td>
-                                <a href="infos">Christophe</a>
+                                <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname; ?></a>
                             </td>
                             <td>
-                                <a href="infos">Béghin</a>
+                                <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname; ?></a>
                             </td>
                             <td>
                                 <i class="icon-male"></i> Homme
@@ -52,57 +55,7 @@
                                 23 ans
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <a href="infos">Nedjma</a>
-                            </td>
-                            <td>
-                                <a href="infos">Behlouli</a>
-                            </td>
-                            <td>
-                                <i class="icon-female"></i> Femme
-                            </td>
-                            <td>
-                                01/12/1989
-                            </td>
-                            <td>
-                                23 ans
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="infos">Clément</a>
-                            </td>
-                            <td>
-                                <a href="infos">Roy</a>
-                            </td>
-                            <td>
-                                <i class="icon-male"></i> Homme
-                            </td>
-                            <td>
-                                02/05/1990
-                            </td>
-                            <td>
-                                23 ans
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="infos">Coraline</a>
-                            </td>
-                            <td>
-                                <a href="infos">Assimon</a>
-                            </td>
-                            <td>
-                                <i class="icon-female"></i> Femme
-                            </td>
-                            <td>
-                                02/01/1989
-                            </td>
-                            <td>
-                                24 ans
-                            </td>
-                        </tr>
+                        <?php endforeach; ?>
                         <!-- row -->
                        
 

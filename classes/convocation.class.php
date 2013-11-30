@@ -2,16 +2,33 @@
 
 class convocation
 {
+
 	
 	function __construct()
 	{
 		# code...
 	}
 
-	static function getAll(){
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
+	static function getList(){
 
 	}
 
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
 	static function getConvocation($id) {
 		
 	}

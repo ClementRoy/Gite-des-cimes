@@ -11,6 +11,14 @@ class user
 	public $rank;
 	public $id;
 
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
 	function __construct( $identifier = '', $password = '') {
 
 		global $db;
@@ -19,7 +27,7 @@ class user
 		        'identifier' => $identifier,
 		        'password' => $password
 		    	));
-		//echo 'helo';
+
 		if($user){
 		    $this->identifier = $user->identifier;
 		    $this->firstname = $user->firstname;
@@ -29,6 +37,14 @@ class user
 		}
 	}
 
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
 	public static function login( $identifier = '', $password = '', $remember = false, $redirect = '' ){
 
 		global $db;
@@ -49,7 +65,15 @@ class user
 		
 	}
 
-	public static function is_logged() {
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
+	public static function isLogged() {
 		if( isset($_SESSION['Auth']) && isset($_SESSION['Auth']['identifier']) && isset($_SESSION['Auth']['password']) ){
 			return true;
 		} else {
@@ -57,7 +81,15 @@ class user
 		}
 	}
 
-	public static function get_user($id) {
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
+	public static function get($id) {
 		global $db;
 
 		$user = $db->row('SELECT * FROM users WHERE id=:id', array(
@@ -67,18 +99,76 @@ class user
 		return $user;
 	}
 
-	public static function get_users() {
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
+	public static function getList() {
 		global $db;
-
 		$users = $db->query('SELECT * FROM users');
-		
 		return $users;
 	}
 
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
 	public function create(){
 
 	}
 
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
+	public function remove(){
+
+	}
+
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
+	public function update(){
+
+	}
+
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
+	public function count(){
+
+	}
+
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
 	static function logout() {
 		$_SESSION = array();
 		session_destroy();		
@@ -89,14 +179,10 @@ class user
 
 
 /*
-
-
 http://www.grafikart.fr/tutoriels/php/securiser-sessions-php-58
 http://www.grafikart.fr/tutoriels/php/poo-models-php-90
 http://www.grafikart.fr/tutoriels/php/introduction-poo-php-114
 http://www.grafikart.fr/tutoriels/php/pdo-php-111
-
-
 */
 
 
