@@ -1,8 +1,14 @@
-<?php session_start();
+<?php 
+
+session_start();
 
 
 require($_SERVER["DOCUMENT_ROOT"] . '/config/config.inc.php');
 
+
+/*
+
+*/
 $params = array_filter(explode('/', $_SERVER['REQUEST_URI']));
 
 foreach ($params as $key => $param) {
@@ -22,11 +28,6 @@ foreach ($params as $key => $param) {
 
 extract($_GET);
 extract($_POST);
-
-// echo '<hr />';
-// print_r($_GET);
-// echo '</pre>';
-
 
 /*
  Initialisation et connexion à la base de données 
@@ -54,9 +55,6 @@ if( isset($login) && !empty($identifier) && !empty($password) ) {
 
 // play with $_SERVER['REQUEST_URI']
 // [REQUEST_URI] => /utilisateurs/infos/1
-
-
-
 
 if ( isset($deconnexion) ) {
     $user->logout();

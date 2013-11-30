@@ -23,11 +23,12 @@ class enfant
 	private function methods(){
 		$methods = array(
 						'get' => array('id'),
-						'getList' => array(),
+						'getList' => array('limit', 'offset'),
 						'count' => array(),
-						'update' => array(),
-						'add' => array(),
-						'remove' => array()
+						'update' => array('id', 'params'),
+						'add' => array('params'),
+						'remove' => array('id'),
+						'count' => array()
 						);
 
 		return $methods;
@@ -58,7 +59,7 @@ class enfant
      * @param
      * @return
      */
-	public static function getList(){
+	public static function getList($limit = false, $offset = false){
 		global $db;
 		$result = $db->query('SELECT * FROM enfant');
 		return $result;
@@ -73,10 +74,8 @@ class enfant
      * @return
      */
 	public static function count(){
-		
 		global $db;
 		$result = $db->row('SELECT COUNT(*) FROM enfant');
-		var_dump($result);
 		return $result;
 	}
 
@@ -89,7 +88,9 @@ class enfant
      * @return
      */
 	function update($id, $params = array()){
+		global $db;
 
+		return true;
 	}
 
     /**
@@ -101,7 +102,9 @@ class enfant
      * @return
      */
 	function add($params = array()){
+		global $db;
 
+		return true;
 	}
 
     /**
@@ -113,7 +116,9 @@ class enfant
      * @return
      */
 	function remove($id){
+		global $db;
 
+		return true;
 	}
 
 

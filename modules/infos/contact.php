@@ -4,6 +4,36 @@
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
+    <?php 
+
+    if( isset($message) && !empty($message) ){
+
+        $mail = new PHPMailer();
+
+        $mail->From = $_SESSION['Auth']['email'];
+        $mail->FromName = $_SESSION['Auth']['firstname']." ".$_SESSION['Auth']['lastname'];
+        $mail->Subject = $page;
+        $mail->Body = $message;
+        $mail->AddAddress(ADMIN, 'clem');
+        if (!$mail->send()) {
+            $error[] = "le message n'est pas parti";
+        }
+    ?>
+    <!-- main container -->
+    <div class="content">
+       <div id="pad-wrapper" class="new-user">
+            <div class="row header">
+                <div class="col-md-12">
+                    <h3>Message envoyé</h3>
+                </div>                
+            </div>
+
+            <p>Votre message a bien été envoyé, il sera pris en compte dans les plus bref délais</p>
+    </div>
+    <?php
+    }
+    else {
+    ?>
 	<!-- main container -->
     <div class="content">
 
@@ -19,15 +49,14 @@
                 <!-- left column -->
                 <div class="col-md-9 with-sidebar">
                     <div class="container">
-                        <form class="new_user_form" action="" method="post">
+                        <form class="new_user_form" action="/infos/contact" method="post">
                             <div class="col-md-12 field-box">
                                 <label for="page">Page concernée :</label>
                                 <input id="page" name="page" class="form-control" type="text" />
                             </div>
                             <div class="col-md-12 field-box textarea">
-                                <label for="description">Description :</label>
-                                <textarea id="description" name="description" class="col-md-9" rows="20"></textarea>
-                                <!--<span class="charactersleft">90 characters remaining. Field limited to 100 characters</span>-->
+                                <label for="message">Description :</label>
+                                <textarea id="message" name="message" class="col-md-9" rows="20"></textarea>
                             </div>
                             <div class="col-md-11 field-box actions">
                                 <input type="submit" class="btn-glow primary" value="Envoyer">
@@ -53,6 +82,7 @@
                 </div>
             </div>
         </div>
+        <?php } ?>
 
 
 

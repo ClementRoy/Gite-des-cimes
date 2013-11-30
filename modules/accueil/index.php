@@ -16,12 +16,19 @@
                     </div>
                     <span class="date">dans la base</span>
                 </div>
-                <div class="col-md-3 col-sm-3 stat last">
+                <div class="col-md-3 col-sm-3 stat">
                     <div class="data">
                         <span class="number"><?php echo count(user::getList()); ?></span>
                         utilisateurs
                     </div>
-                    <span class="date">connectés</span>
+                    <span class="date">autorisés</span>
+                </div>
+                <div class="col-md-3 col-sm-3 stat last">
+                    <div class="data">
+                        <span class="number">0</span>
+                        séjours
+                    </div>
+                    <span class="date">en cours</span>
                 </div>
             </div>
         </div>

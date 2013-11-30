@@ -63,12 +63,12 @@ class DB {
     }
 
     /**
-     * desc
+     * Insert query
      *
      * @note 
      *
-     * @param
-     * @return
+     * @param $sql SQL query
+     * @param $data Binded parameters
      */
     public function insert($sql, $data = array()) {
         $req = $this->db->prepare($sql);
@@ -77,12 +77,12 @@ class DB {
     }
 
     /**
-     * desc
+     * Update query
      *
      * @note 
      *
-     * @param
-     * @return
+     * @param $sql SQL query
+     * @param $data Binded parameters
      */
     public function update($sql, $data = array()) {
         $req = $this->db->prepare($sql);
@@ -91,12 +91,12 @@ class DB {
     }
 
     /**
-     * desc
+     * Delete query
      *
      * @note 
      *
-     * @param
-     * @return
+     * @param $sql SQL query
+     * @param $data Binded parameters
      */
     public function delete($sql, $data = array()) {
         $req = $this->db->prepare($sql);

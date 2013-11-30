@@ -10,8 +10,8 @@
             <div class="row header">
                 <h3>Utilisateur</h3>
                 <div class="col-md-10 col-sm-12 col-xs-12 pull-right">
-                    <?php $user = user::getUser($_GET['id']); ?>
-                    <?php var_dump($user); ?>
+                    <?php $user = user::get($id); ?>
+                    <?php tool::output($user); ?>
                 </div>
             </div>
 

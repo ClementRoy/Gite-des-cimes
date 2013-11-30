@@ -10,25 +10,22 @@
 			<h1>Debug</h1>
 
 			<div class="row">
-			    <div class="col-sm-4">
-			        <h2>SERVER</h2>
-			        <pre>
-			        <?php var_dump($_SERVER); ?>
-			   	 	</pre>
-			    </div>
-			    <div class="col-sm-4">
-			        <h2>CONSTANTE</h2>
-			        <pre>
-			        <?php var_dump(get_defined_constants()); ?>
-			    	</pre>
-			    </div>
-			    <div class="col-sm-4">
+			    <div class="col-sm-12">
 			        <h2>SESSION</h2>
-			        <pre>
-			        <?php var_dump($_SESSION); ?>
-			    	</pre>
+			        <?php tool::output($_SESSION); ?>
 			    </div>
-			 
+			</div>
+			<div class="row">
+			    <div class="col-sm-12">
+			        <h2>SERVER</h2>
+			        <?php tool::output($_SERVER); ?>
+			    </div>
+			</div>
+			<div class="row">
+			    <div class="col-sm-12">
+			        <h2>CONSTANTE</h2>
+			        <?php tool::output(get_defined_constants()); ?>
+			    </div>
 			</div>
 
 		</div>
