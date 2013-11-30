@@ -177,13 +177,13 @@ label {
 }
 .adresse-numero +  .tooltip.right {
 	margin-left: 279px;
-	}
+}
 .adresse-postal +  .tooltip.right {
 	margin-left: 250px;
-	}
+}
 .col-md-5 + .tooltip.right {
 	margin-left: 4px;
-	}
+}
 .tooltip.right {
 	padding: 0 5px;
 	-webkit-backface-visibility: hidden;
@@ -226,8 +226,36 @@ label {
 	-webkit-backface-visibility: hidden;
 }
 .users-list .header input.search {
-padding: 14px 12px;
-display: block;
-position: relative;
-top: 3px;
+	padding: 14px 12px;
+	display: block;
+	position: relative;
+	top: 3px;
+}
+
+.table {
+	tr.first td {
+		border-top: 1px solid #DDD;
+	}
+	th.sortable:hover {
+		text-decoration: none;
+	}
+	th.sortable:after {
+		font-family: FontAwesome;
+		font-weight: normal;
+		font-style: normal;
+		text-decoration: inherit;
+		-webkit-font-smoothing: antialiased;
+		content: "\f0dc";
+		float: right;
+		padding-right: 10px;
+		color: lightgray;
+	}
+	th.headerSortDown:after {
+		content: "\F0DD";
+		color: black;
+	}
+	th.headerSortUp:after {
+		content: "\F0DE";
+		color: black;
+	}
 }

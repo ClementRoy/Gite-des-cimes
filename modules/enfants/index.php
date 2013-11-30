@@ -24,14 +24,14 @@
                     <table id="table-enfant" class="table table-hover">
                         <thead>
                             <tr>
-                                <th class="sortable">Prénom <i class="icon-sort pull-right"></i></th>
-                                <th class="sortable">Nom <i class="icon-sort pull-right"></i></th>
-                                <th class="sortable">Sexe <i class="icon-sort pull-right"></i></th>
+                                <th class="sortable">Prénom</th>
+                                <th class="sortable"><span class="line"></span>Nom</th>
+                                <th class="sortable"><span class="line"></span>Sexe</th>
                                 <th class="sortable">
-                                    <span class="line"></span>Date de naissance <i class="icon-sort pull-right"></i>
+                                    <span class="line"></span>Date de naissance
                                 </th>
                                 <th class="sortable">
-                                    <span class="line"></span>Age <i class="icon-sort pull-right"></i>
+                                    <span class="line"></span>Age
                                 </th>
                             </tr>
                         </thead>

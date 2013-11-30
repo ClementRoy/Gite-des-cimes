@@ -1,41 +1,22 @@
 @import url('compiled/calendar.css');
-
 @import url('compiled/chart-showcase.css');
-
 @import url('compiled/code-editor.css');
-
 @import url('compiled/datatables.css');
-
 @import url('compiled/elements.css');
-
 @import url('compiled/form-showcase.css');
-
 @import url('compiled/form-wizard.css');
-
 @import url('compiled/gallery.css');
-
 @import url('compiled/grids.css');
-
 @import url('compiled/icons.css');
-
 @import url('compiled/index.css');
-
 @import url('compiled/layout.css');
-
 @import url('compiled/new-user.css');
-
 @import url('compiled/personal-info.css');
-
 @import url('compiled/signin.css');
-
 @import url('compiled/tables.css');
-
 @import url('compiled/ui-elements.css');
-
 @import url('compiled/user-list.css');
-
 @import url('compiled/user-profile.css');
-
 @import url('compiled/web-app-icons.css');
 /*@import url('compiled/signup.css');*/
 #pad-wrapper h4 {
@@ -236,4 +217,29 @@ label {
   display: block;
   position: relative;
   top: 3px;
+}
+.table tr.first td {
+  border-top: 1px solid #DDD;
+}
+.table th.sortable:hover {
+  text-decoration: none;
+}
+.table th.sortable:after {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  -webkit-font-smoothing: antialiased;
+  content: "\f0dc";
+  float: right;
+  padding-right: 10px;
+  color: lightgray;
+}
+.table th.headerSortDown:after {
+  content: "\F0DD";
+  color: black;
+}
+.table th.headerSortUp:after {
+  content: "\F0DE";
+  color: black;
 }

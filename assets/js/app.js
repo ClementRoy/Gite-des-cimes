@@ -1,5 +1,7 @@
 $(function () {
 
+	// STEPS FOR FORMS
+
 	$("#wizard").steps({
 		headerTag: 'h2',
 		bodyTag: '.form-wrapper',
@@ -20,18 +22,32 @@ $(function () {
 		bodyTag: '.form-wrapper',
 		transitionEffect: $.fn.steps.transitionEffect.fade,
 		transitionEffectSpeed: 200,
-	    enableFinishButton: false,
-	    enablePagination: false,
-	    enableAllSteps: true,
-	    titleTemplate: "#title#" 
+		enableFinishButton: false,
+		enablePagination: false,
+		enableAllSteps: true,
+		titleTemplate: "#title#"
 	});
 
-    $('#table-enfant').tableSorter();
 
-    $('#enfant-recherche').on('keyup', function(event) {
-    	event.preventDefault();
-    	$('#table-enfant_filter input').val( $(this).val() );
+	// SORT FOR TABLE
+
+    $('#table-enfant').tablesorter();
+
+	function tableFilter(el, pattern) {
+		$(el + ' tbody tr').each(function () {
+			console.log(this);
+		  if ($(this).contains(pattern)) {
+				$(this).show();
+			} else {
+				$(this).hide();
+			}
+		});
+	}
+
+    $('#table-enfant-search').on('keyup', function () {
+		tableFilter('#table-enfant', $(this).val());
     });
+
 
 	$('input:checkbox, input:radio').uniform();
 	$('.select2').select2();
@@ -41,6 +57,8 @@ $(function () {
 	});
 
 
+
+	// TOOLTIPS
 
 	$('input[type="text"]').each(function (index, el) {
 		$(el).tooltip({
@@ -74,6 +92,7 @@ $(function () {
 	});
 
 
+	// SHOW/HIDE FORMS
 
 	$('[data-group]').hide();
 	$('[data-group="structure"').show();
