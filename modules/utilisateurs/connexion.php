@@ -27,14 +27,14 @@
     <![endif]-->
 </head>
 <body>
-
+                    
     <div class="login-wrapper">
         <h1 class="logo">Gîte des cimes</h1>
 
         <div class="box">
             <div class="content-wrap">
                 <h6>Connexion</h6>
-                <form action="/" method="post">
+                <form action="<?=$_SERVER['REDIRECT_URL']; ?>" method="post">
                     
 
                 
