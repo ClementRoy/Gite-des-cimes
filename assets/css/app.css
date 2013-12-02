@@ -243,3 +243,6 @@ label {
   content: "\F0DE";
   color: black;
 }
+.extendlink tbody tr {
+  cursor: pointer;
+}

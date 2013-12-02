@@ -32,21 +32,31 @@ $(function () {
 	// SORT FOR TABLE
 
     $('#table-enfant').tablesorter();
+    //$('#table-enfant').extendlink();
+    //$('#table-enfant').tablefilter();
 
-	function tableFilter(el, pattern) {
-		$(el + ' tbody tr').each(function () {
-			console.log(this);
-		  if ($(this).contains(pattern)) {
-				$(this).show();
-			} else {
-				$(this).hide();
-			}
-		});
-	}
+    $('.extendlink tbody tr').on('click', function() {
+    	var href = $(this).find('td:first-child a').attr('href');
+    	window.location=href;
+    });
 
     $('#table-enfant-search').on('keyup', function () {
-		tableFilter('#table-enfant', $(this).val());
+		var pattern = $(this).val().toLowerCase();
+		if (pattern === '') {
+			$('#table-enfant tbody tr').show();
+		} else {
+			$('#table-enfant tbody tr').each(function () {
+				var nb = $(this).text().toLowerCase().search(pattern);
+				if (nb <= 0) {
+					$(this).hide();
+				} else{
+					$(this).show();
+				}
+			});
+		}
     });
+
+    
 
 
 	$('input:checkbox, input:radio').uniform();

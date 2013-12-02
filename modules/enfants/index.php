@@ -21,7 +21,7 @@
             <!-- Users table -->
             <div class="row">
                 <div class="col-md-12">
-                    <table id="table-enfant" class="table table-hover">
+                    <table id="table-enfant" class="table table-hover extendlink">
                         <thead>
                             <tr>
                                 <th class="sortable">Prénom</th>
@@ -66,5 +66,4 @@
             <!-- end users table -->
         </div>
     </div><!-- /.container -->
-
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
