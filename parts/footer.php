@@ -13,12 +13,11 @@
   	<script src="/assets/js/bootstrap.datepicker.js"></script>
     <script src="/assets/js/jquery.uniform.min.js"></script>
     <script src="/assets/js/select2.js"></script>
-    <script src="/assets/js/jquery.steps.js"></script>
-    <script src="/assets/js/validate.js"></script>
+     <!-- <script src="/assets/js/jquery.steps.js"></script> -->
     <script src="/assets/js/additional-methods.js"></script>
+    <script src="/assets/js/parsley.js"></script>
 
-    <!-- Liste 
-    <script src="/assets/js/jquery.dataTables.js"></script> -->
+    <!-- TABLE -->
     <script src="/assets/js/jquery.tableSorter.js"></script>
 
     <script src="/assets/js/app.js"></script>

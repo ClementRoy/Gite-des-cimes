@@ -12,26 +12,25 @@
                 </div>
             </div>
 
-            <form id="wizard">
-                    <h2>Informations sur l'enfant</h2>
-                    <div class="row form-wrapper">
-
+            <form id="form-add-children" parsley-validate>
+                   <!--  <h2>Informations sur l'enfant</h2> -->
+                     <div class="row form-wrapper">
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-prenom">Prénom</label>
                             <div class="col-md-5">
-                                <input id="form-enfant-prenom" name="form-enfant-prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant.">
+                                <input id="form-enfant-prenom" name="form-enfant-prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
                             </div>                            
                         </div>
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-nom">Nom</label>
                             <div class="col-md-5">
-                                <input id="form-enfant-nom" name="form-enfant-nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'enfant.">
+                                <input id="form-enfant-nom" name="form-enfant-nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'enfant." parsley-required="true">
                             </div>                            
                         </div>
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-naissance">Date de naissance</label>
                             <div class="col-md-5">
-                                <input id="form-enfant-naissance"  name="form-enfant-naissance" type="text" class="form-control input-datepicker" value="01/01/2000" data-toggle="tooltip" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa).">
+                                <input parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" id="form-enfant-naissance"  name="form-enfant-naissance" type="text" class="form-control input-datepicker" value="01/01/2000" data-toggle="tooltip" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa)." parsley-required="true">
                             </div>                            
                         </div>
                         <div class="field-box row">
@@ -55,10 +54,8 @@
                                 </label>
                             </div>                            
                         </div>
-                    </div>
 
-                    <h2>Informations administratives</h2>
-                    <div class="row form-wrapper">
+                    <!-- <h2>Informations administratives</h2> -->
                         <div class="field-box row">
                             <label class="col-md-2">L'enfant est inscrit par</label>
                             <div class="col-md-5" data-toggle="tooltip" title="Précisez qui a inscrit cet enfant au séjour/week-end.">
@@ -301,10 +298,9 @@
                                 </label>
                             </div>
                         </div>
-                    </div>
+     
 
-                    <h2>Informations sanitaires</h2>
-                    <div class="row form-wrapper">
+                    <!-- <h2>Informations sanitaires</h2> -->
                         <div class="field-box row">
                             <label class="col-md-2">Traitement(s) médical(s)</label>
                             <div class="col-md-5" data-toggle="tooltip" title="Précisez si l'enfant suit un traitement médical.">
@@ -447,6 +443,7 @@
                                 </label>
                             </div>
                         </div>
+                        <input type="submit" class="btn-flat primary" value="Valider">
                     </div>
             </form>
         </div>

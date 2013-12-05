@@ -1,34 +1,5 @@
 $(function () {
 
-	// STEPS FOR FORMS
-
-	$("#wizard").steps({
-		headerTag: 'h2',
-		bodyTag: '.form-wrapper',
-		transitionEffect: $.fn.steps.transitionEffect.fade,
-		transitionEffectSpeed: 200,
-		labels: {
-			current: "Etape actuelle :",
-			pagination: "Pagination",
-			finish: "Valider",
-			next: "Suivant",
-			previous: "Précédent",
-			loading: "Chargement..."
-		}
-    });
-
-	$("#wizard2").steps({
-		headerTag: 'h2',
-		bodyTag: '.form-wrapper',
-		transitionEffect: $.fn.steps.transitionEffect.fade,
-		transitionEffectSpeed: 200,
-		enableFinishButton: false,
-		enablePagination: false,
-		enableAllSteps: true,
-		titleTemplate: "#title#"
-	});
-
-
 	// SORT FOR TABLE
 
     $('#table-enfant').tablesorter();
@@ -55,9 +26,6 @@ $(function () {
 			});
 		}
     });
-
-    
-
 
 	$('input:checkbox, input:radio').uniform();
 	$('.select2').select2();
