@@ -30,7 +30,7 @@
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-naissance">Date de naissance</label>
                             <div class="col-md-5">
-                                <input parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" id="form-enfant-naissance"  name="form-enfant-naissance" type="text" class="form-control input-datepicker" value="01/01/2000" data-toggle="tooltip" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa)." parsley-required="true">
+                                <input parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" id="form-enfant-naissance"  name="form-enfant-naissance" type="text" class="form-control input-datepicker" placeholder="JJ/MM/AAAA" data-toggle="tooltip" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa)." parsley-required="true">
                             </div>                            
                         </div>
                         <div class="field-box row">
