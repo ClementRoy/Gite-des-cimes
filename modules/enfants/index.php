@@ -33,6 +33,9 @@
                                 <th class="sortable">
                                     <span class="line"></span>Age
                                 </th>
+                                <th class="action">
+                                    <span class="line"></span>Age
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,6 +53,9 @@
                             </td>
                             <td>
                                 02/01/1990
+                            </td>
+                            <td>
+                                23 ans
                             </td>
                             <td>
                                 23 ans
