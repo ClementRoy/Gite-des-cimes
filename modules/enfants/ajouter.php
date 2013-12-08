@@ -8,7 +8,7 @@
         <div id="pad-wrapper" class="form-page">
             <div class="row header">
                 <div class="col-md-12">
-                    <h1>Ajouter un enfant</h1>
+                    <h3>Ajouter un enfant</h3>
                 </div>
             </div>
 

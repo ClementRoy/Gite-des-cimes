@@ -6,7 +6,7 @@
 
     <!-- main container -->
     <div class="content">
-<div id="pad-wrapper" class="users-list">
+<div id="pad-wrapper">
             <div class="row header">
                 <h3>Les enfants</h3>
                 <div class="col-md-10 col-sm-12 col-xs-12 pull-right">
@@ -18,7 +18,7 @@
 
             <?php $enfants = enfant::getList(); ?>
 
-            <!-- Users table -->
+
             <div class="row">
                 <div class="col-md-12">
                     <table id="table-enfant" class="table table-hover extendlink">
@@ -33,20 +33,19 @@
                                 <th class="sortable">
                                     <span class="line"></span>Age
                                 </th>
-                                <th class="action">
-                                    <span class="line"></span>Age
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
                         <!-- row -->
-                        <?php foreach($enfants as $key => $enfant): ?>
-                        <tr <?php if($key == 0): ?>class="first"<?php endif; ?>>
+
+                         <?php foreach($enfants as $key => $enfant): ?>
+                        <tr class="first">
                             <td>
+                                <img src="http://placehold.it/45x45" class="img-circle avatar hidden-phone" />
                                 <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname; ?></a>
                             </td>
                             <td>
-                                <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname; ?></a>
+                                 <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname; ?></a>
                             </td>
                             <td>
                                 <i class="icon-male"></i> Homme
@@ -57,18 +56,13 @@
                             <td>
                                 23 ans
                             </td>
-                            <td>
-                                23 ans
-                            </td>
                         </tr>
                         <?php endforeach; ?>
-                        <!-- row -->
-                       
-
                         </tbody>
                     </table>
                 </div>                
             </div>
+
             <!-- end users table -->
         </div>
     </div><!-- /.container -->

@@ -2,13 +2,7 @@ $(function () {
 
 	// SORT FOR TABLE
 
-    $('#table-enfant').tablesorter({
-    	headers: { 
-            5: { 
-                sorter: false 
-            }
-        }
-    });
+    $('#table-enfant').tablesorter();
     //$('#table-enfant').extendlink();
     //$('#table-enfant').tablefilter();
 
