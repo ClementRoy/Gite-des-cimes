@@ -34,7 +34,7 @@
         <div class="box">
             <div class="content-wrap">
                 <h6>Connexion</h6>
-                <form action="<?php if(isset($_SERVER['REDIRECT_URL'])) $_SERVER['REDIRECT_URL']; ?>" method="post">
+                <form action="<?php if(isset($_SERVER['REDIRECT_URL'])) $_SERVER['REDIRECT_URL']; else echo '/'; ?>" method="post">
                     
 
                 

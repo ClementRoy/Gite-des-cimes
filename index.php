@@ -58,6 +58,7 @@ if( isset($login) && !empty($identifier) && !empty($password) ) {
 
 if ( isset($deconnexion) ) { // TODO there is a bug here
     $user->logout();
+    //header();
 }
 
 if ( user::isLogged() ) {
