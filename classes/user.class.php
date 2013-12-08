@@ -121,8 +121,10 @@ class user
      * @param
      * @return
      */
-	public function create(){
-
+	public static function add($sql, $params = array()){
+        global $db;
+        $result = $db->insert($sql, $params);
+        return $result;
 	}
 
     /**
@@ -133,8 +135,11 @@ class user
      * @param
      * @return
      */
-	public function remove(){
-
+	public static function remove($id){
+        global $db;
+        $sql = 'DELETE FROM users WHERE id = :id';
+        $result = $db->delete($sql, array('id' => $id));
+        return $result;
 	}
 
     /**

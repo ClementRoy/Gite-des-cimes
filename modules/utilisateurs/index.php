@@ -10,7 +10,7 @@
             <div class="row header">
                 <h3>Utilisateurs</h3>
                 <div class="col-md-10 col-sm-12 col-xs-12 pull-right">
-                    <a href="/users/add" class="btn-flat primary pull-right"><span>+</span>
+                    <a href="/utilisateurs/ajouter" class="btn-flat primary pull-right"><span>+</span>
                         Ajouter un utilisateur</a>
                 </div>
             </div>

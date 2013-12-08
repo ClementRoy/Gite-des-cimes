@@ -56,7 +56,7 @@ if( isset($login) && !empty($identifier) && !empty($password) ) {
 // play with $_SERVER['REQUEST_URI']
 // [REQUEST_URI] => /utilisateurs/infos/1
 
-if ( isset($deconnexion) ) {
+if ( isset($deconnexion) ) { // TODO there is a bug here
     $user->logout();
 }
 

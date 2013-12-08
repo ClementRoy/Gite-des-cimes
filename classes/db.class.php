@@ -107,7 +107,7 @@ class DB {
         $req = $this->db->prepare($sql);
         // $req->bindParam($data); 
         $req->execute($data);  
-        return $req->rowCount();	
+        return $req->rowCount();
     }
 
 }

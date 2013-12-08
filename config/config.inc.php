@@ -43,7 +43,7 @@ Certains sont même abstrait
  */
 $modules = array(
 					'accueil' => array( 'index'),
-					'enfants' => array('index', 'liste', 'ajouter', 'infos', 'editer', 'remove', 'supprimer'),
+					'enfants' => array('index', 'liste', 'ajouter', 'infos', 'editer', 'supprimer'),
 					'sejours' => array( 'index'),
 					'structures' => array( 'index'),
 					'contacts' => array( 'index'),
@@ -51,7 +51,7 @@ $modules = array(
 					'factures' => array( 'index'),
 					'animateurs' => array( 'index'),
 					'vehicules' => array( 'index'),
-					'utilisateurs' => array( 'index', 'infos', 'fiche', 'connexion'),
+					'utilisateurs' => array( 'index', 'infos', 'connexion', 'deconnexion', 'supprimer', 'ajouter'),
 					'infos' => array('contact', 'index', 'infos', 'debug')
 	);
 
