@@ -51,7 +51,7 @@ $modules = array(
 					'factures' => array( 'index'),
 					'animateurs' => array( 'index'),
 					'vehicules' => array( 'index'),
-					'utilisateurs' => array( 'index', 'liste', 'infos', 'fiche', 'connexion'),
+					'utilisateurs' => array( 'index', 'infos', 'fiche', 'connexion'),
 					'infos' => array('contact', 'index', 'infos', 'debug')
 	);
 

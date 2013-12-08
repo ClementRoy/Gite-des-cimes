@@ -11,21 +11,21 @@
             <div class="row stats-row">
                 <div class="col-md-3 col-sm-3 stat">
                     <div class="data">
-                        <span class="number"><?php echo count(enfant::getList()); ?></span>
+                        <span class="number"><a href="/enfants/"><?php echo count(enfant::getList()); ?></a></span>
                         enfants
                     </div>
                     <span class="date">dans la base</span>
                 </div>
                 <div class="col-md-3 col-sm-3 stat">
                     <div class="data">
-                        <span class="number"><?php echo count(user::getList()); ?></span>
+                        <span class="number"><a href="/utilisateurs/"><?php echo count(user::getList()); ?></a></span>
                         utilisateurs
                     </div>
                     <span class="date">autorisés</span>
                 </div>
                 <div class="col-md-3 col-sm-3 stat last">
                     <div class="data">
-                        <span class="number">0</span>
+                        <span class="number"><a href="/enfants/">0</a></span>
                         séjours
                     </div>
                     <span class="date">en cours</span>
@@ -70,6 +70,15 @@
                             </tbody>
                         </table>                        
                     </div>
+                    <div class="col-md-6">
+                        <h4>Séjours en cours</h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Rappels</h4>
+                    </div>                  
                 </div>
             </div>
         </div>
