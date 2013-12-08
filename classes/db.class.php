@@ -99,9 +99,14 @@ class DB {
      * @param $data Binded parameters
      */
     public function delete($sql, $data = array()) {
+        /*
+          $stmt = $pdo->prepare('DELETE FROM someTable WHERE id = :id');
+          $stmt->bindParam(':id', $id); // this time, we'll use the bindParam method
+          $stmt->execute();
+        */
         $req = $this->db->prepare($sql);
-        $req->bindParam($data); 
-        $req->execute();  
+        // $req->bindParam($data); 
+        $req->execute($data);  
         return $req->rowCount();	
     }
 

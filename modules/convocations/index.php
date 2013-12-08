@@ -7,7 +7,7 @@
 	<!-- main container -->
     <div class="content">
 		<div id="pad-wrapper">
-			<h1>Display homepage widgets here</h1>
+			<h1>Convocations</h1>
 		</div>
 	</div>
 

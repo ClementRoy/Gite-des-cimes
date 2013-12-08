@@ -7,24 +7,12 @@
 	<!-- main container -->
     <div class="content">
 		<div id="pad-wrapper">
-			<h1>Debug</h1>
+			<h1>Infos</h1>
 
 			<div class="row">
 			    <div class="col-sm-12">
-			        <h2>SESSION</h2>
-			        <?php tool::output($_SESSION); ?>
-			    </div>
-			</div>
-			<div class="row">
-			    <div class="col-sm-12">
-			        <h2>SERVER</h2>
-			        <?php tool::output($_SERVER); ?>
-			    </div>
-			</div>
-			<div class="row">
-			    <div class="col-sm-12">
-			        <h2>CONSTANTE</h2>
-			        <?php tool::output(get_defined_constants()); ?>
+			        <h2>Version</h2>
+					<p>Dev</p>
 			    </div>
 			</div>
 

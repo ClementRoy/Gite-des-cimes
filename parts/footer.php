@@ -1,5 +1,5 @@
 	<div class="container" role="contentinfo">
-		<p>Conçu et développé avec tout l'♥ du monde part <a href="https://twitter.com/C_Beghin">@C_Beghin</a> and <a href="https://twitter.com/ClementRoy">@ClementRoy</a> - version <?=app::VERSION?>
+		<p>Conçu et développé avec tout l'♥ du monde par <a href="https://twitter.com/C_Beghin">@C_Beghin</a> and <a href="https://twitter.com/ClementRoy">@ClementRoy</a> - version <?=app::VERSION?>
 .</p>
 	</div>
 	

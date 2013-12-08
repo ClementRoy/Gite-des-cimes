@@ -6,7 +6,7 @@
 	<!-- main container -->
     <div class="content">
 		<div id="pad-wrapper">
-			<h1>Display homepage widgets here</h1>
+			<h1>Contrats</h1>
 		</div>
 	</div>
 

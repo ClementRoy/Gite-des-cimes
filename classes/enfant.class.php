@@ -49,7 +49,6 @@ class enfant
         else {
             $result = $db->query('SELECT * FROM enfant');
         }
-		
 		return $result;
 	}
 
@@ -75,11 +74,11 @@ class enfant
      * @param
      * @return
      */
-	function update($id, $params = array()){
+	public static function update($id, $params = array()){
 		global $db;
         $sql = '';
-        $db->update($sql, $params);
-		return true;
+        $result = $db->update($sql, $params);
+		return $result;
 	}
 
     /**
@@ -91,10 +90,10 @@ class enfant
      * @param params those are transmitted to the sql query
      * @return
      */
-	function add($sql, $params = array()){
+	public static function add($sql, $params = array()){
 		global $db;
-        $db->insert($sql, $params);
-		return true;
+        $result = $db->insert($sql, $params);
+		return $result;
 	}
 
     /**
@@ -105,11 +104,11 @@ class enfant
      * @param id id of the child to remove
      * @return
      */
-	function remove($id){
+	public static function remove($id){
 		global $db;
-        $sql = '';
-        $db->delete($sql);
-		return true;
+        $sql = 'DELETE FROM enfant WHERE id = :id';
+        $result = $db->delete($sql, array('id' => $id));
+		return $result;
 	}
 
 
