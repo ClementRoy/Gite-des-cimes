@@ -21,11 +21,32 @@
                     </div>
                 </div>
 
-            <div class="row profile">
-                <!-- bio, new note & orders column -->
-                <div class="col-md-9 bio">
-                <?php tool::output($utilisateur); ?>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <dl>
+                            <dt>Prénom :</dt> <dd><?=$utilisateur->firstname; ?></dd>
+                        </dl>
+                        <dl>
+                            <dt>Identifiant :</dt> <dd><?=$utilisateur->identifier; ?></dd>
+                        </dl>
+                        <dl>
+                            <dt>Rank :</dt> <dd><?=$utilisateur->rank; ?></dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-6">
+
+                        <dl>
+                            <dt>Nom :</dt>
+                            <dd><?=$utilisateur->lastname; ?></dd>
+                        </dl>
+                        <dl>
+                            <dt>Mot de passe :</dt>
+                            <dd><?=$utilisateur->password; ?></dd>
+                        </dl>
+                    </div>
                 </div>
+                <?php //tool::output($utilisateur); ?>
             </div>
 
         </div>

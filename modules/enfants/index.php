@@ -23,7 +23,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-hover tablesorter extendlink">
+                    <table id="table-enfant" class="table table-hover tablesorter extendlink">
                         <thead>
                             <tr>
                                 <th class="sortable">Prénom</th>

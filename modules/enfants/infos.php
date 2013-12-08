@@ -52,9 +52,9 @@
                 <div class="col-md-9 bio">
                     <div class="tabs ctrls">
                         <ul class="nav nav-tabs">
-                          <li class="active"><a href="#home" data-toggle="tab">Générales</a></li>
-                          <li><a href="#profile" data-toggle="tab">Administratives</a></li>
-                          <li><a href="#messages" data-toggle="tab">Sanitaires</a></li>
+                          <li class="active"><a href="#generales" data-toggle="tab">Générales</a></li>
+                          <li><a href="#administratives" data-toggle="tab">Administratives</a></li>
+                          <li><a href="#sanitaires" data-toggle="tab">Sanitaires</a></li>
                       </ul>
                       <div class="tab-content">
                         <div class="tab-pane active" id="home">
@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="profile">
+                        <div class="tab-pane" id="administratives">
                             <div class="row">
                                 <div class="col-md-12">
                                     <dl>
@@ -125,7 +125,7 @@
 
 
                             </div>
-                            <div class="tab-pane" id="messages">
+                            <div class="tab-pane" id="sanitaires">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <dl>
