@@ -73,7 +73,7 @@ class DB {
     public function insert($sql, $data = array()) {
         $req = $this->db->prepare($sql);
         $req->execute($data);   
-        return $req->rowCount();  	
+        return $req->rowCount();
     }
 
     /**

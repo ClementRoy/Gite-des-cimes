@@ -15,24 +15,6 @@ class enfant
      */
 	function __construct(){}
 
-    /**
-     * See quickly all the available methods
-     *
-     * @return array of the methods and their parameters name
-     */
-	private function methods(){
-		$methods = array(
-						'get' => array('id'),
-						'getList' => array('limit', 'offset'),
-						'count' => array(),
-						'update' => array('id', 'params'),
-						'add' => array('params'),
-						'remove' => array('id'),
-						'count' => array()
-						);
-
-		return $methods;
-	}
 
     /**
      * desc
