@@ -61,6 +61,8 @@ input.search {
   /* navbar settings and logout icons */
   /* notification menu with custom dropdowns */
   /* navbar popup dialog */
+  position: fixed;
+  width: 100%;
 }
 .navbar-inverse input.search {
   height: 27px;
@@ -259,7 +261,7 @@ input.search {
 
 /* Sidebar */
 #sidebar-nav {
-  position: absolute;
+  position: fixed;
   width: 180px;
   float: left;
   margin: 0em;
@@ -417,6 +419,7 @@ input.search {
   min-width: 400px;
   min-height: 620px;
   margin-bottom: 100px;
+  padding-top: 50px;
   padding-bottom: 50px;
   overflow: hidden;
   position: relative;
