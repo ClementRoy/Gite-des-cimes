@@ -29,6 +29,7 @@ class DB {
                     PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING
                 ));
+            // $dbh->setAttribute( PDO::ATTR_EMULATE_PREPARES, false );
         }catch(PDOException $e){
             die('Impossible de se connecter a la base de donnee');
         }

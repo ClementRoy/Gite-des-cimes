@@ -13,7 +13,7 @@
             </div>
 
             <?php if(isset($submit)): ?>
-            <?php tool::output($_POST); ?>
+            <?php //tool::output($_POST); ?>
             <?php 
 
                 // Create enfant entry
@@ -60,10 +60,15 @@
                         enfant (firstname,lastname,birthdate,sex,registration_by,organization,contact,guardian,father_name,father_phone,mother_name,mother_phone,guardian_name,guardian_phone,emergency_name,emergency_phone,guardian_address_number,guardian_address_street,guardian_address_postal_code,guardian_address_city,domiciliation,host_family_name,host_family_phone,host_family_address_number,host_family_address_street,host_family_address_postal_code,host_family_address_city,image_rights,medicals_treatments,allergies,self_assurance,self_assurance_expiration_date,cpam_attestation,vaccination,health_record,stay_record) 
                         value (:firstname,:lastname,:birthdate,:sex,:registration_by,:organization,:contact,:guardian,:father_name,:father_phone,:mother_name,:mother_phone,:guardian_name,:guardian_phone,:emergency_name,:emergency_phone,:guardian_address_number,:guardian_address_street,:guardian_address_postal_code,:guardian_address_city,:domiciliation,:host_family_name,:host_family_phone,:host_family_address_number,:host_family_address_street,:host_family_address_postal_code,:host_family_address_city,:image_rights,:medicals_treatments,:allergies,:self_assurance,:self_assurance_expiration_date,:cpam_attestation,:vaccination,:health_record,:stay_record)';
 
-                enfant::add($sql, $datas);
+                $result = enfant::add($sql, $datas);
 
             ?>
-            
+                <?php //tool::output($result); ?>
+                <?php if($result): ?>
+                <p>L'enfant <?=$form_enfant_prenom.' '.$form_enfant_nom; ?> a bien été ajouté</p>
+                <?php else: ?>
+                <p>Une erreur s'est produite lors de l'enregistrement, veuilliez réessayer.</p>
+                <?php endif; ?>
             <?php else: ?>
             <form id="form-add-children" method="post" parsley-validate>
                    <!--  <h2>Informations sur l'enfant</h2> -->

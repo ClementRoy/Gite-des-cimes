@@ -72,6 +72,35 @@
                     </div>
                     <div class="col-md-6">
                         <h4>Séjours en cours</h4>
+                      <?php $sejours = sejour::getList('5','0'); ?>
+                      <table id="table-enfant" class="table table-hover extendlink">
+                            <thead>
+                                <tr>
+                                    <th class="sortable">Numéro</th>
+                                    <th class="sortable"><span class="line"></span>Nom</th>
+                                    <th class="sortable"><span class="line"></span>Date de début</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <!-- row -->
+                            <?php foreach($sejours as $key => $sejour): ?>
+                            <tr <?php if($key == 0): ?>class="first"<?php endif; ?>>
+                                <td>
+                                    <a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->numero; ?></a>
+                                </td>
+                                <td>
+                                    <a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a>
+                                </td>
+                                <td>
+                                    <?=$sejour->date_from ?>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                            <!-- row -->
+                           
+
+                            </tbody>
+                        </table> 
                     </div>
                 </div>
 

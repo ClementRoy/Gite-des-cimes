@@ -44,7 +44,8 @@ class enfant
 	public static function getList($limit = false, $offset = 0){
 		global $db;
         if(!empty($limit)){
-            $result = $db->query('SELECT * FROM enfant LIMIT '.$limit.' OFFSET '.$offset);
+            $data = array();
+            $result = $db->query("SELECT * FROM enfant LIMIT 5 OFFSET 0", $data);
         }
         else {
             $result = $db->query('SELECT * FROM enfant');
