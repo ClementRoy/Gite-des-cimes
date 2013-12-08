@@ -12,7 +12,7 @@
         <div id="pad-wrapper" class="form-page">
             <div class="row header">
                 <div class="col-md-12">
-                    <h1>Modifier <?=$enfant->firstname; ?> <?=$enfant->lastname; ?></h1>
+                    <h3>Modifier <?=$enfant->firstname; ?> <?=$enfant->lastname; ?></h3>
                 </div>
             </div>
 

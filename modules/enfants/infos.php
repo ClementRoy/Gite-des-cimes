@@ -8,132 +8,186 @@
 
         <?php $enfant = enfant::get($id); ?>
 
-        <div id="pad-wrapper" class="user-profile">
+        <div id="pad-wrapper">
                 <div class="row header img">
                     <div class="col-md-5">
                     <img src="http://placehold.it/70x70" class="img-circle" alt="">
                     <h3><?=$enfant->firstname; ?> <?=$enfant->lastname; ?></h3>
                     </div>
                     <div class="col-md-5 text-right pull-right">
-                        <a href="/enfants/remove/id/<?=$enfant->id; ?>" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
+                        <a href="/enfants/supprimer/id/<?=$enfant->id; ?>" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
                         <a href="/enfants/editer/id/<?=$enfant->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
                     </div>
                 </div>
+            
 
-            <div class="row profile">
-                <!-- bio, new note & orders column -->
-                <div class="col-md-9 bio">
-                    <div class="profile-box">
-                        <!-- biography -->
-                        <div class="col-md-12 section">
-                            <h6>Biography</h6>
-                            <p>There are many variations of passages of Lorem Ipsum available but the majority have humour suffered alteration in believable some formhumour , by injected humour, or randomised words which don't look even slightly believable. </p>
-                        </div>
-
-                        <h6>Recent orders</h6>
-                        <br>
-                        <!-- recent orders table -->
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th class="col-md-2">
-                                        Order ID
-                                    </th>
-                                    <th class="col-md-3">
-                                        <span class="line"></span>
-                                        Date
-                                    </th>
-                                    <th class="col-md-3">
-                                        <span class="line"></span>
-                                        Items
-                                    </th>
-                                    <th class="col-md-3">
-                                        <span class="line"></span>
-                                        Total amount
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- row -->
-                                <tr class="first">
-                                    <td>
-                                        <a href="#">#459</a>
-                                    </td>
-                                    <td>
-                                        Jan 03, 2013
-                                    </td>
-                                    <td>
-                                        3
-                                    </td>
-                                    <td>
-                                        $ 3,500.00
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">#510</a>
-                                    </td>
-                                    <td>
-                                        Feb 22, 2013
-                                    </td>
-                                    <td>
-                                        5
-                                    </td>
-                                    <td>
-                                        $ 800.00
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">#618</a>
-                                    </td>
-                                    <td>
-                                        Jan 03, 2013
-                                    </td>
-                                    <td>
-                                        8
-                                    </td>
-                                    <td>
-                                        $ 3,499.99
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <!-- new comment form -->
-                        <div class="col-md-12 section comment">
-                            <h6>Add a quick note</h6>
-                            <p>Add a note about this user to keep a history of your interactions.</p>
-                            <textarea></textarea>
-                            <a href="#">Attach files</a>
-                            <div class="col-md-12 submit-box pull-right">
-                                <input type="submit" class="btn-glow primary" value="Add Note">
-                                <span>OR</span>
-                                <input type="reset" value="Cancel" class="reset">
+                <div class="row">
+                    <div class="col-md-9 bio">
+                    
+                    <div class="tabs ctrls">
+                        <ul class="nav nav-tabs">
+                          <li class="active"><a href="#home" data-toggle="tab">Générales</a></li>
+                          <li><a href="#profile" data-toggle="tab">Administratives</a></li>
+                          <li><a href="#messages" data-toggle="tab">Sanitaires</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="home">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <dl>
+                                            <dt>Prénom :</dt> <dd><?=$enfant->firstname; ?></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Nom :</dt>
+                                            <dd><?=$enfant->lastname; ?></dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <dl>
+                                            <dt>Sexe :</dt>
+                                            <dd><i class="icon-male"></i>Homme</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Date de naissance :</dt>
+                                            <dd>02/01/1990 (23 ans)</dd>
+                                        </dl>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="tab-pane" id="profile">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <dl>
+                                            <dt>Responsable légal de l'enfant :</dt>
+                                            <dd>Parents</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <dl>
+                                            <dt>Père :</dt>
+                                            <dd>Nom du père</dd>
+                                            <dd><i class="icon-phone"></i>03 44 91 20 21</dd>
+                                        </dl>
+                                    </div>
+                                           <div class="col-md-6">
+                                        <dl>
+                                            <dt>Mère :</dt>
+                                            <dd>Nom de la mère</dd>
+                                            <dd><i class="icon-phone"></i>03 44 91 20 21</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <dl>
+                                            <dt>Urgence :</dt>
+                                            <dd>Nom d'urgence</dd>
+                                            <dd><i class="icon-phone"></i>03 44 91 20 21</dd>
+                                        </dl>
+                                    </div>
+              
+                                    <div class="row">
+                                    <div class="col-md-12">
+                                        <dl>
+                                            <dt>Adresse :</dt>
+                                            <dd>33 Allée de Bellevue<br />
+                                                93390 Clichy-sous-Bois</dd>
+                                        </dl>
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <dl>
+                                            <dt>Responsable légal de l'enfant :</dt>
+                                            <dd><a href="">Parents</a></dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <dl>
+                                            <dt>Sexe :</dt>
+                                            <dd><i class="icon-male"></i> Homme</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Date de naissance :</dt>
+                                            <dd>02/01/1990 (23 ans)</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="messages">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <dl>
+                                            <dt>Traitement(s) médical(s) :</dt>
+                                            <dd>Non</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Contre-indications / allergies :</dt>
+                                            <dd><a href="">Aucune</a></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Attestation CPAM :</dt>
+                                            <dd><a href="">Oui</a></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Attestation CPAM :</dt>
+                                            <dd><a href="">Oui</a></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Fiche sanitaire de liaison :</dt>
+                                            <dd><a href="">Oui</a></dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <dl>
+                                            <dt>Assurance (RC) :</dt>
+                                            <dd>Oui</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Date de fin de validité :</dt>
+                                            <dd>02/01/2020</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Carnet de vaccination :</dt>
+                                            <dd>Non</dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>Fiche de séjour :</dt>
+                                            <dd>Non</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                                </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- side address column -->
-                <div class="col-md-3 col-xs-12 address pull-right">
-                    <h6>Address</h6>
-                    <iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.mx/?ie=UTF8&amp;t=m&amp;ll=19.715081,-155.071421&amp;spn=0.010746,0.025749&amp;z=14&amp;output=embed"></iframe>
-                    <ul>
-                        <li>2301 East Lamar Blvd. Suite 140. </li>
-                        <li>City, Arlington. United States,</li>
-                        <li>Zip Code, TX 76006.</li>
-                        <li class="ico-li">
-                            <i class="ico-phone"></i>
-                            1817 274 2933
-                        </li>
-                         <li class="ico-li">
-                            <i class="ico-mail"></i>
-                            <a href="#">alejandra@detail.com</a>
-                        </li>
-                    </ul>
+
+                    </div>
+                    <div class="col-md-3 address">
+                        <h6>Coordonnées</h6>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d2622.060078846162!2d2.5489488500000004!3d48.914247599999996!3m2!1i1024!2i768!4f13.1!3m2!1m1!1s0x0%3A0x97bc04535ade7b59!5e0!3m2!1sfr!2sfr!4v1386513665741" width="200" height="200" frameborder="0" style="border:0"></iframe>
+                        <ul>
+                            <li><strong>Adresse</strong></li>
+                            <li>33 Allée de Bellevue</li>
+                            <li>93390 Clichy-sous-Bois</li>
+                        </ul>
+                        <ul>
+                            <li><strong>Père</strong></li>
+                            <li>Nom du père</li>
+                            <li><i class="icon-phone"></i>01 41 70 35 10</li>
+                        </ul>
+                        <ul>
+                            <li><strong>Mère</strong></li>
+                            <li>Nom de la mère</li>
+                            <li><i class="icon-phone"></i>01 41 70 35 10</li>
+                        </ul>
+                        <ul>
+                            <li><strong>Urgence</strong></li>
+                            <li>Nom du contact d'urgence</li>
+                            <li><i class="icon-phone"></i>01 41 70 35 10</li>
+                        </ul>
+                        </div>
                 </div>
-            </div>
 
 
         <?php tool::output($enfant); ?>
