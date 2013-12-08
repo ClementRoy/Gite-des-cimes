@@ -35,7 +35,43 @@
         <!-- end upper main stats -->
 
         <div id="pad-wrapper">
+            
+            <div class="grid-wrapper">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Enfants récemment ajoutés</h4>
+                      <?php $enfants = enfant::getList('5','0'); ?>
+                      <table id="table-enfant" class="table table-hover extendlink">
+                            <thead>
+                                <tr>
+                                    <th class="sortable">Prénom</th>
+                                    <th class="sortable"><span class="line"></span>Nom</th>
+                                    <th class="sortable"><span class="line"></span>Sexe</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <!-- row -->
+                            <?php foreach($enfants as $key => $enfant): ?>
+                            <tr <?php if($key == 0): ?>class="first"<?php endif; ?>>
+                                <td>
+                                    <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname; ?></a>
+                                </td>
+                                <td>
+                                    <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname; ?></a>
+                                </td>
+                                <td>
+                                    <i class="icon-male"></i> Homme
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                            <!-- row -->
+                           
 
+                            </tbody>
+                        </table>                        
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

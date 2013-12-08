@@ -16,8 +16,8 @@ echo '<pre>';
 foreach ($datas as $key => $data) {
 	//print_r($data);
 	if(!empty($data['1'])){
-		$datasql = array( 'firstname' => utf8_decode($data['2']), 
-					  'lastname' => utf8_decode($data['1'])
+		$datasql = array( 'firstname' => utf8_encode($data['2']), 
+					  'lastname' => utf8_encode($data['1'])
 					);
 		$sql = 'INSERT INTO enfant (firstname, lastname) value (:firstname, :lastname)';
 		$db->insert($sql, $datasql);

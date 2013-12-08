@@ -41,9 +41,15 @@ class enfant
      * @param
      * @return
      */
-	public static function getList($limit = false, $offset = false){
+	public static function getList($limit = false, $offset = 0){
 		global $db;
-		$result = $db->query('SELECT * FROM enfant');
+        if(!empty($limit)){
+            $result = $db->query('SELECT * FROM enfant LIMIT '.$limit.' OFFSET '.$offset);
+        }
+        else {
+            $result = $db->query('SELECT * FROM enfant');
+        }
+		
 		return $result;
 	}
 
@@ -71,21 +77,23 @@ class enfant
      */
 	function update($id, $params = array()){
 		global $db;
-
+        $sql = '';
+        $db->update($sql, $params);
 		return true;
 	}
 
     /**
      * desc
      *
-     * @note 
+     * @note
      *
-     * @param
+     * @param sql 
+     * @param params those are transmitted to the sql query
      * @return
      */
-	function add($params = array()){
+	function add($sql, $params = array()){
 		global $db;
-
+        $db->insert($sql, $params);
 		return true;
 	}
 
@@ -94,12 +102,13 @@ class enfant
      *
      * @note 
      *
-     * @param
+     * @param id id of the child to remove
      * @return
      */
 	function remove($id){
 		global $db;
-
+        $sql = '';
+        $db->delete($sql);
 		return true;
 	}
 
