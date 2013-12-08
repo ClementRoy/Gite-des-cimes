@@ -279,3 +279,10 @@ h6 {
   padding: 20px 20px 5px;
   font-size: 14px;
 }
+.action-page .header {
+  margin-bottom: 35px;
+}
+.action-page .message {
+  margin-bottom: 35px;
+  font-size: 14px;
+}

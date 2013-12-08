@@ -6,9 +6,11 @@
 
     <!-- main container -->
     <div class="content">
-        <div id="pad-wrapper">
+        <div id="pad-wrapper" class="action-page">
             <div class="row header">
-                <h3>Les enfants</h3>
+            <div class="col-md-12">
+                <h3>Suppression</h3>
+                </div>
             </div>
             <?php if(isset($confirm)): ?>
             <div class="row">
@@ -16,19 +18,27 @@
                     <?php 
                         enfant::remove($id);
                     ?>
-                    <p>L'enfant a bien été supprimé</p>
+                    <p>La fiche a bien été supprimé</p>
                     <a href="/enfants/">Retourner à la liste des enfants</a>
                 </div>                
             </div>
             <?php else: ?>
+
             <?php $enfant = enfant::get($id); ?>
             <div class="row">
+                <div class="col-md-12 message">
+                     <p>Vous êtes sur le point de supprimer la fiche de <strong><?=$enfant->firstname; ?> <?=$enfant->lastname; ?></strong>.<br />
+                    Cette action est irréversible.</p>
+                </div>
+            </div>
+
+             <div class="row">
                 <div class="col-md-12">
-                    <p>Confirmer la suppression de <?=$enfant->firstname; ?> <?=$enfant->lastname; ?></p>
-                    <a href="/enfants/remove/id/<?=$enfant->id; ?>/confirm/true" class="btn-flat primary pull-right">Confirmer</a>
-                    <a href="/enfants/" class="btn-flat secondary pull-right">Annuler</a>
+                    <a href="/enfants/infos/id/<?=$enfant->id; ?>" class="btn-flat white" data-dismiss="modal">Annuler</a>
+                    <a href="/enfants/supprimer/id/<?=$enfant->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
                 </div>                
             </div>
+
             <?php endif; ?>
 
             <!-- end users table -->

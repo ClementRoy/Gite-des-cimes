@@ -6,10 +6,12 @@
 
     <!-- main container -->
     <div class="content">
-        <div id="pad-wrapper" class="users-list">
+        <div id="pad-wrapper">
             <div class="row header">
-                <h3>Utilisateurs</h3>
-                <div class="col-md-10 col-sm-12 col-xs-12 pull-right">
+                <div class="col-md-3">
+                    <h3>Les utitilisateurs</h3>
+                </div>
+                <div class="col-md-9 text-right">
                     <a href="/utilisateurs/ajouter" class="btn-flat primary pull-right"><span>+</span>
                         Ajouter un utilisateur</a>
                 </div>
@@ -20,22 +22,15 @@
             <!-- Users table -->
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-hover">
+                    <table class="table table-hover extendlink tablesorter">
                         <thead>
                             <tr>
-                                <th class="col-md-1 sortable">
-                                    Id
-                                </th>
-                                <th class="col-md-4 sortable">
-                                    Nom
-                                </th>
-                                <th class="col-md-3 sortable">
-                                    <span class="line"></span>Prénom
-                                </th>
-                                <th class="col-md-3 sortable">
+                                <th class="sortable col-md-3">Prénom</th>
+                                <th class="sortable col-md-2"><span class="line"></span>Nom</th>
+                                <th class="sortable">
                                     <span class="line"></span>Identifiant
                                 </th>
-                                <th class="col-md-1 sortable align-right">
+                                <th class="sortable col-md-1">
                                     <span class="line"></span>Statut
                                 </th>
                             </tr>
@@ -45,15 +40,11 @@
                         <?php foreach($users as $key => $user): ?>
                         <tr <?php if($key == 0): ?>class="first"<?php endif; ?>>
                             <td>
-                                <?=$user->id; ?>
-                            </td>
-                            <td>
-                                <img src="img/contact-img.png" class="img-circle avatar hidden-phone" />
+                               <img src="http://placehold.it/45x45" width="45" height="45" class="img-circle avatar" />
                                 <a href="/utilisateurs/infos/id/<?=$user->id; ?>" class="name"><?=$user->firstname; ?></a>
-                                <span class="subtext"><?=$user->rank; ?></span>
                             </td>
                             <td>
-                                <?=$user->lastname; ?>
+                                <a href="/utilisateurs/infos/id/<?=$user->id; ?>" class="name"><?=$user->lastname; ?></a>
                             </td>
                             <td>
                                <?=$user->identifier; ?>

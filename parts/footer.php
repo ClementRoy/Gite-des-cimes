@@ -13,8 +13,8 @@
   	<script src="/assets/js/bootstrap.datepicker.js"></script>
     <script src="/assets/js/jquery.uniform.min.js"></script>
     <script src="/assets/js/select2.js"></script>
-     <!-- <script src="/assets/js/jquery.steps.js"></script> -->
-    <script src="/assets/js/additional-methods.js"></script>
+     <!-- <script src="/assets/js/jquery.steps.js"></script>
+    <script src="/assets/js/additional-methods.js"></script> -->
     <script src="/assets/js/parsley.js"></script>
 
     <!-- TABLE -->

@@ -6,35 +6,45 @@
 
     <!-- main container -->
     <div class="content">
-        <div id="pad-wrapper">
+        <div id="pad-wrapper" class="action-page">
             <div class="row header">
-                <h3>Utilisateur</h3>
+                <div class="col-md-12">
+                    <h3>Utilisateur</h3>
+                </div>
             </div>
             <?php if(isset($confirm)): ?>
-            <div class="row">
-                <div class="col-md-12">
-                    <?php 
+                <div class="row">
+                    <div class="col-md-12">
+                        <?php 
                         user::remove($id);
-                    ?>
-                    <p>L'utilisateur a bien été supprimé</p>
-                    <a href="/utilisateurs/">Retourner à la liste des utilisateurs</a>
-                </div>                
-            </div>
+                        ?>
+                        <p>L'utilisateur a bien été supprimé</p>
+                        <a href="/utilisateurs/">Retourner à la liste des utilisateurs</a>
+                    </div>                
+                </div>
             <?php else: ?>
-            <?php $utilisateur = user::get($id); ?>
-            <div class="row">
-                <div class="col-md-12">
-                    <p>Confirmer la suppression de <?=$utilisateur->firstname; ?> <?=$utilisateur->lastname; ?></p>
-                    <a href="/utilisateurs/supprimer/id/<?=$utilisateur->id; ?>/confirm/true" class="btn-flat primary pull-right">Confirmer</a>
-                    <a href="/utilisateurs/" class="btn-flat secondary pull-right">Annuler</a>
-                </div>                
-            </div>
+                <?php $utilisateur = user::get($id); ?>
+                <div class="row" class="message">
+                    <div class="col-md-12 message">
+                       <p>Vous êtes sur le point de supprimer l'utilisateur <strong><?=$utilisateur->firstname; ?> <?=$utilisateur->lastname; ?></strong>.<br />
+                        Cette action est irréversible.</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="/utilisateurs/infos/id/<?=$utilisateur->id; ?>" class="btn-flat white" data-dismiss="modal">Annuler</a>
+                        <a href="/utilisateurs/supprimer/id/<?=$utilisateur->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
+                    </div>                
+                </div>
+
+
             <?php endif; ?>
 
             <!-- end users table -->
         </div>
     </div><!-- /.container -->
-<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
+    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
 
 
 
