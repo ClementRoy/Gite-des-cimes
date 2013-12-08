@@ -150,8 +150,10 @@ class user
      * @param
      * @return
      */
-	public function update(){
-
+	public static function update($sql, $params = array()){
+        global $db;
+        $result = $db->update($sql, $params);
+        return $result;
 	}
 
     /**
