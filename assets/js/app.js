@@ -74,7 +74,7 @@ $(function () {
 
 	$('[data-group]').hide();
 	$('[data-group="structure"').show();
-	$('input[name="form-enfant-inscription"]').on('change', function() {
+	$('input[name="form_enfant_inscription"]').on('change', function() {
 		$('[data-group]').hide();
 		$('[data-group="'+ $(this).val() +'"]').fadeIn(300);
 	});
@@ -83,7 +83,7 @@ $(function () {
 	$('[data-responsable]').hide();
 	$('[data-responsable="parents"]').show();
 	$('[data-responsable="parents"] [data-responsable]').show();
-	$('input[name="form-enfant-responsable"]').on('change', function() {
+	$('input[name="form_enfant_responsable"]').on('change', function() {
 		$('[data-responsable]').hide();
 		$('[data-responsable="parents"]').show();
 		if ($(this).val() === 'parents') {
@@ -94,7 +94,7 @@ $(function () {
 	});
 
 	$('[data-domiciliation="famille"]').hide();
-	$('input[name="form-enfant-domiciliation"]').on('change', function() {
+	$('input[name="form_enfant_domiciliation"]').on('change', function() {
 		if ($(this).val() === 'famille') {
 			$('[data-domiciliation="famille"]').fadeIn(300);
 		} else {
@@ -102,7 +102,7 @@ $(function () {
 		}
 	});
 	$('[data-assurance="oui"]').hide();
-	$('input[name="form-enfant-assurance"]').on('change', function() {
+	$('input[name="form_enfant_assurance"]').on('change', function() {
 		if ($(this).val() === 'oui') {
 			$('[data-assurance="oui"]').fadeIn(300);
 		} else {
