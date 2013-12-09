@@ -18,7 +18,6 @@
                 <ul class="dropdown-menu">
                     <li><a href="/utilisateurs/infos/id/<?=$user->id; ?>">Mes infos personnelles</a></li>
                     <li><a href="/utilisateurs/">Liste des utilisateurs</a></li>
-                    <li><a href="/infos/contact">Repporter un bug</a></li>
                 </ul>
             </li>
             <li class="dropdown hidden-xs hidden-sm">

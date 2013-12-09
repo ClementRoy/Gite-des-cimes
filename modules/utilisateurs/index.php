@@ -9,7 +9,7 @@
         <div id="pad-wrapper">
             <div class="row header">
                 <div class="col-md-3">
-                    <h3>Les utitilisateurs</h3>
+                    <h3>Les utilisateurs</h3>
                 </div>
                 <div class="col-md-9 text-right">
                     <a href="/utilisateurs/ajouter" class="btn-flat primary pull-right"><span>+</span>

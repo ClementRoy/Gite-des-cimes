@@ -70,9 +70,9 @@ $path_array = explode('/', $_SERVER['REQUEST_URI']);
 	                    <span><?=$menu['name']; ?></span>
 	                    <i class="icon-chevron-down"></i>
 	                </a>
-	                <ul class="submenu">
+	                <ul class="submenu <?php if(in_array($key, $path_array)): ?>active<?php endif; ?>">
 	                	<?php foreach($menu['submenu'] as $subKey => $submenu): ?>
-	                    <li><a href="/<?=$key; ?>/<?=$subKey; ?>/"><?=$submenu ?></a></li>
+	                    <li><a href="/<?=$key; ?>/<?=$subKey; ?>/" class="<?php if(in_array($subKey, $path_array) && in_array($key, $path_array)): ?>active<?php endif; ?>"><?=$submenu ?></a></li>
 	                	<?php endforeach; ?>
 	                </ul>
 					<?php else: ?>
