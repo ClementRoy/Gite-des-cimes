@@ -23,12 +23,19 @@
                     </div>
                     <span class="date">autorisés</span>
                 </div>
-                <div class="col-md-3 col-sm-3 stat last">
+                <div class="col-md-3 col-sm-3 stat">
                     <div class="data">
                         <span class="number"><a href="/enfants/">0</a></span>
                         séjours
                     </div>
                     <span class="date">en cours</span>
+                </div>
+                <div class="col-md-3 col-sm-3 stat last">
+                    <div class="data">
+                        <span class="number"><a href="/enfants/">0</a></span>
+                        Fiches
+                    </div>
+                    <span class="date">incomplètes</span>
                 </div>
             </div>
         </div>

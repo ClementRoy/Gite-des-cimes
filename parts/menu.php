@@ -1,15 +1,30 @@
 <?php 
 
-$modules = array(
+$menus = array(
 	'enfants' => array(
 		'name' => 'Enfants',
-		'icon' => 'group'),
+		'icon' => 'group',
+		'submenu' => array(
+						'index' => 'Liste des enfants',
+						'ajouter' => 'Ajouter un enfant'
+					)
+	),
 	'sejours' => array(
 		'name' => 'Séjours',
-		'icon' => 'plane'),
+		'icon' => 'plane',
+		'submenu' => array(
+						'index' => 'Liste des séjours',
+						'ajouter' => 'Ajouter un séjour'
+					)
+	),
 	'structures' => array(
 		'name' => 'Structures',
-		'icon' => 'building'),
+		'icon' => 'building',
+		'submenu' => array(
+						'index' => 'Liste des séjours',
+						'ajouter' => 'Ajouter un séjour'
+					)
+	),
 	'contacts' => array(
 		'name' => 'Contacts',
 		'icon' => 'comments'),
@@ -21,7 +36,8 @@ $modules = array(
 		'icon' => 'edit')
 	);
 
-$path_array = explode('/', $_SERVER['SCRIPT_FILENAME']);
+$path_array = explode('/', $_SERVER['REQUEST_URI']);
+
 ?>
 
 
@@ -36,7 +52,7 @@ $path_array = explode('/', $_SERVER['SCRIPT_FILENAME']);
 	        </li>
        
 
-			<?php foreach($modules as $key => $module): ?>
+			<?php foreach($menus as $key => $menu): ?>
 			<?php if(in_array($key, $path_array)): ?>
 
 		       <li class="active">
@@ -47,10 +63,25 @@ $path_array = explode('/', $_SERVER['SCRIPT_FILENAME']);
 			<?php else: ?>
 				<li>
 			<?php endif; ?>
-		        	<a href="/<?php echo $key; ?>/">
-			        	<i class="icon-<?php echo $module['icon']; ?>"></i>
-			        	<span><?php echo $module['name']; ?></span>
+
+					<?php if( isset($menu['submenu']) && count($menu['submenu']) > 0): ?>
+	                <a class="dropdown-toggle" href="#">
+	                    <i class="icon-<?=$menu['icon']; ?>"></i>
+	                    <span><?=$menu['name']; ?></span>
+	                    <i class="icon-chevron-down"></i>
+	                </a>
+	                <ul class="submenu">
+	                	<?php foreach($menu['submenu'] as $subKey => $submenu): ?>
+	                    <li><a href="/<?=$key; ?>/<?=$subKey; ?>/"><?=$submenu ?></a></li>
+	                	<?php endforeach; ?>
+	                </ul>
+					<?php else: ?>
+		        	<a href="/<?=$key; ?>/">
+			        	<i class="icon-<?=$menu['icon']; ?>"></i>
+			        	<span><?=$menu['name']; ?></span>
 		        	</a>
+					<?php endif; ?>
+
 		        </li>
 	    	<?php endforeach; ?>
         </ul>

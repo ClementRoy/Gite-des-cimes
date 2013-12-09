@@ -65,8 +65,10 @@ Chaque widget est dans un fichier comme suit : /widgets/[widget_name].widget.php
 Chaque fichier est inclus directement dans le module dashboard
  */
 $widgets = array(
-		'incomplete_fiche',
-		'timeline_sejours'
+		array('incomplete_fiche'),
+		array('timeline_sejours'),
+		array('recent_children'),
+		array('waiting_subriction')
 	);
 
 
