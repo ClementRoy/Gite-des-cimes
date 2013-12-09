@@ -65,7 +65,7 @@
             ?>
                 <?php //tool::output($result); ?>
                 <?php if($result): ?>
-                <p>L'enfant <?=$form_enfant_prenom.' '.$form_enfant_nom; ?> a bien été ajouté</p>
+                <p>L'enfant <strong><?=$form_enfant_prenom.' '.$form_enfant_nom; ?></strong> a bien été ajouté</p>
                 <?php else: ?>
                 <p>Une erreur s'est produite lors de l'enregistrement, veuilliez réessayer.</p>
                 <?php endif; ?>

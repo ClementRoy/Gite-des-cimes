@@ -31,7 +31,7 @@
                                     <span class="line"></span>Identifiant
                                 </th>
                                 <th class="sortable col-md-1">
-                                    <span class="line"></span>Statut
+                                    <span class="line"></span>Rôle
                                 </th>
                             </tr>
                         </thead>
@@ -49,8 +49,15 @@
                             <td>
                                <?=$user->identifier; ?>
                             </td>
-                            <td class="align-right">
-                                <a href="#"><?=$user->rank; ?></a>
+                            <td>
+                                <?php if ($user->rank == 1): ?>
+                                    Utilisateur
+                                <?php elseif ($user->rank == 3): ?>
+                                    Gestionnaire
+                                <?php elseif ($user->rank == 5): ?>
+                                    Administrateur
+                                <?php endif; ?>
+                                
                             </td>
                         </tr>
                         <?php endforeach; ?>
