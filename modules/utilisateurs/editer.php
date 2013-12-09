@@ -36,7 +36,7 @@
         </div>
       <?php else: ?>
         <div class="content">
-            <div id="pad-wrapper" class="form-page">
+            <div id="pad-wrapper" class="form-page new-user">
                 <div class="row header">
                     <div class="col-md-12">
                         <h3>Modifier un utilisateur</h3>
@@ -106,7 +106,16 @@
                         </div>                            
                     </div>
 
-                    <input type="submit" class="btn-flat primary" name="validate" value="Valider">
+                    <div class="field-box actions">
+                        <div class="col-md-7">
+                            <input type="submit" class="btn-flat primary" name="validate" value="Valider les changements">
+                            <span>OU</span>
+                            <input type="reset" value="Annuler" class="reset">
+                            <a href="/utilisateurs/" class="reset">Annuler</a>
+                        </div>
+                    </div>
+
+                    
                 </div>
             </form>
         </div>

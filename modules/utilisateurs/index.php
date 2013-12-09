@@ -1,9 +1,22 @@
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
-    <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
+<?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
+
+<?php  
+// Controller
+
+// Get all users list
+$users = user::getList();
+
+// Remove one user case
 
 
+// Add user case
+
+
+
+?>
     <!-- main container -->
     <div class="content">
         <div id="pad-wrapper">
@@ -16,8 +29,18 @@
                         Ajouter un utilisateur</a>
                 </div>
             </div>
-    
-            <?php $users = user::getList(); ?>
+
+            <div class="alert alert-success">
+                <i class="icon-ok-sign"></i> Your order has been placed.
+            </div>
+            <div class="alert alert-info">
+                <i class="icon-exclamation-sign"></i>
+                Do you want to get these resources for as little as $0.70 each?
+            </div>
+            <div class="alert alert-danger">
+                <i class="icon-remove-sign"></i>
+                Unexpected error. Please try again later.
+            </div>
 
             <!-- Users table -->
             <div class="row">

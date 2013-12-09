@@ -1,6 +1,10 @@
 <?php 
 
 $menus = array(
+	'accueil' => array(
+		'name' => 'Accueil',
+		'icon' => 'dashboard',
+		),
 	'enfants' => array(
 		'name' => 'Enfants',
 		'icon' => 'group',
@@ -21,8 +25,8 @@ $menus = array(
 		'name' => 'Structures',
 		'icon' => 'building',
 		'submenu' => array(
-						'index' => 'Liste des séjours',
-						'ajouter' => 'Ajouter un séjour'
+						'index' => 'Liste des structures',
+						'ajouter' => 'Ajouter une structure'
 					)
 	),
 	'contacts' => array(
@@ -37,20 +41,15 @@ $menus = array(
 	);
 
 $path_array = explode('/', $_SERVER['REQUEST_URI']);
-
+if($path_array['1'] == ''){
+	$path_array['1']  = 'accueil';
+}
 ?>
 
 
     <!-- sidebar -->
     <div id="sidebar-nav">
         <ul id="dashboard-menu">
-	        <li>
-	        	<a href="/">
-	        		<i class="icon-dashboard"></i>
-	        		<span>Accueil</span>
-	        	</a>
-	        </li>
-       
 
 			<?php foreach($menus as $key => $menu): ?>
 			<?php if(in_array($key, $path_array)): ?>
