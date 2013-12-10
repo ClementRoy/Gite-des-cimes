@@ -2,6 +2,7 @@ Options +FollowSymLinks
 Options -Indexes 
 
 RewriteEngine On
+RewriteBase /
 
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f

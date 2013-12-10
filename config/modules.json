@@ -1,0 +1,46 @@
+{
+	"accueil": {
+		"name" : "accueil",
+		"functions" : ["index"]
+	},
+	"enfants" : {
+		"name" : "enfants",
+		"functions" : ["index","ajouter","infos","editer","supprimer"]
+	},
+	"sejours" : {
+		"name" :  "sejours",
+		"functions" : ["index","ajouter","infos","editer","supprimer"]
+	},
+	"structures" : {
+		"name" : "structures",
+		"functions" : ["index"]
+	},
+	"contacts" : {
+		"name" : "contacts",
+		"functions" : ["index"]
+	},
+	"convocations" : {
+		"name" : "convocations",
+		"functions" : ["index"]
+	},
+	"factures" : {
+		"name" : "factures",
+		"functions" : ["index"]
+	},
+	"animateurs" : {
+		"name" : "animateurs",
+		"functions" : ["index"]
+	},
+	"vehicules" : {
+		"name" : "vehicules",
+		"functions" : ["index"]
+	},
+	"utilisateurs" : {
+		"name" : "utilisateurs",
+		"functions" : ["index", "infos", "connexion", "deconnexion", "supprimer", "ajouter", "editer"]
+	},
+	"infos" : {
+		"name" : "infos",
+		"functions" : ["contact", "index", "infos", "debug"]
+	}
+}

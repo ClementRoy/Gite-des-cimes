@@ -9,7 +9,12 @@ class app
 	function __construct()
 	{
 		# code...
+		session_start();
+
 	}
+
+
+
 
     /**
      * desc
@@ -22,6 +27,14 @@ class app
 	public static function getVar(&$var) {
 		return self::$var;
 	}
+
+
+	public function router(){
+
+	}
+
+
+
 
 }
 

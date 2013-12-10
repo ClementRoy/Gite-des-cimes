@@ -1,10 +1,14 @@
 <?php 
 
-session_start();
+
 
 
 require($_SERVER["DOCUMENT_ROOT"] . '/config/config.inc.php');
 
+//session_start();
+//
+new app();
+$db = new DB();
 
 /*
 
@@ -32,7 +36,6 @@ extract($_POST);
 /*
  Initialisation et connexion à la base de données 
  */
-$db = new DB();
 
 $user = new user();
 
@@ -64,14 +67,14 @@ if ( isset($deconnexion) ) { // TODO there is a bug here
 if ( user::isLogged() ) {
     
     $user = new user($_SESSION['Auth']['identifier'], $_SESSION['Auth']['password']);
-
-    if ( isset($module) && !empty($module) && array_key_exists($module, $modules) ) {
+    if ( isset($module) && !empty($module) && property_exists($modules, $module) ) {
         $module = $module;
-         if ( isset($function) && !empty($function) && in_array($function, $modules[$module]) ) {
+        //echo $module;
+         if ( isset($function) && !empty($function) && in_array($function, $modules->$module->functions) ) {
            $function = $function;
          }
          else {
-            $function = $modules[$module][0];
+            $function = $modules->$module->functions[0];
          }
     }
     else {
@@ -85,13 +88,6 @@ if ( user::isLogged() ) {
 else {
     include($_SERVER["DOCUMENT_ROOT"] . '/modules/utilisateurs/connexion.php');
 }
-
-
-
-
-
-
-
 
 
 ?>
