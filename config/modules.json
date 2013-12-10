@@ -5,11 +5,11 @@
 	},
 	"enfants" : {
 		"name" : "enfants",
-		"functions" : ["index","ajouter","infos","editer","supprimer"]
+		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"sejours" : {
 		"name" :  "sejours",
-		"functions" : ["index","ajouter","infos","editer","supprimer"]
+		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"structures" : {
 		"name" : "structures",

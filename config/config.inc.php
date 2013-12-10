@@ -41,24 +41,8 @@ Le nom du dossier doit être le même que le module /modules/[module_name]
 Un module peut-être accessible via le menu principal ou à travers d'autres modules
 Certains sont même abstrait
  */
-// $modules = array(
-// 					'accueil' => array( 'index'),
-// 					'enfants' => array('index', 'ajouter', 'infos', 'editer', 'supprimer'),
-// 					'sejours' => array('index', 'ajouter', 'infos', 'editer', 'supprimer'),
-// 					'structures' => array( 'index'),
-// 					'contacts' => array( 'index'),
-// 					'convocations' => array( 'index'),
-// 					'factures' => array( 'index'),
-// 					'animateurs' => array( 'index'),
-// 					'vehicules' => array( 'index'),
-// 					'utilisateurs' => array( 'index', 'infos', 'connexion', 'deconnexion', 'supprimer', 'ajouter', 'editer'),
-// 					'infos' => array('contact', 'index', 'infos', 'debug')
-// 	);
 
 $modules = JSON::get(dirname(__FILE__) . '/modules.json');
-
-//print_r(json_decode('{module : "accueil"}'));
-
 
 define('DEFAULT_MODULE', 'accueil');
 define('DEFAULT_FUNCTION', 'index');
@@ -69,13 +53,8 @@ Les widgets sont appelés sur le dashboard (module)
 Chaque widget est dans un fichier comme suit : /widgets/[widget_name].widget.php
 Chaque fichier est inclus directement dans le module dashboard
  */
-$widgets = array(
-		array('incomplete_fiche'),
-		array('timeline_sejours'),
-		array('recent_children'),
-		array('waiting_subriction')
-	);
-//$widgets = JSON::get(dirname(__FILE__) . '/widgets.json');
+
+$widgets = JSON::get(dirname(__FILE__) . '/widgets.json');
 
 
 define('ADMIN', 'mail@clementroy.fr');
