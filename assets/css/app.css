@@ -230,6 +230,9 @@ input.parsley-error:focus {
   margin-bottom: 18px;
   margin-top: 40px;
 }
+#pad-wrapper .ctrls .tab-content {
+  min-height: 150px;
+}
 .address {
   padding-left: 30px;
 }
