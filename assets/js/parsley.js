@@ -28,8 +28,8 @@
             email:      "Cette adresse mail est invalide."
           , url:        "This value should be a valid url."
           , urlstrict:  "This value should be a valid url."
-          , number:     "This value should be a valid number."
-          , digits:     "This value should be digits."
+          , number:     "Cette valeur doit être un nombre."
+          , digits:     "Cette valeur doit être un nombre entier."
           , dateIso:    "This value should be a valid date (YYYY-MM-DD)."
           , alphanum:   "This value should be alphanumeric."
           , phone:      "This value should be a valid phone number."
@@ -107,7 +107,7 @@
 
             switch ( type ) {
               case 'number':
-                regExp = /^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/;
+                regExp = /^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:,\d+)?$/;
                 break;
               case 'digits':
                 regExp = /^\d+$/;

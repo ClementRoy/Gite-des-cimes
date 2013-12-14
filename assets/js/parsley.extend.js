@@ -138,10 +138,10 @@ window.ParsleyConfig = window.ParsleyConfig || {};
         minwords:       "This value should have %s words at least."
       , maxwords:       "This value should have %s words maximum."
       , rangewords:     "This value should have between %s and %s words."
-      , greaterthan:    "This value should be greater than %s."
+      , greaterthan:    "Cette valeur doit être plus grande que le champ précédent (%s)."
       , lessthan:       "This value should be less than %s."
       , beforedate:     "This date should be before %s."
-      , afterdate:      "This date should be after %s."
+      , afterdate:      "Cette date doit être plus récente que le champ précédent (%s)."
       , luhn:           "This value should pass the luhn test."
       , americandate:	"This value should be a valid date (MM/DD/YYYY)."
     }

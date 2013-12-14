@@ -6,102 +6,108 @@
     <?php if(isset($validate)): ?>
         <?php  
             $datas = array(
-                            'identifier' => $form_utilisateur_identifiant,
-                            'firstname' => $form_utilisateur_prenom,
-                            'lastname' => $form_utilisateur_nom,
-                            'password' => md5($form_utilisateur_password),
-                            'email' => $form_utilisateur_mail,
-                            'rank' => $form_utilisateur_lvl
+                            'identifier' => $form_sejour_identifiant,
+                            'name' => $form_sejour_nom,
+                            'date_from' => $form_sejour_date_debut,
+                            'date_to' => $form_sejour_date_fin,
+                            'created' => $form_sejour_date_creation,
+                            'place' => $form_sejour_lieu,
+                            'capacity_max' => $form_sejour_capacite_max,
+                            'capacity_min' => $form_sejour_capacite_min,
+                            'numero' => $form_sejour_numero,
+                            'price' => $form_sejour_prix
                             );
 
-            $sql = 'INSERT INTO users (identifier, firstname, lastname, password, email, rank) value (:identifier,:firstname,:lastname,:password,:email,:rank)';
+            $sql = 'INSERT INTO sejours (identifier, name, date_from, date_to, place, capacity_max, capacity_min, numero, price) value (:identifier,:name,:date_from,:date_to,:place,:capacity_max,:capacity_min,:numero,:price)';
 
-            user::add($sql, $datas);
+            sejour::add($sql, $datas);
 
         ?>
     <div class="content">
         <div id="pad-wrapper" class="form-page">
             <div class="row header">
                 <div class="col-md-12">
-                    <h3>Ajouter un utilisateur</h3>
+                    <h3>Ajouter un séjour</h3>
                 </div>
             </div>
         </div>
 
-        <p>L'utilisateur <?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?> a bien été ajouté</p>
-        <a href="/utilisateurs/">Retourner à la liste des utilisateurs</a>
+        <p>Le séjour <?=$form_sejour_name; ?> a bien été ajouté</p>
+        <a href="/sejour/">Retourner à la liste des séjours</a>
     </div>
     <?php else: ?>
     <div class="content">
         <div id="pad-wrapper" class="form-page">
             <div class="row header">
                 <div class="col-md-12">
-                    <h3>Ajouter un utilisateur</h3>
+                    <h3>Ajouter un séjour</h3>
                 </div>
             </div>
 
-            <form id="form-add-children" method="post" parsley-validate>
-                   <!--  <h2>Informations sur l'utilisateur</h2> -->
+            <form id="form-add-sejour" method="post" parsley-validate>
+                   <!--  <h2>Informations sur le séjour</h2> -->
                      <div class="row form-wrapper">
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-utilisateur-prenom">Prénom</label>
+                            <label class="col-md-2" for="form-sejour-nom">Nom du séjour</label>
                             <div class="col-md-5">
-                                <input id="form-utilisateur-prenom" name="form_utilisateur_prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'utilisateur." parsley-required="true">
+                                <input id="form-sejour-name" name="form_sejour_name" class="form-control" type="text" 
+                                data-toggle="tooltip" title="Renseignez le nom du séjour." parsley-required="true">
                             </div>                            
                         </div>
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-utilisateur-nom">Nom</label>
+                            <label class="col-md-2" for="form-sejour-nom">Date de début</label>
                             <div class="col-md-5">
-                                <input id="form-utilisateur-nom" name="form_utilisateur_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'utilisateur." parsley-required="true">
+                                <input id="form-sejour-date-debut" name="form_sejour_date_debut" type="text" class="form-control input-datepicker"
+                                placeholder="JJ/MM/AAAA" data-toggle="tooltip" title="Renseignez la date à laquelle commence le séjour (jj/mm/aaaa)." 
+                                parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})">
                             </div>                            
                         </div>
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-utilisateur-identifiant">Identifiant</label>
+                            <label class="col-md-2" for="form-sejour-identifiant">Date de fin</label>
                             <div class="col-md-5">
-                                <input id="form-utilisateur-identifiant" name="form_utilisateur_identifiant" class="form-control" type="text" data-toggle="tooltip" title="Renseignez l'identifiant de l'utilisateur." parsley-required="true">
+                                <input id="form-sejour-date-fin" name="form_sejour_date_fin" type="text" class="form-control input-datepicker" 
+                                placeholder="JJ/MM/AAAA" data-toggle="tooltip" title="Renseignez la date à laquelle se termine le séjour (jj/mm/aaaa)." 
+                                parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" parsley-afterdate="#form-sejour-date-debut">
                             </div>                            
                         </div>                        
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-utilisateur-password">Mot de passe</label>
+                            <label class="col-md-2" for="form-sejour-password">Lieu</label>
                             <div class="col-md-5">
-                                <input id="form-utilisateur-password" name="form_utilisateur_password" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le mot de passe de l'utilisateur." parsley-required="true">
+                                <input id="form-sejour-lieu" name="form_sejour_lieu" class="form-control" type="text" 
+                                data-toggle="tooltip" title="Renseignez où se déroule la séjour." parsley-required="true">
+                            </div>                            
+                        </div>
+
+                        <div class="field-box row">
+                            <label class="col-md-2" for="form-sejour-capacite-min">Capacité minimum</label>
+                            <div class="col-md-5">
+                                <input id="form-sejour-capacite-min" name="form_sejour_capacite_min" class="form-control" type="text" 
+                                data-toggle="tooltip" title="Renseignez le nombre d'enfant minimum pour ce séjour." parsley-type="digits" parsley-required="true">
                             </div>                            
                         </div>
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-utilisateur-mail">Adresse e-mail</label>
+                            <label class="col-md-2" for="form-sejour-capacite-max">Capacité maximum</label>
                             <div class="col-md-5">
-                                <input id="form-utilisateur-mail" name="form_utilisateur_mail" class="form-control" type="email" data-toggle="tooltip" title="Renseignez l'adresse e-mail de l'utilisateur." parsley-required="true">
+                                <input id="form-sejour-capacite-max" name="form_sejour_capacite_max" class="form-control" type="text" 
+                                data-toggle="tooltip" title="Renseignez le nombre d'enfant maximum pour ce séjour." parsley-required="true" parsley-type="digits" parsley-greaterthan="#form-sejour-capacite-min">
+                            </div>                            
+                        </div>
+
+                        <div class="field-box row">
+                            <label class="col-md-2" for="form-sejour-mail">Numéro (Jeunesse & Sport)</label>
+                            <div class="col-md-5">
+                                <input id="form-sejour-numero" name="form_sejour_numero" class="form-control" type="text" 
+                                data-toggle="tooltip" title="Renseignez le numéro jeunesse & sport du séjour." parsley-required="true">
                             </div>                            
                         </div>
                         <div class="field-box row">
-                            <label class="col-md-2">Niveau</label>
-                            <div class="col-md-5" data-toggle="tooltip" title="Précisez le niveau d'administration de l'utilisateur">
-                                <label class="radio" for="form-utilisateur-lvl-1">
-                                    <div class="radio" id="uniform-form-utilisateur-lvl-1">
-                                        <span class="checked">
-                                            <input type="radio" name="form_utilisateur_lvl" id="form-utilisateur-lvl-1" value="1" checked="">
-                                        </span>
-                                    </div>
-                                    Utilisateur
-                                </label>
-                                <label class="radio" for="form-utilisateur-lvl-2">
-                                    <div class="radio" id="uniform-form-utilisateur-lvl-2">
-                                        <span>
-                                            <input type="radio" name="form_utilisateur_lvl" id="form-utilisateur-lvl-2" value="3">
-                                        </span>
-                                    </div>
-                                    Gestionnaire
-                                </label>
-                                <label class="radio" for="form-utilisateur-lvl-3">
-                                    <div class="radio" id="uniform-form-utilisateur-lvl-3">
-                                        <span>
-                                            <input type="radio" name="form_utilisateur_lvl" id="form-utilisateur-lvl-3" value="5">
-                                        </span>
-                                    </div>
-                                    Administrateur
-                                </label>
+                            <label class="col-md-2" for="form-sejour-mail">Prix</label>
+                            <div class="col-md-5">
+                                <input id="form-sejour-prix" name="form_sejour_prix" class="form-control" type="text" 
+                                data-toggle="tooltip" title="Renseignez le prix unitaire du séjour du séjour." parsley-type="number" parsley-required="true">
                             </div>                            
                         </div>
+
 
                         <input type="submit" class="btn-flat primary" name="validate" value="Valider">
                     </div>

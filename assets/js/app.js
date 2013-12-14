@@ -34,8 +34,6 @@ $(function () {
 		$(this).datepicker('hide');
 	});
 
-
-
 	// TOOLTIPS
 
 	$('input[type="text"]').each(function (index, el) {

@@ -16,6 +16,7 @@
      <!-- <script src="/assets/js/jquery.steps.js"></script>
     <script src="/assets/js/additional-methods.js"></script> -->
     <script src="/assets/js/parsley.js"></script>
+    <script src="/assets/js/parsley.extend.js"></script>
 
     <!-- TABLE -->
     <script src="/assets/js/jquery.tableSorter.js"></script>
