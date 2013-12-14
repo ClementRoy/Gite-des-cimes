@@ -93,6 +93,10 @@ label {
 .col-md-5 + .tooltip.right {
   margin-left: 4px;
 }
+#form-sejour-capacite-min + .tooltip.right,
+#form-sejour-date-debut + .tooltip.right {
+  margin-left: 195px;
+}
 .tooltip.right {
   padding: 0 5px;
   -webkit-backface-visibility: hidden;

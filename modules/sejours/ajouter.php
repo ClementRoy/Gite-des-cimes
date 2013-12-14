@@ -49,60 +49,54 @@
                      <div class="row form-wrapper">
                         <div class="field-box row">
                             <label class="col-md-2" for="form-sejour-nom">Nom du séjour</label>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <input id="form-sejour-name" name="form_sejour_name" class="form-control" type="text" 
                                 data-toggle="tooltip" title="Renseignez le nom du séjour." parsley-required="true">
                             </div>                            
                         </div>
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-sejour-nom">Date de début</label>
-                            <div class="col-md-5">
+                            <label class="col-md-2" for="form-sejour-nom">Dates</label>
+                            <div class="col-md-2">
                                 <input id="form-sejour-date-debut" name="form_sejour_date_debut" type="text" class="form-control input-datepicker"
-                                placeholder="JJ/MM/AAAA" data-toggle="tooltip" title="Renseignez la date à laquelle commence le séjour (jj/mm/aaaa)." 
+                                placeholder="Date de début" data-toggle="tooltip" title="Renseignez la date à laquelle commence le séjour (jj/mm/aaaa)." 
                                 parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})">
-                            </div>                            
-                        </div>
-                        <div class="field-box row">
-                            <label class="col-md-2" for="form-sejour-identifiant">Date de fin</label>
-                            <div class="col-md-5">
+                            </div> 
+                          <div class="col-md-2">
                                 <input id="form-sejour-date-fin" name="form_sejour_date_fin" type="text" class="form-control input-datepicker" 
-                                placeholder="JJ/MM/AAAA" data-toggle="tooltip" title="Renseignez la date à laquelle se termine le séjour (jj/mm/aaaa)." 
+                                placeholder="Date de fin" data-toggle="tooltip" title="Renseignez la date à laquelle se termine le séjour (jj/mm/aaaa)." 
                                 parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" parsley-afterdate="#form-sejour-date-debut">
-                            </div>                            
-                        </div>                        
+                            </div>                              
+                        </div>                  
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-sejour-password">Lieu</label>
-                            <div class="col-md-5">
+                            <label class="col-md-2" for="form-sejour-lieu">Lieu</label>
+                            <div class="col-md-4">
                                 <input id="form-sejour-lieu" name="form_sejour_lieu" class="form-control" type="text" 
                                 data-toggle="tooltip" title="Renseignez où se déroule la séjour." parsley-required="true">
                             </div>                            
                         </div>
 
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-sejour-capacite-min">Capacité minimum</label>
-                            <div class="col-md-5">
+                            <label class="col-md-2" for="form-sejour-capacite-min">Capacité</label>
+                            <div class="col-md-2">
                                 <input id="form-sejour-capacite-min" name="form_sejour_capacite_min" class="form-control" type="text" 
-                                data-toggle="tooltip" title="Renseignez le nombre d'enfant minimum pour ce séjour." parsley-type="digits" parsley-required="true">
-                            </div>                            
-                        </div>
-                        <div class="field-box row">
-                            <label class="col-md-2" for="form-sejour-capacite-max">Capacité maximum</label>
-                            <div class="col-md-5">
+                                data-toggle="tooltip" placeholder="Minimum" title="Renseignez le nombre d'enfant minimum pour ce séjour." parsley-type="digits" parsley-required="true">
+                            </div>        
+                            <div class="col-md-2">
                                 <input id="form-sejour-capacite-max" name="form_sejour_capacite_max" class="form-control" type="text" 
-                                data-toggle="tooltip" title="Renseignez le nombre d'enfant maximum pour ce séjour." parsley-required="true" parsley-type="digits" parsley-greaterthan="#form-sejour-capacite-min">
-                            </div>                            
+                                data-toggle="tooltip" placeholder="Maximum" title="Renseignez le nombre d'enfant maximum pour ce séjour." parsley-required="true" parsley-type="digits" parsley-greaterthan="#form-sejour-capacite-min">
+                            </div>                         
                         </div>
 
                         <div class="field-box row">
                             <label class="col-md-2" for="form-sejour-mail">Numéro (Jeunesse & Sport)</label>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <input id="form-sejour-numero" name="form_sejour_numero" class="form-control" type="text" 
-                                data-toggle="tooltip" title="Renseignez le numéro jeunesse & sport du séjour." parsley-required="true">
+                                data-toggle="tooltip" title="Renseignez le numéro jeunesse & sport du séjour.">
                             </div>                            
                         </div>
                         <div class="field-box row">
                             <label class="col-md-2" for="form-sejour-mail">Prix</label>
-                            <div class="col-md-5">
+                            <div class="col-md-2">
                                 <input id="form-sejour-prix" name="form_sejour_prix" class="form-control" type="text" 
                                 data-toggle="tooltip" title="Renseignez le prix unitaire du séjour du séjour." parsley-type="number" parsley-required="true">
                             </div>                            
