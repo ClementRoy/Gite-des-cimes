@@ -32,7 +32,7 @@
           , digits:     "Cette valeur doit être un nombre entier."
           , dateIso:    "This value should be a valid date (YYYY-MM-DD)."
           , alphanum:   "This value should be alphanumeric."
-          , phone:      "This value should be a valid phone number."
+          , phone:      "Cette valeur doit être un numéro de téléphone."
         }
       , notnull:        "This value should not be null."
       , notblank:       "This value should not be blank."

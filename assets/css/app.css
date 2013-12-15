@@ -93,6 +93,9 @@ label {
 .col-md-5 + .tooltip.right {
   margin-left: 4px;
 }
+.col-md-4 + .tooltip.right {
+  margin-left: 4px;
+}
 #form-sejour-capacite-min + .tooltip.right,
 #form-sejour-date-debut + .tooltip.right {
   margin-left: 195px;
@@ -225,7 +228,7 @@ input.parsley-error:focus {
   padding-right: 30px;
   font-size: 12px;
 }
-.bio i {
+.bio .ctrls .tab-content i {
   color: #428BCA;
   font-size: 13px;
   margin-right: 7px;
@@ -233,6 +236,10 @@ input.parsley-error:focus {
 #pad-wrapper .bio h4 {
   margin-bottom: 18px;
   margin-top: 40px;
+}
+#pad-wrapper .bio .row h4 {
+  margin-bottom: 18px;
+  margin-top: 1px;
 }
 #pad-wrapper .ctrls .tab-content {
   min-height: 150px;
@@ -292,4 +299,17 @@ h6 {
 .action-page .message {
   margin-bottom: 35px;
   font-size: 14px;
+}
+.progress-bar > span {
+  padding-top: 2px;
+  display: block;
+}
+.progress > span {
+  padding-top: 2px;
+  padding-right: 10px;
+  display: block;
+  float: right;
+  opacity: .7;
+  filter: alpha(opacity=7);
+  font-weight: bold;
 }

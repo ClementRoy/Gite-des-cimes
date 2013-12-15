@@ -2,27 +2,31 @@
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
     <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
+    
 
     <?php if(isset($validate)): ?>
         <?php  
             $datas = array(
-                            'identifier' => $form_sejour_identifiant,
-                            'name' => $form_sejour_nom,
-                            'date_from' => $form_sejour_date_debut,
-                            'date_to' => $form_sejour_date_fin,
-                            'created' => $form_sejour_date_creation,
-                            'place' => $form_sejour_lieu,
-                            'capacity_max' => $form_sejour_capacite_max,
-                            'capacity_min' => $form_sejour_capacite_min,
-                            'numero' => $form_sejour_numero,
-                            'price' => $form_sejour_prix
+                            ':identifier' => $form_sejour_identifiant,
+                            ':name' => $form_sejour_nom,
+                            ':date_from' => $form_sejour_date_debut,
+                            ':date_to' => $form_sejour_date_fin,
+                            ':created' => $form_sejour_date_creation,
+                            ':place' => $form_sejour_lieu,
+                            ':capacity_max' => $form_sejour_capacite_max,
+                            ':capacity_min' => $form_sejour_capacite_min,
+                            ':numero' => $form_sejour_numero,
+                            ':price' => $form_sejour_prix
                             );
 
-            $sql = 'INSERT INTO sejours (identifier, name, date_from, date_to, place, capacity_max, capacity_min, numero, price) value (:identifier,:name,:date_from,:date_to,:place,:capacity_max,:capacity_min,:numero,:price)';
+            $sql = 'INSERT INTO 
+                    sejour (identifier, name, date_from, date_to, place, capacity_max, capacity_min, numero, price) 
+                    value (:identifier,:name,:date_from,:date_to,:place,:capacity_max,:capacity_min,:numero,:price)';
 
             sejour::add($sql, $datas);
 
         ?>
+    <?php tool::output($_POST); ?>
     <div class="content">
         <div id="pad-wrapper" class="form-page">
             <div class="row header">
@@ -33,7 +37,7 @@
         </div>
 
         <p>Le séjour <?=$form_sejour_name; ?> a bien été ajouté</p>
-        <a href="/sejour/">Retourner à la liste des séjours</a>
+        <a href="/sejours/index/">Retourner à la liste des séjours</a>
     </div>
     <?php else: ?>
     <div class="content">

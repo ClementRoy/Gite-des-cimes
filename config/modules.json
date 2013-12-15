@@ -13,7 +13,7 @@
 	},
 	"structures" : {
 		"name" : "structures",
-		"functions" : ["index"]
+		"functions" : ["index", "ajouter"]
 	},
 	"contacts" : {
 		"name" : "contacts",
