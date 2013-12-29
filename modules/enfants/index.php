@@ -51,8 +51,7 @@
                                  <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname; ?></a>
                             </td>
                             <td>
-                                <i class="icon-male"></i> Homme
-                            </td>
+                                <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?>                            </td>
                             <td>
                                 02/01/1990
                             </td>
