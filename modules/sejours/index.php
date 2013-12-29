@@ -10,7 +10,7 @@
             <div class="row header">
                 <h3>Les séjours</h3>
                 <div class="col-md-10 col-sm-12 col-xs-12 pull-right">
-                    <input type="text" id="table-sejour-search" class="col-md-5 search" placeholder="Tapez le nom d'un séjour...">
+                    <input type="text" id="table-sejour-search" data-search="sejour" class="col-md-5 search" placeholder="Tapez le nom d'un séjour...">
                     <a href="/sejours/ajouter" class="btn-flat primary pull-right"><span>+</span>
                         Ajouter un séjour</a>
                 </div>
@@ -22,7 +22,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <table id="table-sejour" class="table table-hover extendlink">
+                    <table id="table-sejour"  data-search="sejour" class="table tablesorter table-hover extendlink">
                         <thead>
                             <tr>
                             	<th class="sortable">Numéro</th>

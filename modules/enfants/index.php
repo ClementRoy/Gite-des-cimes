@@ -12,7 +12,7 @@
                     <h3>Les enfants</h3>
                 </div>
                 <div class="col-md-10 text-right">
-                    <input type="text" id="table-enfant-search" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">
+                    <input type="text" id="table-enfant-search" data-search="enfant" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">
                     <a href="/enfants/ajouter" class="btn-flat primary"><span>+</span>
                         Ajouter un enfant</a>
                 </div>
@@ -23,7 +23,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <table id="table-enfant" class="table table-hover tablesorter extendlink">
+                    <table id="table-enfant" data-search="enfant" class="table table-hover tablesorter extendlink">
                         <thead>
                             <tr>
                                 <th class="sortable">Prénom</th>

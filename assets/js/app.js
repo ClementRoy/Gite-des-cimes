@@ -11,12 +11,13 @@ $(function () {
 		window.location=href;
     });
 
-    $('#table-enfant-search').on('keyup', function () {
+    $('input[data-search]').on('keyup', function () {
 		var pattern = $(this).val().toLowerCase();
+		var dataSearch = $(this).data('search');
 		if (pattern === '') {
-			$('#table-enfant tbody tr').show();
+			$('table[data-search="' + dataSearch + '"] tbody tr').show();
 		} else {
-			$('#table-enfant tbody tr').each(function () {
+			$('table[data-search="' + dataSearch + '"] tbody tr').each(function () {
 				var nb = $(this).text().toLowerCase().search(pattern);
 				if (nb <= 0) {
 					$(this).hide();
@@ -26,6 +27,8 @@ $(function () {
 			});
 		}
     });
+
+
 
 	$('input:checkbox, input:radio').uniform();
 	$('.select2').select2();

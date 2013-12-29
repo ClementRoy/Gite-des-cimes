@@ -48,7 +48,7 @@
                     <div class="col-md-6">
                         <h4>Enfants récemment ajoutés</h4>
                       <?php $enfants = enfant::getList('5','0'); ?>
-                      <table id="table-enfant" class="table table-hover extendlink">
+                      <table id="table-enfant" class="table tablesorter table-hover extendlink">
                             <thead>
                                 <tr>
                                     <th class="sortable">Prénom</th>
@@ -80,7 +80,7 @@
                     <div class="col-md-6">
                         <h4>Séjours en cours</h4>
                       <?php $sejours = sejour::getList('5','0'); ?>
-                      <table id="table-enfant" class="table table-hover extendlink">
+                      <table id="table-enfant" class="table tablesorter table-hover extendlink">
                             <thead>
                                 <tr>
                                     <th class="sortable">Numéro</th>
