@@ -8,6 +8,11 @@ class app
 	
 	function __construct()
 	{
+
+
+	}
+
+	public function start(){
 		session_start();
 
 		setlocale(LC_ALL, 'fr_FR.UTF8');
@@ -31,8 +36,7 @@ class app
 		}
 		//extract($_GET);
 		//extract($_POST);
-		extract($GLOBALS);
-
+		extract($GLOBALS);		
 	}
 
 
