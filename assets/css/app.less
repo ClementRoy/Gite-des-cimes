@@ -237,9 +237,9 @@ input.parsley-error {
 	}
 
 }
-	.btn-flat + .btn-flat {
-		margin-left: 5px;
-	}
+.btn-flat + .btn-flat {
+	margin-left: 5px;
+}
 .table img.avatar {
 	margin-right: 14px;
 }
@@ -249,28 +249,28 @@ input.parsley-error {
 	padding-right: 30px;
 	font-size: 12px;
 	.ctrls .tab-content {
-	i {
-		color: #428BCA;
-		font-size: 13px;
-		margin-right: 7px;
+		i {
+			color: #428BCA;
+			font-size: 13px;
+			margin-right: 7px;
+		}
 	}
-}
 
 
 }
 #pad-wrapper {
 
 	.bio h4 {
-margin-bottom: 18px;
-margin-top: 40px;
-}
-.bio .row h4 {
-margin-bottom: 18px;
-margin-top: 1px;
-}
-.ctrls .tab-content {
-min-height: 150px;
-}
+		margin-bottom: 18px;
+		margin-top: 40px;
+	}
+	.bio .row h4 {
+		margin-bottom: 18px;
+		margin-top: 1px;
+	}
+	.ctrls .tab-content {
+		min-height: 150px;
+	}
 }
 .address {
 	padding-left: 30px;
@@ -326,8 +326,8 @@ h6 {
 }
 .action-page {
 	.header {
-margin-bottom: 35px;
-}
+		margin-bottom: 35px;
+	}
 	.message {
 		margin-bottom: 35px;
 		font-size: 14px;
@@ -335,7 +335,7 @@ margin-bottom: 35px;
 }
 .progress-bar>span {
 	padding-top: 2px;
-display: block;
+	display: block;
 }
 .progress>span {
 	padding-top: 2px;
@@ -356,9 +356,26 @@ body.menu {
 		left: -165px;
 		transition: left .2s ease;
 	}
-.content {
-margin-left: inherit;
-position: static;
-width: auto;
+	.content {
+		margin-left: inherit;
+		position: static;
+		width: auto;
+	}
 }
+
+@media (max-width: 768px) {
+	.form-page .form-wrapper label {
+		width: 100%;
+	}
+	.form-page .form-wrapper label.radio-inline {
+		width: 46%;
+		padding: 2px 0 5px;
+	}
+	.form-page .form-wrapper .ui-select {
+		width: 100%;
+		min-width: 100%;
+	}
+	.ui-select select {
+		width: 122%;
+	}
 }

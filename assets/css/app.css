@@ -329,3 +329,19 @@ body.menu .content {
   position: static;
   width: auto;
 }
+@media (max-width: 768px) {
+  .form-page .form-wrapper label {
+    width: 100%;
+  }
+  .form-page .form-wrapper label.radio-inline {
+    width: 46%;
+    padding: 2px 0 5px;
+  }
+  .form-page .form-wrapper .ui-select {
+    width: 100%;
+    min-width: 100%;
+  }
+  .ui-select select {
+    width: 122%;
+  }
+}

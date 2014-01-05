@@ -8,10 +8,10 @@
     <div class="content">
 <div id="pad-wrapper">
             <div class="row header">
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <h3>Les enfants</h3>
                 </div>
-                <div class="col-md-10 text-right">
+                <div class="col-md-8 text-right">
                     <input type="text" id="table-enfant-search" data-search="enfant" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">
                     <a href="/enfants/ajouter" class="btn-flat primary"><span>+</span>
                         Ajouter un enfant</a>
