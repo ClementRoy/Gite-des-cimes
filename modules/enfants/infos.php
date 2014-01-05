@@ -259,7 +259,7 @@
         </div>
 
 
-<?php //tool::output($enfant); ?>
+<?php tool::output($enfant); ?>
 
     </div>
 

@@ -19,7 +19,7 @@
             </div>
 
             <?php $enfants = enfant::getList(); ?>
-
+            
 
             <div class="row">
                 <div class="col-md-12">
@@ -51,12 +51,12 @@
                                  <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname; ?></a>
                             </td>
                             <td>
-                                <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?>                            </td>
+                                <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?></td>
                             <td>
-                                02/01/1990
+                                <?=$enfant->birthdate; ?>
                             </td>
                             <td>
-                                23 ans
+                                <?=tool::getAgeFromDate($enfant->birthdate); ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

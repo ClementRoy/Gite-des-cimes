@@ -3,8 +3,6 @@
 class tool
 {
 
-
-	
 	function __construct()
 	{
 		# code...
@@ -42,6 +40,7 @@ class tool
         return stripcslashes(trim($var));
     }
 
+
     /**
      * desc
      *
@@ -69,8 +68,14 @@ class tool
 		echo '</pre>';
 	}
 
-    public static function currentTime() {
-        return date("Y-m-d H:i:s");
+    public static function currentTime($time = NULL ) {
+        if(isset($time)){
+            return date("Y-m-d H:i:s", $time);
+        }
+        else {
+            return date("Y-m-d H:i:s");
+        }
+       
     }
 
 }
