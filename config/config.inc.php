@@ -49,6 +49,8 @@ $GLOBALS['modules'] = JSON::get(dirname(__FILE__) . '/modules.json');
 define('DEFAULT_MODULE', 'accueil');
 define('DEFAULT_FUNCTION', 'index');
 
+define('EMPTYVAL', 'NC');
+
 /*
 Tous les widgets sont dans /widgets
 Les widgets sont appelés sur le dashboard (module)
@@ -60,6 +62,8 @@ $GLOBALS['widgets'] = JSON::get(dirname(__FILE__) . '/widgets.json');
 
 
 define('ADMIN', 'mail@clementroy.fr');
+
+
 
 
 

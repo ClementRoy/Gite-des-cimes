@@ -68,19 +68,20 @@
                                 <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?></td>
                             <td>
                                 <?php 
+                                    // http://net.tutsplus.com/tutorials/php/dates-and-time-the-oop-way/?search_index=27
                                     $birthdate = new DateTime($enfant->birthdate); 
                                 ?>
-                                <?php if($birthdate->getTimestamp() != '-62169987600'): ?>
+                                <?php if($birthdate->getTimestamp() != '-62169984561'): ?>
                                     <?=strftime('%d %B %Y', $birthdate->getTimestamp()); ?>
                                 <?php else: ?>
-                                /
+                                    <?php echo EMPTYVAL; ?>
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <?php if($birthdate->getTimestamp() != '-62169987600'): ?>
+                                <?php if($birthdate->getTimestamp() != '-62169984561'): ?>
                                     <?=tool::getAgeFromDate($enfant->birthdate); ?> ans
                                 <?php else: ?>
-                                /
+                                    <?php echo EMPTYVAL; ?>
                                 <?php endif; ?>
                             </td>
                         </tr>
