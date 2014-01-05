@@ -16,14 +16,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         <?php 
-                        sejour::remove($id);
+                        sejour::remove($_GET['id']);
                         ?>
                         <p>Le séjour a bien été supprimé</p>
                         <a href="/sejours/">Retourner à la liste des séjours</a>
                     </div>                
                 </div>
             <?php else: ?>
-                <?php $sejour = sejour::get($id); ?>
+                <?php $sejour = sejour::get($_GET['id']); ?>
                 <div class="row" class="message">
                     <div class="col-md-12 message">
                        <p>Vous êtes sur le point de supprimer le séjour <strong><?=$sejour->name; ?> (<?=$sejour->numero; ?>)</strong>.<br />

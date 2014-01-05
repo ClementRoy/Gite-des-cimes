@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <?php 
-                        user::remove($id);
+                        user::remove($_GET['id']);
                         ?>
                         <div class="alert alert-danger">
                             <i class="icon-remove-sign"></i>
@@ -27,7 +27,7 @@
                     </div>                
                 </div>
             <?php else: ?>
-                <?php $utilisateur = user::get($id); ?>
+                <?php $utilisateur = user::get($_GET['id']); ?>
                 <div class="row" class="message">
                     <div class="col-md-12 message">
                        <p>Vous êtes sur le point de supprimer l'utilisateur <strong><?=$utilisateur->firstname; ?> <?=$utilisateur->lastname; ?></strong>.<br />

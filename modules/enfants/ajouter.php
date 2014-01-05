@@ -66,9 +66,25 @@
             ?>
                 <?php //tool::output($result); ?>
                 <?php if($result): ?>
-                <p>L'enfant <strong><?=$form_enfant_prenom.' '.$form_enfant_nom; ?></strong> a bien été ajouté</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-success">
+                            <i class="icon-ok-sign"></i> 
+                            L'enfant <?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?> a bien été ajouté
+                        </div>
+                        <a href="/enfants/">Retourner à la liste des enfants</a>
+                    </div>
+                </div>
                 <?php else: ?>
-                <p>Une erreur s'est produite lors de l'enregistrement, veuilliez réessayer.</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger">
+                            <i class="icon-remove-sign"></i> 
+                            Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
+                        </div>
+                        <a href="/enfants/ajouter">Retourner au formulaire d'ajout</a>
+                    </div>
+                </div>
                 <?php endif; ?>
             <?php else: ?>
             <form id="form-add-children" method="post" parsley-validate>

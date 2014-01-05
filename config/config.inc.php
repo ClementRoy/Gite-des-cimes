@@ -42,7 +42,7 @@ Un module peut-être accessible via le menu principal ou à travers d'autres mod
 Certains sont même abstrait
  */
 
-$modules = JSON::get(dirname(__FILE__) . '/modules.json');
+$GLOBALS['modules'] = JSON::get(dirname(__FILE__) . '/modules.json');
 
 define('DEFAULT_MODULE', 'accueil');
 define('DEFAULT_FUNCTION', 'index');
@@ -54,7 +54,7 @@ Chaque widget est dans un fichier comme suit : /widgets/[widget_name].widget.php
 Chaque fichier est inclus directement dans le module dashboard
  */
 
-$widgets = JSON::get(dirname(__FILE__) . '/widgets.json');
+$GLOBALS['widgets'] = JSON::get(dirname(__FILE__) . '/widgets.json');
 
 
 define('ADMIN', 'mail@clementroy.fr');

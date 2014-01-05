@@ -5,8 +5,8 @@
 
 
     <div class="content">
-
-        <?php $enfant = enfant::get($id); ?>
+        
+        <?php $enfant = enfant::get($_GET['id']); ?>
 
         <div id="pad-wrapper">
             <div class="row header img">
