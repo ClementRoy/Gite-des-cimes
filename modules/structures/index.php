@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <?php $enfants = structure::getList(); ?>
+            <?php $structures = structure::getList(); ?>
 
 
             <div class="row">

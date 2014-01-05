@@ -15,7 +15,7 @@ class app
 	public function start(){
 		session_start();
 
-		setlocale(LC_ALL, 'fr_FR.UTF8');
+		
 
 		$GLOBALS['db'] = new DB();
 
