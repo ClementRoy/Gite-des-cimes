@@ -5,14 +5,12 @@
 
 require($_SERVER["DOCUMENT_ROOT"] . '/config/config.inc.php');
 
-//session_start();
-//
-new app();
-$db = new DB();
+$app = new app();
+$user = new user();
 
-/*
+$app->route($user);
 
-*/
+
 $params = array_filter(explode('/', $_SERVER['REQUEST_URI']));
 
 foreach ($params as $key => $param) {
@@ -29,15 +27,16 @@ foreach ($params as $key => $param) {
         }
     }
 }
-
 extract($_GET);
 extract($_POST);
+
+
 
 /*
  Initialisation et connexion à la base de données 
  */
 
-$user = new user();
+
 
 // Handle login system
 if( isset($login) && !empty($identifier) && !empty($password) ) {
@@ -45,7 +44,7 @@ if( isset($login) && !empty($identifier) && !empty($password) ) {
     extract($_POST);
     $remember = (isset($remember)) ? true : false;
     $referer = ($_SERVER['REQUEST_URI'] != '/') ? $_SERVER['HTTP_REFERER'] : '/';
-    $user = new user();
+    //$user = new user();
     $user->login($identifier, $password, $remember, $referer );
 }
 

@@ -18,8 +18,12 @@
                         <?php 
                         user::remove($id);
                         ?>
-                        <p>L'utilisateur a bien été supprimé</p>
+                        <div class="alert alert-danger">
+                            <i class="icon-remove-sign"></i>
+                            L'utilisateur a bien été supprimé
+                        </div>
                         <a href="/utilisateurs/">Retourner à la liste des utilisateurs</a>
+
                     </div>                
                 </div>
             <?php else: ?>

@@ -37,6 +37,11 @@ class tool
 		return 'http://api.randomuser.me/0.2/portraits/'.$genders[$gender].'/'.$id.'.jpg';
 	}
 
+
+    public static function cleanInput($var){
+        return stripcslashes(trim($var));
+    }
+
     /**
      * desc
      *
@@ -63,6 +68,10 @@ class tool
 		print_r($var);
 		echo '</pre>';
 	}
+
+    public static function currentTime() {
+        return date("Y-m-d H:i:s");
+    }
 
 }
 

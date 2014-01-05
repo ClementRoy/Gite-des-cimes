@@ -8,6 +8,7 @@
     <?php if(isset($validate)): ?>
         <?php  
         $datas = array(
+            'edited' => tool::currentTime(),
             'firstname' => $form_utilisateur_prenom,
             'lastname' => $form_utilisateur_nom,
             'email' => $form_utilisateur_mail,
@@ -15,7 +16,7 @@
             'id' => $id
             );
 
-        $sql = 'UPDATE users SET firstname = :firstname, lastname = :lastname, email = :email, rank = :rank WHERE id=:id';
+        $sql = 'UPDATE users SET edited = :edited, firstname = :firstname, lastname = :lastname, email = :email, rank = :rank WHERE id=:id';
         user::update($sql, $datas);
 
         ?>
@@ -28,8 +29,13 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <p>L'utilisateur <strong><?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?></strong> a bien été modifié.</p>
-                        <a href="/utilisateurs/">Retourner à la liste des utilisateurs</a>
+
+                    <div class="alert alert-info">
+                        <i class="icon-exclamation-sign"></i>
+                        L'utilisateur <strong><?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?></strong> a bien été modifié.
+                    </div>
+                    <a href="/utilisateurs/">Retourner à la liste des utilisateurs</a>
+
                     </div>
                 </div>
             </div>

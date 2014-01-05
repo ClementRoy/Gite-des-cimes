@@ -10,10 +10,15 @@ class app
 	{
 		# code...
 		session_start();
+		$GLOBALS['db'] = new DB();
+		extract($GLOBALS);
 
 	}
 
 
+	public function route(){
+		
+	}
 
 
     /**

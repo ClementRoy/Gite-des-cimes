@@ -1,11 +1,13 @@
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
-    <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
+    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
     <?php if(isset($validate)): ?>
         <?php  
         $datas = array(
+            'created' => tool::currentTime(),
+            'edited' => tool::currentTime(),
             'identifier' => $form_utilisateur_identifiant,
             'firstname' => $form_utilisateur_prenom,
             'lastname' => $form_utilisateur_nom,
@@ -14,10 +16,49 @@
             'rank' => $form_utilisateur_lvl
             );
 
-        $sql = 'INSERT INTO users (identifier, firstname, lastname, password, email, rank) value (:identifier,:firstname,:lastname,:password,:email,:rank)';
+        $sql = 'INSERT INTO users (created, edited, identifier, firstname, lastname, password, email, rank) value (:created, :edited,:identifier,:firstname,:lastname,:password,:email,:rank)';
 
-        user::add($sql, $datas);
+        $result = user::add($sql, $datas);
 
+        /*
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url );
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, true);
+
+        $data = array(
+            'action' => 'user_added',
+            'firstname' => $form_utilisateur_prenom,
+            'lastname' => $form_utilisateur_nom
+        );
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        $output = curl_exec($ch);
+        $info = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+        curl_close($ch);
+        header('Location: ' . $url);
+        */
+
+/*
+
+$datatopost = array (
+"year" => $currentyear,
+"month" => $currentmonth
+);
+
+
+$url = "timerecording.php";
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_HEADER, false);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $datatopost);
+curl_exec($ch);
+curl_close($ch);
+$url = curl_getinfo($ch , CURLINFO_EFFECTIVE_URL);
+header('Location: ' . $url);
+
+*/
         ?>
         <div class="content">
             <div id="pad-wrapper" class="action-page">
@@ -28,8 +69,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <p>L'utilisateur <?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?> a bien été ajouté</p>
+                        <div class="alert alert-success">
+                            <i class="icon-ok-sign"></i> 
+                            L'utilisateur <?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?> a bien été ajouté
+                        </div>
                         <a href="/utilisateurs/">Retourner à la liste des utilisateurs</a>
+
                     </div>
                 </div>
             </div>

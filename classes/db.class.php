@@ -111,6 +111,10 @@ class DB {
         return $req->rowCount();
     }
 
+    public function lastInsertId(){
+        return $this->db->lastInsertId();
+    }
+
 }
 
 

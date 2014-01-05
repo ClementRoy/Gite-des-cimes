@@ -17,9 +17,14 @@ $users = user::getList();
 
 
 ?>
+
+
+
     <!-- main container -->
     <div class="content">
         <div id="pad-wrapper">
+
+
             <div class="row header">
                 <div class="col-md-3">
                     <h3>Les utilisateurs</h3>
@@ -28,8 +33,9 @@ $users = user::getList();
                     <a href="/utilisateurs/ajouter" class="btn-flat primary pull-right"><span>+</span>
                         Ajouter un utilisateur</a>
                 </div>
-            </div>
+            </div>        
 
+            <!--
             <div class="alert alert-success">
                 <i class="icon-ok-sign"></i> Your order has been placed.
             </div>
@@ -41,6 +47,7 @@ $users = user::getList();
                 <i class="icon-remove-sign"></i>
                 Unexpected error. Please try again later.
             </div>
+            -->
 
             <!-- Users table -->
             <div class="row">
