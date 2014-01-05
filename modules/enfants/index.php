@@ -64,7 +64,7 @@
                             </td>
                             <td>
                                 <?php if($birthdate->getTimestamp() != '-62169987600'): ?>
-                                    <?=tool::getAgeFromDate($enfant->birthdate); ?>
+                                    <?=tool::getAgeFromDate($enfant->birthdate); ?> ans
                                 <?php else: ?>
                                 /
                                 <?php endif; ?>
