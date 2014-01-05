@@ -12,6 +12,7 @@ class app
 		session_start();
 		$GLOBALS['db'] = new DB();
 		extract($GLOBALS);
+		setlocale(LC_ALL, 'fr_FR.UTF8');
 
 	}
 

@@ -16,8 +16,10 @@ class tool
      * @param
      * @return
      */
-	public static function getAgeFromDate(){
-		return '28';
+	public static function getAgeFromDate($date){
+        $today = new DateTime();
+        $diff = $today->diff(new DateTime($date));
+		return $diff->y;
 	}
 
     /**

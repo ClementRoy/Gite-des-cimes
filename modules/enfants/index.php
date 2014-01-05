@@ -53,10 +53,21 @@
                             <td>
                                 <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?></td>
                             <td>
-                                <?=$enfant->birthdate; ?>
+                                <?php 
+                                    $birthdate = new DateTime($enfant->birthdate); 
+                                ?>
+                                <?php if($birthdate->getTimestamp() != '-62169987600'): ?>
+                                    <?=strftime('%d %B %Y', $birthdate->getTimestamp()); ?>
+                                <?php else: ?>
+                                /
+                                <?php endif; ?>
                             </td>
                             <td>
-                                <?=tool::getAgeFromDate($enfant->birthdate); ?>
+                                <?php if($birthdate->getTimestamp() != '-62169987600'): ?>
+                                    <?=tool::getAgeFromDate($enfant->birthdate); ?>
+                                <?php else: ?>
+                                /
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
