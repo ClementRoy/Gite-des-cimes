@@ -346,3 +346,19 @@ display: block;
 	filter: alpha(opacity=7);
 	font-weight: bold;
 }
+body {
+	transition: left .3s ease;
+}
+body.menu {
+	position: relative;
+	left: 165px;
+	#sidebar-nav {
+		left: -165px;
+		transition: left .2s ease;
+	}
+.content {
+margin-left: inherit;
+position: static;
+width: auto;
+}
+}
