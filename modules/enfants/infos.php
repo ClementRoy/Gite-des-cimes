@@ -175,7 +175,10 @@
                                         </li>   
                                     <?php endif ?>
                                     <li class="list-group-item">
-                                        <p><strong>N° de sécurité sociale :</strong><span class="pull-right"><?=($enfant->number_ss > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?></span></p>
+                                        <p><strong>N° de sécurité sociale :</strong><span class="pull-right"><?=($enfant->number_ss != 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?></span></p>
+                                        <?php if ($enfant->number_ss != 0): ?>
+                                            <p><?=$enfant->number_ss;?></p>
+                                        <?php endif ?>
                                     </li>
                                     <li class="list-group-item">
                                         <p><strong>Assurance (RC) :</strong><span class="pull-right"><?=($enfant->self_assurance > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?></span></p>
