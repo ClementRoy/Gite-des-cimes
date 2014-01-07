@@ -19,7 +19,21 @@
             </div>
 
             <?php $enfants = enfant::getList(); ?>
-            
+
+            <!--
+            <div class="alert alert-success">
+                <i class="icon-ok-sign"></i> Your order has been placed.
+            </div>
+            <div class="alert alert-info">
+                <i class="icon-exclamation-sign"></i>
+                Do you want to get these resources for as little as $0.70 each?
+            </div>
+            <div class="alert alert-danger">
+                <i class="icon-remove-sign"></i>
+                Unexpected error. Please try again later.
+            </div>
+            -->
+                      
 
             <div class="row">
                 <div class="col-md-12">
@@ -54,19 +68,20 @@
                                 <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?></td>
                             <td>
                                 <?php 
+                                    // http://net.tutsplus.com/tutorials/php/dates-and-time-the-oop-way/?search_index=27
                                     $birthdate = new DateTime($enfant->birthdate); 
                                 ?>
-                                <?php if($birthdate->getTimestamp() != '-62169987600'): ?>
+                                <?php if($birthdate->getTimestamp() != '-62169984561'): ?>
                                     <?=strftime('%d %B %Y', $birthdate->getTimestamp()); ?>
                                 <?php else: ?>
-                                /
+                                    <?php echo EMPTYVAL; ?>
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <?php if($birthdate->getTimestamp() != '-62169987600'): ?>
+                                <?php if($birthdate->getTimestamp() != '-62169984561'): ?>
                                     <?=tool::getAgeFromDate($enfant->birthdate); ?> ans
                                 <?php else: ?>
-                                /
+                                    <?php echo EMPTYVAL; ?>
                                 <?php endif; ?>
                             </td>
                         </tr>

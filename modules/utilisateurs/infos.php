@@ -4,7 +4,7 @@
     <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
     
-    <?php $utilisateur = user::get($id); ?>
+    <?php $utilisateur = user::get($_GET['id']); ?>
 
 
     <!-- main container -->

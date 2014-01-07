@@ -4,9 +4,15 @@
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
+<<<<<<< HEAD
 <div class="content">
 
     <?php $enfant = enfant::get($id); ?>
+=======
+    <div class="content">
+        
+        <?php $enfant = enfant::get($_GET['id']); ?>
+>>>>>>> d16b83965268318fd29e8dac6ed1aed6516685ca
 
     <div id="pad-wrapper" class="user-profile">
 

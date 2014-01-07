@@ -5,7 +5,7 @@
 
     <div class="content">
 
-        <?php $enfant = enfant::get($id); ?>
+        <?php $enfant = enfant::get($_GET['id']); ?>
 
         <?php //tool::output($enfant); ?>
         

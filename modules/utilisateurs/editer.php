@@ -3,7 +3,7 @@
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
     <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
-    <?php $utilisateur = user::get($id); ?>
+    <?php $utilisateur = user::get($_GET['id']); ?>
 
     <?php if(isset($validate)): ?>
         <?php  

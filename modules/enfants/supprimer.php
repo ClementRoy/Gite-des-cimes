@@ -16,15 +16,18 @@
             <div class="row">
                 <div class="col-md-12">
                     <?php 
-                        enfant::remove($id);
+                        enfant::remove($_GET['id']);
                     ?>
-                    <p>La fiche a bien été supprimé</p>
+                    <div class="alert alert-danger">
+                        <i class="icon-remove-sign"></i>
+                        La fiche a bien été supprimé
+                    </div>
                     <a href="/enfants/">Retourner à la liste des enfants</a>
                 </div>                
             </div>
             <?php else: ?>
 
-            <?php $enfant = enfant::get($id); ?>
+            <?php $enfant = enfant::get($_GET['id']); ?>
             <div class="row">
                 <div class="col-md-12 message">
                      <p>Vous êtes sur le point de supprimer la fiche de <strong><?=$enfant->firstname; ?> <?=$enfant->lastname; ?></strong>.<br />

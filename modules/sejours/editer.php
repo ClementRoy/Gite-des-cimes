@@ -3,7 +3,7 @@
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
     <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
-    <?php $sejour = sejour::get($id); ?>
+    <?php $sejour = sejour::get($_GET['id']); ?>
 
     <?php if(isset($validate)): ?>
         <?php  

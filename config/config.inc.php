@@ -17,6 +17,8 @@ ini_set('log_errros', 1);
 ini_set('error_log', dirname(__FILE__) . '/error.log');
 error_reporting(E_ALL);
 
+date_default_timezone_set('Europe/Paris');
+setlocale(LC_ALL, 'fr_FR.UTF8');
 
 /*
 Fonction d'autoload des classes PHP
@@ -42,10 +44,12 @@ Un module peut-être accessible via le menu principal ou à travers d'autres mod
 Certains sont même abstrait
  */
 
-$modules = JSON::get(dirname(__FILE__) . '/modules.json');
+$GLOBALS['modules'] = JSON::get(dirname(__FILE__) . '/modules.json');
 
 define('DEFAULT_MODULE', 'accueil');
 define('DEFAULT_FUNCTION', 'index');
+
+define('EMPTYVAL', 'NC');
 
 /*
 Tous les widgets sont dans /widgets
@@ -54,10 +58,12 @@ Chaque widget est dans un fichier comme suit : /widgets/[widget_name].widget.php
 Chaque fichier est inclus directement dans le module dashboard
  */
 
-$widgets = JSON::get(dirname(__FILE__) . '/widgets.json');
+$GLOBALS['widgets'] = JSON::get(dirname(__FILE__) . '/widgets.json');
 
 
 define('ADMIN', 'mail@clementroy.fr');
+
+
 
 
 
