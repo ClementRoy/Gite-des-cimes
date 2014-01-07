@@ -13,8 +13,8 @@
             </div>
 
             <?php if(isset($_POST['submit'])): ?>
-            <?php tool::output($_POST); ?>
-             <?php tool::output($_SESSION); ?>
+            <?php //tool::output($_POST); ?>
+            <?php //tool::output($_SESSION); ?>
             <?php 
                 extract($_POST);
                 // Create enfant entry
