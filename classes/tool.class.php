@@ -84,6 +84,13 @@ class tool
         return self::currentTime(mktime(0,0,0,$date['1'],$date['0'],$date['2']));
     }
 
+    public static function getDatefromDatetime($datetime){
+         $date = explode(' ', $datetime);
+         $date = explode('-', $date['0']);
+         return $date['2'].'/'.$date['1'].'/'.$date['0'];
+    }
+        
+
     public static function getCurrentUser(){
         return $_SESSION['Auth']['id'];
     }
