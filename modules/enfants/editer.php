@@ -59,6 +59,7 @@
                             </div>                            
                         </div>
 
+
                     <!-- <h2>Informations administratives</h2> -->
                         <div class="field-box row">
                             <label class="col-md-2">L'enfant est inscrit par</label>
