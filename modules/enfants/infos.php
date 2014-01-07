@@ -125,8 +125,6 @@
                                             <p><?=$enfant->contact;?></p>
                                         </li>
                                     <?php endif; ?>
-
-                                    
                                 </ul>
                             </div>
 

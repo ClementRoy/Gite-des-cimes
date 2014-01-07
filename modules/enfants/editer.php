@@ -6,8 +6,8 @@
     <div class="content">
 
         <?php $enfant = enfant::get($_GET['id']); ?>
-
-        <?php //tool::output($enfant); ?>
+    
+        <?php tool::output($enfant); ?>
         
         <div id="pad-wrapper" class="form-page">
             <div class="row header">
@@ -22,19 +22,19 @@
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-prenom">Prénom</label>
                             <div class="col-md-4 col-sm-5">
-                                <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
+                                <input value="<?=$enfant->firstname; ?>" id="form-enfant-prenom" name="form_enfant_prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
                             </div>                            
                         </div>
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-nom">Nom</label>
                             <div class="col-md-4 col-sm-5">
-                                <input id="form-enfant-nom" name="form_enfant_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'enfant." parsley-required="true">
+                                <input value="<?=$enfant->lastname; ?>" id="form-enfant-nom" name="form_enfant_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'enfant." parsley-required="true">
                             </div>                            
                         </div>
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-naissance">Date de naissance</label>
                             <div class="col-md-4 col-sm-5">
-                                <input parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" id="form-enfant-naissance"  name="form_enfant_naissance" type="text" class="form-control input-datepicker" placeholder="JJ/MM/AAAA" data-toggle="tooltip" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa).">
+                                <input value="<?=$enfant->birthdate; ?>" parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" id="form-enfant-naissance"  name="form_enfant_naissance" type="text" class="form-control input-datepicker" placeholder="JJ/MM/AAAA" data-toggle="tooltip" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa).">
                             </div>                            
                         </div>
                         <div class="field-box row">
@@ -42,16 +42,16 @@
                             <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez le sexe de l'enfant.">
                                 <label class="radio" for="form-enfant-sexe-m">
                                     <div class="radio" id="uniform-form-enfant-sex-m">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_sexe" id="form-enfant-sexe-m" value="masculin" checked="">
+                                        <span<?php if($enfant->sex != 'féminin'): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_sexe" id="form-enfant-sexe-m" value="masculin"<?php if($enfant->sex == 'féminin'): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Masculin
                                 </label>
                                 <label class="radio" for="form-enfant-sexe-f">
                                     <div class="radio" id="uniform-form-enfant-sex-f">
-                                        <span>
-                                            <input type="radio" name="form_enfant_sexe" id="form-enfant-sexe-f" value="féminin">
+                                        <span<?php if($enfant->sex == 'féminin'): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_sexe" id="form-enfant-sexe-f" value="féminin"<?php if($enfant->sex == 'féminin'): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Féminin
