@@ -6,14 +6,16 @@
     <?php if(isset($validate)): ?>
         <?php  
         $datas = array(
-            'created' => tool::currentTime(),
-            'edited' => tool::currentTime(),
-            'identifier' => $form_utilisateur_identifiant,
-            'firstname' => $form_utilisateur_prenom,
-            'lastname' => $form_utilisateur_nom,
-            'password' => md5($form_utilisateur_password),
-            'email' => $form_utilisateur_mail,
-            'rank' => $form_utilisateur_lvl
+            ':created' => tool::currentTime(),
+            ':edited' => tool::currentTime(),
+            ':author' => user::getCurrentUser(), 
+            ':editor' => user::getCurrentUser(), 
+            ':identifier' => $form_utilisateur_identifiant,
+            ':firstname' => $form_utilisateur_prenom,
+            ':lastname' => $form_utilisateur_nom,
+            ':password' => md5($form_utilisateur_password),
+            ':email' => $form_utilisateur_mail,
+            ':rank' => $form_utilisateur_lvl
             );
 
         $sql = 'INSERT INTO users (created, edited, identifier, firstname, lastname, password, email, rank) value (:created, :edited,:identifier,:firstname,:lastname,:password,:email,:rank)';

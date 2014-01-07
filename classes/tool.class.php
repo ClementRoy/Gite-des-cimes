@@ -77,9 +77,16 @@ class tool
         else {
             return date("Y-m-d H:i:s");
         }
-       
     }
 
+    public static function generateDatetime($date){
+        $date = explode('/', $date);
+        return self::currentTime(mktime(0,0,0,$date['1'],$date['0'],$date['2']));
+    }
+
+    public static function getCurrentUser(){
+        return $_SESSION['Auth']['id'];
+    }
 }
 
 ?>

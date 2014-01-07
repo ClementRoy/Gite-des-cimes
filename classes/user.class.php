@@ -181,7 +181,9 @@ class user
 		session_destroy();		
 	}
 
-
+    public static function getCurrentUser(){
+        return $_SESSION['Auth']['id'];
+    }
 
 
 
