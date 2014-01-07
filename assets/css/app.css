@@ -233,6 +233,24 @@ input.parsley-error:focus {
   font-size: 13px;
   margin-right: 7px;
 }
+.bio .icon-remove-sign {
+  font-size: 18px;
+  color: #b63224;
+}
+.bio .icon-ok-sign {
+  font-size: 18px;
+  color: #83b54d;
+}
+.bio .icon-phone {
+  color: #428BCA;
+  margin-right: 4px;
+}
+.bio .list-group-item {
+  padding: 13px 15px;
+}
+.bio .list-group-item p {
+  margin: 0;
+}
 #pad-wrapper .bio h4 {
   margin-bottom: 18px;
   margin-top: 40px;
@@ -344,4 +362,13 @@ body.menu .content {
   .ui-select select {
     width: 122%;
   }
+}
+.panel.noheader li:first-child {
+  border-top: none;
+}
+.panel iframe {
+  margin-bottom: -3px;
+}
+.panel .extendli {
+  padding: 0;
 }
