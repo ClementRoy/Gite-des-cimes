@@ -3,150 +3,20 @@
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
     <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
-<<<<<<< HEAD
     <div class="content">
 
         <?php $enfant = enfant::get($_GET['id']); ?>
     
         <?php tool::output($enfant); ?>
         
-=======
-
-     <?php $enfant = enfant::get($_GET['id']); ?>
-       
-    <div class="content">
->>>>>>> bad762e6599462a1bf4d89559019542cb3b6ca7c
         <div id="pad-wrapper" class="form-page">
             <div class="row header">
                 <div class="col-md-12">
-                    <h3>Editer <?=$enfant->firstname.' '.$enfant->lastname; ?></h3>
+                    <h3>Modifier <?=$enfant->firstname; ?> <?=$enfant->lastname; ?></h3>
                 </div>
             </div>
 
-         <?php tool::output($enfant); ?>
-
-            <?php if(isset($_POST['submit'])): ?>
-            <?php //tool::output($_POST); ?>
-            <?php //tool::output($_SESSION); ?>
-            <?php 
-                extract($_POST);
-                // Create enfant entry
-                $birthdate = tool::generateDatetime($form_enfant_naissance);
-                $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
-
-                $datas = array(
-                    ':edited' => tool::currentTime(), 
-                    ':editor' => user::getCurrentUser(),                  
-                    ':firstname' => $form_enfant_prenom,
-                    ':lastname' => $form_enfant_nom,
-                    ':birthdate' => $birthdate,
-                    ':sex' => $form_enfant_sexe,
-                    ':registration_by' => $form_enfant_inscription,
-                    ':organization' => $form_enfant_structure,
-                    ':contact' => $form_enfant_contact,
-                    ':guardian' => $form_enfant_responsable,
-                    ':father_name' => $form_enfant_pere_nom,
-                    ':father_phone' => $form_enfant_pere_telephone,
-                    ':mother_name' => $form_enfant_mere_nom,
-                    ':mother_phone' => $form_enfant_mere_telephone,
-                    ':guardian_name' => $form_enfant_tuteur_nom,
-                    ':guardian_phone' => $form_enfant_tuteur_telephone,
-                    ':emergency_name' => $form_enfant_urgence_nom,
-                    ':emergency_phone' => $form_enfant_urgence_telephone,
-                    ':guardian_address_number' => $form_enfant_responsable_adresse_numero,
-                    ':guardian_address_street' => $form_enfant_responsable_adresse_voirie,
-                    ':guardian_address_postal_code' => $form_enfant_responsable_adresse_code_postal,
-                    ':guardian_address_city' => $form_enfant_responsable_adresse_code_ville,
-                    ':domiciliation' => $form_enfant_domiciliation,
-                    ':host_family_name' => $form_enfant_famille_nom,
-                    ':host_family_phone' => $form_enfant_famille_telephone,
-                    ':host_family_address_number' => $form_enfant_famille_adresse_numero,
-                    ':host_family_address_street' => $form_enfant_famille_adresse_voirie,
-                    ':host_family_address_postal_code' => $form_enfant_famille_adresse_code_postal,
-                    ':host_family_address_city' => $form_enfant_famille_adresse_code_ville,
-                    ':image_rights' => $form_enfant_droit_image,
-                    ':medicals_treatments' => $form_enfant_traitement_medical,
-                    ':allergies' => $form_enfant_contre_indication,
-                    ':number_ss' => $form_enfant_numero_securite,
-                    ':self_assurance' => $form_enfant_assurance,
-                    ':self_assurance_expiration_date' => $assurance_validite,
-                    ':cpam_attestation' => $form_enfant_attestation_cpam,
-                    ':vaccination' => $form_enfant_carnet_vaccination,
-                    ':health_record' => $form_enfant_fiche_sanitaire,
-                    ':stay_record' => $form_enfant_fiche_sejour,
-                    ':id' => $_GET['id']
-                    );
-
-                $sql = 'UPDATE enfant SET  
-                                edited = :edited
-                                editor = :editor
-                                firstname = :firstname
-                                lastname = :lastname
-                                birthdate = :birthdate
-                                sex = :sex
-                                registration_by = :registration_by
-                                organization = :organization
-                                contact = :contact
-                                guardian = :guardian
-                                father_name = :father_name
-                                father_phone = :father_phone
-                                mother_name = :mother_name
-                                mother_phone = :mother_phone
-                                guardian_name = :guardian_name
-                                guardian_phone = :guardian_phone
-                                emergency_name = :emergency_name
-                                emergency_phone = :emergency_phone
-                                guardian_address_number = :guardian_address_number
-                                guardian_address_street = :guardian_address_street
-                                guardian_address_postal_code = :guardian_address_postal_code
-                                guardian_address_city = :guardian_address_city
-                                domiciliation = :domiciliation
-                                host_family_name = :host_family_name
-                                host_family_phone = :host_family_phone
-                                host_family_address_number = :host_family_address_number
-                                host_family_address_street = :host_family_address_street
-                                host_family_address_postal_code = :host_family_address_postal_code
-                                host_family_address_city = :host_family_address_city
-                                image_rights = :image_rights
-                                medicals_treatments = :medicals_treatments
-                                allergies = :allergies
-                                number_ss = :number_ss
-                                self_assurance = :self_assurance
-                                self_assurance_expiration_date = :self_assurance_expiration_date
-                                cpam_attestation = :cpam_attestation
-                                vaccination = :vaccination
-                                health_record = :health_record
-                                stay_record = :stay_record
-                                WHERE id = :id
-                                ';
-
-                $result = enfant::update($sql, $datas);
-
-            ?>
-                <?php //tool::output($result); ?>
-                <?php if($result): ?>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-success">
-                            <i class="icon-ok-sign"></i> 
-                            L'enfant <?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?> a bien été ajouté
-                        </div>
-                        <a href="/enfants/">Retourner à la liste des enfants</a>
-                    </div>
-                </div>
-                <?php else: ?>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-danger">
-                            <i class="icon-remove-sign"></i> 
-                            Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
-                        </div>
-                        <a href="/enfants/ajouter">Retourner au formulaire d'ajout</a>
-                    </div>
-                </div>
-                <?php endif; ?>
-            <?php else: ?>
-            <form id="form-add-children" method="post" parsley-validate>
+           <form id="form-add-children" method="post" parsley-validate>
                    <!--  <h2>Informations sur l'enfant</h2> -->
                      <div class="row form-wrapper">
                         <div class="field-box row">
@@ -164,11 +34,7 @@
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-naissance">Date de naissance</label>
                             <div class="col-md-4 col-sm-5">
-<<<<<<< HEAD
                                 <input value="<?=$enfant->birthdate; ?>" parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" id="form-enfant-naissance"  name="form_enfant_naissance" type="text" class="form-control input-datepicker" placeholder="JJ/MM/AAAA" data-toggle="tooltip" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa).">
-=======
-                                <input parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" id="form-enfant-naissance"  name="form_enfant_naissance" type="text" class="form-control input-datepicker" placeholder="JJ/MM/AAAA" data-toggle="tooltip" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa)." value="<?=tool::getDatefromDatetime($enfant->birthdate) ?>">
->>>>>>> bad762e6599462a1bf4d89559019542cb3b6ca7c
                             </div>                            
                         </div>
                         <div class="field-box row">
@@ -421,7 +287,7 @@
                                 <label class="radio-inline col-md-7" for="form-enfant-droit-image-oui">
                                     <div class="radio" id="uniform-form-enfant-droit-image-oui">
                                         <span class="checked">
-                                            <input type="radio" name="form_enfant_droit_image" id="form-enfant-droit-image-oui" value="1">
+                                            <input type="radio" name="form_enfant_droit_image" id="form-enfant-droit-image-oui" value="oui">
                                         </span>
                                     </div>
                                     Oui
@@ -429,7 +295,7 @@
                                 <label class="radio-inline col-md-4 col-sm-5" for="form-enfant-droit-image-non">
                                     <div class="radio" id="uniform-form-enfant-droit-image-non">
                                         <span class="checked">
-                                            <input type="radio" name="form_enfant_droit_image" id="form-enfant-droit-image-non" value="0" checked="">
+                                            <input type="radio" name="form_enfant_droit_image" id="form-enfant-droit-image-non" value="non" checked="">
                                         </span>
                                     </div>
                                     Non
@@ -445,7 +311,7 @@
                                 <label class="radio-inline col-md-7" for="form-enfant-traitement-medical-oui">
                                     <div class="radio" id="uniform-form-enfant-traitement-medical-oui">
                                         <span class="checked">
-                                            <input type="radio" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-oui" value="1">
+                                            <input type="radio" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-oui" value="oui">
                                         </span>
                                     </div>
                                     Oui
@@ -453,7 +319,7 @@
                                 <label class="radio-inline col-md-4 col-sm-5" for="form-enfant-traitement-medical-non">
                                     <div class="radio" id="uniform-form-enfant-traitement-medical-non">
                                         <span class="checked">
-                                            <input type="radio" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-non" value="0" checked="">
+                                            <input type="radio" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-non" value="non" checked="">
                                         </span>
                                     </div>
                                     Non
@@ -480,7 +346,7 @@
                                 <label class="radio-inline col-md-7" for="form-enfant-assurance-oui">
                                     <div class="radio" id="uniform-form-enfant-assurance-oui">
                                         <span class="checked">
-                                            <input type="radio" name="form_enfant_assurance" id="form-enfant-assurance-oui" value="1">
+                                            <input type="radio" name="form_enfant_assurance" id="form-enfant-assurance-oui" value="oui">
                                         </span>
                                     </div>
                                     Oui
@@ -488,7 +354,7 @@
                                 <label class="radio-inline col-md-4 col-sm-5">
                                     <div class="radio" id="uniform-form-enfant-assurance-non">
                                         <span class="checked">
-                                            <input type="radio" name="form_enfant_assurance" id="form-enfant-assurance-non" value="0" checked="">
+                                            <input type="radio" name="form_enfant_assurance" id="form-enfant-assurance-non" value="non" checked="">
                                         </span>
                                     </div>
                                     Non
@@ -509,7 +375,7 @@
                                 <label class="radio-inline col-md-7" for="form-enfant-attestation-cpam-oui">
                                     <div class="radio" id="uniform-form-enfant-attestation-cpam-oui">
                                         <span class="checked">
-                                            <input type="radio" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-oui" value="1">
+                                            <input type="radio" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-oui" value="oui">
                                         </span>
                                     </div>
                                     Oui
@@ -517,7 +383,7 @@
                                 <label class="radio-inline col-md-4 col-sm-5">
                                     <div class="radio" id="uniform-form-enfant-attestation-cpam-non">
                                         <span class="checked">
-                                            <input type="radio" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-non" value="0" checked="">
+                                            <input type="radio" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-non" value="non" checked="">
                                         </span>
                                     </div>
                                     Non
@@ -531,7 +397,7 @@
                                 <label class="radio-inline col-md-7" for="form-enfant-carnet-vaccination-oui">
                                     <div class="radio" id="uniform-form-enfant-carnet-vaccination-oui">
                                         <span class="checked">
-                                            <input type="radio" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-oui" value="1">
+                                            <input type="radio" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-oui" value="oui">
                                         </span>
                                     </div>
                                     Oui
@@ -539,7 +405,7 @@
                                 <label class="radio-inline col-md-4 col-sm-5" for="form-enfant-carnet-vaccination-non">
                                     <div class="radio" id="uniform-form-enfant-carnet-vaccination-non">
                                         <span class="checked">
-                                            <input type="radio" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-non" value="0" checked="">
+                                            <input type="radio" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-non" value="non" checked="">
                                         </span>
                                     </div>
                                     Non
@@ -552,7 +418,7 @@
                                 <label class="radio-inline col-md-7" for="form-enfant-fiche-sanitaire-oui">
                                     <div class="radio" id="uniform-form-enfant-fiche-sanitaire-oui">
                                         <span class="checked">
-                                            <input type="radio" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-oui" value="1">
+                                            <input type="radio" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-oui" value="oui">
                                         </span>
                                     </div>
                                     Oui
@@ -560,7 +426,7 @@
                                 <label class="radio-inline col-md-4 col-sm-5" for="form-enfant-fiche-sanitaire-non">
                                     <div class="radio" id="uniform-form-enfant-fiche-sanitaire-non">
                                         <span class="checked">
-                                            <input type="radio" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-non" value="0" checked="">
+                                            <input type="radio" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-non" value="non" checked="">
                                         </span>
                                     </div>
                                     Non
@@ -573,7 +439,7 @@
                                 <label class="radio-inline col-md-7" for="form-enfant-fiche-sejour-oui">
                                     <div class="radio" id="uniform-form-enfant-fiche-sejour-oui">
                                         <span class="checked">
-                                            <input type="radio" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-oui" value="1">
+                                            <input type="radio" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-oui" value="oui">
                                         </span>
                                     </div>
                                     Oui
@@ -581,7 +447,7 @@
                                 <label class="radio-inline col-md-4 col-sm-5" for="form-enfant-fiche-sejour-non">
                                     <div class="radio" id="uniform-form-enfant-fiche-sejour-non">
                                         <span class="checked">
-                                            <input type="radio" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-non" value="0" checked="">
+                                            <input type="radio" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-non" value="non" checked="">
                                         </span>
                                     </div>
                                     Non
@@ -591,7 +457,6 @@
                         <input type="submit" class="btn-flat primary" name="submit" value="Valider">
                     </div>
             </form>
-            <?php endif; ?>
         </div>
     </div>
 
