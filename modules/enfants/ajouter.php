@@ -4,7 +4,7 @@
     <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
-    <div class="content">
+    <div class="content" data-page="add-children">
         <div id="pad-wrapper" class="form-page">
             <div class="row header">
                 <div class="col-md-12">
@@ -714,4 +714,6 @@ form-enfant-fiche-sejour
     form-enfant-fiche-sejour-non
 
 -->
+
+
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

@@ -1,35 +1,5 @@
 $(function () {
 
-	// SORT FOR TABLE
-
-    $('.tablesorter').tablesorter();
-    //$('#table-enfant').extendlink();
-    //$('#table-enfant').tablefilter();
-
-    $('.extendlink tbody tr').on('click', function() {
-		var href = $(this).find('td:first-child a').attr('href');
-		window.location=href;
-    });
-
-    $('input[data-search]').on('keyup', function () {
-		var pattern = $(this).val().toLowerCase();
-		var dataSearch = $(this).data('search');
-		if (pattern === '') {
-			$('table[data-search="' + dataSearch + '"] tbody tr').show();
-		} else {
-			$('table[data-search="' + dataSearch + '"] tbody tr').each(function () {
-				var nb = $(this).text().toLowerCase().search(pattern);
-				if (nb <= 0) {
-					$(this).hide();
-				} else{
-					$(this).show();
-				}
-			});
-		}
-    });
-
-
-
 	$('input:checkbox, input:radio').uniform();
 	$('.select2').select2();
 
@@ -37,8 +7,7 @@ $(function () {
 		$(this).datepicker('hide');
 	});
 
-	// TOOLTIPS
-
+	// SETTINGS TOOLTIPS
 	$('input[type="text"]').each(function (index, el) {
 		$(el).tooltip({
 			placement: $(this).data("placement") || 'right',
@@ -70,46 +39,145 @@ $(function () {
 		});
 	});
 
-
-	// SHOW/HIDE FORMS
-
+	// SETTINGS CONDITIONNALS FORMS
 	$('[data-group]').hide();
-	$('[data-group="structure"').show();
-	$('input[name="form_enfant_inscription"]').on('change', function() {
-		$('[data-group]').hide();
-		$('[data-group="'+ $(this).val() +'"]').fadeIn(300);
-	});
-
+	$('[data-group="'+ $('input[name="form_enfant_inscription"]:checked').val() +'"]').show();
 
 	$('[data-responsable]').hide();
-	$('[data-responsable="parents"]').show();
-	$('[data-responsable="parents"] [data-responsable]').show();
+	if ($('input[name="form_enfant_responsable"]:checked').val() != 'tuteur') {
+		$('[data-responsable="parents"]').show();
+		if ($('input[name="form_enfant_responsable"]:checked').val() == 'mere') {
+			$('[data-responsable="mere"]').show();
+		} else if ($('input[name="form_enfant_responsable"]:checked').val() == 'pere') {
+			$('[data-responsable="pere"]').show();
+		} else {
+			$('[data-responsable="mere"]').show();
+			$('[data-responsable="pere"]').show();
+		}
+	} else {
+		$('[data-responsable="tuteur"]').show();
+	}
+
+	if ($('input[name="form_enfant_domiciliation"]:checked').val() != 'famille') {
+		$('[data-domiciliation="famille"]').hide();
+	}
+
+	if ($('input[name="form_enfant_assurance"]:checked').val() != 1) {
+		$('[data-assurance="oui"]').hide();
+	}
+
+	// HANDLERS CONDITIONNALS FORMS
+
+	$('input[name="form_enfant_inscription"]').on('change', function() {
+		$('[data-group]')
+		.hide()
+		.find('input[type="text"]').each(function () {
+			if ($(this).val() != '') {
+				$(this).attr('data-original-value', $(this).val()).val('');
+			}
+		});
+		$('[data-group="'+ $(this).val() +'"]')
+			.fadeIn(300)
+			.find('input[type="text"]').each(function () {
+				$(this).val($(this).data('original-value'));
+			});
+	});
+
 	$('input[name="form_enfant_responsable"]').on('change', function() {
-		$('[data-responsable]').hide();
+		$('[data-responsable]')
+			.hide()
+			.find('input[type="text"]').each(function () {
+				if ($(this).val() != '') {
+					$(this).attr('data-original-value', $(this).val()).val('');
+				}
+			});
 		$('[data-responsable="parents"]').show();
 		if ($(this).val() === 'parents') {
-			$('[data-responsable="parents"] [data-responsable]').fadeIn(300);
+			$('[data-responsable="parents"] [data-responsable]')
+				.fadeIn(300)
+				.find('input[type="text"]').each(function () {
+					$(this).val($(this).data('original-value'));
+				});
 		} else {
-			$('[data-responsable="'+ $(this).val() +'"]').fadeIn(300);
+			$('[data-responsable="'+ $(this).val() +'"]')
+				.fadeIn(300)
+				.find('input[type="text"]').each(function () {
+					$(this).val($(this).data('original-value'));
+				});
 		}
 	});
 
-	$('[data-domiciliation="famille"]').hide();
 	$('input[name="form_enfant_domiciliation"]').on('change', function() {
-		if ($(this).val() === 'famille') {
-			$('[data-domiciliation="famille"]').fadeIn(300);
+		if ($(this).val() != 'famille') {
+			$('[data-domiciliation="famille"]')
+				.hide()
+				.find('input[type="text"]').each(function () {
+					if ($(this).val() != '') {
+						$(this).attr('data-original-value', $(this).val()).val('');
+					}
+				});
 		} else {
-			$('[data-domiciliation="famille"]').hide();
+			$('[data-domiciliation="famille"]')
+				.fadeIn(300)
+				.find('input[type="text"]').each(function () {
+					$(this).val($(this).data('original-value'));
+				});
 		}
 	});
-	$('[data-assurance="oui"]').hide();
+
 	$('input[name="form_enfant_assurance"]').on('change', function() {
-		if ($(this).val() === 'oui') {
-			$('[data-assurance="oui"]').fadeIn(300);
+		if ($(this).val() != 1) {
+			$('[data-assurance="oui"]')
+			.hide()
+			.find('input[type="text"]').each(function () {
+				if ($(this).val() != '') {
+					$(this).attr('data-original-value', $(this).val()).val('');
+				}
+			});
 		} else {
-			$('[data-assurance="oui"]').hide();
+			$('[data-assurance="oui"]')
+			.fadeIn(300)
+			.find('input[type="text"]').each(function () {
+				$(this).val($(this).data('original-value'));
+			});
 		}
 	});
+	$('#form-add-children').find('input[type="text"]').on('keypress', function () {
+		$(this).attr('data-original-value', $(this).val());
+	});
+	$('#form-edit-children').find('input[type="text"]').on('keypress', function () {
+		$(this).attr('data-original-value', $(this).val());
+	});
+
+
+	// SORT FOR TABLE
+
+    $('.tablesorter').tablesorter();
+    //$('#table-enfant').extendlink();
+    //$('#table-enfant').tablefilter();
+
+    $('.extendlink tbody tr').on('click', function() {
+		var href = $(this).find('td:first-child a').attr('href');
+		window.location=href;
+    });
+
+    $('input[data-search]').on('keyup', function () {
+		var pattern = $(this).val().toLowerCase();
+		var dataSearch = $(this).data('search');
+		if (pattern === '') {
+			$('table[data-search="' + dataSearch + '"] tbody tr').show();
+		} else {
+			$('table[data-search="' + dataSearch + '"] tbody tr').each(function () {
+				var nb = $(this).text().toLowerCase().search(pattern);
+				if (nb <= 0) {
+					$(this).hide();
+				} else{
+					$(this).show();
+				}
+			});
+		}
+    });
+
 
   // sidebar menu dropdown toggle
   $("#dashboard-menu .dropdown-toggle").click(function (e) {
@@ -140,9 +208,5 @@ $(function () {
   });
   $(window).resize(function() { 
     $(this).width() > 769 && $("body.menu").removeClass("menu")
-  })
-
-
-  
-
+  });
 });

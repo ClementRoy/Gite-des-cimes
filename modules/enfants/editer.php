@@ -120,7 +120,7 @@
                     <div class="col-md-12">
                         <div class="alert alert-success">
                             <i class="icon-ok-sign"></i> 
-                            L'enfant <?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?> a bien été ajouté
+                            L'enfant <?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?> a bien été modifié
                         </div>
                         <a href="/enfants/">Retourner à la liste des enfants</a>
                     </div>
@@ -143,13 +143,13 @@
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-prenom">Prénom</label>
                             <div class="col-md-4 col-sm-5">
-                                <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
+                                <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true" value="<?=$enfant->firstname; ?>">
                             </div>                            
                         </div>
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-nom">Nom</label>
                             <div class="col-md-4 col-sm-5">
-                                <input id="form-enfant-nom" name="form_enfant_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'enfant." parsley-required="true">
+                                <input id="form-enfant-nom" name="form_enfant_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'enfant." parsley-required="true" value="<?=$enfant->lastname; ?>">
                             </div>                            
                         </div>
                         <div class="field-box row">
@@ -163,16 +163,16 @@
                             <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez le sexe de l'enfant.">
                                 <label class="radio" for="form-enfant-sexe-m">
                                     <div class="radio" id="uniform-form-enfant-sex-m">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_sexe" id="form-enfant-sexe-m" value="masculin" checked="">
+                                        <span<?php if ($enfant->sex != 'féminin'): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_sexe" id="form-enfant-sexe-m" value="masculin"<?php if ($enfant->sex != 'féminin'): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Masculin
                                 </label>
                                 <label class="radio" for="form-enfant-sexe-f">
                                     <div class="radio" id="uniform-form-enfant-sex-f">
-                                        <span>
-                                            <input type="radio" name="form_enfant_sexe" id="form-enfant-sexe-f" value="féminin">
+                                        <span<?php if ($enfant->sex == 'féminin'): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_sexe" id="form-enfant-sexe-f" value="féminin"<?php if ($enfant->sex == 'féminin'): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Féminin
@@ -180,22 +180,22 @@
                             </div>                            
                         </div>
 
-                    <!-- <h2>Informations administratives</h2> -->
+                        <!-- <h2>Informations administratives</h2> -->
                         <div class="field-box row">
                             <label class="col-md-2">L'enfant est inscrit par</label>
                             <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez qui a inscrit cet enfant au séjour/week-end.">
                                 <label class="radio" for="form-enfant-inscription-structure">
                                     <div class="radio" id="uniform-form-enfant-inscription-structure">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_inscription" id="form-enfant-inscription-structure" value="structure" checked="">
+                                        <span <?php if ($enfant->registration_by != 'particulier'): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_inscription" id="form-enfant-inscription-structure" value="structure"<?php if ($enfant->registration_by != 'particulier'): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Une structure
                                 </label>
                                 <label class="radio" for="form-enfant-inscription-particulier">
                                     <div class="radio" id="uniform-form-enfant-inscription-particulier">
-                                        <span>
-                                            <input type="radio" name="form_enfant_inscription" id="form-enfant-inscription-particulier" value="particulier">
+                                        <span<?php if ($enfant->registration_by == 'particulier'): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_inscription" id="form-enfant-inscription-particulier" value="particulier"<?php if ($enfant->registration_by == 'particulier'): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Un particulier
@@ -237,32 +237,32 @@
                                 <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez qui est le responsable légal de l'enfant.">
                                     <label class="radio" for="form-enfant-responsable-parents">
                                         <div class="radio" id="uniform-form-enfant-responsable-parents">
-                                            <span class="checked">
-                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-parents" value="parents" checked="">
+                                            <span <?php if ($enfant->guardian != 'pere' || $enfant->guardian != 'mere' || $enfant->guardian != 'tuteur'): ?> class="checked"<?php endif ?>>
+                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-parents" value="parents" <?php if ($enfant->guardian != 'pere' || $enfant->guardian != 'mere' || $enfant->guardian != 'tuteur'): ?> checked="checked"<?php endif ?>>
                                             </span>
                                         </div>
                                         Parents
                                     </label>
                                     <label class="radio">
                                         <div class="radio" id="uniform-form-enfant-responsable-pere">
-                                            <span class="checked">
-                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-pere" value="pere">
+                                            <span <?php if ($enfant->guardian == 'pere'): ?> class="checked"<?php endif ?>>
+                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-pere" value="pere"<?php if ($enfant->guardian == 'pere'): ?> checked="checked"<?php endif ?>>
                                             </span>
                                         </div>
                                         Père
                                     </label>
                                     <label class="radio">
                                         <div class="radio" id="uniform-form-enfant-responsable-mere">
-                                            <span class="checked">
-                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-mere" value="mere">
+                                            <span<?php if ($enfant->guardian == 'mere'): ?> class="checked"<?php endif ?>>
+                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-mere" value="mere"<?php if ($enfant->guardian == 'mere'): ?> checked="checked"<?php endif ?>>
                                             </span>
                                         </div>
                                         Mère
                                     </label>
                                     <label class="radio">
                                         <div class="radio" id="uniform-form-enfant-responsable-tuteur">
-                                            <span class="checked">
-                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-tuteur" value="tuteur">
+                                            <span<?php if ($enfant->guardian == 'tuteur'): ?> class="checked"<?php endif ?>>
+                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-tuteur" value="tuteur"<?php if ($enfant->guardian == 'tuteur'): ?> checked="checked"<?php endif ?>>
                                             </span>
                                         </div>
                                         Tuteur
@@ -275,13 +275,13 @@
                                     <div class="field-box row">
                                         <label class="col-md-2" for="form-enfant-pere-nom">Nom du père</label>
                                         <div class="col-md-4 col-sm-5">
-                                            <input id="form-enfant-pere-nom" name="form_enfant_pere_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom du père.">
+                                            <input id="form-enfant-pere-nom" name="form_enfant_pere_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom du père." value="<?=$enfant->father_name; ?>">
                                         </div>                            
                                     </div>
                                     <div class="field-box row">
                                         <label class="col-md-2" for="form-enfant-pere-telephone">Téléphone du père</label>
                                         <div class="col-md-4 col-sm-5">
-                                            <input id="form-enfant-pere-telephone" name="form_enfant_pere_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone du père.">
+                                            <input id="form-enfant-pere-telephone" name="form_enfant_pere_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone du père." value="<?=$enfant->father_phone; ?>">
                                         </div>                            
                                     </div>
                                 </div>
@@ -290,13 +290,13 @@
                                     <div class="field-box row">
                                         <label class="col-md-2" for="form-enfant-mere-nom">Nom de la mère</label>
                                         <div class="col-md-4 col-sm-5">
-                                            <input id="form-enfant-mere-nom" name="form_enfant_mere_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom de la mère.">
+                                            <input id="form-enfant-mere-nom" name="form_enfant_mere_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom de la mère." value="<?=$enfant->mother_name; ?>">
                                         </div>                            
                                     </div>
                                     <div class="field-box row">
                                         <label class="col-md-2" for="form-enfant-mere-telephone">Téléphone de la mère</label>
                                         <div class="col-md-4 col-sm-5">
-                                            <input id="form-enfant-mere-telephone" name="form_enfant_mere_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de la mère.">
+                                            <input id="form-enfant-mere-telephone" name="form_enfant_mere_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de la mère." value="<?=$enfant->mother_phone; ?>">
                                         </div>                            
                                     </div>
                                 </div>
@@ -306,13 +306,13 @@
                                 <div class="field-box row">
                                     <label class="col-md-2" for="form-enfant-tuteur-nom">Nom du tuteur</label>
                                     <div class="col-md-4 col-sm-5">
-                                        <input id="form-enfant-tuteur-nom" name="form_enfant_tuteur_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom du tuteur.">
+                                        <input id="form-enfant-tuteur-nom" name="form_enfant_tuteur_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom du tuteur." value="<?=$enfant->guardian_name; ?>">
                                     </div>                            
                                 </div>
                                 <div class="field-box row">
                                     <label class="col-md-2" for="form-enfant-tuteur-telephone">Téléphone du tuteur</label>
                                     <div class="col-md-4 col-sm-5">
-                                        <input id="form-enfant-tuteur-telephone" name="form_enfant_tuteur_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone du tuteur.">
+                                        <input id="form-enfant-tuteur-telephone" name="form_enfant_tuteur_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone du tuteur." value="<?=$enfant->guardian_phone; ?>">
                                     </div>                            
                                 </div>
                             </div>
@@ -320,13 +320,13 @@
                             <div class="field-box row">
                                 <label class="col-md-2" for="form-enfant-urgence-nom">Contact d'urgence</label>
                                 <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-urgence-nom" name="form_enfant_urgence_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom de la personne à contacter en cas d'urgence.">
+                                    <input id="form-enfant-urgence-nom" name="form_enfant_urgence_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom de la personne à contacter en cas d'urgence." value="<?=$enfant->emergency_name; ?>">
                                 </div>                            
                             </div>
                             <div class="field-box row">
                                 <label class="col-md-2" for="form-enfant-urgence-telephone">Téléphone d'urgence</label>
                                 <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-urgence-telephone" name="form_enfant_urgence_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de la personne à contacter en cas d'urgence.">
+                                    <input id="form-enfant-urgence-telephone" name="form_enfant_urgence_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de la personne à contacter en cas d'urgence." value="<?=$enfant->emergency_phone; ?>">
                                 </div>                            
                             </div>
 
@@ -335,18 +335,23 @@
                                 <div class="col-md-4 col-sm-5">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <input id="form-enfant-responsable-adresse-numero" name="form_enfant_responsable_adresse_numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse du responsable légal.">
+                                            <input id="form-enfant-responsable-adresse-numero" name="form_enfant_responsable_adresse_numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse du responsable légal." value="<?=$enfant->guardian_address_number; ?>">
                                         </div>
-                                        <div class="col-md-9"><input id="form-enfant-responsable-adresse-voirie" name="form_enfant_responsable_adresse_voirie" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse du responsable légal."></div>
+                                        <div class="col-md-9">
+                                        <input id="form-enfant-responsable-adresse-voirie" name="form_enfant_responsable_adresse_voirie" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse du responsable légal." value="<?=$enfant->guardian_address_street; ?>">
+                                        </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-4"><input id="form-enfant-responsable-adresse-code-postal" name="form_enfant_responsable_adresse_code_postal" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville du responsable légal."></div>
-                                        <div class="col-md-8"><input id="form-enfant-responsable-adresse-code-ville" name="form_enfant_responsable_adresse_code_ville" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville du responsable légal."></div>
+                                        <div class="col-md-4">
+                                        <input id="form-enfant-responsable-adresse-code-postal" name="form_enfant_responsable_adresse_code_postal" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville du responsable légal." value="<?=$enfant->guardian_address_postal_code; ?>">
+                                        </div>
+                                        <div class="col-md-8">
+                                        <input id="form-enfant-responsable-adresse-code-ville" name="form_enfant_responsable_adresse_code_ville" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville du responsable légal." value="<?=$enfant->guardian_address_city; ?>">
+                                        </div>
                                     </div>
                                 </div>                            
                             </div>
-
                         </div>
 
                         <div class="field-box row">
@@ -354,16 +359,16 @@
                             <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez chez qui habite l'enfant.">
                                 <label class="radio" for="form-enfant-domiciliation-responsable">
                                     <div class="radio" id="uniform-form-enfant-domiciliation-responsable">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_domiciliation" id="form-enfant-domiciliation-responsable" value="responsable" checked="">
+                                        <span<?php if ($enfant->domiciliation != 'famille'): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_domiciliation" id="form-enfant-domiciliation-responsable" value="responsable"<?php if ($enfant->domiciliation != 'famille'): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Responsable légal
                                 </label>
                                 <label class="radio" for="form-enfant-domiciliation-famille">
                                     <div class="radio" id="uniform-form-enfant-domiciliation-famille">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_domiciliation" id="form-enfant-domiciliation-famille" value="famille">
+                                        <span<?php if ($enfant->domiciliation == 'famille'): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_domiciliation" id="form-enfant-domiciliation-famille" value="famille"<?php if ($enfant->domiciliation == 'famille'): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Famille d'accueil
@@ -375,13 +380,13 @@
                             <div class="field-box row">
                                 <label class="col-md-2" for="form-enfant-famille-nom">Nom de la famille d'accueil</label>
                                 <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-famille-nom" name="form_enfant_famille_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de la famille d'accueil.">
+                                    <input id="form-enfant-famille-nom" name="form_enfant_famille_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de la famille d'accueil." value="<?=$enfant->host_family_name; ?>">
                                 </div>                            
                             </div>
                             <div class="field-box row">
                                 <label class="col-md-2" for="form-enfant-famille-telephone">Téléphone de la famille d'accueil</label>
                                 <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-famille-telephone" name="form_enfant_famille_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de la famille d'accueil.">
+                                    <input id="form-enfant-famille-telephone" name="form_enfant_famille_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de la famille d'accueil." value="<?=$enfant->host_family_phone; ?>">
                                 </div>                            
                             </div>
                             <div class="field-box row">
@@ -389,14 +394,20 @@
                                 <div class="col-md-4 col-sm-5">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <input id="form-enfant-famille-adresse-numero" name="form_enfant_famille_adresse_numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse de la famille d'accueil.">
+                                            <input id="form-enfant-famille-adresse-numero" name="form_enfant_famille_adresse_numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse de la famille d'accueil." value="<?=$enfant->host_family_address_number; ?>">
                                         </div>
-                                        <div class="col-md-9"><input id="form-enfant-famille-adresse-voirie" name="form_enfant_famille_adresse_voirie" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse de la famille d'accueil."></div>
+                                        <div class="col-md-9">
+                                        <input id="form-enfant-famille-adresse-voirie" name="form_enfant_famille_adresse_voirie" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse de la famille d'accueil." value="<?=$enfant->host_family_address_street; ?>">
+                                        </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-4"><input id="form-enfant-famille-adresse-code-postal" name="form_enfant_famille_adresse_code_postal" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville de la famille d'accueil."></div>
-                                        <div class="col-md-8"><input id="form-enfant-famille-adresse-code-ville" name="form_enfant_famille_adresse_code_ville" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville de la famille d'accueil."></div>
+                                        <div class="col-md-4">
+                                        <input id="form-enfant-famille-adresse-code-postal" name="form_enfant_famille_adresse_code_postal" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville de la famille d'accueil." value="<?=$enfant->host_family_address_postal_code; ?>">
+                                        </div>
+                                        <div class="col-md-8">
+                                        <input id="form-enfant-famille-adresse-code-ville" name="form_enfant_famille_adresse_code_ville" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville de la famille d'accueil." value="<?=$enfant->host_family_address_city; ?>">
+                                        </div>
                                     </div>
                                 </div>                            
                             </div>
@@ -407,16 +418,16 @@
                             <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si des photos/vidéos de l'enfant peuvent être utilisé par le gîte.">
                                 <label class="radio-inline col-md-7" for="form-enfant-droit-image-oui">
                                     <div class="radio" id="uniform-form-enfant-droit-image-oui">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_droit_image" id="form-enfant-droit-image-oui" value="1">
+                                        <span<?php if ($enfant->image_rights): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_droit_image" id="form-enfant-droit-image-oui" value="1"<?php if ($enfant->image_rights): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Oui
                                 </label>
                                 <label class="radio-inline col-md-4 col-sm-5" for="form-enfant-droit-image-non">
                                     <div class="radio" id="uniform-form-enfant-droit-image-non">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_droit_image" id="form-enfant-droit-image-non" value="0" checked="">
+                                        <span<?php if (!$enfant->image_rights): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_droit_image" id="form-enfant-droit-image-non" value="0"<?php if (!$enfant->image_rights): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Non
@@ -431,16 +442,16 @@
                             <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si l'enfant suit un traitement médical.">
                                 <label class="radio-inline col-md-7" for="form-enfant-traitement-medical-oui">
                                     <div class="radio" id="uniform-form-enfant-traitement-medical-oui">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-oui" value="1">
+                                        <span<?php if ($enfant->medicals_treatments): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-oui"<?php if ($enfant->medicals_treatments): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Oui
                                 </label>
                                 <label class="radio-inline col-md-4 col-sm-5" for="form-enfant-traitement-medical-non">
                                     <div class="radio" id="uniform-form-enfant-traitement-medical-non">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-non" value="0" checked="">
+                                        <span<?php if (!$enfant->medicals_treatments): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-non" value="0"<?php if (!$enfant->medicals_treatments): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Non
@@ -450,14 +461,14 @@
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-contre-indication">Contre-indications / allergies</label>
                             <div class="col-md-4 col-sm-5">
-                                <textarea id="form-enfant-contre-indication" name="form_enfant_contre_indication" class="form-control" rows="4" data-toggle="tooltip" title="Renseignez les contre-indication(s) et/ou allergie(s) connue(s) de l'enfant."></textarea>
+                                <textarea id="form-enfant-contre-indication" name="form_enfant_contre_indication" class="form-control" rows="4" data-toggle="tooltip" title="Renseignez les contre-indication(s) et/ou allergie(s) connue(s) de l'enfant."><?=$enfant->allergies; ?></textarea>
                             </div>
                         </div>
 
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-numero-securite">N° de sécurité sociale</label>
                             <div class="col-md-4 col-sm-5">
-                                <input id="form-enfant-numero-securite" name="form_enfant_numero_securite" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de sécurité sociale de l'enfant.">
+                                <input id="form-enfant-numero-securite" name="form_enfant_numero_securite" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de sécurité sociale de l'enfant." value="<?=$enfant->number_ss; ?>">
                             </div>                            
                         </div>
 
@@ -466,16 +477,16 @@
                             <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si l'enfant est convert par une assurance (responsabilité civile).">
                                 <label class="radio-inline col-md-7" for="form-enfant-assurance-oui">
                                     <div class="radio" id="uniform-form-enfant-assurance-oui">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_assurance" id="form-enfant-assurance-oui" value="1">
+                                        <span<?php if ($enfant->self_assurance): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_assurance" id="form-enfant-assurance-oui" value="1"<?php if ($enfant->self_assurance): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Oui
                                 </label>
                                 <label class="radio-inline col-md-4 col-sm-5">
                                     <div class="radio" id="uniform-form-enfant-assurance-non">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_assurance" id="form-enfant-assurance-non" value="0" checked="">
+                                        <span<?php if (!$enfant->self_assurance): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_assurance" id="form-enfant-assurance-non" value="0"<?php if (!$enfant->self_assurance): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Non
@@ -486,7 +497,7 @@
                             <div class="field-box row">
                                 <label class="col-md-2" for="form-enfant-assurance-validite">Date de fin de validité</label>
                                 <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" value="15/06/2014" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa).">
+                                    <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" value="15/06/2014" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa)." value="<?=$enfant->self_assurance_expiration_date; ?>">
                                 </div>                            
                             </div>
                         </div>
@@ -495,16 +506,16 @@
                             <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si l'attestation CPAM est dans le dossier de l'enfant.">
                                 <label class="radio-inline col-md-7" for="form-enfant-attestation-cpam-oui">
                                     <div class="radio" id="uniform-form-enfant-attestation-cpam-oui">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-oui" value="1">
+                                        <span<?php if ($enfant->cpam_attestation): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-oui" value="1"<?php if ($enfant->cpam_attestation): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Oui
                                 </label>
                                 <label class="radio-inline col-md-4 col-sm-5">
                                     <div class="radio" id="uniform-form-enfant-attestation-cpam-non">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-non" value="0" checked="">
+                                        <span<?php if (!$enfant->cpam_attestation): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-non" value="0"<?php if (!$enfant->cpam_attestation): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Non
@@ -517,16 +528,16 @@
                             <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si le carnet de vaccination est dans le dossier de l'enfant.">
                                 <label class="radio-inline col-md-7" for="form-enfant-carnet-vaccination-oui">
                                     <div class="radio" id="uniform-form-enfant-carnet-vaccination-oui">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-oui" value="1">
+                                        <span<?php if ($enfant->vaccination): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-oui" value="1"<?php if ($enfant->vaccination): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Oui
                                 </label>
                                 <label class="radio-inline col-md-4 col-sm-5" for="form-enfant-carnet-vaccination-non">
                                     <div class="radio" id="uniform-form-enfant-carnet-vaccination-non">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-non" value="0" checked="">
+                                        <span<?php if (!$enfant->vaccination): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-non" value="0"<?php if (!$enfant->vaccination): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Non
@@ -538,16 +549,16 @@
                             <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si la fiche sanitaire de liaison est dans le dossier de l'enfant.">
                                 <label class="radio-inline col-md-7" for="form-enfant-fiche-sanitaire-oui">
                                     <div class="radio" id="uniform-form-enfant-fiche-sanitaire-oui">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-oui" value="1">
+                                        <span<?php if ($enfant->health_record): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-oui" value="1"<?php if ($enfant->health_record): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Oui
                                 </label>
                                 <label class="radio-inline col-md-4 col-sm-5" for="form-enfant-fiche-sanitaire-non">
                                     <div class="radio" id="uniform-form-enfant-fiche-sanitaire-non">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-non" value="0" checked="">
+                                        <span<?php if (!$enfant->health_record): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-non" value="0"<?php if (!$enfant->health_record): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Non
@@ -559,16 +570,16 @@
                             <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si la fiche de séjour est dans le dossier de l'enfant.">
                                 <label class="radio-inline col-md-7" for="form-enfant-fiche-sejour-oui">
                                     <div class="radio" id="uniform-form-enfant-fiche-sejour-oui">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-oui" value="1">
+                                        <span<?php if ($enfant->stay_record): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-oui" value="1"<?php if ($enfant->stay_record): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Oui
                                 </label>
                                 <label class="radio-inline col-md-4 col-sm-5" for="form-enfant-fiche-sejour-non">
                                     <div class="radio" id="uniform-form-enfant-fiche-sejour-non">
-                                        <span class="checked">
-                                            <input type="radio" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-non" value="0" checked="">
+                                        <span<?php if (!$enfant->stay_record): ?> class="checked"<?php endif ?>>
+                                            <input type="radio" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-non" value="0"<?php if (!$enfant->stay_record): ?> checked="checked"<?php endif ?>>
                                         </span>
                                     </div>
                                     Non
@@ -672,4 +683,5 @@ form-enfant-fiche-sejour
     form-enfant-fiche-sejour-non
 
 -->
+
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
