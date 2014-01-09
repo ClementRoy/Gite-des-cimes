@@ -3,7 +3,10 @@ $(function () {
 	$('input:checkbox, input:radio').uniform();
 	$('.select2').select2();
 
-	$('.input-datepicker').datepicker().on('changeDate', function () {
+	$('.input-datepicker').datepicker({
+		format : "dd/mm/yyyy",
+		startView : "decade"
+	}).on('changeDate', function () {
 		$(this).datepicker('hide');
 	});
 
