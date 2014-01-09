@@ -75,12 +75,11 @@ class enfant
      * @param
      * @return
      */
-	public static function update($id, $params = array()){
-		global $db;
-        $sql = '';
+    public static function update($sql, $params = array()){
+        global $db;
         $result = $db->update($sql, $params);
-		return $result;
-	}
+        return $result;
+    }
 
     /**
      * desc

@@ -73,7 +73,8 @@ $(function () {
 		.hide()
 		.find('input[type="text"]').each(function () {
 			if ($(this).val() != '') {
-				$(this).attr('data-original-value', $(this).val()).val('');
+					$(this).attr('data-original-value', $(this).val());
+					$(this).attr('value', '');
 			}
 		});
 		$('[data-group="'+ $(this).val() +'"]')
@@ -88,7 +89,8 @@ $(function () {
 			.hide()
 			.find('input[type="text"]').each(function () {
 				if ($(this).val() != '') {
-					$(this).attr('data-original-value', $(this).val()).val('');
+					$(this).attr('data-original-value', $(this).val());
+					$(this).attr('value', '');
 				}
 			});
 		$('[data-responsable="parents"]').show();
@@ -113,7 +115,8 @@ $(function () {
 				.hide()
 				.find('input[type="text"]').each(function () {
 					if ($(this).val() != '') {
-						$(this).attr('data-original-value', $(this).val()).val('');
+					$(this).attr('data-original-value', $(this).val());
+					$(this).attr('value', '');
 					}
 				});
 		} else {
@@ -131,7 +134,8 @@ $(function () {
 			.hide()
 			.find('input[type="text"]').each(function () {
 				if ($(this).val() != '') {
-					$(this).attr('data-original-value', $(this).val()).val('');
+					$(this).attr('data-original-value', $(this).val());
+					$(this).attr('value', '');
 				}
 			});
 		} else {

@@ -14,7 +14,7 @@
                 </div>
             </div>
 
-         <?php tool::output($enfant); ?>
+         <?php //tool::output($enfant); ?>
 
             <?php if(isset($_POST['submit'])): ?>
             <?php //tool::output($_POST); ?>
@@ -69,44 +69,44 @@
                     );
 
                 $sql = 'UPDATE enfant SET  
-                                edited = :edited
-                                editor = :editor
-                                firstname = :firstname
-                                lastname = :lastname
-                                birthdate = :birthdate
-                                sex = :sex
-                                registration_by = :registration_by
-                                organization = :organization
-                                contact = :contact
-                                guardian = :guardian
-                                father_name = :father_name
-                                father_phone = :father_phone
-                                mother_name = :mother_name
-                                mother_phone = :mother_phone
-                                guardian_name = :guardian_name
-                                guardian_phone = :guardian_phone
-                                emergency_name = :emergency_name
-                                emergency_phone = :emergency_phone
-                                guardian_address_number = :guardian_address_number
-                                guardian_address_street = :guardian_address_street
-                                guardian_address_postal_code = :guardian_address_postal_code
-                                guardian_address_city = :guardian_address_city
-                                domiciliation = :domiciliation
-                                host_family_name = :host_family_name
-                                host_family_phone = :host_family_phone
-                                host_family_address_number = :host_family_address_number
-                                host_family_address_street = :host_family_address_street
-                                host_family_address_postal_code = :host_family_address_postal_code
-                                host_family_address_city = :host_family_address_city
-                                image_rights = :image_rights
-                                medicals_treatments = :medicals_treatments
-                                allergies = :allergies
-                                number_ss = :number_ss
-                                self_assurance = :self_assurance
-                                self_assurance_expiration_date = :self_assurance_expiration_date
-                                cpam_attestation = :cpam_attestation
-                                vaccination = :vaccination
-                                health_record = :health_record
+                                edited = :edited,
+                                editor = :editor,
+                                firstname = :firstname,
+                                lastname = :lastname,
+                                birthdate = :birthdate,
+                                sex = :sex,
+                                registration_by = :registration_by,
+                                organization = :organization,
+                                contact = :contact,
+                                guardian = :guardian,
+                                father_name = :father_name,
+                                father_phone = :father_phone,
+                                mother_name = :mother_name,
+                                mother_phone = :mother_phone,
+                                guardian_name = :guardian_name,
+                                guardian_phone = :guardian_phone,
+                                emergency_name = :emergency_name,
+                                emergency_phone = :emergency_phone,
+                                guardian_address_number = :guardian_address_number,
+                                guardian_address_street = :guardian_address_street,
+                                guardian_address_postal_code = :guardian_address_postal_code,
+                                guardian_address_city = :guardian_address_city,
+                                domiciliation = :domiciliation,
+                                host_family_name = :host_family_name,
+                                host_family_phone = :host_family_phone,
+                                host_family_address_number = :host_family_address_number,
+                                host_family_address_street = :host_family_address_street,
+                                host_family_address_postal_code = :host_family_address_postal_code,
+                                host_family_address_city = :host_family_address_city,
+                                image_rights = :image_rights,
+                                medicals_treatments = :medicals_treatments,
+                                allergies = :allergies,
+                                number_ss = :number_ss,
+                                self_assurance = :self_assurance,
+                                self_assurance_expiration_date = :self_assurance_expiration_date,
+                                cpam_attestation = :cpam_attestation,
+                                vaccination = :vaccination,
+                                health_record = :health_record,
                                 stay_record = :stay_record
                                 WHERE id = :id
                                 ';
