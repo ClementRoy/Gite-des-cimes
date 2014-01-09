@@ -6,7 +6,7 @@
 
     <div class="content">
 
-        <?php $sejour = sejour::get($id); ?>
+        <?php $sejour = sejour::get($_GET['id']); ?>
         <?php tool::output($sejour); ?>
         <div id="pad-wrapper">
             <div class="row header">
