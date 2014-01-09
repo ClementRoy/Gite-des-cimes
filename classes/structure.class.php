@@ -45,7 +45,7 @@ class structure
             $result = $db->query("SELECT * FROM structure LIMIT 5 OFFSET 0", $data);
         }
         else {
-            $result = $db->query('SELECT * FROM structure');
+            $result = $db->query('SELECT * FROM structure ORDER BY name');
         }
         return $result;
     }

@@ -48,7 +48,7 @@ class enfant
             $result = $db->query("SELECT * FROM enfant LIMIT 5 OFFSET 0", $data);
         }
         else {
-            $result = $db->query('SELECT * FROM enfant');
+            $result = $db->query('SELECT * FROM enfant ORDER BY firstname');
         }
 		return $result;
 	}

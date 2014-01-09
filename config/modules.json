@@ -13,27 +13,27 @@
 	},
 	"structures" : {
 		"name" : "structures",
-		"functions" : ["index", "ajouter"]
+		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"contacts" : {
 		"name" : "contacts",
-		"functions" : ["index"]
+		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"convocations" : {
 		"name" : "convocations",
-		"functions" : ["index"]
+		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"factures" : {
 		"name" : "factures",
-		"functions" : ["index"]
+		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"animateurs" : {
 		"name" : "animateurs",
-		"functions" : ["index"]
+		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"vehicules" : {
 		"name" : "vehicules",
-		"functions" : ["index"]
+		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"utilisateurs" : {
 		"name" : "utilisateurs",
