@@ -47,8 +47,14 @@ $(function () {
 	$('[data-group="'+ $('input[name="form_enfant_inscription"]:checked').val() +'"]').show();
 
 	$('[data-responsable]').hide();
-	if ($('input[name="form_enfant_responsable"]:checked').val() != 'tuteur') {
+	if ($('input[name="form_enfant_responsable"]:checked').val() === 'structure') {
+		$('[data-responsable]').hide();
+	} else if ($('input[name="form_enfant_responsable"]:checked').val() === 'tuteur') {
+		$('[data-responsable="tuteur"]').show();
+		$('[data-responsable="adresse"]').show();
+	} else {
 		$('[data-responsable="parents"]').show();
+		$('[data-responsable="adresse"]').show();
 		if ($('input[name="form_enfant_responsable"]:checked').val() == 'mere') {
 			$('[data-responsable="mere"]').show();
 		} else if ($('input[name="form_enfant_responsable"]:checked').val() == 'pere') {
@@ -57,8 +63,6 @@ $(function () {
 			$('[data-responsable="mere"]').show();
 			$('[data-responsable="pere"]').show();
 		}
-	} else {
-		$('[data-responsable="tuteur"]').show();
 	}
 
 	if ($('input[name="form_enfant_domiciliation"]:checked').val() != 'famille') {
@@ -76,15 +80,15 @@ $(function () {
 		.hide()
 		.find('input[type="text"]').each(function () {
 			if ($(this).val() != '') {
-					$(this).attr('data-original-value', $(this).val());
-					$(this).attr('value', '');
+				$(this).attr('data-original-value', $(this).val());
+				$(this).attr('value', '');
 			}
 		});
 		$('[data-group="'+ $(this).val() +'"]')
-			.fadeIn(300)
-			.find('input[type="text"]').each(function () {
-				$(this).val($(this).data('original-value'));
-			});
+		.fadeIn(300)
+		.find('input[type="text"]').each(function () {
+			$(this).val($(this).data('original-value'));
+		});
 	});
 
 	$('input[name="form_enfant_responsable"]').on('change', function() {
@@ -93,41 +97,74 @@ $(function () {
 			.find('input[type="text"]').each(function () {
 				if ($(this).val() != '') {
 					$(this).attr('data-original-value', $(this).val());
-					$(this).attr('value', '');
 				}
 			});
-		$('[data-responsable="parents"]').show();
-		if ($(this).val() === 'parents') {
-			$('[data-responsable="parents"] [data-responsable]')
-				.fadeIn(300)
-				.find('input[type="text"]').each(function () {
-					$(this).val($(this).data('original-value'));
-				});
-		} else {
+		if ($(this).val() === 'tuteur') {
 			$('[data-responsable="'+ $(this).val() +'"]')
-				.fadeIn(300)
-				.find('input[type="text"]').each(function () {
-					$(this).val($(this).data('original-value'));
-				});
+			.fadeIn(300)
+			.find('input[type="text"]').each(function () {
+				$(this).val($(this).data('original-value'));
+			});
+			$('[data-responsable="adresse"]')
+			.fadeIn(300)
+			.find('input[type="text"]').each(function () {
+				$(this).val($(this).data('original-value'));
+			});
+		} else if ($(this).val() === 'parents') {
+			$('[data-responsable="parents"]').show();
+			$('[data-responsable="parents"] [data-responsable]')
+			.fadeIn(300)
+			.find('input[type="text"]').each(function () {
+				$(this).val($(this).data('original-value'));
+			});
+			$('[data-responsable="adresse"]')
+			.fadeIn(300)
+			.find('input[type="text"]').each(function () {
+				$(this).val($(this).data('original-value'));
+			});
+		} else if ($(this).val() === 'pere') {
+			$('[data-responsable="parents"]').show();
+			$('[data-responsable="pere"]')
+			.fadeIn(300)
+			.find('input[type="text"]').each(function () {
+				$(this).val($(this).data('original-value'));
+			});
+			$('[data-responsable="adresse"]')
+			.fadeIn(300)
+			.find('input[type="text"]').each(function () {
+				$(this).val($(this).data('original-value'));
+			});
+		} else if ($(this).val() === 'mere') {
+			$('[data-responsable="parents"]').show();
+			$('[data-responsable="mere"]')
+			.fadeIn(300)
+			.find('input[type="text"]').each(function () {
+				$(this).val($(this).data('original-value'));
+			});
+			$('[data-responsable="adresse"]')
+			.fadeIn(300)
+			.find('input[type="text"]').each(function () {
+				$(this).val($(this).data('original-value'));
+			});
 		}
 	});
 
 	$('input[name="form_enfant_domiciliation"]').on('change', function() {
 		if ($(this).val() != 'famille') {
 			$('[data-domiciliation="famille"]')
-				.hide()
-				.find('input[type="text"]').each(function () {
-					if ($(this).val() != '') {
+			.hide()
+			.find('input[type="text"]').each(function () {
+				if ($(this).val() != '') {
 					$(this).attr('data-original-value', $(this).val());
 					$(this).attr('value', '');
-					}
-				});
+				}
+			});
 		} else {
 			$('[data-domiciliation="famille"]')
-				.fadeIn(300)
-				.find('input[type="text"]').each(function () {
-					$(this).val($(this).data('original-value'));
-				});
+			.fadeIn(300)
+			.find('input[type="text"]').each(function () {
+				$(this).val($(this).data('original-value'));
+			});
 		}
 	});
 
@@ -159,61 +196,61 @@ $(function () {
 
 	// SORT FOR TABLE
 
-    $('.tablesorter').tablesorter();
+	$('.tablesorter').tablesorter();
     //$('#table-enfant').extendlink();
     //$('#table-enfant').tablefilter();
 
     $('.extendlink tbody tr').on('click', function() {
-		var href = $(this).find('td:first-child a').attr('href');
-		window.location=href;
+    	var href = $(this).find('td:first-child a').attr('href');
+    	window.location=href;
     });
 
     $('input[data-search]').on('keyup', function () {
-		var pattern = $(this).val().toLowerCase();
-		var dataSearch = $(this).data('search');
-		if (pattern === '') {
-			$('table[data-search="' + dataSearch + '"] tbody tr').show();
-		} else {
-			$('table[data-search="' + dataSearch + '"] tbody tr').each(function () {
-				var nb = $(this).text().toLowerCase().search(pattern);
-				if (nb <= 0) {
-					$(this).hide();
-				} else{
-					$(this).show();
-				}
-			});
-		}
+    	var pattern = $(this).val().toLowerCase();
+    	var dataSearch = $(this).data('search');
+    	if (pattern === '') {
+    		$('table[data-search="' + dataSearch + '"] tbody tr').show();
+    	} else {
+    		$('table[data-search="' + dataSearch + '"] tbody tr').each(function () {
+    			var nb = $(this).text().toLowerCase().search(pattern);
+    			if (nb <= 0) {
+    				$(this).hide();
+    			} else{
+    				$(this).show();
+    			}
+    		});
+    	}
     });
 
 
   // sidebar menu dropdown toggle
   $("#dashboard-menu .dropdown-toggle").click(function (e) {
-    e.preventDefault();
-    var $item = $(this).parent();
-    $item.toggleClass("active");
-    if ($item.hasClass("active")) {
-      $item.find(".submenu").slideDown("fast");
-    } else {
-      $item.find(".submenu").slideUp("fast");
-    }
+  	e.preventDefault();
+  	var $item = $(this).parent();
+  	$item.toggleClass("active");
+  	if ($item.hasClass("active")) {
+  		$item.find(".submenu").slideDown("fast");
+  	} else {
+  		$item.find(".submenu").slideUp("fast");
+  	}
   });
 
 
   // mobile side-menu slide toggler
   var $menu = $("#sidebar-nav");
   $("body").click(function () {
-    if ($(this).hasClass("menu")) {
-      $(this).removeClass("menu");
-    }
+  	if ($(this).hasClass("menu")) {
+  		$(this).removeClass("menu");
+  	}
   });
   $menu.click(function(e) {
-    e.stopPropagation();
+  	e.stopPropagation();
   });
   $("#menu-toggler").click(function (e) {
-    e.stopPropagation();
-    $("body").toggleClass("menu");
+  	e.stopPropagation();
+  	$("body").toggleClass("menu");
   });
   $(window).resize(function() { 
-    $(this).width() > 769 && $("body.menu").removeClass("menu")
+  	$(this).width() > 769 && $("body.menu").removeClass("menu")
   });
 });

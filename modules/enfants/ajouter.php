@@ -283,10 +283,10 @@
         <div class="field-box row">
             <label class="col-md-2">Responsable légal de l'enfant</label>
             <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez qui est le responsable légal de l'enfant.">
-                <label class="radio" for="form-enfant-responsable-parents">
-                    <div class="radio" id="uniform-form-enfant-responsable-parents">
+                <label class="radio" for="form-enfant-responsable-structure">
+                    <div class="radio" id="uniform-form-enfant-responsable-structure">
                         <span class="checked">
-                        <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-parents" value="structure" checked="cheked">
+                        <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-structure" value="structure" checked="cheked">
                         </span>
                     </div>
                     Structure
@@ -372,26 +372,25 @@
                 </div>                            
             </div>
         </div>
-
-        <div class="field-box row">
-            <label class="col-md-2" for="form-enfant-responsable-adresse-numero">Adresse du responsable légal</label>
-            <div class="col-md-4 col-sm-5">
-                <div class="row">
-                    <div class="col-md-3">
-                        <input id="form-enfant-responsable-adresse-numero" name="form_enfant_responsable_adresse_numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse du responsable légal.">
+        
+        <div data-responsable="adresse">
+            <div class="field-box row">
+                <label class="col-md-2" for="form-enfant-responsable-adresse-numero">Adresse du responsable légal</label>
+                <div class="col-md-4 col-sm-5">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <input id="form-enfant-responsable-adresse-numero" name="form_enfant_responsable_adresse_numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse du responsable légal.">
+                        </div>
+                        <div class="col-md-9"><input id="form-enfant-responsable-adresse-voirie" name="form_enfant_responsable_adresse_voirie" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse du responsable légal."></div>
                     </div>
-                    <div class="col-md-9"><input id="form-enfant-responsable-adresse-voirie" name="form_enfant_responsable_adresse_voirie" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse du responsable légal."></div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-4"><input id="form-enfant-responsable-adresse-code-postal" name="form_enfant_responsable_adresse_code_postal" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville du responsable légal."></div>
-                    <div class="col-md-8"><input id="form-enfant-responsable-adresse-code-ville" name="form_enfant_responsable_adresse_code_ville" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville du responsable légal."></div>
-                </div>
-            </div>                            
+                    <div class="row">
+                        <div class="col-md-4"><input id="form-enfant-responsable-adresse-code-postal" name="form_enfant_responsable_adresse_code_postal" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville du responsable légal."></div>
+                        <div class="col-md-8"><input id="form-enfant-responsable-adresse-code-ville" name="form_enfant_responsable_adresse_code_ville" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville du responsable légal."></div>
+                    </div>
+                </div>                            
+            </div>
         </div>
-
-
-
 
         <div class="field-box row">
             <label class="col-md-2">Domiciliation de l'enfant</label>

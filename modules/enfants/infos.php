@@ -28,13 +28,15 @@
                         <?php endif; ?>
                     </span>
                 </div>
-                <a class="btn-flat icon pull-right delete-user" data-toggle="modal" data-target="#remove-modal">
-                    <i class="icon-trash"></i>
-                </a>
 
-                <a href="/enfants/editer/id/<?=$enfant->id; ?>" class="btn-flat icon large pull-right edit">
-                    <i class="icon-edit"></i> Modifier cette fiche
-                </a>
+
+                <div class="col-md-4 text-right pull-right">
+                    <button class="btn-flat danger" data-toggle="modal" data-target="#remove-modal">
+                        <i class="icon-remove"></i> Supprimer
+                    </button>
+                    <a href="/enfants/editer/id/<?=$enfant->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
+                </div>
+
             </div>
 
 
@@ -81,7 +83,11 @@
                                     </li>
                                     <li class="list-group-item">
                                         <p><strong>Domiciliation :</strong></p>
-                                        <p><?=$enfant->domiciliation; ?></p>
+                                        <?php if ($enfant->domiciliation === 'responsable'): ?>
+                                            <p><?=ucfirst($enfant->guardian); ?></p>
+                                        <?php else: ?>
+                                            <p>Famille d'accueil</p>
+                                        <?php endif ?>
                                     </li>
                                 </ul>
                             </div>
@@ -90,27 +96,26 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">Inscription de l'enfant</div>
                                 <ul class="list-group">
-                                <?php if($enfant->registration_by = 'structure'): ?>
+                                <?php if($enfant->registration_by === 'structure'): ?>
                                     <li class="list-group-item">
                                         <p><strong>Structure :</strong></p>
-                                        <?php if ($enfant->organization == 0): ?>
+                                        <?php if ($enfant->organization != 0): ?>
                                             <p><a href=""><?=$enfant->organization;?></a></p>
                                         <?php else: ?>
-                                            <p>NC</p>
+                                            <p><?=EMPTYVAL; ?></p>
                                         <?php endif ?>
                                     </li>
                                     <li class="list-group-item">
                                         <p><strong>Contact :</strong></p>
-                                        <?php if ($enfant->contact == 0): ?>
+                                        <?php if ($enfant->contact != 0): ?>
                                             <p><a href=""><?=$enfant->contact;?></a></p>
                                         <?php else: ?>
-                                            <p>NC</p>
+                                            <p><?=EMPTYVAL; ?></p>
                                         <?php endif ?>
                                     </li>
                                 <?php else: ?>
                                     <li class="list-group-item">
-                                        <p><strong> :</strong></p>
-                                            <p><?$enfant->guardian; ?></p>
+                                        <p><?=ucfirst($enfant->registration_by); ?></p>
                                     </li>
                                 <?php endif; ?>
                                 </ul>
@@ -119,46 +124,44 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">Responsable légal de l'enfant</div>
                                 <ul class="list-group">
-                                    <?php if($enfant->registration_by = 'structure'): ?>
-                                        <li class="list-group-item">
-                                            <p><strong>Structure :</strong></p>
-                                            <?php if ($enfant->organization == 0): ?>
-                                                <p><a href=""><?=$enfant->organization;?></a></p>
-                                            <?php else: ?>
-                                                <p><?=EMPTYVAL; ?></p>
-                                            <?php endif ?>
-                                        </li>
-                                     <?php elseif($enfant->registration_by = 'particulier'): ?>
-                                        <?php if($enfant->guardian = 'tuteur'): ?>
-                                            <li class="list-group-item">
-                                                <p><strong>Tuteur :</strong></p>
-                                                <p><?=$enfant->guardian_name;?> <?php if (!empty($enfant->guardian_phone)): ?><span class="pull-right"><i class="icon-phone"></i><?=$enfant->guardian_phone;?></span><?php endif ?></p>
-                                            </li>
+                                    <?php if($enfant->guardian == 'structure'): ?>
+                                    <li class="list-group-item">
+                                        <p><strong>Structure :</strong></p>
+                                        <?php if ($enfant->organization != 0): ?>
+                                            <p><a href=""><?=$enfant->organization;?></a></p>
                                         <?php else: ?>
-                                            <?php if (!empty($enfant->father_name)): ?>
-                                                <li class="list-group-item">
-                                                    <p><strong>Père :</strong></p>
-                                                    <p><?=$enfant->father_name;?> <?php if (!empty($enfant->father_phone)): ?><span class="pull-right"><i class="icon-phone"></i><?=$enfant->father_phone;?></span><?php endif ?></p>
-                                                </li>
-                                            <?php endif ?>
-                                            
-                                            <?php if (!empty($enfant->mother_name)): ?>
-                                                <li class="list-group-item">
-                                                    <p><strong>Mère :</strong></p>
-                                                    <p><?=$enfant->mother_name;?> <?php if (!empty($enfant->mother_phone)): ?><span class="pull-right"><i class="icon-phone"></i><?=$enfant->mother_phone;?></span><?php endif ?></p>
-                                                </li>
-                                            <?php endif; ?>
+                                            <p><?=EMPTYVAL; ?></p>
                                         <?php endif ?>
-                                        <li class="list-group-item">
-                                            <p><strong>Adresse  :</strong></p>
-                                            <p><?=$enfant->guardian_address_number;?> <?=$enfant->guardian_address_street;?>,<br /> <?=$enfant->guardian_address_postal_code;?> <?=$enfant->guardian_address_city;?></p>
-                                        </li>
-                                        
+                                    </li>
+                                    <?php elseif($enfant->guardian == 'tuteur'): ?>
+                                    <li class="list-group-item">
+                                        <p><strong>Tuteur :</strong></p>
+                                        <p><?=(!empty($enfant->guardian_name))? $enfant->guardian_name : EMPTYVAL; ?> <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->guardian_phone))? $enfant->guardian_phone : EMPTYVAL; ?></span></p>
+                                    </li>
+                                    <?php elseif($enfant->guardian == 'parents'): ?>
+                                    <li class="list-group-item">
+                                        <p><strong>Père :</strong></p>
+                                        <p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?> <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->father_phone))? $enfant->father_phone : EMPTYVAL; ?></span></p>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <p><strong>Mère :</strong></p>
+                                        <p><?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?> <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->mother_phone))? $enfant->mother_phone : EMPTYVAL; ?></span></p>
+                                    </li>
+                                    <?php elseif($enfant->guardian == 'pere'): ?>
+                                    <li class="list-group-item">
+                                        <p><strong>Père :</strong></p>
+                                        <p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?> <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->father_phone))? $enfant->father_phone : EMPTYVAL; ?></span></p>
+                                    </li>
+                                    <?php elseif($enfant->guardian == 'mere'): ?>
+                                    <li class="list-group-item">
+                                        <p><strong>Adresse  :</strong></p>
+                                        <p><?=(!empty($enfant->guardian_address_number) && !empty($enfant->guardian_address_street) && !empty($enfant->guardian_address_postal_code) && !empty($enfant->guardian_address_city))? $enfant->guardian_address_number.' '.$enfant->guardian_address_street.', <br />'.$enfant->guardian_address_postal_code.' '.$enfant->guardian_address_city : EMPTYVAL; ?></p>
+                                    </li>
                                     <?php endif; ?>
                                 </ul>
                             </div>
 
-                            <?php if ($enfant->domiciliation = 'famille'): ?>
+                            <?php if ($enfant->domiciliation == 'famille'): ?>
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Famille d'accueil</div>
                                     <ul class="list-group">
@@ -168,15 +171,8 @@
                                             <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->host_family_phone))? $enfant->host_family_phone : EMPTYVAL; ?></span></p>
                                         </li>
                                         <li class="list-group-item">
-                                            <?php if (!empty($enfant->host_family_address_number) && !empty($enfant->host_family_address_street)): ?>
-
-                                            <?php else: ?>
-
-                                            <?php endif ?>
                                             <p><strong>Adresse de la famille d'accueil :</strong></p>
-                                            <?=(!empty($enfant->host_family_name))? $enfant->host_family_name : EMPTYVAL; ?>
-                                            <p><?=$enfant->host_family_address_number;?> <?=$enfant->host_family_address_street.',<br />';?>
-                                            <?=$enfant->host_family_address_postal_code;?> <?=$enfant->host_family_address_city;?></p>
+                                            <p><?=(!empty($enfant->host_family_address_number) && !empty($enfant->host_family_address_street) && !empty($enfant->host_family_address_postal_code) && !empty($enfant->host_family_address_city))? $enfant->host_family_address_number.' '.$enfant->host_family_address_street.', <br />'.$enfant->host_family_address_postal_code.' '.$enfant->host_family_address_city : EMPTYVAL; ?></p>
                                         </li>
                                     </ul>
                                 </div>

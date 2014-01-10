@@ -65,6 +65,7 @@
                     ':vaccination' => $form_enfant_carnet_vaccination,
                     ':health_record' => $form_enfant_fiche_sanitaire,
                     ':stay_record' => $form_enfant_fiche_sejour,
+                    ':note' => $form_enfant_note,
                     ':id' => $_GET['id']
                     );
 
@@ -107,7 +108,8 @@
                                 cpam_attestation = :cpam_attestation,
                                 vaccination = :vaccination,
                                 health_record = :health_record,
-                                stay_record = :stay_record
+                                stay_record = :stay_record,
+                                note = :note
                                 WHERE id = :id
                                 ';
 
@@ -231,19 +233,26 @@
                             </div>
                         </div>
 
-                        <div data-group="particulier">
                             <div class="field-box row">
                                 <label class="col-md-2">Responsable légal de l'enfant</label>
                                 <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez qui est le responsable légal de l'enfant.">
+                                    <label class="radio" for="form-enfant-responsable-structure">
+                                        <div class="radio" id="uniform-form-enfant-responsable-structure">
+                                            <span <?php if ($enfant->guardian == 'structure'): ?> class="checked"<?php endif ?>>
+                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-structure" value="structure" <?php if ($enfant->guardian == 'structure'): ?> checked="checked"<?php endif ?>>
+                                            </span>
+                                        </div>
+                                        Structure
+                                    </label>
                                     <label class="radio" for="form-enfant-responsable-parents">
                                         <div class="radio" id="uniform-form-enfant-responsable-parents">
-                                            <span <?php if ($enfant->guardian != 'pere' || $enfant->guardian != 'mere' || $enfant->guardian != 'tuteur'): ?> class="checked"<?php endif ?>>
-                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-parents" value="parents" <?php if ($enfant->guardian != 'pere' || $enfant->guardian != 'mere' || $enfant->guardian != 'tuteur'): ?> checked="checked"<?php endif ?>>
+                                            <span <?php if ($enfant->guardian == 'parents'): ?> class="checked"<?php endif ?>>
+                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-parents" value="parents" <?php if ($enfant->guardian == 'parents'): ?> checked="checked"<?php endif ?>>
                                             </span>
                                         </div>
                                         Parents
                                     </label>
-                                    <label class="radio">
+                                    <label class="radio" for="form-enfant-responsable-pere">
                                         <div class="radio" id="uniform-form-enfant-responsable-pere">
                                             <span <?php if ($enfant->guardian == 'pere'): ?> class="checked"<?php endif ?>>
                                                 <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-pere" value="pere"<?php if ($enfant->guardian == 'pere'): ?> checked="checked"<?php endif ?>>
@@ -251,7 +260,7 @@
                                         </div>
                                         Père
                                     </label>
-                                    <label class="radio">
+                                    <label class="radio" for="form-enfant-responsable-mere">
                                         <div class="radio" id="uniform-form-enfant-responsable-mere">
                                             <span<?php if ($enfant->guardian == 'mere'): ?> class="checked"<?php endif ?>>
                                                 <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-mere" value="mere"<?php if ($enfant->guardian == 'mere'): ?> checked="checked"<?php endif ?>>
@@ -259,7 +268,7 @@
                                         </div>
                                         Mère
                                     </label>
-                                    <label class="radio">
+                                    <label class="radio" for="form-enfant-responsable-tuteur">
                                         <div class="radio" id="uniform-form-enfant-responsable-tuteur">
                                             <span<?php if ($enfant->guardian == 'tuteur'): ?> class="checked"<?php endif ?>>
                                                 <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-tuteur" value="tuteur"<?php if ($enfant->guardian == 'tuteur'): ?> checked="checked"<?php endif ?>>
@@ -317,42 +326,30 @@
                                 </div>
                             </div>
 
-                            <div class="field-box row">
-                                <label class="col-md-2" for="form-enfant-urgence-nom">Contact d'urgence</label>
-                                <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-urgence-nom" name="form_enfant_urgence_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom de la personne à contacter en cas d'urgence." value="<?=$enfant->emergency_name; ?>">
-                                </div>                            
-                            </div>
-                            <div class="field-box row">
-                                <label class="col-md-2" for="form-enfant-urgence-telephone">Téléphone d'urgence</label>
-                                <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-urgence-telephone" name="form_enfant_urgence_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de la personne à contacter en cas d'urgence." value="<?=$enfant->emergency_phone; ?>">
-                                </div>                            
-                            </div>
+                            <div data-responsable="adresse">
+                                <div class="field-box row">
+                                    <label class="col-md-2" for="form-enfant-responsable-adresse-numero">Adresse du responsable légal</label>
+                                    <div class="col-md-4 col-sm-5">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <input id="form-enfant-responsable-adresse-numero" name="form_enfant_responsable_adresse_numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse du responsable légal." value="<?=$enfant->guardian_address_number; ?>">
+                                            </div>
+                                            <div class="col-md-9">
+                                            <input id="form-enfant-responsable-adresse-voirie" name="form_enfant_responsable_adresse_voirie" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse du responsable légal." value="<?=$enfant->guardian_address_street; ?>">
+                                            </div>
+                                        </div>
 
-                            <div class="field-box row">
-                                <label class="col-md-2" for="form-enfant-responsable-adresse-numero">Adresse du responsable légal</label>
-                                <div class="col-md-4 col-sm-5">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <input id="form-enfant-responsable-adresse-numero" name="form_enfant_responsable_adresse_numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse du responsable légal." value="<?=$enfant->guardian_address_number; ?>">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                            <input id="form-enfant-responsable-adresse-code-postal" name="form_enfant_responsable_adresse_code_postal" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville du responsable légal." value="<?=$enfant->guardian_address_postal_code; ?>">
+                                            </div>
+                                            <div class="col-md-8">
+                                            <input id="form-enfant-responsable-adresse-code-ville" name="form_enfant_responsable_adresse_code_ville" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville du responsable légal." value="<?=$enfant->guardian_address_city; ?>">
+                                            </div>
                                         </div>
-                                        <div class="col-md-9">
-                                        <input id="form-enfant-responsable-adresse-voirie" name="form_enfant_responsable_adresse_voirie" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse du responsable légal." value="<?=$enfant->guardian_address_street; ?>">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                        <input id="form-enfant-responsable-adresse-code-postal" name="form_enfant_responsable_adresse_code_postal" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville du responsable légal." value="<?=$enfant->guardian_address_postal_code; ?>">
-                                        </div>
-                                        <div class="col-md-8">
-                                        <input id="form-enfant-responsable-adresse-code-ville" name="form_enfant_responsable_adresse_code_ville" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville du responsable légal." value="<?=$enfant->guardian_address_city; ?>">
-                                        </div>
-                                    </div>
-                                </div>                            
+                                    </div>                            
+                                </div>
                             </div>
-                        </div>
 
                         <div class="field-box row">
                             <label class="col-md-2">Domiciliation de l'enfant</label>
@@ -375,6 +372,7 @@
                                 </label>
                             </div>
                         </div>
+
 
                         <div data-domiciliation="famille">
                             <div class="field-box row">
@@ -411,6 +409,18 @@
                                     </div>
                                 </div>                            
                             </div>
+                        </div>
+                        <div class="field-box row">
+                            <label class="col-md-2" for="form-enfant-urgence-nom">Contact d'urgence</label>
+                            <div class="col-md-4 col-sm-5">
+                                <input id="form-enfant-urgence-nom" name="form_enfant_urgence_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom de la personne à contacter en cas d'urgence." value="<?=$enfant->emergency_name; ?>">
+                            </div>                            
+                        </div>
+                        <div class="field-box row">
+                            <label class="col-md-2" for="form-enfant-urgence-telephone">Téléphone d'urgence</label>
+                            <div class="col-md-4 col-sm-5">
+                                <input id="form-enfant-urgence-telephone" name="form_enfant_urgence_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de la personne à contacter en cas d'urgence." value="<?=$enfant->emergency_phone; ?>">
+                            </div>                            
                         </div>
 
                         <div class="field-box row">
@@ -584,6 +594,12 @@
                                     </div>
                                     Non
                                 </label>
+                            </div>
+                        </div>
+                         <div class="field-box row">
+                            <label class="col-md-2" for="form-enfant-note">Notes</label>
+                            <div class="col-md-4 col-sm-5">
+                                <textarea id="form-enfant-note" name="form_enfant_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de l'enfant."><?=$enfant->note; ?></textarea>
                             </div>
                         </div>
                         <input type="submit" class="btn-flat primary" name="submit" value="Valider">

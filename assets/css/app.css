@@ -372,3 +372,7 @@ body.menu .content {
 .panel .extendli {
   padding: 0;
 }
+.user-profile .header button.btn-flat,
+.user-profile .header a.btn-flat {
+  margin-top: 18px;
+}
