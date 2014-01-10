@@ -3,6 +3,8 @@
 class user
 {
 	
+    private static $table = "users";
+
 	//public
 	//private
 	public $identifier;
@@ -23,7 +25,7 @@ class user
 
 		global $db;
 
-		$user = $db->row('SELECT * FROM users WHERE identifier=:identifier AND password=:password', array(
+		$user = $db->row('SELECT * FROM '.self::$table.' WHERE identifier=:identifier AND password=:password', array(
 		        'identifier' => $identifier,
 		        'password' => $password
 		    	));
@@ -49,7 +51,7 @@ class user
 
 		global $db;
 
-		$user = $db->row('SELECT * FROM users WHERE identifier=:identifier AND password=:password', array(
+		$user = $db->row('SELECT * FROM '.self::$table.' WHERE identifier=:identifier AND password=:password', array(
 		        'identifier' => $identifier,
 		        'password' => md5($password)
 		    	));
@@ -92,7 +94,7 @@ class user
 	public static function get($id) {
 		global $db;
 
-		$user = $db->row('SELECT * FROM users WHERE id=:id', array(
+		$user = $db->row('SELECT * FROM '.self::$table.' WHERE id=:id', array(
 		        'id' => $id
 		        ));
 
@@ -109,7 +111,7 @@ class user
      */
 	public static function getList() {
 		global $db;
-		$users = $db->query('SELECT * FROM users');
+		$users = $db->query('SELECT * FROM '.self::$table);
 		return $users;
 	}
 
@@ -137,7 +139,7 @@ class user
      */
 	public static function remove($id){
         global $db;
-        $sql = 'DELETE FROM users WHERE id = :id';
+        $sql = 'DELETE FROM '.self::$table.' WHERE id = :id';
         $result = $db->delete($sql, array('id' => $id));
         return $result;
 	}
@@ -181,6 +183,15 @@ class user
 		session_destroy();		
 	}
 
+
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
     public static function getCurrentUser(){
         return $_SESSION['Auth']['id'];
     }

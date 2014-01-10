@@ -3,6 +3,9 @@
 class contact
 {
 
+
+    private static $table = "contact_structure";
+
     /**
      * desc
      *

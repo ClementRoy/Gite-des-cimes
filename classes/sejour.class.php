@@ -3,6 +3,8 @@
 class sejour
 {
     private static $table = 'sejour';
+
+    
     /**
      * desc
      *

@@ -3,6 +3,9 @@
 class facture
 {
 
+
+    private static $table = "facture";
+
     /**
      * desc
      *

@@ -3,7 +3,8 @@
 class convocation
 {
 
-	
+	private static $table = "covocation";
+
 	function __construct()
 	{
 		# code...

@@ -8,13 +8,14 @@ class DB {
     private $database 	= DB_NAME;
     private $db;
  
+
     /**
-     * desc
+     * Contrcutor
      *
      * @note 
      *
      * @param
-     * @return
+     * @return global $db object
      */
     public function __construct($host = null, $username = null, $password = null, $database = null){
         if($host != null){
@@ -35,8 +36,9 @@ class DB {
         }
     }
  
+
     /**
-     * desc
+     * Fetch All Query
      *
      * @note 
      *
@@ -50,8 +52,9 @@ class DB {
         return $req->fetchAll($type);
     }
 
+
     /**
-     * desc
+     * Fecth row Query
      *
      * @note 
      *
@@ -62,6 +65,7 @@ class DB {
         $datas = $this->query($sql, $data);
         return empty($datas) ? false : $datas[0];
     }
+
 
     /**
      * Insert query
@@ -77,6 +81,7 @@ class DB {
         return $req->rowCount();
     }
 
+
     /**
      * Update query
      *
@@ -91,6 +96,7 @@ class DB {
         return $req->rowCount();
     }
 
+
     /**
      * Delete query
      *
@@ -100,14 +106,8 @@ class DB {
      * @param $data Binded parameters
      */
     public function delete($sql, $data = array()) {
-        /*
-          $stmt = $pdo->prepare('DELETE FROM someTable WHERE id = :id');
-          $stmt->bindParam(':id', $id); // this time, we'll use the bindParam method
-          $stmt->execute();
-        */
         $req = $this->db->prepare($sql);
-        // $req->bindParam($data); 
-        $req->execute($data);  
+        $req->execute($data); 
         return $req->rowCount();
     }
 
