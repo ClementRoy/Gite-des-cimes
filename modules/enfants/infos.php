@@ -8,7 +8,7 @@
     <div class="content">
         
         <?php $enfant = enfant::get($_GET['id']); ?>
-        <?php tool::output($enfant); ?>
+        <?php //tool::output($enfant); ?>
 
     <div id="pad-wrapper" class="user-profile">
 
@@ -40,7 +40,7 @@
             </div>
 
 
-            <div class="modal fade" id="remove-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" id="remove-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -50,7 +50,7 @@
                         <div class="modal-body">
                             <p>Vous êtes sur le point de supprimer la fiche de <strong><?=$enfant->firstname; ?> <?=$enfant->lastname; ?></strong>.<br />
                                 Cette action est irréversible.</p>
-                            </div>
+                        </div>
                             <div class="modal-footer">
                                 <a class="btn-flat white" data-dismiss="modal">Annuler</a>
                                 <a href="/enfants/supprimer/id/<?=$enfant->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
@@ -238,10 +238,6 @@
                     </div>
 
 
-
-
-
-
                     <dl>
                         <dt>Séjour <a href="">Nom du séjour</a> - du 21/12/2004 au 28/12/2004 :</dt>
                         <dd>Augue enim phasellus adipiscing mid parturient? Ac montes, in enim augue ut.</dd>
@@ -296,7 +292,7 @@
         </div>
 
 
-        <?php tool::output($enfant); ?>
+        <?php //tool::output($enfant); ?>
 
     </div>
 

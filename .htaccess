@@ -10,7 +10,7 @@ RewriteCond %{SCRIPT_FILENAME} !-f
 
 #RewriteRule ^assets/(css|fonts|js|img)/.* - [NC,L]
 #RewriteRule ^([a-zA-Z0-9-]+)/?$  /index\.php?module=$1 [L]
-#RewriteRule ^([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/?$ /index\.php?module=$1&function=$2 [L]
-#RewriteRule ^([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/?$ /index\.php?module=$1&function=$2&id=$3 [L]
+#RewriteRule ^([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/?$ /index\.php?module=$1&view=$2 [L]
+#RewriteRule ^([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/?$ /index\.php?module=$1&view=$2&id=$3 [L]
 RewriteRule .* index\.php [L]
 

@@ -15,8 +15,6 @@ class app
 	public function start(){
 		session_start();
 
-		
-
 		$GLOBALS['db'] = new DB();
 
 		$params = array_filter(explode('/', $_SERVER['REQUEST_URI']));
@@ -26,7 +24,7 @@ class app
 		        $GLOBALS['module'] = $param;
 		    }
 		    elseif($key == 2) {
-		        $GLOBALS['function'] = $param;
+		        $GLOBALS['view'] = $param;
 		    }
 		    else {
 		        if($key%2 != 0) {
@@ -58,26 +56,26 @@ class app
 
 		if ( user::isLogged() ) {
 		    
-		    global $module, $function, $modules;
+		    global $module, $view, $modules;
 
 		    $user = new user($_SESSION['Auth']['identifier'], $_SESSION['Auth']['password']);
 
 		    if ( isset($module) && !empty($module) && property_exists($modules, $module) ) {
 		        $module = $module;
 		        //echo $module;
-		         if ( isset($function) && !empty($function) && in_array($function, $modules->$module->functions) ) {
-		           $function = $function;
+		         if ( isset($view) && !empty($view) && in_array($view, $modules->$module->views) ) {
+		           $view = $view;
 		         }
 		         else {
-		            $function = $modules->$module->functions[0];
+		            $view = $modules->$module->views[0];
 		         }
 		    }
 		    else {
-		        $function = DEFAULT_FUNCTION;
+		        $view = DEFAULT_VIEW;
 		        $module   = DEFAULT_MODULE;
 		    }
-		    //echo $_SERVER["DOCUMENT_ROOT"] . '/modules/'.$module.'/'.$function.'.php';
-		    include($_SERVER["DOCUMENT_ROOT"] . '/modules/'.$module.'/'.$function.'.php');
+		    //echo $_SERVER["DOCUMENT_ROOT"] . '/modules/'.$module.'/'.$view.'.php';
+		    include($_SERVER["DOCUMENT_ROOT"] . '/modules/'.$module.'/'.$view.'.php');
 
 		}
 		else {

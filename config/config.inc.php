@@ -47,7 +47,7 @@ Certains sont même abstrait
 $GLOBALS['modules'] = JSON::get(dirname(__FILE__) . '/modules.json');
 
 define('DEFAULT_MODULE', 'accueil');
-define('DEFAULT_FUNCTION', 'index');
+define('DEFAULT_VIEW', 'index');
 
 define('EMPTYVAL', 'NC');
 
