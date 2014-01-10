@@ -3,8 +3,11 @@
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
-    <?php if(isset($validate)): ?>
-        <?php  
+    <?php if(isset($_POST['submit'])): ?>
+                <?php //tool::output($_POST); ?>
+                <?php //tool::output($_SESSION); ?>
+                <?php 
+                extract($_POST);
         $datas = array(
             ':created' => tool::currentTime(),
             ':edited' => tool::currentTime(),
@@ -18,50 +21,33 @@
             ':rank' => $form_utilisateur_lvl
             );
 
-        $sql = 'INSERT INTO users (created, edited, identifier, firstname, lastname, password, email, rank) value (:created, :edited,:identifier,:firstname,:lastname,:password,:email,:rank)';
+        $sql = 'INSERT INTO users (
+            created, 
+            edited, 
+            author,
+            editor,
+            identifier, 
+            firstname, 
+            lastname, 
+            password, 
+            email, 
+            rank) value (
+            :created, 
+            :edited,
+            :author,
+            :editor,
+            :identifier,
+            :firstname,
+            :lastname,
+            :password,
+            :email,
+            :rank)';
 
         $result = user::add($sql, $datas);
 
-        /*
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url );
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, true);
-
-        $data = array(
-            'action' => 'user_added',
-            'firstname' => $form_utilisateur_prenom,
-            'lastname' => $form_utilisateur_nom
-        );
-
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        $output = curl_exec($ch);
-        $info = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
-        curl_close($ch);
-        header('Location: ' . $url);
-        */
-
-/*
-
-$datatopost = array (
-"year" => $currentyear,
-"month" => $currentmonth
-);
-
-
-$url = "timerecording.php";
-
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_HEADER, false);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $datatopost);
-curl_exec($ch);
-curl_close($ch);
-$url = curl_getinfo($ch , CURLINFO_EFFECTIVE_URL);
-header('Location: ' . $url);
-
-*/
         ?>
+
+    <?php if($result): ?>
         <div class="content">
             <div id="pad-wrapper" class="action-page">
                 <div class="row header">
@@ -81,6 +67,30 @@ header('Location: ' . $url);
                 </div>
             </div>
         </div>
+
+    <?php else: ?>
+
+        <div class="content">
+            <div id="pad-wrapper" class="action-page">
+                <div class="row header">
+                    <div class="col-md-12">
+                        <h3>Ajouter un utilisateur</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger">
+                            <i class="icon-remove-sign"></i> 
+                            Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
+                        </div>
+                        <a href="/enfants/ajouter">Retourner au formulaire d'ajout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+
     <?php else: ?>
         <div class="content">
             <div id="pad-wrapper" class="form-page new-user">
@@ -155,7 +165,7 @@ header('Location: ' . $url);
 
                     <div class="field-box actions">
                         <div class="col-md-7">
-                            <input type="submit" class="btn-flat primary" name="validate" value="Ajouter cet utilisateur">
+                            <input type="submit" class="btn-flat primary" name="submit" value="Ajouter cet utilisateur">
                             <span>OU</span>
                             <input type="reset" value="Annuler" class="reset">
                             <a href="/utilisateurs/" class="reset">Annuler</a>

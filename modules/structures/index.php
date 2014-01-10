@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-md-9 text-right">
                     <input type="text" id="table-enfant-search" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">
-                    <a href="/structure/ajouter" class="btn-flat primary"><span>+</span>
+                    <a href="/structures/ajouter" class="btn-flat primary"><span>+</span>
                         Ajouter une structure</a>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                                 <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name; ?></a>
                             </td>
                             <td>
-                                 <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->paying; ?></a>
+                                 <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->payer; ?></a>
                             </td>
                             <td>
                                <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->email; ?></a>

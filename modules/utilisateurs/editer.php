@@ -8,16 +8,17 @@
     <?php if(isset($validate)): ?>
         <?php  
         $datas = array(
-            'edited' => tool::currentTime(),
-            'firstname' => $form_utilisateur_prenom,
-            'lastname' => $form_utilisateur_nom,
-            'email' => $form_utilisateur_mail,
-            'rank' => $form_utilisateur_lvl,
-            'id' => $id
+            ':edited' => tool::currentTime(),
+            ':editor' => user::getCurrentUser(),
+            ':firstname' => $form_utilisateur_prenom,
+            ':lastname' => $form_utilisateur_nom,
+            ':email' => $form_utilisateur_mail,
+            ':rank' => $form_utilisateur_lvl,
+            ':id' => $_GET['id']
             );
 
         $sql = 'UPDATE users SET edited = :edited, firstname = :firstname, lastname = :lastname, email = :email, rank = :rank WHERE id=:id';
-        user::update($sql, $datas);
+        $result = user::update($sql, $datas);
 
         ?>
         <div class="content">

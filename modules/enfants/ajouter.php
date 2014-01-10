@@ -255,10 +255,11 @@
                 <label class="col-md-2" for="form-enfant-structure-select">Nom de la structure</label>
                 <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez la structure qui s'occupe de cet enfant.">
                     <div class="ui-select">
+                        <?php $structures = structure::getList(); ?>
                         <select id="form-enfant-structure-select" name="form_enfant_structure">
-                            <option selected="">Choisissez une structure</option>
-                            <option>Custom selects</option>
-                            <option>Pure css styles</option>
+                            <?php foreach($structures as $structure): ?>
+                            <option selected=""><?=$structure->name ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                     <p>+</p>

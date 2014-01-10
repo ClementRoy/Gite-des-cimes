@@ -4,12 +4,18 @@
     <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
     
 
-    <?php if(isset($validate)): ?>
-        <?php  
+    <?php if(isset($_POST['submit'])): ?>
+        <?php //tool::output($_POST); ?>
+        <?php //tool::output($_SESSION); ?>
+        <?php 
+        extract($_POST);
             $datas = array(
-                            ':identifier' => $form_structure_identifiant,
-                            ':name' => $form_structure_nom,
-                            ':paying' => $form_structure_payeur,
+                            ':created' => tool::currentTime(),
+                            ':edited' => tool::currentTime(),
+                            ':creator' => user::getCurrentUser(), 
+                            ':editor' => user::getCurrentUser(), 
+                            ':name' => $form_structure_name,
+                            ':payer' => $form_structure_payer,
                             ':email' => $form_structure_email,
                             ':phone' => $form_structure_telephone,
                             ':address_number' => $form_structure_adresse_numero,
@@ -18,26 +24,55 @@
                             ':address_city' => $form_structure_adresse_code_ville
                             );
 
-            $sql = 'INSERT INTO 
-                    structure (identifier, name, paying, email, phone, address_number, address_street, address_postal_code, address_city) 
-                    value (:identifier, :name, :paying, :email, :phone, :address_number, :address_street, :address_postal_code, :address_city)';
-
-            structure::add($sql, $datas);
+            $result = structure::add($datas);
 
         ?>
-    <?php tool::output($_POST); ?>
-    <div class="content">
-        <div id="pad-wrapper" class="form-page">
-            <div class="row header">
-                <div class="col-md-12">
-                    <h3>Ajouter un séjour</h3>
+
+    <?php if($result): ?>
+        <div class="content">
+            <div id="pad-wrapper" class="action-page">
+                <div class="row header">
+                    <div class="col-md-12">
+                        <h3>Ajouter une structure</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-success">
+                            <i class="icon-ok-sign"></i> 
+                            La structure <?=$form_structure_name; ?> a bien été ajoutée
+                        </div>
+                        <a href="/structures/">Retourner à la liste des structures</a>
+
+                    </div>
                 </div>
             </div>
         </div>
 
-        <p>La structure <?=$form_sejour_name; ?> a bien été ajouté</p>
-        <a href="/structure/index/">Retourner à la liste des séjours</a>
-    </div>
+    <?php else: ?>
+
+        <div class="content">
+            <div id="pad-wrapper" class="action-page">
+                <div class="row header">
+                    <div class="col-md-12">
+                        <h3>Ajouter une structure</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger">
+                            <i class="icon-remove-sign"></i> 
+                            Une erreur s'est produite durant l'ajout de la structure, veuillez réessayer
+                        </div>
+                        <a href="/structures/ajouter">Retourner au formulaire d'ajout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+
+
     <?php else: ?>
     <div class="content">
         <div id="pad-wrapper" class="form-page">
@@ -63,7 +98,7 @@
                                 <label class="radio-inline col-md-7" for="form-structure-payeur-oui">
                                     <div class="radio" id="uniform-form-structure-payeur-oui">
                                         <span class="checked">
-                                            <input type="radio" name="form_structure_payeur_oui" id="form-structure-payeur-oui" value="oui">
+                                            <input type="radio" name="form_structure_payer" id="form-structure-payeur-oui" value="1">
                                         </span>
                                     </div>
                                     Oui
@@ -71,7 +106,7 @@
                                 <label class="radio-inline col-md-4" for="form-structure-payeur-non">
                                     <div class="radio" id="uniform-form-structure-payeur-non">
                                         <span class="checked">
-                                            <input type="radio" name="form_structure_payeur_non" id="form-structure-payeur-non" value="non" checked="">
+                                            <input type="radio" name="form_structure_payer" id="form-structure-payeur-non" value="0" checked="">
                                         </span>
                                     </div>
                                     Non
@@ -90,7 +125,7 @@
                         <div class="field-box row">
                             <label class="col-md-2" for="form-structure-phone">Téléphone</label>
                             <div class="col-md-4">
-                                <input id="form-structure-phone" name="form_structure_email" type="text" class="form-control"
+                                <input id="form-structure-phone" name="form_structure_telephone" type="text" class="form-control"
                                 data-toggle="tooltip" title="Renseignez le numéro de téléphone de la structure." 
                                 parsley-type="phone">
                             </div>                        
@@ -114,7 +149,7 @@
                             </div>
 
 
-                        <input type="submit" class="btn-flat primary" name="validate" value="Valider">
+                        <input type="submit" class="btn-flat primary" name="submit" value="Valider">
                     </div>
             </form>
         </div>
