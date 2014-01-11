@@ -18,20 +18,19 @@ class sejour
 		# code...
 	}
 
+
+
     /**
-     * desc
+     * Get an object from its id
      *
-     * @note 
-     *
-     * @param
-     * @return
+     * @param int id of the object
+     * @return object result of the query
      */
     public static function get($id){
         global $db;
-        $params = array(
-                        'id' => $id
-                        );
-        $result = $db->row('SELECT * FROM '.self::$table.' WHERE id=:id', $params);
+        $params = array(':id' => $id);
+        $sql = 'SELECT * FROM '.self::$table.' WHERE id=:id';
+        $result = $db->row($sql, $params);
         return $result;
     }
 
@@ -56,30 +55,79 @@ class sejour
     }
 
     /**
-     * desc
+     * Count the number of entries in the database table
      *
-     * @note 
-     *
-     * @param
-     * @return
+     * @return int number of the entries in the table
      */
-    public static function count(){
+    public static function countAll(){
         global $db;
-        $result = $db->row('SELECT COUNT(*) FROM '.self::$table);
+        $result = $db->row('SELECT COUNT(*) FROM '.self::$table.'');
         return $result;
     }
 
+
     /**
-     * desc
+     * Insert a new object into the database
      *
-     * @note 
-     *
-     * @param
-     * @return
+     * @param array data to insert
+     * @param array override the metadata
+     * @return boolean query result
      */
-    public static function update($data = array(), $id){
+    public static function add($data = array(), $metadata = false){
         global $db;
 
+        // Handle Metadata infos
+        if(!$metadata) {
+            $metadata = array(
+                                ':created' => tool::currentTime(),
+                                ':edited' => tool::currentTime(),
+                                ':creator' => user::getCurrentUser(), 
+                                ':editor' => user::getCurrentUser(), 
+                            );
+        }
+
+        // Merge the data and metadatas arrays
+        $data = array_merge($metadata, $data);
+
+        // Build the Query, be careful, vars must be prefixed with ":"
+        $bind = implode(', ', array_keys($data)); 
+        $entries = '';
+        foreach (array_keys($data) as $key => $name) {
+            if($key !=0)
+                $entries .= ',';
+            $entries .=  substr($name, 1);
+        }    
+        $sql = 'INSERT INTO '.self::$table.' (' . $entries . ') ' . 'values (' . $bind . ')';
+
+        $result = $db->insert($sql, $data);
+        
+        return $result;
+    }
+
+
+    /**
+     * Update the object
+     *
+     * @param array data to update
+     * @param int id of the object to update
+     * @param array override the metadata
+     * @return boolean query result
+     */
+    public static function update($data = array(), $id, $metadata = false){
+        global $db;
+
+        // Handle the metadatas
+        if(!$metadata) {
+            $metadata = array(
+                                ':edited' => tool::currentTime(),
+                                ':editor' => user::getCurrentUser(), 
+                            );
+        }
+
+        // Merge the data and metadatas arrays
+        $data = array_merge($metadata, $data);
+
+        // Build the Query, be careful, vars must be prefixed with ":"
         $entries = '';
         foreach (array_keys($data) as $key => $name) {
             if($key !=0)
@@ -94,42 +142,16 @@ class sejour
     }
 
     /**
-     * desc
+     * Remove object
      *
-     * @note
-     *
-     * @param sql 
-     * @param params those are transmitted to the sql query
-     * @return
-     */
-    public static function add($data = array()){
-        global $db;
-
-        $bind = implode(', ', array_keys($data)); 
-        $entries = '';
-        foreach (array_keys($data) as $key => $name) {
-            if($key !=0)
-                $entries .= ',';
-            $entries .=  substr($name, 1);
-        }    
-        $sql = 'INSERT INTO '.self::$table.' (' . $entries . ') ' . 'values (' . $bind . ')';
-
-        $result = $db->insert($sql, $data);
-        return $result;
-    }
-
-    /**
-     * desc
-     *
-     * @note 
-     *
-     * @param id id of the child to remove
-     * @return
+     * @param id of the object
+     * @return boolean
      */
     public static function remove($id){
         global $db;
+        $data = array(':id' => $id);
         $sql = 'DELETE FROM '.self::$table.' WHERE id = :id';
-        $result = $db->delete($sql, array('id' => $id));
+        $result = $db->delete($sql, $data);
         return $result;
     }
 

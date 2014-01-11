@@ -3,22 +3,7 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
-<?php  
-// Controller
-
-// Get all users list
-$users = user::getList();
-
-// Remove one user case
-
-
-// Add user case
-
-
-
-?>
-
-
+    <?php  $users = user::getList(); ?>
 
     <!-- main container -->
     <div class="content">

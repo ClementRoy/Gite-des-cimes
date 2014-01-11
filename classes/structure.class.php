@@ -16,6 +16,20 @@ class structure
 
 
     /**
+     * Get an object from its id
+     *
+     * @param int id of the object
+     * @return object result of the query
+     */
+    public static function get($id){
+        global $db;
+        $params = array(':id' => $id);
+        $sql = 'SELECT * FROM '.self::$table.' WHERE id=:id';
+        $result = $db->row($sql, $params);
+        return $result;
+    }
+
+    /**
      * desc
      *
      * @note 
@@ -23,16 +37,6 @@ class structure
      * @param
      * @return
      */
-    public static function get($id){
-        global $db;
-        $params = array(
-                        ':id' => $id
-                        );
-        $sql = 'SELECT * FROM '.self::$table.' WHERE id=:id';
-        $result = $db->row($sql, $params);
-        return $result;
-    }
-
     public static function getByName($name){
         echo $name;
         global $db;
@@ -66,12 +70,22 @@ class structure
 
 
     /**
-     * desc
+     * Count the number of entries in the database table
      *
-     * @note 
+     * @return int number of the entries in the table
+     */
+    public static function countAll(){
+        global $db;
+        $result = $db->row('SELECT COUNT(*) FROM '.self::$table.'');
+        return $result;
+    }
+
+    /**
+     * Insert a new object into the database
      *
-     * @param
-     * @return
+     * @param array data to insert
+     * @param array override the metadata
+     * @return boolean query result
      */
     public static function add($data = array(), $metadata = false){
         global $db;
@@ -85,9 +99,11 @@ class structure
                                 ':editor' => user::getCurrentUser(), 
                             );
         }
+
+        // Merge the data and metadatas arrays
         $data = array_merge($metadata, $data);
-        //tool::output($data);
-        //die();
+
+        // Build the Query, be careful, vars must be prefixed with ":"
         $bind = implode(', ', array_keys($data)); 
         $entries = '';
         foreach (array_keys($data) as $key => $name) {
@@ -98,29 +114,34 @@ class structure
         $sql = 'INSERT INTO '.self::$table.' (' . $entries . ') ' . 'values (' . $bind . ')';
 
         $result = $db->insert($sql, $data);
+
         return $result;
     }
 
 
     /**
-     * desc
+     * Update the object
      *
-     * @note 
-     *
-     * @param
-     * @return
+     * @param array data to update
+     * @param int id of the object to update
+     * @param array override the metadata
+     * @return boolean query result
      */
     public static function update($data = array(), $id, $metadata = false){
         global $db;
 
+        // Handle the metadatas
         if(!$metadata) {
-        $metadata = array(
-                            ':edited' => tool::currentTime(),
-                            ':editor' => user::getCurrentUser(), 
-                        );
+            $metadata = array(
+                                ':edited' => tool::currentTime(),
+                                ':editor' => user::getCurrentUser(), 
+                            );
         }
+
+        // Merge the data and metadatas arrays
         $data = array_merge($metadata, $data);
 
+        // Build the Query, be careful, vars must be prefixed with ":"
         $entries = '';
         foreach (array_keys($data) as $key => $name) {
             if($key !=0)
@@ -136,12 +157,10 @@ class structure
 
 
     /**
-     * desc
+     * Remove object
      *
-     * @note 
-     *
-     * @param
-     * @return
+     * @param id of the object
+     * @return boolean
      */
     public static function remove($id){
         global $db;

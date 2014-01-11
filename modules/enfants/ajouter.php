@@ -16,57 +16,54 @@
                 <?php //tool::output($_POST); ?>
                 <?php //tool::output($_SESSION); ?>
                 <?php 
-                extract($_POST);
-                // Create enfant entry
-                $birthdate = tool::generateDatetime($form_enfant_naissance);
-                $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
-                $cpam_validite = tool::generateDatetime($form_enfant_cpam_validite);
+                    extract($_POST);
 
-                $datas = array(
-                    ':created' => tool::currentTime(),
-                    ':edited' => tool::currentTime(), 
-                    ':creator' => user::getCurrentUser(), 
-                    ':editor' => user::getCurrentUser(),                  
-                    ':firstname' => $form_enfant_prenom,
-                    ':lastname' => $form_enfant_nom,
-                    ':birthdate' => $birthdate,
-                    ':sex' => $form_enfant_sexe,
-                    ':registration_by' => $form_enfant_inscription,
-                    ':organization' => $form_enfant_structure,
-                    ':contact' => $form_enfant_contact,
-                    ':guardian' => $form_enfant_responsable,
-                    ':father_name' => $form_enfant_pere_nom,
-                    ':father_phone' => $form_enfant_pere_telephone,
-                    ':mother_name' => $form_enfant_mere_nom,
-                    ':mother_phone' => $form_enfant_mere_telephone,
-                    ':guardian_name' => $form_enfant_tuteur_nom,
-                    ':guardian_phone' => $form_enfant_tuteur_telephone,
-                    ':emergency_name' => $form_enfant_urgence_nom,
-                    ':emergency_phone' => $form_enfant_urgence_telephone,
-                    ':guardian_address_number' => $form_enfant_responsable_adresse_numero,
-                    ':guardian_address_street' => $form_enfant_responsable_adresse_voirie,
-                    ':guardian_address_postal_code' => $form_enfant_responsable_adresse_code_postal,
-                    ':guardian_address_city' => $form_enfant_responsable_adresse_code_ville,
-                    ':domiciliation' => $form_enfant_domiciliation,
-                    ':host_family_name' => $form_enfant_famille_nom,
-                    ':host_family_phone' => $form_enfant_famille_telephone,
-                    ':host_family_address_number' => $form_enfant_famille_adresse_numero,
-                    ':host_family_address_street' => $form_enfant_famille_adresse_voirie,
-                    ':host_family_address_postal_code' => $form_enfant_famille_adresse_code_postal,
-                    ':host_family_address_city' => $form_enfant_famille_adresse_code_ville,
-                    ':image_rights' => $form_enfant_droit_image,
-                    ':medicals_treatments' => $form_enfant_traitement_medical,
-                    ':allergies' => $form_enfant_contre_indication,
-                    ':number_ss' => $form_enfant_numero_securite,
-                    ':self_assurance' => $form_enfant_assurance,
-                    ':self_assurance_expiration_date' => $assurance_validite,
-                    ':cpam_attestation' => $form_enfant_attestation_cpam,
-                    ':cpam_attestation_expiration_date' => $cpam_validite,
-                    ':vaccination' => $form_enfant_carnet_vaccination,
-                    ':health_record' => $form_enfant_fiche_sanitaire,
-                    ':stay_record' => $form_enfant_fiche_sejour,
-                    ':note' => $form_enfant_note
-                    );
+                    // Create enfant entry
+                    $birthdate = tool::generateDatetime($form_enfant_naissance);
+                    $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
+                    $cpam_validite = tool::generateDatetime($form_enfant_cpam_validite);
+
+                    $datas = array(                
+                        ':firstname' => $form_enfant_prenom,
+                        ':lastname' => $form_enfant_nom,
+                        ':birthdate' => $birthdate,
+                        ':sex' => $form_enfant_sexe,
+                        ':registration_by' => $form_enfant_inscription,
+                        ':organization' => $form_enfant_structure,
+                        ':contact' => $form_enfant_contact,
+                        ':guardian' => $form_enfant_responsable,
+                        ':father_name' => $form_enfant_pere_nom,
+                        ':father_phone' => $form_enfant_pere_telephone,
+                        ':mother_name' => $form_enfant_mere_nom,
+                        ':mother_phone' => $form_enfant_mere_telephone,
+                        ':guardian_name' => $form_enfant_tuteur_nom,
+                        ':guardian_phone' => $form_enfant_tuteur_telephone,
+                        ':emergency_name' => $form_enfant_urgence_nom,
+                        ':emergency_phone' => $form_enfant_urgence_telephone,
+                        ':guardian_address_number' => $form_enfant_responsable_adresse_numero,
+                        ':guardian_address_street' => $form_enfant_responsable_adresse_voirie,
+                        ':guardian_address_postal_code' => $form_enfant_responsable_adresse_code_postal,
+                        ':guardian_address_city' => $form_enfant_responsable_adresse_code_ville,
+                        ':domiciliation' => $form_enfant_domiciliation,
+                        ':host_family_name' => $form_enfant_famille_nom,
+                        ':host_family_phone' => $form_enfant_famille_telephone,
+                        ':host_family_address_number' => $form_enfant_famille_adresse_numero,
+                        ':host_family_address_street' => $form_enfant_famille_adresse_voirie,
+                        ':host_family_address_postal_code' => $form_enfant_famille_adresse_code_postal,
+                        ':host_family_address_city' => $form_enfant_famille_adresse_code_ville,
+                        ':image_rights' => $form_enfant_droit_image,
+                        ':medicals_treatments' => $form_enfant_traitement_medical,
+                        ':allergies' => $form_enfant_contre_indication,
+                        ':number_ss' => $form_enfant_numero_securite,
+                        ':self_assurance' => $form_enfant_assurance,
+                        ':self_assurance_expiration_date' => $assurance_validite,
+                        ':cpam_attestation' => $form_enfant_attestation_cpam,
+                        ':cpam_attestation_expiration_date' => $cpam_validite,
+                        ':vaccination' => $form_enfant_carnet_vaccination,
+                        ':health_record' => $form_enfant_fiche_sanitaire,
+                        ':stay_record' => $form_enfant_fiche_sejour,
+                        ':note' => $form_enfant_note
+                        );
 
     $sql = 'INSERT INTO 
     enfant (

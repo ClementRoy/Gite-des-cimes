@@ -5,22 +5,24 @@
 
     <?php $utilisateur = user::get($_GET['id']); ?>
 
-    <?php if(isset($validate)): ?>
+    <?php if(isset($_POST['submit'])): ?>
         <?php  
         $datas = array(
-            ':edited' => tool::currentTime(),
-            ':editor' => user::getCurrentUser(),
-            ':firstname' => $form_utilisateur_prenom,
-            ':lastname' => $form_utilisateur_nom,
-            ':email' => $form_utilisateur_mail,
-            ':rank' => $form_utilisateur_lvl,
-            ':id' => $_GET['id']
-            );
+                    ':firstname' => $form_utilisateur_prenom,
+                    ':lastname' => $form_utilisateur_nom,
+                    ':email' => $form_utilisateur_mail,
+                    ':rank' => $form_utilisateur_lvl,
+                    ':id' => $_GET['id']
+                    );
 
-        $sql = 'UPDATE users SET edited = :edited, firstname = :firstname, lastname = :lastname, email = :email, rank = :rank WHERE id=:id';
-        $result = user::update($sql, $datas);
+        $result = user::update($datas);
 
         ?>
+            <?php if($result): ?>
+
+            <?php else: ?>
+
+            <?php endif; ?>
         <div class="content">
             <div id="pad-wrapper" class="action-page">
                 <div class="row header">
@@ -115,7 +117,7 @@
 
                     <div class="field-box actions">
                         <div class="col-md-7">
-                            <input type="submit" class="btn-flat primary" name="validate" value="Valider les changements">
+                            <input type="submit" class="btn-flat primary" name="submit" value="Valider les changements">
                             <span>OU</span>
                             <input type="reset" value="Annuler" class="reset">
                             <a href="/utilisateurs/" class="reset">Annuler</a>

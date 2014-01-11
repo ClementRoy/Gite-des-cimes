@@ -12,11 +12,11 @@
                     <h3>Séjour</h3>
                 </div>
             </div>
-            <?php if(isset($confirm)): ?>
+            <?php if(isset($_GET['confirm'])): ?>
                 <div class="row">
                     <div class="col-md-12">
                         <?php 
-                        sejour::remove($_GET['id']);
+                            $result = sejour::remove($_GET['id']);
                         ?>
                         <p>Le séjour a bien été supprimé</p>
                         <a href="/sejours/">Retourner à la liste des séjours</a>

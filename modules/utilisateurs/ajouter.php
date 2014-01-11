@@ -4,48 +4,21 @@
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
     <?php if(isset($_POST['submit'])): ?>
-                <?php //tool::output($_POST); ?>
-                <?php //tool::output($_SESSION); ?>
-                <?php 
-                extract($_POST);
-        $datas = array(
-            ':created' => tool::currentTime(),
-            ':edited' => tool::currentTime(),
-            ':author' => user::getCurrentUser(), 
-            ':editor' => user::getCurrentUser(), 
-            ':identifier' => $form_utilisateur_identifiant,
-            ':firstname' => $form_utilisateur_prenom,
-            ':lastname' => $form_utilisateur_nom,
-            ':password' => md5($form_utilisateur_password),
-            ':email' => $form_utilisateur_mail,
-            ':rank' => $form_utilisateur_lvl
-            );
 
-        $sql = 'INSERT INTO users (
-            created, 
-            edited, 
-            author,
-            editor,
-            identifier, 
-            firstname, 
-            lastname, 
-            password, 
-            email, 
-            rank) value (
-            :created, 
-            :edited,
-            :author,
-            :editor,
-            :identifier,
-            :firstname,
-            :lastname,
-            :password,
-            :email,
-            :rank)';
+    <?php 
+            extract($_POST);
+            $datas = array(
+                            ':identifier' => $form_utilisateur_identifiant,
+                            ':firstname' => $form_utilisateur_prenom,
+                            ':lastname' => $form_utilisateur_nom,
+                            ':password' => md5($form_utilisateur_password),
+                            ':email' => $form_utilisateur_mail,
+                            ':rank' => $form_utilisateur_lvl
+                );
 
-        $result = user::add($sql, $datas);
+            $result = user::add($datas);
 
-        ?>
+    ?>
 
     <?php if($result): ?>
         <div class="content">

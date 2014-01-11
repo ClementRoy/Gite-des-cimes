@@ -27,7 +27,7 @@
                         <thead>
                             <tr>
                                 <th class="sortable">Nom</th>
-                                <th class="sortable"><span class="line"></span>Payeur</th>
+                                <th class="sortable"><span class="line"></span>Prénom</th>
                                 <th class="sortable"><span class="line"></span>Email</th>
                             </tr>
                         </thead>
@@ -38,10 +38,10 @@
                         <?php foreach($contacts as $key => $contact): ?>
                         <tr>
                             <td>
-                                <a href="/contacts/infos/id/<?=$contact->id; ?>"><?=$contact->firstname; ?></a>
+                                <a href="/contacts/infos/id/<?=$contact->id; ?>"><?=$contact->lastname; ?></a>
                             </td>
                             <td>
-                                 <a href="/contacts/infos/id/<?=$contact->id; ?>"><?=$contact->lastname; ?></a>
+                                 <a href="/contacts/infos/id/<?=$contact->id; ?>"><?=$contact->firstname; ?></a>
                             </td>
                             <td>
                                <a href="/contacts/infos/id/<?=$contact->id; ?>"><?=$contact->email; ?></a>

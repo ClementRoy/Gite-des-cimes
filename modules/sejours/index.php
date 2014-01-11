@@ -4,6 +4,9 @@
     <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
+    <?php $sejours = sejour::getList(); ?>
+    <?php //tool::output($sejours); ?>
+
     <!-- main container -->
     <div class="content">
 <div id="pad-wrapper">
@@ -15,10 +18,6 @@
                         Ajouter un séjour</a>
                 </div>
             </div>
-
-            <?php $sejours = sejour::getList(); ?>
-
-			<?php //tool::output($sejours); ?>
 
             <div class="row">
                 <div class="col-md-12">

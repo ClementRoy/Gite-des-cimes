@@ -4,8 +4,9 @@
     <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
     
 
-    <?php if(isset($validate)): ?>
+    <?php if(isset($_POST['submit'])): ?>
         <?php  
+            extract($_POST);
             $datas = array(
                             ':identifier' => $form_sejour_identifiant,
                             ':name' => $form_sejour_nom,
@@ -19,14 +20,10 @@
                             ':price' => $form_sejour_prix
                             );
 
-            $sql = 'INSERT INTO 
-                    sejour (identifier, name, date_from, date_to, place, capacity_max, capacity_min, numero, price) 
-                    value (:identifier,:name,:date_from,:date_to,:place,:capacity_max,:capacity_min,:numero,:price)';
-
-            sejour::add($sql, $datas);
+            $result = sejour::add($datas);
 
         ?>
-    <?php tool::output($_POST); ?>
+    <?php //tool::output($_POST); ?>
     <div class="content">
         <div id="pad-wrapper" class="form-page">
             <div class="row header">
@@ -107,7 +104,7 @@
                         </div>
 
 
-                        <input type="submit" class="btn-flat primary" name="validate" value="Valider">
+                        <input type="submit" class="btn-flat primary" name="submit" value="Valider">
                     </div>
             </form>
         </div>

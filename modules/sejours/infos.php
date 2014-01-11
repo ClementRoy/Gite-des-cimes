@@ -8,6 +8,8 @@
 
         <?php $sejour = sejour::get($_GET['id']); ?>
         <?php tool::output($sejour); ?>
+
+
         <div id="pad-wrapper">
             <div class="row header">
                 <div class="col-md-5">
@@ -114,9 +116,6 @@
                 </div>
             </div>
         </div>
-
-
-<?php //tool::output($enfant); ?>
 
     </div>
 
