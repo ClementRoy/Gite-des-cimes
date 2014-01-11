@@ -8,7 +8,7 @@
 <div class="content">
 
     <?php $enfant = enfant::get($_GET['id']); ?>
-    <?php //tool::output($enfant); ?>
+    <?php // tool::output($enfant); ?>
 
     <div id="pad-wrapper" class="user-profile">
 
@@ -31,6 +31,17 @@
 
 
                 <div class="col-md-4 text-right pull-right">
+                <div class="dropdown">
+                    <button class="btn-flat white" data-toggle="dropdown">
+                        <i class="icon-info-sign"></i>
+                    </button>
+                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                       <li><strong>Créé par :</strong> XX</li>
+                       <li><strong>Le :</strong> XX</li>
+                       <li><strong>Créé par :</strong> XX</li>
+                       <li><strong>Créé par :</strong> XX</li>
+                      </ul>
+                </div>
                     <button class="btn-flat danger" data-toggle="modal" data-target="#remove-modal">
                         <i class="icon-remove"></i> Supprimer
                     </button>
@@ -71,7 +82,7 @@
                                 <li class="list-group-item">
                                     <p><strong>Date de naissance :</strong></p>
                                     <?php $birthdate = new DateTime($enfant->birthdate); ?>
-                                    <p><?=($birthdate->getTimestamp() != '-62169987600')? strftime('%d %B %Y', $birthdate->getTimestamp()) : '<em>Non renseignée</em>';?></p>
+                                    <p class="editable"><?=($birthdate->getTimestamp() != '-62169987600')? strftime('%d %B %Y', $birthdate->getTimestamp()) : '<em>Non renseignée</em>';?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <p><strong>Age :</strong></p>
@@ -79,15 +90,17 @@
                                 </li>
                                 <li class="list-group-item">
                                     <p><strong>Sexe :</strong></p>
-                                    <p><?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?></p>
+                                    <p class="editable"><?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?></p>
 
                                 </li>
                                 <li class="list-group-item">
                                     <p><strong>Domiciliation :</strong></p>
                                     <?php if ($enfant->domiciliation === 'responsable'): ?>
-                                    <?php else: ?>
                                         <p>Famille d'accueil</p>
-                                        <p><?=ucfirst($enfant->guardian); ?></p>
+                                    <?php elseif($enfant->domiciliation === 'famille'): ?>
+                                        <p>Famille d'accueil</p>
+                                    <?php else: ?>
+                                        <p><?=EMPTYVAL; ?></p>
                                     <?php endif ?>
                                 </li>
                             </ul>

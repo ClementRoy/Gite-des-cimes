@@ -376,3 +376,28 @@ body.menu .content {
 .user-profile .header a.btn-flat {
   margin-top: 18px;
 }
+.content .header .dropdown {
+  display: inline-block;
+  margin-right: 6px;
+  margin-top: 18px;
+}
+.content .header .dropdown .btn-flat {
+  font-size: 15px;
+  padding: 7px 8px 5px;
+}
+:focus {
+  outline: none;
+}
+.editable {
+  display: inline-block;
+  border: 1px solid white;
+  padding: 0 2px;
+}
+.editable:hover {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: text;
+}
+.editable:hover:after {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: text;
+}
