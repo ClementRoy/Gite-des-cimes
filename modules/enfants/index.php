@@ -58,7 +58,6 @@
                         <?php foreach($enfants as $key => $enfant): ?>
                         <tr class="first">
                             <td>
-                                <img src="http://placehold.it/45x45" width="45" height="45" class="img-circle avatar" />
                                 <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname; ?></a>
                             </td>
                             <td>

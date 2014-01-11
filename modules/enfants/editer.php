@@ -37,25 +37,41 @@
                     ':organization' => $form_enfant_structure,
                     ':contact' => $form_enfant_contact,
                     ':guardian' => $form_enfant_responsable,
-                    ':father_name' => $form_enfant_pere_nom,
-                    ':father_phone' => $form_enfant_pere_telephone,
-                    ':mother_name' => $form_enfant_mere_nom,
-                    ':mother_phone' => $form_enfant_mere_telephone,
-                    ':guardian_name' => $form_enfant_tuteur_nom,
-                    ':guardian_phone' => $form_enfant_tuteur_telephone,
-                    ':emergency_name' => $form_enfant_urgence_nom,
-                    ':emergency_phone' => $form_enfant_urgence_telephone,
-                    ':guardian_address_number' => $form_enfant_responsable_adresse_numero,
-                    ':guardian_address_street' => $form_enfant_responsable_adresse_voirie,
-                    ':guardian_address_postal_code' => $form_enfant_responsable_adresse_code_postal,
-                    ':guardian_address_city' => $form_enfant_responsable_adresse_code_ville,
+                     ':father_name' => $form_enfant_nom_pere,
+                    ':father_phone_home' => $form_enfant_telephone_fixe_pere,
+                    ':father_phone_mobile' => $form_enfant_telephone_portable_pere,
+                    ':father_phone_pro' => $form_enfant_telephone_professionnel_pere,
+                    ':father_address_number' => $form_enfant_adresse_numero_pere,
+                    ':father_address_street' => $form_enfant_adresse_voirie_pere,
+                    ':father_address_postal_code' => $form_enfant_adresse_code_postal_pere,
+                    ':father_address_city' => $form_enfant_adresse_code_ville_pere,
+                    ':mother_name' => $form_enfant_nom_mere,
+                    ':mother_phone_home' => $form_enfant_telephone_fixe_mere,
+                    ':mother_phone_mobile' => $form_enfant_telephone_portable_mere,
+                    ':mother_phone_pro' => $form_enfant_telephone_professionnel_mere,
+                    ':mother_address_number' => $form_enfant_adresse_numero_mere,
+                    ':mother_address_street' => $form_enfant_adresse_voirie_mere,
+                    ':mother_address_postal_code' => $form_enfant_adresse_code_postal_mere,
+                    ':mother_address_city' => $form_enfant_adresse_code_ville_mere,
+                    ':guardian_name' => $form_enfant_nom_tuteur,
+                    ':guardian_phone_home' => $form_enfant_telephone_fixe_tuteur,
+                    ':guardian_phone_mobile' => $form_enfant_telephone_portable_tuteur,
+                    ':guardian_phone_pro' => $form_enfant_telephone_professionnel_tuteur,
+                    ':guardian_address_number' => $form_enfant_adresse_numero_tuteur,
+                    ':guardian_address_street' => $form_enfant_adresse_voirie_tuteur,
+                    ':guardian_address_postal_code' => $form_enfant_adresse_code_postal_tuteur,
+                    ':guardian_address_city' => $form_enfant_adresse_code_ville_tuteur,
+                    ':emergency_name' => $form_enfant_nom_urgence,
+                    ':emergency_phone' => $form_enfant_telephone_urgence,
                     ':domiciliation' => $form_enfant_domiciliation,
-                    ':host_family_name' => $form_enfant_famille_nom,
-                    ':host_family_phone' => $form_enfant_famille_telephone,
-                    ':host_family_address_number' => $form_enfant_famille_adresse_numero,
-                    ':host_family_address_street' => $form_enfant_famille_adresse_voirie,
-                    ':host_family_address_postal_code' => $form_enfant_famille_adresse_code_postal,
-                    ':host_family_address_city' => $form_enfant_famille_adresse_code_ville,
+                    ':host_family_name' => $form_enfant_nom_famille,
+                    ':host_family_phone_home' => $form_enfant_telephone_fixe_famille,
+                    ':host_family_phone_mobile' => $form_enfant_telephone_portable_famille,
+                    ':host_family_phone_pro' => $form_enfant_telephone_professionnel_famille,
+                    ':host_family_address_number' => $form_enfant_adresse_numero_famille,
+                    ':host_family_address_street' => $form_enfant_adresse_voirie_famille,
+                    ':host_family_address_postal_code' => $form_enfant_adresse_code_postal_famille,
+                    ':host_family_address_city' => $form_enfant_adresse_code_ville_famille,
                     ':image_rights' => $form_enfant_droit_image,
                     ':medicals_treatments' => $form_enfant_traitement_medical,
                     ':allergies' => $form_enfant_contre_indication,
@@ -83,11 +99,25 @@
                                 contact = :contact,
                                 guardian = :guardian,
                                 father_name = :father_name,
-                                father_phone = :father_phone,
+                                father_phone_home = :father_phone_home,
+                                father_phone_mobile = :father_phone_mobile,
+                                father_phone_pro = :father_phone_pro,
+                                father_address_number = :father_address_number,
+                                father_address_street = :father_address_street,
+                                father_address_postal_code = :father_address_postal_code,
+                                father_address_city = :father_address_city,
                                 mother_name = :mother_name,
-                                mother_phone = :mother_phone,
+                                mother_phone_home = :mother_phone_home,
+                                mother_phone_mobile = :mother_phone_mobile,
+                                mother_phone_pro = :mother_phone_pro,
+                                mother_address_number = :mother_address_number,
+                                mother_address_street = :mother_address_street,
+                                mother_address_postal_code = :mother_address_postal_code,
+                                mother_address_city = :mother_address_city,
                                 guardian_name = :guardian_name,
-                                guardian_phone = :guardian_phone,
+                                guardian_phone_home = :guardian_phone_home,
+                                guardian_phone_mobile = :guardian_phone_mobile,
+                                guardian_phone_pro = :guardian_phone_pro,
                                 emergency_name = :emergency_name,
                                 emergency_phone = :emergency_phone,
                                 guardian_address_number = :guardian_address_number,
@@ -96,11 +126,13 @@
                                 guardian_address_city = :guardian_address_city,
                                 domiciliation = :domiciliation,
                                 host_family_name = :host_family_name,
-                                host_family_phone = :host_family_phone,
+                                host_family_phone_home = :host_family_phone_home,
+                                host_family_phone_mobile = :host_family_phone_mobile,
+                                host_family_phone_pro = :host_family_phone_pro,
                                 host_family_address_number = :host_family_address_number,
                                 host_family_address_street = :host_family_address_street,
                                 host_family_address_postal_code = :host_family_address_postal_code,
-                                host_family_address_city = :host_family_address_city,
+                                host_family_address_city = :host_family_address_postal_code,
                                 image_rights = :image_rights,
                                 medicals_treatments = :medicals_treatments,
                                 allergies = :allergies,
@@ -285,72 +317,131 @@
                             <div data-responsable="parents">
                                 <div data-responsable="pere">
                                     <div class="field-box row">
-                                        <label class="col-md-2" for="form-enfant-pere-nom">Nom du père</label>
+                                        <label class="col-md-2" for="form-enfant-nom-pere">Nom du père</label>
                                         <div class="col-md-4 col-sm-5">
-                                            <input id="form-enfant-pere-nom" name="form_enfant_pere_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom du père." value="<?=$enfant->father_name; ?>">
-                                        </div>                            
+                                            <input id="form-enfant-nom-pere" value="<?=$enfant->father_name; ?>" name="form_enfant_nom_pere" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom du père.">
+                                        </div>
                                     </div>
                                     <div class="field-box row">
-                                        <label class="col-md-2" for="form-enfant-pere-telephone">Téléphone du père</label>
+                                        <label class="col-md-2" for="form-enfant-telephone-fixe-pere">Téléphone fixe</label>
                                         <div class="col-md-4 col-sm-5">
-                                            <input id="form-enfant-pere-telephone" name="form_enfant_pere_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone du père." value="<?=$enfant->father_phone; ?>">
-                                        </div>                            
+                                            <input id="form-enfant-telephone-pere" value="<?=$enfant->father_phone_home; ?>" name="form_enfant_telephone_fixe_pere" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe du père.">
+                                        </div>
+                                    </div>
+                                    <div class="field-box row">
+                                        <label class="col-md-2" for="form-enfant-telephone-portable-pere">Téléphone portable</label>
+                                        <div class="col-md-4 col-sm-5">
+                                            <input id="form-enfant-telephone-pere" value="<?=$enfant->father_phone_mobile; ?>" name="form_enfant_telephone_portable_pere" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable du père.">
+                                        </div>
+                                    </div>
+                                    <div class="field-box row">
+                                        <label class="col-md-2" for="form-enfant-telephone-professionnel-pere">Téléphone professionnel</label>
+                                        <div class="col-md-4 col-sm-5">
+                                            <input id="form-enfant-professionnel-pere" value="<?=$enfant->father_phone_pro; ?>" name="form_enfant_telephone_professionnel_pere" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel du père.">
+                                        </div>
+                                    </div>
+                                    <div class="field-box row">
+                                        <label class="col-md-2" for="form-enfant-adresse-numero-pere">Adresse du père</label>
+                                        <div class="col-md-4 col-sm-5">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <input id="form-enfant-adresse-numero-pere" value="<?=$enfant->father_address_number; ?>" name="form_enfant_adresse_numero_pere" class="form-control input-sm adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse du père.">
+                                                </div>
+                                                <div class="col-md-9"><input id="form-enfant-adresse-voirie-pere" value="<?=$enfant->father_address_street; ?>" name="form_enfant_adresse_voirie_pere" class="form-control input-sm adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse du père."></div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4"><input id="form-enfant-adresse-code-postal-pere" value="<?=$enfant->father_address_postal_code; ?>" name="form_enfant_adresse_code_postal_pere" class="form-control input-sm adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville du père."></div>
+                                                <div class="col-md-8"><input id="form-enfant-adresse-code-ville-pere" value="<?=$enfant->father_address_city; ?>" name="form_enfant_adresse_code_ville_pere" class="form-control input-sm adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville du père."></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div data-responsable="mere">
                                     <div class="field-box row">
-                                        <label class="col-md-2" for="form-enfant-mere-nom">Nom de la mère</label>
+                                        <label class="col-md-2" for="form-enfant-nom-mere">Nom de la mère</label>
                                         <div class="col-md-4 col-sm-5">
-                                            <input id="form-enfant-mere-nom" name="form_enfant_mere_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom de la mère." value="<?=$enfant->mother_name; ?>">
-                                        </div>                            
+                                            <input id="form-enfant-nom-mere" value="<?=$enfant->mother_name; ?>" name="form_enfant_nom_mere" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom de la mère.">
+                                        </div>
                                     </div>
                                     <div class="field-box row">
-                                        <label class="col-md-2" for="form-enfant-mere-telephone">Téléphone de la mère</label>
+                                        <label class="col-md-2" for="form-enfant-telephone-fixe-mere">Téléphone fixe</label>
                                         <div class="col-md-4 col-sm-5">
-                                            <input id="form-enfant-mere-telephone" name="form_enfant_mere_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de la mère." value="<?=$enfant->mother_phone; ?>">
-                                        </div>                            
+                                            <input id="form-enfant-telephone-fixe-mere" value="<?=$enfant->mother_phone_home; ?>" name="form_enfant_telephone_fixe_mere" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe de la mère.">
+                                        </div>
+                                    </div>
+                                    <div class="field-box row">
+                                        <label class="col-md-2" for="form-enfant-telephone-portable-mere">Téléphone portable</label>
+                                        <div class="col-md-4 col-sm-5">
+                                            <input id="form-enfant-telephone-portable-mere" value="<?=$enfant->mother_phone_mobile; ?>" name="form_enfant_telephone_portable_mere" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable de la mère.">
+                                        </div>
+                                    </div>
+                                    <div class="field-box row">
+                                        <label class="col-md-2" for="form-enfant-telephone-professionnel-mere">Téléphone professionnel</label>
+                                        <div class="col-md-4 col-sm-5">
+                                            <input id="form-enfant-telephone-professionnel-mere" value="<?=$enfant->mother_phone_pro; ?>" name="form_enfant_telephone_professionnel_mere" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel de la mère.">
+                                        </div>
+                                    </div>
+                                    <div class="field-box row">
+                                        <label class="col-md-2" for="form-enfant-adresse-numero-mere">Adresse de la mère</label>
+                                        <div class="col-md-4 col-sm-5">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <input id="form-enfant-adresse-numero-mere" value="<?=$enfant->mother_address_number; ?>" name="form_enfant_adresse_numero_mere" class="form-control input-sm adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse de la mère.">
+                                                </div>
+                                                <div class="col-md-9"><input id="form-enfant-adresse-voirie-mere" value="<?=$enfant->mother_address_street; ?>" name="form_enfant_adresse_voirie_mere" class="form-control input-sm adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse de la mère."></div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4"><input id="form-enfant-adresse-code-postal-mere" value="<?=$enfant->mother_address_postal_code; ?>" name="form_enfant_adresse_code_postal_mere" class="form-control input-sm adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville de la mère."></div>
+                                                <div class="col-md-8"><input id="form-enfant-adresse-code-ville-mere" value="<?=$enfant->mother_address_city; ?>" name="form_enfant_adresse_code_ville_mere" class="form-control input-sm adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville de la mère."></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div data-responsable="tuteur">
                                 <div class="field-box row">
-                                    <label class="col-md-2" for="form-enfant-tuteur-nom">Nom du tuteur</label>
+                                    <label class="col-md-2" for="form-enfant-nom-tuteur">Nom du tuteur</label>
                                     <div class="col-md-4 col-sm-5">
-                                        <input id="form-enfant-tuteur-nom" name="form_enfant_tuteur_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom du tuteur." value="<?=$enfant->guardian_name; ?>">
-                                    </div>                            
+                                        <input id="form-enfant-nom-tuteur" value="<?=$enfant->guardian_name; ?>" name="form_enfant_nom_tuteur" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom du tuteur.">
+                                    </div>
                                 </div>
                                 <div class="field-box row">
-                                    <label class="col-md-2" for="form-enfant-tuteur-telephone">Téléphone du tuteur</label>
+                                    <label class="col-md-2" for="form-enfant-telephone-fixe-tuteur">Téléphone fixe</label>
                                     <div class="col-md-4 col-sm-5">
-                                        <input id="form-enfant-tuteur-telephone" name="form_enfant_tuteur_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone du tuteur." value="<?=$enfant->guardian_phone; ?>">
-                                    </div>                            
+                                        <input id="form-enfant-telephone-fixe-tuteur" value="<?=$enfant->guardian_phone_home; ?>" name="form_enfant_telephone_fixe_tuteur" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe du tuteur.">
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div data-responsable="adresse">
                                 <div class="field-box row">
-                                    <label class="col-md-2" for="form-enfant-responsable-adresse-numero">Adresse du responsable légal</label>
+                                    <label class="col-md-2" for="form-enfant-telephone-portable-tuteur">Téléphone portable</label>
+                                    <div class="col-md-4 col-sm-5">
+                                        <input id="form-enfant-telephone-portable-tuteur" value="<?=$enfant->guardian_phone_mobile; ?>" name="form_enfant_telephone_portable_tuteur" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable du tuteur.">
+                                    </div>
+                                </div>
+                                <div class="field-box row">
+                                    <label class="col-md-2" for="form-enfant-telephone-travail-tuteur">Téléphone professionnel</label>
+                                    <div class="col-md-4 col-sm-5">
+                                        <input id="form-enfant-telephone-professionnel-tuteur" value="<?=$enfant->guardian_phone_pro; ?>" name="form_enfant_telephone_professionnel_tuteur" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel du tuteur.">
+                                    </div>
+                                </div>
+                                <div class="field-box row">
+                                    <label class="col-md-2" for="form-enfant-adresse-numero-tuteur">Adresse du tuteur</label>
                                     <div class="col-md-4 col-sm-5">
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <input id="form-enfant-responsable-adresse-numero" name="form_enfant_responsable_adresse_numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse du responsable légal." value="<?=$enfant->guardian_address_number; ?>">
+                                                <input id="form-enfant-adresse-numero-tuteur" value="<?=$enfant->guardian_address_number; ?>" name="form_enfant_adresse_numero_tuteur" class="form-control input-sm adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse du tuteur.">
                                             </div>
-                                            <div class="col-md-9">
-                                            <input id="form-enfant-responsable-adresse-voirie" name="form_enfant_responsable_adresse_voirie" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse du responsable légal." value="<?=$enfant->guardian_address_street; ?>">
-                                            </div>
+                                            <div class="col-md-9"><input id="form-enfant-adresse-voirie-tuteur" value="<?=$enfant->guardian_address_street; ?>" name="form_enfant_adresse_voirie_tuteur" class="form-control input-sm adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse du tuteur."></div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-4">
-                                            <input id="form-enfant-responsable-adresse-code-postal" name="form_enfant_responsable_adresse_code_postal" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville du responsable légal." value="<?=$enfant->guardian_address_postal_code; ?>">
-                                            </div>
-                                            <div class="col-md-8">
-                                            <input id="form-enfant-responsable-adresse-code-ville" name="form_enfant_responsable_adresse_code_ville" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville du responsable légal." value="<?=$enfant->guardian_address_city; ?>">
-                                            </div>
+                                            <div class="col-md-4"><input id="form-enfant-adresse-code-postal-tuteur" value="<?=$enfant->guardian_address_postal_code; ?>" name="form_enfant_adresse_code_postal_tuteur" class="form-control input-sm adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville du tuteur."></div>
+                                            <div class="col-md-8"><input id="form-enfant-adresse-code-ville-tuteur" value="<?=$enfant->guardian_address_city; ?>" name="form_enfant_adresse_code_ville_tuteur" class="form-control input-sm adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville du tuteur."></div>
                                         </div>
-                                    </div>                            
+                                    </div>
                                 </div>
                             </div>
 
@@ -376,54 +467,62 @@
                             </div>
                         </div>
 
-
                         <div data-domiciliation="famille">
                             <div class="field-box row">
-                                <label class="col-md-2" for="form-enfant-famille-nom">Nom de la famille d'accueil</label>
+                                <label class="col-md-2" for="form-enfant-nom-famille">Nom de la famille d'accueil</label>
                                 <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-famille-nom" name="form_enfant_famille_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de la famille d'accueil." value="<?=$enfant->host_family_name; ?>">
-                                </div>                            
+                                    <input id="form-enfant-nom-famille" value="<?=$enfant->host_family_name; ?>" name="form_enfant_nom_famille" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom de la famille d'accueil.">
+                                </div>
+                            </div>
+
+                            <div class="field-box row">
+                                <label class="col-md-2" for="form-enfant-telephone-fixe-famille">Téléphone fixe</label>
+                                <div class="col-md-4 col-sm-5">
+                                    <input id="form-enfant-pere-telephone" value="<?=$enfant->host_family_phone_home; ?>" name="form_enfant_telephone_fixe_famille" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe de la famille d'accueil.">
+                                </div>
                             </div>
                             <div class="field-box row">
-                                <label class="col-md-2" for="form-enfant-famille-telephone">Téléphone de la famille d'accueil</label>
+                                <label class="col-md-2" for="form-enfant-telephone-portable-famille">Téléphone portable</label>
                                 <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-famille-telephone" name="form_enfant_famille_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de la famille d'accueil." value="<?=$enfant->host_family_phone; ?>">
-                                </div>                            
+                                    <input id="form-enfant-telephone-portable-famille" value="<?=$enfant->host_family_phone_mobile; ?>" name="form_enfant_telephone_portable_famille" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable de la famille d'accueil.">
+                                </div>
                             </div>
                             <div class="field-box row">
-                                <label class="col-md-2" for="form-enfant-famille-adresse-numero">Adresse de la famille d'accueil</label>
+                                <label class="col-md-2" for="form-enfant-telephone-professionnel-famille">Téléphone professionnel</label>
+                                <div class="col-md-4 col-sm-5">
+                                    <input id="form-enfant-telephone-professionnel-famille" value="<?=$enfant->host_family_phone_pro; ?>" name="form_enfant_telephone_professionnel_famille" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel de la famille d'accueil.">
+                                </div>
+                            </div>
+
+                            <div class="field-box row">
+                                <label class="col-md-2" for="form-enfant-adresse-numero-famille">Adresse de la famille d'accueil</label>
                                 <div class="col-md-4 col-sm-5">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <input id="form-enfant-famille-adresse-numero" name="form_enfant_famille_adresse_numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse de la famille d'accueil." value="<?=$enfant->host_family_address_number; ?>">
+                                            <input id="form-enfant-adresse-numero-famille" value="<?=$enfant->host_family_address_number; ?>" name="form_enfant_adresse_numero_famille" class="form-control input-sm adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse de la famille d'accueil.">
                                         </div>
-                                        <div class="col-md-9">
-                                        <input id="form-enfant-famille-adresse-voirie" name="form_enfant_famille_adresse_voirie" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse de la famille d'accueil." value="<?=$enfant->host_family_address_street; ?>">
-                                        </div>
+                                        <div class="col-md-9"><input id="form-enfant-adresse-voirie-famille" value="<?=$enfant->host_family_address_street; ?>" name="form_enfant_adresse_voirie_famille" class="form-control input-sm adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse de la famille d'accueil."></div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-4">
-                                        <input id="form-enfant-famille-adresse-code-postal" name="form_enfant_famille_adresse_code_postal" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville de la famille d'accueil." value="<?=$enfant->host_family_address_postal_code; ?>">
-                                        </div>
-                                        <div class="col-md-8">
-                                        <input id="form-enfant-famille-adresse-code-ville" name="form_enfant_famille_adresse_code_ville" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville de la famille d'accueil." value="<?=$enfant->host_family_address_city; ?>">
-                                        </div>
+                                        <div class="col-md-4"><input id="form-enfant-adresse-code-postal-famille" value="<?=$enfant->host_family_address_postal_code; ?>" name="form_enfant_adresse_code_postal_famille" class="form-control input-sm adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville de la famille d'accueil."></div>
+                                        <div class="col-md-8"><input id="form-enfant-adresse-code-ville-famille" value="<?=$enfant->host_family_address_city; ?>" name="form_enfant_adresse_code_ville_famille" class="form-control input-sm adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville de la famille d'accueil."></div>
                                     </div>
-                                </div>                            
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-box row">
+                            <label class="col-md-2" for="form-enfant-nom-urgence">Contact d'urgence</label>
+                            <div class="col-md-4 col-sm-5">
+                                <input id="form-enfant-nom-urgence" value="<?=$enfant->emergency_name; ?>" name="form_enfant_nom_urgence" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom de la personne à contacter en cas d'urgence.">
                             </div>
                         </div>
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-enfant-urgence-nom">Contact d'urgence</label>
+                            <label class="col-md-2" for="form-enfant-telephone-urgence">Téléphone d'urgence</label>
                             <div class="col-md-4 col-sm-5">
-                                <input id="form-enfant-urgence-nom" name="form_enfant_urgence_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom de la personne à contacter en cas d'urgence." value="<?=$enfant->emergency_name; ?>">
-                            </div>                            
-                        </div>
-                        <div class="field-box row">
-                            <label class="col-md-2" for="form-enfant-urgence-telephone">Téléphone d'urgence</label>
-                            <div class="col-md-4 col-sm-5">
-                                <input id="form-enfant-urgence-telephone" name="form_enfant_urgence_telephone" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de la personne à contacter en cas d'urgence." value="<?=$enfant->emergency_phone; ?>">
-                            </div>                            
+                                <input id="form-enfant-telephone-urgence" value="<?=$enfant->emergency_phone; ?>" name="form_enfant_telephone_urgence" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de la personne à contacter en cas d'urgence.">
+                            </div>
                         </div>
 
                         <div class="field-box row">
@@ -510,7 +609,7 @@
                             <div class="field-box row">
                                 <label class="col-md-2" for="form-enfant-assurance-validite">Date de fin de validité</label>
                                 <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" value="15/06/2014" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa)." value="<?=$enfant->self_assurance_expiration_date; ?>">
+                                    <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" value="<?=$enfant->self_assurance_expiration_date; ?>" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa)." value="<?=$enfant->self_assurance_expiration_date; ?>">
                                 </div>                            
                             </div>
                         </div>
@@ -539,7 +638,7 @@
                             <div class="field-box row">
                                 <label class="col-md-2" for="form-enfant-cpam-validite">Date de fin de validité</label>
                                 <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-cpam-validite" name="form_enfant_cpam_validite" type="text" class="form-control input-datepicker" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'attestation CPAM (jj/mm/aaaa).">
+                                    <input id="form-enfant-cpam-validite" name="form_enfant_cpam_validite" type="text" value="<?=$enfant->cpam_attestation_expiration_date; ?>" class="form-control input-datepicker" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'attestation CPAM (jj/mm/aaaa).">
                                 </div>                            
                             </div>
                         </div>
