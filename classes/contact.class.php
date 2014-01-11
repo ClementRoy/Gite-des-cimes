@@ -62,7 +62,7 @@ class contact
             $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0', $data);
         }
         else {
-            $result = $db->query('SELECT * FROM '.self::$table.' ORDER BY name');
+            $result = $db->query('SELECT * FROM '.self::$table.' ORDER BY firstname');
         }
         return $result;
     }

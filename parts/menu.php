@@ -31,7 +31,12 @@ $menus = array(
 	),
 	'contacts' => array(
 		'name' => 'Contacts',
-		'icon' => 'comments'),
+		'icon' => 'comments',
+		'submenu' => array(
+						'index' => 'Liste des contact',
+						'ajouter' => 'Ajouter un contact'
+					)
+	),
 	'convocations' => array(
 		'name' => 'Convocations',
 		'icon' => 'file-text-alt'),

@@ -1,6 +1,5 @@
 <?php  
 
-die();
 
 // Load classes
 include('../config/mysql.php');
@@ -38,15 +37,15 @@ foreach ($datas as $key => $data) {
         $datas = array(
 	            ':ref_structure' => $structure_id,
 	            ':civility' => $data['2'],
-	            ':lastname' => $data['0'],
-	            ':firstname' => $data['1'],
-	            ':title' => $data['9'],
+	            ':lastname' => utf8_encode($data['0']),
+	            ':firstname' => utf8_encode($data['1']),
+	            ':title' => utf8_encode($data['9']),
 	            ':fax' => $data['7'],
 	            ':email' => $data['4'],
 	            ':mobile_phone' => $data['5'],
 	            ':phone' => $data['6'],
 	            ':fax' => $data['5'],
-	            ':note' => $data['8']
+	            ':note' => utf8_encode($data['8'])
         	);
 
 
