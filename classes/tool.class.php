@@ -105,7 +105,14 @@ class tool
 
     public static function getLatLng($address) {
 
-        return $address;
+        $uri = "http://maps.google.com/maps/api/geocode/json?address=".url_encode($address)."&sensor=false&region=UK";
+        $url = file_get_contents($uri);
+        $response = json_decode($url);
+         
+        $lat = $response->results[0]->geometry->location->lat;
+        $long = $response->results[0]->geometry->location->lng; 
+
+        return array($lat, $lng);
     }
 }
 
