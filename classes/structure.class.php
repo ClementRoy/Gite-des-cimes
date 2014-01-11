@@ -26,11 +26,22 @@ class structure
     public static function get($id){
         global $db;
         $params = array(
-                        'id' => $id
+                        ':id' => $id
                         );
         $sql = 'SELECT * FROM '.self::$table.' WHERE id=:id';
         $result = $db->row($sql, $params);
         return $result;
+    }
+
+    public static function getByName($name){
+        echo $name;
+        global $db;
+        $params = array(
+                        ':name' => '%'.$name.'%'
+                        );
+        $sql = 'SELECT * FROM '.self::$table.' WHERE name LIKE :name';
+        $result = $db->row($sql, $params);
+        return $result;        
     }
 
     /**
@@ -66,8 +77,7 @@ class structure
         global $db;
 
         // Handle Metadata infos
-        if(!$metadata)
-        {
+        if(!$metadata) {
             $metadata = array(
                                 ':created' => tool::currentTime(),
                                 ':edited' => tool::currentTime(),
@@ -100,16 +110,16 @@ class structure
      * @param
      * @return
      */
-    public static function update($data = array(), $id){
+    public static function update($data = array(), $id, $metadata = false){
         global $db;
 
+        if(!$metadata) {
         $metadata = array(
                             ':edited' => tool::currentTime(),
                             ':editor' => user::getCurrentUser(), 
                         );
+        }
         $data = array_merge($metadata, $data);
-        tool::output($data);
-        die();
 
         $entries = '';
         foreach (array_keys($data) as $key => $name) {
@@ -135,8 +145,9 @@ class structure
      */
     public static function remove($id){
         global $db;
+        $data = array(':id' => $id);
         $sql = 'DELETE FROM '.self::$table.' WHERE id = :id';
-        $result = $db->delete($sql, array('id' => $id));
+        $result = $db->delete($sql, $data);
         return $result;
     }
 

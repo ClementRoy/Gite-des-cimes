@@ -139,8 +139,9 @@ class user
      */
 	public static function remove($id){
         global $db;
+        $data = array(':id' => $id);
         $sql = 'DELETE FROM '.self::$table.' WHERE id = :id';
-        $result = $db->delete($sql, array('id' => $id));
+        $result = $db->delete($sql, $data);
         return $result;
 	}
 

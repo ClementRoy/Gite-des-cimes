@@ -1,5 +1,7 @@
 <?php  
 
+die();
+
 // Load classes
 include('../config/mysql.php');
 include('../classes/db.class.php');
