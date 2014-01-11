@@ -65,6 +65,15 @@ class structure
     public static function add($data = array()){
         global $db;
 
+        $metadata = array(
+                            ':created' => tool::currentTime(),
+                            ':edited' => tool::currentTime(),
+                            ':creator' => user::getCurrentUser(), 
+                            ':editor' => user::getCurrentUser(), 
+                        );
+        $data = array_merge($metadata, $data);
+        tool::output($data);
+        die();
         $bind = implode(', ', array_keys($data)); 
         $entries = '';
         foreach (array_keys($data) as $key => $name) {
@@ -77,6 +86,40 @@ class structure
         $result = $db->insert($sql, $data);
         return $result;
     }
+
+
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
+    public static function update($data = array(), $id){
+        global $db;
+
+        $metadata = array(
+                            ':edited' => tool::currentTime(),
+                            ':editor' => user::getCurrentUser(), 
+                        );
+        $data = array_merge($metadata, $data);
+        tool::output($data);
+        die();
+
+        $entries = '';
+        foreach (array_keys($data) as $key => $name) {
+            if($key !=0)
+                $entries .= ',';
+            $entries .=  substr($name, 1).' = '.$name;
+        }
+        $sql = 'UPDATE '.self::$table.' SET '.$entries.' WHERE id='.$id;
+
+        $result = $db->update($sql, $data);
+
+        return $result;
+    }
+
 
     /**
      * desc
@@ -93,29 +136,6 @@ class structure
         return $result;
     }
 
-    /**
-     * desc
-     *
-     * @note 
-     *
-     * @param
-     * @return
-     */
-    public static function update($data = array(), $id){
-        global $db;
-
-        $entries = '';
-        foreach (array_keys($data) as $key => $name) {
-            if($key !=0)
-                $entries .= ',';
-            $entries .=  substr($name, 1).' = '.$name;
-        }
-        $sql = 'UPDATE '.self::$table.' SET '.$entries.' WHERE id='.$id;
-
-        $result = $db->update($sql, $data);
-
-        return $result;
-    }
 
 }
 

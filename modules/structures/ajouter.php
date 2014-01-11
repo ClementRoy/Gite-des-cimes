@@ -10,18 +10,16 @@
         <?php 
         extract($_POST);
             $datas = array(
-                            ':created' => tool::currentTime(),
-                            ':edited' => tool::currentTime(),
-                            ':creator' => user::getCurrentUser(), 
-                            ':editor' => user::getCurrentUser(), 
                             ':name' => $form_structure_name,
                             ':payer' => $form_structure_payer,
                             ':email' => $form_structure_email,
                             ':phone' => $form_structure_telephone,
+                            ':fax' => $form_structure_fax,
                             ':address_number' => $form_structure_adresse_numero,
                             ':address_street' => $form_structure_adresse_voirie,
                             ':address_postal_code' => $form_structure_adresse_code_postal,
-                            ':address_city' => $form_structure_adresse_code_ville
+                            ':address_city' => $form_structure_adresse_code_ville,
+                            ':node' => $form_structure_note
                             );
 
             $result = structure::add($datas);
@@ -121,12 +119,22 @@
                                 data-toggle="tooltip" title="Renseignez l'email de la structure." 
                                 parsley-type="email">
                             </div>                        
-                        </div>                  
+                        </div>     
+
                         <div class="field-box row">
                             <label class="col-md-2" for="form-structure-phone">Téléphone</label>
                             <div class="col-md-4">
                                 <input id="form-structure-phone" name="form_structure_telephone" type="text" class="form-control"
                                 data-toggle="tooltip" title="Renseignez le numéro de téléphone de la structure." 
+                                parsley-type="phone">
+                            </div>                        
+                        </div>
+
+                        <div class="field-box row">
+                            <label class="col-md-2" for="form-structure-fax">Fax</label>
+                            <div class="col-md-4">
+                                <input id="form-structure-fax" name="form_structure_fax" type="text" class="form-control"
+                                data-toggle="tooltip" title="Renseignez le numéro de fax de la structure." 
                                 parsley-type="phone">
                             </div>                        
                         </div>
@@ -146,8 +154,14 @@
                                         <div class="col-md-8"><input id="form-structure-adresse-code-ville" name="form_structure_adresse_code_ville" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville de la structure."></div>
                                     </div>
                                 </div>                            
-                            </div>
+                        </div>
 
+                        <div class="field-box row">
+                            <label class="col-md-2" for="form-structure-note">Notes</label>
+                            <div class="col-md-4 col-sm-5">
+                                <textarea id="form-structure-note" name="form_structure_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de la strucure."></textarea>
+                            </div>
+                        </div>
 
                         <input type="submit" class="btn-flat primary" name="submit" value="Valider">
                     </div>

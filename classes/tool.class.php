@@ -101,6 +101,12 @@ class tool
     public static function getCurrentUser(){
         return $_SESSION['Auth']['id'];
     }
+
+
+    public static function getLatLng($address) {
+
+        return $address;
+    }
 }
 
 ?>
