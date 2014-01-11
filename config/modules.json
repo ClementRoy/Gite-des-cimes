@@ -1,46 +1,46 @@
 {
 	"accueil": {
 		"name" : "accueil",
-		"functions" : ["index"]
+		"views" : ["index"]
 	},
 	"enfants" : {
 		"name" : "enfants",
-		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
+		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"sejours" : {
 		"name" :  "sejours",
-		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
+		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"structures" : {
 		"name" : "structures",
-		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
+		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"contacts" : {
 		"name" : "contacts",
-		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
+		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"convocations" : {
 		"name" : "convocations",
-		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
+		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"factures" : {
 		"name" : "factures",
-		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
+		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"animateurs" : {
 		"name" : "animateurs",
-		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
+		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"vehicules" : {
 		"name" : "vehicules",
-		"functions" : ["index", "ajouter", "infos", "editer", "supprimer"]
+		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"utilisateurs" : {
 		"name" : "utilisateurs",
-		"functions" : ["index", "infos", "connexion", "deconnexion", "supprimer", "ajouter", "editer"]
+		"views" : ["index", "infos", "connexion", "deconnexion", "supprimer", "ajouter", "editer"]
 	},
 	"infos" : {
 		"name" : "infos",
-		"functions" : ["contact", "index", "infos", "debug"]
+		"views" : ["contact", "index", "infos", "debug"]
 	}
 }

@@ -12,7 +12,7 @@
                 <h3>Suppression</h3>
                 </div>
             </div>
-            <?php if(isset($confirm)): ?>
+            <?php if(isset($_GET['confirm'])): ?>
             <div class="row">
                 <div class="col-md-12">
                     <?php 
@@ -20,9 +20,9 @@
                     ?>
                     <div class="alert alert-danger">
                         <i class="icon-remove-sign"></i>
-                        La fiche a bien été supprimé
+                        La fiche a bien été supprimée
                     </div>
-                    <a href="/enfants/">Retourner à la liste des enfants</a>
+                    <a href="/enfants/index">Retourner à la liste des enfants</a>
                 </div>                
             </div>
             <?php else: ?>

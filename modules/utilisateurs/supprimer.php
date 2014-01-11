@@ -12,7 +12,7 @@
                     <h3>Utilisateur</h3>
                 </div>
             </div>
-            <?php if(isset($confirm)): ?>
+            <?php if(isset($_GET['confirm'])): ?>
                 <div class="row">
                     <div class="col-md-12">
                         <?php 

@@ -40,7 +40,7 @@
             </div>
 
 
-            <div class="modal fade" id="remove-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" id="remove-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -315,6 +315,7 @@
                         <li>Nom du contact d'urgence</li>
                         <li><i class="icon-phone"></i>01 41 70 35 10</li>
                     </ul>
+
                 </div>
 
         </div>
