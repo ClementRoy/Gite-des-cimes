@@ -73,6 +73,10 @@ $(function () {
 		$('[data-assurance="oui"]').hide();
 	}
 
+	if ($('input[name="form_enfant_attestation_cpam"]:checked').val() != 1) {
+		$('[data-cpam="oui"]').hide();
+	}
+
 	// HANDLERS CONDITIONNALS FORMS
 
 	$('input[name="form_enfant_inscription"]').on('change', function() {
@@ -180,6 +184,25 @@ $(function () {
 			});
 		} else {
 			$('[data-assurance="oui"]')
+			.fadeIn(300)
+			.find('input[type="text"]').each(function () {
+				$(this).val($(this).data('original-value'));
+			});
+		}
+	});
+
+	$('input[name="form_enfant_attestation_cpam"]').on('change', function() {
+		if ($(this).val() != 1) {
+			$('[data-cpam="oui"]')
+			.hide()
+			.find('input[type="text"]').each(function () {
+				if ($(this).val() != '') {
+					$(this).attr('data-original-value', $(this).val());
+					$(this).attr('value', '');
+				}
+			});
+		} else {
+			$('[data-cpam="oui"]')
 			.fadeIn(300)
 			.find('input[type="text"]').each(function () {
 				$(this).val($(this).data('original-value'));

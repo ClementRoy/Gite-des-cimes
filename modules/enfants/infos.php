@@ -217,11 +217,14 @@
                                 <li class="list-group-item">
                                     <p><strong>Assurance (RC) :</strong><span class="pull-right"><?=($enfant->self_assurance > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?></span></p>
                                     <?php if ($enfant->self_assurance > 0): ?>
-                                        <p><small>Validité : <?=$enfant->self_assurance_expiration_date;?></small></p>
+                                        <p><small>Validité : <?=(!empty($enfant->self_assurance_expiration_date))? $enfant->self_assurance_expiration_date : EMPTYVAL; ?></small></p>
                                     <?php endif ?>
                                 </li>
                                 <li class="list-group-item">
                                     <p><strong>Attestation CPAM :</strong><span class="pull-right"><?=($enfant->cpam_attestation > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?></span></p>
+                                    <?php if ($enfant->cpam_attestation > 0): ?>
+                                        <p><small>Validité : <?=(!empty($enfant->cpam_attestation_expiration_date))? $enfant->cpam_attestation_expiration_date : EMPTYVAL; ?></small></p>
+                                    <?php endif ?>
                                 </li>
                                 <li class="list-group-item">
                                     <p><strong>Fiche sanitaire de liaison :</strong><span class="pull-right"><?=($enfant->health_record > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?></span></p>
@@ -237,11 +240,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
 
                 <dl>
                     <dt>Séjour <a href="">Nom du séjour</a> - du 21/12/2004 au 28/12/2004 :</dt>

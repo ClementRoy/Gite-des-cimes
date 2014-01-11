@@ -24,6 +24,7 @@
                 // Create enfant entry
                 $birthdate = tool::generateDatetime($form_enfant_naissance);
                 $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
+                $cpam_validite = tool::generateDatetime($form_enfant_cpam_validite);
 
                 $datas = array(
                     ':edited' => tool::currentTime(), 
@@ -62,6 +63,7 @@
                     ':self_assurance' => $form_enfant_assurance,
                     ':self_assurance_expiration_date' => $assurance_validite,
                     ':cpam_attestation' => $form_enfant_attestation_cpam,
+                    ':cpam_attestation_expiration_date' => $cpam_validite,
                     ':vaccination' => $form_enfant_carnet_vaccination,
                     ':health_record' => $form_enfant_fiche_sanitaire,
                     ':stay_record' => $form_enfant_fiche_sejour,
@@ -106,6 +108,7 @@
                                 self_assurance = :self_assurance,
                                 self_assurance_expiration_date = :self_assurance_expiration_date,
                                 cpam_attestation = :cpam_attestation,
+                                cpam_attestation_expiration_date = :cpam_attestation_expiration_date,
                                 vaccination = :vaccination,
                                 health_record = :health_record,
                                 stay_record = :stay_record,
@@ -532,7 +535,14 @@
                                 </label>
                             </div>
                         </div>
-
+                        <div data-cpam="oui">
+                            <div class="field-box row">
+                                <label class="col-md-2" for="form-enfant-cpam-validite">Date de fin de validité</label>
+                                <div class="col-md-4 col-sm-5">
+                                    <input id="form-enfant-cpam-validite" name="form_enfant_cpam_validite" type="text" class="form-control input-datepicker" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'attestation CPAM (jj/mm/aaaa).">
+                                </div>                            
+                            </div>
+                        </div>
                         <div class="field-box row">
                             <label class="col-md-2">Carnet de vaccination</label>
                             <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si le carnet de vaccination est dans le dossier de l'enfant.">
@@ -608,96 +618,5 @@
             <?php endif; ?>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-    <!-- LISTE DES CHAMPS -->
-<!--
-form-enfant-prenom
-form-enfant-nom
-form-enfant-naissance
-
-form-enfant-sexe
-    form-enfant-sexe-m
-    form-enfant-sexe-f
-
-form-enfant-inscription
-    form-enfant-inscription-structure
-    form-enfant-inscription-particulier
-
-form-enfant-structure-select
-
-form-enfant-contact-select
-
-form-enfant-responsable
-    form-enfant-responsable-parents
-    form-enfant-responsable-mere
-    form-enfant-responsable-pere
-    form-enfant-responsable-tuteur
-
-form-enfant-pere-nom
-form-enfant-pere-telephone
-form-enfant-mere-nom
-form-enfant-mere-telephone
-form-enfant-tuteur-nom
-form-enfant-tuteur-telephone
-form-enfant-urgence-nom
-form-enfant-urgence-telephone
-
-form-enfant-responsable-adresse-numero
-form-enfant-responsable-adresse-voirie
-form-enfant-responsable-adresse-code-postal
-form-enfant-responsable-adresse-ville
-
-form-enfant-domiciliation
-    form-enfant-domiciliation-responsable
-    form-enfant-domiciliation-famille
-
-form-enfant-famille-nom
-form-enfant-famille-telephone
-form-enfant-famille-adresse-numero
-form-enfant-famille-adresse-voirie
-form-enfant-famille-adresse-code-postal
-form-enfant-famille-adresse-ville
-
-form-enfant-droit-image
-    form-enfant-droit-image-oui
-    form-enfant-droit-image-non
-
-form-enfant-traitement-medical
-    form-enfant-traitement-medical-oui
-    form-enfant-traitement-medical-non
-
-form-enfant-contre-indication
-
-form-enfant-assurance
-    form-enfant-assurance-oui
-    form-enfant-assurance-non
-
-form-enfant-assurance-validite
-
-form-enfant-attestation-cpam
-    form-enfant-attestation-cpam-oui
-    form-enfant-attestation-cpam-non
-
-form-enfant-carnet-vaccination
-    form-enfant-carnet-vaccination-oui
-    form-enfant-carnet-vaccination-non
-
-form-enfant-fiche-sanitaire
-    form-enfant-fiche-sanitaire-oui
-    form-enfant-fiche-sanitaire-non
-
-form-enfant-fiche-sejour
-    form-enfant-fiche-sejour-oui
-    form-enfant-fiche-sejour-non
-
--->
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
