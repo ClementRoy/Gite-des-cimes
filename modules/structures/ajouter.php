@@ -8,9 +8,10 @@
         <?php //tool::output($_POST); ?>
         <?php //tool::output($_SESSION); ?>
         <?php 
-        extract($_POST);
+            extract($_POST);
             $datas = array(
                             ':name' => $form_structure_name,
+                            ':service' => $form_structure_service,
                             ':payer' => $form_structure_payer,
                             ':email' => $form_structure_email,
                             ':phone' => $form_structure_telephone,
@@ -19,7 +20,7 @@
                             ':address_street' => $form_structure_adresse_voirie,
                             ':address_postal_code' => $form_structure_adresse_code_postal,
                             ':address_city' => $form_structure_adresse_code_ville,
-                            ':node' => $form_structure_note
+                            ':note' => $form_structure_note
                             );
 
             $result = structure::add($datas);

@@ -62,18 +62,22 @@ class structure
      * @param
      * @return
      */
-    public static function add($data = array()){
+    public static function add($data = array(), $metadata = false){
         global $db;
 
-        $metadata = array(
-                            ':created' => tool::currentTime(),
-                            ':edited' => tool::currentTime(),
-                            ':creator' => user::getCurrentUser(), 
-                            ':editor' => user::getCurrentUser(), 
-                        );
+        // Handle Metadata infos
+        if(!$metadata)
+        {
+            $metadata = array(
+                                ':created' => tool::currentTime(),
+                                ':edited' => tool::currentTime(),
+                                ':creator' => user::getCurrentUser(), 
+                                ':editor' => user::getCurrentUser(), 
+                            );
+        }
         $data = array_merge($metadata, $data);
-        tool::output($data);
-        die();
+        //tool::output($data);
+        //die();
         $bind = implode(', ', array_keys($data)); 
         $entries = '';
         foreach (array_keys($data) as $key => $name) {
