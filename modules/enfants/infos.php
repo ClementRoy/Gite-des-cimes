@@ -8,6 +8,10 @@
 <div class="content">
 
     <?php $enfant = enfant::get($_GET['id']); ?>
+    <?php $creator = user::get($enfant->creator); ?>
+    <?php $editor = user::get($enfant->editor); ?>
+    <?php $date_created = new DateTime($enfant->created); ?>
+    <?php $date_edited = new DateTime($enfant->edited); ?>
     <?php // tool::output($enfant); ?>
 
     <div id="pad-wrapper" class="user-profile">
@@ -31,21 +35,13 @@
 
 
                 <div class="col-md-4 text-right pull-right">
-                <div class="dropdown">
-                    <button class="btn-flat white" data-toggle="dropdown">
-                        <i class="icon-info-sign"></i>
-                    </button>
-                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                       <li><strong>Créé par :</strong> XX</li>
-                       <li><strong>Le :</strong> XX</li>
-                       <li><strong>Créé par :</strong> XX</li>
-                       <li><strong>Créé par :</strong> XX</li>
-                      </ul>
-                </div>
                     <button class="btn-flat danger" data-toggle="modal" data-target="#remove-modal">
                         <i class="icon-remove"></i> Supprimer
                     </button>
                     <a href="/enfants/editer/id/<?=$enfant->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
+                    <button class="metadata btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<strong>Créé par :</strong><br/> <?=$creator->firstname; ?>, le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?> <br /><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?> " data-original-title="Informations" title="">
+                      <i class="icon-info-sign"></i>
+                    </button>
                 </div>
 
             </div>

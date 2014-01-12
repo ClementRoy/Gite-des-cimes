@@ -1,5 +1,9 @@
 $(function () {
 
+
+	$('.metadata').popover();
+
+
 	$('input:checkbox, input:radio').uniform();
 	$('.select2').select2();
 

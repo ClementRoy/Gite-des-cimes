@@ -5,8 +5,11 @@
 
     
     <?php $utilisateur = user::get($_GET['id']); ?>
-
-
+    <?php $creator = user::get($utilisateur->creator); ?>
+    <?php $editor = user::get($utilisateur->editor); ?>
+    <?php $date_created = new DateTime($utilisateur->created); ?>
+    <?php $date_edited = new DateTime($utilisateur->edited); ?>
+    
     <!-- main container -->
     <div class="content">
       <div id="pad-wrapper" class="users-profil">
@@ -22,6 +25,9 @@
                     </button>
 
                 <a href="/utilisateurs/editer/id/<?=$utilisateur->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
+                      <button class="metadata btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<strong>Créé par :</strong><br/> <?=$creator->firstname; ?>, le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?> <br /><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?> " data-original-title="Informations" title="">
+                      <i class="icon-info-sign"></i>
+                    </button>         
             </div>
         </div>
 

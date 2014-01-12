@@ -6,7 +6,10 @@
     
     <?php // TODO : ne pas oublier de lister les contacts associés  ?>
     <?php $structure = structure::get($_GET['id']); ?>
-
+    <?php $creator = user::get($structure->creator); ?>
+    <?php $editor = user::get($structure->editor); ?>
+    <?php $date_created = new DateTime($structure->created); ?>
+    <?php $date_edited = new DateTime($structure->edited); ?>
 
     <!-- main container -->
     <div class="content">
@@ -21,6 +24,9 @@
                     </button>
 
                 <a href="/structures/editer/id/<?=$structure->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
+                     <button class="metadata btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<strong>Créé par :</strong><br/> <?=$creator->firstname; ?>, le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?> <br /><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?> " data-original-title="Informations" title="">
+                      <i class="icon-info-sign"></i>
+                    </button>           
             </div>
         </div>
 

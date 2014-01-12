@@ -373,7 +373,8 @@ body.menu .content {
   padding: 0;
 }
 .user-profile .header button.btn-flat,
-.user-profile .header a.btn-flat {
+.user-profile .header a.btn-flat,
+.user-profile .header button.btn {
   margin-top: 18px;
 }
 .content .header .dropdown {

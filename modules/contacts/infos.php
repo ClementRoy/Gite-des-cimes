@@ -5,15 +5,18 @@
 
     
     <?php // TODO : ne pas oublier de lister les contacts associés  ?>
-    <?php $structure = structure::get($_GET['id']); ?>
-
+    <?php $contact = contact::get($_GET['id']); ?>
+    <?php $creator = user::get($contact->creator); ?>
+    <?php $editor = user::get($contact->editor); ?>
+    <?php $date_created = new DateTime($contact->created); ?>
+    <?php $date_edited = new DateTime($contact->edited); ?>
 
     <!-- main container -->
     <div class="content">
       <div id="pad-wrapper" class="users-profil">
         <div class="row header img">
             <div class="col-md-5">
-                <h3><?=$structure->name; ?></h3>
+                <h3><?=$contact->firstname; ?></h3>
             </div>
             <div class="col-md-5 text-right pull-right">
                       <button class="btn-flat danger" data-toggle="modal" data-target="#remove-modal">
@@ -21,6 +24,9 @@
                     </button>
 
                 <a href="/structures/editer/id/<?=$structure->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
+                     <button class="metadata btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<strong>Créé par :</strong><br/> <?=$creator->firstname; ?>, le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?> <br /><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?> " data-original-title="Informations" title="">
+                      <i class="icon-info-sign"></i>
+                    </button>           
             </div>
         </div>
 

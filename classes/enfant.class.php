@@ -37,7 +37,7 @@ class enfant
 		global $db;
         if(!empty($limit)){
             $data = array();
-            $result = $db->query("SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0", $data);
+            $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0');
         }
         else {
             $result = $db->query('SELECT * FROM '.self::$table.' ORDER BY firstname');

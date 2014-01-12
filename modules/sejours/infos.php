@@ -8,7 +8,10 @@
 
         <?php $sejour = sejour::get($_GET['id']); ?>
         <?php tool::output($sejour); ?>
-
+    <?php $creator = user::get($sejour->creator); ?>
+    <?php $editor = user::get($sejour->editor); ?>
+    <?php $date_created = new DateTime($sejour->created); ?>
+    <?php $date_edited = new DateTime($sejour->edited); ?>
 
         <div id="pad-wrapper">
             <div class="row header">
@@ -20,6 +23,9 @@
                         <i class="icon-remove"></i> Supprimer
                     </button>
                     <a href="/enfants/editer/id/<?=$enfant->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
+                    <button class="metadata btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<strong>Créé par :</strong><br/> <?=$creator->firstname; ?>, le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?> <br /><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?> " data-original-title="Informations" title="">
+                      <i class="icon-info-sign"></i>
+                    </button>                
                 </div>
             </div>
 
