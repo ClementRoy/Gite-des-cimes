@@ -17,10 +17,12 @@
                             ':payer' => $form_structure_payer,
                             ':email' => $form_structure_email,
                             ':phone' => $form_structure_telephone,
+                            ':fax' => $form_structure_fax,
                             ':address_number' => $form_structure_adresse_numero,
                             ':address_street' => $form_structure_adresse_voirie,
                             ':address_postal_code' => $form_structure_adresse_code_postal,
-                            ':address_city' => $form_structure_adresse_code_ville
+                            ':address_city' => $form_structure_adresse_code_ville,
+                            ':note' => $form_structure_note
                             );
 
         $result = structure::update($datas,  $_GET['id']);
@@ -131,6 +133,15 @@
                         </div>
 
                         <div class="field-box row">
+                            <label class="col-md-2" for="form-structure-fax">Fax</label>
+                            <div class="col-md-4">
+                                <input id="form-structure-fax" name="form_structure_fax" type="text" class="form-control"
+                                data-toggle="tooltip" title="Renseignez le numéro de fax de la structure." 
+                                parsley-type="phone" value="<?=$structure->fax ?>">
+                            </div>                        
+                        </div>
+
+                        <div class="field-box row">
                                 <label class="col-md-2" for="form-structure-adresse-numero">Adresse de la structure</label>
                                 <div class="col-md-4">
                                     <div class="row">
@@ -146,6 +157,13 @@
                                     </div>
                                 </div>                            
                             </div>
+
+                         <div class="field-box row">
+                            <label class="col-md-2" for="form-enfant-note">Notes</label>
+                            <div class="col-md-4 col-sm-5">
+                                <textarea id="form-enfant-note" name="form_enfant_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de l'enfant."><?=$structure->note; ?></textarea>
+                            </div>
+                        </div>
 
 
                         <input type="submit" class="btn-flat primary" name="submit" value="Valider">

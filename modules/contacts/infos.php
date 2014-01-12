@@ -6,7 +6,11 @@
     
     <?php // TODO : ne pas oublier de lister les contacts associés  ?>
     <?php $contact = contact::get($_GET['id']); ?>
-    <?php $structure = structure::get($contact->ref_structure); ?>
+    <?php 
+      if($contact->ref_structure) {
+        $structure = structure::get($contact->ref_structure);
+      }
+    ?>
     <?php $creator = user::get($contact->creator); ?>
     <?php $editor = user::get($contact->editor); ?>
     <?php $date_created = new DateTime($contact->created); ?>
