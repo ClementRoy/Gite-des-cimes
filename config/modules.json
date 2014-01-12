@@ -42,5 +42,9 @@
 	"infos" : {
 		"name" : "infos",
 		"views" : ["contact", "index", "infos", "debug"]
+	},
+	"ajax" : {
+		"name" : "ajax",
+		"views" : ["get_contact"]
 	}
 }

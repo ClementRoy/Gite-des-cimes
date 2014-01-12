@@ -22,5 +22,6 @@
     <script src="/assets/js/jquery.tableSorter.js"></script>
 
     <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/ajax.js"></script>
 <body>
 </html>

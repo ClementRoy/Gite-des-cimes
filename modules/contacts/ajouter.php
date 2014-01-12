@@ -10,20 +10,19 @@
         <?php 
             extract($_POST);
             $datas = array(
-                            ':name' => $form_structure_name,
-                            ':service' => $form_structure_service,
-                            ':payer' => $form_structure_payer,
-                            ':email' => $form_structure_email,
-                            ':phone' => $form_structure_telephone,
-                            ':fax' => $form_structure_fax,
-                            ':address_number' => $form_structure_adresse_numero,
-                            ':address_street' => $form_structure_adresse_voirie,
-                            ':address_postal_code' => $form_structure_adresse_code_postal,
-                            ':address_city' => $form_structure_adresse_code_ville,
-                            ':note' => $form_structure_note
+                            ':firstname' => $form_contact_firstname,
+                            ':lastname' => $form_contact_lastname,
+                            ':title' => $form_contact_title,
+                            ':ref_contact' => $form_contact_contact,
+                            ':civility' => $form_contact_civility,
+                            ':email' => $form_contact_email,
+                            ':phone' => $form_contact_telephone,
+                            ':mobile_phone' => $form_contact_mobile_phone,
+                            ':fax' => $form_contact_fax,
+                            ':note' => $form_contact_note
                             );
 
-            $result = structure::add($datas);
+            $result = contact::add($datas);
 
         ?>
 
@@ -32,16 +31,16 @@
             <div id="pad-wrapper" class="action-page">
                 <div class="row header">
                     <div class="col-md-12">
-                        <h3>Ajouter une structure</h3>
+                        <h3>Ajouter un contact</h3>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="alert alert-success">
                             <i class="icon-ok-sign"></i> 
-                            La structure <?=$form_structure_name; ?> a bien été ajoutée
+                            Le contact <?=$form_contact_name; ?> a bien été ajoutée
                         </div>
-                        <a href="/structures/">Retourner à la liste des structures</a>
+                        <a href="/contacts/">Retourner à la liste des contacts</a>
 
                     </div>
                 </div>
@@ -54,16 +53,16 @@
             <div id="pad-wrapper" class="action-page">
                 <div class="row header">
                     <div class="col-md-12">
-                        <h3>Ajouter une structure</h3>
+                        <h3>Ajouter une contact</h3>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="alert alert-danger">
                             <i class="icon-remove-sign"></i> 
-                            Une erreur s'est produite durant l'ajout de la structure, veuillez réessayer
+                            Une erreur s'est produite durant l'ajout de la contact, veuillez réessayer
                         </div>
-                        <a href="/structures/ajouter">Retourner au formulaire d'ajout</a>
+                        <a href="/contacts/ajouter">Retourner au formulaire d'ajout</a>
                     </div>
                 </div>
             </div>
@@ -77,90 +76,112 @@
         <div id="pad-wrapper" class="form-page">
             <div class="row header">
                 <div class="col-md-12">
-                    <h3>Ajouter une structure</h3>
+                    <h3>Ajouter un contact</h3>
                 </div>
             </div>
 
-            <form id="form-add-structure" method="post" parsley-validate>
+            <form id="form-add-contact" method="post" parsley-validate>
                    <!--  <h2>Informations sur le séjour</h2> -->
                      <div class="row form-wrapper">
+
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-structure-nom">Nom de la structure</label>
-                            <div class="col-md-4">
-                                <input id="form-structure-name" name="form_structure_name" class="form-control" type="text" 
-                                data-toggle="tooltip" title="Renseignez le nom de la structure." parsley-required="true">
-                            </div>                            
+                            <label class="col-md-2" for="form-enfant-structure-select">Nom de la structure</label>
+                            <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez la structure qui s'occupe de cet enfant.">
+                                <div class="ui-select">
+                                    <?php $structures = structure::getList(); ?>
+                                    <select id="form-enfant-structure-select" name="form_enfant_structure">
+                                        <?php foreach($structures as $structure): ?>
+                                        <option selected=""><?=$structure->name ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="field-box row">
-                            <label class="col-md-2">Structure payante</label>
-                            <div class="col-md-4" data-toggle="tooltip" title="Précisez si cette structure paye les séjours.">
-                                <label class="radio-inline col-md-7" for="form-structure-payeur-oui">
-                                    <div class="radio" id="uniform-form-structure-payeur-oui">
+                            <label class="col-md-2">Civilité</label>
+                            <div class="col-md-4" data-toggle="tooltip" title="Précisez la civilité du contact">
+                                <label class="radio-inline col-md-7" for="form-contact-civility-mme">
+                                    <div class="radio" id="uniform-form-contact-civility-mme">
                                         <span class="checked">
-                                            <input type="radio" name="form_structure_payer" id="form-structure-payeur-oui" value="1">
+                                            <input type="radio" name="form_contact_civility" id="form-contact-civility-mme" value="Mme">
                                         </span>
                                     </div>
-                                    Oui
+                                    Mme
                                 </label>
-                                <label class="radio-inline col-md-4" for="form-structure-payeur-non">
-                                    <div class="radio" id="uniform-form-structure-payeur-non">
+                                <label class="radio-inline col-md-4" for="form-contact-civility-mr">
+                                    <div class="radio" id="uniform-form-contact-civility-mr">
                                         <span class="checked">
-                                            <input type="radio" name="form_structure_payer" id="form-structure-payeur-non" value="0" checked="">
+                                            <input type="radio" name="form_contact_civility" id="form-contact-civility-mr" value="Mr" checked="">
                                         </span>
                                     </div>
-                                    Non
+                                    Mr
                                 </label>
                             </div>
                         </div>
 
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-structure-email">Email</label>
+                            <label class="col-md-2" for="form-contact-prenom">Prénom</label>
+                            <div class="col-md-4 col-sm-5">
+                                <input id="form-contact-prenom" name="form_contact_firstname" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le prénom du contact." parsley-required="true">
+                            </div>
+                        </div>
+
+                        <div class="field-box row">
+                            <label class="col-md-2" for="form-contact-nom">Nom</label>
+                            <div class="col-md-4 col-sm-5">
+                                <input id="form-contact-nom" name="form_contact_lastname" class="form-control input-sm input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom du contact." parsley-required="true">
+                            </div>
+                        </div>
+
+                        <div class="field-box row">
+                            <label class="col-md-2" for="form-contact-title">Titre</label>
                             <div class="col-md-4">
-                                <input id="form-structure-email" name="form_structure_email" type="text" class="form-control"
-                                data-toggle="tooltip" title="Renseignez l'email de la structure." 
+                                <input id="form-contact-title" name="form_contact_title" class="form-control" type="text" 
+                                data-toggle="tooltip" title="Renseignez le titre de la contact." parsley-required="true">
+                            </div>                            
+                        </div>
+
+                        <div class="field-box row">
+                            <label class="col-md-2" for="form-contact-email">Email</label>
+                            <div class="col-md-4">
+                                <input id="form-contact-email" name="form_contact_email" type="text" class="form-control"
+                                data-toggle="tooltip" title="Renseignez l'email de la contact." 
                                 parsley-type="email">
                             </div>                        
                         </div>     
 
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-structure-phone">Téléphone</label>
+                            <label class="col-md-2" for="form-contact-phone">Téléphone</label>
                             <div class="col-md-4">
-                                <input id="form-structure-phone" name="form_structure_telephone" type="text" class="form-control"
-                                data-toggle="tooltip" title="Renseignez le numéro de téléphone de la structure." 
+                                <input id="form-contact-phone" name="form_contact_telephone" type="text" class="form-control"
+                                data-toggle="tooltip" title="Renseignez le numéro de téléphone de la contact." 
                                 parsley-type="phone">
                             </div>                        
                         </div>
 
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-structure-fax">Fax</label>
+                            <label class="col-md-2" for="form-contact-mobile-phone">Téléphone mobile</label>
                             <div class="col-md-4">
-                                <input id="form-structure-fax" name="form_structure_fax" type="text" class="form-control"
-                                data-toggle="tooltip" title="Renseignez le numéro de fax de la structure." 
+                                <input id="form-contact-mobile-phone" name="form_contact_mobile_phone" type="text" class="form-control"
+                                data-toggle="tooltip" title="Renseignez le numéro de téléphone mobile du contact." 
                                 parsley-type="phone">
                             </div>                        
                         </div>
 
                         <div class="field-box row">
-                                <label class="col-md-2" for="form-structure-adresse-numero">Adresse de la structure</label>
-                                <div class="col-md-4">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <input id="form-structure-adresse-numero" name="form_structure_adresse_numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse de la structure.">
-                                        </div>
-                                        <div class="col-md-9"><input id="form-structure-adresse-voirie" name="form_structure_adresse_voirie" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse de la structure."></div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4"><input id="form-structure-adresse-code-postal" name="form_structure_adresse_code_postal" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville de la structure."></div>
-                                        <div class="col-md-8"><input id="form-structure-adresse-code-ville" name="form_structure_adresse_code_ville" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville de la structure."></div>
-                                    </div>
-                                </div>                            
+                            <label class="col-md-2" for="form-contact-fax">Fax</label>
+                            <div class="col-md-4">
+                                <input id="form-contact-fax" name="form_contact_fax" type="text" class="form-control"
+                                data-toggle="tooltip" title="Renseignez le numéro de fax de la contact." 
+                                parsley-type="phone">
+                            </div>                        
                         </div>
 
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-structure-note">Notes</label>
+                            <label class="col-md-2" for="form-contact-note">Notes</label>
                             <div class="col-md-4 col-sm-5">
-                                <textarea id="form-structure-note" name="form_structure_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de la strucure."></textarea>
+                                <textarea id="form-contact-note" name="form_contact_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de la strucure."></textarea>
                             </div>
                         </div>
 
