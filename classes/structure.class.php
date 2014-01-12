@@ -48,6 +48,7 @@ class structure
         return $result;        
     }
 
+
     /**
      * desc
      *

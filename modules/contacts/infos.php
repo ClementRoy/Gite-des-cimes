@@ -6,6 +6,7 @@
     
     <?php // TODO : ne pas oublier de lister les contacts associés  ?>
     <?php $contact = contact::get($_GET['id']); ?>
+    <?php $structure = structure::get($contact->ref_structure); ?>
     <?php $creator = user::get($contact->creator); ?>
     <?php $editor = user::get($contact->editor); ?>
     <?php $date_created = new DateTime($contact->created); ?>
@@ -16,14 +17,14 @@
       <div id="pad-wrapper" class="users-profil">
         <div class="row header img">
             <div class="col-md-5">
-                <h3><?=$contact->firstname; ?></h3>
+                <h3><?=$contact->firstname; ?> <?=$contact->lastname; ?></h3>
             </div>
             <div class="col-md-5 text-right pull-right">
                       <button class="btn-flat danger" data-toggle="modal" data-target="#remove-modal">
                       <i class="icon-remove"></i> Supprimer
                     </button>
 
-                <a href="/structures/editer/id/<?=$structure->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
+                <a href="/contacts/editer/id/<?=$contact->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
                      <button class="metadata btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<strong>Créé par :</strong><br/> <?=$creator->firstname; ?>, le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?> <br /><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?> " data-original-title="Informations" title="">
                       <i class="icon-info-sign"></i>
                     </button>           
@@ -40,12 +41,12 @@
                     <h6 class="modal-title" id="myModalLabel">Supprimer cette fiche</h6>
                   </div>
                   <div class="modal-body">
-                    <p>Vous êtes sur le point de supprimer la structure  <strong>"<?=$structure->name; ?>"</strong>.<br />
+                    <p>Vous êtes sur le point de supprimer le contact  <strong>"<?=$contact->name; ?>"</strong>.<br />
                     Cette action est irréversible.</p>
                   </div>
                   <div class="modal-footer">
                     <a class="btn-flat white" data-dismiss="modal">Annuler</a>
-                    <a href="/structures/supprimer/id/<?=$structure->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
+                    <a href="/contacts/supprimer/id/<?=$contact->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
                   </div>
                 </div><!-- /.modal-content -->
               </div><!-- /.modal-dialog -->
@@ -56,6 +57,7 @@
         <div class="row">
 
         </div>
+        <?php tool::output($contact); ?>
         <?php tool::output($structure); ?>
     </div>
 
