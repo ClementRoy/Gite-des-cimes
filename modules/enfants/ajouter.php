@@ -306,12 +306,13 @@
                     <div class="ui-select">
                         <?php $structures = structure::getList(); ?>
                         <select id="form-enfant-structure-select" name="form_enfant_structure">
+                            <option value="" selected="selected">Sélectionnez la structure</option>
                             <?php foreach($structures as $structure): ?>
-                            <option selected=""><?=$structure->name ?></option>
+                            <option value="<?=$structure->id ?>"><?=$structure->name ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <p>+</p>
+                    <?php //TODO : ajouter la possibilité de créer une sutrcutre à la volée ?>
                 </div>
             </div>
             <div class="field-box row">
@@ -319,12 +320,10 @@
                 <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez le contact responsable de l'enfant.">
                     <div class="ui-select">
                         <select id="form-enfant-contact-select" name="form_enfant_contact">
-                            <option selected="">Choisissez un contact</option>
-                            <option>Custom selects</option>
-                            <option>Pure css styles</option>
+                            <option selected="">Sélectionnez un contact</option>
                         </select>
                     </div>
-                    <p>+</p>
+                    <?php // TODO : ajouter la possibilité de créer une structure à la volée ?>
                 </div>
             </div>
         </div>

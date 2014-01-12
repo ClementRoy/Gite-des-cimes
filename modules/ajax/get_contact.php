@@ -1,30 +1,14 @@
 <?php  
-
 	$id = $_GET['id'];
 	global $db;
-	// Query
-	$datas = array(
-			':id' => $id
-		);
 	$contacts = contact::getByStructure($id);
 
-	foreach ($contacts as $contact) {
-		echo $contact->lastname;
+	if(count($contacts) > 0){
+		foreach ($contacts as $key => $contact) {
+			echo $contact->civility.' '.$contact->lastname.' '.$contact->firstname.'|'.$contact->id;
+			if(count($contacts) > 1 && $key+1 != count($contacts)){
+				echo '#';
+			}
+		}
 	}
-	//tool::output($contacts);
-
-	// if(isset($contacts[0])){
-	// 	if(count($contacts) > 1){
-	// 		foreach ($contacts as $contact) {
-	// 			echo  "|".$contact["firstname"];
-	// 		}
-	// 	} else{
-	// 		echo $contacts[0]["firstname"];
-	// 	}
-	// } else{
-	// 	echo "no_result";
-	// }
-
-
 ?>
-

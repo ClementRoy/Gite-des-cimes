@@ -5,7 +5,7 @@
 	
 	<!-- Communs -->
     <script src="/assets/js/wysihtml5-0.3.0.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+   
     <script src="/assets/js/bootstrap.min.js"></script>
 
     <!-- Ajouter -->
@@ -23,5 +23,12 @@
 
     <script src="/assets/js/app.js"></script>
     <script src="/assets/js/ajax.js"></script>
+
+                                        <script>
+                                            $(document).ready(function(){
+                                                $('#form-enfant-structure-select').trigger('change');
+                                            });
+                                        </script>
+                                        
 <body>
 </html>

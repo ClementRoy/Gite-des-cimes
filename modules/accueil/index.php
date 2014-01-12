@@ -18,24 +18,24 @@
                 </div>
                 <div class="col-md-3 col-sm-3 stat">
                     <div class="data">
-                        <span class="number"><a href="/utilisateurs/"><?php echo count(user::getList()); ?></a></span>
-                        utilisateurs
+                        <span class="number"><a href="/contacts/"><?php echo count(contact::getList()); ?></a></span>
+                        contacts
                     </div>
-                    <span class="date">autorisés</span>
+                    <span class="date">dans la base</span>
                 </div>
                 <div class="col-md-3 col-sm-3 stat">
                     <div class="data">
-                        <span class="number"><a href="/enfants/">0</a></span>
-                        séjours
+                        <span class="number"><a href="/structures/"><?php echo count(structure::getList()); ?></a></span>
+                        structures
                     </div>
-                    <span class="date">en cours</span>
+                    <span class="date">dans la base</span>
                 </div>
                 <div class="col-md-3 col-sm-3 stat last">
                     <div class="data">
-                        <span class="number"><a href="/enfants/">0</a></span>
-                        Fiches
+                        <span class="number"><a href="/sejours/"><?php echo count(sejour::getList()); ?></a></span>
+                        Séjours
                     </div>
-                    <span class="date">incomplètes</span>
+                    <span class="date">dans la base</span>
                 </div>
             </div>
         </div>

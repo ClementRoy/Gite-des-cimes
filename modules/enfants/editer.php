@@ -26,9 +26,7 @@
                 $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
                 $cpam_validite = tool::generateDatetime($form_enfant_cpam_validite);
 
-                $datas = array(
-                    ':edited' => tool::currentTime(), 
-                    ':editor' => user::getCurrentUser(),                  
+                $datas = array(                 
                     ':firstname' => $form_enfant_prenom,
                     ':lastname' => $form_enfant_nom,
                     ':birthdate' => $birthdate,
@@ -83,72 +81,10 @@
                     ':vaccination' => $form_enfant_carnet_vaccination,
                     ':health_record' => $form_enfant_fiche_sanitaire,
                     ':stay_record' => $form_enfant_fiche_sejour,
-                    ':note' => $form_enfant_note,
-                    ':id' => $_GET['id']
+                    ':note' => $form_enfant_note
                     );
 
-                $sql = 'UPDATE enfant SET  
-                                edited = :edited,
-                                editor = :editor,
-                                firstname = :firstname,
-                                lastname = :lastname,
-                                birthdate = :birthdate,
-                                sex = :sex,
-                                registration_by = :registration_by,
-                                organization = :organization,
-                                contact = :contact,
-                                guardian = :guardian,
-                                father_name = :father_name,
-                                father_phone_home = :father_phone_home,
-                                father_phone_mobile = :father_phone_mobile,
-                                father_phone_pro = :father_phone_pro,
-                                father_address_number = :father_address_number,
-                                father_address_street = :father_address_street,
-                                father_address_postal_code = :father_address_postal_code,
-                                father_address_city = :father_address_city,
-                                mother_name = :mother_name,
-                                mother_phone_home = :mother_phone_home,
-                                mother_phone_mobile = :mother_phone_mobile,
-                                mother_phone_pro = :mother_phone_pro,
-                                mother_address_number = :mother_address_number,
-                                mother_address_street = :mother_address_street,
-                                mother_address_postal_code = :mother_address_postal_code,
-                                mother_address_city = :mother_address_city,
-                                guardian_name = :guardian_name,
-                                guardian_phone_home = :guardian_phone_home,
-                                guardian_phone_mobile = :guardian_phone_mobile,
-                                guardian_phone_pro = :guardian_phone_pro,
-                                emergency_name = :emergency_name,
-                                emergency_phone = :emergency_phone,
-                                guardian_address_number = :guardian_address_number,
-                                guardian_address_street = :guardian_address_street,
-                                guardian_address_postal_code = :guardian_address_postal_code,
-                                guardian_address_city = :guardian_address_city,
-                                domiciliation = :domiciliation,
-                                host_family_name = :host_family_name,
-                                host_family_phone_home = :host_family_phone_home,
-                                host_family_phone_mobile = :host_family_phone_mobile,
-                                host_family_phone_pro = :host_family_phone_pro,
-                                host_family_address_number = :host_family_address_number,
-                                host_family_address_street = :host_family_address_street,
-                                host_family_address_postal_code = :host_family_address_postal_code,
-                                host_family_address_city = :host_family_address_postal_code,
-                                image_rights = :image_rights,
-                                medicals_treatments = :medicals_treatments,
-                                allergies = :allergies,
-                                number_ss = :number_ss,
-                                self_assurance = :self_assurance,
-                                self_assurance_expiration_date = :self_assurance_expiration_date,
-                                cpam_attestation = :cpam_attestation,
-                                cpam_attestation_expiration_date = :cpam_attestation_expiration_date,
-                                vaccination = :vaccination,
-                                health_record = :health_record,
-                                stay_record = :stay_record,
-                                note = :note
-                                WHERE id = :id
-                                ';
-
-                $result = enfant::update($sql, $datas);
+                $result = enfant::update($datas, $_GET['id']);
 
             ?>
                 <?php //tool::output($result); ?>
@@ -241,32 +177,35 @@
                         </div>
 
 
-                        <div data-group="structure">
-                            <div class="field-box row">
-                                <label class="col-md-2" for="form-enfant-structure-select">Nom de la structure</label>
-                                <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez la structure qui s'occupe de cet enfant.">
-                                    <div class="ui-select">
-                                        <select id="form-enfant-structure-select" name="form_enfant_structure">
-                                            <option selected="">Choisissez une structure</option>
-                                            <option>Custom selects</option>
-                                            <option>Pure css styles</option>
-                                        </select>
+                            <div data-group="structure">
+                                <div class="field-box row">
+                                    <label class="col-md-2" for="form-enfant-structure-select">Nom de la structure</label>
+                                    <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez la structure qui s'occupe de cet enfant.">
+                                        <div class="ui-select">
+                                            <?php $structures = structure::getList(); ?>
+                                            <select id="form-enfant-structure-select" name="form_enfant_structure">
+                                                <option value="" selected="selected">Sélectionnez la structure</option>
+                                                <?php foreach($structures as $structure): ?>
+                                                <option value="<?=$structure->id ?>" <?php if($structure->id == $enfant->organization): ?>selected="selected"<?php endif; ?>><?=$structure->name ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+
+                                        <?php //TODO : ajouter la possibilité de créer une sutrcutre à la volée ?>
+                                    </div>
+                                </div>
+                                <div class="field-box row">
+                                    <label class="col-md-2" for="form-enfant-contact-select">Nom du contact</label>
+                                    <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez le contact responsable de l'enfant.">
+                                        <div class="ui-select">
+                                            <select id="form-enfant-contact-select" name="form_enfant_contact">
+                                                <option selected="">Sélectionnez un contact</option>
+                                            </select>
+                                        </div>
+                                        <?php // TODO : ajouter la possibilité de créer une structure à la volée ?>
                                     </div>
                                 </div>
                             </div>
-                            <div class="field-box row">
-                                <label class="col-md-2" for="form-enfant-contact-select">Nom du contact</label>
-                                <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez le contact responsable de l'enfant.">
-                                    <div class="ui-select">
-                                        <select id="form-enfant-contact-select" name="form_enfant_contact">
-                                            <option selected="">Choisissez un contact</option>
-                                            <option>Custom selects</option>
-                                            <option>Pure css styles</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                             <div class="field-box row">
                                 <label class="col-md-2">Responsable légal de l'enfant</label>

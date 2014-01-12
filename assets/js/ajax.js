@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
 
-
 	$('#form-enfant-structure-select').on('change', function(){
 		//$('#dpt_etude').prev('span').hide('fast');
 		$.ajax({
@@ -10,24 +9,23 @@ $(document).ready(function(){
 			data: {
 			},
 			success: function(data){
-				//console.log(data);
-				if(data != "no_result"){
-					villeVisible = true;
-					var strArray = data.split("|");
-					strArray.splice(0,1)
+				if(data != ''){
+					$('#form-enfant-contact-select').html('');
+					var strArray = data.split("#");
+					//console.log(data);
+					//strArray.splice(0,1);
 					if(strArray[0] != null) {
-						$('#ville_etude').html("").show();
-						$('#ville_etude').append("<option value='default'>Choisissez votre ville d'études</option>");
-						$('#etablissement_etude').html("<option value='default'>Choisissez votre établissement d'études</option>");
-						for(var cpt=0; cpt<=strArray.length-1; cpt++){
-							$('#ville_etude').append("<option id='" + strArray[cpt] + "'>" + strArray[cpt] + "</option>");
-						}
+						$('#form-enfant-contact-select').html("<option value='default'>Choisissez le contact</option>");
+						$.each(strArray,function( index, value ) {
+							var elemArray = value.split("|");
+							$('#form-enfant-contact-select').append("<option value='" + elemArray['1'] + "'>" + elemArray['0'] + "</option>");
+						});
 					} else {
-						villeVisible = false;
-						etabVisible = false
-						$('#ville_etude').html("<option value='default'>Choisissez votre ville d'études</option>");
-						$('#etablissement_etude').html("<option value='default'>Choisissez votre établissement d'études</option>");
+						$('#form-enfant-contact-select').html("<option value='default'>Choisissez le contact</option>");
 					}
+				}
+				else {
+					$('#form-enfant-contact-select').html("<option value='default'>Aucun contact associé pour le moment</option>");
 				}
 
 			}
