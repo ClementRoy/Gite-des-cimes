@@ -35,15 +35,27 @@ class contact
 
 
 
-    public static function getByName($name){
+    // public static function getByName($name){
+    //     global $db;
+    //     $params = array(
+    //                     ':name' => $name
+    //                     );
+    //     $sql = 'SELECT * FROM '.self::$table.' WHERE id=:id';
+    //     $result = $db->row($sql, $params);
+    //     return $result;        
+    // }
+
+
+    public static function getByStructure($id){
         global $db;
         $params = array(
-                        ':name' => $name
+                        ':id' => $id
                         );
-        $sql = 'SELECT * FROM '.self::$table.' WHERE id=:id';
-        $result = $db->row($sql, $params);
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_structure=:id';
+        $result = $db->query($sql, $params);
         return $result;        
     }
+
 
     /**
      * desc
