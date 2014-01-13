@@ -1,31 +1,31 @@
-nom;date_debut;date_fin;lieu;nb_min;nb_max
-Glisses vosgiennes;15/02/2014;01/03/2014;Cornimont;5;25
-Tout Schuss;12/04/2014;26/04/2014;Les Gets;5;25
-Roues Libres;05/07/2014;12/07/2014;Clinchamps;5;25
-A la Vend'tagne;12/07/2014;26/07/2014;ChŽmŽrŽ;5;25
-Brises et Houles;26/07/2014;09/08/2014;Bacilly;5;25
-Du Vert et du Bleu;09/08/2014;23/08/2014;Sainte Marguerite sur Mer;5;25
-Du Vert et du Bleu;18/10/2014;01/11/2014;Sainte Marguerite sur Mer;5;25
-Multi-activitŽ;15/02/2014;01/03/2014;Bonneuil-en-Valois;5;25
-Multi-activitŽ;12/04/2014;26/04/2014;Bonneuil-en-Valois;5;25
-Multi-activitŽ;05/07/2014;26/07/2014;Bonneuil-en-Valois;5;25
-Multi-activitŽ;26/07/2014;23/08/2014;Bonneuil-en-Valois;5;25
-Multi-activitŽ;18/10/2014;01/11/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;10/01/2014;12/01/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;24/01/2014;26/01/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;31/01/2014;02/02/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;21/03/2014;23/03/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;28/03/2014;30/03/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;04/04/2014;06/04/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;16/05/2014;18/05/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;23/05/2014;25/05/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;30/05/2014;01/06/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;13/06/2014;15/06/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;20/06/2014;22/06/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;12/09/2014;14/09/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;26/09/2014;28/09/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;03/10/2014;05/10/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;14/11/2014;16/11/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;21/11/2014;23/11/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;12/12/2014;14/12/2014;Bonneuil-en-Valois;5;25
-SŽjours courts;19/12/2014;21/12/2014;Bonneuil-en-Valois;5;25
+nom;date_from;date_to;other;place;min;max;price;price_week
+Glisses vosgiennes;15/02/2014;01/03/2014;16/12/2013;Cornimont;5;25;0;200
+Tout Schuss;12/04/2014;26/04/2014;16/12/2013;Les Gets;5;25;0;200
+Roues Libres;05/07/2014;12/07/2014;16/12/2013;Clinchamps;5;25;0;200
+A la Vend'tagne;12/07/2014;26/07/2014;16/12/2013;Chéméré;5;25;0;200
+Brises et Houles;26/07/2014;09/08/2014;16/12/2013;Bacilly;5;25;0;200
+Du Vert et du Bleu;09/08/2014;23/08/2014;16/12/2013;Sainte Marguerite sur Mer;5;25;0;200
+Du Vert et du Bleu;18/10/2014;01/11/2014;16/12/2013;Sainte Marguerite sur Mer;5;25;0;200
+Multi-activité;15/02/2014;01/03/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Multi-activité;12/04/2014;26/04/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Multi-activité;05/07/2014;26/07/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Multi-activité;26/07/2014;23/08/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Multi-activité;18/10/2014;01/11/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;10/01/2014;12/01/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;24/01/2014;26/01/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;31/01/2014;02/02/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;21/03/2014;23/03/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;28/03/2014;30/03/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;04/04/2014;06/04/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;16/05/2014;18/05/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;23/05/2014;25/05/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;30/05/2014;01/06/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;13/06/2014;15/06/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;20/06/2014;22/06/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;12/09/2014;14/09/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;26/09/2014;28/09/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;03/10/2014;05/10/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;14/11/2014;16/11/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;21/11/2014;23/11/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;12/12/2014;14/12/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
+Séjours courts;19/12/2014;21/12/2014;16/12/2013;Bonneuil-en-Valois;5;25;0;200
