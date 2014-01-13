@@ -8,10 +8,10 @@
 
         <?php $sejour = sejour::get($_GET['id']); ?>
         <?php tool::output($sejour); ?>
-    <?php $creator = user::get($sejour->creator); ?>
-    <?php $editor = user::get($sejour->editor); ?>
-    <?php $date_created = new DateTime($sejour->created); ?>
-    <?php $date_edited = new DateTime($sejour->edited); ?>
+        <?php $creator = user::get($sejour->creator); ?>
+        <?php $editor = user::get($sejour->editor); ?>
+        <?php $date_created = new DateTime($sejour->created); ?>
+        <?php $date_edited = new DateTime($sejour->edited); ?>
 
         <div id="pad-wrapper">
             <div class="row header">
@@ -22,7 +22,7 @@
                     <button class="btn-flat danger" data-toggle="modal" data-target="#remove-modal">
                         <i class="icon-remove"></i> Supprimer
                     </button>
-                    <a href="/enfants/editer/id/<?=$enfant->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
+                    <a href="/sejours/editer/id/<?=$sejour->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
                     <button class="metadata btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<strong>Créé par :</strong><br/> <?=$creator->firstname; ?>, le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?> <br /><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?> " data-original-title="Informations" title="">
                       <i class="icon-info-sign"></i>
                     </button>                
@@ -37,12 +37,12 @@
                             <h6 class="modal-title" id="myModalLabel">Supprimer cette fiche</h6>
                         </div>
                         <div class="modal-body">
-                            <p>Vous êtes sur le point de supprimer la fiche de <strong><?=$enfant->firstname; ?> <?=$enfant->lastname; ?></strong>.<br />
+                            <p>Vous êtes sur le point de supprimer la fiche de <strong><?=$sejour->name; ?></strong>.<br />
                                 Cette action est irréversible.</p>
                         </div>
                         <div class="modal-footer">
                             <a class="btn-flat white" data-dismiss="modal">Annuler</a>
-                            <a href="/enfants/supprimer/id/<?=$enfant->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
+                            <a href="/sejours/supprimer/id/<?=$sejour->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
                         </div>
                     </div>
                 </div>

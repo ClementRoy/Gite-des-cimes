@@ -7,6 +7,7 @@
 
     <?php if(isset($_POST['submit'])): ?>
         <?php  
+        extract($_POST);
         $datas = array(
                     ':firstname' => $form_utilisateur_prenom,
                     ':lastname' => $form_utilisateur_nom,

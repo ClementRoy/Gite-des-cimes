@@ -7,12 +7,13 @@
     <?php if(isset($_POST['submit'])): ?>
         <?php  
             extract($_POST);
+            $form_sejour_date_debut = tool::generateDatetime($form_sejour_date_debut);
+            $form_sejour_date_fin = tool::generateDatetime($form_sejour_date_fin);
+            
             $datas = array(
-                            ':identifier' => $form_sejour_identifiant,
                             ':name' => $form_sejour_nom,
                             ':date_from' => $form_sejour_date_debut,
                             ':date_to' => $form_sejour_date_fin,
-                            ':created' => $form_sejour_date_creation,
                             ':place' => $form_sejour_lieu,
                             ':capacity_max' => $form_sejour_capacite_max,
                             ':capacity_min' => $form_sejour_capacite_min,
