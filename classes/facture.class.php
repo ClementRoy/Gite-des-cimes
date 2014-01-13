@@ -33,7 +33,28 @@ class facture
         return $result;
     }
 
-    
+
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
+    public static function getList($limit = false, $offset = 0){
+        global $db;
+        if(!empty($limit)){
+            $data = array();
+            $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0');
+        }
+        else {
+            $result = $db->query('SELECT * FROM '.self::$table.' ORDER BY id');
+        }
+        return $result;
+    }
+
+
     /**
      * Count the number of entries in the database table
      *

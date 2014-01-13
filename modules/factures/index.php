@@ -12,13 +12,13 @@
                     <h3>Les factures</h3>
                 </div>
                 <div class="col-md-9 text-right">
-                    <input type="text" id="table-enfant-search" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">
+                    <input type="text" id="table-enfant-search" class="col-md-5 search" placeholder="Tapez le numéro d'une facture..." autofocus="autofocus">
                     <a href="/factures/ajouter" class="btn-flat primary"><span>+</span>
-                        Ajouter une facture</a>
+                        Editer une nouvelle facture</a>
                 </div>
             </div>
 
-            <?php $factures = factures::getList(); ?>
+            <?php $factures = facture::getList(); ?>
 
 
             <div class="row">
