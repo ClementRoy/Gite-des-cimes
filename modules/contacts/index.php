@@ -12,7 +12,7 @@
                     <h3>Les contacts</h3>
                 </div>
                 <div class="col-md-9 text-right">
-                    <input type="text" id="table-enfant-search" class="col-md-5 search" placeholder="Tapez le nom d'un contact..." autofocus="autofocus">
+                    <input type="text" id="table-enfant-search" class="col-md-5 search" data-search="contact" placeholder="Tapez le nom d'un contact..." autofocus="autofocus">
                     <a href="/contacts/ajouter" class="btn-flat primary"><span>+</span>
                         Ajouter un contact</a>
                 </div>
@@ -23,8 +23,8 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <table id="table-enfant" class="table table-hover tablesorter extendlink">
-                        <thead>
+                    <table id="table-enfant" data-search="contact" class="table table-hover tablesorter extendlink">
+                        <thead data-spy="affix" data-offset-top="60" data-offset-bottom="200">
                             <tr>
                                 <th class="sortable">Nom</th>
                                 <th class="sortable"><span class="line"></span>Prénom</th>
@@ -44,7 +44,7 @@
                                  <a href="/contacts/infos/id/<?=$contact->id; ?>"><?=$contact->firstname; ?></a>
                             </td>
                             <td>
-                               <a href="/contacts/infos/id/<?=$contact->id; ?>"><?=$contact->email; ?></a>
+                               <a href="mailto:<?=$contact->email; ?>"><?=$contact->email; ?></a>
                             </td>
                         </tr>
                         <?php endforeach; ?>

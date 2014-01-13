@@ -15,19 +15,20 @@
     <!-- main container -->
     <div class="content">
       <div id="pad-wrapper" class="users-profil">
-        <div class="row header img">
-            <div class="col-md-5">
-                <h3><?=$structure->name; ?></h3>
-            </div>
-            <div class="col-md-5 text-right pull-right">
-                <button class="btn-flat danger" data-toggle="modal" data-target="#remove-modal">
-                  <i class="icon-remove"></i> Supprimer
-                </button>
-                <a href="/structures/editer/id/<?=$structure->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
-                 <button class="metadata btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<strong>Créé par :</strong><br/> <?=$creator->firstname; ?>, le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?> <br /><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?> " data-original-title="Informations" title="">
-                  <i class="icon-info-sign"></i>
-                </button>           
-            </div>
+        <div class="row header icon">
+          <div class="col-md-5">
+            <i class="big-icon icon-building"></i>
+            <h3><?=$structure->name; ?></h3>
+          </div>
+          <div class="col-md-5 text-right pull-right">
+            <button class="btn-flat danger" data-toggle="modal" data-target="#remove-modal">
+              <i class="icon-remove"></i> Supprimer
+            </button>
+            <a href="/structures/editer/id/<?=$structure->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
+            <button class="metadata btn-flat white" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<p><strong>Créé par :</strong><br/> <?=$creator->firstname; ?>, <br>le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?> </p><p><strong>Edité par :</strong><br/> <?=$editor->firstname ?>, <br>le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?></p>" data-original-title="Informations" title="">
+              <i class="icon-info-sign"></i>
+            </button>     
+          </div>
         </div>
 
 
@@ -41,26 +42,107 @@
               </div>
               <div class="modal-body">
                 <p>Vous êtes sur le point de supprimer la structure  <strong>"<?=$structure->name; ?>"</strong>.<br />
-                Cette action est irréversible.</p>
+                  Cette action est irréversible.</p>
+                </div>
+                <div class="modal-footer">
+                  <a class="btn-flat white" data-dismiss="modal">Annuler</a>
+                  <a href="/structures/supprimer/id/<?=$structure->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+
+
+
+          <div class="row bio">
+
+            <div class="col-md-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">Coordonnées</div>
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <p><strong>Email :</strong></p>
+                    <p><?=(!empty($structure->email)) ? $structure->email : EMPTYVAL; ?></p>
+                  </li>
+                  <li class="list-group-item">
+                    <p><strong>Adresse :</strong></p>
+                    <p><?=$structure->address_number; ?> <?=$structure->address_street; ?><br />
+                      <?=$structure->address_postal_code; ?> <?=$structure->address_city; ?>
+                    </p>    
+                  </li>
+                  <li class="list-group-item">
+                    <p><strong>Téléphone :</strong></p>
+                    <p><?=(!empty($structure->phone)) ? $structure->phone : EMPTYVAL; ?></p>
+                  </li>
+                  <li class="list-group-item">
+                    <p><strong>Fax :</strong></p>
+                    <p><?=(!empty($structure->fax)) ? $structure->phone : EMPTYVAL; ?></p>
+                  </li>
+                </ul>
               </div>
-              <div class="modal-footer">
-                <a class="btn-flat white" data-dismiss="modal">Annuler</a>
-                <a href="/structures/supprimer/id/<?=$structure->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
+            </div>
+            <div class="col-md-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">Informations</div>
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <p><strong>Nom de la structure :</strong></p>
+                    <p><?=(!empty($structure->name)) ? $structure->name : EMPTYVAL; ?></p>
+                  </li>
+                  <?php if (!isset($structure->service)): ?>
+                    <li class="list-group-item">
+                      <p><strong>Service :</strong></p>
+                      <p><?=(!empty($structure->service)) ? $structure->service : EMPTYVAL; ?></p>
+                    </li>
+                  <?php endif ?>
+
+                  <li class="list-group-item">
+                    <p><strong>Structure payeuse  :</strong></p>
+                    <p><?=($structure->payer>0)?'Oui':'Non'; ?></p>    
+                  </li>
+                </ul>
               </div>
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+            </div>
 
+          </div>
+<h4>Ses contacts</h4>
+                <table class="table table-hover extendlink">
+                    <thead>
+                        <tr>
+                            <th class="col-md-1">
+                                N° 
+                            </th>
+                            <th class="col-md-3">
+                                <span class="line"></span>
+                                Dates
+                            </th>
+                            <th class="col-md-5">
+                                <span class="line"></span>
+                                Nom du séjour
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="#">459</a>
+                            </td>
+                            <td>
+                                12 au 17 décembre 2014
+                            </td>
+                            <td>
+                                <a href="#">Du Vert et du Bleu</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        </table>
 
-
-        <div class="row">
-              
         </div>
         <?php tool::output($structure); ?>
         <?php tool::output($contacts); ?>
+      </div>
+
     </div>
+  </div><!-- /.container -->
 
-</div>
-</div><!-- /.container -->
-
-<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
+  <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

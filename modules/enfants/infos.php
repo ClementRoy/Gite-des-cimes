@@ -39,7 +39,7 @@
                         <i class="icon-remove"></i> Supprimer
                     </button>
                     <a href="/enfants/editer/id/<?=$enfant->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
-                    <button class="metadata btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<strong>Créé par :</strong><br/> <?=$creator->firstname; ?>, le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?> <br /><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?> " data-original-title="Informations" title="">
+                    <button class="metadata btn-flat white" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<p><strong>Créé par :</strong><br/> <?=$creator->firstname; ?>,<br />le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?></p><p><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,<br />le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?></p>" data-original-title="Informations" title="">
                       <i class="icon-info-sign"></i>
                     </button>
                 </div>
@@ -47,7 +47,7 @@
             </div>
 
 
-                <div class="modal fade" id="remove-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" id="remove-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -68,7 +68,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-9 bio">
+                <div class="col-md-12 bio">
                    <h4>Ses informations</h4>
                    <div class="row">
                     <div class="col-md-4">
@@ -78,7 +78,7 @@
                                 <li class="list-group-item">
                                     <p><strong>Date de naissance :</strong></p>
                                     <?php $birthdate = new DateTime($enfant->birthdate); ?>
-                                    <p class="editable"><?=($birthdate->getTimestamp() != '-62169987600')? strftime('%d %B %Y', $birthdate->getTimestamp()) : '<em>Non renseignée</em>';?></p>
+                                    <p><?=($birthdate->getTimestamp() != '-62169987600')? strftime('%d %B %Y', $birthdate->getTimestamp()) : '<em>Non renseignée</em>';?></p>
                                 </li>
                                 <li class="list-group-item">
                                     <p><strong>Age :</strong></p>
@@ -86,7 +86,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <p><strong>Sexe :</strong></p>
-                                    <p class="editable"><?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?></p>
+                                    <p><?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?></p>
 
                                 </li>
                                 <li class="list-group-item">
@@ -299,7 +299,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-lg-3 address">
+<!--             <div class="col-lg-3 address">
                     <h6>Coordonnées</h6>
                     <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d2622.060078846162!2d2.5489488500000004!3d48.914247599999996!3m2!1i1024!2i768!4f13.1!3m2!1m1!1s0x0%3A0x97bc04535ade7b59!5e0!3m2!1sfr!2sfr!4v1386513665741" width="100%" height="200" frameborder="0" style="border:0"></iframe>
                     <ul>
@@ -323,7 +323,7 @@
                         <li><i class="icon-phone"></i>01 41 70 35 10</li>
                     </ul>
 
-                </div>
+                </div> -->
 
         </div>
     </div>

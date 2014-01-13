@@ -12,7 +12,7 @@
                     <h3>Les structures</h3>
                 </div>
                 <div class="col-md-9 text-right">
-                    <input type="text" id="table-enfant-search" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">
+                    <input type="text" id="table-enfant-search" data-search="structure" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">
                     <a href="/structures/ajouter" class="btn-flat primary"><span>+</span>
                         Ajouter une structure</a>
                 </div>
@@ -23,7 +23,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <table id="table-enfant" class="table table-hover tablesorter extendlink">
+                    <table id="table-enfant" data-search="structure" class="table table-hover tablesorter extendlink">
                         <thead>
                             <tr>
                                 <th class="sortable">Nom</th>
@@ -33,18 +33,16 @@
                         </thead>
                         <tbody>
 
-                        <!-- row -->
-
                         <?php foreach($structures as $key => $structure): ?>
                         <tr>
                             <td>
                                 <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name; ?></a>
                             </td>
                             <td>
-                                 <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->payer; ?></a>
+                                <?=($structure->payer>0)?'Oui':'Non'; ?>
                             </td>
                             <td>
-                               <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->email; ?></a>
+                               <a href="mailto:<?=$structure->email; ?>"><?=$structure->email; ?></a>
                             </td>
                         </tr>
                         <?php endforeach; ?>
