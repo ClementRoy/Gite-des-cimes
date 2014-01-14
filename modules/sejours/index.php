@@ -24,41 +24,48 @@
                     <table id="table-sejour"  data-search="sejour" class="table tablesorter table-hover extendlink">
                         <thead>
                             <tr>
-                            	<th class="sortable">Numéro</th>
+    
                                 <th class="sortable">Nom</th>
                                 <th class="sortable"><span class="line"></span>Date de début</th>
                                 <th class="sortable"><span class="line"></span>Date de fin</th>
                                 <th class="sortable"><span class="line"></span>Lieu</th>
                                 <th class="sortable"><span class="line"></span>Capacité min</th>
                                 <th class="sortable"><span class="line"></span>Capacité max</th>
+                                <th class="sortable"><span class="line"></span>Prix (€)</th>
                             </tr>
                         </thead>
                         <tbody>
                         <!-- row -->
 
                         <?php foreach($sejours as $key => $sejour): ?>
-                        <tr class="first">
-                            <td>
-                            	<a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->numero; ?></a>
-                            </td>
+                        <tr>
                             <td>
                             	<a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a>
                             </td>
-                            <td>
-                            	<?=$sejour->date_from; ?>
+                            <td class="text-right">
+                            <?php $date_from = new DateTime($sejour->date_from); ?>
+                            <?php if($date_from->getTimestamp() != '-62169987600'): ?>
+                                <?=strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
+                            <?php endif; ?>
                             </td>
-                            <td>
-                                <?=$sejour->date_to; ?>
+                            <td class="text-right">
+                            <?php $date_to = new DateTime($sejour->date_to); ?>
+                            <?php if($date_to->getTimestamp() != '-62169987600'): ?>
+                                <?=strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
+                            <?php endif; ?>
                             </td>
                             <td>
                                <?=$sejour->place; ?>
                             </td>
-                            <td>
+                            <td class="text-right">
                                 <?=$sejour->capacity_min; ?>
                             </td>
-                            <td>
+                            <td class="text-right">  
                                 <?=$sejour->capacity_max; ?>
-                            </td>                            
+                            </td>
+                             <td class="text-right">
+                                <?=$sejour->price; ?>
+                            </td>
                         </tr>
                         <?php endforeach; ?>
                         </tbody>
