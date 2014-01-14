@@ -1,17 +1,13 @@
 <?php
-class structure
+
+class inscription
 {
 
-    private static $table = "structure";
+	private static $table = 'inscription';
 
-    /**
-     * desc
-     *
-     * @note 
-     *
-     * @param
-     * @return
-     */	
+
+
+
 	function __construct(){}
 
 
@@ -37,49 +33,30 @@ class structure
      * @param
      * @return
      */
-    public static function getByName($name){
-        echo $name;
-        global $db;
-        $params = array(
-                        ':name' => '%'.$name.'%'
-                        );
-        $sql = 'SELECT * FROM '.self::$table.' WHERE name LIKE :name';
-        $result = $db->row($sql, $params);
-        return $result;        
-    }
-
-
-    /**
-     * desc
-     *
-     * @note 
-     *
-     * @param
-     * @return
-     */
-    public static function getList($limit = false, $offset = 0){
-        global $db;
+	public static function getList($limit = false, $offset = 0){
+		global $db;
         if(!empty($limit)){
             $data = array();
-            $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0', $data);
+            $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0');
         }
         else {
-            $result = $db->query('SELECT * FROM '.self::$table.' ORDER BY name');
+            $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY firstname');
         }
-        return $result;
-    }
-
+		return $result;
+	}
 
     /**
      * Count the number of entries in the database table
      *
      * @return int number of the entries in the table
      */
-    public static function countAll(){
-        global $db;
-        $result = $db->row('SELECT COUNT(*) FROM '.self::$table.'');
-        return $result;
-    }
+	public static function countAll(){
+		global $db;
+		$result = $db->row('SELECT COUNT(*) FROM '.self::$table.'');
+		return $result;
+	}
+
+
 
     /**
      * Insert a new object into the database
@@ -115,7 +92,7 @@ class structure
         $sql = 'INSERT INTO '.self::$table.' (' . $entries . ') ' . 'values (' . $bind . ')';
 
         $result = $db->insert($sql, $data);
-
+        
         return $result;
     }
 
@@ -192,7 +169,7 @@ class structure
         //$result = self::archive($id);
         return $result;
     }
-    
+
 
 }
 

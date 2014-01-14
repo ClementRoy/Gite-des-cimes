@@ -175,9 +175,31 @@ class contact
      */
     public static function remove($id){
         global $db;
+        // $data = array(':id' => $id);
+        // $sql = 'DELETE FROM '.self::$table.' WHERE id = :id';
+        // $result = $db->delete($sql, $data);
+        $result = self::archive($id);
+        return $result;
+    }
+
+    public static function archive($id){
+        $data = array(':archived' => 1); 
+        $result = self::update($data, $id);
+        return $result;       
+    }
+
+    public static function unarchive($id){
+        $data = array(':archived' => 0); 
+        $result = self::update($data, $id);
+        return $result;       
+    }
+
+    public static function delete($id){
+        global $db;
         $data = array(':id' => $id);
         $sql = 'DELETE FROM '.self::$table.' WHERE id = :id';
         $result = $db->delete($sql, $data);
+        //$result = self::archive($id);
         return $result;
     }
     

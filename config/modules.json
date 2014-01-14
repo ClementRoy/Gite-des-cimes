@@ -50,5 +50,9 @@
 	"ajax" : {
 		"name" : "ajax",
 		"views" : ["get_contact"]
+	},
+	"corbeille" : {
+		"name" : "corbeille",
+		"views" : ["index"]
 	}
 }

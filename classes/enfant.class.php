@@ -58,11 +58,17 @@ class enfant
             $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0');
         }
         else {
-            $result = $db->query('SELECT * FROM '.self::$table.' ORDER BY firstname');
+            $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY firstname');
         }
 		return $result;
 	}
 
+
+    public static function getTrashed(){
+        global $db;
+         $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1 ORDER BY firstname');
+         return $result;
+    }
     /**
      * Count the number of entries in the database table
      *
@@ -160,9 +166,31 @@ class enfant
      */
     public static function remove($id){
         global $db;
+        // $data = array(':id' => $id);
+        // $sql = 'DELETE FROM '.self::$table.' WHERE id = :id';
+        // $result = $db->delete($sql, $data);
+        $result = self::archive($id);
+        return $result;
+    }
+
+    public static function archive($id){
+        $data = array(':archived' => 1); 
+        $result = self::update($data, $id);
+        return $result;       
+    }
+
+    public static function unarchive($id){
+        $data = array(':archived' => 0); 
+        $result = self::update($data, $id);
+        return $result;       
+    }
+
+    public static function delete($id){
+        global $db;
         $data = array(':id' => $id);
         $sql = 'DELETE FROM '.self::$table.' WHERE id = :id';
         $result = $db->delete($sql, $data);
+        //$result = self::archive($id);
         return $result;
     }
 
