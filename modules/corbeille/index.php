@@ -35,56 +35,32 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <table id="table-enfant" data-search="enfant" class="table table-hover tablesorter extendlink">
-                        <thead>
-                            <tr>
-                                <th class="sortable">Prénom</th>
-                                <th class="sortable"><span class="line"></span>Nom</th>
-                                <th class="sortable"><span class="line"></span>Sexe</th>
-                                <th class="sortable">
-                                    <span class="line"></span>Date de naissance
-                                </th>
-                                <th class="sortable">
-                                    <span class="line"></span>Age
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
 
-                        <!-- row -->
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a href="#enfants">Enfants</a></li>
+                      <li class=""><a href="#structures">Structures</a></li>
+                      <li class=""><a href="#contacts">Contacts</a></li>
+                      <li class=""><a href="#sejours">Séjours</a></li>
+                      <li class=""><a href="#utilisateurs">Utilisateurs</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="enfants">Home tab!</div>
+                        <div class="tab-pane" id="structures">Profile tab!</div>
+                        <div class="tab-pane" id="contacts">Messages tab!</div>
+                        <div class="tab-pane" id="sejours">Messages tab!</div>
+                        <div class="tab-pane" id="sejours">Messages tab!</div>
+                    </div>
 
-                        <?php foreach($enfants as $key => $enfant): ?>
-                        <tr class="first">
-                            <td>
-                                <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname; ?></a>
-                            </td>
-                            <td>
-                                 <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname; ?></a>
-                            </td>
-                            <td>
-                                <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?></td>
-                            <td>
-                                <?php 
-                                    // http://net.tutsplus.com/tutorials/php/dates-and-time-the-oop-way/?search_index=27
-                                    $birthdate = new DateTime($enfant->birthdate); 
-                                ?>
-                                <?php if($birthdate->getTimestamp() != '-62169984561'): ?>
-                                    <?=strftime('%d %B %Y', $birthdate->getTimestamp()); ?>
-                                <?php else: ?>
-                                    <?php echo EMPTYVAL; ?>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if($birthdate->getTimestamp() != '-62169984561'): ?>
-                                    <?=tool::getAgeFromDate($enfant->birthdate); ?> ans
-                                <?php else: ?>
-                                    <?php echo EMPTYVAL; ?>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                    <script>
+                    $(function () {
+                        $('.nav-tabs a').click(function (e) {
+                            e.preventDefault();
+                            $(this).tab('show');
+                        });
+                    });
+                    </script>
+
+
                 </div>                
             </div>
 
