@@ -97,7 +97,7 @@
                             </div>                            
                         </div>
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-sejour-mail">Prix</label>
+                            <label class="col-md-2" for="form-sejour-mail">Prix unitaire</label>
                             <div class="col-md-2">
                                 <input id="form-sejour-prix" name="form_sejour_prix" class="form-control" type="text" 
                                 data-toggle="tooltip" title="Renseignez le prix unitaire du séjour du séjour." parsley-type="number" parsley-required="true">

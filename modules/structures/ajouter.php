@@ -92,12 +92,12 @@
                             </div>                            
                         </div>
                         <div class="field-box row">
-                            <label class="col-md-2">Structure payante</label>
+                            <label class="col-md-2">Centre payeur</label>
                             <div class="col-md-4" data-toggle="tooltip" title="Précisez si cette structure paye les séjours.">
                                 <label class="radio-inline col-md-7" for="form-structure-payeur-oui">
                                     <div class="radio" id="uniform-form-structure-payeur-oui">
                                         <span class="checked">
-                                            <input type="radio" name="form_structure_payer" id="form-structure-payeur-oui" value="1">
+                                            <input type="radio" name="form_structure_payer" id="form-structure-payeur-oui" value="1" checked="checked">
                                         </span>
                                     </div>
                                     Oui
@@ -105,7 +105,7 @@
                                 <label class="radio-inline col-md-4" for="form-structure-payeur-non">
                                     <div class="radio" id="uniform-form-structure-payeur-non">
                                         <span class="checked">
-                                            <input type="radio" name="form_structure_payer" id="form-structure-payeur-non" value="0" checked="">
+                                            <input type="radio" name="form_structure_payer" id="form-structure-payeur-non" value="0" >
                                         </span>
                                     </div>
                                     Non

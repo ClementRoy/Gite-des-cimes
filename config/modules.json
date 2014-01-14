@@ -11,6 +11,10 @@
 		"name" :  "sejours",
 		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
+	"inscriptions" : {
+		"name" :  "inscriptions",
+		"views" : ["index", "liste-enfants", "liste-sejours", "editer", "supprimer"]
+	},
 	"structures" : {
 		"name" : "structures",
 		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]

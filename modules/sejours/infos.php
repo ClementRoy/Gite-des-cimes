@@ -7,7 +7,7 @@
     <div class="content">
 
         <?php $sejour = sejour::get($_GET['id']); ?>
-        <?php tool::output($sejour); ?>
+        <?php //tool::output($sejour); ?>
         <?php $creator = user::get($sejour->creator); ?>
         <?php $editor = user::get($sejour->editor); ?>
         <?php $date_created = new DateTime($sejour->created); ?>
@@ -76,6 +76,11 @@
                         </div>
                         
                     </div>
+
+
+
+
+
                     <table class="table table-hover extendlink">
                         <thead>
                             <tr>
@@ -124,5 +129,65 @@
         </div>
 
     </div>
+
+
+
+
+            <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="add-modal-label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h6 class="modal-title" id="add-modal-label">Ajouter un enfant au séjour</h6>
+                        </div>
+                        <div class="modal-body">
+
+                            <form action="" method="get">
+  
+                             <div class="field-box row">
+                            <div class="ui-select">
+                                <?php $enfants = enfant::getList(); ?>
+                                <select id="form-enfant-select" name="form_enfant_structure">
+                                    <option value="" selected="selected">Sélectionnez un enfant</option>
+                                    <?php foreach($enfants as $enfant): ?>
+                                    <option value="<?=$enfant->id ?>"><?=$enfant->firstname ?> <?=$enfant->lastname ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div> 
+                            </div>                             
+
+
+        <div class="field-box row">
+            <label class="col-md-2" for="form-enfant-prenom">Date début</label>
+            <div class="col-md-4 col-sm-5">
+                <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
+            </div>
+        </div>
+
+
+        <div class="field-box row">
+            <label class="col-md-2" for="form-enfant-prenom">Date fin</label>
+            <div class="col-md-4 col-sm-5">
+                <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
+            </div>
+        </div>
+
+
+        <p>// Autres infos ????</p>
+
+        
+                            </form>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn-flat white" data-dismiss="modal">Annuler</a>
+                            <a href="/sejours/supprimer/id/<?=$sejour->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

@@ -42,10 +42,10 @@
                 <input class="form-control" type="password" name="password" placeholder="Votre mot de passe">
                 <!--<a href="#" class="forgot">Mot de passe oublié ?</a>-->
                 
-                <div class="remember">
+                <!--<div class="remember">
                     <input id="remember-me" type="checkbox" name="remember">
                     <label for="remember-me">Se souvenir de moi</label>
-                </div>
+                </div>-->
                 
                 <input type="submit" class="btn-glow primary login" name="login" value="Connexion">
                 </form>

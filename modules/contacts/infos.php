@@ -11,10 +11,16 @@
         $structure = structure::get($contact->ref_structure);
       }
     ?>
+    <?php 
+        $enfants = enfant::getByContact($contact->id);
+    ?>
     <?php $creator = user::get($contact->creator); ?>
     <?php $editor = user::get($contact->editor); ?>
     <?php $date_created = new DateTime($contact->created); ?>
     <?php $date_edited = new DateTime($contact->edited); ?>
+
+
+  
 
     <!-- main container -->
     <div class="content">
@@ -37,6 +43,7 @@
         </div>
 
 
+
             <!-- Modal -->
             <div class="modal fade" id="remove-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
@@ -56,13 +63,46 @@
                 </div><!-- /.modal-content -->
               </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
+  
 
-
-
-        <div class="row">
-
-        </div>
         <?php tool::output($contact); ?>
+
+        <p><strong>Structure</strong> : <a href="/structures/infos/id/<?$structure->id ?>"><?=$structure->name ?></a></p>
+
+        <?php if(count($enfants) > 0): ?>
+        <div class="row">
+            <h4>Les enfants affiliés</h4>
+
+                <table class="table table-hover extendlink">
+                    <thead>
+                        <tr>
+                            <th class="col-md-1">
+                                Prénom
+                            </th>
+                            <th class="col-md-3">
+                                <span class="line"></span>
+                                Nom
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach($enfants as $enfant): ?>
+                        <tr>
+                            <td>
+                                <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->firstname ?></a>
+                            </td>
+                            <td>
+                                <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->lastname ?></a>
+                            </td>
+                        </tr>
+                      <?php endforeach; ?>
+                        </tbody>
+                </table>
+        </div>
+        <?php endif; ?>
+
+
+        
         <?php tool::output($structure); ?>
     </div>
 

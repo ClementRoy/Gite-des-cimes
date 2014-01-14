@@ -7,6 +7,7 @@
     <?php // TODO : ne pas oublier de lister les contacts associés  ?>
     <?php $structure = structure::get($_GET['id']); ?>
     <?php $contacts = contact::getByStructure($structure->id); ?>
+    <?php $enfants = enfant::getByStructure($structure->id); ?>
     <?php $creator = user::get($structure->creator); ?>
     <?php $editor = user::get($structure->editor); ?>
     <?php $date_created = new DateTime($structure->created); ?>
@@ -105,41 +106,74 @@
             </div>
 
           </div>
-<h4>Ses contacts</h4>
+            <h4>Ses contacts</h4>
+
                 <table class="table table-hover extendlink">
                     <thead>
                         <tr>
                             <th class="col-md-1">
-                                N° 
+                                Prénom
                             </th>
                             <th class="col-md-3">
                                 <span class="line"></span>
-                                Dates
+                                Nom
                             </th>
                             <th class="col-md-5">
                                 <span class="line"></span>
-                                Nom du séjour
+                                Email
                             </th>
                         </tr>
                     </thead>
                     <tbody>
+                      <?php foreach($contacts as $contact): ?>
                         <tr>
                             <td>
-                                <a href="#">459</a>
+                                <a href="/contacts/infos/id/<?=$contact->id ?>"><?=$contact->firstname ?></a>
                             </td>
                             <td>
-                                12 au 17 décembre 2014
+                                <a href="/contacts/infos/id/<?=$contact->id ?>"><?=$contact->lastname ?></a>
                             </td>
                             <td>
-                                <a href="#">Du Vert et du Bleu</a>
+                                <a href="/contacts/infos/id/<?=$contact->id ?>"><?=$contact->email ?></a>
                             </td>
                         </tr>
+                      <?php endforeach; ?>
                         </tbody>
-                        </table>
+                </table>
+
+
+            <h4>Les enfants affiliés</h4>
+
+                <table class="table table-hover extendlink">
+                    <thead>
+                        <tr>
+                            <th class="col-md-1">
+                                Prénom
+                            </th>
+                            <th class="col-md-3">
+                                <span class="line"></span>
+                                Nom
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach($enfants as $enfant): ?>
+                        <tr>
+                            <td>
+                                <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->firstname ?></a>
+                            </td>
+                            <td>
+                                <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->lastname ?></a>
+                            </td>
+                        </tr>
+                      <?php endforeach; ?>
+                        </tbody>
+                </table>
+
 
         </div>
-        <?php tool::output($structure); ?>
-        <?php tool::output($contacts); ?>
+        <?php //tool::output($structure); ?>
+        <?php //tool::output($contacts); ?>
       </div>
 
     </div>

@@ -25,6 +25,24 @@ class enfant
         return $result;
     }
 
+
+    public static function getByStructure($id){
+        global $db;
+        $params = array(':id' => $id);
+        $sql = 'SELECT * FROM '.self::$table.' WHERE organization=:id';
+        $result = $db->query($sql, $params);
+        return $result;
+    }
+
+
+    public static function getByContact($id){
+        global $db;
+        $params = array(':id' => $id);
+        $sql = 'SELECT * FROM '.self::$table.' WHERE contact=:id';
+        $result = $db->query($sql, $params);
+        return $result;        
+    }
+
     /**
      * desc
      *

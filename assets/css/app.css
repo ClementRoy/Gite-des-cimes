@@ -22,6 +22,10 @@
 #pad-wrapper h4 {
   margin-bottom: 35px;
 }
+
+.form-control {
+  font-size:12px;
+}
 .form-page .form-wrapper .select2-container {
   margin-left: 0px;
   margin-top: 4px;
