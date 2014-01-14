@@ -55,6 +55,12 @@ class facture
     }
 
 
+    public static function getFromTrash(){
+        global $db;
+        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1 ORDER BY firstname');
+        return $result;
+    }
+    
     /**
      * Count the number of entries in the database table
      *

@@ -114,7 +114,13 @@ class user
 	}
 
 
+    public static function getFromTrash(){
+        global $db;
+        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1 ORDER BY firstname');
+        return $result;
+    }
 
+    
     /**
      * Insert a new object into the database
      *

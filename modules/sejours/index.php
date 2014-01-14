@@ -45,13 +45,13 @@
                             <td class="text-right">
                             <?php $date_from = new DateTime($sejour->date_from); ?>
                             <?php if($date_from->getTimestamp() != '-62169987600'): ?>
-                                <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>
+                                <?=strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
                             <?php endif; ?>
                             </td>
                             <td class="text-right">
                             <?php $date_to = new DateTime($sejour->date_to); ?>
                             <?php if($date_to->getTimestamp() != '-62169987600'): ?>
-                                <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?>
+                                <?=strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
                             <?php endif; ?>
                             </td>
                             <td>

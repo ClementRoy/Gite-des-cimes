@@ -223,7 +223,7 @@ $(function () {
 
 	// SORT FOR TABLE
 
-	$('.tablesorter').tablesorter();
+	$('.tablesorter').tablesorter({dateFormat : "uk"});
     //$('#table-enfant').extendlink();
     //$('#table-enfant').tablefilter();
 

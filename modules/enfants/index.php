@@ -71,7 +71,7 @@
                                     $birthdate = new DateTime($enfant->birthdate); 
                                 ?>
                                 <?php if($birthdate->getTimestamp() != '-62169984561'): ?>
-                                    <?=strftime('%d %B %Y', $birthdate->getTimestamp()); ?>
+                                    <?=strftime('%d/%m/%Y', $birthdate->getTimestamp()); ?>
                                 <?php else: ?>
                                     <?php echo EMPTYVAL; ?>
                                 <?php endif; ?>

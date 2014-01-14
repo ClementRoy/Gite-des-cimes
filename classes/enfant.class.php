@@ -64,7 +64,7 @@ class enfant
 	}
 
 
-    public static function getTrashed(){
+    public static function getFromTrash(){
         global $db;
          $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1 ORDER BY firstname');
          return $result;
