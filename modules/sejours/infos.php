@@ -51,9 +51,6 @@
             <div class="row">
                 <div class="col-md-9 bio">
 
-
-
-
                     <h4>Capacité du séjour</h4>
 
                     <div class="progress">

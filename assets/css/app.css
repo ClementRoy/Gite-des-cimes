@@ -20,11 +20,13 @@
 @import url('compiled/web-app-icons.css');
 /*@import url('compiled/signup.css');*/
 #pad-wrapper h4 {
-  margin-bottom: 35px;
+  margin-bottom: 15px;
+  margin-top: 40px;
 }
-
-.form-control {
-  font-size:12px;
+#pad-wrapper h6 {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 14px;
 }
 .form-page .form-wrapper .select2-container {
   margin-left: 0px;

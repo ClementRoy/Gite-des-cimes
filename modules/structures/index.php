@@ -6,7 +6,7 @@
 
     <!-- main container -->
     <div class="content">
-<div id="pad-wrapper">
+        <div id="pad-wrapper">
             <div class="row header">
                 <div class="col-md-3">
                     <h3>Les structures</h3>
@@ -15,46 +15,46 @@
                     <input type="text" id="table-enfant-search" data-search="structure" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">
                     <a href="/structures/ajouter" class="btn-flat primary"><span>+</span>
                         Ajouter une structure</a>
+                    </div>
                 </div>
-            </div>
 
-            <?php $structures = structure::getList(); ?>
+                <?php $structures = structure::getList(); ?>
 
 
-            <div class="row">
-                <div class="col-md-12">
-                    <table id="table-enfant" data-search="structure" class="table table-hover tablesorter extendlink">
-                        <thead>
-                            <tr>
-                                <th class="sortable">Nom</th>
-                                <th class="sortable"><span class="line"></span>Payeur</th>
-                                <th class="sortable"><span class="line"></span>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="table-enfant" data-search="structure" class="table table-hover tablesorter extendlink">
+                            <thead>
+                                <tr>
+                                    <th class="sortable">Nom</th>
+                                    <th class="sortable"><span class="line"></span>Téléphone</th>
+                                    <th class="sortable"><span class="line"></span>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                        <?php foreach($structures as $key => $structure): ?>
-                        <tr>
-                            <td>
-                                <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name; ?></a>
-                            </td>
-                            <td>
-                                <?=($structure->payer>0)?'Oui':'Non'; ?>
-                            </td>
-                            <td>
-                               <a href="mailto:<?=$structure->email; ?>"><?=$structure->email; ?></a>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>                
-            </div>
+                                <?php foreach($structures as $key => $structure): ?>
+                                    <tr>
+                                        <td>
+                                            <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name; ?></a>
+                                        </td>
+                                        <td>
+                                            <?=$structure->phone; ?>
+                                        </td>
+                                        <td>
+                                         <a href="mailto:<?=$structure->email; ?>"><?=$structure->email; ?></a>
+                                     </td>
+                                 </tr>
+                             <?php endforeach; ?>
+                         </tbody>
+                     </table>
+                 </div>                
+             </div>
 
-            <!-- end users table -->
-        </div>
-    </div><!-- /.container -->
-<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
+             <!-- end users table -->
+         </div>
+     </div><!-- /.container -->
+     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
 
 
 

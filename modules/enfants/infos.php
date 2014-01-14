@@ -12,7 +12,7 @@
     <?php $editor = user::get($enfant->editor); ?>
     <?php $date_created = new DateTime($enfant->created); ?>
     <?php $date_edited = new DateTime($enfant->edited); ?>
-    <?php // tool::output($enfant); ?>
+    <?php tool::output($enfant); ?>
 
     <div id="pad-wrapper" class="user-profile">
 
@@ -43,7 +43,6 @@
                       <i class="icon-info-sign"></i>
                     </button>
                 </div>
-
             </div>
 
 
@@ -101,6 +100,16 @@
                                 </li>
                             </ul>
                         </div>
+                        <?php if (!empty($enfant->note)): ?>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Notes</div>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <p><?=$enfant->note;?></p>
+                                    </li>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
                     </div>
                     <div class="col-md-4">
                         <div class="panel panel-default">
@@ -250,97 +259,66 @@
                             </ul>
                         </div>
                     </div>
+            
+
+
+                        <div class="row">
+                            
+                       <div class="col-md-6">
+                    <h4>Ses séjours</h4>
+                        </div>
+                    <div class="col-md-6 text-right">
+                         <button class="btn-flat success" data-toggle="modal" data-target="#add-modal">
+                            <i class="icon-plus"></i> Inscrire l'enfant à un séjour
+                        </button>
+                    </div>
+                    </div>
+
+                    <table class="table table-hover extendlink">
+                        <thead>
+                            <tr>
+                                <th class="col-md-1">
+                                    N° 
+                                </th>
+                                <th class="col-md-3">
+                                    <span class="line"></span>
+                                    Dates
+                                </th>
+                                <th class="col-md-5">
+                                    <span class="line"></span>
+                                    Nom du séjour
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a href="#">459</a>
+                                </td>
+                                <td>
+                                    12 au 17 décembre 2014
+                                </td>
+                                <td>
+                                    <a href="#">Du Vert et du Bleu</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="#">471</a>
+                                </td>
+                                <td>
+                                    21 au 28 juillet 2013
+                                </td>
+                                <td>
+                                    <a href="#">Brises et Houles</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-
-                <dl>
-                    <dt>Séjour <a href="">Nom du séjour</a> - du 21/12/2004 au 28/12/2004 :</dt>
-                    <dd>Augue enim phasellus adipiscing mid parturient? Ac montes, in enim augue ut.</dd>
-                </dl>
-
-
+                </div>
+                   
             </div>
-
-            <div class="row">
-
-                <div class="col-md-6">
-                <h4>Ses séjours</h4>
-                </div>
-                    
-                <div class="col-md-6 text-right">
-                     <button class="btn-flat success" data-toggle="modal" data-target="#add-modal">
-                        <i class="icon-plus"></i> Inscrire l'enfant à un séjour
-                    </button>
-                </div>
-
-                <table class="table table-hover extendlink">
-                    <thead>
-                        <tr>
-                            <th class="col-md-1">
-                                N° 
-                            </th>
-                            <th class="col-md-3">
-                                <span class="line"></span>
-                                Dates
-                            </th>
-                            <th class="col-md-5">
-                                <span class="line"></span>
-                                Nom du séjour
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <a href="#">459</a>
-                            </td>
-                            <td>
-                                12 au 17 décembre 2014
-                            </td>
-                            <td>
-                                <a href="#">Du Vert et du Bleu</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#">471</a>
-                            </td>
-                            <td>
-                                21 au 28 juillet 2013
-                            </td>
-                            <td>
-                                <a href="#">Brises et Houles</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-<!--             <div class="col-lg-3 address">
-                    <h6>Coordonnées</h6>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d2622.060078846162!2d2.5489488500000004!3d48.914247599999996!3m2!1i1024!2i768!4f13.1!3m2!1m1!1s0x0%3A0x97bc04535ade7b59!5e0!3m2!1sfr!2sfr!4v1386513665741" width="100%" height="200" frameborder="0" style="border:0"></iframe>
-                    <ul>
-                        <li><strong>Adresse</strong></li>
-                        <li>33 Allée de Bellevue</li>
-                        <li>93390 Clichy-sous-Bois</li>
-                    </ul>
-                    <ul>
-                        <li><strong>Père</strong></li>
-                        <li>Nom du père</li>
-                        <li><i class="icon-phone"></i>01 41 70 35 10</li>
-                    </ul>
-                    <ul>
-                        <li><strong>Mère</strong></li>
-                        <li>Nom de la mère</li>
-                        <li><i class="icon-phone"></i>01 41 70 35 10</li>
-                    </ul>
-                    <ul>
-                        <li><strong>Urgence</strong></li>
-                        <li>Nom du contact d'urgence</li>
-                        <li><i class="icon-phone"></i>01 41 70 35 10</li>
-                    </ul>
-
-                </div> -->
-
-        </div>
     </div>
 
 

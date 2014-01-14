@@ -104,8 +104,8 @@
                                 </label>
                                 <label class="radio-inline col-md-4" for="form-structure-payeur-non">
                                     <div class="radio" id="uniform-form-structure-payeur-non">
-                                        <span class="checked">
-                                            <input type="radio" name="form_structure_payer" id="form-structure-payeur-non" value="0" >
+                                        <span>
+                                            <input type="radio" name="form_structure_payer" id="form-structure-payeur-non" value="0">
                                         </span>
                                     </div>
                                     Non
