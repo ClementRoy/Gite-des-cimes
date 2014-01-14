@@ -95,7 +95,13 @@ class tool
     public static function getDatefromDatetime($datetime){
          $date = explode(' ', $datetime);
          $date = explode('-', $date['0']);
-         return $date['2'].'/'.$date['1'].'/'.$date['0'];
+         if($date['0'] != '0000'){
+            $date = $date['2'].'/'.$date['1'].'/'.$date['0'];
+         }
+         else {
+            $date = '';
+         }
+         return $date;
     }
         
 

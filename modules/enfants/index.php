@@ -43,6 +43,7 @@
                                 <th class="sortable">Prénom</th>
                                 <th class="sortable"><span class="line"></span>Nom</th>
                                 <th class="sortable"><span class="line"></span>Sexe</th>
+                                <th class="sortable">Statut de la fiche</th>
                                 <th class="sortable">
                                     <span class="line"></span>Date de naissance
                                 </th>
@@ -64,7 +65,11 @@
                                  <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname; ?></a>
                             </td>
                             <td>
-                                <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?></td>
+                                <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?>
+                            </td>
+                            <td>
+                                <span class="label label-warning">Incomplète</span>      
+                            </td>
                             <td>
                                 <?php 
                                     // http://net.tutsplus.com/tutorials/php/dates-and-time-the-oop-way/?search_index=27

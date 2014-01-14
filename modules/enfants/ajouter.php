@@ -18,6 +18,11 @@
                 <?php 
                     extract($_POST);
 
+                    $birthdate = tool::generateDatetime($form_enfant_naissance);
+                    $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
+                    $cpam_validite = tool::generateDatetime($form_enfant_cpam_validite);
+
+
                 $datas = array(                
                     ':firstname' => $form_enfant_prenom,
                     ':lastname' => $form_enfant_nom,
@@ -85,7 +90,7 @@
             <div class="col-md-12">
                 <div class="alert alert-success">
                     <i class="icon-ok-sign"></i> 
-                    L'enfant <?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?> a bien été ajouté
+                    L'enfant <strong><?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?></strong> a bien été ajouté
                 </div>
                 <a href="/enfants/">Retourner à la liste des enfants</a>
             </div>
@@ -101,6 +106,7 @@
             </div>
         </div>
     <?php endif; ?>
+
 <?php else: ?>
     <form id="form-add-children" method="post" parsley-validate>
      <!--  <h2>Informations sur l'enfant</h2> -->
@@ -642,7 +648,17 @@
                 <textarea id="form-enfant-note" name="form_enfant_note" class="form-control input-sm" rows="4" data-toggle="tooltip" title="Notes générales au sujet de l'enfant."></textarea>
             </div>
         </div>
-        <input type="submit" class="btn-flat primary" name="submit" value="Valider">
+
+
+        <div class="field-box actions">
+            <div class="col-md-6">
+                <input type="submit" class="btn-flat primary" name="submit" value="Ajouter l'enfant">
+                <span>OU</span>
+                <a href="/enfants/" class="reset">Annuler</a>
+            </div>
+        </div>
+
+
     </div>
 </form>
 <?php endif; ?>

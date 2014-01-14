@@ -20,30 +20,30 @@
 
         ?>
             <?php if($result): ?>
+                <div class="content">
+                    <div id="pad-wrapper" class="action-page">
+                        <div class="row header">
+                            <div class="col-md-12">
+                                <h3>Modifier un utilisateur</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
 
+                            <div class="alert alert-info">
+                                <i class="icon-exclamation-sign"></i>
+                                L'utilisateur <strong><?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?></strong> a bien été modifié.
+                            </div>
+                            <a href="/utilisateurs/">Retourner à la liste des utilisateurs</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <?php else: ?>
 
             <?php endif; ?>
-        <div class="content">
-            <div id="pad-wrapper" class="action-page">
-                <div class="row header">
-                    <div class="col-md-12">
-                        <h3>Modifier un utilisateur</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
 
-                    <div class="alert alert-info">
-                        <i class="icon-exclamation-sign"></i>
-                        L'utilisateur <strong><?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?></strong> a bien été modifié.
-                    </div>
-                    <a href="/utilisateurs/">Retourner à la liste des utilisateurs</a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
       <?php else: ?>
         <div class="content">
             <div id="pad-wrapper" class="form-page new-user">
@@ -120,7 +120,6 @@
                         <div class="col-md-7">
                             <input type="submit" class="btn-flat primary" name="submit" value="Valider les changements">
                             <span>OU</span>
-                            <input type="reset" value="Annuler" class="reset">
                             <a href="/utilisateurs/" class="reset">Annuler</a>
                         </div>
                     </div>

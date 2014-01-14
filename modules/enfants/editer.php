@@ -93,9 +93,9 @@
                     <div class="col-md-12">
                         <div class="alert alert-success">
                             <i class="icon-ok-sign"></i> 
-                            L'enfant <?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?> a bien été modifié
+                            L'enfant <strong><?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?></strong> a bien été modifié
                         </div>
-                        <a href="/enfants/">Retourner à la liste des enfants</a>
+                        <a href="/enfants/" class="btn-flat default">Retourner à la liste des enfants</a>
                     </div>
                 </div>
                 <?php else: ?>
@@ -105,7 +105,7 @@
                             <i class="icon-remove-sign"></i> 
                             Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
                         </div>
-                        <a href="/enfants/ajouter">Retourner au formulaire d'ajout</a>
+                        <a href="/enfants/ajouter" class="btn-flat default">Retourner au formulaire d'ajout</a>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -548,7 +548,7 @@
                             <div class="field-box row">
                                 <label class="col-md-2" for="form-enfant-assurance-validite">Date de fin de validité</label>
                                 <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" value="<?=$enfant->self_assurance_expiration_date; ?>" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa)." value="<?=$enfant->self_assurance_expiration_date; ?>">
+                                    <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" value="<?=tool::getDatefromDatetime($enfant->self_assurance_expiration_date); ?>" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa)." value="<?=$enfant->self_assurance_expiration_date; ?>">
                                 </div>                            
                             </div>
                         </div>
@@ -577,7 +577,7 @@
                             <div class="field-box row">
                                 <label class="col-md-2" for="form-enfant-cpam-validite">Date de fin de validité</label>
                                 <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-cpam-validite" name="form_enfant_cpam_validite" type="text" value="<?=$enfant->cpam_attestation_expiration_date; ?>" class="form-control input-datepicker" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'attestation CPAM (jj/mm/aaaa).">
+                                    <input id="form-enfant-cpam-validite" name="form_enfant_cpam_validite" type="text" value="<?=tool::getDatefromDatetime($enfant->cpam_attestation_expiration_date); ?>" class="form-control input-datepicker" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'attestation CPAM (jj/mm/aaaa).">
                                 </div>                            
                             </div>
                         </div>
@@ -650,7 +650,15 @@
                                 <textarea id="form-enfant-note" name="form_enfant_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de l'enfant."><?=$enfant->note; ?></textarea>
                             </div>
                         </div>
-                        <input type="submit" class="btn-flat primary" name="submit" value="Valider">
+
+                        <div class="field-box actions">
+                            <div class="col-md-6">
+                                <input type="submit" class="btn-flat primary" name="submit" value="Ajouter l'enfant">
+                                <span>OU</span>
+                                <a href="/enfants/" class="reset">Annuler</a>
+                            </div>
+                        </div>
+
                     </div>
             </form>
             <?php endif; ?>
