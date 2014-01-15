@@ -446,4 +446,7 @@ a.reset{
   margin: 0 2px 0 8px;
 }
 
+.dropdown-menu li i {
+  margin-right: 5px;
+}
 

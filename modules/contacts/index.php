@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <table id="table-enfant" data-search="contact" class="table table-hover tablesorter extendlink">
-                        <thead data-spy="affix" data-offset-top="60" data-offset-bottom="200">
+                        <thead>
                             <tr>
                                 <th class="sortable">Nom</th>
                                 <th class="sortable"><span class="line"></span>Prénom</th>

@@ -135,16 +135,14 @@
                             </label>
                         </div>                            
                     </div>
-
-                    <div class="field-box actions">
-                        <div class="col-md-7">
-                            <input type="submit" class="btn-flat primary" name="submit" value="Ajouter cet utilisateur">
-                            <span>OU</span>
-                            <input type="reset" value="Annuler" class="reset">
-                            <a href="/utilisateurs/" class="reset">Annuler</a>
+                        <div class="field-box actions">
+                            <div class="col-md-6">
+                                <input type="submit" class="btn-flat primary" name="submit" value="Ajouter l'enfant">
+                                <span>OU</span>
+                                <a href="/utilisateurs/" class="reset">Annuler</a>
+                            </div>
                         </div>
-                    </div>
-                                    </div>
+                </div>
             </form>
         </div>
     </div>

@@ -70,7 +70,7 @@
                             </div>                              
                         </div>                  
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-sejour-lieu">Lieu</label>
+                            <label class="col-md-2" for="form-sejour-lieu">Hébergement</label>
                             <div class="col-md-4">
                                 <input id="form-sejour-lieu" name="form_sejour_lieu" class="form-control" type="text" 
                                 data-toggle="tooltip" title="Renseignez où se déroule la séjour." parsley-required="true">
@@ -105,7 +105,13 @@
                         </div>
 
 
-                        <input type="submit" class="btn-flat primary" name="submit" value="Valider">
+                        <div class="field-box actions">
+                            <div class="col-md-6">
+                                <input type="submit" class="btn-flat primary" name="submit" value="Ajouter le séjour">
+                                <span>OU</span>
+                                <a href="/sejours/" class="reset">Annuler</a>
+                            </div>
+                        </div>
                     </div>
             </form>
         </div>

@@ -185,8 +185,13 @@
                                 <textarea id="form-contact-note" name="form_contact_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de la strucure."><?=$contact->note ?></textarea>
                             </div>
                         </div>
-
-                        <input type="submit" class="btn-flat primary" name="submit" value="Valider">
+                        <div class="field-box actions">
+                            <div class="col-md-6">
+                                <input type="submit" class="btn-flat primary" name="submit" value="Modifier le contact">
+                                <span>OU</span>
+                                <a href="/contacts/" class="reset">Annuler</a>
+                            </div>
+                        </div>
                     </div>
             </form>
         </div>

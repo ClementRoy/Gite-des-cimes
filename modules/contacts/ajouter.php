@@ -185,7 +185,13 @@
                             </div>
                         </div>
 
-                        <input type="submit" class="btn-flat primary" name="submit" value="Valider">
+                        <div class="field-box actions">
+                            <div class="col-md-6">
+                                <input type="submit" class="btn-flat primary" name="submit" value="Ajouter le contact">
+                                <span>OU</span>
+                                <a href="/contacts/" class="reset">Annuler</a>
+                            </div>
+                        </div>
                     </div>
             </form>
         </div>

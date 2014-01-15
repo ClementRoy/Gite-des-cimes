@@ -16,8 +16,8 @@
                     <strong class="caret"></strong>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="/utilisateurs/infos/id/<?=$user->id; ?>">Mes infos personnelles</a></li>
-                    <li><a href="/utilisateurs/">Liste des utilisateurs</a></li>
+                    <li><a href="/utilisateurs/infos/id/<?=$user->id; ?>"><i class="icon-user"></i> Mes infos personnelles</a></li>
+                    <li><a href="/utilisateurs/"><i class="icon-reorder"></i> Liste des utilisateurs</a></li>
                     <li><a href="/corbeille/"><i class="icon-trash"></i> Corbeille</a></li>
                 </ul>
             </li>

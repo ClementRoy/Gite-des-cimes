@@ -97,7 +97,7 @@
                                 <label class="radio-inline col-md-7" for="form-structure-payeur-oui">
                                     <div class="radio" id="uniform-form-structure-payeur-oui">
                                         <span class="checked">
-                                            <input type="radio" name="form_structure_payer" id="form-structure-payeur-oui" value="1" checked="checked">
+                                            <input type="radio" name="form_structure_payer" id="form-structure-payeur-oui" value="1">
                                         </span>
                                     </div>
                                     Oui
@@ -105,7 +105,7 @@
                                 <label class="radio-inline col-md-4" for="form-structure-payeur-non">
                                     <div class="radio" id="uniform-form-structure-payeur-non">
                                         <span>
-                                            <input type="radio" name="form_structure_payer" id="form-structure-payeur-non" value="0">
+                                            <input type="radio" name="form_structure_payer" id="form-structure-payeur-non" value="0" checked="checked">
                                         </span>
                                     </div>
                                     Non
@@ -164,7 +164,15 @@
                             </div>
                         </div>
 
-                        <input type="submit" class="btn-flat primary" name="submit" value="Valider">
+
+                        <div class="field-box actions">
+                            <div class="col-md-6">
+                                <input type="submit" class="btn-flat primary" name="submit" value="Ajouter la structure">
+                                <span>OU</span>
+                                <a href="/structures/" class="reset">Annuler</a>
+                            </div>
+                        </div>
+
                     </div>
             </form>
         </div>
