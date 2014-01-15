@@ -12,7 +12,7 @@
     <?php $editor = user::get($enfant->editor); ?>
     <?php $date_created = new DateTime($enfant->created); ?>
     <?php $date_edited = new DateTime($enfant->edited); ?>
-    <?php tool::output($enfant); ?>
+    <?php //tool::output($enfant); ?>
 
     <div id="pad-wrapper" class="user-profile">
 
@@ -261,18 +261,18 @@
                     </div>
             
 
-
-                        <div class="row">
+                <!--
+            <div class="row">
                             
-                       <div class="col-md-6">
+                 <div class="col-md-6">
                     <h4>Ses séjours</h4>
-                        </div>
+                </div>
                     <div class="col-md-6 text-right">
                          <button class="btn-flat success" data-toggle="modal" data-target="#add-modal">
                             <i class="icon-plus"></i> Inscrire l'enfant à un séjour
                         </button>
                     </div>
-                    </div>
+             </div>
 
                     <table class="table table-hover extendlink">
                         <thead>
@@ -315,7 +315,11 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                -->
+
+            </div>
+            
+
                 </div>
                    
             </div>
