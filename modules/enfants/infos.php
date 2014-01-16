@@ -67,9 +67,9 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12 bio">
-                   <h4>Ses informations</h4>
+                <div class="col-md-12 fiche">
                    <div class="row">
+                   <div class="col-md-12 section"><h4>Ses informations</h4></div>
                     <div class="col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">A propos de l'enfant</div>
@@ -259,8 +259,9 @@
                             </ul>
                         </div>
                     </div>
-            
+                </div>
 
+<<<<<<< HEAD
                 <!--
             <div class="row">
                             
@@ -271,9 +272,68 @@
                          <button class="btn-flat success" data-toggle="modal" data-target="#add-modal">
                             <i class="icon-plus"></i> Inscrire l'enfant à un séjour
                         </button>
+=======
+
+  
+                    <div class="row section">
+                    <div class="col-md-12">
+                    <div class="row">
+                       <div class="col-md-6">
+
+                            <h4>Ses séjours</h4>
+                        </div>
+                        <div class="col-md-6 text-right">
+                             <button class="btn-flat success" data-toggle="modal" data-target="#add-modal">
+                                <i class="icon-plus"></i> Inscrire l'enfant à un séjour
+                            </button>
+                        </div>
+                        </div>
+                        <table class="table table-hover extendlink">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-1">
+                                        N° 
+                                    </th>
+                                    <th class="col-md-3">
+                                        <span class="line"></span>
+                                        Dates
+                                    </th>
+                                    <th class="col-md-5">
+                                        <span class="line"></span>
+                                        Nom du séjour
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a href="#">459</a>
+                                    </td>
+                                    <td>
+                                        12 au 17 décembre 2014
+                                    </td>
+                                    <td>
+                                        <a href="#">Du Vert et du Bleu</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#">471</a>
+                                    </td>
+                                    <td>
+                                        21 au 28 juillet 2013
+                                    </td>
+                                    <td>
+                                        <a href="#">Brises et Houles</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+>>>>>>> 6e72c8a4eb89f8646a32684900ee732e63be65fc
                     </div>
              </div>
 
+<<<<<<< HEAD
                     <table class="table table-hover extendlink">
                         <thead>
                             <tr>
@@ -321,6 +381,8 @@
             
 
                 </div>
+=======
+>>>>>>> 6e72c8a4eb89f8646a32684900ee732e63be65fc
                    
             </div>
     </div>
