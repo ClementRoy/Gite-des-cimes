@@ -29,6 +29,7 @@
                                     <th class="sortable">Nom</th>
                                     <th class="sortable"><span class="line"></span>Téléphone</th>
                                     <th class="sortable"><span class="line"></span>Email</th>
+                                    <th class="sortable"><span class="line"></span>Ville</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,9 +43,12 @@
                                             <?=$structure->phone; ?>
                                         </td>
                                         <td>
-                                         <a href="mailto:<?=$structure->email; ?>"><?=$structure->email; ?></a>
-                                     </td>
-                                 </tr>
+                                            <a href="mailto:<?=$structure->email; ?>"><?=$structure->email; ?></a>
+                                        </td>
+                                        <td>
+                                            <?=$structure->address_city; ?>
+                                        </td>                                        
+                                    </tr>
                              <?php endforeach; ?>
                          </tbody>
                      </table>

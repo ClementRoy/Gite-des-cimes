@@ -65,7 +65,7 @@
             </div><!-- /.modal -->
   
 
-        <?php tool::output($contact); ?>
+        <?php //tool::output($contact); ?>
 
         <p><strong>Structure</strong> : <a href="/structures/infos/id/<?$structure->id ?>"><?=$structure->name ?></a></p>
 
@@ -103,7 +103,7 @@
 
 
         
-        <?php tool::output($structure); ?>
+        <?php //tool::output($structure); ?>
     </div>
 
 </div>

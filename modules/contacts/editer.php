@@ -124,7 +124,7 @@
                         <div class="field-box row">
                             <label class="col-md-2" for="form-contact-prenom">Prénom</label>
                             <div class="col-md-4 col-sm-5">
-                                <input id="form-contact-prenom" name="form_contact_firstname" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le prénom du contact." parsley-required="true" value="<?=$contact->firstname ?>">
+                                <input id="form-contact-prenom" name="form_contact_firstname" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le prénom du contact." value="<?=$contact->firstname ?>">
                             </div>
                         </div>
 
