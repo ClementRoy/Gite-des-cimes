@@ -19,7 +19,7 @@
     <script src="/assets/js/parsley.extend.js"></script>
 
     <!-- TABLE -->
-    <script src="/assets/js/jquery.tableSorter.js"></script>
+    <script src="/assets/js/jquery.tablesorter.js"></script>
 
     <script src="/assets/js/app.js"></script>
     <script src="/assets/js/ajax.js"></script>
