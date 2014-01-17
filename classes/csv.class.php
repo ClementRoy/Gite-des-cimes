@@ -36,18 +36,18 @@ class CSV{
 
     }
  
-    static function parse($file, $head = true, $sep = ';')
+    static function parse($file, $head = true, $delimiter = ';')
     {
         $content = file($file);
         $headers = NULL;
         if($head)
         {
             $headers = array_shift($content);
-            $headers = explode($sep, $headers);
+            $headers = explode($delimiter, $headers);
         }
         foreach($content as $k => $v)
         {
-            $content[$k] = explode($sep, $v);
+            $content[$k] = explode($delimiter, $v);
             if($head) foreach($content[$k] as $num_col => $value)
                 $content[$k][$headers[$num_col]] = $value;
         }

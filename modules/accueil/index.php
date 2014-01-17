@@ -45,6 +45,12 @@
             
             <div class="grid-wrapper">
                 <div class="row">
+                    
+                    <div class="col-md-6">
+                        <h1>En cours de construction !</h1>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <h4>Enfants récemment ajoutés</h4>
                       <?php $enfants = enfant::getList('5','0'); ?>
