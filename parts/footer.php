@@ -24,11 +24,12 @@
     <script src="/assets/js/app.js"></script>
     <script src="/assets/js/ajax.js"></script>
 
-                                        <script>
-                                            $(document).ready(function(){
-                                                $('#form-enfant-structure-select').trigger('change');
-                                            });
-                                        </script>
+    <script>
+        $(document).ready(function(){
+            $('#form-enfant-structure-select').trigger('change');
+        });
+    </script>
+    <?php // TODO: create a dalyed system, with obtstart ?>
                                         
 <body>
 </html>

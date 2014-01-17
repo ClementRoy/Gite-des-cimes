@@ -64,7 +64,7 @@ class structure
             $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0', $data);
         }
         else {
-            $result = $db->query('SELECT * FROM '.self::$table.' ORDER BY name');
+            $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY name');
         }
         return $result;
     }
@@ -72,7 +72,7 @@ class structure
 
     public static function getFromTrash(){
         global $db;
-        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1 ORDER BY firstname');
+        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1 ORDER BY name');
         return $result;
     }
     

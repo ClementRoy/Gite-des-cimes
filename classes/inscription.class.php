@@ -40,14 +40,14 @@ class inscription
             $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0');
         }
         else {
-            $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY firstname');
+            $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0');
         }
 		return $result;
 	}
 
     public static function getFromTrash(){
         global $db;
-        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1 ORDER BY firstname');
+        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1');
         return $result;
     }
     

@@ -109,7 +109,7 @@ class user
      */
 	public static function getList() {
 		global $db;
-		$users = $db->query('SELECT * FROM '.self::$table);
+		$users = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY firstname');
 		return $users;
 	}
 
