@@ -50,6 +50,7 @@
                         <h1>En cours de construction !</h1>
                     </div>
                 </div>
+<!--
                 <div class="row">
                     <div class="col-md-6">
                         <h4>Enfants récemment ajoutés</h4>
@@ -63,7 +64,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <!-- row -->
                             <?php foreach($enfants as $key => $enfant): ?>
                             <tr <?php if($key == 0): ?>class="first"<?php endif; ?>>
                                 <td>
@@ -76,10 +76,7 @@
                                     <i class="icon-male"></i> Homme
                                 </td>
                             </tr>
-                            <?php endforeach; ?>
-                            <!-- row -->
-                           
-
+                            <?php endforeach; ?>                           
                             </tbody>
                         </table>                        
                     </div>
@@ -95,7 +92,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <!-- row -->
                             <?php foreach($sejours as $key => $sejour): ?>
                             <tr <?php if($key == 0): ?>class="first"<?php endif; ?>>
                                 <td>
@@ -109,13 +105,12 @@
                                 </td>
                             </tr>
                             <?php endforeach; ?>
-                            <!-- row -->
-                           
-
+                        
                             </tbody>
                         </table> 
                     </div>
                 </div>
+            -->
 
                 <div class="row">
                     <div class="col-md-6">
