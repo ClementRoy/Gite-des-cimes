@@ -14,7 +14,7 @@
                             ':firstname' => $form_contact_firstname,
                             ':lastname' => $form_contact_lastname,
                             ':title' => $form_contact_title,
-                            ':ref_contact' => $form_contact_contact,
+                            ':ref_structure' => $form_contact_structure,
                             ':civility' => $form_contact_civility,
                             ':email' => $form_contact_email,
                             ':phone' => $form_contact_telephone,
@@ -90,7 +90,8 @@
                             <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez la structure qui s'occupe de cet enfant.">
                                 <div class="ui-select">
                                     <?php $structures = structure::getList(); ?>
-                                    <select id="form-enfant-structure-select" name="form_enfant_structure">
+                                    <select id="form-enfant-structure-select" name="form_contact_structure">
+                                        <option selected="selected">Choisissez la structure</option>
                                         <?php foreach($structures as $structure): ?>
                                         <option <?php if( $structure->id == $contact->ref_structure): ?>selected="selected"<?php endif; ?>><?=$structure->name ?></option>
                                         <?php endforeach; ?>

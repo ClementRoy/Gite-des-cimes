@@ -46,9 +46,12 @@
             <div class="grid-wrapper">
                 <div class="row">
                     
-                    <div class="col-md-6">
+                    <div class="col-md-12">
+                        <div class="jumbotron">
                         <h1>En cours de construction !</h1>
+                        </div>
                     </div>
+
                 </div>
 <!--
                 <div class="row">

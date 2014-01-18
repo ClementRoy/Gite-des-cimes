@@ -16,7 +16,12 @@
                 </div>
             </div>
 
-            <?php $enfants = enfant::getTrashed(); ?>
+            <?php $enfants = enfant::getFromTrash(); ?>
+            <?php $sejours = sejour::getFromTrash(); ?>
+            <?php $structures = structure::getFromTrash(); ?>
+            <?php $contacts = contact::getFromTrash(); ?>
+            <?php $utilisateurs = user::getFromTrash(); ?>
+
 
             <!--
             <div class="alert alert-success">
@@ -44,11 +49,57 @@
                       <li class=""><a href="#utilisateurs">Utilisateurs</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane active" id="enfants">Home tab!</div>
-                        <div class="tab-pane" id="structures">Profile tab!</div>
-                        <div class="tab-pane" id="contacts">Messages tab!</div>
-                        <div class="tab-pane" id="sejours">Messages tab!</div>
-                        <div class="tab-pane" id="sejours">Messages tab!</div>
+                        <div class="tab-pane active" id="enfants">
+                        <?php if(count($enfants)): ?>
+                        <table id="" data-search="" class="table table-hover tablesorter extendlink">
+                            <thead>
+                                <tr>
+                                    <th class="sortable">Nom</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php foreach($enfants as $key => $enfant): ?>
+                                    <tr>
+                                        <td>
+                                            <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname; ?></a>
+                                        </td>                                       
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <?php else: ?>
+                            <p><em>Cette corbeille est vide</em></p>
+                        <?php endif; ?>
+                        </div>
+                        <div class="tab-pane" id="structures">
+                        <?php if(count($structures)): ?>
+
+                        <?php else: ?>
+                            <p><em>Cette corbeille est vide</em></p>
+                        <?php endif; ?>                            
+                        </div>
+                        <div class="tab-pane" id="contacts">
+                        <?php if(count($contacts)): ?>
+
+                        <?php else: ?>
+                            <p><em>Cette corbeille est vide</em></p>
+                        <?php endif; ?>                            
+                        </div>
+                        <div class="tab-pane" id="sejours">
+                        <?php if(count($sejours)): ?>
+
+                        <?php else: ?>
+                            <p><em>Cette corbeille est vide</em></p>
+                        <?php endif; ?>                            
+                        </div>
+                        <div class="tab-pane" id="utilisateurs">
+                        <?php if(count($utilisateurs)): ?>
+
+                        <?php else: ?>
+                            <p><em>Cette corbeille est vide</em></p>
+                        <?php endif; ?>                            
+                        </div>
                     </div>
 
                     <script>
@@ -59,6 +110,22 @@
                         });
                     });
                     </script>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Panel heading without title</div>
+  <div class="panel-body">
+    Panel content
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Panel title</h3>
+  </div>
+  <div class="panel-body">
+    Panel content
+  </div>
+</div>
 
 
                 </div>                

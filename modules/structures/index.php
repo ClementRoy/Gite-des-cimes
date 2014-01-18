@@ -20,7 +20,6 @@
 
                 <?php $structures = structure::getList(); ?>
 
-
                 <div class="row">
                     <div class="col-md-12">
                         <table id="table-enfant" data-search="structure" class="table table-hover tablesorter extendlink">
@@ -52,7 +51,7 @@
                              <?php endforeach; ?>
                          </tbody>
                      </table>
-                 </div>                
+                </div>                
              </div>
 
              <!-- end users table -->

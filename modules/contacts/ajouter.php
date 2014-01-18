@@ -13,7 +13,7 @@
                             ':firstname' => $form_contact_firstname,
                             ':lastname' => $form_contact_lastname,
                             ':title' => $form_contact_title,
-                            ':ref_contact' => $form_contact_contact,
+                            ':ref_structure' => $form_contact_structure,
                             ':civility' => $form_contact_civility,
                             ':email' => $form_contact_email,
                             ':phone' => $form_contact_telephone,
@@ -38,7 +38,7 @@
                     <div class="col-md-12">
                         <div class="alert alert-success">
                             <i class="icon-ok-sign"></i> 
-                            Le contact <?=$form_contact_name; ?> a bien été ajoutée
+                            Le contact <strong><?=$form_contact_firstname; ?> <?=$form_contact_lastname; ?></strong> a bien été ajoutée
                         </div>
                         <a href="/contacts/">Retourner à la liste des contacts</a>
 
@@ -89,9 +89,10 @@
                             <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez la structure qui s'occupe de cet enfant.">
                                 <div class="ui-select">
                                     <?php $structures = structure::getList(); ?>
-                                    <select id="form-enfant-structure-select" name="form_enfant_structure">
+                                    <select id="form-enfant-structure-select" name="form_contact_structure">
+                                        <option selected="selected">Choisissez la structure</option>
                                         <?php foreach($structures as $structure): ?>
-                                        <option selected=""><?=$structure->name ?></option>
+                                        <option><?=$structure->name ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>

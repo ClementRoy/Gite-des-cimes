@@ -7,7 +7,7 @@
     <?php // TODO : ne pas oublier de lister les contacts associés  ?>
     <?php $contact = contact::get($_GET['id']); ?>
     <?php 
-      if($contact->ref_structure) {
+      if($contact->ref_structure && $contact->ref_structure != 0) {
         $structure = structure::get($contact->ref_structure);
       }
     ?>
@@ -67,7 +67,9 @@
 
         <?php //tool::output($contact); ?>
 
+        <?php if( isset($structure) ): ?>
         <p><strong>Structure</strong> : <a href="/structures/infos/id/<?$structure->id ?>"><?=$structure->name ?></a></p>
+        <?php endif; ?>
 
         <?php if(count($enfants) > 0): ?>
         <div class="row">

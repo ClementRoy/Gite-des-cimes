@@ -40,12 +40,12 @@
                     <table class="table table-hover extendlink tablesorter">
                         <thead>
                             <tr>
-                                <th class="sortable col-md-3">Prénom</th>
-                                <th class="sortable col-md-2"><span class="line"></span>Nom</th>
+                                <th class="sortable">Prénom</th>
+                                <th class="sortable"><span class="line"></span>Nom</th>
                                 <th class="sortable">
                                     <span class="line"></span>Identifiant
                                 </th>
-                                <th class="sortable col-md-1">
+                                <th class="sortable">
                                     <span class="line"></span>Rôle
                                 </th>
                             </tr>
@@ -65,6 +65,7 @@
                                <?=$user->identifier; ?>
                             </td>
                             <td>
+                                <span class="label label-info">
                                 <?php if ($user->rank == 1): ?>
                                     Utilisateur
                                 <?php elseif ($user->rank == 3): ?>
@@ -72,7 +73,12 @@
                                 <?php elseif ($user->rank == 5): ?>
                                     Administrateur
                                 <?php endif; ?>
-                                
+                                </span>
+                                <ul class="actions">
+                                    <li><i class="table-edit"></i></li>
+                                    <li><i class="table-settings"></i></li>
+                                    <li class="last"><i class="table-delete"></i></li>
+                                </ul>                            
                             </td>
                         </tr>
                         <?php endforeach; ?>

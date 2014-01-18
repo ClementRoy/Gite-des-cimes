@@ -76,7 +76,7 @@
                     </li>
                     <li class="list-group-item">
                       <p><strong>Fax :</strong></p>
-                      <p><?=(!empty($structure->fax)) ? $structure->phone : EMPTYVAL; ?></p>
+                      <p><?=(!empty($structure->fax)) ? $structure->fax : EMPTYVAL; ?></p>
                     </li>
                   </ul>
                 </div>

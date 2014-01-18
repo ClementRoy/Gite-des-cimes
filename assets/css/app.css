@@ -433,3 +433,11 @@ body.menu .content {
   border: 1px solid rgba(0, 0, 0, 0.2);
   cursor: text;
 }
+
+.dropdown-menu li i {
+  margin-right: 6px;
+}
+
+.nav-tabs {
+margin-bottom: 15px;
+}
