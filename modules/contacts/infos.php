@@ -45,7 +45,7 @@
                         </div>
                     </div>
                 </div>                
-                <h3><?=$contact->firstname; ?> <?=$contact->lastname; ?></h3>
+                <h3><?=$contact->civility; ?> <?=$contact->firstname; ?> <?=$contact->lastname; ?><small><?=$contact->title ?></small></h3>
             </div>
             <div class="col-md-5 text-right pull-right">
                 <!--<button class="btn-flat danger" data-toggle="modal" data-target="#remove-modal">
@@ -84,9 +84,37 @@
 
         <?php //tool::output($contact); ?>
 
-        <?php if( isset($structure) ): ?>
-        <p><strong>Structure</strong> : <a href="/structures/infos/id/<?$structure->id ?>"><?=$structure->name ?></a></p>
-        <?php endif; ?>
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <?php if( isset($contact->email) ): ?>
+                <p><strong>Email</strong> : <a href="mailto:<?=$contact->email ?>"><?=$contact->email ?></a></p>
+                <?php endif; ?>  
+
+                <?php if( isset($phone) ): ?>
+                <p><strong>Téléphone</strong> : <?=$structure->phone ?></p>
+                <?php endif; ?>  
+
+                <?php if( isset($mobile_phone) ): ?>
+                <p><strong>Téléphone portable</strong> : <?=$structure->mobile_phone ?></p>
+                <?php endif; ?>  
+
+                <?php if( isset($fax) ): ?>
+                <p><strong>Fax</strong> : <?=$structure->fax ?></p>
+                <?php endif; ?>  
+
+                <?php if( isset($note) ): ?>
+                <p><strong>Note</strong> : <?=$note->note ?></p>
+                <?php endif; ?>  
+
+                <?php if( isset($structure) ): ?>
+                <p><strong>Structure</strong> : <a href="/structures/infos/id/<?=$structure->id ?>"><?=$structure->name ?></a></p>
+                <?php endif; ?>                
+            </div>
+
+
+        </div>
 
         <?php if(count($enfants) > 0): ?>
         <div class="row">
