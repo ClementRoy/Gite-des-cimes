@@ -140,7 +140,7 @@
                             <label class="col-md-2" for="form-contact-title">Titre</label>
                             <div class="col-md-4">
                                 <input id="form-contact-title" name="form_contact_title" class="form-control" type="text" 
-                                data-toggle="tooltip" title="Renseignez le titre de la contact." parsley-required="true" value="<?=$contact->title ?>">
+                                data-toggle="tooltip" title="Renseignez le titre de la contact." value="<?=$contact->title ?>">
                             </div>                            
                         </div>
 
