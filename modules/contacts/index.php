@@ -40,6 +40,8 @@ Array (
                             <tr>
                                 <th class="sortable">Nom</th>
                                 <th class="sortable">Prénom</th>
+                                <th class="sortable">Téléphone</th>
+                                <th class="sortable">Téléphone mobile</th>
                                 <th class="sortable">Email</th>
                                 <th class="sortable">Structure</th>
                                 <th class="sortable">Nombre d'enfant en charge</th>
@@ -50,6 +52,8 @@ Array (
                             <tr>
                                 <th class="sortable">Nom</th>
                                 <th class="sortable">Prénom</th>
+                                <th class="sortable">Téléphone</th>
+                                <th class="sortable">Téléphone mobile</th>
                                 <th class="sortable">Email</th>
                                 <th class="sortable">Structure</th>
                                 <th class="sortable">Nombre d'enfant en charge</th>
@@ -74,11 +78,17 @@ Array (
                                  <a href="/contacts/infos/id/<?=$contact->id; ?>"><?=$contact->firstname; ?></a>
                             </td>
                             <td>
+                                <?=$contact->phone; ?>
+                            </td>
+                            <td>
+                                 <?=$contact->mobile_phone; ?>
+                            </td>                            
+                            <td>
                                <a href="mailto:<?=$contact->email; ?>"><?=$contact->email; ?></a>
                             </td>
                             <td>
                                 <?php if(isset($structure)): ?>
-                                <?=$structure->name ?>
+                                <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name ?></a>
                             <?php endif; ?>
                             </td>
                             <td>

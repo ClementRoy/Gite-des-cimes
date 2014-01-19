@@ -22,6 +22,7 @@
                 <div class="row">
                     <div class="col-md-12">
 
+                    <?php if($hebergements && count($hebergements)>0 ): ?>
                     <table class="datatable">
                         <thead>
                             <tr>
@@ -59,6 +60,9 @@
                          <?php endforeach; ?>
                         </tbody>
                     </table>
+                    <?php else: ?>
+                    <p>Aucune données disponibles</p>
+                    <?php endif; ?>
 
                 </div>                
              </div>
