@@ -73,7 +73,7 @@ class contact
             $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0', $data);
         }
         else {
-            $result = $db->query('SELECT * FROM '.self::$table.' ORDER BY lastname');
+            $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY lastname');
         }
         return $result;
     }
