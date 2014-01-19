@@ -9,7 +9,7 @@
 <div id="pad-wrapper">
             <div class="row header">
                 <div class="col-md-4">
-                    <h3>Les enfants</h3>
+                    <h3>Corbeille</h3>
                 </div>
                 <div class="col-md-8 text-right">
                     <!--<input type="text" id="table-enfant-search" data-search="enfant" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">-->
@@ -70,8 +70,9 @@
                                             Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <?=$archived_by->firstname; ?>
                                         </td>   
                                         <td>
-                                            <a href="">Réactiver</a>
-                                        </td>                                    
+                                            <a href="">Réactiver</a> |  <a href="">Supprimer</a>
+                                        </td>
+
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -101,7 +102,7 @@
                                             Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <?=$archived_by->firstname; ?>
                                         </td>   
                                         <td>
-                                            <a href="">Réactiver</a>
+                                            <a href="">Réactiver</a> |  <a href="">Supprimer</a>
                                         </td>                                    
                                     </tr>
                                 <?php endforeach; ?>
@@ -132,7 +133,7 @@
                                             Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <?=$archived_by->firstname; ?>
                                         </td>   
                                         <td>
-                                            <a href="">Réactiver</a>
+                                            <a href="">Réactiver</a> |  <a href="">Supprimer</a>
                                         </td>                                    
                                     </tr>
                                 <?php endforeach; ?>
@@ -163,7 +164,7 @@
                                             Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <?=$archived_by->firstname; ?>
                                         </td>   
                                         <td>
-                                            <a href="">Réactiver</a>
+                                            <a href="">Réactiver</a> |  <a href="">Supprimer</a>
                                         </td>                                    
                                     </tr>
                                 <?php endforeach; ?>
@@ -194,7 +195,7 @@
                                             Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <?=$archived_by->firstname; ?>
                                         </td>   
                                         <td>
-                                            <a href="">Réactiver</a>
+                                            <a href="">Réactiver</a> |  <a href="">Supprimer</a>
                                         </td>                                    
                                     </tr>
                                 <?php endforeach; ?>
