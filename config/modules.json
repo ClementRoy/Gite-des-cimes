@@ -43,6 +43,10 @@
 		"name" : "utilisateurs",
 		"views" : ["index", "infos", "connexion", "deconnexion", "supprimer", "ajouter", "editer"]
 	},
+	"hebergements" : {
+		"name" : "hebergements",
+		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
+	},
 	"infos" : {
 		"name" : "infos",
 		"views" : ["contact", "index", "infos", "debug"]

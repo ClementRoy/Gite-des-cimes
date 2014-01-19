@@ -113,13 +113,14 @@
                         </table> 
                     </div>
                 </div>
-            -->
+            
 
                 <div class="row">
                     <div class="col-md-6">
                         <h4>Rappels</h4>
                     </div>                  
                 </div>
+                -->
             </div>
         </div>
     </div>

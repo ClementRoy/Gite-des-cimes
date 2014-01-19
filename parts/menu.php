@@ -21,6 +21,14 @@ $menus = array(
 						'ajouter' => 'Ajouter un séjour'
 					)
 	),
+	'hebergements' => array(
+		'name' => 'Hébergements',
+		'icon' => 'globe',
+		'submenu' => array(
+						'index' => 'Liste des hébergements',
+						'ajouter' => 'Ajouter un hébergement'
+					)
+	),
 	'structures' => array(
 		'name' => 'Structures',
 		'icon' => 'building',
@@ -37,8 +45,7 @@ $menus = array(
 						'ajouter' => 'Ajouter un contact'
 					)
 	),
-
-	);
+);
 /*
 	'convocations' => array(
 		'name' => 'Convocations',
