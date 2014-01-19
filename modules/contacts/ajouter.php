@@ -166,7 +166,7 @@
                             <div class="col-md-4">
                                 <input id="form-contact-mobile-phone" name="form_contact_mobile_phone" type="text" class="form-control"
                                 data-toggle="tooltip" title="Renseignez le numéro de téléphone mobile du contact." 
-                                parsley-type="phone">
+                                >
                             </div>                        
                         </div>
 

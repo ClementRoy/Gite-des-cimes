@@ -88,27 +88,27 @@
 
             <div class="col-md-12">
 
-                <?php if( isset($contact->email) ): ?>
+                <?php if( isset($contact->email) && !empty($contact->email) ): ?>
                 <p><strong>Email</strong> : <a href="mailto:<?=$contact->email ?>"><?=$contact->email ?></a></p>
                 <?php endif; ?>  
 
-                <?php if( isset($phone) ): ?>
-                <p><strong>Téléphone</strong> : <?=$structure->phone ?></p>
+                <?php if( isset($contact->phone) && !empty($contact->phone) ): ?>
+                <p><strong>Téléphone</strong> : <?=$contact->phone ?></p>
                 <?php endif; ?>  
 
-                <?php if( isset($mobile_phone) ): ?>
-                <p><strong>Téléphone portable</strong> : <?=$structure->mobile_phone ?></p>
+                <?php if( isset($contact->mobile_phone) && !empty($contact->mobile_phone) ): ?>
+                <p><strong>Téléphone portable</strong> : <?=$contact->mobile_phone ?></p>
                 <?php endif; ?>  
 
-                <?php if( isset($fax) ): ?>
-                <p><strong>Fax</strong> : <?=$structure->fax ?></p>
+                <?php if( isset($contact->fax) && !empty($contact->fax) ): ?>
+                <p><strong>Fax</strong> : <?=$contact->fax ?></p>
                 <?php endif; ?>  
 
-                <?php if( isset($note) ): ?>
-                <p><strong>Note</strong> : <?=$note->note ?></p>
+                <?php if( isset($contact->note) && !empty($contact->note) ): ?>
+                <p><strong>Note</strong> : <?=$contact->note ?></p>
                 <?php endif; ?>  
 
-                <?php if( isset($structure) ): ?>
+                <?php if( isset($contact->structure) && !empty($contact->structure) ): ?>
                 <p><strong>Structure</strong> : <a href="/structures/infos/id/<?=$structure->id ?>"><?=$structure->name ?></a></p>
                 <?php endif; ?>                
             </div>
