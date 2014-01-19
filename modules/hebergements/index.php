@@ -9,15 +9,15 @@
         <div id="pad-wrapper">
             <div class="row header">
                 <div class="col-md-3">
-                    <h3>Les structures</h3>
+                    <h3>Les hébergements</h3>
                 </div>
                 <div class="col-md-9 text-right">
-                    <a href="/structures/ajouter" class="btn-flat primary"><span>+</span>
-                        Ajouter une structure</a>
+                    <a href="/hebergement/ajouter" class="btn-flat primary"><span>+</span>
+                        Ajouter un hébergement</a>
                     </div>
                 </div>
 
-                <?php $structures = structure::getList(); ?>
+                <?php $hebergements = hebergement::getList(); ?>
 
                 <div class="row">
                     <div class="col-md-12">
@@ -41,19 +41,19 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                        <?php foreach($structures as $key => $structure): ?>
+                        <?php foreach($hebergements as $key => $hebergement): ?>
                             <tr>
                                 <td>
-                                    <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name; ?></a>
+                                    <a href="/hebergements/infos/id/<?=$hebergement->id; ?>"><?=$hebergement->name; ?></a>
                                 </td>
                                 <td>
-                                    <?=$structure->phone; ?>
+                                    <?=$hebergement->phone; ?>
                                 </td>
                                 <td>
-                                    <a href="mailto:<?=$structure->email; ?>"><?=$structure->email; ?></a>
+                                    <a href="mailto:<?=$hebergement->email; ?>"><?=$hebergement->email; ?></a>
                                 </td>
                                 <td>
-                                    <?=$structure->address_city; ?>
+                                    <?=$hebergement->address_city; ?>
                                 </td>                                        
                             </tr>
                          <?php endforeach; ?>

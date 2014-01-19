@@ -9,56 +9,16 @@
         <div id="pad-wrapper">
             <div class="row header">
                 <div class="col-md-3">
-                    <h3>Les structures</h3>
-                </div>
-                <div class="col-md-9 text-right">
-                    <a href="/structures/ajouter" class="btn-flat primary"><span>+</span>
-                        Ajouter une structure</a>
-                    </div>
+                    <h3>Exports</h3>
                 </div>
 
-                <?php $structures = structure::getList(); ?>
+            </div>
 
-                <div class="row">
-                    <div class="col-md-12">
 
-                    <table class="datatable">
-                        <thead>
-                            <tr>
-                                <th class="sortable">Nom</th>
-                                <th class="sortable">Téléphone</th>
-                                <th class="sortable">Email</th>
-                                <th class="sortable">Ville</th>
-                            </tr>
-                        </thead>
-                        
-                        <tfoot>
-                            <tr>
-                                <th class="sortable">Nom</th>
-                                <th class="sortable">Téléphone</th>
-                                <th class="sortable">Email</th>
-                                <th class="sortable">Ville</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                        <?php foreach($structures as $key => $structure): ?>
-                            <tr>
-                                <td>
-                                    <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name; ?></a>
-                                </td>
-                                <td>
-                                    <?=$structure->phone; ?>
-                                </td>
-                                <td>
-                                    <a href="mailto:<?=$structure->email; ?>"><?=$structure->email; ?></a>
-                                </td>
-                                <td>
-                                    <?=$structure->address_city; ?>
-                                </td>                                        
-                            </tr>
-                         <?php endforeach; ?>
-                        </tbody>
-                    </table>
+            <div class="row">
+                <div class="col-md-12">
+
+                    <p>Aucun export disponible pour le moment</p>    
 
                 </div>                
              </div>
