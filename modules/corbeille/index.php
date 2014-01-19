@@ -12,7 +12,7 @@
                     <h3>Les enfants</h3>
                 </div>
                 <div class="col-md-8 text-right">
-                    <input type="text" id="table-enfant-search" data-search="enfant" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">
+                    <!--<input type="text" id="table-enfant-search" data-search="enfant" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">-->
                 </div>
             </div>
 
