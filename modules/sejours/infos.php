@@ -13,19 +13,37 @@
         <?php $date_created = new DateTime($sejour->created); ?>
         <?php $date_edited = new DateTime($sejour->edited); ?>
 
-        <div id="pad-wrapper">
-            <div class="row header">
-                <div class="col-md-5">
+        <div id="pad-wrapper" class="users-profil">
+            <div class="row header icon">
+                <div class="col-md-7">
+                    <a href="#" class="trigger"><i class="big-icon icon-plane"></i></a>
+                    <div class="pop-dialog">
+                        <div class="pointer">
+                            <div class="arrow"></div>
+                            <div class="arrow_border"></div>
+                        </div>
+                        <div class="body">
+                            <!--<a href="#" class="close-icon"><i class="icon-remove-sign"></i></a>-->
+                            <div class="menu">
+                                <a href="/sejours/editer/id/<?=$sejour->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                <a href="/sejours/supprimer/id/<?=$sejour->id; ?>" class="item" data-toggle="modal"><i class="icon-remove"></i> Supprimer</a>
+                                <!--<a href="#" class="item" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<strong>Créé par :</strong><br/> <a href='/utilisateurs/infos/<?=$creator->id; ?>'><?=$creator->firstname; ?></a>, le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?> <br /><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?> " data-original-title="Informations" title=""><i class="icon-info-sign"></i> Informations</a>-->
+                                <!--<div class="footer">
+                                    <a href="#" class="logout">Supprimer</a>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>                    
                     <h3><?=$sejour->name; ?></h3>
                 </div>
                 <div class="col-md-5 text-right pull-right">
-                    <button class="btn-flat danger" data-toggle="modal" data-target="#remove-modal">
+                    <!--<button class="btn-flat danger" data-toggle="modal" data-target="#remove-modal">
                         <i class="icon-remove"></i> Supprimer
                     </button>
                     <a href="/sejours/editer/id/<?=$sejour->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
                     <button class="metadata btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<p><strong>Créé par :</strong><br/> <?=$creator->firstname; ?>,<br />le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?></p><p><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,<br />le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?></p>" data-original-title="Informations" title="">
                       <i class="icon-info-sign"></i>
-                    </button>                
+                    </button>-->                
                 </div>
             </div>
 

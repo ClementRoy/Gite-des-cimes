@@ -137,7 +137,7 @@
                     </div>
                         <div class="field-box actions">
                             <div class="col-md-6">
-                                <input type="submit" class="btn-flat primary" name="submit" value="Ajouter l'enfant">
+                                <input type="submit" class="btn-flat primary" name="submit" value="Ajouter l'utilisateur">
                                 <span>OU</span>
                                 <a href="/utilisateurs/" class="reset">Annuler</a>
                             </div>

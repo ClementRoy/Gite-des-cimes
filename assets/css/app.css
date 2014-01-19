@@ -26,7 +26,7 @@
 #pad-wrapper h6 {
   font-weight: 600;
   font-size: 16px;
-  margin-bottom: 14px;
+  /*margin-bottom: 14px;*/
 }
 .form-page .form-wrapper .select2-container {
   margin-left: 0px;
@@ -223,8 +223,11 @@ input.parsley-error:focus {
 .header.icon .big-icon {
   font-size: 50px;
   float: left;
-  margin-top: -12px;
+  margin-top: 0px;
   color: #6E829B;
+}
+.header.icon .big-icon:hover {
+  text-decoration: none;
 }
 .header.icon h3 {
   padding-left: 20px;
@@ -449,4 +452,27 @@ margin-bottom: 15px;
   height: 28px;
   padding: 5px;
   background: url("../img/lens.png") #fcfcfc no-repeat 95%;
+}
+
+h3 small {
+  display: block;
+  margin-left: 0px;
+}
+small.metadata {
+  display: block;
+  margin-top: 40px;
+  margin-left: 0px;
+  font-size: 12px;
+}
+.pop-dialog {
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    display: none;
+}
+.pop-dialog .menu {
+    width: 140px;
+}
+.pop-dialog .menu .item {
+    font-weight: 400;
 }

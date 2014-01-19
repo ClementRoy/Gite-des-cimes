@@ -54,6 +54,35 @@
                     }
                 }
             });
+
+          $(".header").each(function (index, el) {
+            var $el = $(el);
+            var $dialog = $el.find(".pop-dialog");
+            var $trigger = $el.find(".trigger");
+            
+            $dialog.click(function (e) {
+                e.stopPropagation()
+            });
+            $("body").click(function () {
+              $dialog.removeClass("is-visible");
+              $trigger.removeClass("active");
+            });
+
+            $trigger.click(function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+
+              $dialog.toggleClass("is-visible");
+
+              if ($dialog.hasClass("is-visible")) {
+                $(this).addClass("active");
+              } else {
+                $(this).removeClass("active");
+              }
+
+            });
+          });
+  
     
         });
     </script>
