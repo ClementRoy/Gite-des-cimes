@@ -7,6 +7,26 @@
 
 <div class="content">
 
+
+
+
+
+
+
+    <div id="pad-wrapper" class="user-profile">
+
+    <?php if(isset($_GET['activate']) && $_GET['activate'] == 1){
+            enfant::unarchive($_GET['id']);
+    ?>
+            <div class="alert alert-success">
+                <i class="icon-ok-sign"></i>
+                Cette fiche a bien été réactivée !
+            </div>
+    <?php
+          }
+    ?>
+
+
     <?php $enfant = enfant::get($_GET['id']); ?>
     <?php $creator = user::get($enfant->creator); ?>
     <?php $editor = user::get($enfant->editor); ?>
@@ -14,10 +34,17 @@
     <?php $date_edited = new DateTime($enfant->edited); ?>
     <?php //tool::output($enfant); ?>
 
-    <div id="pad-wrapper" class="user-profile">
 
+    <?php if($enfant->archived) :?>
+    <div class="alert alert-info">
+        <i class="icon-exclamation-sign"></i>
+        Cette fiche est archivée voulez-vous la réactiver ?
+        <a href="<?=$_GET['id'] ?>/activate/1" class="btn btn-primary pull-right">Réactiver</a>
+        <?php // USE POST DATA asshole ?>
+    </div>
+    <?php endif; ?>
 
-        <div id="pad-wrapper" class="users-profil">
+        <div id="pad-wrapper" class="users-profil" <?php if($enfant->archived) :?>style="opacity:0.3"<?php endif; ?>>
             <div class="row header icon">
                 <div class="col-md-7">
                 <a href="#" class="trigger"><i class="big-icon icon-user"></i></a>

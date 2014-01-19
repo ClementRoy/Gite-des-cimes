@@ -51,19 +51,27 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="enfants">
                         <?php if(count($enfants)): ?>
-                        <table id="" data-search="" class="table table-hover tablesorter extendlink">
-                            <thead>
-                                <tr>
-                                    <th class="sortable">Nom</th>
-                                </tr>
-                            </thead>
+                        <table id="" data-search="" class="table table-hover extendlink">
+                            <tfoot>
+                                <th>Nom</th>
+                                <th><span class="line"></span>Date de suppression</th>
+                                <th><span class="line"></span>Action</th>
+                            </tfoot>
                             <tbody>
 
                                 <?php foreach($enfants as $key => $enfant): ?>
+                                <?php $archived_by = user::get($enfant->editor); ?>
+                                <?php $archived_on = new DateTime($enfant->created); ?>
                                     <tr>
                                         <td>
                                             <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname; ?></a>
-                                        </td>                                       
+                                        </td>
+                                        <td>
+                                            Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <?=$archived_by->firstname; ?>
+                                        </td>   
+                                        <td>
+                                            <a href="">Réactiver</a>
+                                        </td>                                    
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -74,28 +82,124 @@
                         </div>
                         <div class="tab-pane" id="structures">
                         <?php if(count($structures)): ?>
+                        <table id="" data-search="" class="table table-hover extendlink">
+                            <tfoot>
+                                <th>Nom</th>
+                                <th><span class="line"></span>Date de suppression</th>
+                                <th><span class="line"></span>Action</th>
+                            </tfoot>
+                            <tbody>
 
+                                <?php foreach($structures as $key => $structure): ?>
+                                <?php $archived_by = user::get($structure->editor); ?>
+                                <?php $archived_on = new DateTime($structure->created); ?>
+                                    <tr>
+                                        <td>
+                                            <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name; ?></a>
+                                        </td>
+                                        <td>
+                                            Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <?=$archived_by->firstname; ?>
+                                        </td>   
+                                        <td>
+                                            <a href="">Réactiver</a>
+                                        </td>                                    
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                         <?php else: ?>
                             <p><em>Cette corbeille est vide</em></p>
                         <?php endif; ?>                            
                         </div>
                         <div class="tab-pane" id="contacts">
                         <?php if(count($contacts)): ?>
+                        <table id="" data-search="" class="table table-hover extendlink">
+                            <tfoot>
+                                <th>Nom</th>
+                                <th><span class="line"></span>Date de suppression</th>
+                                <th><span class="line"></span>Action</th>
+                            </tfoot>
+                            <tbody>
 
+                                <?php foreach($contacts as $key => $contact): ?>
+                                <?php $archived_by = user::get($contact->editor); ?>
+                                <?php $archived_on = new DateTime($contact->created); ?>
+                                    <tr>
+                                        <td>
+                                            <a href="/contacts/infos/id/<?=$contact->id; ?>"><?=$contact->firstname; ?></a>
+                                        </td>
+                                        <td>
+                                            Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <?=$archived_by->firstname; ?>
+                                        </td>   
+                                        <td>
+                                            <a href="">Réactiver</a>
+                                        </td>                                    
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                         <?php else: ?>
                             <p><em>Cette corbeille est vide</em></p>
                         <?php endif; ?>                            
                         </div>
                         <div class="tab-pane" id="sejours">
                         <?php if(count($sejours)): ?>
+                        <table id="" data-search="" class="table table-hover extendlink">
+                            <tfoot>
+                                <th>Nom</th>
+                                <th><span class="line"></span>Date de suppression</th>
+                                <th><span class="line"></span>Action</th>
+                            </tfoot>
+                            <tbody>
 
+                                <?php foreach($sejours as $key => $sejour): ?>
+                                <?php $archived_by = user::get($sejour->editor); ?>
+                                <?php $archived_on = new DateTime($sejour->created); ?>
+                                    <tr>
+                                        <td>
+                                            <a href="/enfants/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a>
+                                        </td>
+                                        <td>
+                                            Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <?=$archived_by->firstname; ?>
+                                        </td>   
+                                        <td>
+                                            <a href="">Réactiver</a>
+                                        </td>                                    
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                         <?php else: ?>
                             <p><em>Cette corbeille est vide</em></p>
                         <?php endif; ?>                            
                         </div>
                         <div class="tab-pane" id="utilisateurs">
                         <?php if(count($utilisateurs)): ?>
+                        <table id="" data-search="" class="table table-hover extendlink">
+                            <tfoot>
+                                <th>Nom</th>
+                                <th><span class="line"></span>Date de suppression</th>
+                                <th><span class="line"></span>Action</th>
+                            </tfoot>
+                            <tbody>
 
+                                <?php foreach($utilisateurs as $key => $utilisateur): ?>
+                                <?php $archived_by = user::get($utilisateur->editor); ?>
+                                <?php $archived_on = new DateTime($utilisateur->created); ?>
+                                    <tr>
+                                        <td>
+                                            <a href="/utilisateurs/infos/id/<?=$utilisateur->id; ?>"><?=$utilisateur->firstname; ?></a>
+                                        </td>
+                                        <td>
+                                            Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <?=$archived_by->firstname; ?>
+                                        </td>   
+                                        <td>
+                                            <a href="">Réactiver</a>
+                                        </td>                                    
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                         <?php else: ?>
                             <p><em>Cette corbeille est vide</em></p>
                         <?php endif; ?>                            
@@ -111,21 +215,6 @@
                     });
                     </script>
 
-<div class="panel panel-default">
-  <div class="panel-heading">Panel heading without title</div>
-  <div class="panel-body">
-    Panel content
-  </div>
-</div>
-
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Panel title</h3>
-  </div>
-  <div class="panel-body">
-    Panel content
-  </div>
-</div>
 
 
                 </div>                
