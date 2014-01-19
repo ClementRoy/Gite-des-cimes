@@ -7,12 +7,12 @@
     <!-- main container -->
     <div class="content">
 		<div id="pad-wrapper">
+
             <div class="row header">
                 <div class="col-md-3">
                     <h3>Les contacts</h3>
                 </div>
                 <div class="col-md-9 text-right">
-                    <input type="text" id="table-enfant-search" class="col-md-5 search" data-search="contact" placeholder="Tapez le nom d'un contact..." autofocus="autofocus">
                     <a href="/contacts/ajouter" class="btn-flat primary"><span>+</span>
                         Ajouter un contact</a>
                 </div>
@@ -20,23 +20,43 @@
 
             <?php $contacts = contact::getList(); ?>
 
+            <?php //$contacts = contact::getList(); 
+/*
+Array (
+    'join strucutre on xxx '
+    'join contact on xxx '
+)
+
+*/
+            ?>
+
 
             <div class="row">
                 <div class="col-md-12">
-                    <table id="table-enfant" data-search="contact" class="table table-hover tablesorter extendlink">
+
+
+                    <table class="datatable">
                         <thead>
                             <tr>
                                 <th class="sortable">Nom</th>
-                                <th class="sortable"><span class="line"></span>Prénom</th>
-                                <th class="sortable"><span class="line"></span>Email</th>
+                                <th class="sortable">Prénom</th>
+                                <th class="sortable">Email</th>
                                 <th class="sortable">Structure</th>
                                 <th class="sortable">Nombre d'enfant en charge</th>
                             </tr>
                         </thead>
+                        
+                        <tfoot>
+                            <tr>
+                                <th class="sortable">Nom</th>
+                                <th class="sortable">Prénom</th>
+                                <th class="sortable">Email</th>
+                                <th class="sortable">Structure</th>
+                                <th class="sortable">Nombre d'enfant en charge</th>
+                            </tr>
+                        </tfoot>
+
                         <tbody>
-
-                        <!-- row -->
-
                         <?php foreach($contacts as $key => $contact): ?>
                         <?php 
                           if($contact->ref_structure) {
@@ -68,6 +88,7 @@
                         <?php endforeach; ?>
                         </tbody>
                     </table>
+
                 </div>                
             </div>
 

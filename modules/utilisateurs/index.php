@@ -37,53 +37,59 @@
             <!-- Users table -->
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-hover extendlink tablesorter">
+
+                    <table class="datatable">
                         <thead>
                             <tr>
                                 <th class="sortable">Prénom</th>
-                                <th class="sortable"><span class="line"></span>Nom</th>
-                                <th class="sortable">
-                                    <span class="line"></span>Identifiant
-                                </th>
-                                <th class="sortable">
-                                    <span class="line"></span>Rôle
-                                </th>
+                                <th class="sortable">Nom</th>
+                                <th class="sortable">Identifiant</th>
+                                <th class="sortable">Rôle</th>
                             </tr>
                         </thead>
+                        
+                        <tfoot>
+                            <tr>
+                                <th class="sortable">Prénom</th>
+                                <th class="sortable">Nom</th>
+                                <th class="sortable">Identifiant</th>
+                                <th class="sortable">Rôle</th>
+                            </tr>
+                        </tfoot>
                         <tbody>
-                        <!-- row -->
-                        <?php foreach($users as $key => $user): ?>
-                        <tr <?php if($key == 0): ?>class="first"<?php endif; ?>>
-                            <td>
-                               <img src="http://placehold.it/45x45" width="45" height="45" class="img-circle avatar" />
-                                <a href="/utilisateurs/infos/id/<?=$user->id; ?>" class="name"><?=$user->firstname; ?></a>
-                            </td>
-                            <td>
-                                <a href="/utilisateurs/infos/id/<?=$user->id; ?>" class="name"><?=$user->lastname; ?></a>
-                            </td>
-                            <td>
-                               <?=$user->identifier; ?>
-                            </td>
-                            <td>
-                                <span class="label label-info">
-                                <?php if ($user->rank == 1): ?>
-                                    Utilisateur
-                                <?php elseif ($user->rank == 3): ?>
-                                    Gestionnaire
-                                <?php elseif ($user->rank == 5): ?>
-                                    Administrateur
-                                <?php endif; ?>
-                                </span>
-                                <ul class="actions">
-                                    <li><i class="table-edit"></i></li>
-                                    <li><i class="table-settings"></i></li>
-                                    <li class="last"><i class="table-delete"></i></li>
-                                </ul>                            
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
+                            <?php foreach($users as $key => $user): ?>
+                            <tr <?php if($key == 0): ?>class="first"<?php endif; ?>>
+                                <td>
+                                   <img src="http://placehold.it/45x45" width="45" height="45" class="img-circle avatar" />
+                                    <a href="/utilisateurs/infos/id/<?=$user->id; ?>" class="name"><?=$user->firstname; ?></a>
+                                </td>
+                                <td>
+                                    <a href="/utilisateurs/infos/id/<?=$user->id; ?>" class="name"><?=$user->lastname; ?></a>
+                                </td>
+                                <td>
+                                   <?=$user->identifier; ?>
+                                </td>
+                                <td>
+                                    <span class="label label-info">
+                                    <?php if ($user->rank == 1): ?>
+                                        Utilisateur
+                                    <?php elseif ($user->rank == 3): ?>
+                                        Gestionnaire
+                                    <?php elseif ($user->rank == 5): ?>
+                                        Administrateur
+                                    <?php endif; ?>
+                                    </span>
+                                    <!--<ul class="actions">
+                                        <li><i class="table-edit"></i></li>
+                                        <li><i class="table-settings"></i></li>
+                                        <li class="last"><i class="table-delete"></i></li>
+                                    </ul> -->                          
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
+
                 </div>                
             </div>
             <!-- end users table -->

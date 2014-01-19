@@ -21,6 +21,7 @@
     <link href="/assets/css/lib/select2.css" type="text/css" rel="stylesheet">
     <link href="/assets/css/lib/bootstrap.datepicker.css" type="text/css" rel="stylesheet">
     <link href="/assets/css/lib/jquery.steps.css" type="text/css" rel="stylesheet">
+    <link href="/assets/css/lib/jquery.dataTables.css" type="text/css" rel="stylesheet">
 
 
     <!-- global styles -->

@@ -9,11 +9,11 @@
 
     <!-- main container -->
     <div class="content">
-<div id="pad-wrapper">
+        <div id="pad-wrapper">
+
             <div class="row header">
                 <h3>Les séjours</h3>
                 <div class="col-md-10 col-sm-12 col-xs-12 pull-right">
-                    <input type="text" id="table-sejour-search" data-search="sejour" class="col-md-5 search" placeholder="Tapez le nom d'un séjour...">
                     <a href="/sejours/ajouter" class="btn-flat primary pull-right"><span>+</span>
                         Ajouter un séjour</a>
                 </div>
@@ -21,26 +21,36 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <table id="table-sejour"  data-search="sejour" class="table tablesorter table-hover extendlink">
+
+                    <table class="datatable">
                         <thead>
                             <tr>
-    
                                 <th class="sortable">Nom</th>
-                                <th class="sortable"><span class="line"></span>Date de début</th>
-                                <th class="sortable"><span class="line"></span>Date de fin</th>
-                                <th class="sortable"><span class="line"></span>Lieu</th>
-                                <th class="sortable"><span class="line"></span>Capacité min</th>
-                                <th class="sortable"><span class="line"></span>Capacité max</th>
-                                <th class="sortable"><span class="line"></span>Prix (€)</th>
+                                <th class="sortable">Date de début</th>
+                                <th class="sortable">Date de fin</th>
+                                <th class="sortable">Lieu</th>
+                                <th class="sortable">Capacité min</th>
+                                <th class="sortable">Capacité max</th>
+                                <th class="sortable">Prix (€)</th>
                             </tr>
                         </thead>
+                        
+                        <tfoot>
+                            <tr>
+                                <th class="sortable">Nom</th>
+                                <th class="sortable">Date de début</th>
+                                <th class="sortable">Date de fin</th>
+                                <th class="sortable">Lieu</th>
+                                <th class="sortable">Capacité min</th>
+                                <th class="sortable">Capacité max</th>
+                                <th class="sortable">Prix (€)</th>
+                            </tr>
+                        </tfoot>
                         <tbody>
-                        <!-- row -->
-
                         <?php foreach($sejours as $key => $sejour): ?>
                         <tr>
                             <td>
-                            	<a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a>
+                                <a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a>
                             </td>
                             <td class="text-right">
                             <?php $date_from = new DateTime($sejour->date_from); ?>

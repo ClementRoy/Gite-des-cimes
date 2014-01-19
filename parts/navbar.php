@@ -29,7 +29,7 @@
                 <ul class="dropdown-menu">
                     <li><a href="/infos/infos/">Infos</a></li>
                     <li><a href="/infos/debug/">Debug</a></li>
-                    <li><a href="/infos/contact">Repporter un bug</a></li>
+                    <!--<li><a href="/infos/contact">Repporter un bug</a></li>-->
                 </ul>
             </li>
             <li class="settings hidden-xs hidden-sm">

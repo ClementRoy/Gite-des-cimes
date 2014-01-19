@@ -37,18 +37,25 @@ $menus = array(
 						'ajouter' => 'Ajouter un contact'
 					)
 	),
+
+	);
+/*
 	'convocations' => array(
 		'name' => 'Convocations',
 		'icon' => 'file-text-alt'),
 	'factures' => array(
 		'name' => 'Factures',
 		'icon' => 'edit')
-	);
+*/
 
+// Build active element from REQUEST URI
 $path_array = explode('/', $_SERVER['REQUEST_URI']);
+
+// Set default path
 if($path_array['1'] == ''){
 	$path_array['1']  = 'accueil';
 }
+
 ?>
 
 

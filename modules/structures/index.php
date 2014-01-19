@@ -12,7 +12,6 @@
                     <h3>Les structures</h3>
                 </div>
                 <div class="col-md-9 text-right">
-                    <input type="text" id="table-enfant-search" data-search="structure" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">
                     <a href="/structures/ajouter" class="btn-flat primary"><span>+</span>
                         Ajouter une structure</a>
                     </div>
@@ -22,35 +21,45 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <table id="table-enfant" data-search="structure" class="table table-hover tablesorter extendlink">
-                            <thead>
-                                <tr>
-                                    <th class="sortable">Nom</th>
-                                    <th class="sortable"><span class="line"></span>Téléphone</th>
-                                    <th class="sortable"><span class="line"></span>Email</th>
-                                    <th class="sortable"><span class="line"></span>Ville</th>
-                                </tr>
-                            </thead>
-                            <tbody>
 
-                                <?php foreach($structures as $key => $structure): ?>
-                                    <tr>
-                                        <td>
-                                            <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name; ?></a>
-                                        </td>
-                                        <td>
-                                            <?=$structure->phone; ?>
-                                        </td>
-                                        <td>
-                                            <a href="mailto:<?=$structure->email; ?>"><?=$structure->email; ?></a>
-                                        </td>
-                                        <td>
-                                            <?=$structure->address_city; ?>
-                                        </td>                                        
-                                    </tr>
-                             <?php endforeach; ?>
-                         </tbody>
-                     </table>
+                    <table class="datatable">
+                        <thead>
+                            <tr>
+                                <th class="sortable">Nom</th>
+                                <th class="sortable">Téléphone</th>
+                                <th class="sortable">Email</th>
+                                <th class="sortable">Ville</th>
+                            </tr>
+                        </thead>
+                        
+                        <tfoot>
+                            <tr>
+                                <th class="sortable">Nom</th>
+                                <th class="sortable">Téléphone</th>
+                                <th class="sortable">Email</th>
+                                <th class="sortable">Ville</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                        <?php foreach($structures as $key => $structure): ?>
+                            <tr>
+                                <td>
+                                    <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name; ?></a>
+                                </td>
+                                <td>
+                                    <?=$structure->phone; ?>
+                                </td>
+                                <td>
+                                    <a href="mailto:<?=$structure->email; ?>"><?=$structure->email; ?></a>
+                                </td>
+                                <td>
+                                    <?=$structure->address_city; ?>
+                                </td>                                        
+                            </tr>
+                         <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
                 </div>                
              </div>
 
