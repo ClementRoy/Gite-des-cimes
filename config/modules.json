@@ -58,5 +58,9 @@
 	"corbeille" : {
 		"name" : "corbeille",
 		"views" : ["index"]
+	},
+	"export" : {
+		"name" : "export",
+		"views" : ["index"]
 	}
 }

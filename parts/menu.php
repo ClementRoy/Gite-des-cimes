@@ -45,6 +45,14 @@ $menus = array(
 						'ajouter' => 'Ajouter un contact'
 					)
 	),
+	'export' => array(
+		'name' => 'Export',
+		'icon' => 'cog'
+	),
+	'corbeille' => array(
+		'name' => 'Corbeille',
+		'icon' => 'trash'
+	),
 );
 /*
 	'convocations' => array(

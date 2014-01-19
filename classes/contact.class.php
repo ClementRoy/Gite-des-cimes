@@ -188,13 +188,21 @@ class contact
     }
 
     public static function archive($id){
-        $data = array(':archived' => 1); 
+        $data = array(
+            ':archived' => 1,
+            ':archived_on' => tool::currentTime(),
+            ':archived_by' => user::getCurrentUser() 
+        ); 
         $result = self::update($data, $id);
         return $result;       
     }
 
     public static function unarchive($id){
-        $data = array(':archived' => 0); 
+        $data = array(
+            ':archived' => 0,
+            ':archived_on' => '',
+            ':archived_by' => ''
+        ); 
         $result = self::update($data, $id);
         return $result;       
     }

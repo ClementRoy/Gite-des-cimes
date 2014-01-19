@@ -125,12 +125,42 @@ class convocation
      */
     public static function remove($id){
         global $db;
-        $data = array(':id' => $id);
-        $sql = 'DELETE FROM '.self::$table.' WHERE id = :id';
-        $result = $db->delete($sql, $data);
+        // $data = array(':id' => $id);
+        // $sql = 'DELETE FROM '.self::$table.' WHERE id = :id';
+        // $result = $db->delete($sql, $data);
+        $result = self::archive($id);
         return $result;
     }
 
+    public static function archive($id){
+        $data = array(
+            ':archived' => 1,
+            ':archived_on' => tool::currentTime(),
+            ':archived_by' => user::getCurrentUser() 
+        ); 
+        $result = self::update($data, $id);
+        return $result;       
+    }
+
+    public static function unarchive($id){
+        $data = array(
+            ':archived' => 0,
+            ':archived_on' => '',
+            ':archived_by' => ''
+        ); 
+        $result = self::update($data, $id);
+        return $result;       
+    }
+
+    public static function delete($id){
+        global $db;
+        $data = array(':id' => $id);
+        $sql = 'DELETE FROM '.self::$table.' WHERE id = :id';
+        $result = $db->delete($sql, $data);
+        //$result = self::archive($id);
+        return $result;
+    }
+    
 }
 
 ?>
