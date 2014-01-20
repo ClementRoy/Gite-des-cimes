@@ -23,7 +23,7 @@
                             ':note' => $form_structure_note
                             );
 
-            $result = structure::add($datas);
+            $result = hebergement::add($datas);
 
         ?>
 
@@ -32,16 +32,16 @@
             <div id="pad-wrapper" class="action-page">
                 <div class="row header">
                     <div class="col-md-12">
-                        <h3>Ajouter une structure</h3>
+                        <h3>Ajouter un hébergement</h3>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="alert alert-success">
                             <i class="icon-ok-sign"></i> 
-                            La structure <?=$form_structure_name; ?> a bien été ajoutée
+                            L'hébergement <?=$form_structure_name; ?> a bien été ajoutée
                         </div>
-                        <a href="/structures/">Retourner à la liste des structures</a>
+                        <a href="/hebergements/">Retourner à la liste des hébergements</a>
 
                     </div>
                 </div>

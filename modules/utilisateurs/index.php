@@ -60,7 +60,7 @@
                             <?php foreach($users as $key => $user): ?>
                             <tr <?php if($key == 0): ?>class="first"<?php endif; ?>>
                                 <td>
-                                   <img src="http://placehold.it/45x45" width="45" height="45" class="img-circle avatar" />
+                                   <!--<img src="http://placehold.it/45x45" width="45" height="45" class="img-circle avatar" />-->
                                     <a href="/utilisateurs/infos/id/<?=$user->id; ?>" class="name"><?=$user->firstname; ?></a>
                                 </td>
                                 <td>

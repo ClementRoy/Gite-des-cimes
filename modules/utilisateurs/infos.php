@@ -13,7 +13,20 @@
     <!-- main container -->
     <div class="content">
       <div id="pad-wrapper" class="users-profil">
-        <div class="row header img">
+
+    <?php if(isset($_POST['activate'])):
+            enfant::unarchive($_GET['id']);
+    ?>
+            <div class="alert alert-success">
+                <i class="icon-ok-sign"></i>
+                Cette fiche a bien été réactivée !
+            </div>
+    <?php
+          endif;
+    ?>
+
+
+        <div class="row header icon">
             <div class="col-md-7">
                 <a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
                 <div class="pop-dialog">

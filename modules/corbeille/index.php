@@ -6,16 +6,62 @@
 
     <!-- main container -->
     <div class="content">
-<div id="pad-wrapper">
-            <div class="row header">
-                <div class="col-md-4">
-                    <h3>Corbeille</h3>
-                </div>
-                <div class="col-md-8 text-right">
-                    <!--<input type="text" id="table-enfant-search" data-search="enfant" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">-->
-                </div>
-            </div>
+        <div id="pad-wrapper">
 
+
+    
+            <?php 
+
+            // Action de réactivation
+            //tool::output($_POST);
+            extract($_POST);
+
+            if( isset($active) ){
+                if($type == 'enfant'){enfant::unarchive($id);}
+                elseif($type == 'structure'){structure::unarchive($id);}
+                elseif($type == 'contact'){contact::unarchive($id);}
+                elseif($type == 'utilisateur'){utilisateur::unarchive($id);} 
+                elseif($type == 'sejour'){sejour::unarchive($id);}
+                ?>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-success">
+                                <i class="icon-ok-sign"></i> 
+                                L'élément a bien été réactivé
+                            </div>
+                        </div>
+                    </div>
+
+            <?php
+
+            }
+
+
+            // Action de suppression
+
+            if( isset($remove) ){
+                if($type == 'enfant'){enfant::delete($id);}    
+                elseif($type == 'structure'){structure::delete($id);}
+                elseif($type == 'contact'){contact::delete($id);}
+                elseif($type == 'utilisateur'){utilisateur::delete($id);} 
+                elseif($type == 'sejour'){sejour::delete($id);}
+                ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger">
+                            <i class="icon-remove-sign"></i> 
+                            L'élément a bien été supprimé
+                        </div>
+                    </div>
+                </div>
+
+            <?php
+                
+            }
+
+
+
+            ?>
             <?php $enfants = enfant::getFromTrash(); ?>
             <?php $sejours = sejour::getFromTrash(); ?>
             <?php $structures = structure::getFromTrash(); ?>
@@ -36,7 +82,17 @@
                 Unexpected error. Please try again later.
             </div>
             -->
-                      
+
+            <div class="row header">
+                <div class="col-md-4">
+                    <h3>Corbeille</h3>
+                </div>
+                <div class="col-md-8 text-right">
+                    <!--<input type="text" id="table-enfant-search" data-search="enfant" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">-->
+                </div>
+            </div>
+
+
 
             <div class="row">
                 <div class="col-md-12">
@@ -67,10 +123,16 @@
                                             <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname; ?></a>
                                         </td>
                                         <td>
-                                            Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <?=$archived_by->firstname; ?>
+                                            Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <a href="/utilisateurs/infos/id/<?=$archived_by->id; ?>"><?=$archived_by->firstname; ?> <?=$archived_by->lastname; ?></a>
                                         </td>   
                                         <td>
-                                            <a href="">Réactiver</a> |  <a href="">Supprimer</a>
+                                            <form action="" method="post" class="pull-roght">
+                                                <input type="hidden" name="id" value="<?=$enfant->id; ?>">
+                                                <input type="hidden" name="type" value="enfant">
+                                                <a href="/enfants/infos/id/<?=$enfant->id; ?>" class="btn"><i class="icon-share"></i></a>
+                                                <button class="btn" name="active"><i class="icon-ok"></i></button>
+                                                <button class="btn" name="remove"><i class="icon-trash"></i></button>
+                                            </form>
                                         </td>
 
                                     </tr>
@@ -99,10 +161,16 @@
                                             <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name; ?></a>
                                         </td>
                                         <td>
-                                            Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <?=$archived_by->firstname; ?>
-                                        </td>   
+                                            Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <a href="/utilisateurs/infos/id/<?=$archived_by->id; ?>"><?=$archived_by->firstname; ?> <?=$archived_by->lastname; ?></a>
+                                        </td>
                                         <td>
-                                            <a href="">Réactiver</a> |  <a href="">Supprimer</a>
+                                            <form action="#structures" method="post" class="pull-roght">
+                                                <input type="hidden" name="id" value="<?=$structure->id; ?>">
+                                                <input type="hidden" name="type" value="structure">
+                                                <a href="/structures/infos/id/<?=$structure->id; ?>" class="btn"><i class="icon-share"></i></a>
+                                                <button class="btn" name="active"><i class="icon-ok"></i></button>
+                                                <button class="btn" name="remove"><i class="icon-trash"></i></button>
+                                            </form>                                        
                                         </td>                                    
                                     </tr>
                                 <?php endforeach; ?>
@@ -127,13 +195,19 @@
                                 <?php $archived_on = new DateTime($contact->created); ?>
                                     <tr>
                                         <td>
-                                            <a href="/contacts/infos/id/<?=$contact->id; ?>"><?=$contact->firstname; ?></a>
+                                            <a href="/contacts/infos/id/<?=$contact->id; ?>"><?=$contact->civility; ?> <?=$contact->lastname; ?> <?=$contact->firstname; ?></a>
                                         </td>
                                         <td>
                                             Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <?=$archived_by->firstname; ?>
                                         </td>   
                                         <td>
-                                            <a href="">Réactiver</a> |  <a href="">Supprimer</a>
+                                            <form action="" method="post" class="pull-roght">
+                                                <input type="hidden" name="id" value="<?=$contact->id; ?>">
+                                                <input type="hidden" name="type" value="enfant">
+                                                <a href="/contacts/infos/id/<?=$contact->id; ?>" class="btn"><i class="icon-share"></i></a>
+                                                <button class="btn" name="active"><i class="icon-ok"></i></button>
+                                                <button class="btn" name="remove"><i class="icon-trash"></i></button>
+                                            </form>                                        
                                         </td>                                    
                                     </tr>
                                 <?php endforeach; ?>
@@ -158,13 +232,19 @@
                                 <?php $archived_on = new DateTime($sejour->created); ?>
                                     <tr>
                                         <td>
-                                            <a href="/enfants/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a>
+                                            <a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a>
                                         </td>
                                         <td>
                                             Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <?=$archived_by->firstname; ?>
                                         </td>   
                                         <td>
-                                            <a href="">Réactiver</a> |  <a href="">Supprimer</a>
+                                            <form action="" method="post" class="pull-roght">
+                                                <input type="hidden" name="id" value="<?=$sejour->id; ?>">
+                                                <input type="hidden" name="type" value="enfant">
+                                                <a href="/sejours/infos/id/<?=$sejour->id; ?>" class="btn"><i class="icon-share"></i></a>
+                                                <button class="btn" name="active"><i class="icon-ok"></i></button>
+                                                <button class="btn" name="remove"><i class="icon-trash"></i></button>
+                                            </form>
                                         </td>                                    
                                     </tr>
                                 <?php endforeach; ?>
@@ -195,7 +275,13 @@
                                             Supprimé le <?=strftime('%d %B %Y', $archived_on->getTimestamp()); ?> par <?=$archived_by->firstname; ?>
                                         </td>   
                                         <td>
-                                            <a href="">Réactiver</a> |  <a href="">Supprimer</a>
+                                            <form action="" method="post" class="pull-roght">
+                                                <input type="hidden" name="id" value="<?=$utilisateur->id; ?>">
+                                                <input type="hidden" name="type" value="utilisateur">
+                                                <a href="/utilisateurs/infos/id/<?=$utilisateur->id; ?>" class="btn"><i class="icon-share"></i></a>
+                                                <button class="btn" name="active"><i class="icon-ok"></i></button>
+                                                <button class="btn" name="remove"><i class="icon-trash"></i></button>
+                                            </form>
                                         </td>                                    
                                     </tr>
                                 <?php endforeach; ?>

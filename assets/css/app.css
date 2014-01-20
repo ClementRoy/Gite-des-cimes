@@ -476,3 +476,9 @@ small.metadata {
 .pop-dialog .menu .item {
     font-weight: 400;
 }
+td button.btn {
+  background: none;
+}
+.btn i {
+  color: #000;
+}

@@ -7,15 +7,9 @@
 
 <div class="content">
 
-
-
-
-
-
-
     <div id="pad-wrapper" class="user-profile">
 
-    <?php if(isset($_GET['activate']) && $_GET['activate'] == 1){
+    <?php if(isset($_POST['activate'])):
             enfant::unarchive($_GET['id']);
     ?>
             <div class="alert alert-success">
@@ -23,7 +17,7 @@
                 Cette fiche a bien été réactivée !
             </div>
     <?php
-          }
+          endif;
     ?>
 
 
@@ -39,13 +33,15 @@
     <div class="alert alert-info">
         <i class="icon-exclamation-sign"></i>
         Cette fiche est archivée voulez-vous la réactiver ?
-        <a href="<?=$_GET['id'] ?>/activate/1" class="btn btn-primary pull-right">Réactiver</a>
+        <form action="" method="post" class="pull-right">
+        <button class="btn btn-primary" name="activate">Réactiver</button>
+        </form>
         <?php // USE POST DATA asshole ?>
     </div>
     <?php endif; ?>
 
         <div id="pad-wrapper" class="users-profil" <?php if($enfant->archived) :?>style="opacity:0.3"<?php endif; ?>>
-            <div class="row header icon">
+        <div class="row header icon">
                 <div class="col-md-7">
                 <a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
                 <div class="pop-dialog">
