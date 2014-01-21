@@ -310,9 +310,9 @@
                             <h4>Ses séjours</h4>
                         </div>
                         <div class="col-md-6 text-right">
-                             <button class="btn-flat success" data-toggle="modal" data-target="#add-modal">
+                            <!--<button class="btn-flat success" data-toggle="modal" data-target="#add-modal">
                                 <i class="icon-plus"></i> Inscrire l'enfant à un séjour
-                            </button>
+                            </button>-->
                         </div>
                         </div>
                         <table class="table table-hover extendlink">
@@ -359,7 +359,6 @@
                     </div>
              </div>
 
-
     <?php //tool::output($enfant); ?>
 
 </div>
@@ -390,23 +389,23 @@
                             </div>                             
 
 
-        <div class="field-box row">
-            <label class="col-md-2" for="form-enfant-prenom">Date début</label>
-            <div class="col-md-4 col-sm-5">
-                <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
-            </div>
-        </div>
+                            <div class="field-box row">
+                                <label class="col-md-2" for="form-enfant-prenom">Date début</label>
+                                <div class="col-md-4 col-sm-5">
+                                    <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
+                                </div>
+                            </div>
 
 
-        <div class="field-box row">
-            <label class="col-md-2" for="form-enfant-prenom">Date fin</label>
-            <div class="col-md-4 col-sm-5">
-                <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
-            </div>
-        </div>
+                            <div class="field-box row">
+                                <label class="col-md-2" for="form-enfant-prenom">Date fin</label>
+                                <div class="col-md-4 col-sm-5">
+                                    <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
+                                </div>
+                            </div>
 
 
-        <p>// Autres infos ????</p>
+                            <p>// Autres infos ????</p>
 
         
                             </form>

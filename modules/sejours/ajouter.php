@@ -66,7 +66,7 @@
                           <div class="col-md-2">
                                 <input id="form-sejour-date-fin" name="form_sejour_date_fin" type="text" class="form-control input-datepicker" 
                                 placeholder="Date de fin" data-toggle="tooltip" title="Renseignez la date à laquelle se termine le séjour (jj/mm/aaaa)." 
-                                parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" parsley-afterdate="#form-sejour-date-debut">
+                                parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" ><!-- parsley-afterdate="#form-sejour-date-debut" CR : not working properly with french dates -->
                             </div>                              
                         </div>                  
                         <div class="field-box row">

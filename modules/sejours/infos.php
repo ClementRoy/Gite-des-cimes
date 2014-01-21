@@ -85,9 +85,9 @@
                             <h4>Enfants participants à ce séjour</h4>
                         </div>
                         <div class="col-md-6 text-right">
-                             <button class="btn-flat success" data-toggle="modal" data-target="#add-modal">
+                             <!--<button class="btn-flat success" data-toggle="modal" data-target="#add-modal">
                                 <i class="icon-plus"></i> Ajouter un enfant
-                            </button>
+                            </button>-->
                         </div>
                         
                     </div>

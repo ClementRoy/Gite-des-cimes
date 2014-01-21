@@ -132,6 +132,7 @@
                                                 <a href="/enfants/infos/id/<?=$enfant->id; ?>" class="btn"><i class="icon-share"></i></a>
                                                 <button class="btn" name="active"><i class="icon-ok"></i></button>
                                                 <button class="btn" name="remove"><i class="icon-trash"></i></button>
+                                                <?php //data-toggle="tooltip" data-placement="top" title="" data-original-title="Supprimer définitivement" ?>
                                             </form>
                                         </td>
 
