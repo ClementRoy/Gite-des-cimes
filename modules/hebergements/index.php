@@ -42,6 +42,19 @@
                             <tr>
                                 <td>
                                     <a href="/hebergements/infos/id/<?=$hebergement->id; ?>"><?=$hebergement->name; ?></a>
+                                    <div class="pop-dialog tr">
+                                        <div class="pointer">
+                                            <div class="arrow"></div>
+                                            <div class="arrow_border"></div>
+                                        </div>
+                                        <div class="body">
+                                            <div class="menu">
+                                                <a href="/hebergements/infos/id/<?=$hebergement->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                                <a href="/hebergements/editer/id/<?=$hebergement->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                                <a href="/hebergements/supprimer/id/<?=$hebergement->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                            </div>
+                                        </div>
+                                    </div>                                      
                                 </td>
                                 <td>
                                     <?=$hebergement->address_city; ?>
