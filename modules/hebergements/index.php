@@ -27,8 +27,6 @@
                         <thead>
                             <tr>
                                 <th class="sortable">Nom</th>
-                                <th class="sortable">Téléphone</th>
-                                <th class="sortable">Email</th>
                                 <th class="sortable">Ville</th>
                             </tr>
                         </thead>
@@ -36,8 +34,6 @@
                         <tfoot>
                             <tr>
                                 <th class="sortable">Nom</th>
-                                <th class="sortable">Téléphone</th>
-                                <th class="sortable">Email</th>
                                 <th class="sortable">Ville</th>
                             </tr>
                         </tfoot>
@@ -46,12 +42,6 @@
                             <tr>
                                 <td>
                                     <a href="/hebergements/infos/id/<?=$hebergement->id; ?>"><?=$hebergement->name; ?></a>
-                                </td>
-                                <td>
-                                    <?=$hebergement->phone; ?>
-                                </td>
-                                <td>
-                                    <a href="mailto:<?=$hebergement->email; ?>"><?=$hebergement->email; ?></a>
                                 </td>
                                 <td>
                                     <?=$hebergement->address_city; ?>
