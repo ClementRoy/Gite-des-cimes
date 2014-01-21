@@ -58,6 +58,19 @@
                         <tr>
                             <td>
                                 <a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a>
+                                <div class="pop-dialog tr">
+                                    <div class="pointer">
+                                        <div class="arrow"></div>
+                                        <div class="arrow_border"></div>
+                                    </div>
+                                    <div class="body">
+                                        <div class="menu">
+                                            <a href="/sejours/infos/id/<?=$sejour->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                            <a href="/sejours/editer/id/<?=$sejour->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                            <a href="/sejours/supprimer/id/<?=$sejour->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                        </div>
+                                    </div>
+                                </div> 
                             </td>
                             <td class="text-right">
                             <?php $date_from = new DateTime($sejour->date_from); ?>

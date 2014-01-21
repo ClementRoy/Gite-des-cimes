@@ -470,6 +470,20 @@ small.metadata {
     left: 0px;
     display: none;
 }
+table.dataTable tr.active {
+  background-color: #f5fafc;
+}
+table.dataTable tr.active td.sorting_1 {
+  background-color: #f5fafc;
+}
+table td {
+  position: relative;
+}
+.pop-dialog.tr {
+    position: absolute;
+    top: 40px;
+    left: 0px; 
+}
 .pop-dialog .menu {
     width: 140px;
 }

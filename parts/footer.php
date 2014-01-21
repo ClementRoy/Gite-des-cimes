@@ -83,8 +83,34 @@
             });
           });
 
-          $('.tooltip').tooltip()
-  
+          $('.tooltip').tooltip();
+
+
+            // Handle right click on table row to open contextual menu
+            $("table").on("contextmenu", "tr", function(e){
+                var $dialog = $(this).find(".pop-dialog");
+                $dialog.click(function (e) {
+                    e.stopPropagation();
+                });
+                $("body").click(function () {
+                  $dialog.removeClass("is-visible");
+                  $("table tr").removeClass("active");
+                });
+              
+                $("table tr").removeClass("active");               
+                $(".pop-dialog").each(function (index, el) {
+                    $(el).removeClass("is-visible");
+                });
+                $dialog.toggleClass("is-visible");
+
+                if ($dialog.hasClass("is-visible")) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+              e.preventDefault();
+              e.stopPropagation();
+            });
     
         });
     </script>
