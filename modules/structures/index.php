@@ -45,6 +45,19 @@
                             <tr>
                                 <td>
                                     <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name; ?></a>
+                                <div class="pop-dialog tr">
+                                    <div class="pointer">
+                                        <div class="arrow"></div>
+                                        <div class="arrow_border"></div>
+                                    </div>
+                                    <div class="body">
+                                        <div class="menu">
+                                            <a href="/structures/infos/id/<?=$structure->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                            <a href="/structures/editer/id/<?=$structure->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                            <a href="/structures/supprimer/id/<?=$structure->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                        </div>
+                                    </div>
+                                </div>                                     
                                 </td>
                                 <td>
                                     <?=$structure->phone; ?>

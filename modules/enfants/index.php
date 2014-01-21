@@ -51,6 +51,19 @@
                         <tr class="">
                                 <td>
                                     <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname; ?></a>
+                                <div class="pop-dialog tr">
+                                    <div class="pointer">
+                                        <div class="arrow"></div>
+                                        <div class="arrow_border"></div>
+                                    </div>
+                                    <div class="body">
+                                        <div class="menu">
+                                            <a href="/enfants/infos/id/<?=$enfant->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                            <a href="/enfants/editer/id/<?=$enfant->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                            <a href="/enfants/supprimer/id/<?=$enfant->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                        </div>
+                                    </div>
+                                </div>                                     
                                 </td>
                                 <td>
                                      <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname; ?></a>

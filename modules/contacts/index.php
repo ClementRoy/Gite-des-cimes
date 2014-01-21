@@ -73,6 +73,19 @@ Array (
                         <tr>
                             <td>
                                 <a href="/contacts/infos/id/<?=$contact->id; ?>"><?=$contact->lastname; ?></a>
+                                <div class="pop-dialog tr">
+                                    <div class="pointer">
+                                        <div class="arrow"></div>
+                                        <div class="arrow_border"></div>
+                                    </div>
+                                    <div class="body">
+                                        <div class="menu">
+                                            <a href="/contacts/infos/id/<?=$contact->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                            <a href="/contacts/editer/id/<?=$contact->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                            <a href="/contacts/supprimer/id/<?=$contact->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                        </div>
+                                    </div>
+                                </div> 
                             </td>
                             <td>
                                  <a href="/contacts/infos/id/<?=$contact->id; ?>"><?=$contact->firstname; ?></a>

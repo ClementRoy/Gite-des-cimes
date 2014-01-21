@@ -62,6 +62,19 @@
                                 <td>
                                    <!--<img src="http://placehold.it/45x45" width="45" height="45" class="img-circle avatar" />-->
                                     <a href="/utilisateurs/infos/id/<?=$user->id; ?>" class="name"><?=$user->firstname; ?></a>
+                                <div class="pop-dialog tr">
+                                    <div class="pointer">
+                                        <div class="arrow"></div>
+                                        <div class="arrow_border"></div>
+                                    </div>
+                                    <div class="body">
+                                        <div class="menu">
+                                            <a href="/utilisateurs/infos/id/<?=$user->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                            <a href="/utilisateurs/editer/id/<?=$user->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                            <a href="/utilisateurs/supprimer/id/<?=$user->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                        </div>
+                                    </div>
+                                </div>                                     
                                 </td>
                                 <td>
                                     <a href="/utilisateurs/infos/id/<?=$user->id; ?>" class="name"><?=$user->lastname; ?></a>
