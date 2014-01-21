@@ -11,10 +11,10 @@
             $form_sejour_date_fin = tool::generateDatetime($form_sejour_date_fin);
             
             $datas = array(
-                            ':name' => $form_sejour_nom,
+                            ':name' => $form_sejour_name,
                             ':date_from' => $form_sejour_date_debut,
                             ':date_to' => $form_sejour_date_fin,
-                            ':place' => $form_sejour_lieu,
+                            ':ref_hebergement' => $form_sejour_hebergement,
                             ':capacity_max' => $form_sejour_capacite_max,
                             ':capacity_min' => $form_sejour_capacite_min,
                             ':numero' => $form_sejour_numero,
@@ -25,18 +25,49 @@
 
         ?>
     <?php //tool::output($_POST); ?>
-    <div class="content">
-        <div id="pad-wrapper" class="form-page">
-            <div class="row header">
-                <div class="col-md-12">
-                    <h3>Ajouter un séjour</h3>
+        <?php if($result): ?>
+            <div class="content">
+                <div id="pad-wrapper" class="action-page">
+                    <div class="row header">
+                        <div class="col-md-12">
+                            <h3>Ajouter un séjour</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-success">
+                                <i class="icon-ok-sign"></i> 
+                                Le séjour <strong><?=$form_sejour_name; ?></strong> a bien été ajouté
+                            </div>
+                            <a href="/sejours/">Retourner à la liste des séjours</a>
+
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <p>Le séjour <?=$form_sejour_name; ?> a bien été ajouté</p>
-        <a href="/sejours/index/">Retourner à la liste des séjours</a>
-    </div>
+        <?php else: ?>
+
+            <div class="content">
+                <div id="pad-wrapper" class="action-page">
+                    <div class="row header">
+                        <div class="col-md-12">
+                            <h3>Ajouter un séjour</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger">
+                                <i class="icon-remove-sign"></i> 
+                                Une erreur s'est produite durant l'ajout du séjour, veuillez réessayer
+                            </div>
+                            <a href="/sejours/ajouter">Retourner au formulaire d'ajout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
     <?php else: ?>
     <div class="content">
         <div id="pad-wrapper" class="form-page">
@@ -68,13 +99,22 @@
                                 placeholder="Date de fin" data-toggle="tooltip" title="Renseignez la date à laquelle se termine le séjour (jj/mm/aaaa)." 
                                 parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" ><!-- parsley-afterdate="#form-sejour-date-debut" CR : not working properly with french dates -->
                             </div>                              
-                        </div>                  
+                        </div>   
+
                         <div class="field-box row">
-                            <label class="col-md-2" for="form-sejour-lieu">Hébergement</label>
-                            <div class="col-md-4">
-                                <input id="form-sejour-lieu" name="form_sejour_lieu" class="form-control" type="text" 
-                                data-toggle="tooltip" title="Renseignez où se déroule la séjour." parsley-required="true">
-                            </div>                            
+                            <label class="col-md-2" for="form-enfant-structure-select">Hébergement</label>
+                            <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez l'hébergement qui accueillera le séjour.">
+                                <div class="ui-select">
+                                    <?php $hebergements = hebergement::getList(); ?>
+                                    <select id="form-sejour-hebergement-select" name="form_sejour_hebergement">
+                                        <option selected="selected">Choisissez l'hébergement</option>
+                                        <?php foreach($hebergements as $hebergement): ?>
+                                        <option value="<?=$hebergement->id ?>"><?=$hebergement->name ?></option>
+                                        <?php endforeach; ?>
+                                        <!--<option value="0">Nouvel hébergement</option>-->
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="field-box row">
@@ -101,6 +141,7 @@
                             <div class="col-md-2">
                                 <input id="form-sejour-prix" name="form_sejour_prix" class="form-control" type="text" 
                                 data-toggle="tooltip" title="Renseignez le prix unitaire du séjour du séjour." parsley-type="number" parsley-required="true">
+                                <span class="libelle-suffix">€</span>
                             </div>                            
                         </div>
 

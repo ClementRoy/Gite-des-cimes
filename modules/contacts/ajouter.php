@@ -53,7 +53,7 @@
             <div id="pad-wrapper" class="action-page">
                 <div class="row header">
                     <div class="col-md-12">
-                        <h3>Ajouter une contact</h3>
+                        <h3>Ajouter un contact</h3>
                     </div>
                 </div>
                 <div class="row">

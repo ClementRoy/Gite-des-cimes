@@ -12,7 +12,7 @@
                     <h3>Les hébergements</h3>
                 </div>
                 <div class="col-md-9 text-right">
-                    <a href="/hebergement/ajouter" class="btn-flat primary"><span>+</span>
+                    <a href="/hebergements/ajouter" class="btn-flat primary"><span>+</span>
                         Ajouter un hébergement</a>
                     </div>
                 </div>

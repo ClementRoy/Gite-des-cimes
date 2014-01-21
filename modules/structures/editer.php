@@ -11,8 +11,6 @@
         <?php 
             extract($_POST);
             $datas = array(
-                            ':edited' => tool::currentTime(),
-                            ':editor' => user::getCurrentUser(),
                             ':name' => $form_structure_name,
                             ':payer' => $form_structure_payer,
                             ':email' => $form_structure_email,
@@ -26,7 +24,6 @@
                             );
 
         $result = structure::update($datas,  $_GET['id']);
-        tool::output($result);
         ?>
 
     <?php if($result): ?>

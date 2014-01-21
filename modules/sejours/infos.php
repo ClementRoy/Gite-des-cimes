@@ -8,6 +8,11 @@
 
         <?php $sejour = sejour::get($_GET['id']); ?>
         <?php //tool::output($sejour); ?>
+        <?php 
+          if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
+            $hebergement = hebergement::get($sejour->ref_hebergement);
+          }
+        ?>
         <?php $creator = user::get($sejour->creator); ?>
         <?php $editor = user::get($sejour->editor); ?>
         <?php $date_created = new DateTime($sejour->created); ?>
@@ -92,10 +97,6 @@
                         
                     </div>
 
-
-
-
-
                     <table class="table table-hover extendlink">
                         <thead>
                             <tr>
@@ -137,8 +138,16 @@
                 </div>
 
                 <div class="col-md-3 address">
-                    <h6><?=$sejour->place; ?></h6>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d44678.62570246739!2d5.90635345!3d45.5822195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478ba85708695f63%3A0xd5c21acfa63d899c!2schambery!5e0!3m2!1sfr!2sfr!4v1387062351950" width="210" height="200" frameborder="0" style="border:0"></iframe>
+                    <?php if(isset($hebergement )): ?>
+                    <h6>Coordonnées</h6>
+                    <?php $geo = tool::getLatLng($hebergement->address_number.' '.$hebergement->address_street.' '.$hebergement->address_postal_code.' '.$hebergement->address_city); ?>
+                    <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$geo[0]; ?>,<?=$geo[1]; ?>&zoom=12&size=210x200&scale=2&markers=<?=$geo[0]; ?>,<?=$geo[1]; ?>&sensor=false" width="100%" alt="">
+                    <ul>
+                      <li><strong>Adresse</strong></li>
+                      <li><?=$hebergement->address_number; ?> <?=$hebergement->address_street; ?></li>
+                      <li><?=$hebergement->address_postal_code; ?> <?=$hebergement->address_city; ?></li>              
+                    </ul>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -172,23 +181,23 @@
                             </div>                             
 
 
-        <div class="field-box row">
-            <label class="col-md-2" for="form-enfant-prenom">Date début</label>
-            <div class="col-md-4 col-sm-5">
-                <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
-            </div>
-        </div>
+                            <div class="field-box row">
+                                <label class="col-md-2" for="form-enfant-prenom">Date début</label>
+                                <div class="col-md-4 col-sm-5">
+                                    <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
+                                </div>
+                            </div>
 
 
-        <div class="field-box row">
-            <label class="col-md-2" for="form-enfant-prenom">Date fin</label>
-            <div class="col-md-4 col-sm-5">
-                <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
-            </div>
-        </div>
+                            <div class="field-box row">
+                                <label class="col-md-2" for="form-enfant-prenom">Date fin</label>
+                                <div class="col-md-4 col-sm-5">
+                                    <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
+                                </div>
+                            </div>
 
 
-        <p>// Autres infos ????</p>
+                                <p>// Autres infos ????</p>
 
         
                             </form>

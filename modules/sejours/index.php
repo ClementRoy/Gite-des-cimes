@@ -48,6 +48,13 @@
                         </tfoot>
                         <tbody>
                         <?php foreach($sejours as $key => $sejour): ?>
+                        <?php 
+                          if($sejour->ref_hebergement) {
+                            $hebergement = hebergement::get($sejour->ref_hebergement);
+                          }else {
+                            $hebergement = null;
+                          }
+                        ?>
                         <tr>
                             <td>
                                 <a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a>
@@ -65,7 +72,9 @@
                             <?php endif; ?>
                             </td>
                             <td>
-                               <?=$sejour->place; ?>
+                                <?php if(isset($hebergement)): ?>
+                                    <a href="/hebergements/infos/id/<?=$hebergement->id; ?>"><?=$hebergement->name ?></a>
+                                <?php endif; ?>
                             </td>
                             <td class="text-right">
                                 <?=$sejour->capacity_min; ?>
