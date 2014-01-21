@@ -121,7 +121,7 @@
 
                         <div class="field-box actions">
                             <div class="col-md-6">
-                                <input type="submit" class="btn-flat primary" name="submit" value="Ajouter l'enfant">
+                                <input type="submit" class="btn-flat primary" name="submit" value="Modifier le séjour">
                                 <span>OU</span>
                                 <a href="/sejours/" class="reset">Annuler</a>
                             </div>

@@ -92,7 +92,7 @@
                                     <select id="form-enfant-structure-select" name="form_contact_structure">
                                         <option selected="selected">Choisissez la structure</option>
                                         <?php foreach($structures as $structure): ?>
-                                        <option><?=$structure->name ?></option>
+                                        <option value="<?=$structure->id ?>"><?=$structure->name ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
