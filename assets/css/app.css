@@ -496,3 +496,6 @@ td button.btn {
 .btn i {
   color: #000;
 }
+.archived {
+  opacity: 0.3;
+}

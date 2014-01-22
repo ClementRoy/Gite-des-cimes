@@ -40,7 +40,7 @@
     </div>
     <?php endif; ?>
 
-        <div id="pad-wrapper" class="users-profil" <?php if($enfant->archived) :?>style="opacity:0.3"<?php endif; ?>>
+        <div id="pad-wrapper" class="users-profil<?=($enfant->archived)?' archived':' ';?>" >
         <div class="row header icon">
                 <div class="col-md-7">
                 <a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
@@ -359,7 +359,7 @@
                     </div>
              </div>
 
-    <?php //tool::output($enfant); ?>
+
 
 </div>
 
@@ -420,6 +420,21 @@
                 </div>
             </div>
 
+        </div>
+    <?php if($enfant->archived) :?>
+    <div class="alert alert-danger">
+        <i class="icon-remove-sign"></i>
+        Cette fiche est archivée voulez-vous la supprimer ?
+        <form action="" method="post" class="pull-right">
+        <button class="btn btn-danger" name="activate">Supprimer</button>
+        </form>
+        <?php // USE POST DATA asshole ?>
+    </div>
+    <?php endif; ?>
+
+</div>
+</div></div>
+    <?php //tool::output($enfant); ?>
 
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

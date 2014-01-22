@@ -1,7 +1,6 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
-<?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
     <?php  $users = user::getList(); ?>
 
@@ -60,7 +59,6 @@
                             <?php foreach($users as $key => $user): ?>
                             <tr <?php if($key == 0): ?>class="first"<?php endif; ?>>
                                 <td>
-                                   <!--<img src="http://placehold.it/45x45" width="45" height="45" class="img-circle avatar" />-->
                                     <a href="/utilisateurs/infos/id/<?=$user->id; ?>" class="name"><?=$user->firstname; ?></a>
                                     <div class="pop-dialog tr">
                                         <div class="pointer">
@@ -91,12 +89,7 @@
                                     <?php elseif ($user->rank == 5): ?>
                                         Administrateur
                                     <?php endif; ?>
-                                    </span>
-                                    <!--<ul class="actions">
-                                        <li><i class="table-edit"></i></li>
-                                        <li><i class="table-settings"></i></li>
-                                        <li class="last"><i class="table-delete"></i></li>
-                                    </ul> -->                          
+                                    </span>                      
                                 </td>
                             </tr>
                             <?php endforeach; ?>

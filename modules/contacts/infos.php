@@ -1,10 +1,8 @@
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
-    <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
     
-    <?php // TODO : ne pas oublier de lister les contacts associés  ?>
     <?php $contact = contact::get($_GET['id']); ?>
     <?php 
       if($contact->ref_structure && $contact->ref_structure != 0) {
@@ -34,52 +32,18 @@
                         <div class="arrow_border"></div>
                     </div>
                     <div class="body">
-                        <!--<a href="#" class="close-icon"><i class="icon-remove-sign"></i></a>-->
                         <div class="menu">
                             <a href="/contacts/editer/id/<?=$contact->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
                             <a href="/contacts/supprimer/id/<?=$contact->id; ?>" class="item" data-toggle="modal"><i class="icon-remove"></i> Supprimer</a>
-                            <!--<a href="#" class="item" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<strong>Créé par :</strong><br/> <a href='/utilisateurs/infos/<?=$creator->id; ?>'><?=$creator->firstname; ?></a>, le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?> <br /><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?> " data-original-title="Informations" title=""><i class="icon-info-sign"></i> Informations</a>-->
-                            <!--<div class="footer">
-                                <a href="#" class="logout">Supprimer</a>
-                            </div>-->
                         </div>
                     </div>
                 </div>                
                 <h3><?=$contact->civility; ?> <?=$contact->firstname; ?> <?=$contact->lastname; ?><small><?=$contact->title ?></small></h3>
             </div>
             <div class="col-md-5 text-right pull-right">
-                <!--<button class="btn-flat danger" data-toggle="modal" data-target="#remove-modal">
-                  <i class="icon-remove"></i> Supprimer
-                </button>
-
-                <a href="/contacts/editer/id/<?=$contact->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
-                 <button class="metadata btn-flat white" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<p><strong>Créé par :</strong><br/> <?=$creator->firstname; ?>,<br />le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?></p><p><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?></p>" data-original-title="Informations" title="">
-                  <i class="icon-info-sign"></i>
-                </button>-->           
+       
             </div>
         </div>
-
-
-
-            <!-- Modal -->
-            <div class="modal fade" id="remove-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h6 class="modal-title" id="myModalLabel">Supprimer cette fiche</h6>
-                  </div>
-                  <div class="modal-body">
-                    <p>Vous êtes sur le point de supprimer le contact  <strong>"<?=$contact->name; ?>"</strong>.<br />
-                    Cette action est irréversible.</p>
-                  </div>
-                  <div class="modal-footer">
-                    <a class="btn-flat white" data-dismiss="modal">Annuler</a>
-                    <a href="/contacts/supprimer/id/<?=$contact->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
-                  </div>
-                </div><!-- /.modal-content -->
-              </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
   
 
         <?php //tool::output($contact); ?>
@@ -123,13 +87,8 @@
                 <table class="table table-hover extendlink">
                     <thead>
                         <tr>
-                            <th class="col-md-1">
-                                Prénom
-                            </th>
-                            <th class="col-md-3">
-                                <span class="line"></span>
-                                Nom
-                            </th>
+                            <th class="col-md-1">Prénom</th>
+                            <th class="col-md-3"><span class="line"></span>Nom</th>
                         </tr>
                     </thead>
                     <tbody>
