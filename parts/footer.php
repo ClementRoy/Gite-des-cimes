@@ -31,6 +31,7 @@
 
             $('.datatable').dataTable({
                 "sPaginationType": "full_numbers",
+                "iDisplayLength": 50,
                 "oLanguage": {
                     "sProcessing":     "Traitement en cours...",
                     "sSearch":         "Rechercher&nbsp;:",
