@@ -3,7 +3,7 @@
 	</div>
 	
 	<!-- Communs -->
-    <script src="/assets/js/wysihtml5-0.3.0.js"></script>
+    <?php //<script src="/assets/js/wysihtml5-0.3.0.js"></script> ?>
    
     <script src="/assets/js/bootstrap.min.js"></script>
 
