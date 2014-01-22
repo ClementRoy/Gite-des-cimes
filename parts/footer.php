@@ -90,8 +90,10 @@
             // Handle right click on table row to open contextual menu
             $("table").on("contextmenu", "tr", function(e){
                 var offset = $(this).offset();
-                var $posX = e.clientX - offset.left - 20;
-                var $posY = e.clientY - offset.top + 10;
+                var $posX = e.pageX - offset.left - 20;
+                var $posY = e.pageY - offset.top + 10;
+                //console.log(e.pageX + " Y: " + e.pageY);
+                //console.log(e.clientX + " Y: " + e.clientY);
                 var $dialog = $(this).find(".pop-dialog");
                 $dialog.css({top:$posY,left:$posX});
                 $dialog.click(function (e) {
