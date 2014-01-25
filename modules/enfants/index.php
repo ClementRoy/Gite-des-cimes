@@ -71,7 +71,7 @@
                                     <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?>
                                 </td>
                                 <td>  
-                                    <?php if( !empty($enfant->number_ss) && !empty($enfant->self_assurance) && !empty($enfant->cpam_attestation) && !empty($enfant->self_assurance_expiration_date) && !empty($enfant->health_record) && !empty($enfant->vaccination) ): ?>
+                                    <?php if( $enfant->number_ss != 0 && $enfant->self_assurance > 0 && $enfant->cpam_attestation > 0 && !empty($enfant->self_assurance_expiration_date) && $enfant->health_record > 0 && $enfant->vaccination > 0 ): ?>
                                     <span class="label label-success">Complète</span> 
                                     <?php else: ?>
                                     <span class="label label-warning">Incomplète</span> 
