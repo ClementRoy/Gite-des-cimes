@@ -38,7 +38,7 @@
                     <div class="col-md-12">
                         <div class="alert alert-success">
                             <i class="icon-ok-sign"></i> 
-                            La structure <?=$form_structure_name; ?> a bien été modifée
+                            La structure <strong><?=$form_structure_name; ?></strong> a bien été modifée
                         </div>
                         <a href="/structures/">Retourner à la liste des structures</a>
 
@@ -125,7 +125,7 @@
                             <div class="col-md-4">
                                 <input id="form-structure-phone" name="form_structure_telephone" type="text" class="form-control"
                                 data-toggle="tooltip" title="Renseignez le numéro de téléphone de la structure." 
-                                parsley-type="phone" value="<?=$structure->phone ?>">
+                                value="<?=$structure->phone ?>">
                             </div>                        
                         </div>
 
@@ -134,7 +134,7 @@
                             <div class="col-md-4">
                                 <input id="form-structure-fax" name="form_structure_fax" type="text" class="form-control"
                                 data-toggle="tooltip" title="Renseignez le numéro de fax de la structure." 
-                                parsley-type="phone" value="<?=$structure->fax ?>">
+                                value="<?=$structure->fax ?>">
                             </div>                        
                         </div>
 
