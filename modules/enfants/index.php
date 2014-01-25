@@ -70,8 +70,12 @@
                                 <td>
                                     <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?>
                                 </td>
-                                <td>
-                                    <span class="label label-warning">Incomplète</span>      
+                                <td>  
+                                    <?php if( !empty($enfant->number_ss) && !empty($enfant->self_assurance) && !empty($enfant->cpam_attestation) && !empty($enfant->self_assurance_expiration_date) && !empty($enfant->health_record) && !empty($enfant->vaccination) ): ?>
+                                    <span class="label label-success">Complète</span> 
+                                    <?php else: ?>
+                                    <span class="label label-warning">Incomplète</span> 
+                                    <?php endif; ?>  
                                 </td>
                                 <td>
                                     <?php 
