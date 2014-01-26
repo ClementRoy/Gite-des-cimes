@@ -197,9 +197,14 @@
                                 <div class="field-box row">
                                     <label class="col-md-2" for="form-enfant-contact-select">Nom du contact</label>
                                     <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez le contact responsable de l'enfant.">
+
                                         <div class="ui-select">
                                             <select id="form-enfant-contact-select" name="form_enfant_contact">
-                                                <option selected="">Sélectionnez un contact</option>
+                                                <option>Sélectionnez un contact</option>
+                                                <?php if ($enfant->contact != 0): ?>
+                                                <?php $contact = contact::get($enfant->contact); ?>
+                                                <option value="<?=$contact->id ?>" selected="selected"><?php echo $contact->civility.' '.$contact->lastname.' '.$contact->firstname;?></option>
+                                                <?php endif; ?>
                                             </select>
                                         </div>
                                         <?php // TODO : ajouter la possibilité de créer une structure à la volée ?>
@@ -213,7 +218,7 @@
                                     <label class="radio" for="form-enfant-responsable-structure">
                                         <div class="radio" id="uniform-form-enfant-responsable-structure">
                                             <span <?php if ($enfant->guardian == 'structure'): ?> class="checked"<?php endif ?>>
-                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-structure" value="structure" <?php if ($enfant->guardian == 'structure'): ?> checked="checked"<?php endif ?>>
+                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-structure" value="structure" checked="checked"<?php if ($enfant->guardian == 'structure'): ?> checked="checked"<?php endif ?>>
                                             </span>
                                         </div>
                                         Structure
@@ -653,7 +658,7 @@
 
                         <div class="field-box actions">
                             <div class="col-md-6">
-                                <input type="submit" class="btn-flat primary" name="submit" value="Ajouter l'enfant">
+                                <input type="submit" class="btn-flat primary" name="submit" value="Modifier la fiche">
                                 <span>OU</span>
                                 <a href="/enfants/" class="reset">Annuler</a>
                             </div>

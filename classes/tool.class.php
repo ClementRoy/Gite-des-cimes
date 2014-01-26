@@ -82,7 +82,7 @@ class tool
 
     public static function generateDatetime($date){
         $date = explode('/', $date);
-        if(isset($date['1'])){
+        if(isset($date['2'])){
             
             return self::currentTime(mktime(0,0,0,$date['1'],$date['0'],$date['2']));
         }

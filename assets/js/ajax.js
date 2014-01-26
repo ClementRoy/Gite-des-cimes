@@ -10,18 +10,20 @@ $(document).ready(function(){
 			},
 			success: function(data){
 				if(data != ''){
-					$('#form-enfant-contact-select').html('');
+					//$('#form-enfant-contact-select').html('');
 					var strArray = data.split("#");
 					//console.log(data);
 					//strArray.splice(0,1);
+					html = $('#form-enfant-contact-select').html();
 					if(strArray[0] != null) {
-						$('#form-enfant-contact-select').html("<option value='default'>Choisissez le contact</option>");
+
+						//$('#form-enfant-contact-select').html(html);
 						$.each(strArray,function( index, value ) {
 							var elemArray = value.split("|");
 							$('#form-enfant-contact-select').append("<option value='" + elemArray['1'] + "'>" + elemArray['0'] + "</option>");
 						});
 					} else {
-						$('#form-enfant-contact-select').html("<option value='default'>Choisissez le contact</option>");
+						//$('#form-enfant-contact-select').html(html);
 					}
 				}
 				else {
