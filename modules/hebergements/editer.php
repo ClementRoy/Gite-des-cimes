@@ -106,9 +106,9 @@
                             </div>
 
                          <div class="field-box row">
-                            <label class="col-md-2" for="form-enfant-note">Notes</label>
+                            <label class="col-md-2" for="form-hebergement-note">Notes</label>
                             <div class="col-md-4 col-sm-5">
-                                <textarea id="form-enfant-note" name="form_enfant_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de l'enfant."><?=$hebergement->note; ?></textarea>
+                                <textarea id="form-hebergement-note" name="form_hebergement_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de l'hébergement."><?=$hebergement->note; ?></textarea>
                             </div>
                         </div>
 

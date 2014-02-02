@@ -67,15 +67,13 @@
                                     <div class="col-md-6">
                                         <dl>
                                             <dt>Sexe :</dt>
-                                            <dd>                                <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?></td>
-</dd>
+                                            <dd>
+                                                <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?></td>
+                                            </dd>
                                         </dl>
                                         <dl>
                                             <dt>Date de naissance :</dt>
-                                            <dd>
-                                                                            <?php 
-                                    $birthdate = new DateTime($enfant->birthdate); 
-                                ?>
+                                            <dd> <?php $birthdate = new DateTime($enfant->birthdate);  ?>
                                 <?php if($birthdate->getTimestamp() != '-62169987600'): ?>
                                     <?=strftime('%d %B %Y', $birthdate->getTimestamp()); ?> (<?=tool::getAgeFromDate($enfant->birthdate); ?> ans)
                                 <?php else: ?>

@@ -55,6 +55,10 @@ class sejour
     }
 
 
+    public static function getListByHebergement(){
+        return false;
+    }
+
     public static function getFromTrash(){
         global $db;
         $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1 ORDER BY name');

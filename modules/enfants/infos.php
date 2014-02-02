@@ -1,7 +1,6 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
-<?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
 
@@ -19,6 +18,9 @@
     <?php
           endif;
     ?>
+
+        <?php tool::output($enfant); ?>
+
 
 
     <?php $enfant = enfant::get($_GET['id']); ?>
@@ -421,6 +423,9 @@
             </div>
 
         </div>
+
+
+
     <?php if($enfant->archived) :?>
     <div class="alert alert-danger">
         <i class="icon-remove-sign"></i>
@@ -432,9 +437,13 @@
     </div>
     <?php endif; ?>
 
+
+
 </div>
-</div></div>
-    <?php //tool::output($enfant); ?>
+</div>
+</div>
+
+
 
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

@@ -40,10 +40,10 @@ Array (
                                 <th class="sortable">Nom</th>
                                 <th class="sortable">Prénom</th>
                                 <th class="sortable">Téléphone</th>
-                                <th class="sortable">Téléphone mobile</th>
+                                <th class="sortable">Mobile</th>
                                 <th class="sortable">Email</th>
                                 <th class="sortable">Structure</th>
-                                <th class="sortable">Nombre d'enfant en charge</th>
+                                <th class="sortable">Enfants à charge</th>
                             </tr>
                         </thead>
                         
@@ -52,10 +52,10 @@ Array (
                                 <th class="sortable">Nom</th>
                                 <th class="sortable">Prénom</th>
                                 <th class="sortable">Téléphone</th>
-                                <th class="sortable">Téléphone mobile</th>
+                                <th class="sortable">Mobile</th>
                                 <th class="sortable">Email</th>
                                 <th class="sortable">Structure</th>
-                                <th class="sortable">Nombre d'enfant en charge</th>
+                                <th class="sortable">Enfants à charge</th>
                             </tr>
                         </tfoot>
 
