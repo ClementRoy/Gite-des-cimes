@@ -34,6 +34,8 @@ class sejour
         return $result;
     }
 
+
+
     /**
      * desc
      *

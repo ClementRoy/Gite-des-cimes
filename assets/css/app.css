@@ -499,3 +499,8 @@ td button.btn {
 .archived {
   opacity: 0.3;
 }
+
+.input-suffix {
+padding-top: 8px;
+margin-left: -20px;
+}

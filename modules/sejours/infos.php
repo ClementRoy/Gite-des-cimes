@@ -44,6 +44,7 @@
             <div class="row">
                 <div class="col-md-9 bio">
 
+                    <!--
                     <h4>Capacité du séjour</h4>
 
                     <div class="progress">
@@ -60,17 +61,23 @@
                             <h4>Enfants participants à ce séjour</h4>
                         </div>
                         <div class="col-md-6 text-right">
-                             <!--<button class="btn-flat success" data-toggle="modal" data-target="#add-modal">
-                                <i class="icon-plus"></i> Ajouter un enfant
-                            </button>-->
                         </div>
                         
                     </div>
+                -->
 
+
+                
+                    <?php $inscriptions = inscription::getBySejour($sejour->id); ?>
+                    <?php //tool::output($inscriptions); ?>
+
+                    
                     <div class="pull-right">
                         <a href="/inscriptions/ajouter/sejour/<?=$sejour->id; ?>" class="btn-flat primary"><span>+</span> Ajouter un enfant à ce séjour</a>
                     </div>
-                    
+                    <h6>Enfants inscrits à ce séjour</h6>
+
+                    <?php if(count($inscriptions) > 0): ?>
                     <table class="table table-hover extendlink">
                         <thead>
                             <tr>
@@ -83,32 +90,30 @@
                                 </th>
                                 <th class="col-md-2">
                                     <span class="line"></span>
-                                    Age
-                                </th>
-
-                                <th class="col-md-4">
-                                    <span class="line"></span>
-                                    Dossier complet
+                                    Dates
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach($inscriptions as $inscription): ?>
+                            <?php $enfant = enfant::get($inscription->ref_enfant); ?>
                             <tr>
                                 <td>
-                                    <a href="#">Christophe</a>
+                                    <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->firstname ?></a>
                                 </td>
                                 <td>
-                                    <a href="#">Béghin</a>
+                                    <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->lastname ?></a>
                                 </td>
                                 <td>
-                                    23 ans
-                                </td>
-                                <td>
-                                    Oui
+                                    du <?=tool::getDatefromDatetime($inscription->date_from); ?> au <?=tool::getDatefromDatetime($inscription->date_to); ?>
                                 </td>
                             </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
+                    <?php else: ?>
+                        <em>Aucune inscription pour le moment</em>
+                    <?php endif; ?>
                 </div>
 
                 <div class="col-md-3 address">

@@ -278,50 +278,44 @@
                     <div class="pull-right">
                         <a href="/inscriptions/ajouter/enfant/<?=$enfant->id; ?>" class="btn-flat primary"><span>+</span> Inscrire à un séjour</a>
                     </div>
-
+                        <?php $inscriptions = inscription::getByEnfant($enfant->id); ?>
+                        <?php //tool::output($inscriptions); ?>
                     <h6>Séjours à venir de l'enfant</h6>
                       <table class="table table-hover extendlink">
                             <thead>
                                 <tr>
-                                    <th class="col-md-1">
-                                        N° 
+                                    <th>
+                                        Nom du séjour
                                     </th>
-                                    <th class="col-md-3">
+                                    <th>
                                         <span class="line"></span>
                                         Dates
                                     </th>
-                                    <th class="col-md-5">
+                                    <th>
                                         <span class="line"></span>
-                                        Nom du séjour
+                                        Note
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php foreach($inscriptions as $inscription): ?>
+                                <?php $sejour = sejour::get($inscription->ref_sejour); ?>
                                 <tr>
                                     <td>
-                                        <a href="#">459</a>
+                                        <a href="/sejours/infos/id/<?=$sejour->id ?>"><?=$sejour->name ?></a>
                                     </td>
                                     <td>
-                                        12 au 17 décembre 2014
+                                        du <?=tool::getDatefromDatetime($inscription->date_from); ?> au <?=tool::getDatefromDatetime($inscription->date_to); ?>
                                     </td>
                                     <td>
-                                        <a href="#">Du Vert et du Bleu</a>
+                                        <?=$inscription->note ?>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">471</a>
-                                    </td>
-                                    <td>
-                                        21 au 28 juillet 2013
-                                    </td>
-                                    <td>
-                                        <a href="#">Brises et Houles</a>
-                                    </td>
-                                </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
 
+<!--
                     <h6>Séjours déjà effectués</h6>
                       <table class="table table-hover extendlink">
                             <thead>
@@ -364,7 +358,7 @@
                                 </tr>
                             </tbody>
                         </table>
-
+-->
                 </div>
 
                 <div class="col-md-3 address">
@@ -416,10 +410,12 @@
 <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->father_phone_mobile))? $enfant->father_phone_mobile : EMPTYVAL; ?></span>
 <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->father_phone_pro))? $enfant->father_phone_pro : EMPTYVAL; ?></span>
 </p>
+<!--
     [father_address_number] => 
     [father_address_street] => 
     [father_address_postal_code] => 
     [father_address_city] => 
+-->
 </div>
 <div>
 <h6>Mère</h6>
@@ -428,10 +424,12 @@
 <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->mother_phone_mobile))? $enfant->mother_phone_mobile : EMPTYVAL; ?></span>
 <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->mother_phone_pro))? $enfant->mother_phone_pro : EMPTYVAL; ?></span>
 </p>
+<!--
     [mother_address_number] => 
     [mother_address_street] => 
     [mother_address_postal_code] => 
     [mother_address_city] => 
+-->
 </div>
 <div>
 <h6>Responsable légale</h6>
@@ -440,10 +438,12 @@
 <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->guardian_phone_mobile))? $enfant->guardian_phone_mobile : EMPTYVAL; ?></span>
 <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->guardian_phone_pro))? $enfant->guardian_phone_pro : EMPTYVAL; ?></span>
 </p>
+<!--
     [guardian_address_number] => 
     [guardian_address_street] => 
     [guardian_address_postal_code] => 0
     [guardian_address_city] => 
+-->
 </div>
 <div>
 <h6>Contact d'urgence</h6>
@@ -457,10 +457,12 @@
 <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->host_family_phone_mobile))? $enfant->host_family_phone_mobile : EMPTYVAL; ?></span>
 <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->host_family_phone_pro))? $enfant->host_family_phone_pro : EMPTYVAL; ?></span>
 </p>
+<!--
     [host_family_address_number] => 
     [host_family_address_street] => 
     [host_family_address_postal_code] => 0
     [host_family_address_city] => 
+-->
 </div>
 
                 </div>

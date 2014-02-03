@@ -25,6 +25,29 @@ class inscription
         return $result;
     }
 
+
+    public static function getByEnfant($id){
+        global $db;
+        $params = array(
+                        ':id' => $id
+                        );
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_enfant=:id';
+        $result = $db->query($sql, $params);
+        return $result;        
+    }
+
+
+    public static function getBySejour($id){
+        global $db;
+        $params = array(
+                        ':id' => $id
+                        );
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:id';
+        $result = $db->query($sql, $params);
+        return $result;        
+    }
+
+
     /**
      * desc
      *

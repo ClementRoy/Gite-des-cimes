@@ -45,6 +45,13 @@ $menus = array(
 						'ajouter' => 'Ajouter un contact'
 					)
 	),
+	'inscriptions' => array(
+		'name' => 'Inscriptions',
+		'icon' => 'comments',
+		'submenu' => array(
+						'index' => 'Liste des inscriptions'
+					)
+	),
 	'export' => array(
 		'name' => 'Export',
 		'icon' => 'cog'

@@ -13,7 +13,7 @@
 	},
 	"inscriptions" : {
 		"name" :  "inscriptions",
-		"views" : ["index", "liste-enfants", "liste-sejours", "editer", "supprimer", "ajouter"]
+		"views" : ["index", "editer", "supprimer", "ajouter", "infos"]
 	},
 	"structures" : {
 		"name" : "structures",
