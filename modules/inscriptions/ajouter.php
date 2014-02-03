@@ -212,7 +212,7 @@
                         <p class="input-suffix">h</p>
                     </div>
                     <div class="col-md-1 col-sm-5">
-                        <input id="form-inscription-min-aller" name="form_inscription_min_aller" class="form-control adresse-numero" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
+                        <input id="form-inscription-min-aller" name="form_inscription_min_aller" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
                     </div>
                 </div>
 
@@ -223,7 +223,7 @@
                         <p class="input-suffix">h</p>
                     </div>
                     <div class="col-md-1 col-sm-5">
-                        <input id="form-inscription-min-retour" name="form_inscription_min_retour" class="form-control adresse-numero" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                        <input id="form-inscription-min-retour" name="form_inscription_min_retour" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
                     </div>
                 </div>
 
