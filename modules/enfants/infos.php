@@ -4,66 +4,54 @@
 
 
 
-<div class="content">
-
-    <div id="pad-wrapper" class="user-profile">
-
-    <?php if(isset($_POST['activate'])):
-            enfant::unarchive($_GET['id']);
-    ?>
-            <div class="alert alert-success">
-                <i class="icon-ok-sign"></i>
-                Cette fiche a bien été réactivée !
-            </div>
-    <?php
-          endif;
-    ?>
-
-        <?php tool::output($enfant); ?>
-
-
-
     <?php $enfant = enfant::get($_GET['id']); ?>
     <?php $creator = user::get($enfant->creator); ?>
     <?php $editor = user::get($enfant->editor); ?>
     <?php $date_created = new DateTime($enfant->created); ?>
     <?php $date_edited = new DateTime($enfant->edited); ?>
-    <?php //tool::output($enfant); ?>
 
 
-    <?php if($enfant->archived) :?>
-    <div class="alert alert-info">
-        <i class="icon-exclamation-sign"></i>
-        Cette fiche est archivée voulez-vous la réactiver ?
-        <form action="" method="post" class="pull-right">
-        <button class="btn btn-primary" name="activate">Réactiver</button>
-        </form>
-        <?php // USE POST DATA asshole ?>
-    </div>
-    <?php endif; ?>
+    <div class="content">
+
+        <?php if(isset($_POST['activate'])): ?>
+                <div class="alert alert-success">
+                    <i class="icon-ok-sign"></i>
+                    Cette fiche a bien été réactivée !
+                </div>
+                <?php enfant::unarchive($_GET['id']); ?>
+        <?php endif; ?>
+
+        <?php if($enfant->archived) :?>
+        <div class="alert alert-info">
+            <i class="icon-exclamation-sign"></i> Cette fiche est archivée voulez-vous la réactiver ?
+            <form action="" method="post" class="pull-right">
+                <button class="btn btn-primary" name="activate">Réactiver</button>
+            </form>
+        </div>
+        <?php endif; ?>
 
         <div id="pad-wrapper" class="users-profil<?=($enfant->archived)?' archived':' ';?>" >
-        <div class="row header icon">
+
+            <?php //tool::output($enfant); ?>
+
+            <div class="row header icon">
                 <div class="col-md-7">
-                <a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
-                <div class="pop-dialog">
-                    <div class="pointer">
-                        <div class="arrow"></div>
-                        <div class="arrow_border"></div>
-                    </div>
-                    <div class="body">
-                        <!--<a href="#" class="close-icon"><i class="icon-remove-sign"></i></a>-->
-                        <div class="menu">
-                            <a href="/enfants/editer/id/<?=$enfant->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
-                            <a href="/enfants/supprimer/id/<?=$enfant->id; ?>" class="item" data-toggle="modal"><i class="icon-remove"></i> Supprimer</a>
-                            <!--<a href="#" class="item" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<strong>Créé par :</strong><br/> <a href='/utilisateurs/infos/<?=$creator->id; ?>'><?=$creator->firstname; ?></a>, le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?> <br /><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?> " data-original-title="Informations" title=""><i class="icon-info-sign"></i> Informations</a>-->
-                            <!--<div class="footer">
-                                <a href="#" class="logout">Supprimer</a>
-                            </div>-->
+                    <a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
+
+                    <div class="pop-dialog">
+                        <div class="pointer">
+                            <div class="arrow"></div>
+                            <div class="arrow_border"></div>
+                        </div>
+                        <div class="body">
+                            <div class="menu">
+                                <a href="/enfants/editer/id/<?=$enfant->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                <a href="/enfants/supprimer/id/<?=$enfant->id; ?>" class="item" data-toggle="modal"><i class="icon-remove"></i> Supprimer</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <h3><!-- class="name" -->
+
+                    <h3><!-- class="name" -->
                     
                     <?=$enfant->firstname; ?> <?=$enfant->lastname; ?>
                     <small class="area">
@@ -79,42 +67,18 @@
 
 
                 <div class="col-md-4 text-right pull-right">
-                    <!--<button class="btn-flat danger" data-toggle="modal" data-target="#remove-modal">
-                        <i class="icon-remove"></i> Supprimer
-                    </button>
-                    <a href="/enfants/editer/id/<?=$enfant->id; ?>" class="btn-flat default"><i class="icon-edit"></i> Modifier</a>
-                    <button class="metadata btn-flat white" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<p><strong>Créé par :</strong><br/> <?=$creator->firstname; ?>,<br />le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?></p><p><strong>Edité par :</strong><br/> <?=$editor->firstname ?> ,<br />le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?></p>" data-original-title="Informations" title="">
-                      <i class="icon-info-sign"></i>
-                    </button>-->
+                    <i class="icon-cog"></i>
                 </div>
+
             </div>
 
+            <div class="row profile">
 
-            <div class="modal fade" id="remove-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h6 class="modal-title" id="myModalLabel">Supprimer cette fiche</h6>
-                        </div>
-                        <div class="modal-body">
-                            <p>Vous êtes sur le point de supprimer la fiche de <strong><?=$enfant->firstname; ?> <?=$enfant->lastname; ?></strong>.<br />
-                                Cette action est irréversible.
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <a class="btn-flat white" data-dismiss="modal">Annuler</a>
-                            <a href="/enfants/supprimer/id/<?=$enfant->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <div class="col-md-9 bio">
+                    <h6>Ses informations</h6>
+                    <div class="row">
 
-            <div class="row">
-                <div class="col-md-12 fiche">
-                   <div class="row">
-                   <div class="col-md-12 section"><h4>Ses informations</h4></div>
-                    <div class="col-md-4">
+                   <div class="col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">A propos de l'enfant</div>
                             <ul class="list-group">
@@ -155,7 +119,9 @@
                             </div>
                         <?php endif; ?>
                     </div>
-                    <div class="col-md-4">
+
+
+                   <div class="col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">Inscription de l'enfant</div>
                             <ul class="list-group">
@@ -222,39 +188,41 @@
                                         <p><strong>Adresse  :</strong></p>
                                         <p><?=(!empty($enfant->guardian_address_number) && !empty($enfant->guardian_address_street) && !empty($enfant->guardian_address_postal_code) && !empty($enfant->guardian_address_city))? $enfant->guardian_address_number.' '.$enfant->guardian_address_street.', <br />'.$enfant->guardian_address_postal_code.' '.$enfant->guardian_address_city : EMPTYVAL; ?></p>
                                     </li>
+                                <?php else: ?>
+                                    <li class="list-group-item">Aucun responsable légal de défini pour le moment</li>
                                 <?php endif; ?>
                             </ul>
                         </div>
 
                         <?php if ($enfant->domiciliation == 'famille'): ?>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Famille d'accueil</div>
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <p><strong>Nom de la famille d'accueil :</strong></p>
-                                        <?=(!empty($enfant->host_family_name))? $enfant->host_family_name : EMPTYVAL; ?>
-                                        <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->host_family_phone))? $enfant->host_family_phone : EMPTYVAL; ?></span></p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <p><strong>Adresse de la famille d'accueil :</strong></p>
-                                        <p><?=(!empty($enfant->host_family_address_number) && !empty($enfant->host_family_address_street) && !empty($enfant->host_family_address_postal_code) && !empty($enfant->host_family_address_city))? $enfant->host_family_address_number.' '.$enfant->host_family_address_street.', <br />'.$enfant->host_family_address_postal_code.' '.$enfant->host_family_address_city : EMPTYVAL; ?></p>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Famille d'accueil</div>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <p><strong>Nom de la famille d'accueil :</strong></p>
+                                    <?=(!empty($enfant->host_family_name))? $enfant->host_family_name : EMPTYVAL; ?>
+                                    <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->host_family_phone))? $enfant->host_family_phone : EMPTYVAL; ?></span></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <p><strong>Adresse de la famille d'accueil :</strong></p>
+                                    <p><?=(!empty($enfant->host_family_address_number) && !empty($enfant->host_family_address_street) && !empty($enfant->host_family_address_postal_code) && !empty($enfant->host_family_address_city))? $enfant->host_family_address_number.' '.$enfant->host_family_address_street.', <br />'.$enfant->host_family_address_postal_code.' '.$enfant->host_family_address_city : EMPTYVAL; ?></p>
+                                </li>
+                            </ul>
+                        </div>
                         <?php endif ?>
 
                         <?php if (!empty($enfant->emergency_name)): ?>
-                            <div class="panel panel-default noheader">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <p><strong>Urgence :</strong></p>
-                                        <p><?=$enfant->emergency_name;?> <?php if (!empty($enfant->host_family_phone)): ?><span class="pull-right"><i class="icon-phone"></i><?=$enfant->emergency_phone;?></span><?php endif ?></p>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="panel panel-default noheader">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <p><strong>Urgence :</strong></p>
+                                    <p><?=$enfant->emergency_name;?> <?php if (!empty($enfant->host_family_phone)): ?><span class="pull-right"><i class="icon-phone"></i><?=$enfant->emergency_phone;?></span><?php endif ?></p>
+                                </li>
+                            </ul>
+                        </div>
                         <?php endif ?>
-                    </div>
 
+                    </div>
 
                     <div class="col-md-4">
                         <div class="panel panel-default">
@@ -303,21 +271,16 @@
                             </ul>
                         </div>
                     </div>
-                </div>
 
-            <div class="row">
-                        
-                <div class="col-md-12">
-                       <div class="col-md-6">
-                            <h4>Ses séjours</h4>
-                        </div>
-                        <div class="col-md-6 text-right">
-                            <!--<button class="btn-flat success" data-toggle="modal" data-target="#add-modal">
-                                <i class="icon-plus"></i> Inscrire l'enfant à un séjour
-                            </button>-->
-                        </div>
-                        </div>
-                        <table class="table table-hover extendlink">
+                    </div>
+
+
+                    <div class="pull-right">
+                        <a href="/inscriptions/ajouter/enfant/<?=$enfant->id; ?>" class="btn-flat primary"><span>+</span> Inscrire à un séjour</a>
+                    </div>
+
+                    <h6>Séjours à venir de l'enfant</h6>
+                      <table class="table table-hover extendlink">
                             <thead>
                                 <tr>
                                     <th class="col-md-1">
@@ -358,90 +321,169 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-             </div>
 
+                    <h6>Séjours déjà effectués</h6>
+                      <table class="table table-hover extendlink">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-1">
+                                        N° 
+                                    </th>
+                                    <th class="col-md-3">
+                                        <span class="line"></span>
+                                        Dates
+                                    </th>
+                                    <th class="col-md-5">
+                                        <span class="line"></span>
+                                        Nom du séjour
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a href="#">459</a>
+                                    </td>
+                                    <td>
+                                        12 au 17 décembre 2014
+                                    </td>
+                                    <td>
+                                        <a href="#">Du Vert et du Bleu</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#">471</a>
+                                    </td>
+                                    <td>
+                                        21 au 28 juillet 2013
+                                    </td>
+                                    <td>
+                                        <a href="#">Brises et Houles</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
 
+                </div>
 
+                <div class="col-md-3 address">
+<?php  
+/*
+[guardian] => 
+    [father_name] => 
+    [father_phone_home] => 06 13 88 8
+    [father_phone_mobile] => 
+    [father_phone_pro] => 
+    [father_address_number] => 
+    [father_address_street] => 
+    [father_address_postal_code] => 
+    [father_address_city] => 
+    [mother_name] => Mme MALAMBA Attie
+    [mother_phone_home] => 
+    [mother_phone_mobile] => 
+    [mother_phone_pro] => 
+    [mother_address_number] => 
+    [mother_address_street] => 
+    [mother_address_postal_code] => 
+    [mother_address_city] => 
+    [guardian_name] => 
+    [guardian_phone_home] => 
+    [guardian_phone_mobile] => 
+    [guardian_phone_pro] => 
+    [emergency_name] => 
+    [emergency_phone] => 
+    [guardian_address_number] => 
+    [guardian_address_street] => 
+    [guardian_address_postal_code] => 0
+    [guardian_address_city] => 
+    [domiciliation] => responsable
+    [host_family_name] => 
+    [host_family_phone_home] => 
+    [host_family_phone_mobile] => 
+    [host_family_phone_pro] => 
+    [host_family_address_number] => 
+    [host_family_address_street] => 
+    [host_family_address_postal_code] => 0
+    [host_family_address_city] => 
+*/
+
+?>
+<div>
+<h6>Père</h6>
+<p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?> 
+<span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->father_phone_home))? $enfant->father_phone_home : EMPTYVAL; ?></span>
+<span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->father_phone_mobile))? $enfant->father_phone_mobile : EMPTYVAL; ?></span>
+<span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->father_phone_pro))? $enfant->father_phone_pro : EMPTYVAL; ?></span>
+</p>
+    [father_address_number] => 
+    [father_address_street] => 
+    [father_address_postal_code] => 
+    [father_address_city] => 
+</div>
+<div>
+<h6>Mère</h6>
+<p><?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?>
+<span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->mother_phone_home))? $enfant->mother_phone_home : EMPTYVAL; ?></span>
+<span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->mother_phone_mobile))? $enfant->mother_phone_mobile : EMPTYVAL; ?></span>
+<span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->mother_phone_pro))? $enfant->mother_phone_pro : EMPTYVAL; ?></span>
+</p>
+    [mother_address_number] => 
+    [mother_address_street] => 
+    [mother_address_postal_code] => 
+    [mother_address_city] => 
+</div>
+<div>
+<h6>Responsable légale</h6>
+<p><?=(!empty($enfant->guardian_name))? $enfant->guardian_name : EMPTYVAL; ?> 
+<span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->guardian_phone_home))? $enfant->guardian_phone_home : EMPTYVAL; ?></span>
+<span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->guardian_phone_mobile))? $enfant->guardian_phone_mobile : EMPTYVAL; ?></span>
+<span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->guardian_phone_pro))? $enfant->guardian_phone_pro : EMPTYVAL; ?></span>
+</p>
+    [guardian_address_number] => 
+    [guardian_address_street] => 
+    [guardian_address_postal_code] => 0
+    [guardian_address_city] => 
+</div>
+<div>
+<h6>Contact d'urgence</h6>
+<p><?=(!empty($enfant->emergency_name))? $enfant->emergency_name : EMPTYVAL; ?></p> 
+<p><span class="pull-right"><i class="icon-phone"></i> <?=(!empty($enfant->emergency_phone))? $enfant->emergency_phone : EMPTYVAL; ?></span></p>
+</div>
+<div>
+<h6>Famille d'accueil</h6>
+<p><?=(!empty($enfant->host_family_name))? $enfant->host_family_name : EMPTYVAL; ?> 
+<span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->host_family_phone_home))? $enfant->host_family_phone_home : EMPTYVAL; ?></span>
+<span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->host_family_phone_mobile))? $enfant->host_family_phone_mobile : EMPTYVAL; ?></span>
+<span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->host_family_phone_pro))? $enfant->host_family_phone_pro : EMPTYVAL; ?></span>
+</p>
+    [host_family_address_number] => 
+    [host_family_address_street] => 
+    [host_family_address_postal_code] => 0
+    [host_family_address_city] => 
 </div>
 
-
-
-            <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="add-modal-label" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h6 class="modal-title" id="add-modal-label">Inscrire l'enfant à un séjour</h6>
-                        </div>
-                        <div class="modal-body">
-
-                            <form action="" method="get">
-  
-                             <div class="field-box row">
-                            <div class="ui-select">
-                                <?php $sejours = sejour::getList(); ?>
-                                <select id="form-enfant-select" name="form_enfant_structure">
-                                    <option value="" selected="selected">Sélectionnez un séjour</option>
-                                    <?php foreach($sejours as $sejour): ?>
-                                    <option value="<?=$sejour->id ?>"><?=$sejour->name ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div> 
-                            </div>                             
-
-
-                            <div class="field-box row">
-                                <label class="col-md-2" for="form-enfant-prenom">Date début</label>
-                                <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
-                                </div>
-                            </div>
-
-
-                            <div class="field-box row">
-                                <label class="col-md-2" for="form-enfant-prenom">Date fin</label>
-                                <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
-                                </div>
-                            </div>
-
-
-                            <p>// Autres infos ????</p>
-
-        
-                            </form>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <a class="btn-flat white" data-dismiss="modal">Annuler</a>
-                            <a href="/sejours/supprimer/id/<?=$sejour->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
-                        </div>
-                    </div>
                 </div>
+
             </div>
+
+
+
+            <?php if($enfant->archived) :?>
+            <div class="alert alert-danger">
+                <i class="icon-remove-sign"></i> Cette fiche est archivée voulez-vous la supprimer ?
+                <form action="" method="post" class="pull-right">
+                    <button class="btn btn-danger" name="activate">Supprimer</button>
+                </form>
+            </div>
+            <?php endif; ?>
+
+
+
 
         </div>
 
-
-
-    <?php if($enfant->archived) :?>
-    <div class="alert alert-danger">
-        <i class="icon-remove-sign"></i>
-        Cette fiche est archivée voulez-vous la supprimer ?
-        <form action="" method="post" class="pull-right">
-        <button class="btn btn-danger" name="activate">Supprimer</button>
-        </form>
-        <?php // USE POST DATA asshole ?>
     </div>
-    <?php endif; ?>
-
-
-
-</div>
-</div>
-</div>
 
 
 

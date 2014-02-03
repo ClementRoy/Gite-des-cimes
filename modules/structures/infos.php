@@ -122,7 +122,7 @@
               </div>
 
             </div>
-            <h4>Ses contacts</h4>
+            <h4>Coordonnées des contacts</h4>
 
             <table class="table table-hover extendlink">
               <thead>

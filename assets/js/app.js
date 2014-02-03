@@ -14,6 +14,12 @@ $(function () {
 		$(this).datepicker('hide');
 	});
 
+	$('.input-datepicker-light').datepicker({
+		format : "dd/mm/yyyy"
+	}).on('changeDate', function () {
+		$(this).datepicker('hide');
+	});
+
 	// SETTINGS TOOLTIPS
 	$('input[type="text"]').each(function (index, el) {
 		$(el).tooltip({
