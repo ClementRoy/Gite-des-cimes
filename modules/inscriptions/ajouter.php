@@ -21,8 +21,8 @@
                             ':supported' => $form_inscription_supported,
                             ':note' => $form_inscription_note,
                             ':place' => $form_inscription_lieu,
-                            ':hour_departure' => $form_inscription_heure_aller,
-                            ':hour_return' => $form_inscription_heure_retour,
+                            ':hour_departure' => $form_inscription_heure_aller.'h'.$form_inscription_min_aller,
+                            ':hour_return' => $form_inscription_heure_retour.'h'.$form_inscription_min_retour,
                             ':pique_nique' => $form_inscription_pique_nique,
                             ':sac' => $form_inscription_sac
                             );
@@ -208,20 +208,22 @@
                 <div class="field-box row">
                     <label class="col-md-2" for="form-inscription-heure-aller">Heure de rendez-vous</label>
                     <div class="col-md-1 col-sm-5">
-                        <input id="form-inscription-heure-aller" name="form_inscription_heure_aller" class="form-control adresse-numero" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
-                    </div>
-                    <div class="col-md-1">
+                        <input id="form-inscription-heure-aller" name="form_inscription_heure_aller" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
                         <p class="input-suffix">h</p>
+                    </div>
+                    <div class="col-md-1 col-sm-5">
+                        <input id="form-inscription-min-aller" name="form_inscription_min_aller" class="form-control adresse-numero" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
                     </div>
                 </div>
 
                 <div class="field-box row">
                     <label class="col-md-2" for="form-inscription-heure-retour">Heure de rendez-vous pour le retour</label>
                     <div class="col-md-1 col-sm-5">
-                        <input id="form-inscription-heure-retour" name="form_inscription_heure_retour" class="form-control adresse-numero" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
-                    </div>
-                    <div class="col-md-1">
+                        <input id="form-inscription-heure-retour" name="form_inscription_heure_retour" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
                         <p class="input-suffix">h</p>
+                    </div>
+                    <div class="col-md-1 col-sm-5">
+                        <input id="form-inscription-min-retour" name="form_inscription_min_retour" class="form-control adresse-numero" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
                     </div>
                 </div>
 

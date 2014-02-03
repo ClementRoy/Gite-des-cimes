@@ -501,6 +501,7 @@ td button.btn {
 }
 
 .input-suffix {
-padding-top: 8px;
-margin-left: -20px;
+  position: absolute;
+  top: 8px;
+  right: 0%;
 }
