@@ -47,7 +47,7 @@ $menus = array(
 	),
 	'inscriptions' => array(
 		'name' => 'Inscriptions',
-		'icon' => 'comments',
+		'icon' => 'folder-open',
 		'submenu' => array(
 						'index' => 'Liste des inscriptions'
 					)

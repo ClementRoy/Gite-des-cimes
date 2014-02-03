@@ -23,7 +23,7 @@
                             ':note' => $form_contact_note
                             );
 
-        $result = contact::update($datas,  $_GET['id']);
+        $result = contact::update($datas, $_GET['id']);
         //tool::output($result);
         ?>
 
@@ -32,7 +32,7 @@
             <div id="pad-wrapper" class="action-page">
                 <div class="row header">
                     <div class="col-md-12">
-                        <h3>Ajouter un contact</h3>
+                        <h3>Modifier un contact</h3>
                     </div>
                 </div>
                 <div class="row">
@@ -63,7 +63,7 @@
                             <i class="icon-remove-sign"></i> 
                             Une erreur s'est produite durant la modification du contact, veuillez réessayer
                         </div>
-                        <a href="/contacts/editer/<?=$contact->id ?>">Retourner au formulaire d'édition</a>
+                        <a href="/contacts/editer/id/<?=$contact->id ?>">Retourner au formulaire d'édition</a>
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@
         <div id="pad-wrapper" class="form-page">
             <div class="row header">
                 <div class="col-md-12">
-                    <h3>Ajouter un contact</h3>
+                    <h3>Modifier un contact</h3>
                 </div>
             </div>
 

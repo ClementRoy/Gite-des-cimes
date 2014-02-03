@@ -4,9 +4,11 @@
     <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
     
 
+     <?php $inscription = inscription::get($_GET['id']); ?>
+
     <?php if(isset($_POST['submit'])): ?>
         <?php  
-            tool::output($_POST);
+            //tool::output($_POST);
             extract($_POST);
             $form_inscription_date_debut = tool::generateDatetime($form_inscription_date_debut);
             $form_inscription_date_fin = tool::generateDatetime($form_inscription_date_fin);
@@ -27,7 +29,7 @@
                             ':sac' => $form_inscription_sac
                             );
 
-            $result = inscription::add($datas);
+            $result = inscription::update($datas, $_GET['id']);
 
         ?>
     <?php //tool::output($_POST); ?>
@@ -36,14 +38,14 @@
                 <div id="pad-wrapper" class="action-page">
                     <div class="row header">
                         <div class="col-md-12">
-                            <h3>Ajouter une inscription</h3>
+                            <h3>Modifier une inscription</h3>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="alert alert-success">
                                 <i class="icon-ok-sign"></i> 
-                                L'inscription de <strong><?=$form_inscription_enfant; ?></strong> au séjour <strong></strong> a bien été ajoutée
+                                L'inscription de <strong><?=$form_inscription_enfant; ?></strong> au séjour <strong></strong> a bien été modifiée
                             </div>
                             <a href="/inscriptions/">Retourner à la liste des inscriptions</a>
                         </div>
@@ -57,16 +59,16 @@
                 <div id="pad-wrapper" class="action-page">
                     <div class="row header">
                         <div class="col-md-12">
-                            <h3>Ajouter une inscription</h3>
+                            <h3>Modifier une inscription</h3>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="alert alert-danger">
                                 <i class="icon-remove-sign"></i> 
-                                Une erreur s'est produite durant la création de l'inscription, veuillez réessayer
+                                Une erreur s'est produite durant la modification de l'inscription, veuillez réessayer
                             </div>
-                            <a href="/inscriptions/ajouter">Retourner au formulaire de création</a>
+                            <a href="/inscriptions/edit/id/<?=$inscription->id ?>">Retourner au formulaire de modification</a>
                         </div>
                     </div>
                 </div>
@@ -78,7 +80,7 @@
         <div id="pad-wrapper" class="form-page">
             <div class="row header">
                 <div class="col-md-12">
-                    <h3>Créer une inscription</h3>
+                    <h3>Modifier une inscription</h3>
                 </div>
             </div>
 
@@ -94,7 +96,7 @@
                             <select id="form-inscription-enfant-select" name="form_inscription_enfant" parsley-required="true">
                                 <option selected="selected">Choisissez l'enfant</option>
                                 <?php foreach($enfants as $enfant): ?>
-                                <option <?php if( isset($_GET['enfant']) && $enfant->id == $_GET['enfant']): ?>selected="selected"<?php endif; ?> value="<?=$enfant->id ?>"><?=$enfant->firstname ?> <?=$enfant->lastname ?></option>
+                                <option <?php if( $enfant->id == $inscription->ref_enfant): ?>selected="selected"<?php endif; ?> value="<?=$enfant->id ?>"><?=$enfant->firstname ?> <?=$enfant->lastname ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -120,7 +122,7 @@
                                 <?php if($date_to->getTimestamp() != '-62169987600'): ?>
                                 <?php $date_to = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
                                 <?php endif; ?>
-                                <option <?php if( isset($_GET['sejour']) && $sejour->id == $_GET['sejour']): ?>selected="selected"<?php endif; ?> value="<?=$sejour->id ?>" data-date-start="<?=$date_from; ?>" data-date-end-2="<?=$date_from_2->format('d/m/Y'); ?>" data-date-end="<?=$date_to; ?>"><?=$sejour->name ?> du <?=$date_from; ?> au <?=$date_to; ?></option>
+                                <option <?php if( $sejour->id == $inscription->ref_sejour): ?>selected="selected"<?php endif; ?> value="<?=$sejour->id ?>" data-date-start="<?=$date_from; ?>" data-date-end-2="<?=$date_from_2->format('d/m/Y'); ?>" data-date-end="<?=$date_to; ?>"><?=$sejour->name ?> du <?=$date_from; ?> au <?=$date_to; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -135,13 +137,15 @@
                         <input id="form-inscription-date-debut" name="form_inscription_date_debut" type="text" class="form-control input-datepicker-light"
                         placeholder="Date de début" data-toggle="tooltip" title="Renseignez la date à laquelle commence le séjour (jj/mm/aaaa)." 
                         parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})"
-                         parsley-required="true">
+                         parsley-required="true"
+                         value="<?=tool::getDatefromDatetime($inscription->date_from); ?>">
                     </div> 
                   <div class="col-md-2">
                         <input id="form-inscription-date-fin" name="form_inscription_date_fin" type="text" class="form-control input-datepicker-light" 
                         placeholder="Date de fin" data-toggle="tooltip" title="Renseignez la date à laquelle se termine le séjour (jj/mm/aaaa)." 
                         parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})"
-                         parsley-required="true"><!-- parsley-afterdate="#form-sejour-date-debut" CR : not working properly with french dates -->
+                         parsley-required="true"
+                         value="<?=tool::getDatefromDatetime($inscription->date_to); ?>"><!-- parsley-afterdate="#form-sejour-date-debut" CR : not working properly with french dates -->
                     </div>                              
                 </div>   
 
@@ -154,7 +158,7 @@
                             <select id="form-inscription-structure-select" name="form_inscription_structure">
                                 <option selected="selected">Choisissez la structure</option>
                                 <?php foreach($structures as $structure): ?>
-                                <option value="<?=$structure->id ?>"><?=$structure->name ?></option>
+                                <option <?php if( $structure->id == $inscription->ref_structure_payer): ?>selected="selected"<?php endif; ?> value="<?=$structure->id ?>"><?=$structure->name ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -164,7 +168,7 @@
                 <div class="field-box row">
                     <label class="col-md-2" for="form-inscription-centre-payeur">Centre payeur <em>Si il n'est pas dans la liste</em></label>
                     <div class="col-md-4 col-sm-5">
-                        <input id="form-inscription-centre-payeur" name="form_inscription_structure_name" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom du centre payeur.">
+                        <input id="form-inscription-centre-payeur" name="form_inscription_structure_name" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom du centre payeur." value="<?=$inscription->structure_payer ?>">
                     </div>
                 </div>
 
@@ -174,7 +178,7 @@
                         <label class="radio-inline col-md-7" for="form-inscription-supported-oui">
                             <div class="radio" id="uniform-form-inscription-supported-oui">
                                 <span>
-                                    <input type="radio" name="form_inscription_supported" id="form-inscription-supported-oui" value="1">
+                                    <input type="radio" name="form_inscription_supported" id="form-inscription-supported-oui" value="1" <?php if($inscription->supported == 1): ?>checked="checked"<?php endif; ?>>
                                 </span>
                             </div>
                             Oui
@@ -182,7 +186,7 @@
                         <label class="radio-inline col-md-4 col-sm-5" for="form-inscription-supported-non">
                             <div class="radio" id="uniform-form-inscription-supported-non">
                                 <span class="checked">
-                                    <input type="radio" name="form_inscription_supported" id="form-inscription-supported-non" value="0" checked="checked">
+                                    <input type="radio" name="form_inscription_supported" id="form-inscription-supported-non" value="0" checked="checked" <?php if($inscription->supported == 0): ?>checked="checked"<?php endif; ?>>
                                 </span>
                             </div>
                             Non
@@ -196,9 +200,9 @@
                         <div class="ui-select">
                             <select id="form-inscription-lieu-select" name="form_inscription_lieu">
                                 <option selected="selected" value="">Choisissez le lieu de rendez-vous</option>
-                                <option value="Aulnay sous bois, au Parking d'Intermarché">Aulnay sous bois, au Parking d'Intermarché</option>
-                                <option value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>
-                                <option value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>
+                                <option <?php if( $inscription->lieu == "Aulnay sous bois, au Parking d'Intermarché"): ?>selected="selected"<?php endif; ?> value="Aulnay sous bois, au Parking d'Intermarché">Aulnay sous bois, au Parking d'Intermarché</option>
+                                <option <?php if( $inscription->lieu == "Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle"): ?>selected="selected"<?php endif; ?> value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>
+                                <option <?php if( $inscription->lieu == "Bonneuil en Valois, au Gite"): ?>selected="selected"<?php endif; ?> value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>
                             </select>
                         </div>
                     </div>
@@ -208,22 +212,24 @@
                 <div class="field-box row">
                     <label class="col-md-2" for="form-inscription-heure-aller">Heure de rendez-vous</label>
                     <div class="col-md-1 col-sm-5">
-                        <input id="form-inscription-heure-aller" name="form_inscription_heure_aller" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
+                        <?php $hour_departure = explode('h', $inscription->hour_departure); ?>
+                        <input id="form-inscription-heure-aller" name="form_inscription_heure_aller" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ." value="<?=$hour_departure['0'] ?>">
                         <p class="input-suffix">h</p>
                     </div>
                     <div class="col-md-1 col-sm-5">
-                        <input id="form-inscription-min-aller" name="form_inscription_min_aller" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
+                        <input id="form-inscription-min-aller" name="form_inscription_min_aller" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="<?=$hour_departure['1'] ?>" title="Renseignez l'heure de rendez-vous pour le départ.">
                     </div>
                 </div>
 
                 <div class="field-box row">
                     <label class="col-md-2" for="form-inscription-heure-retour">Heure de rendez-vous pour le retour</label>
                     <div class="col-md-1 col-sm-5">
-                        <input id="form-inscription-heure-retour" name="form_inscription_heure_retour" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                        <?php $hour_return = explode('h', $inscription->hour_return); ?>
+                        <input id="form-inscription-heure-retour" name="form_inscription_heure_retour" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'." value="<?=$hour_return['0'] ?>">
                         <p class="input-suffix">h</p>
                     </div>
                     <div class="col-md-1 col-sm-5">
-                        <input id="form-inscription-min-retour" name="form_inscription_min_retour" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                        <input id="form-inscription-min-retour" name="form_inscription_min_retour" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="<?=$hour_return['1'] ?>" title="Renseignez l'heure de rendez-vous pour le retour'.">
                     </div>
                 </div>
 
@@ -233,7 +239,7 @@
                         <label class="radio-inline col-md-7" for="form-inscription-pique-nique-oui">
                             <div class="radio" id="uniform-form-inscription-pique-nique-oui">
                                 <span>
-                                    <input type="radio" name="form_inscription_pique_nique" id="form-inscription-pique-nique-oui" value="1">
+                                    <input type="radio" name="form_inscription_pique_nique" id="form-inscription-pique-nique-oui" value="1" <?php if($inscription->pique_nique == 1): ?>checked="checked"<?php endif; ?>>
                                 </span>
                             </div>
                             Oui
@@ -241,7 +247,7 @@
                         <label class="radio-inline col-md-4 col-sm-5" for="form-inscription-pique-nique-non">
                             <div class="radio" id="uniform-form-inscription-pique-nique-non">
                                 <span class="checked">
-                                    <input type="radio" name="form_inscription_pique_nique" id="form-inscription-pique-nique-non" value="0" checked="checked">
+                                    <input type="radio" name="form_inscription_pique_nique" id="form-inscription-pique-nique-non" value="0" <?php if($inscription->pique_nique == 0): ?>checked="checked"<?php endif; ?>>
                                 </span>
                             </div>
                             Non
@@ -255,7 +261,7 @@
                         <label class="radio-inline col-md-7" for="form-inscription-sac-oui">
                             <div class="radio" id="uniform-form-enfant-carnet-vaccination-oui">
                                 <span>
-                                    <input type="radio" name="form_inscription_sac" id="form-inscription-sac-oui" value="1">
+                                    <input type="radio" name="form_inscription_sac" id="form-inscription-sac-oui" value="1" <?php if($inscription->sac == 1): ?>checked="checked"<?php endif; ?>>
                                 </span>
                             </div>
                             Oui
@@ -263,7 +269,7 @@
                         <label class="radio-inline col-md-4 col-sm-5" for="form-inscription-sac-non">
                             <div class="radio" id="uniform-form-inscription-sac-non">
                                 <span class="checked">
-                                    <input type="radio" name="form_inscription_sac" id="form-inscription-sac-non" value="0" checked="">
+                                    <input type="radio" name="form_inscription_sac" id="form-inscription-sac-non" value="0"  <?php if($inscription->sac == 0): ?>checked="checked"<?php endif; ?>>
                                 </span>
                             </div>
                             Non
@@ -274,7 +280,7 @@
                 <div class="field-box row">
                     <label class="col-md-2" for="form-inscription-note">Notes</label>
                     <div class="col-md-4 col-sm-5">
-                        <textarea id="form-inscription-note" name="form_inscription_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de l'inscription."></textarea>
+                        <textarea id="form-inscription-note" name="form_inscription_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de l'inscription."><?=$inscription->note ?></textarea>
                     </div>
                 </div>
 
