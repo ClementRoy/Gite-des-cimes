@@ -6,7 +6,7 @@
 
     <?php if(isset($_POST['submit'])): ?>
         <?php  
-            tool::output($_POST);
+            //tool::output($_POST);
             extract($_POST);
             $form_inscription_date_debut = tool::generateDatetime($form_inscription_date_debut);
             $form_inscription_date_fin = tool::generateDatetime($form_inscription_date_fin);
@@ -136,12 +136,14 @@
                         placeholder="Date de début" data-toggle="tooltip" title="Renseignez la date à laquelle commence le séjour (jj/mm/aaaa)." 
                         parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})"
                          parsley-required="true">
+                        <input type="hidden" id="form-inscription-date-debut-hidden" name="form_inscription_date_debut" value="" disabled="disabled">
                     </div> 
                   <div class="col-md-2">
                         <input id="form-inscription-date-fin" name="form_inscription_date_fin" type="text" class="form-control input-datepicker-light" 
                         placeholder="Date de fin" data-toggle="tooltip" title="Renseignez la date à laquelle se termine le séjour (jj/mm/aaaa)." 
                         parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})"
                          parsley-required="true"><!-- parsley-afterdate="#form-sejour-date-debut" CR : not working properly with french dates -->
+                        <input type="hidden" id="form-inscription-date-fin-hidden" name="form_inscription_date_fin" value="" disabled="disabled">
                     </div>                              
                 </div>   
 
@@ -165,6 +167,7 @@
                     <label class="col-md-2" for="form-inscription-centre-payeur">Centre payeur <em>Si il n'est pas dans la liste</em></label>
                     <div class="col-md-4 col-sm-5">
                         <input id="form-inscription-centre-payeur" name="form_inscription_structure_name" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom du centre payeur.">
+                        <input type="hidden" id="form-inscription-centre-payeur-hidden" name="form_inscription_structure_name" value="" disabled="disabled">
                     </div>
                 </div>
 
@@ -298,6 +301,9 @@
                                 // on set les values de début et de fin
                                 $('#form-inscription-date-debut').val($option.data('date-start')).attr('disabled', 'disabled');
                                 $('#form-inscription-date-fin').val($option.data('date-end')).attr('disabled', 'disabled');
+
+                                $('#form-inscription-date-debut-hidden').val($option.data('date-start')).removeAttr('disabled', 'disabled');
+                                $('#form-inscription-date-fin-hidden').val($option.data('date-end')).removeAttr('disabled', 'disabled');
                                 // On met en disabled les champs
                             }else {
                                 // On met en set les values début et fin
@@ -305,20 +311,26 @@
                                 $('#form-inscription-date-fin').val($option.data('date-end')).data('date-startdate',$option.data('date-start')).data('date-enddate',$option.data('date-end')).removeAttr('disabled');
                                 // On set les data-debut et data-fin des patepickers
                                 $('.input-datepicker-light').datepicker('startDate', $option.data('date-start'));
+
+                                $('#form-inscription-date-debut-hidden').val('').attr('disabled', 'disabled');
+                                $('#form-inscription-date-fin-hidden').val('').attr('disabled', 'disabled');
+
                             }
                         });
 
                         $('#form-inscription-structure-select').change(function(){
                             console.log($(this).val());
                             if($(this).val() == 'Choisissez la structure'){
-                                $('#form-inscription-centre-payeur').removeAttr('disabled');  
+                                $('#form-inscription-centre-payeur').removeAttr('disabled'); 
+                                $('#form-inscription-centre-payeur-hidden').attr('disabled', 'disabled'); 
                             }else {
                                 $('#form-inscription-centre-payeur').val('');
                                 $('#form-inscription-centre-payeur').attr('disabled','disabled');
+                                $('#form-inscription-centre-payeur-hidden').removeAttr('disabled');
                             }
                         });
 
-                        <?php if(isset($_GET['sejour'])): ?>
+                        <?php if(isset($_GET['sejour'] )): ?>
                         $('#form-inscription-sejour-select').trigger('change');
                         <?php endif; ?>
                     });
