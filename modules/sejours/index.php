@@ -28,6 +28,7 @@
                                 <th class="sortable">Date de début</th>
                                 <th class="sortable">Date de fin</th>
                                 <th class="sortable">Lieu</th>
+                                <th class="sortable">Remplissage</th>
                                 <th class="sortable">Capacité min</th>
                                 <th class="sortable">Capacité max</th>
                                 <th class="sortable">Prix (€)</th>
@@ -40,6 +41,7 @@
                                 <th class="sortable">Date de début</th>
                                 <th class="sortable">Date de fin</th>
                                 <th class="sortable">Lieu</th>
+                                <th class="sortable">Remplissage</th>
                                 <th class="sortable">Capacité min</th>
                                 <th class="sortable">Capacité max</th>
                                 <th class="sortable">Prix (€)</th>
@@ -47,6 +49,7 @@
                         </tfoot>
                         <tbody>
                         <?php foreach($sejours as $key => $sejour): ?>
+                        <?php $inscriptions = inscription::getBySejour($sejour->id); ?>
                         <?php 
                           if($sejour->ref_hebergement) {
                             $hebergement = hebergement::get($sejour->ref_hebergement);
@@ -85,17 +88,26 @@
                             </td>
                             <td>
                                 <?php if(isset($hebergement)): ?>
-                                    <a href="/hebergements/infos/id/<?=$hebergement->id; ?>"><?=$hebergement->name ?></a>
+                                    <a href="/hebergements/infos/id/<?=$hebergement->id; ?>"><span class="label label-default"><?=$hebergement->name ?></span></a>
                                 <?php endif; ?>
                             </td>
                             <td class="text-right">
-                                <?=$sejour->capacity_min; ?>
+                                <?=count($inscriptions)/$sejour->capacity_min*100 ?>% / <?=count($inscriptions)/$sejour->capacity_max*100 ?>%
+                                <!--<span class="label label-default">Default</span>
+<span class="label label-primary">Primary</span>
+<span class="label label-success">Success</span>
+<span class="label label-info">Info</span>
+<span class="label label-warning">Warning</span>
+<span class="label label-danger">Danger</span>-->
+                            </td>
+                            <td class="text-right">
+                               <span class="label label-success"><?=$sejour->capacity_min; ?></span>
                             </td>
                             <td class="text-right">  
                                 <?=$sejour->capacity_max; ?>
                             </td>
                              <td class="text-right">
-                                <?=$sejour->price; ?>
+                                <span class="label label-info"><?=$sejour->price; ?>€</span>
                             </td>
                         </tr>
                         <?php endforeach; ?>
