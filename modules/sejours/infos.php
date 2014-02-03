@@ -105,6 +105,7 @@
                                     <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->lastname ?></a>
                                 </td>
                                 <td>
+                                    <?php echo $inscription->date_from; ?>
                                     du <?=tool::getDatefromDatetime($inscription->date_from); ?> au <?=tool::getDatefromDatetime($inscription->date_to); ?>
                                 </td>
                             </tr>

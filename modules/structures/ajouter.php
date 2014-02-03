@@ -84,6 +84,7 @@
             <form id="form-add-structure" method="post" parsley-validate>
                    <!--  <h2>Informations sur le séjour</h2> -->
                      <div class="row form-wrapper">
+
                         <div class="field-box row">
                             <label class="col-md-2" for="form-structure-nom">Nom de la structure</label>
                             <div class="col-md-4">
@@ -91,6 +92,16 @@
                                 data-toggle="tooltip" title="Renseignez le nom de la structure." parsley-required="true">
                             </div>                            
                         </div>
+
+                        <div class="field-box row">
+                            <label class="col-md-2" for="form-structure-service">Nom du service</label>
+                            <div class="col-md-4">
+                                <input id="form-structure-service" name="form_structure_service" class="form-control" type="text" 
+                                data-toggle="tooltip" title="Renseignez le nom du service." parsley-required="true">
+                            </div>                            
+                        </div>
+
+
                         <div class="field-box row">
                             <label class="col-md-2">Centre payeur</label>
                             <div class="col-md-4" data-toggle="tooltip" title="Précisez si cette structure paye les séjours.">

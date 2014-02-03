@@ -12,6 +12,7 @@
             extract($_POST);
             $datas = array(
                             ':name' => $form_structure_name,
+                            ':service' => $form_structure_service,
                             ':payer' => $form_structure_payer,
                             ':email' => $form_structure_email,
                             ':phone' => $form_structure_telephone,
@@ -90,6 +91,15 @@
                                 data-toggle="tooltip" title="Renseignez le nom de la structure." parsley-required="true" value="<?=$structure->name ?>">
                             </div>                            
                         </div>
+
+                        <div class="field-box row">
+                            <label class="col-md-2" for="form-structure-service">Nom du service</label>
+                            <div class="col-md-4">
+                                <input id="form-structure-service" name="form_structure_service" class="form-control" type="text" 
+                                data-toggle="tooltip" title="Renseignez le nom du service." parsley-required="true" value="<?=$structure->service ?>">
+                            </div>                            
+                        </div>
+
                         <div class="field-box row">
                             <label class="col-md-2">Structure payante</label>
                             <div class="col-md-4" data-toggle="tooltip" title="Précisez si cette structure paye les séjours.">
