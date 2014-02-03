@@ -20,7 +20,7 @@
 
         <div id="pad-wrapper" class="users-profil">
             <div class="row header icon">
-                <div class="col-md-7">
+                <div class="col-md-10">
                     <a href="#" class="trigger"><i class="big-icon icon-plane"></i></a>
                     <div class="pop-dialog">
                         <div class="pointer">
@@ -36,8 +36,19 @@
                     </div>                    
                     <h3><?=$sejour->name; ?></h3>
                 </div>
-                <div class="col-md-5 text-right pull-right">
-         
+                <div class="col-md-2 pull-right">
+
+                    <div class="btn-group">
+                        <button class="btn glow"><i class="icon-download-alt"></i></button>
+                        <button class="btn glow dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>">Récapitulatif mineurs</a></li>
+                            <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>">Suivi sanitaire</a></li>
+                            <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>">Registre des mineurs</a></li>
+                        </ul>
+                    </div>         
                 </div>
             </div>
 
@@ -51,7 +62,7 @@
                       <div class="progress-bar" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="10" style="width: 30%;">
                         <span>3</span>
                       </div>
-                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="7" style="width: 10%">
+                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="7" style="width: 10%">
                         <span>1</span>
                       </div>
                       <span>10</span>
@@ -67,8 +78,21 @@
                 -->
 
 
-                
+                    <h4>Capacité du séjour</h4>
                     <?php $inscriptions = inscription::getBySejour($sejour->id); ?>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="<?=count($inscriptions) ?>" aria-valuemin="0" aria-valuemax="<?=$sejour->capacity_min ?>" style="width: <?php echo (count($inscriptions)/$sejour->capacity_max)*100; ?>%;">
+                        <span><?=count($inscriptions) ?></span>
+                      </div>
+                      <!--
+                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="7" style="width: 10%">
+                        <span>1</span>
+                      </div>
+                  -->
+                      <span><?=$sejour->capacity_max ?></span>
+                    </div>
+
+
                     <?php //tool::output($inscriptions); ?>
 
                     
@@ -78,7 +102,7 @@
                     <h6>Enfants inscrits à ce séjour</h6>
 
                     <?php if(count($inscriptions) > 0): ?>
-                    <table class="table table-hover extendlink">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th class="col-md-3">
@@ -105,7 +129,6 @@
                                     <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->lastname ?></a>
                                 </td>
                                 <td>
-                                    <?php echo $inscription->date_from; ?>
                                     du <?=tool::getDatefromDatetime($inscription->date_from); ?> au <?=tool::getDatefromDatetime($inscription->date_to); ?>
                                 </td>
                             </tr>

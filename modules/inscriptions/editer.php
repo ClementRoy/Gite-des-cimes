@@ -15,6 +15,7 @@
             
             $datas = array(
                             ':ref_sejour' => $form_inscription_sejour,
+                            ':option' => $form_inscription_option,
                             ':ref_enfant' => $form_inscription_enfant,
                             ':date_from' => $form_inscription_date_debut,
                             ':date_to' => $form_inscription_date_fin,
@@ -129,6 +130,27 @@
                     </div>
                 </div>
 
+                <div class="field-box row">
+                    <label class="col-md-2">Inscription finalisée</label>
+                    <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si l'inscription est finalisé.">
+                        <label class="radio-inline col-md-7" for="form-inscription-option-oui">
+                            <div class="radio" id="uniform-form-inscription-option-oui">
+                                <span>
+                                    <input type="radio" name="form_inscription_option" id="form-inscription-option-oui" value="1" <?php if($inscription->option == 0): ?>checked="checked"<?php endif; ?>>
+                                </span>
+                            </div>
+                            Oui
+                        </label>
+                        <label class="radio-inline col-md-4 col-sm-5" for="form-inscription-option-non">
+                            <div class="radio" id="uniform-form-inscription-option-non">
+                                <span class="checked">
+                                    <input type="radio" name="form_inscription_option" id="form-inscription-option-non" value="0" <?php if($inscription->option == 0): ?>checked="checked"<?php endif; ?>>
+                                </span>
+                            </div>
+                            Non
+                        </label>
+                    </div>
+                </div>
 
 
                 <div class="field-box row">
@@ -189,7 +211,7 @@
                         <label class="radio-inline col-md-4 col-sm-5" for="form-inscription-supported-non">
                             <div class="radio" id="uniform-form-inscription-supported-non">
                                 <span class="checked">
-                                    <input type="radio" name="form_inscription_supported" id="form-inscription-supported-non" value="0" checked="checked" <?php if($inscription->supported == 0): ?>checked="checked"<?php endif; ?>>
+                                    <input type="radio" name="form_inscription_supported" id="form-inscription-supported-non" value="0" <?php if($inscription->supported == 0): ?>checked="checked"<?php endif; ?>>
                                 </span>
                             </div>
                             Non

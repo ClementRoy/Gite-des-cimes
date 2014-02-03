@@ -53,6 +53,16 @@
                     </div>
 
                 </div>
+
+                <div class="row">
+                    
+                    <h6>Inscriptions non finalisées</h6>
+
+                    <h6>Séjours à venir</h6>
+
+                    <h6>Fiches à compléter</h6>
+
+                </div>
 <!--
                 <div class="row">
                     <div class="col-md-6">

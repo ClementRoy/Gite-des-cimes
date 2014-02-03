@@ -61,6 +61,6 @@
 	},
 	"export" : {
 		"name" : "export",
-		"views" : ["index"]
+		"views" : ["index", "sejour"]
 	}
 }

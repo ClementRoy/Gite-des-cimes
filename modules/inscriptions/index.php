@@ -24,7 +24,9 @@
                     <table class="datatable">
                         <thead>
                             <tr>
-                                <th class="sortable">Numéro</th>
+                                <th class="sortable">Nom du séjour</th>
+                                <th class="sortable">Nom de l'enfant</th>
+                                <th class="sortable">Dates</th>
                             </tr>
                         </thead>
                         
@@ -35,9 +37,11 @@
                         </tfoot>
                         <tbody>
                         <?php foreach($inscriptions as $key => $inscription): ?>
+                        <?php $enfant = enfant::get($inscription->ref_enfant); ?>
+                        <?php $sejour = sejour::get($inscription->ref_sejour); ?>
                         <tr>
                             <td>
-                                <a href="/inscriptions/infos/id/<?=$inscription->id; ?>"><?=$inscription->id; ?></a>
+                                <a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a>
                                 <div class="pop-dialog tr">
                                     <div class="pointer">
                                         <div class="arrow"></div>
@@ -51,6 +55,12 @@
                                         </div>
                                     </div>
                                 </div> 
+                            </td>
+                            <td>
+                                <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname ?> <?=$enfant->lastname ?></a>
+                            </td>
+                            <td>
+                                du <?=tool::getDatefromDatetime($inscription->date_from); ?> au <?=tool::getDatefromDatetime($inscription->date_to); ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

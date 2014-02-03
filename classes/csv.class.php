@@ -10,9 +10,12 @@ class CSV{
      * @param
      * @return
      */
-    static function export($datas,$filename){
+    static function export($datas, $filename = 'file', $headline = false){
         header('Content-Type: text/csv;');
         header('Content-Disposition: attachment; filename="'.$filename.'.csv"');
+        if($headline){
+            echo $headline."\n\n";
+        }
         $i = 0;
         foreach($datas as $v){ // pass by $key => $v, avoid $i
             if($i==0){
