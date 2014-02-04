@@ -57,7 +57,7 @@
                                 </div> 
                             </td>
                             <td>
-                                <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname ?> <?=$enfant->lastname ?></a>
+                                <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname ?> <?=$enfant->firstname ?></a>
                             </td>
                             <td>
                                 du <?=tool::getDatefromDatetime($inscription->date_from); ?> au <?=tool::getDatefromDatetime($inscription->date_to); ?>

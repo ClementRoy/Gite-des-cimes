@@ -97,7 +97,7 @@
                             <select id="form-inscription-enfant-select" name="form_inscription_enfant" parsley-required="true">
                                 <option selected="selected">Choisissez l'enfant</option>
                                 <?php foreach($enfants as $enfant): ?>
-                                <option <?php if( $enfant->id == $inscription->ref_enfant): ?>selected="selected"<?php endif; ?> value="<?=$enfant->id ?>"><?=$enfant->firstname ?> <?=$enfant->lastname ?></option>
+                                <option <?php if( $enfant->id == $inscription->ref_enfant): ?>selected="selected"<?php endif; ?> value="<?=$enfant->id ?>"><?=$enfant->lastname ?> <?=$enfant->firstname ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
