@@ -15,7 +15,7 @@
             
             $datas = array(
                             ':ref_sejour' => $form_inscription_sejour,
-                            ':option' => $form_inscription_option,
+                            ':finished' => $form_inscription_option,
                             ':ref_enfant' => $form_inscription_enfant,
                             ':date_from' => $form_inscription_date_debut,
                             ':date_to' => $form_inscription_date_fin,
