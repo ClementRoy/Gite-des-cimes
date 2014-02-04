@@ -62,6 +62,8 @@
 
                     <h6>Fiches à compléter</h6>
 
+                    <h6>Taux de remplissage</h6>
+
                 </div>
 <!--
                 <div class="row">
