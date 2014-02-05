@@ -331,7 +331,8 @@
                                 $('#form-inscription-date-debut').val($option.data('date-start')).data('date-startdate',$option.data('date-start')).data('date-enddate',$option.data('date-end')).removeAttr('disabled');
                                 $('#form-inscription-date-fin').val($option.data('date-end')).data('date-startdate',$option.data('date-start')).data('date-enddate',$option.data('date-end')).removeAttr('disabled');
                                 // On set les data-debut et data-fin des patepickers
-                                $('.input-datepicker-light').datepicker('startDate', $option.data('date-start'));
+                                //console.log($option.data('date-start'));
+                                //$('.input-datepicker-light').datepicker('startDate', $option.data('date-start'));
 
                                 $('#form-inscription-date-debut-hidden').val('').attr('disabled', 'disabled');
                                 $('#form-inscription-date-fin-hidden').val('').attr('disabled', 'disabled');
@@ -340,7 +341,7 @@
                         });
 
                         $('#form-inscription-structure-select').change(function(){
-                            console.log($(this).val());
+                            //console.log($(this).val());
                             if($(this).val() == 'Choisissez la structure'){
                                 $('#form-inscription-centre-payeur').removeAttr('disabled'); 
                                 $('#form-inscription-centre-payeur-hidden').attr('disabled', 'disabled'); 
@@ -352,7 +353,7 @@
                         });
 
                         <?php if(isset($_GET['sejour'] )): ?>
-                        $('#form-inscription-sejour-select').trigger('change');
+                            $('#form-inscription-sejour-select').trigger('change');
                         <?php endif; ?>
                     });
                 </script>
