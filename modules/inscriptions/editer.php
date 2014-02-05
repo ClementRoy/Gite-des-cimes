@@ -136,7 +136,7 @@
                         <label class="radio-inline col-md-7" for="form-inscription-option-oui">
                             <div class="radio" id="uniform-form-inscription-option-oui">
                                 <span>
-                                    <input type="radio" name="form_inscription_option" id="form-inscription-option-oui" value="1" <?php if($inscription->option == 0): ?>checked="checked"<?php endif; ?>>
+                                    <input type="radio" name="form_inscription_option" id="form-inscription-option-oui" value="1" <?php if($inscription->finished == 0): ?>checked="checked"<?php endif; ?>>
                                 </span>
                             </div>
                             Oui
@@ -144,7 +144,7 @@
                         <label class="radio-inline col-md-4 col-sm-5" for="form-inscription-option-non">
                             <div class="radio" id="uniform-form-inscription-option-non">
                                 <span class="checked">
-                                    <input type="radio" name="form_inscription_option" id="form-inscription-option-non" value="0" <?php if($inscription->option == 0): ?>checked="checked"<?php endif; ?>>
+                                    <input type="radio" name="form_inscription_option" id="form-inscription-option-non" value="0" <?php if($inscription->finished == 0): ?>checked="checked"<?php endif; ?>>
                                 </span>
                             </div>
                             Non
@@ -359,7 +359,7 @@
                         });
 
                         <?php if(isset($inscription->ref_sejour )): ?>
-                        $('#form-inscription-sejour-select').trigger('change');
+                        //$('#form-inscription-sejour-select').trigger('change');
                         <?php endif; ?>
                     });
                 </script>
