@@ -105,6 +105,9 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
+                                <th>
+                                    id
+                                </th>
                                 <th class="col-md-3">
                                     Prénom
                                 </th>
@@ -122,6 +125,9 @@
                             <?php foreach($inscriptions as $inscription): ?>
                             <?php $enfant = enfant::get($inscription->ref_enfant); ?>
                             <tr>
+                                <td>
+                                    <?=$inscription->id ?>
+                                </td>
                                 <td>
                                     <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->firstname ?></a>
                                 </td>

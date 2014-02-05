@@ -12,9 +12,9 @@ if($type == 1){
 		$enfant = enfant::get($inscription->ref_enfant);
 		$birthdate = new DateTime($enfant->birthdate);
 		$datas[] = array(
-				'Nom' => $enfant->lastname,
-				utf8_decode('Prénom') => $enfant->firstname,
-				'Date de naissance' => strftime('%d %B %Y', $birthdate->getTimestamp()),
+				'Nom' => utf8_decode($enfant->lastname),
+				utf8_decode('Prénom') => utf8_decode($enfant->firstname),
+				'Date de naissance' => utf8_decode(strftime('%d %B %Y', $birthdate->getTimestamp())),
 				'Age' => tool::getAgeFromDate($enfant->birthdate)
 			);
 	}
