@@ -25,8 +25,8 @@
                    <table class="datatable">
                         <thead>
                             <tr>
-                                <th tabindex="0" rowspan="1" colspan="1">Prénom</th>
                                 <th tabindex="0" rowspan="1" colspan="1">Nom</th>
+                                <th tabindex="0" rowspan="1" colspan="1">Prénom</th>
                                 <th tabindex="0" rowspan="1" colspan="1">Sexe</th>
                                 <th tabindex="0" rowspan="1" colspan="1">Statut de la fiche</th>
                                 <th tabindex="0" rowspan="1" colspan="1">Date de naissance</th>
@@ -37,8 +37,8 @@
                         
                         <tfoot>
                             <tr>
-                                <th tabindex="0" rowspan="1" colspan="1">Prénom</th>
                                 <th tabindex="0" rowspan="1" colspan="1">Nom</th>
+                                <th tabindex="0" rowspan="1" colspan="1">Prénom</th>
                                 <th tabindex="0" rowspan="1" colspan="1">Sexe</th>
                                 <th tabindex="0" rowspan="1" colspan="1">Statut de la fiche</th>
                                 <th tabindex="0" rowspan="1" colspan="1">Date de naissance</th>
@@ -49,7 +49,7 @@
                         <?php foreach($enfants as $key => $enfant): ?>
                         <tr class="">
                                 <td>
-                                    <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname; ?></a>
+                                    <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname; ?></a>
                                 <div class="pop-dialog tr">
                                     <div class="pointer">
                                         <div class="arrow"></div>
@@ -65,7 +65,7 @@
                                 </div>                                     
                                 </td>
                                 <td>
-                                     <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname; ?></a>
+                                     <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname; ?></a>
                                 </td>
                                 <td>
                                     <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?>

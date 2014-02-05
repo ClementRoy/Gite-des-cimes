@@ -58,7 +58,7 @@ class enfant
             $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0');
         }
         else {
-            $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY firstname');
+            $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY lastname');
         }
 		return $result;
 	}
@@ -66,7 +66,7 @@ class enfant
 
     public static function getFromTrash(){
         global $db;
-         $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1 ORDER BY firstname');
+         $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1 ORDER BY lastname');
          return $result;
     }
     /**
