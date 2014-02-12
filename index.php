@@ -2,6 +2,8 @@
 
 require($_SERVER["DOCUMENT_ROOT"] . '/config/config.inc.php');
 
+// strftime("jourEnLettres jour moisEnLettres annee") de la date courante
+
 $app = new app();
 
 $app->start();

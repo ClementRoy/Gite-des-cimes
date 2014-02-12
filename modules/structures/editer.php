@@ -21,6 +21,7 @@
                             ':address_street' => $form_structure_adresse_voirie,
                             ':address_postal_code' => $form_structure_adresse_code_postal,
                             ':address_city' => $form_structure_adresse_code_ville,
+                            ':address_comp' => $form_structure_addresse_comp,
                             ':note' => $form_structure_note
                             );
 
@@ -96,7 +97,7 @@
                             <label class="col-md-2" for="form-structure-service">Nom du service</label>
                             <div class="col-md-4">
                                 <input id="form-structure-service" name="form_structure_service" class="form-control" type="text" 
-                                data-toggle="tooltip" title="Renseignez le nom du service." parsley-required="true" value="<?=$structure->service ?>">
+                                data-toggle="tooltip" title="Renseignez le nom du service." value="<?=$structure->service ?>">
                             </div>                            
                         </div>
 
@@ -157,7 +158,12 @@
                                         </div>
                                         <div class="col-md-9"><input id="form-structure-adresse-voirie" name="form_structure_adresse_voirie" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse de la structure." value="<?=$structure->address_street ?>"></div>
                                     </div>
-
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input id="form-structure-addresse-comp" name="form_structure_addresse_comp" class="form-control" type="text" 
+                                            data-toggle="tooltip" title="Renseignez l'addresse complémentaire." placeholder="Complément d'addresse">  
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-4"><input id="form-structure-adresse-code-postal" name="form_structure_adresse_code_postal" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville de la structure." value="<?=$structure->address_postal_code ?>"></div>
                                         <div class="col-md-8"><input id="form-structure-adresse-code-ville" name="form_structure_adresse_code_ville" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville de la structure." value="<?=$structure->address_city ?>"></div>

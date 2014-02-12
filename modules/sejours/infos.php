@@ -18,6 +18,9 @@
         <?php $date_created = new DateTime($sejour->created); ?>
         <?php $date_edited = new DateTime($sejour->edited); ?>
 
+        <?php $date_from = new DateTime($sejour->date_from); ?>
+        <?php $date_to = new DateTime($sejour->date_to); ?>
+
         <div id="pad-wrapper" class="users-profil">
             <div class="row header icon">
                 <div class="col-md-10">
@@ -44,9 +47,28 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>">Récapitulatif mineurs</a></li>
-                            <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>">Suivi sanitaire</a></li>
-                            <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>">Registre des mineurs</a></li>
+                            <?php if($date_from->diff($date_to)->format('%d') > 14): ?>
+                            <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/1/">Récapitulatif mineurs semaine 1</a></li>
+                            <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/1/">Suivi sanitaire semaine 1</a></li>
+                            <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/1/">Registre des mineurs semaine 1</a></li>
+                            <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/2/">Récapitulatif mineurs semaine 2</a></li>
+                            <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/2/">Suivi sanitaire semaine 2</a></li>
+                            <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/2/">Registre des mineurs semaine 2</a></li>
+                            <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/3/">Récapitulatif mineurs semaine 3</a></li>
+                            <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/3/">Suivi sanitaire semaine 3</a></li>
+                            <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/3/">Registre des mineurs semaine 3</a></li>
+                            <?php elseif($date_from->diff($date_to)->format('%d') > 7): ?>
+                            <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/1/">Récapitulatif mineurs semaine 1</a></li>
+                            <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/1/">Suivi sanitaire semaine 1</a></li>
+                            <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/1/">Registre des mineurs semaine 1</a></li>
+                            <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/2/">Récapitulatif mineurs semaine 2</a></li>
+                            <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/2/">Suivi sanitaire semaine 2</a></li>
+                            <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/2/">Registre des mineurs semaine 2</a></li>
+                            <?php else: ?>
+                            <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/1/">Récapitulatif mineurs</a></li>
+                            <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/1/">Suivi sanitaire</a></li>
+                            <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/1/">Registre des mineurs</a></li>
+                            <?php endif; ?>
                         </ul>
                     </div>         
                 </div>
@@ -54,7 +76,7 @@
 
             <div class="row">
                 <div class="col-md-9 bio">
-
+                    <p>Séjour du <?=$date_from->format('j F Y') ?> au <?=$date_to->format('j F Y') ?></p>
                     <!--
                     <h4>Capacité du séjour</h4>
 
