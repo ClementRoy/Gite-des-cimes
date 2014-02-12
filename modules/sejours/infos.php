@@ -76,7 +76,7 @@
 
             <div class="row">
                 <div class="col-md-9 bio">
-                    <p>Séjour du <?=$date_from->format('j F Y') ?> au <?=$date_to->format('j F Y') ?></p>
+                    <p>Séjour du <?=strftime('%d %B %Y', $date_from->getTimestamp()) ?> au <?=strftime('%d %B %Y', $date_to->getTimestamp()) ?></p>
                     <!--
                     <h4>Capacité du séjour</h4>
 

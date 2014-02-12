@@ -18,12 +18,12 @@ ini_set('error_log', dirname(__FILE__) . '/error.log');
 error_reporting(E_ALL);
 
 date_default_timezone_set('Europe/Paris');
-
+//setlocale(LC_TIME, 'fr_FR.utf8','fra');
 /*
 Fonction d'autoload des classes PHP
 Toutes les classes doivent être dans le dossiers /classes
  */
-function __autoload($class_name) {  
+function __autoload($class_name) { 
     $class_name = strtolower($class_name);  
     if(file_exists($_SERVER["DOCUMENT_ROOT"] . '/classes/' . $class_name . '.class.php')) {
         include_once ($_SERVER["DOCUMENT_ROOT"] . '/classes/' . $class_name . '.class.php');  
