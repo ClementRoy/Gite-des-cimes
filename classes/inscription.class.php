@@ -48,6 +48,20 @@ class inscription
     }
 
 
+    public static function getBySejourBetweenDates($id, $date_from = false, $date_to = false){
+        global $db;
+        
+        $date_from = $date_from->format("Y-m-d H:i:s");
+        $date_to = $date_to->format("Y-m-d H:i:s");
+        $params = array(
+                        ':id' => $id
+                        );
+        $sql = 'SELECT * FROM '.self::$table.' LEFT JOIN enfant ON inscription.ref_enfant = enfant.id LEFT JOIN structure ON enfant.organization = structure.id LEFT JOIN structure_contact ON enfant.contact = structure_contact.id WHERE ref_sejour=:id AND date_from >= "'.$date_from.'" AND date_to <="'.$date_to.'"';
+        $result = $db->query($sql, $params);
+        return $result;        
+    }
+
+
     /**
      * desc
      *

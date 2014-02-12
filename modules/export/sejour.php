@@ -1,11 +1,28 @@
 <?php  
 
 extract($_GET);
+$sejour = sejour::get($id);
+
+$date_from = new DateTime($sejour->date_from);
+$date_from_2 = new DateTime($sejour->date_from);
+$date_to = new DateTime($sejour->date_to);
+
+if($week == 3){
+	$date_from_query = $date_from->modify('+14 days');
+	$date_to_query =  $date_from_2->modify('+21 days');
+}elseif($week == 2){
+	$date_from_query = $date_from->modify('+7 days');
+	$date_to_query = $date_from_2->modify('+14 days');
+}else {
+	$date_from_query = $date_from;
+	$date_to_query = $date_from_2->modify('+7 days');
+}	
 
 if($type == 1){
 // Récapitulatif mineur
-	$sejour = sejour::get($id);
-	$inscriptions = inscription::getBySejour($id);
+
+	$inscriptions = inscription::getBySejourBetweenDates($id, $date_from_query, $date_to_query);
+
 
 	$datas = array();
 	foreach ($inscriptions as $key => $inscription) {
@@ -14,15 +31,14 @@ if($type == 1){
 		$datas[] = array(
 				'Nom' => utf8_decode($enfant->lastname),
 				utf8_decode('Prénom') => utf8_decode($enfant->firstname),
-				'Date de naissance' => $birthdate->format('j F Y'),
+				'Date de naissance' => strftime('%d %B %Y', $birthdate->getTimestamp()),
 				'Age' => tool::getAgeDetailFromDate($enfant->birthdate)
 			);
 	}
 	//tool::output($datas);
 	
-	$date_from = new DateTime($sejour->date_from);
-	$date_to = new DateTime($sejour->date_to);
-	$headline = utf8_decode('Récapitulatif mineurs par age - '.$sejour->name.' du '.$date_from->format('j F Y').' au '.$date_to->format('j F Y'));
+
+	$headline = utf8_decode('Récapitulatif mineurs par age - '.$sejour->name.' du '.strftime('%d %B %Y', $date_from_query->getTimestamp()).' au '.strftime('%d %B %Y', $date_to_query->getTimestamp()));
 	$filename = 'Récapitulatif mineurs par age - '.$sejour->name.' - ';
 	CSV::export($datas, $filename, $headline);
 
@@ -39,7 +55,9 @@ Traitement médical
 Contre indications	
 Fiche sanitaire (oui/non)
 */
+	$inscriptions = inscription::getBySejourBetweenDates($id, $date_from_query, $date_to_query);
 
+	tool::output($inscriptions);
 
 }
 elseif($type == 3){
