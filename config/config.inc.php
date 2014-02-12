@@ -17,6 +17,8 @@ ini_set('log_errros', 1);
 ini_set('error_log', dirname(__FILE__) . '/error.log');
 error_reporting(E_ALL);
 
+date_default_timezone_set('Europe/Paris');
+
 /*
 Fonction d'autoload des classes PHP
 Toutes les classes doivent être dans le dossiers /classes
