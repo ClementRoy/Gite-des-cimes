@@ -31,13 +31,11 @@ if($type == 1){
 		$datas[] = array(
 				'Nom' => utf8_decode($enfant->lastname),
 				utf8_decode('Prénom') => utf8_decode($enfant->firstname),
-				'Date de naissance' => strftime('%d %B %Y', $birthdate->getTimestamp()),
+				'Date de naissance' => utf8_decode(strftime('%d %B %Y', $birthdate->getTimestamp())),
 				'Age' => tool::getAgeDetailFromDate($enfant->birthdate)
 			);
 	}
 	//tool::output($datas);
-	
-
 	$headline = utf8_decode('Récapitulatif mineurs par age - '.$sejour->name.' du '.strftime('%d %B %Y', $date_from_query->getTimestamp()).' au '.strftime('%d %B %Y', $date_to_query->getTimestamp()));
 	$filename = 'Récapitulatif mineurs par age - '.$sejour->name.' - ';
 	CSV::export($datas, $filename, $headline);
