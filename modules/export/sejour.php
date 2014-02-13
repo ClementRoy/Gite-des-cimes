@@ -28,37 +28,74 @@ if($type == 1){
 	foreach ($inscriptions as $key => $inscription) {
 		$enfant = enfant::get($inscription->ref_enfant);
 		$birthdate = new DateTime($enfant->birthdate);
+		if( $enfant->birthdate != '0000-00-00 00:00:00') {
+			$birthdate_string = utf8_decode(strftime('%d %B %Y', $birthdate->getTimestamp()));
+		}
+		else {
+			$birthdate_string = ' ';
+		}
+		
+		
 		$datas[] = array(
 				'Nom' => utf8_decode($enfant->lastname),
 				utf8_decode('Prénom') => utf8_decode($enfant->firstname),
-				'Date de naissance' => utf8_decode(strftime('%d %B %Y', $birthdate->getTimestamp())),
+				'Date de naissance' => $birthdate_string,
 				'Age' => tool::getAgeDetailFromDate($enfant->birthdate)
 			);
 	}
 	//tool::output($datas);
-	$headline = utf8_decode('Récapitulatif mineurs par age - '.$sejour->name.' du '.strftime('%d %B %Y', $date_from_query->getTimestamp()).' au '.strftime('%d %B %Y', $date_to_query->getTimestamp()));
+	$headline = utf8_decode('Récapitulatif mineurs par âge - '.$sejour->name.' du '.strftime('%d %B %Y', $date_from_query->getTimestamp()).' au '.strftime('%d %B %Y', $date_to_query->getTimestamp()));
 	$filename = 'Récapitulatif mineurs par age - '.$sejour->name.' - ';
 	CSV::export($datas, $filename, $headline);
 
 }
 elseif($type == 2){
-//Suivi sanitaire
-/*
-Nom	
-Prénom	
-Date de naissance	
-N° sécurité sociale	
-Carnet de vaccination (oui/non)	
-Traitement médical	
-Contre indications	
-Fiche sanitaire (oui/non)
-*/
+
 	$inscriptions = inscription::getBySejourBetweenDates($id, $date_from_query, $date_to_query);
 
-	tool::output($inscriptions);
+	$datas = array();
+
+	foreach ($inscriptions as $key => $inscription) {
+		$enfant = enfant::get($inscription->ref_enfant);
+		$birthdate = new DateTime($enfant->birthdate);
+		if( $enfant->birthdate != '0000-00-00 00:00:00') {
+			$birthdate_string = utf8_decode(strftime('%d %B %Y', $birthdate->getTimestamp()));
+		}
+		else {
+			$birthdate_string = ' ';
+		}
+
+		$datas[] = array(
+			'Nom' => utf8_decode($enfant->lastname),
+			utf8_decode('Prénom') => utf8_decode($enfant->firstname),
+			'Date de naissance' => $birthdate_string,
+			utf8_decode('N° sécurité sociale') => utf8_decode($enfant->number_ss),
+			'Carnet de vaccination' => ($enfant->vaccination > 0)?'oui':'non',
+			utf8_decode('Traitement médical') => ($enfant->medicals_treatments > 0)?'oui':'non',
+			'Contre indications' => utf8_decode($enfant->allergies),
+			'Fiche sanitaire' => ($enfant->health_record > 0)?'oui':'non'
+		);
+	}
+
+
+	$headline = utf8_decode('Suivi sanitaire - '.$sejour->name.' du '.strftime('%d %B %Y', $date_from_query->getTimestamp()).' au '.strftime('%d %B %Y', $date_to_query->getTimestamp()));
+	$filename = 'Suivi sanitaire - '.$sejour->name.' - ';
+	CSV::export($datas, $filename, $headline);
+	//tool::output($datas);
 
 }
 elseif($type == 3){
+
+	$inscriptions = inscription::getBySejourBetweenDates($id, $date_from_query, $date_to_query);
+	$datas = array();
+
+	foreach ($inscriptions as $key => $inscription) {
+
+
+	}
+
+	$headline = utf8_decode('Suivi sanitaire - '.$sejour->name.' du '.strftime('%d %B %Y', $date_from_query->getTimestamp()).' au '.strftime('%d %B %Y', $date_to_query->getTimestamp()));
+	tool::output($datas);
 // Registre des mineurs
 /*
 Nom	

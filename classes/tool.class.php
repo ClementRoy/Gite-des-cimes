@@ -24,9 +24,14 @@ class tool
 
 
     public static function getAgeDetailFromDate($date){
-        $today = new DateTime();
-        $diff = $today->diff(new DateTime($date));
-        return $diff->format('%Y ans %m mois');
+        if($date != '0000-00-00 00:00:00'){
+            $today = new DateTime();
+            $diff = $today->diff(new DateTime($date));
+            return $diff->format('%Y ans %m mois');        
+        }else {
+            return '';
+        }
+
     }
     /**
      * desc
