@@ -55,6 +55,8 @@ elseif($type == 2){
 
 	$datas = array();
 
+
+
 	foreach ($inscriptions as $key => $inscription) {
 		$enfant = enfant::get($inscription->ref_enfant);
 		$birthdate = new DateTime($enfant->birthdate);
