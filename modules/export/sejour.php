@@ -90,27 +90,41 @@ elseif($type == 3){
 	$datas = array();
 
 	foreach ($inscriptions as $key => $inscription) {
+		$enfant = enfant::get($inscription->ref_enfant);
+		$birthdate = new DateTime($enfant->birthdate);
+		$organization = structure::get($enfant->organization);
+		$contact = contact::get($enfant->contact);
+		if( $enfant->birthdate != '0000-00-00 00:00:00') {
+			$birthdate_string = utf8_decode(strftime('%d %B %Y', $birthdate->getTimestamp()));
+		}
+		else {
+			$birthdate_string = ' ';
+		}
+
+		$datas[] = array(
+			'Nom' => utf8_decode($enfant->lastname),
+			utf8_decode('Prénom') => utf8_decode($enfant->firstname),
+			'Date de naissance' => $birthdate_string,
+			"Adresse de l'enfant" => utf8_decode($enfant->firstname),
+			utf8_decode("Famille d'accueil") => utf8_decode($enfant->firstname),
+			utf8_decode('Structure') => (isset($organization->name))?utf8_decode($organization->name):'',
+			utf8_decode('Nom Contact') => (isset($contact->lastname))?utf8_decode($contact->lastname).' '.utf8_decode($contact->firstname):'',
+			utf8_decode('Tél structure') => (isset($organization->phone))?utf8_decode($organization->phone):'',
+			utf8_decode('Père') => utf8_decode($enfant->father_name),
+			utf8_decode('Tél père') => utf8_decode($enfant->father_phone_home).' '.utf8_decode($enfant->father_phone_mobile).' '.utf8_decode($enfant->father_phone_pro),
+			utf8_decode('Mère') => utf8_decode($enfant->mother_name),
+			utf8_decode('Tél Mère') => utf8_decode($enfant->mother_phone_home).' '.utf8_decode($enfant->mother_phone_mobile).' '.utf8_decode($enfant->mother_phone_pro),
+		);
 
 
 	}
 
-	$headline = utf8_decode('Suivi sanitaire - '.$sejour->name.' du '.strftime('%d %B %Y', $date_from_query->getTimestamp()).' au '.strftime('%d %B %Y', $date_to_query->getTimestamp()));
-	tool::output($datas);
+	$headline = utf8_decode('Registre des mineurs - '.$sejour->name.' du '.strftime('%d %B %Y', $date_from_query->getTimestamp()).' au '.strftime('%d %B %Y', $date_to_query->getTimestamp()));
+	// tool::output($datas);
+	// tool::output($inscriptions);
+	$filename = 'Registre des mineurs - '.$sejour->name.' - ';
+	CSV::export($datas, $filename, $headline);
 // Registre des mineurs
-/*
-Nom	
-Prénom	
-Date Naissance	
-Adresse de l'enfant	
-Famille d'accueil (le cas échéant)	
-Structure	
-Nom Contact	
-Tél structure	
-Père	
-Tél père	
-Mère	
-Tél Mère
-*/
 
 }
 
