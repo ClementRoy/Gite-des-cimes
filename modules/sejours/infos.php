@@ -148,7 +148,7 @@
                             <?php $enfant = enfant::get($inscription->ref_enfant); ?>
                             <tr>
                                 <td>
-                                    #<?=$key ?>
+                                    #<?=$key+1 ?>
                                 </td>
                                 <td>
                                     <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->firstname ?></a>
