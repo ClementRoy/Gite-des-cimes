@@ -144,11 +144,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($inscriptions as $inscription): ?>
+                            <?php foreach($inscriptions as $key => $inscription): ?>
                             <?php $enfant = enfant::get($inscription->ref_enfant); ?>
                             <tr>
                                 <td>
-                                    <?=$inscription->id ?>
+                                    #<?=$key ?>
                                 </td>
                                 <td>
                                     <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->firstname ?></a>

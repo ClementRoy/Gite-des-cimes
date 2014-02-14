@@ -10,13 +10,30 @@ include('../classes/user.class.php');
 
 $db = new DB();
 
-$datas = CSV::parse('enfants_import.csv');
+$datas = CSV::parse('enfants_complements.csv');
 
 echo '<pre>';
 
 foreach ($datas as $key => $data) {
-	//print_r($data);
-	if(!empty($data['0'])){
+	tool::output($data);
+
+        $enfant = enfant::getByName($data[0]);
+        //tool::output($enfant);
+
+    if(isset($enfant) && !empty($enfant)){
+
+
+                $datasql = array(                
+                    ':father_phone_home' => $data[1]
+                    );                              
+        $result = enfant::updateByName($datasql, $data[0]);
+        echo $data['0']." imported \n";
+    }
+    else {
+        echo $data['0']." NOT imported \n";
+    }
+
+	if(!empty($data['3'])){
 
         $metadata = array(
                             ':created' => $data[3],
@@ -69,8 +86,8 @@ foreach ($datas as $key => $data) {
 		// $sql = 'INSERT INTO enfant (created, edited, firstname, lastname, birthdate, number_ss, note, father_name, mother_name, father_phone) 
 		// 					value (:created, :edited, :firstname, :lastname, :birthdate, :number_ss, :note, :father_name, :mother_name, :father_phone)';
 		// $db->insert($sql, $datasql);
-		$result = enfant::add($datasql, $metadata);
-		tool::output($result);
+		//$result = enfant::add($datasql, $metadata);
+		//tool::output($datasql);
 		echo $data['0']." imported \n";
 	}
 }

@@ -25,6 +25,14 @@ class enfant
         return $result;
     }
 
+    public static function getByName($id){
+        global $db;
+        $params = array(':id' => $id);
+        $sql = 'SELECT * FROM '.self::$table.' WHERE lastname=:id';
+        $result = $db->row($sql, $params);
+        return $result;
+    }
+
 
     public static function getByStructure($id){
         global $db;
@@ -157,6 +165,33 @@ class enfant
         return $result;
     }
 
+
+    public static function updateByName($data = array(), $lastname, $metadata = false){
+        global $db;
+        // Handle the metadatas
+        // if(!$metadata) {
+        //     $metadata = array(
+        //                         ':edited' => tool::currentTime(),
+        //                         ':editor' => user::getCurrentUser(), 
+        //                     );
+        // }
+
+        // // Merge the data and metadatas arrays
+        // $data = array_merge($metadata, $data);
+
+        // Build the Query, be careful, vars must be prefixed with ":"
+        $entries = '';
+        foreach (array_keys($data) as $key => $name) {
+            if($key !=0)
+                $entries .= ',';
+            $entries .=  substr($name, 1).' = '.$name;
+        }
+        $sql = 'UPDATE '.self::$table.' SET '.$entries.' WHERE lastname="'.$lastname.'"';
+        echo $sql;
+        $result = $db->update($sql, $data);
+
+        return $result;        
+    }
 
     /**
      * Remove object

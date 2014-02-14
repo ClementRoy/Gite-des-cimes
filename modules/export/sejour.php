@@ -125,9 +125,9 @@ elseif($type == 3){
 			utf8_decode('Nom Contact') => (isset($contact->lastname))?utf8_decode($contact->lastname).' '.utf8_decode($contact->firstname):'',
 			utf8_decode('Tél structure') => (isset($organization->phone))?utf8_decode($organization->phone):'',
 			utf8_decode('Père') => utf8_decode($enfant->father_name),
-			utf8_decode('Tél père') => utf8_decode($enfant->father_phone_home).' '.utf8_decode($enfant->father_phone_mobile).' '.utf8_decode($enfant->father_phone_pro),
+			utf8_decode('Tél père') => utf8_decode($enfant->father_phone_home).'|'.utf8_decode($enfant->father_phone_mobile).'|'.utf8_decode($enfant->father_phone_pro),
 			utf8_decode('Mère') => utf8_decode($enfant->mother_name),
-			utf8_decode('Tél Mère') => utf8_decode($enfant->mother_phone_home).' '.utf8_decode($enfant->mother_phone_mobile).' '.utf8_decode($enfant->mother_phone_pro),
+			utf8_decode('Tél Mère') => utf8_decode($enfant->mother_phone_home).'|'.utf8_decode($enfant->mother_phone_mobile).'|'.utf8_decode($enfant->mother_phone_pro),
 		);
 
 
