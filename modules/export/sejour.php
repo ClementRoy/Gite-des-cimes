@@ -120,24 +120,24 @@ elseif($type == 3){
 			utf8_decode('Prénom') => utf8_decode($enfant->firstname),
 			'Date de naissance' => $birthdate_string,
 			"Adresse de l'enfant" => utf8_decode($address),
-			utf8_decode("Famille d'accueil") => utf8_decode($enfant->firstname),
+			utf8_decode("Famille d'accueil") => utf8_decode($enfant->host_family_name),
 			utf8_decode('Structure') => (isset($organization->name))?utf8_decode($organization->name):'',
 			utf8_decode('Nom Contact') => (isset($contact->lastname))?utf8_decode($contact->lastname).' '.utf8_decode($contact->firstname):'',
 			utf8_decode('Tél structure') => (isset($organization->phone))?utf8_decode($organization->phone):'',
 			utf8_decode('Père') => utf8_decode($enfant->father_name),
-			utf8_decode('Tél père') => utf8_decode($enfant->father_phone_home).'|'.utf8_decode($enfant->father_phone_mobile).'|'.utf8_decode($enfant->father_phone_pro),
+			utf8_decode('Tél père') => utf8_decode($enfant->father_phone_home).'  '.utf8_decode($enfant->father_phone_mobile).'  '.utf8_decode($enfant->father_phone_pro),
 			utf8_decode('Mère') => utf8_decode($enfant->mother_name),
-			utf8_decode('Tél Mère') => utf8_decode($enfant->mother_phone_home).'|'.utf8_decode($enfant->mother_phone_mobile).'|'.utf8_decode($enfant->mother_phone_pro),
+			utf8_decode('Tél Mère') => utf8_decode($enfant->mother_phone_home).'  '.utf8_decode($enfant->mother_phone_mobile).'  '.utf8_decode($enfant->mother_phone_pro),
 		);
 
 
 	}
 
 	$headline = utf8_decode('Registre des mineurs - '.$sejour->name.' du '.strftime('%d %B %Y', $date_from_query->getTimestamp()).' au '.strftime('%d %B %Y', $date_to_query->getTimestamp()));
-	//tool::output($datas);
+	tool::output($datas);
 	 //tool::output($inscriptions);
 	$filename = 'Registre des mineurs - '.$sejour->name.' - ';
-	CSV::export($datas, $filename, $headline);
+	//CSV::export($datas, $filename, $headline);
 // Registre des mineurs
 
 }
