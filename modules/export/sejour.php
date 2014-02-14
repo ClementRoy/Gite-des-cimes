@@ -161,10 +161,10 @@ if(isset($enfant->mother_phone_pro) && !empty($enfant->mother_phone_pro)){
 	}
 
 	$headline = utf8_decode('Registre des mineurs - '.$sejour->name.' du '.strftime('%d %B %Y', $date_from_query->getTimestamp()).' au '.strftime('%d %B %Y', $date_to_query->getTimestamp()));
-	tool::output($datas);
-	tool::output($inscriptions);
+	//tool::output($datas);
+	//tool::output($inscriptions);
 	$filename = 'Registre des mineurs - '.$sejour->name.' - ';
-	//CSV::export($datas, $filename, $headline);
+	CSV::export($datas, $filename, $headline);
 // Registre des mineurs
 
 }
