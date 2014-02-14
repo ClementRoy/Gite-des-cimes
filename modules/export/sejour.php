@@ -102,7 +102,7 @@ elseif($type == 3){
 		else {
 			$birthdate_string = ' ';
 		}
-
+		$address_host = '';
 		if(!empty($enfant->father_address_number)){
 			$address = $enfant->father_address_number.' '.$enfant->father_address_street.' '.$enfant->father_address_postal_code.' '.$enfant->father_address_city;
 		}elseif(!empty($enfant->mother_address_postal_code)){
@@ -143,10 +143,10 @@ if(isset($enfant->mother_phone_pro) && !empty($enfant->mother_phone_pro)){
 
 // 'tel : '.utf8_decode($enfant->mother_phone_home)."\n mobile : ".utf8_decode($enfant->mother_phone_mobile)."\n pro : ".utf8_decode($enfant->mother_phone_pro),
 		$datas[] = array(
-			'Nom' => utf8_decode($enfant->lastname),
+			utf8_decode('Nom') => utf8_decode($enfant->lastname),
 			utf8_decode('Prénom') => utf8_decode($enfant->firstname),
-			'Date de naissance' => $birthdate_string,
-			"Adresse de l'enfant" => utf8_decode($address),
+			utf8_decode('Date de naissance') => $birthdate_string,
+			utf8_decode("Adresse de l'enfant") => utf8_decode($address),
 			utf8_decode("Famille d'accueil") => utf8_decode($enfant->host_family_name).(isset($address_host))?utf8_decode($address_host):'',
 			utf8_decode('Structure') => (isset($organization->name))?utf8_decode($organization->name):'',
 			utf8_decode('Nom Contact') => (isset($contact->lastname))?utf8_decode($contact->lastname).' '.utf8_decode($contact->firstname):'',
