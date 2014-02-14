@@ -111,23 +111,50 @@ elseif($type == 3){
 			$address = $enfant->guardian_address_number.' '.$enfant->guardian_address_street.' '.$enfant->guardian_address_postal_code.' '.$enfant->guardian_address_city;
 		}elseif(!empty($enfant->host_family_address_street)){
 			$address = $enfant->host_family_address_number.' '.$enfant->host_family_address_street.' '.$enfant->host_family_address_postal_code.' '.$enfant->host_family_address_city;
+			$address_host = $enfant->host_family_address_number.' '.$enfant->host_family_address_street.' '.$enfant->host_family_address_postal_code.' '.$enfant->host_family_address_city;
 		}else{
 			$address = '';
 		}
 
+
+// (isset($organization->father_phone_home))?'tel : '.utf8_decode($enfant->father_phone_home)."\n ".:''.(isset($organization->father_phone_mobile))?"mobile : ".utf8_decode($enfant->father_phone_mobile)."\n":''.(isset($organization->father_phone_pro))?" pro : ".utf8_decode($enfant->father_phone_pro):'',
+$tel_father = '';
+if(isset($enfant->father_phone_home) && !empty($enfant->father_phone_home)){
+	$tel_father .= 'tel : '.$enfant->father_phone_home."\n";
+}
+if(isset($enfant->father_phone_mobile) && !empty($enfant->father_phone_mobile)){
+	$tel_father .= 'mobile : '.$enfant->father_phone_mobile."\n";
+}
+if(isset($enfant->father_phone_pro) && !empty($enfant->father_phone_pro)){
+	$tel_father .= 'pro : '.$enfant->father_phone_pro."\n";
+}
+
+$tel_mother = '';
+
+if(isset($enfant->mother_phone_home) && !empty($enfant->mother_phone_home)){
+	$tel_mother .= 'tel : '.$enfant->mother_phone_home."\n";
+}
+if(isset($enfant->mother_phone_mobile) && !empty($enfant->mother_phone_mobile)){
+	$tel_mother .= 'mobile : '.$enfant->mother_phone_mobile."\n";
+}
+if(isset($enfant->mother_phone_pro) && !empty($enfant->mother_phone_pro)){
+	$tel_mother .= 'pro : '.$enfant->mother_phone_pro."\n";
+}
+
+// 'tel : '.utf8_decode($enfant->mother_phone_home)."\n mobile : ".utf8_decode($enfant->mother_phone_mobile)."\n pro : ".utf8_decode($enfant->mother_phone_pro),
 		$datas[] = array(
 			'Nom' => utf8_decode($enfant->lastname),
 			utf8_decode('Prénom') => utf8_decode($enfant->firstname),
 			'Date de naissance' => $birthdate_string,
 			"Adresse de l'enfant" => utf8_decode($address),
-			utf8_decode("Famille d'accueil") => utf8_decode($enfant->host_family_name),
+			utf8_decode("Famille d'accueil") => utf8_decode($enfant->host_family_name).(isset($address_host))?utf8_decode($address_host):'',
 			utf8_decode('Structure') => (isset($organization->name))?utf8_decode($organization->name):'',
 			utf8_decode('Nom Contact') => (isset($contact->lastname))?utf8_decode($contact->lastname).' '.utf8_decode($contact->firstname):'',
 			utf8_decode('Tél structure') => (isset($organization->phone))?utf8_decode($organization->phone):'',
 			utf8_decode('Père') => utf8_decode($enfant->father_name),
-			utf8_decode('Tél père') => utf8_decode($enfant->father_phone_home).'  '.utf8_decode($enfant->father_phone_mobile).'  '.utf8_decode($enfant->father_phone_pro),
+			utf8_decode('Tél père') => $tel_father,
 			utf8_decode('Mère') => utf8_decode($enfant->mother_name),
-			utf8_decode('Tél Mère') => utf8_decode($enfant->mother_phone_home).'  '.utf8_decode($enfant->mother_phone_mobile).'  '.utf8_decode($enfant->mother_phone_pro),
+			utf8_decode('Tél Mère') => $tel_mother,
 		);
 
 
@@ -135,7 +162,7 @@ elseif($type == 3){
 
 	$headline = utf8_decode('Registre des mineurs - '.$sejour->name.' du '.strftime('%d %B %Y', $date_from_query->getTimestamp()).' au '.strftime('%d %B %Y', $date_to_query->getTimestamp()));
 	tool::output($datas);
-	 //tool::output($inscriptions);
+	tool::output($inscriptions);
 	$filename = 'Registre des mineurs - '.$sejour->name.' - ';
 	//CSV::export($datas, $filename, $headline);
 // Registre des mineurs
