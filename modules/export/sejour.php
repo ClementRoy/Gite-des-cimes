@@ -149,7 +149,7 @@ if(isset($enfant->mother_phone_pro) && !empty($enfant->mother_phone_pro)){
 			utf8_decode("Adresse de l'enfant") => utf8_decode($address),
 			utf8_decode("Famille d'accueil") => utf8_decode($enfant->host_family_name).(isset($address_host))?utf8_decode($address_host):'',
 			utf8_decode('Structure') => (isset($organization->name))?utf8_decode($organization->name):'',
-			utf8_decode('Nom Contact') => $contact->civility.' '.(isset($contact->lastname))?utf8_decode($contact->lastname).' '.utf8_decode($contact->firstname):'',
+			utf8_decode('Nom Contact') => (!empty($contact))?utf8_decode($contact->civility).' '.utf8_decode($contact->lastname).' '.utf8_decode($contact->firstname):'',
 			utf8_decode('Tél structure') => (isset($organization->phone))?utf8_decode($organization->phone):'',
 			utf8_decode('Père') => utf8_decode($enfant->father_name),
 			utf8_decode('Tél père') => $tel_father,
