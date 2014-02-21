@@ -42,7 +42,7 @@ class inscription
         $params = array(
                         ':id' => $id
                         );
-        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:id';
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:id AND archived = 0';
         $result = $db->query($sql, $params);
         return $result;        
     }
@@ -56,7 +56,7 @@ class inscription
         $params = array(
                         ':id' => $id
                         );
-        $sql = 'SELECT * FROM '.self::$table.' LEFT JOIN enfant ON inscription.ref_enfant = enfant.id LEFT JOIN structure ON enfant.organization = structure.id LEFT JOIN structure_contact ON enfant.contact = structure_contact.id WHERE ref_sejour=:id AND date_from <= "'.$date_from.'" AND date_to >="'.$date_to.'" ORDER BY enfant.lastname';
+        $sql = 'SELECT * FROM '.self::$table.' LEFT JOIN enfant ON inscription.ref_enfant = enfant.id LEFT JOIN structure ON enfant.organization = structure.id LEFT JOIN structure_contact ON enfant.contact = structure_contact.id WHERE ref_sejour=:id AND inscription.archived = 0 AND date_from <= "'.$date_from.'" AND date_to >="'.$date_to.'" ORDER BY enfant.lastname';
         $result = $db->query($sql, $params);
         return $result;        
     }
