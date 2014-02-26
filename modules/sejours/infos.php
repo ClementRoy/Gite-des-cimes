@@ -148,7 +148,20 @@
                             <?php $enfant = enfant::get($inscription->ref_enfant); ?>
                             <tr>
                                 <td>
-                                    #<?=$key+1 ?>
+                                    <a href="/inscriptions/infos/id/<?=$inscription->id; ?>">#<?=$key+1 ?></a>
+                                    <div class="pop-dialog tr">
+                                        <div class="pointer">
+                                            <div class="arrow"></div>
+                                            <div class="arrow_border"></div>
+                                        </div>
+                                        <div class="body">
+                                            <div class="menu">
+                                                <a href="/inscriptions/infos/id/<?=$inscription->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                                <a href="/inscriptions/editer/id/<?=$inscription->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                                <a href="/inscriptions/supprimer/id/<?=$inscription->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                            </div>
+                                        </div>
+                                    </div> 
                                 </td>
                                 <td>
                                     <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->firstname ?></a>

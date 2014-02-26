@@ -51,7 +51,7 @@ class sejour
             $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0', $data);
         }
         else {
-            $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY name');
+            $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY date_from');
         }
         return $result;
     }

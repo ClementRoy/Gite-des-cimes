@@ -32,7 +32,7 @@
 
         <div id="pad-wrapper" class="users-profil<?=($enfant->archived)?' archived':' ';?>" >
 
-            <?php tool::output($enfant); ?>
+            <?php //tool::output($enfant); ?>
 
             <div class="row header icon">
                 <div class="col-md-7">
