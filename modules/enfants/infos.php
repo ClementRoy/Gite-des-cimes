@@ -284,6 +284,7 @@
                       <table class="table table-hover extendlink">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>
                                         Nom du séjour
                                     </th>
@@ -298,14 +299,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($inscriptions as $inscription): ?>
+                                <?php foreach($inscriptions as $key => $inscription): ?>
                                 <?php $sejour = sejour::get($inscription->ref_sejour); ?>
                                 <tr>
+                                    <td>
+                                        <a href="/inscriptions/infos/id/<?=$inscription->id; ?>">#<?=$key+1 ?></a>
+                                        <div class="pop-dialog tr">
+                                            <div class="pointer">
+                                                <div class="arrow"></div>
+                                                <div class="arrow_border"></div>
+                                            </div>
+                                            <div class="body">
+                                                <div class="menu">
+                                                    <a href="/inscriptions/infos/id/<?=$inscription->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                                    <a href="/inscriptions/editer/id/<?=$inscription->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                                    <a href="/inscriptions/supprimer/id/<?=$inscription->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </td>
                                     <td>
                                         <a href="/sejours/infos/id/<?=$sejour->id ?>"><?=$sejour->name ?></a>
                                     </td>
                                     <td>
-                                        du <?=tool::getDatefromDatetime($inscription->date_from); ?> au <?=tool::getDatefromDatetime($inscription->date_to); ?>
+                                        <?php $date_from = new DateTime($inscription->date_from); ?>
+                                        <?php $date_to = new DateTime($inscription->date_to); ?>
+                                        du <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?> 
                                     </td>
                                     <td>
                                         <?=$inscription->note ?>
@@ -314,51 +333,6 @@
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
-
-<!--
-                    <h6>Séjours déjà effectués</h6>
-                      <table class="table table-hover extendlink">
-                            <thead>
-                                <tr>
-                                    <th class="col-md-1">
-                                        N° 
-                                    </th>
-                                    <th class="col-md-3">
-                                        <span class="line"></span>
-                                        Dates
-                                    </th>
-                                    <th class="col-md-5">
-                                        <span class="line"></span>
-                                        Nom du séjour
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="#">459</a>
-                                    </td>
-                                    <td>
-                                        12 au 17 décembre 2014
-                                    </td>
-                                    <td>
-                                        <a href="#">Du Vert et du Bleu</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">471</a>
-                                    </td>
-                                    <td>
-                                        21 au 28 juillet 2013
-                                    </td>
-                                    <td>
-                                        <a href="#">Brises et Houles</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
--->
                 </div>
 
                 <div class="col-md-3 address">

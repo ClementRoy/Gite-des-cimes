@@ -47,7 +47,7 @@
 
                 <div class="col-md-9 bio">
                     <div class="profile-box">
-                      <?php //tool::output($hebergement); ?>
+                      <?php tool::output($hebergement); ?>
                         <?php if(!empty($hebergement->note)): ?>
                         <div class="">
                             <h6>Description</h6>
@@ -70,7 +70,9 @@
                 <div class="col-md-3 address">
                     <h6>Coordonnées</h6>
                     <?php $geo = tool::getLatLng($hebergement->address_number.' '.$hebergement->address_street.' '.$hebergement->address_postal_code.' '.$hebergement->address_city); ?>
+                    <?php if($geo[0]): ?>
                     <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$geo[0]; ?>,<?=$geo[1]; ?>&zoom=12&size=210x200&scale=2&markers=<?=$geo[0]; ?>,<?=$geo[1]; ?>&sensor=false" width="100%" alt="">
+                    <?php endif; ?>
                     <ul>
                       <li><strong>Adresse</strong></li>
                       <li><?=$hebergement->address_number; ?> <?=$hebergement->address_street; ?></li>

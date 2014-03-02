@@ -170,7 +170,9 @@
                                     <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->lastname ?></a>
                                 </td>
                                 <td>
-                                    du <?=tool::getDatefromDatetime($inscription->date_from); ?> au <?=tool::getDatefromDatetime($inscription->date_to); ?>
+                                        <?php $date_from = new DateTime($inscription->date_from); ?>
+                                        <?php $date_to = new DateTime($inscription->date_to); ?>
+                                        du <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?> 
                                 </td>
                             </tr>
                             <?php endforeach; ?>

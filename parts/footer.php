@@ -43,9 +43,16 @@ jQuery.extend( jQuery.fn.dataTableExt.oSort, {
     }
 } );
 
+            if($('.datatable').data('sort') != undefined ){
+                var col_sort = $('.datatable').data('sort');
+            }
+            else {
+                var col_sort = '0';
+            }
             $('.datatable').dataTable({
+                "aaSorting": [[col_sort,'asc']],
                 "sPaginationType": "full_numbers",
-                "iDisplayLength": 25,
+                "iDisplayLength": 50,
                 "oLanguage": {
                     "sProcessing":     "Traitement en cours...",
                     "sSearch":         "Rechercher&nbsp;:",

@@ -48,7 +48,7 @@ class sejour
         global $db;
         if(!empty($limit)){
             $data = array();
-            $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0', $data);
+            $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0 ORDER BY date_from', $data);
         }
         else {
             $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY date_from');

@@ -123,12 +123,17 @@ class tool
 
     public static function getLatLng($address) {
 
-        $uri = "http://maps.google.com/maps/api/geocode/json?address=".urlencode($address)."&sensor=false&region=UK";
+        $uri = "http://maps.google.com/maps/api/geocode/json?address=".urlencode($address)."&sensor=false&region=FR";
         $url = file_get_contents($uri);
         $response = json_decode($url);
-         
-        $lat = $response->results[0]->geometry->location->lat;
-        $lng = $response->results[0]->geometry->location->lng; 
+        tool::output($response);
+        if(count($response->results) > 0){
+            $lat = $response->results[0]->geometry->location->lat;
+            $lng = $response->results[0]->geometry->location->lng; 
+        }else {
+            $lat = false;
+            $lng = false;
+        }
 
         return array($lat, $lng);
     }
