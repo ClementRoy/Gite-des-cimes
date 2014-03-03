@@ -3,11 +3,15 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
-	<!-- main container -->
+    <div class="title">
+        <div class="row header">
+            <div class="col-md-12">
+                <h3>Tableau de bord</h3>
+            </div>
+        </div>
+    </div>
     <div class="content">
-
-        <!-- upper main stats -->
-        <div id="main-stats" class="hidden-xs">
+        <div class="main-stats hidden-xs">
             <div class="row stats-row">
                 <div class="col-md-3 col-sm-3 stat">
                     <div class="data">
@@ -39,32 +43,29 @@
                 </div>
             </div>
         </div>
-        <!-- end upper main stats -->
 
-        <div id="pad-wrapper">
-            
-            <div class="grid-wrapper">
-                <div class="row">
-                    
-                    <div class="col-md-12">
-                        <div class="jumbotron">
-                        <h1>En cours de construction !</h1>
-                        </div>
-                    </div>
 
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="jumbotron">
+                    <h1>En cours de construction !</h1>
                 </div>
+            </div>
 
-                <div class="row">
-                    
-                    <h6>Inscriptions non finalisées</h6>
+        </div>
 
-                    <h6>Séjours à venir</h6>
+        <div class="row">
 
-                    <h6>Fiches à compléter</h6>
+            <h6>Inscriptions non finalisées</h6>
 
-                    <h6>Taux de remplissage</h6>
+            <h6>Séjours à venir</h6>
 
-                </div>
+            <h6>Fiches à compléter</h6>
+
+            <h6>Taux de remplissage</h6>
+
+        </div>
 <!--
                 <div class="row">
                     <div class="col-md-6">
@@ -132,9 +133,7 @@
                         <h4>Rappels</h4>
                     </div>                  
                 </div>
-                -->
-            </div>
-        </div>
+            -->
     </div>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

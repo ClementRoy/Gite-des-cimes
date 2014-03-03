@@ -2,26 +2,22 @@
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 
-
-    <!-- main container -->
-    <div class="content">
-        <div id="pad-wrapper">
-
+        <div class="title">
             <div class="row header">
                 <div class="col-md-4">
                     <h3>Les enfants</h3>
                 </div>
                 <div class="col-md-8 text-right">
-                    <a href="/enfants/ajouter" class="btn-flat primary"><span>+</span>
+                    <a href="/enfants/ajouter" class="btn btn-primary"><span>+</span>
                         Ajouter un enfant</a>
                 </div>
             </div>
-
-            <?php $enfants = enfant::getList(); ?>                      
+        </div>
+        <div class="content content-table">
+            <?php $enfants = enfant::getList(); ?>          
 
             <div class="row">
                 <div class="col-md-12">
-
                    <table class="datatable">
                         <thead>
                             <tr>
@@ -32,7 +28,6 @@
                                 <th tabindex="0" rowspan="1" colspan="1">Date de naissance</th>
                                 <th tabindex="0" rowspan="1" colspan="1">Age</th>
                             </tr>
-
                         </thead>
                         
                         <tfoot>
@@ -50,19 +45,19 @@
                         <tr class="">
                                 <td>
                                     <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname; ?></a>
-                                <div class="pop-dialog tr">
-                                    <div class="pointer">
-                                        <div class="arrow"></div>
-                                        <div class="arrow_border"></div>
-                                    </div>
-                                    <div class="body">
-                                        <div class="menu">
-                                            <a href="/enfants/infos/id/<?=$enfant->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
-                                            <a href="/enfants/editer/id/<?=$enfant->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
-                                            <a href="/enfants/supprimer/id/<?=$enfant->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                    <div class="pop-dialog tr">
+                                        <div class="pointer">
+                                            <div class="arrow"></div>
+                                            <div class="arrow_border"></div>
                                         </div>
-                                    </div>
-                                </div>                                     
+                                        <div class="body">
+                                            <div class="menu">
+                                                <a href="/enfants/infos/id/<?=$enfant->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                                <a href="/enfants/editer/id/<?=$enfant->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                                <a href="/enfants/supprimer/id/<?=$enfant->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                            </div>
+                                        </div>
+                                    </div>                                     
                                 </td>
                                 <td>
                                      <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname; ?></a>
@@ -77,14 +72,14 @@
                                     <span class="label label-warning">Incomplète</span> 
                                     <?php endif; ?>  
                                     <?php 
-                                    /*
-<span class="label label-default">Default</span>
-<span class="label label-primary">Primary</span>
-<span class="label label-success">Success</span>
-<span class="label label-info">Info</span>
-<span class="label label-warning">Warning</span>
-<span class="label label-danger">Danger</span>
-                                    */
+                                        /*
+                                        <span class="label label-default">Default</span>
+                                        <span class="label label-primary">Primary</span>
+                                        <span class="label label-success">Success</span>
+                                        <span class="label label-info">Info</span>
+                                        <span class="label label-warning">Warning</span>
+                                        <span class="label label-danger">Danger</span>
+                                        */
                                      ?>
                                 </td>
                                 <td>
@@ -109,18 +104,13 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-
                 </div>                
             </div>
-
-            <!-- end users table -->
         </div>
-    </div><!-- /.container -->
 
     <script>
         $(document).ready(function(){
-
-
+            $('html, body').animate({scrollTop: $('#wrap').offset().top}, 1);
         });
     </script>
 

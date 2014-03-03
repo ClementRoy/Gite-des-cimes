@@ -5,14 +5,16 @@
 
 
      <?php $enfant = enfant::get($_GET['id']); ?>
-       
-    <div class="content">
-        <div id="pad-wrapper" class="form-page">
+
+        <div class="title">
             <div class="row header">
                 <div class="col-md-12">
                     <h3>Editer <?=$enfant->firstname.' '.$enfant->lastname; ?></h3>
                 </div>
             </div>
+        </div>
+        
+        <div class="content">
 
          <?php //tool::output($enfant); ?>
 
@@ -113,6 +115,7 @@
             <form id="form-add-children" method="post" parsley-validate>
                    <!--  <h2>Informations sur l'enfant</h2> -->
                      <div class="row form-wrapper">
+                     <div class="col-md-12">
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-prenom">Prénom</label>
                             <div class="col-md-4 col-sm-5">
@@ -663,11 +666,10 @@
                                 <a href="/enfants/" class="reset">Annuler</a>
                             </div>
                         </div>
-
+                    </div>
                     </div>
             </form>
             <?php endif; ?>
         </div>
-    </div>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

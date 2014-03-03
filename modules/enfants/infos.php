@@ -11,7 +11,6 @@
     <?php $date_edited = new DateTime($enfant->edited); ?>
 
 
-    <div class="content">
 
         <?php if(isset($_POST['activate'])): ?>
                 <div class="alert alert-success">
@@ -30,13 +29,22 @@
         </div>
         <?php endif; ?>
 
-        <div id="pad-wrapper" class="users-profil<?=($enfant->archived)?' archived':' ';?>" >
 
-            <?php //tool::output($enfant); ?>
+        <div class="title">
+            <div class="row header">
+                <div class="col-md-6">
 
-            <div class="row header icon">
-                <div class="col-md-7">
-                    <a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
+
+                    <h3><a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
+                    <?=$enfant->firstname; ?> <strong><?=$enfant->lastname; ?></strong><br />
+                    <small class="area">
+                        <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i>' : '<i class="icon-male"></i>'; ?>
+                        <?php $birthdate = new DateTime($enfant->birthdate); ?>
+                        <?php if($birthdate->getTimestamp() != '-62169987600'): ?>
+                            <?=strftime('%d %B %Y', $birthdate->getTimestamp()); ?> 
+                            (<?=tool::getAgeFromDate($enfant->birthdate); ?> ans)
+                        <?php endif; ?>
+                    </small></h3>
 
                     <div class="pop-dialog">
                         <div class="pointer">
@@ -51,26 +59,23 @@
                         </div>
                     </div>
 
-                    <h3><!-- class="name" -->
-                    
-                    <?=$enfant->firstname; ?> <?=$enfant->lastname; ?>
-                    <small class="area">
-                        <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i>' : '<i class="icon-male"></i>'; ?>
-                        <?php $birthdate = new DateTime($enfant->birthdate); ?>
-                        <?php if($birthdate->getTimestamp() != '-62169987600'): ?>
-                            <?=strftime('%d %B %Y', $birthdate->getTimestamp()); ?> 
-                            (<?=tool::getAgeFromDate($enfant->birthdate); ?> ans)
-                        <?php endif; ?>
-                    </small>
-                    </h3>
                 </div>
-
-
-                <div class="col-md-4 text-right pull-right">
+                <div class="col-md-6 text-right">
+                    <!-- <a href="/enfants/ajouter" class="btn btn-primary"><span>+</span> 
+                        Ajouter un enfant</a>-->
+                        <div class="col-md-4 text-right pull-right">
                     <i class="icon-cog"></i>
                 </div>
-
+                </div>
             </div>
+        </div>
+        <div class="content users-profil<?=($enfant->archived)?' archived':' ';?>">
+
+
+
+
+            <?php //tool::output($enfant); ?>
+
 
             <div class="row profile">
 
@@ -471,7 +476,6 @@
 
         </div>
 
-    </div>
 
 
 

@@ -2,7 +2,7 @@
 
 $menus = array(
 	'accueil' => array(
-		'name' => 'Accueil',
+		'name' => 'Tableau de bord',
 		'icon' => 'dashboard',
 		),
 	'enfants' => array(
@@ -82,7 +82,7 @@ if($path_array['1'] == ''){
 
 
     <!-- sidebar -->
-    <div id="sidebar-nav">
+    <div id="sidebar-nav" data-spy="affix" data-offset-top="52">
         <ul id="dashboard-menu">
 
 			<?php foreach($menus as $key => $menu): ?>
@@ -101,7 +101,7 @@ if($path_array['1'] == ''){
 	                <a class="dropdown-toggle" href="#">
 	                    <i class="icon-<?=$menu['icon']; ?>"></i>
 	                    <span><?=$menu['name']; ?></span>
-	                    <i class="icon-chevron-down"></i>
+	                    <i class="icon-angle-right"></i>
 	                </a>
 	                <ul class="submenu <?php if(in_array($key, $path_array)): ?>active<?php endif; ?>">
 	                	<?php foreach($menu['submenu'] as $subKey => $submenu): ?>
@@ -119,4 +119,5 @@ if($path_array['1'] == ''){
 	    	<?php endforeach; ?>
         </ul>
     </div>
+    <div class="wrap fadeInUp animated" id="wrap">
     <!-- end sidebar -->
