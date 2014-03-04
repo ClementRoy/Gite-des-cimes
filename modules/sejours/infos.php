@@ -47,13 +47,25 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <?php if($date_from->diff($date_to)->format('%d') > 14): ?>
+                            <?php if($date_from->diff($date_to)->format('%d') > 21): ?>
+                            <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/1/">Récapitulatif mineurs semaine 1</a></li>
+                            <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/2/">Récapitulatif mineurs semaine 2</a></li>
+                            <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/3/">Récapitulatif mineurs semaine 3</a></li>
+                            <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/4/">Récapitulatif mineurs semaine 3</a></li>
+                            <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/1/">Suivi sanitaire semaine 1</a></li>
+                            <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/2/">Suivi sanitaire semaine 2</a></li>
+                            <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/3/">Suivi sanitaire semaine 3</a></li>
+                            <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/4/">Suivi sanitaire semaine 3</a></li>
+                            <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/1/">Registre des mineurs semaine 1</a></li>
+                            <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/2/">Registre des mineurs semaine 2</a></li>
+                            <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/3/">Registre des mineurs semaine 3</a></li>
+                            <?php elseif($date_from->diff($date_to)->format('%d') > 14): ?>
                             <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/1/">Récapitulatif mineurs semaine 1</a></li>
                             <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/2/">Récapitulatif mineurs semaine 2</a></li>
                             <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/3/">Récapitulatif mineurs semaine 3</a></li>
                             <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/1/">Suivi sanitaire semaine 1</a></li>
-                             <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/2/">Suivi sanitaire semaine 2</a></li>
-                             <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/3/">Suivi sanitaire semaine 3</a></li>
+                            <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/2/">Suivi sanitaire semaine 2</a></li>
+                            <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/3/">Suivi sanitaire semaine 3</a></li>
                             <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/1/">Registre des mineurs semaine 1</a></li>
                             <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/2/">Registre des mineurs semaine 2</a></li>
                             <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/3/">Registre des mineurs semaine 3</a></li>

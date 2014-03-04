@@ -136,7 +136,7 @@
                         <label class="radio-inline col-md-7" for="form-inscription-option-oui">
                             <div class="radio" id="uniform-form-inscription-option-oui">
                                 <span>
-                                    <input type="radio" name="form_inscription_option" id="form-inscription-option-oui" value="1" <?php if($inscription->finished == 0): ?>checked="checked"<?php endif; ?>>
+                                    <input type="radio" name="form_inscription_option" id="form-inscription-option-oui" value="1" <?php if($inscription->finished == 1): ?>checked="checked"<?php endif; ?>>
                                 </span>
                             </div>
                             Oui

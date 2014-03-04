@@ -39,6 +39,11 @@
             <div class="row">
                 <div class="col-md-9 bio">
 
+                <ul>
+                    <li> éditer le contrat, </li>
+                    <li>le dossier d'inscription </li>
+                    <li>et la convocation.</li>
+                </ul>
                     <!--
                     <h4>Capacité du séjour</h4>
 

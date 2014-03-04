@@ -285,6 +285,7 @@
                     </div>
                         <?php $inscriptions = inscription::getByEnfant($enfant->id); ?>
                         <?php //tool::output($inscriptions); ?>
+                        <?php if(count($inscriptions)>0): ?>
                     <h6>Séjours à venir de l'enfant</h6>
                       <table class="table table-hover extendlink">
                             <thead>
@@ -338,6 +339,9 @@
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
+                        <?php else: ?>
+                            <p>Aucun séjour à venir pour cet enfant</p>
+                        <?php endif; ?>
                 </div>
 
                 <div class="col-md-3 address">
