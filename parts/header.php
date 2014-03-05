@@ -16,10 +16,11 @@
     <!-- libraries -->
     <link href="/assets/css/lib/jquery-ui-1.10.2.custom.css" rel="stylesheet" type="text/css" />
 
-<link href="/assets/css/lib/uniform.default.css" type="text/css" rel="stylesheet">
-    <link href="/assets/css/lib/select2.css" type="text/css" rel="stylesheet">
+<!--     <link href="/assets/css/lib/uniform.default.css" type="text/css" rel="stylesheet">
+    <link href="/assets/css/lib/jquery.steps.css" type="text/css" rel="stylesheet"> 
+
+    <link href="/assets/css/lib/select2.css" type="text/css" rel="stylesheet">-->
     <link href="/assets/css/lib/bootstrap.datepicker.css" type="text/css" rel="stylesheet">
-    <link href="/assets/css/lib/jquery.steps.css" type="text/css" rel="stylesheet">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.0.0/animate.min.css" type="text/css" rel="stylesheet">
     <link href="/assets/css/lib/jquery.dataTables.css" type="text/css" rel="stylesheet">
 

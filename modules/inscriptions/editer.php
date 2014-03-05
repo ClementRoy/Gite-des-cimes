@@ -119,26 +119,26 @@
                         </div>
                     </div>
 
-                    <div class="field-box row">
-                        <label class="col-md-2">Inscription finalisée</label>
-                        <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si l'inscription est finalisé.">
-                            <label class="radio-inline col-md-7" for="form-inscription-option-oui">
-                                <div class="radio" id="uniform-form-inscription-option-oui">
-                                    <span>
-                                        <input type="radio" name="form_inscription_option" id="form-inscription-option-oui" value="1" <?php if($inscription->finished == 0): ?>checked="checked"<?php endif; ?>>
-                                    </span>
-                                </div>
-                                Oui
-                            </label>
-                            <label class="radio-inline col-md-4 col-sm-5" for="form-inscription-option-non">
-                                <div class="radio" id="uniform-form-inscription-option-non">
-                                    <span class="checked">
-                                        <input type="radio" name="form_inscription_option" id="form-inscription-option-non" value="0" <?php if($inscription->finished == 0): ?>checked="checked"<?php endif; ?>>
-                                    </span>
-                                </div>
-                                Non
-                            </label>
-                        </div>
+
+                <div class="field-box row">
+                    <label class="col-md-2">Inscription finalisée</label>
+                    <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si l'inscription est finalisé.">
+                        <label class="radio-inline col-md-7" for="form-inscription-option-oui">
+                            <div class="radio" id="uniform-form-inscription-option-oui">
+                                <span>
+                                    <input type="radio" name="form_inscription_option" id="form-inscription-option-oui" value="1" <?php if($inscription->finished == 1): ?>checked="checked"<?php endif; ?>>
+                                </span>
+                            </div>
+                            Oui
+                        </label>
+                        <label class="radio-inline col-md-4 col-sm-5" for="form-inscription-option-non">
+                            <div class="radio" id="uniform-form-inscription-option-non">
+                                <span class="checked">
+                                    <input type="radio" name="form_inscription_option" id="form-inscription-option-non" value="0" <?php if($inscription->finished == 0): ?>checked="checked"<?php endif; ?>>
+                                </span>
+                            </div>
+                            Non
+                        </label>
                     </div>
 
 

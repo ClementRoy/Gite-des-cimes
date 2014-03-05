@@ -279,9 +279,68 @@
 
                 </div>
 
-
-                <div class="pull-right">
-                    <a href="/inscriptions/ajouter/enfant/<?=$enfant->id; ?>" class="btn-flat primary"><span>+</span> Inscrire à un séjour</a>
+                    <div class="pull-right">
+                        <a href="/inscriptions/ajouter/enfant/<?=$enfant->id; ?>" class="btn-flat primary"><span>+</span> Inscrire à un séjour</a>
+                    </div>
+                        <?php $inscriptions = inscription::getByEnfant($enfant->id); ?>
+                        <?php //tool::output($inscriptions); ?>
+                        <?php if(count($inscriptions)>0): ?>
+                    <h6>Séjours à venir de l'enfant</h6>
+                      <table class="table table-hover extendlink">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>
+                                        Nom du séjour
+                                    </th>
+                                    <th>
+                                        <span class="line"></span>
+                                        Dates
+                                    </th>
+                                    <th>
+                                        <span class="line"></span>
+                                        Note
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($inscriptions as $key => $inscription): ?>
+                                <?php $sejour = sejour::get($inscription->ref_sejour); ?>
+                                <tr>
+                                    <td>
+                                        <a href="/inscriptions/infos/id/<?=$inscription->id; ?>">#<?=$key+1 ?></a>
+                                        <div class="pop-dialog tr">
+                                            <div class="pointer">
+                                                <div class="arrow"></div>
+                                                <div class="arrow_border"></div>
+                                            </div>
+                                            <div class="body">
+                                                <div class="menu">
+                                                    <a href="/inscriptions/infos/id/<?=$inscription->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                                    <a href="/inscriptions/editer/id/<?=$inscription->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                                    <a href="/inscriptions/supprimer/id/<?=$inscription->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </td>
+                                    <td>
+                                        <a href="/sejours/infos/id/<?=$sejour->id ?>"><?=$sejour->name ?></a>
+                                    </td>
+                                    <td>
+                                        <?php $date_from = new DateTime($inscription->date_from); ?>
+                                        <?php $date_to = new DateTime($inscription->date_to); ?>
+                                        du <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?> 
+                                    </td>
+                                    <td>
+                                        <?=$inscription->note ?>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <?php else: ?>
+                            <p>Aucun séjour à venir pour cet enfant</p>
+                        <?php endif; ?>
                 </div>
                 <?php $inscriptions = inscription::getByEnfant($enfant->id); ?>
                 <?php //tool::output($inscriptions); ?>
