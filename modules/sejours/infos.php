@@ -20,6 +20,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
 <?php $date_from = new DateTime($sejour->date_from); ?>
 <?php $date_to = new DateTime($sejour->date_to); ?>
 
+<?php $nb_weeks = tool::getNbWeeks($date_from, $date_to); ?>
 
 
 <div class="title">
@@ -45,163 +46,159 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
         </div>
 
         <div class="col-md-6 text-right">
-            <div class="btn-group">
-                <button class="btn glow"><i class="icon-download-alt"></i></button>
-                <button class="btn glow dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <?php if($date_from->diff($date_to)->format('%d') > 21): ?>
-                        <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/1/">Récapitulatif mineurs semaine 1</a></li>
-                        <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/2/">Récapitulatif mineurs semaine 2</a></li>
-                        <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/3/">Récapitulatif mineurs semaine 3</a></li>
-                        <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/4/">Récapitulatif mineurs semaine 3</a></li>
-                        <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/1/">Suivi sanitaire semaine 1</a></li>
-                        <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/2/">Suivi sanitaire semaine 2</a></li>
-                        <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/3/">Suivi sanitaire semaine 3</a></li>
-                        <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/4/">Suivi sanitaire semaine 3</a></li>
-                        <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/1/">Registre des mineurs semaine 1</a></li>
-                        <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/2/">Registre des mineurs semaine 2</a></li>
-                        <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/3/">Registre des mineurs semaine 3</a></li>
-                    <?php elseif($date_from->diff($date_to)->format('%d') > 14): ?>
-                        <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/1/">Récapitulatif mineurs semaine 1</a></li>
-                        <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/2/">Récapitulatif mineurs semaine 2</a></li>
-                        <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/3/">Récapitulatif mineurs semaine 3</a></li>
-                        <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/1/">Suivi sanitaire semaine 1</a></li>
-                        <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/2/">Suivi sanitaire semaine 2</a></li>
-                        <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/3/">Suivi sanitaire semaine 3</a></li>
-                        <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/1/">Registre des mineurs semaine 1</a></li>
-                        <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/2/">Registre des mineurs semaine 2</a></li>
-                        <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/3/">Registre des mineurs semaine 3</a></li>
-                    <?php elseif($date_from->diff($date_to)->format('%d') > 7): ?>
-                        <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/1/">Récapitulatif mineurs semaine 1</a></li>
-                        <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/2/">Récapitulatif mineurs semaine 2</a></li>
-                        <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/1/">Suivi sanitaire semaine 1</a></li>
-                        <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/2/">Suivi sanitaire semaine 2</a></li>
-                        <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/1/">Registre des mineurs semaine 1</a></li>
-                        <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/2/">Registre des mineurs semaine 2</a></li>
-                    <?php else: ?>
-                        <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/week/1/">Récapitulatif mineurs</a></li>
-                        <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/week/1/">Suivi sanitaire</a></li>
-                        <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/week/1/">Registre des mineurs</a></li>
-                    <?php endif; ?>
-                </ul>
-            </div>   
+
         </div>
     </div>
 </div>
 
-<div class="content <?=($enfant->archived)?' archived':' ';?>">
+<div class="content <?=($sejour->archived)?' archived':' ';?>">
 
 
     <div class="row">
         <div class="col-md-9">
             <p>Séjour du <?=strftime('%d %B %Y', $date_from->getTimestamp()) ?> au <?=strftime('%d %B %Y', $date_to->getTimestamp()) ?></p>
-            <!--
-            <h4>Capacité du séjour</h4>
+            
+                <div class="pull-right">
+                    <a href="/inscriptions/ajouter/sejour/<?=$sejour->id; ?>" class="btn-flat primary"><span>+</span> Ajouter un enfant à ce séjour</a>
+                </div>
 
-            <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="10" style="width: 30%;">
-            <span>3</span>
-            </div>
-            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="7" style="width: 10%">
-            <span>1</span>
-            </div>
-            <span>10</span>
-            </div>
-            <div class="row">
-            <div class="col-md-6">
-            <h4>Enfants participants à ce séjour</h4>
-            </div>
-            <div class="col-md-6 text-right">
-            </div>
+            <ul class="nav nav-tabs">
+            <?php for ($i=1; $i <= $nb_weeks; $i++) : ?>
+               <li <?php if($i == 1): ?>class="active"<?php endif; ?>><a href="#week-<?=$i ?>"><?php if($date_from->diff($date_to)->format('%d') == 2): ?>Week-end<?php else: ?>Semaine <?=$i ?><?php endif; ?></a></li>
+            <?php endfor; ?>
+            </ul>
+                      
 
-            </div>
-            -->
+            <div class="tab-content">
+            <?php for ($i=1; $i <= $nb_weeks; $i++) : ?>
 
 
-            <h4>Capacité du séjour</h4>
-            <?php $inscriptions = inscription::getBySejour($sejour->id); ?>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="<?=count($inscriptions) ?>" aria-valuemin="0" aria-valuemax="<?=$sejour->capacity_min ?>" style="width: <?php echo (count($inscriptions)/$sejour->capacity_max)*100; ?>%;">
+                <?php 
+                    /*
+                    $i donne la semaine de la recherche
+                    on recherche toujours de +$i-1 week à +$i week
+                    */
+
+                    $date_from_query = new DateTime($sejour->date_from);
+                    $date_to_query = new DateTime($sejour->date_from);
+                    $diff_date_from = $i-1;
+                    $date_from_query->modify("+$diff_date_from weeks");
+                    $date_to_query->modify("+$i weeks");
+                ?>
+
+
+                <?php $inscriptions = inscription::getBySejourBetweenDates($sejour->id, $date_from_query, $date_to_query); ?>
+
+                <div class="tab-pane <?php if($i == 1): ?>active<?php endif; ?>" id="week-<?=$i ?>">
+
+
+                <div class="row">
+                <div class="col-md-10">
+                <h4>Capacité du séjour du au </h4>
+                <ul>
+                    <li>capacité min : <?=$sejour->capacity_min ?></li>
+                    <li>capacité max : <?=$sejour->capacity_max ?></li>
+                </ul>
+                </div>
+
+                <div class="col-md-2">
+                <br />
+                <div class="btn-group">
+                    <button class="btn glow"><i class="icon-download-alt"></i></button>
+                    <button class="btn glow dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp() ?>">Récapitulatif mineurs</a></li>
+                        <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp() ?>">Suivi sanitaire</a></li>
+                        <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp() ?>">Registre des mineurs</a></li>
+                    </ul>
+                </div> 
+                </div>
+
+                </div>
+
+
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="<?=min($sejour->capacity_min,count($inscriptions)) ?>" aria-valuemin="0" aria-valuemax="<?=$sejour->capacity_min ?>" style="width: <?php echo (min($sejour->capacity_min,count($inscriptions))/$sejour->capacity_max)*100; ?>%;">
+                    <span><?=min($sejour->capacity_min,count($inscriptions)) ?></span>
+                    </div>
+                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?=count($inscriptions) ?>" aria-valuemin="0" aria-valuemax="7" style="width: <?php echo (min($sejour->capacity_max,count($inscriptions))/$sejour->capacity_max)*100-(min($sejour->capacity_min,count($inscriptions))/$sejour->capacity_max)*100; ?>%;">
                     <span><?=count($inscriptions) ?></span>
+                    </div>
+                    <span><?=$sejour->capacity_max ?></span>
                 </div>
-                <!--
-                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="7" style="width: 10%">
-                <span>1</span>
+
+
+                <h6><?=count($inscriptions) ?> Enfants inscrits à ce séjour <?php if($date_from->diff($date_to)->format('%d') != 2): ?> pour la semaine <?=$i ?> <?php endif; ?></h6>
+
+                <?php if(count($inscriptions) > 0): ?>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    id
+                                </th>
+                                <th class="col-md-3">
+                                    Prénom
+                                </th>
+                                <th class="col-md-3">
+                                    <span class="line"></span>
+                                    Nom
+                                </th>
+                                <th class="col-md-2">
+                                    <span class="line"></span>
+                                    Dates
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($inscriptions as $key => $inscription): ?>
+                                <?php $enfant = enfant::get($inscription->ref_enfant); ?>
+                                <tr>
+                                    <td>
+                                        <a href="/inscriptions/infos/id/<?=$inscription->id; ?>">#<?=$key+1 ?></a>
+                                        <div class="pop-dialog tr">
+                                            <div class="pointer">
+                                                <div class="arrow"></div>
+                                                <div class="arrow_border"></div>
+                                            </div>
+                                            <div class="body">
+                                                <div class="menu">
+                                                    <a href="/inscriptions/infos/id/<?=$inscription->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                                    <a href="/inscriptions/editer/id/<?=$inscription->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                                    <a href="/inscriptions/supprimer/id/<?=$inscription->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </td>
+                                    <td>
+                                        <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->firstname ?></a>
+                                    </td>
+                                    <td>
+                                        <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->lastname ?></a>
+                                    </td>
+                                    <td>
+                                        <?php $date_from = new DateTime($inscription->date_from); ?>
+                                        <?php $date_to = new DateTime($inscription->date_to); ?>
+                                        du <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?> 
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php else: ?>
+                    <em>Aucune inscription pour le moment</em>
+                <?php endif; ?>
                 </div>
-                -->
-                <span><?=$sejour->capacity_max ?></span>
+            
+            <?php endfor; ?>
             </div>
 
+    </div>
 
-<?php //tool::output($inscriptions); ?>
 
 
-<div class="pull-right">
-    <a href="/inscriptions/ajouter/sejour/<?=$sejour->id; ?>" class="btn-flat primary"><span>+</span> Ajouter un enfant à ce séjour</a>
-</div>
-<h6>Enfants inscrits à ce séjour</h6>
-
-<?php if(count($inscriptions) > 0): ?>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>
-                    id
-                </th>
-                <th class="col-md-3">
-                    Prénom
-                </th>
-                <th class="col-md-3">
-                    <span class="line"></span>
-                    Nom
-                </th>
-                <th class="col-md-2">
-                    <span class="line"></span>
-                    Dates
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach($inscriptions as $key => $inscription): ?>
-                <?php $enfant = enfant::get($inscription->ref_enfant); ?>
-                <tr>
-                    <td>
-                        <a href="/inscriptions/infos/id/<?=$inscription->id; ?>">#<?=$key+1 ?></a>
-                        <div class="pop-dialog tr">
-                            <div class="pointer">
-                                <div class="arrow"></div>
-                                <div class="arrow_border"></div>
-                            </div>
-                            <div class="body">
-                                <div class="menu">
-                                    <a href="/inscriptions/infos/id/<?=$inscription->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
-                                    <a href="/inscriptions/editer/id/<?=$inscription->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
-                                    <a href="/inscriptions/supprimer/id/<?=$inscription->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
-                                </div>
-                            </div>
-                        </div> 
-                    </td>
-                    <td>
-                        <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->firstname ?></a>
-                    </td>
-                    <td>
-                        <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->lastname ?></a>
-                    </td>
-                    <td>
-                        <?php $date_from = new DateTime($inscription->date_from); ?>
-                        <?php $date_to = new DateTime($inscription->date_to); ?>
-                        du <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?> 
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-<?php else: ?>
-    <em>Aucune inscription pour le moment</em>
-<?php endif; ?>
-</div>
 
 <div class="col-md-3 address">
     <?php if(isset($hebergement )): ?>
@@ -215,5 +212,17 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
         </ul>
     <?php endif; ?>
 </div>
+
+</div>
+</div>
+
+<script>
+    $(function () {
+        $('.nav-tabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    });
+</script>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

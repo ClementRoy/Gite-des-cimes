@@ -3,20 +3,17 @@
 extract($_GET);
 $sejour = sejour::get($id);
 
-$date_from = new DateTime($sejour->date_from);
-$date_from_2 = new DateTime($sejour->date_from);
-$date_to = new DateTime($sejour->date_to);
 
-if($week == 3){
-	$date_from_query = $date_from->modify('+14 days');
-	$date_to_query =  $date_from_2->modify('+21 days');
-}elseif($week == 2){
-	$date_from_query = $date_from->modify('+7 days');
-	$date_to_query = $date_from_2->modify('+14 days');
-}else {
-	$date_from_query = $date_from;
-	$date_to_query = $date_from_2->modify('+7 days');
-}	
+/*
+$timestamp = strtotime('Mon, 12 Dec 2011 21:17:52 +0000');
+$dt = new DateTime();
+$dt->setTimestamp($timestamp);
+*/
+
+$date_from_query = new DateTime();
+$date_from_query->setTimestamp($datefrom);
+$date_to_query = new DateTime();
+$date_to_query->setTimestamp($dateto);
 
 if($type == 1){
 // Récapitulatif mineur

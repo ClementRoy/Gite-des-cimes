@@ -116,6 +116,21 @@ class tool
     }
         
 
+    public static function getNbWeeks($fromDate, $toDate){
+        if($fromDate->diff($toDate)->format('%d') > 21){
+            return 4;
+        }
+        elseif($fromDate->diff($toDate)->format('%d') > 14){
+            return 3;
+        }
+        elseif($fromDate->diff($toDate)->format('%d') > 7){
+            return 2;
+        }
+        else {
+            return 1;
+        }
+    }
+
     public static function getCurrentUser(){
         return $_SESSION['Auth']['id'];
     }
