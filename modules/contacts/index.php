@@ -1,73 +1,73 @@
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
+
+<div class="title">
+    <div class="row header">
+        <div class="col-md-6">
+            <h3>Les contacts</h3>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="/contacts/ajouter" class="btn btn-primary">
+                <span>+</span>Ajouter un contact
+            </a>
+        </div>
+    </div>
+</div>
+<div class="content content-table">
 
 
-    <!-- main container -->
-    <div class="content">
-		<div id="pad-wrapper">
 
-            <div class="row header">
-                <div class="col-md-3">
-                    <h3>Les contacts</h3>
-                </div>
-                <div class="col-md-9 text-right">
-                    <a href="/contacts/ajouter" class="btn-flat primary"><span>+</span>
-                        Ajouter un contact</a>
-                </div>
-            </div>
 
-            <?php $contacts = contact::getList(); ?>
+    <?php $contacts = contact::getList(); ?>
 
-            <?php //$contacts = contact::getList(); 
-/*
-Array (
+    <?php //$contacts = contact::getList(); 
+    /*
+    Array (
     'join strucutre on xxx '
     'join contact on xxx '
-)
+    )
 
-*/
-            ?>
-
-
-            <div class="row">
-                <div class="col-md-12">
+    */
+    ?>
 
 
-                    <table class="datatable">
-                        <thead>
-                            <tr>
-                                <th class="sortable">Nom</th>
-                                <th class="sortable">Prénom</th>
-                                <th class="sortable">Téléphone</th>
-                                <th class="sortable">Mobile</th>
-                                <th class="sortable">Email</th>
-                                <th class="sortable">Structure</th>
-                                <th class="sortable">Enfants à charge</th>
-                            </tr>
-                        </thead>
-                        
-                        <tfoot>
-                            <tr>
-                                <th class="sortable">Nom</th>
-                                <th class="sortable">Prénom</th>
-                                <th class="sortable">Téléphone</th>
-                                <th class="sortable">Mobile</th>
-                                <th class="sortable">Email</th>
-                                <th class="sortable">Structure</th>
-                                <th class="sortable">Enfants à charge</th>
-                            </tr>
-                        </tfoot>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="datatable">
+                <thead>
+                    <tr>
+                        <th class="sortable">Nom</th>
+                        <th class="sortable">Prénom</th>
+                        <th class="sortable">Téléphone</th>
+                        <th class="sortable">Mobile</th>
+                        <th class="sortable">Email</th>
+                        <th class="sortable">Structure</th>
+                        <th class="sortable">Enfants à charge</th>
+                    </tr>
+                </thead>
 
-                        <tbody>
-                        <?php foreach($contacts as $key => $contact): ?>
+                <tfoot>
+                    <tr>
+                        <th class="sortable">Nom</th>
+                        <th class="sortable">Prénom</th>
+                        <th class="sortable">Téléphone</th>
+                        <th class="sortable">Mobile</th>
+                        <th class="sortable">Email</th>
+                        <th class="sortable">Structure</th>
+                        <th class="sortable">Enfants à charge</th>
+                    </tr>
+                </tfoot>
+
+                <tbody>
+                    <?php foreach($contacts as $key => $contact): ?>
                         <?php 
-                          if($contact->ref_structure) {
+                        if($contact->ref_structure) {
                             $structure = structure::get($contact->ref_structure);
-                          }
+                        }
                         ?>
                         <?php 
-                            $enfants = enfant::getByContact($contact->id);
+                        $enfants = enfant::getByContact($contact->id);
                         ?>
                         <tr>
                             <td>
@@ -84,40 +84,34 @@ Array (
                                             <a href="/contacts/supprimer/id/<?=$contact->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                             </td>
                             <td>
-                                 <a href="/contacts/infos/id/<?=$contact->id; ?>"><?=$contact->firstname; ?></a>
+                                <a href="/contacts/infos/id/<?=$contact->id; ?>"><?=$contact->firstname; ?></a>
                             </td>
                             <td>
                                 <?=$contact->phone; ?>
                             </td>
                             <td>
-                                 <?=$contact->mobile_phone; ?>
-                            </td>                            
+                                <?=$contact->mobile_phone; ?>
+                            </td>
                             <td>
-                               <a href="mailto:<?=$contact->email; ?>"><?=$contact->email; ?></a>
+                                <a href="mailto:<?=$contact->email; ?>"><?=$contact->email; ?></a>
                             </td>
                             <td>
                                 <?php if(isset($structure)): ?>
-                                <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name ?></a>
-                            <?php endif; ?>
+                                    <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name ?></a>
+                                <?php endif; ?>
                             </td>
                             <td>
                                 <?=count($enfants) ?>
                             </td>
                         </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
 
-                </div>                
-            </div>
-
-            <!-- end users table -->
         </div>
-    </div><!-- /.container -->
+    </div>
+</div>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
-
-
-

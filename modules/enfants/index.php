@@ -109,9 +109,9 @@
         </div>
 
     <script>
-        $(document).ready(function(){
-            $('html, body').animate({scrollTop: $('#wrap').offset().top}, 1);
-        });
+        // $(document).ready(function(){
+        //     $('html, body').animate({scrollTop: $('#wrap').offset().top}, 1);
+        // });
     </script>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

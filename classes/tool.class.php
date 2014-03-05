@@ -126,7 +126,7 @@ class tool
         $uri = "http://maps.google.com/maps/api/geocode/json?address=".urlencode($address)."&sensor=false&region=FR";
         $url = file_get_contents($uri);
         $response = json_decode($url);
-        tool::output($response);
+        //tool::output($response);
         if(count($response->results) > 0){
             $lat = $response->results[0]->geometry->location->lat;
             $lng = $response->results[0]->geometry->location->lng; 

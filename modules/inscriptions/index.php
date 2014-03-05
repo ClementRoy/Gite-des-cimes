@@ -1,42 +1,43 @@
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 
 
-    <?php $inscriptions = inscription::getList(); ?>
-    <?php //tool::output($sejours); ?>
+<?php $inscriptions = inscription::getList(); ?>
+<?php //tool::output($sejours); ?>
 
-    <!-- main container -->
-    <div class="content">
-        <div id="pad-wrapper">
+<div class="title">
+    <div class="row header">
+        <div class="col-md-6">
+            <h3>Les inscriptions</h3>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="/inscriptions/ajouter" class="btn btn-primary">
+                <span>+</span>Ajouter une inscription
+            </a>
+        </div>
+    </div>
+</div>
+<div class="content content-table">
+    <div class="row">
+        <div class="col-md-12">
 
-            <div class="row header">
-                <h3>Les inscriptions</h3>
-                <div class="col-md-10 col-sm-12 col-xs-12 pull-right">
-                    <a href="/inscriptions/ajouter" class="btn-flat primary pull-right"><span>+</span>
-                        Ajouter une inscription</a>
-                </div>
-            </div>
+            <table class="datatable">
+                <thead>
+                    <tr>
+                        <th class="sortable">Nom du séjour</th>
+                        <th class="sortable">Nom de l'enfant</th>
+                        <th class="sortable">Dates</th>
+                    </tr>
+                </thead>
 
-            <div class="row">
-                <div class="col-md-12">
-
-                    <table class="datatable">
-                        <thead>
-                            <tr>
-                                <th class="sortable">Nom du séjour</th>
-                                <th class="sortable">Nom de l'enfant</th>
-                                <th class="sortable">Dates</th>
-                            </tr>
-                        </thead>
-                        
-                        <tfoot>
-                            <tr>
-                                <th class="sortable">Numéro</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                        <?php foreach($inscriptions as $key => $inscription): ?>
+                <tfoot>
+                    <tr>
+                        <th class="sortable">Numéro</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <?php foreach($inscriptions as $key => $inscription): ?>
                         <?php $enfant = enfant::get($inscription->ref_enfant); ?>
                         <?php $sejour = sejour::get($inscription->ref_sejour); ?>
                         <tr>
@@ -63,16 +64,10 @@
                                 du <?=tool::getDatefromDatetime($inscription->date_from); ?> au <?=tool::getDatefromDatetime($inscription->date_to); ?>
                             </td>
                         </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>                
-            </div>
-
-            <!-- end users table -->
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
-    </div><!-- /.container -->
+    </div>
+</div>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
-
-
-

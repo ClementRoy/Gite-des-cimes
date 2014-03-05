@@ -4,47 +4,43 @@
     <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
-    <!-- main container -->
+    <div class="title">
+        <div class="row header">
+            <div class="col-md-12">
+                <h3>Suppression</h3>
+            </div>
+        </div>
+    </div>
+
     <div class="content">
-        <div id="pad-wrapper" class="action-page">
-            <div class="row header">
+        <?php if(isset($_GET['confirm'])): ?>
+            <div class="row">
                 <div class="col-md-12">
-                    <h3>Structure</h3>
+                    <?php 
+                    $result = structure::remove($_GET['id']);
+                    ?>
+                    <p>Le séjour a bien été supprimé</p>
+                    <a href="/structures/">Retourner à la liste des séjours</a>
+                </div>                
+            </div>
+        <?php else: ?>
+            <?php $structure = structure::get($_GET['id']); ?>
+            <div class="row" class="message">
+                <div class="col-md-12 message">
+                 <p>Vous êtes sur le point de supprimer la structure <strong><?=$structure->name; ?></strong>.<br />
+                    Cette action est irréversible.</p>
                 </div>
             </div>
-            <?php if(isset($_GET['confirm'])): ?>
-                <div class="row">
-                    <div class="col-md-12">
-                        <?php 
-                            $result = structure::remove($_GET['id']);
-                        ?>
-                        <p>Le séjour a bien été supprimé</p>
-                        <a href="/structures/">Retourner à la liste des séjours</a>
-                    </div>                
-                </div>
-            <?php else: ?>
-                <?php $structure = structure::get($_GET['id']); ?>
-                <div class="row" class="message">
-                    <div class="col-md-12 message">
-                       <p>Vous êtes sur le point de supprimer la structure <strong><?=$sejour->name; ?> (<?=$sejour->numero; ?>)</strong>.<br />
-                        Cette action est irréversible.</p>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <a href="/structures/infos/id/<?=$structure->id; ?>" class="btn-flat white" data-dismiss="modal">Annuler</a>
-                        <a href="/structures/supprimer/id/<?=$structure->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
-                    </div>                
-                </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="/structures/infos/id/<?=$structure->id; ?>" class="btn-flat white" data-dismiss="modal">Annuler</a>
+                    <a href="/structures/supprimer/id/<?=$structure->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
+                </div>                
+            </div>
 
 
-            <?php endif; ?>
+        <?php endif; ?>
 
-            <!-- end users table -->
-        </div>
-    </div><!-- /.container -->
+    </div>
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
-
-
-
