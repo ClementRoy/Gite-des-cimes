@@ -41,10 +41,10 @@
                                 <th class="sortable">Date de début</th>
                                 <th class="sortable">Date de fin</th>
                                 <th class="sortable">Lieu</th>
-                                <th class="sortable">Remplissage</th>
+                                <th class="sortable">Nb enfants</th>
                                 <th class="sortable">Capacité min</th>
                                 <th class="sortable">Capacité max</th>
-                                <th class="sortable">Prix (€)</th>
+                                <th class="sortable">Tarif (€)</th>
                             </tr>
                         </thead>
 
@@ -54,10 +54,10 @@
                                 <th class="sortable">Date de début</th>
                                 <th class="sortable">Date de fin</th>
                                 <th class="sortable">Lieu</th>
-                                <th class="sortable">Remplissage</th>
+                                <th class="sortable">Nb enfants</th>
                                 <th class="sortable">Capacité min</th>
                                 <th class="sortable">Capacité max</th>
-                                <th class="sortable">Prix (€)</th>
+                                <th class="sortable">Tarif (€)</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -105,6 +105,7 @@
                                         <?php endif; ?>
                                     </td>
                                     <td class="text-right">
+                                    <?=count($inscriptions) ?>
                                         <?php // Les capacités doivent de compter par semaine et non sur la globalité du séjour ?>
                             <?php /* ?>
                                 <?=count($inscriptions)/$sejour->capacity_min*100 ?>% / <?=count($inscriptions)/$sejour->capacity_max*100 ?>%

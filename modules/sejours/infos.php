@@ -150,6 +150,9 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                     <span class="line"></span>
                                     Dates
                                 </th>
+                                <th>
+                                    Statut
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -157,7 +160,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                 <?php $enfant = enfant::get($inscription->ref_enfant); ?>
                                 <tr>
                                     <td>
-                                        <a href="/inscriptions/infos/id/<?=$inscription->id; ?>">#<?=$key+1 ?></a>
+                                        <a href="/inscriptions/infos/id/<?=$inscription->inscription_id; ?>">#<?=$key+1 ?></a>
                                         <div class="pop-dialog tr">
                                             <div class="pointer">
                                                 <div class="arrow"></div>
@@ -165,9 +168,9 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                             </div>
                                             <div class="body">
                                                 <div class="menu">
-                                                    <a href="/inscriptions/infos/id/<?=$inscription->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
-                                                    <a href="/inscriptions/editer/id/<?=$inscription->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
-                                                    <a href="/inscriptions/supprimer/id/<?=$inscription->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                                    <a href="/inscriptions/infos/id/<?=$inscription->inscription_id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                                    <a href="/inscriptions/editer/id/<?=$inscription->inscription_id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                                    <a href="/inscriptions/supprimer/id/<?=$inscription->inscription_id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
                                                 </div>
                                             </div>
                                         </div> 
@@ -182,6 +185,13 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                         <?php $date_from = new DateTime($inscription->date_from); ?>
                                         <?php $date_to = new DateTime($inscription->date_to); ?>
                                         du <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?> 
+                                    </td>
+                                    <td>
+                                        <?php if($inscription->finished): ?>
+                                            <span class="label label-success">Confirmé</span>
+                                        <?php else: ?>
+                                            <span class="label label-danger">Non confirmé</span>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

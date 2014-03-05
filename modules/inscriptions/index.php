@@ -27,7 +27,8 @@
                     <tr>
                         <th class="sortable">Nom du séjour</th>
                         <th class="sortable">Nom de l'enfant</th>
-                        <th class="sortable">Dates</th>
+                        <th class="sortable">Date de début</th>
+                        <th>Date de fin</th>
                     </tr>
                 </thead>
 
@@ -60,9 +61,19 @@
                             <td>
                                 <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname ?> <?=$enfant->firstname ?></a>
                             </td>
-                            <td>
-                                du <?=tool::getDatefromDatetime($inscription->date_from); ?> au <?=tool::getDatefromDatetime($inscription->date_to); ?>
+                            <td class="text-right">
+                                <?php $date_from = new DateTime($inscription->date_from); ?>
+                                <?php if($date_from->getTimestamp() != '-62169987600'): ?>
+                                    <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>
+                                <?php endif; ?>
                             </td>
+                            <td class="text-right">
+                                <?php $date_to = new DateTime($inscription->date_to); ?>
+                                <?php if($date_to->getTimestamp() != '-62169987600'): ?>
+                                    <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?>
+                                <?php endif; ?>
+                            </td>
+
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

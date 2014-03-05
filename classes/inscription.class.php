@@ -25,6 +25,14 @@ class inscription
         return $result;
     }
 
+    public static function getDetails($id){
+        global $db;
+        $params = array(':id' => $id);
+        $sql = 'SELECT * FROM '.self::$table.' LEFT JOIN enfant ON inscription.ref_enfant = enfant.id LEFT JOIN structure ON enfant.organization = structure.id LEFT JOIN structure_contact ON enfant.contact = structure_contact.id WHERE inscription.id=:id';
+        $result = $db->row($sql, $params);
+        return $result;        
+    }
+
 
     public static function getByEnfant($id){
         global $db;
@@ -56,9 +64,10 @@ class inscription
         $params = array(
                         ':id' => $id
                         );
-        $sql = 'SELECT * FROM '.self::$table.' LEFT JOIN enfant ON inscription.ref_enfant = enfant.id LEFT JOIN structure ON enfant.organization = structure.id LEFT JOIN structure_contact ON enfant.contact = structure_contact.id WHERE ref_sejour=:id AND inscription.archived = 0 AND date_from <= "'.$date_from.'" AND date_to >="'.$date_to.'" ORDER BY enfant.lastname';
+        // Ne pas faire un étoile ici ....
+        $sql = 'SELECT *, inscription.id as inscription_id FROM '.self::$table.' LEFT JOIN enfant ON inscription.ref_enfant = enfant.id LEFT JOIN structure ON enfant.organization = structure.id LEFT JOIN structure_contact ON enfant.contact = structure_contact.id WHERE ref_sejour=:id AND inscription.archived = 0 AND date_from <= "'.$date_from.'" AND date_to >="'.$date_to.'" ORDER BY enfant.lastname';
         $result = $db->query($sql, $params);
-        return $result;        
+        return $result;
     }
 
 
