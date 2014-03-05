@@ -3,8 +3,8 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
-    <?php $inscription = inscription::get($_GET['id']); ?>
-    <?php //tool::output($sejour); ?>
+    <?php $inscription = inscription::getDetails($_GET['id']); ?>
+    <?php tool::output($inscription); ?>
     <?php $creator = user::get($inscription->creator); ?>
     <?php $editor = user::get($inscription->editor); ?>
     <?php $date_created = new DateTime($inscription->created); ?>
@@ -30,7 +30,7 @@
 <h2>Dossier d'inscription</h2>
 <pre>
 
-Adressé à : <Structure>  
+Adressé à : <?=$inscription->name; ?>  
 A l'attention de <NomContact>
 
 
