@@ -200,6 +200,7 @@
                                 <p><strong>Adresse  :</strong></p>
                                 <p><?=(!empty($enfant->guardian_address_number) && !empty($enfant->guardian_address_street) && !empty($enfant->guardian_address_postal_code) && !empty($enfant->guardian_address_city))? $enfant->guardian_address_number.' '.$enfant->guardian_address_street.', <br />'.$enfant->guardian_address_postal_code.' '.$enfant->guardian_address_city : EMPTYVAL; ?></p>
                             </li>
+
                         <?php else: ?>
                             <li class="list-group-item">Aucun responsable légal de défini pour le moment</li>
                         <?php endif; ?>
@@ -283,7 +284,8 @@
                     </ul>
                 </div>
             </div>
-            </div></div>
+            </div>
+            </div>
 
 
 
