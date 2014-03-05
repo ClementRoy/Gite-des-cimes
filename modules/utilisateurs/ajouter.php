@@ -1,109 +1,97 @@
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
+
+
+<div class="title">
+    <div class="row header">
+        <div class="col-md-12">
+            <h3>Ajouter un utilisateur</h3>
+        </div>
+    </div>
+</div>
+<div class="content">
 
     <?php if(isset($_POST['submit'])): ?>
 
-    <?php 
-            extract($_POST);
-            $datas = array(
-                            ':identifier' => $form_utilisateur_identifiant,
-                            ':firstname' => $form_utilisateur_prenom,
-                            ':lastname' => $form_utilisateur_nom,
-                            ':password' => md5($form_utilisateur_password),
-                            ':email' => $form_utilisateur_mail,
-                            ':rank' => $form_utilisateur_lvl
-                );
+        <?php 
+        extract($_POST);
+        $datas = array(
+            ':identifier' => $form_utilisateur_identifiant,
+            ':firstname' => $form_utilisateur_prenom,
+            ':lastname' => $form_utilisateur_nom,
+            ':password' => md5($form_utilisateur_password),
+            ':email' => $form_utilisateur_mail,
+            ':rank' => $form_utilisateur_lvl
+            );
 
-            $result = user::add($datas);
+        $result = user::add($datas);
 
-    ?>
+        ?>
 
-    <?php if($result): ?>
-        <div class="content">
-            <div id="pad-wrapper" class="action-page">
-                <div class="row header">
-                    <div class="col-md-12">
-                        <h3>Ajouter un utilisateur</h3>
+        <?php if($result): ?>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success">
+                        <i class="icon-ok-sign"></i> 
+                        L'utilisateur <?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?> a bien été ajouté
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-success">
-                            <i class="icon-ok-sign"></i> 
-                            L'utilisateur <?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?> a bien été ajouté
-                        </div>
-                        <a href="/utilisateurs/">Retourner à la liste des utilisateurs</a>
+                    <a href="/utilisateurs/">Retourner à la liste des utilisateurs</a>
 
-                    </div>
                 </div>
             </div>
-        </div>
+
+        <?php else: ?>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger">
+                        <i class="icon-remove-sign"></i> 
+                        Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
+                    </div>
+                    <a href="/enfants/ajouter">Retourner au formulaire d'ajout</a>
+                </div>
+            </div>
+        <?php endif; ?>
+
 
     <?php else: ?>
 
-        <div class="content">
-            <div id="pad-wrapper" class="action-page">
-                <div class="row header">
-                    <div class="col-md-12">
-                        <h3>Ajouter un utilisateur</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-danger">
-                            <i class="icon-remove-sign"></i> 
-                            Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
-                        </div>
-                        <a href="/enfants/ajouter">Retourner au formulaire d'ajout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
 
-
-    <?php else: ?>
-        <div class="content">
-            <div id="pad-wrapper" class="form-page new-user">
-                <div class="row header">
-                    <div class="col-md-12">
-                        <h3>Ajouter un utilisateur</h3>
-                    </div>
-                </div>
-
-                <form id="form-add-children" method="post" parsley-validate>
-                 <!--  <h2>Informations sur l'utilisateur</h2> -->
-                 <div class="row form-wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <form id="form-add-user" method="post" parsley-validate>
                     <div class="field-box row">
                         <label class="col-md-2" for="form-utilisateur-prenom">Prénom</label>
                         <div class="col-md-5">
                             <input id="form-utilisateur-prenom" name="form_utilisateur_prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'utilisateur." parsley-required="true">
-                        </div>                            
+                        </div>
                     </div>
                     <div class="field-box row">
                         <label class="col-md-2" for="form-utilisateur-nom">Nom</label>
                         <div class="col-md-5">
                             <input id="form-utilisateur-nom" name="form_utilisateur_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'utilisateur." parsley-required="true">
-                        </div>                            
+                        </div>
                     </div>
                     <div class="field-box row">
                         <label class="col-md-2" for="form-utilisateur-identifiant">Identifiant</label>
                         <div class="col-md-5">
                             <input id="form-utilisateur-identifiant" name="form_utilisateur_identifiant" class="form-control" type="text" data-toggle="tooltip" title="Renseignez l'identifiant de l'utilisateur." parsley-required="true">
-                        </div>                            
-                    </div>                        
+                        </div>
+                        </div>
                     <div class="field-box row">
                         <label class="col-md-2" for="form-utilisateur-password">Mot de passe</label>
                         <div class="col-md-5">
                             <input id="form-utilisateur-password" name="form_utilisateur_password" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le mot de passe de l'utilisateur." parsley-required="true">
-                        </div>                            
+                        </div>
                     </div>
                     <div class="field-box row">
                         <label class="col-md-2" for="form-utilisateur-mail">Adresse e-mail</label>
                         <div class="col-md-5">
                             <input id="form-utilisateur-mail" name="form_utilisateur_mail" class="form-control" type="email" data-toggle="tooltip" title="Renseignez l'adresse e-mail de l'utilisateur." parsley-required="true">
-                        </div>                            
+                        </div>
                     </div>
                     <div class="field-box row">
                         <label class="col-md-2">Niveau</label>
@@ -132,19 +120,18 @@
                                 </div>
                                 Administrateur
                             </label>
-                        </div>                            
+                        </div>
                     </div>
                     <div class="field-box actions">
-                        <div class="col-md-6">
-                            <input type="submit" class="btn-flat primary" name="submit" value="Ajouter l'utilisateur">
+                        <div class="col-md-6  col-md-offset-2">
+                            <input type="submit" class="btn btn-primary" name="submit" value="Ajouter l'utilisateur">
                             <span>OU</span>
                             <a href="/utilisateurs/" class="reset">Annuler</a>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-<?php endif; ?>
-
-<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
+    <?php endif; ?>
+</div>
+    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

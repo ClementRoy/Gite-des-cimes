@@ -16,7 +16,6 @@
                 <li class=""><a href="#sejours">Séjours</a></li>
                 <li class=""><a href="#utilisateurs">Utilisateurs</a></li>
             </ul>
-
         </div>
     </div>
 </div>

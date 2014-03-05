@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-md-8 text-right">
                     <input type="text" id="table-enfant-search" data-search="enfant" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">
-                    <a href="/enfants/ajouter" class="btn-flat primary"><span>+</span>
+                    <a href="/enfants/ajouter" class="btn btn-primary"><span>+</span>
                         Ajouter un enfant</a>
                 </div>
             </div>

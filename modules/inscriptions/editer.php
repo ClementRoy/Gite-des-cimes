@@ -83,7 +83,7 @@
                         <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez l'enfant à inscrire">
                             <div class="ui-select">
                                 <?php $enfants = enfant::getList(); ?>
-                                <select id="form-inscription-enfant-select" name="form_inscription_enfant" parsley-required="true">
+                                <select class="form-control" id="form-inscription-enfant-select" name="form_inscription_enfant" parsley-required="true">
                                     <option selected="selected">Choisissez l'enfant</option>
                                     <?php foreach($enfants as $enfant): ?>
                                         <option <?php if( $enfant->id == $inscription->ref_enfant): ?>selected="selected"<?php endif; ?> value="<?=$enfant->id ?>"><?=$enfant->lastname ?> <?=$enfant->firstname ?></option>
@@ -99,7 +99,7 @@
                         <label class="col-md-2" for="form-inscription-sejour-select">Séjour</label>
                         <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez le séjour">
                             <div class="ui-select">
-                                <select id="form-inscription-sejour-select" name="form_inscription_sejour" parsley-required="true">
+                                <select class="form-control" id="form-inscription-sejour-select" name="form_inscription_sejour" parsley-required="true">
                                     <option selected="selected">Choisissez le séjour</option>
                                     <?php foreach($sejours as $sejour): ?>
                                         <?php $date_from = new DateTime($sejour->date_from); ?>
@@ -120,27 +120,27 @@
                     </div>
 
 
-                <div class="field-box row">
-                    <label class="col-md-2">Inscription finalisée</label>
-                    <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si l'inscription est finalisé.">
-                        <label class="radio-inline col-md-7" for="form-inscription-option-oui">
-                            <div class="radio" id="uniform-form-inscription-option-oui">
-                                <span>
-                                    <input type="radio" name="form_inscription_option" id="form-inscription-option-oui" value="1" <?php if($inscription->finished == 1): ?>checked="checked"<?php endif; ?>>
-                                </span>
-                            </div>
-                            Oui
-                        </label>
-                        <label class="radio-inline col-md-4 col-sm-5" for="form-inscription-option-non">
-                            <div class="radio" id="uniform-form-inscription-option-non">
-                                <span class="checked">
-                                    <input type="radio" name="form_inscription_option" id="form-inscription-option-non" value="0" <?php if($inscription->finished == 0): ?>checked="checked"<?php endif; ?>>
-                                </span>
-                            </div>
-                            Non
-                        </label>
+                    <div class="field-box row">
+                        <label class="col-md-2">Inscription finalisée</label>
+                        <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si l'inscription est finalisé.">
+                            <label class="radio-inline col-md-7" for="form-inscription-option-oui">
+                                <div class="radio" id="uniform-form-inscription-option-oui">
+                                    <span>
+                                        <input type="radio" name="form_inscription_option" id="form-inscription-option-oui" value="1" <?php if($inscription->finished == 1): ?>checked="checked"<?php endif; ?>>
+                                    </span>
+                                </div>
+                                Oui
+                            </label>
+                            <label class="radio-inline col-md-4 col-sm-5" for="form-inscription-option-non">
+                                <div class="radio" id="uniform-form-inscription-option-non">
+                                    <span class="checked">
+                                        <input type="radio" name="form_inscription_option" id="form-inscription-option-non" value="0" <?php if($inscription->finished == 0): ?>checked="checked"<?php endif; ?>>
+                                    </span>
+                                </div>
+                                Non
+                            </label>
+                        </div>
                     </div>
-
 
                     <div class="field-box row">
                         <label class="col-md-2" for="form-inscription-nom">Dates</label>
@@ -168,7 +168,7 @@
                         <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez la structure qui s'occupe de cet enfant.">
                             <div class="ui-select">
                                 <?php $structures = structure::getList(); ?>
-                                <select id="form-inscription-structure-select" name="form_inscription_structure">
+                                <select class="form-control" id="form-inscription-structure-select" name="form_inscription_structure">
                                     <option selected="selected">Choisissez la structure</option>
                                     <?php foreach($structures as $structure): ?>
                                         <option <?php if( $structure->id == $inscription->ref_structure_payer): ?>selected="selected"<?php endif; ?> value="<?=$structure->id ?>"><?=$structure->name ?></option>
@@ -212,7 +212,7 @@
                         <label class="col-md-2" for="form-inscription-lieu-select">Lieu de rendez-vous</label>
                         <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Renseignez le lieu de rendez-vous.">
                             <div class="ui-select">
-                                <select id="form-inscription-lieu-select" name="form_inscription_lieu">
+                                <select class="form-control" id="form-inscription-lieu-select" name="form_inscription_lieu">
                                     <option selected="selected" value="">Choisissez le lieu de rendez-vous</option>
                                     <option <?php if( $inscription->lieu == "Aulnay sous bois, au Parking d'Intermarché"): ?>selected="selected"<?php endif; ?> value="Aulnay sous bois, au Parking d'Intermarché">Aulnay sous bois, au Parking d'Intermarché</option>
                                     <option <?php if( $inscription->lieu == "Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle"): ?>selected="selected"<?php endif; ?> value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>
@@ -300,8 +300,8 @@
 
 
                     <div class="field-box actions">
-                        <div class="col-md-6">
-                            <input type="submit" class="btn-flat primary" name="submit" value="Valider l'inscription">
+                        <div class="col-md-6  col-md-offset-2">
+                            <input type="submit" class="btn btn-primary" name="submit" value="Valider l'inscription">
                             <span>OU</span>
                             <a href="/inscriptions/" class="reset">Annuler</a>
                         </div>

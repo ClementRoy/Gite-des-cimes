@@ -4,16 +4,14 @@
     <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
-    <!-- main container -->
-    <div class="content">
-        <div id="pad-wrapper">
+        <div class="title">
             <div class="row header">
-                <div class="col-md-3">
-                    <h3>Exports</h3>
+                <div class="col-md-12">
+                    <h3>Les exports</h3>
                 </div>
-
             </div>
-
+        </div>
+        <div class="content">
 
             <div class="row">
                 <div class="col-md-12">
@@ -23,9 +21,7 @@
                 </div>                
              </div>
 
-             <!-- end users table -->
          </div>
-     </div><!-- /.container -->
      <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
 
 

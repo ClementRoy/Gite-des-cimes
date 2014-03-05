@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-md-9 text-right">
                     <input type="text" id="table-enfant-search" class="col-md-5 search" placeholder="Tapez le numéro d'une facture..." autofocus="autofocus">
-                    <a href="/factures/ajouter" class="btn-flat primary"><span>+</span>
+                    <a href="/factures/ajouter" class="btn btn-primary"><span>+</span>
                         Editer une nouvelle facture</a>
                 </div>
             </div>

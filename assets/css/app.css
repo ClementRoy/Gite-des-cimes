@@ -1,8 +1,10 @@
+@import url('compiled/form-showcase.css');
 html,
 body {
   min-height: 100%;
 }
 body {
+  padding-bottom: 50px;
   position: relative;
   font-family: 'Lato';
   background: #ebedf3;
@@ -16,6 +18,13 @@ h4,
 h5,
 h6 {
   font-family: 'Open sans';
+}
+h4,
+.h4 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 0;
 }
 /*	Page de login
 --------------------------------------------------------------------------- */
@@ -114,16 +123,16 @@ h6 {
 .carousel-fade .carousel-control {
   z-index: 2;
 }
-.navbar {
+#top-nav {
   border-radius: 0;
   margin: 0;
 }
 #sidebar-nav {
-  min-height: 100%;
   float: left;
   position: absolute;
+  min-height: 100%;
   top: 52px;
-  z-index: 10000;
+  z-index: 999;
   transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   overflow: hidden;
   width: 62px;
@@ -263,10 +272,19 @@ h6 {
 .wrap > .title {
   padding-top: 30px;
 }
+.wrap > .title .nav-tabs {
+  border-bottom: none;
+  margin-bottom: -10px;
+}
+.wrap > .title .pop-dialog.is-visible {
+  display: block;
+  position: absolute;
+  top: 69px;
+}
 .wrap > .title h3 {
   font-weight: 100;
   font-size: 50px;
-  margin: 0 0 18px;
+  margin: 0 0 10px;
   color: #333;
 }
 .wrap > .title h3 small {
@@ -458,6 +476,12 @@ table.dataTable tfoot {
   padding: 0;
 }
 .pop-dialog {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -webkit-animation-duration: .3s;
+  animation-duration: .3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
   z-index: 10000;
   display: none;
 }
@@ -468,11 +492,25 @@ table.dataTable tfoot {
 }
 .pop-dialog .item {
   display: block;
+  padding: 3px 15px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.428571429;
+  color: #333;
+  white-space: nowrap;
+}
+.pop-dialog .item i {
+  margin-right: 3px;
+}
+.pop-dialog .item:hover,
+.pop-dialog .item:focus {
+  text-decoration: none;
+  color: #FFF;
+  background-color: #428BCA;
 }
 .pop-dialog .pointer {
   position: relative;
   top: -22px;
-  /* pop-dialog with pointer to the right */
 }
 .pop-dialog .pointer .arrow,
 .pop-dialog .pointer .arrow_border {
@@ -483,22 +521,15 @@ table.dataTable tfoot {
   position: absolute;
   top: 7px;
   z-index: 1002;
-  left: 25px;
+  left: 50%;
+  margin-left: -11px;
 }
 .pop-dialog .pointer .arrow_border {
   border-color: transparent transparent #a1a1a1;
   border-width: 9px;
   top: 4px;
   z-index: 1001;
-  left: 24px;
-}
-.pop-dialog .pointer.right .arrow {
-  left: auto;
-  right: 25px;
-}
-.pop-dialog .pointer.right .arrow_border {
-  left: auto;
-  right: 24px;
+  margin-left: -12px;
 }
 .pop-dialog .body {
   width: auto;
@@ -506,8 +537,56 @@ table.dataTable tfoot {
   border: 1px solid #a1a1a1;
   border-radius: 5px;
   box-shadow: 0px 0px 9px 0px #d6d6d6;
-  padding: 10px;
+  padding: 6px 0;
+}
+.field-box {
+  margin: 20px 0;
+  min-height: 35px;
+}
+.field-box em {
+  display: block;
+  font-weight: normal;
+}
+.field-box .addresse-complement,
+.field-box .adresse-voirie {
+  margin-bottom: 7px;
+}
+.field-box .libelle-suffix {
+  position: absolute;
+  top: 9px;
+  left: 96%;
+}
+.field-box .input-suffix {
+  margin: 0;
+  position: absolute;
+  left: 93%;
+  top: 8px;
+}
+.field-box.actions {
+  margin-top: 30px;
+  font-size: 12px;
+}
+.field-box.actions span {
+  text-transform: uppercase;
+  color: #7E91AA;
+  font-weight: 600;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 2px 0 8px;
+}
+.field-box.actions .reset {
+  color: #000;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+.icon-male {
+  color: #4396B6;
+  margin-right: 3px;
+}
+.icon-female {
+  color: #D657B8;
+  margin-right: 3px;
 }
 .footer {
-  padding-top: 30px;
+  padding: 10px 50px 10px 112px;
 }

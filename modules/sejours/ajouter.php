@@ -112,7 +112,7 @@
                 <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez l'hébergement qui accueillera le séjour.">
                     <div class="ui-select">
                         <?php $hebergements = hebergement::getList(); ?>
-                        <select id="form-sejour-hebergement-select" name="form_sejour_hebergement">
+                        <select class="form-control" id="form-sejour-hebergement-select" name="form_sejour_hebergement">
                             <option selected="selected">Choisissez l'hébergement</option>
                             <?php foreach($hebergements as $hebergement): ?>
                                 <option value="<?=$hebergement->id ?>"><?=$hebergement->name ?></option>
@@ -153,8 +153,8 @@
 
 
             <div class="field-box actions">
-                <div class="col-md-6">
-                    <input type="submit" class="btn-flat primary" name="submit" value="Ajouter le séjour">
+                <div class="col-md-6 col-md-offset-2">
+                    <input type="submit" class="btn btn-primary" name="submit" value="Ajouter le séjour">
                     <span>OU</span>
                     <a href="/sejours/" class="reset">Annuler</a>
                 </div>

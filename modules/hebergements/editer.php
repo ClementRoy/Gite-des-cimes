@@ -101,8 +101,8 @@
 
 
                 <div class="field-box actions">
-                    <div class="col-md-6">
-                        <input type="submit" class="btn-flat primary" name="submit" value="Modifier l'hébergement">
+                    <div class="col-md-6 col-md-offset-2">
+                        <input type="submit" class="btn btn-primary" name="submit" value="Modifier l'hébergement">
                         <span>OU</span>
                         <a href="/hebergements/" class="reset">Annuler</a>
                     </div>

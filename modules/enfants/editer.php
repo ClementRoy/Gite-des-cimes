@@ -186,7 +186,7 @@
                                     <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez la structure qui s'occupe de cet enfant.">
                                         <div class="ui-select">
                                             <?php $structures = structure::getList(); ?>
-                                            <select id="form-enfant-structure-select" name="form_enfant_structure">
+                                            <select class="form-control" id="form-enfant-structure-select" name="form_enfant_structure">
                                                 <option value="" selected="selected">Sélectionnez la structure</option>
                                                 <?php foreach($structures as $structure): ?>
                                                 <option value="<?=$structure->id ?>" <?php if($structure->id == $enfant->organization): ?>selected="selected"<?php endif; ?>><?=$structure->name ?></option>
@@ -202,7 +202,7 @@
                                     <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez le contact responsable de l'enfant.">
 
                                         <div class="ui-select">
-                                            <select id="form-enfant-contact-select" name="form_enfant_contact">
+                                            <select class="form-control" id="form-enfant-contact-select" name="form_enfant_contact">
                                                 <option>Sélectionnez un contact</option>
                                                 <?php if ($enfant->contact != 0): ?>
                                                 <?php $contact = contact::get($enfant->contact); ?>
@@ -272,19 +272,19 @@
                                     <div class="field-box row">
                                         <label class="col-md-2" for="form-enfant-telephone-fixe-pere">Téléphone fixe</label>
                                         <div class="col-md-4 col-sm-5">
-                                            <input id="form-enfant-telephone-pere" value="<?=$enfant->father_phone_home; ?>" name="form_enfant_telephone_fixe_pere" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe du père.">
+                                            <input id="form-enfant-telephone-pere" value="<?=$enfant->father_phone_home; ?>" name="form_enfant_telephone_fixe_pere" class="form-control input-phone input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe du père.">
                                         </div>
                                     </div>
                                     <div class="field-box row">
                                         <label class="col-md-2" for="form-enfant-telephone-portable-pere">Téléphone portable</label>
                                         <div class="col-md-4 col-sm-5">
-                                            <input id="form-enfant-telephone-pere" value="<?=$enfant->father_phone_mobile; ?>" name="form_enfant_telephone_portable_pere" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable du père.">
+                                            <input id="form-enfant-telephone-pere" value="<?=$enfant->father_phone_mobile; ?>" name="form_enfant_telephone_portable_pere" class="form-control input-phone input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable du père.">
                                         </div>
                                     </div>
                                     <div class="field-box row">
                                         <label class="col-md-2" for="form-enfant-telephone-professionnel-pere">Téléphone professionnel</label>
                                         <div class="col-md-4 col-sm-5">
-                                            <input id="form-enfant-professionnel-pere" value="<?=$enfant->father_phone_pro; ?>" name="form_enfant_telephone_professionnel_pere" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel du père.">
+                                            <input id="form-enfant-professionnel-pere" value="<?=$enfant->father_phone_pro; ?>" name="form_enfant_telephone_professionnel_pere" class="form-control input-phone input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel du père.">
                                         </div>
                                     </div>
                                     <div class="field-box row">
@@ -315,19 +315,19 @@
                                     <div class="field-box row">
                                         <label class="col-md-2" for="form-enfant-telephone-fixe-mere">Téléphone fixe</label>
                                         <div class="col-md-4 col-sm-5">
-                                            <input id="form-enfant-telephone-fixe-mere" value="<?=$enfant->mother_phone_home; ?>" name="form_enfant_telephone_fixe_mere" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe de la mère.">
+                                            <input id="form-enfant-telephone-fixe-mere" value="<?=$enfant->mother_phone_home; ?>" name="form_enfant_telephone_fixe_mere" class="form-control input-phone input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe de la mère.">
                                         </div>
                                     </div>
                                     <div class="field-box row">
                                         <label class="col-md-2" for="form-enfant-telephone-portable-mere">Téléphone portable</label>
                                         <div class="col-md-4 col-sm-5">
-                                            <input id="form-enfant-telephone-portable-mere" value="<?=$enfant->mother_phone_mobile; ?>" name="form_enfant_telephone_portable_mere" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable de la mère.">
+                                            <input id="form-enfant-telephone-portable-mere" value="<?=$enfant->mother_phone_mobile; ?>" name="form_enfant_telephone_portable_mere" class="form-control input-phone input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable de la mère.">
                                         </div>
                                     </div>
                                     <div class="field-box row">
                                         <label class="col-md-2" for="form-enfant-telephone-professionnel-mere">Téléphone professionnel</label>
                                         <div class="col-md-4 col-sm-5">
-                                            <input id="form-enfant-telephone-professionnel-mere" value="<?=$enfant->mother_phone_pro; ?>" name="form_enfant_telephone_professionnel_mere" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel de la mère.">
+                                            <input id="form-enfant-telephone-professionnel-mere" value="<?=$enfant->mother_phone_pro; ?>" name="form_enfant_telephone_professionnel_mere" class="form-control input-phone input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel de la mère.">
                                         </div>
                                     </div>
                                     <div class="field-box row">
@@ -359,19 +359,19 @@
                                 <div class="field-box row">
                                     <label class="col-md-2" for="form-enfant-telephone-fixe-tuteur">Téléphone fixe</label>
                                     <div class="col-md-4 col-sm-5">
-                                        <input id="form-enfant-telephone-fixe-tuteur" value="<?=$enfant->guardian_phone_home; ?>" name="form_enfant_telephone_fixe_tuteur" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe du tuteur.">
+                                        <input id="form-enfant-telephone-fixe-tuteur" value="<?=$enfant->guardian_phone_home; ?>" name="form_enfant_telephone_fixe_tuteur" class="form-control input-phone input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe du tuteur.">
                                     </div>
                                 </div>
                                 <div class="field-box row">
                                     <label class="col-md-2" for="form-enfant-telephone-portable-tuteur">Téléphone portable</label>
                                     <div class="col-md-4 col-sm-5">
-                                        <input id="form-enfant-telephone-portable-tuteur" value="<?=$enfant->guardian_phone_mobile; ?>" name="form_enfant_telephone_portable_tuteur" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable du tuteur.">
+                                        <input id="form-enfant-telephone-portable-tuteur" value="<?=$enfant->guardian_phone_mobile; ?>" name="form_enfant_telephone_portable_tuteur" class="form-control input-phone input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable du tuteur.">
                                     </div>
                                 </div>
                                 <div class="field-box row">
                                     <label class="col-md-2" for="form-enfant-telephone-travail-tuteur">Téléphone professionnel</label>
                                     <div class="col-md-4 col-sm-5">
-                                        <input id="form-enfant-telephone-professionnel-tuteur" value="<?=$enfant->guardian_phone_pro; ?>" name="form_enfant_telephone_professionnel_tuteur" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel du tuteur.">
+                                        <input id="form-enfant-telephone-professionnel-tuteur" value="<?=$enfant->guardian_phone_pro; ?>" name="form_enfant_telephone_professionnel_tuteur" class="form-control input-phone input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel du tuteur.">
                                     </div>
                                 </div>
                                 <div class="field-box row">
@@ -425,19 +425,19 @@
                             <div class="field-box row">
                                 <label class="col-md-2" for="form-enfant-telephone-fixe-famille">Téléphone fixe</label>
                                 <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-pere-telephone" value="<?=$enfant->host_family_phone_home; ?>" name="form_enfant_telephone_fixe_famille" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe de la famille d'accueil.">
+                                    <input id="form-enfant-pere-telephone" value="<?=$enfant->host_family_phone_home; ?>" name="form_enfant_telephone_fixe_famille" class="form-control input-phone input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe de la famille d'accueil.">
                                 </div>
                             </div>
                             <div class="field-box row">
                                 <label class="col-md-2" for="form-enfant-telephone-portable-famille">Téléphone portable</label>
                                 <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-telephone-portable-famille" value="<?=$enfant->host_family_phone_mobile; ?>" name="form_enfant_telephone_portable_famille" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable de la famille d'accueil.">
+                                    <input id="form-enfant-telephone-portable-famille" value="<?=$enfant->host_family_phone_mobile; ?>" name="form_enfant_telephone_portable_famille" class="form-control input-phone input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable de la famille d'accueil.">
                                 </div>
                             </div>
                             <div class="field-box row">
                                 <label class="col-md-2" for="form-enfant-telephone-professionnel-famille">Téléphone professionnel</label>
                                 <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-telephone-professionnel-famille" value="<?=$enfant->host_family_phone_pro; ?>" name="form_enfant_telephone_professionnel_famille" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel de la famille d'accueil.">
+                                    <input id="form-enfant-telephone-professionnel-famille" value="<?=$enfant->host_family_phone_pro; ?>" name="form_enfant_telephone_professionnel_famille" class="form-control input-phone input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel de la famille d'accueil.">
                                 </div>
                             </div>
 
@@ -468,7 +468,7 @@
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-telephone-urgence">Téléphone d'urgence</label>
                             <div class="col-md-4 col-sm-5">
-                                <input id="form-enfant-telephone-urgence" value="<?=$enfant->emergency_phone; ?>" name="form_enfant_telephone_urgence" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de la personne à contacter en cas d'urgence.">
+                                <input id="form-enfant-telephone-urgence" value="<?=$enfant->emergency_phone; ?>" name="form_enfant_telephone_urgence" class="form-control input-phone input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de la personne à contacter en cas d'urgence.">
                             </div>
                         </div>
 
@@ -527,7 +527,7 @@
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-numero-securite">N° de sécurité sociale</label>
                             <div class="col-md-4 col-sm-5">
-                                <input id="form-enfant-numero-securite" name="form_enfant_numero_securite" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de sécurité sociale de l'enfant." value="<?=$enfant->number_ss; ?>">
+                                <input id="form-enfant-numero-securite" name="form_enfant_numero_securite" class="form-control input-securite-social" type="text" data-toggle="tooltip" title="Renseignez le numéro de sécurité sociale de l'enfant." value="<?=$enfant->number_ss; ?>">
                             </div>                            
                         </div>
 
@@ -660,8 +660,8 @@
                         </div>
 
                         <div class="field-box actions">
-                            <div class="col-md-6">
-                                <input type="submit" class="btn-flat primary" name="submit" value="Modifier la fiche">
+                            <div class="col-md-6 col-md-offset-2">
+                                <input type="submit" class="btn btn-primary" name="submit" value="Modifier la fiche">
                                 <span>OU</span>
                                 <a href="/enfants/" class="reset">Annuler</a>
                             </div>

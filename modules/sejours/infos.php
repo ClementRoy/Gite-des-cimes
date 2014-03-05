@@ -139,7 +139,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
 
 
 <div class="pull-right">
-    <a href="/inscriptions/ajouter/sejour/<?=$sejour->id; ?>" class="btn-flat primary"><span>+</span> Ajouter un enfant à ce séjour</a>
+    <a href="/inscriptions/ajouter/sejour/<?=$sejour->id; ?>" class="btn btn-primary"><span>+</span> Ajouter un enfant à ce séjour</a>
 </div>
 <h6>Enfants inscrits à ce séjour</h6>
 

@@ -148,7 +148,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input id="form-structure-addresse-comp" name="form_structure_addresse_comp" class="form-control" type="text" 
+                                    <input id="form-structure-addresse-comp" name="form_structure_addresse_comp" class="form-control addresse-complement" type="text" 
                                     data-toggle="tooltip" title="Renseignez l'addresse complémentaire." placeholder="Complément d'addresse">  
                                 </div>
                             </div>
@@ -169,8 +169,8 @@
 
 
                     <div class="field-box actions">
-                        <div class="col-md-6">
-                            <input type="submit" class="btn-flat primary" name="submit" value="Modifier la structure">
+                        <div class="col-md-6  col-md-offset-2">
+                            <input type="submit" class="btn btn-primary" name="submit" value="Modifier la structure">
                             <span>OU</span>
                             <a href="/structures/" class="reset">Annuler</a>
                         </div>

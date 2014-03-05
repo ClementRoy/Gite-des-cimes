@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-md-9"><input id="form-hebergement-adresse-voirie" name="form_hebergement_adresse_voirie" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse de l'hébergement."></div>
                         </div>
-
+                        
                         <div class="row">
                             <div class="col-md-4"><input id="form-hebergement-adresse-code-postal" name="form_hebergement_adresse_code_postal" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville de l'hébergement."></div>
                             <div class="col-md-8"><input id="form-hebergement-adresse-code-ville" name="form_hebergement_adresse_code_ville" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville de l'hébergement."></div>
@@ -96,8 +96,8 @@
                 </div>
 
                 <div class="field-box actions">
-                    <div class="col-md-6">
-                        <input type="submit" class="btn-flat primary" name="submit" value="Ajouter l'hébergement">
+                    <div class="col-md-6 col-md-offset-2">
+                        <input type="submit" class="btn btn-primary" name="submit" value="Ajouter l'hébergement">
                         <span>OU</span>
                         <a href="/hebergements/" class="reset">Annuler</a>
                     </div>
