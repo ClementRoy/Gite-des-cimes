@@ -18,101 +18,8 @@
 
          <?php //tool::output($enfant); ?>
 
-            <?php if(isset($_POST['submit'])): ?>
-            <?php //tool::output($_POST); ?>
-            <?php //tool::output($_SESSION); ?>
-            <?php 
-                extract($_POST);
-                // Create enfant entry
-                $birthdate = tool::generateDatetime($form_enfant_naissance);
-                $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
-                $cpam_validite = tool::generateDatetime($form_enfant_cpam_validite);
 
-                $datas = array(                 
-                    ':firstname' => $form_enfant_prenom,
-                    ':lastname' => $form_enfant_nom,
-                    ':birthdate' => $birthdate,
-                    ':sex' => $form_enfant_sexe,
-                    ':registration_by' => $form_enfant_inscription,
-                    ':organization' => $form_enfant_structure,
-                    ':contact' => $form_enfant_contact,
-                    ':guardian' => $form_enfant_responsable,
-                    ':father_name' => $form_enfant_nom_pere,
-                    ':father_phone_home' => $form_enfant_telephone_fixe_pere,
-                    ':father_phone_mobile' => $form_enfant_telephone_portable_pere,
-                    ':father_phone_pro' => $form_enfant_telephone_professionnel_pere,
-                    ':father_address_number' => $form_enfant_adresse_numero_pere,
-                    ':father_address_street' => $form_enfant_adresse_voirie_pere,
-                    ':father_address_postal_code' => $form_enfant_adresse_code_postal_pere,
-                    ':father_address_city' => $form_enfant_adresse_code_ville_pere,
-                    ':mother_name' => $form_enfant_nom_mere,
-                    ':mother_phone_home' => $form_enfant_telephone_fixe_mere,
-                    ':mother_phone_mobile' => $form_enfant_telephone_portable_mere,
-                    ':mother_phone_pro' => $form_enfant_telephone_professionnel_mere,
-                    ':mother_address_number' => $form_enfant_adresse_numero_mere,
-                    ':mother_address_street' => $form_enfant_adresse_voirie_mere,
-                    ':mother_address_postal_code' => $form_enfant_adresse_code_postal_mere,
-                    ':mother_address_city' => $form_enfant_adresse_code_ville_mere,
-                    ':guardian_name' => $form_enfant_nom_tuteur,
-                    ':guardian_phone_home' => $form_enfant_telephone_fixe_tuteur,
-                    ':guardian_phone_mobile' => $form_enfant_telephone_portable_tuteur,
-                    ':guardian_phone_pro' => $form_enfant_telephone_professionnel_tuteur,
-                    ':guardian_address_number' => $form_enfant_adresse_numero_tuteur,
-                    ':guardian_address_street' => $form_enfant_adresse_voirie_tuteur,
-                    ':guardian_address_postal_code' => $form_enfant_adresse_code_postal_tuteur,
-                    ':guardian_address_city' => $form_enfant_adresse_code_ville_tuteur,
-                    ':emergency_name' => $form_enfant_nom_urgence,
-                    ':emergency_phone' => $form_enfant_telephone_urgence,
-                    ':domiciliation' => $form_enfant_domiciliation,
-                    ':host_family_name' => $form_enfant_nom_famille,
-                    ':host_family_phone_home' => $form_enfant_telephone_fixe_famille,
-                    ':host_family_phone_mobile' => $form_enfant_telephone_portable_famille,
-                    ':host_family_phone_pro' => $form_enfant_telephone_professionnel_famille,
-                    ':host_family_address_number' => $form_enfant_adresse_numero_famille,
-                    ':host_family_address_street' => $form_enfant_adresse_voirie_famille,
-                    ':host_family_address_postal_code' => $form_enfant_adresse_code_postal_famille,
-                    ':host_family_address_city' => $form_enfant_adresse_code_ville_famille,
-                    ':image_rights' => $form_enfant_droit_image,
-                    ':medicals_treatments' => $form_enfant_traitement_medical,
-                    ':allergies' => $form_enfant_contre_indication,
-                    ':number_ss' => $form_enfant_numero_securite,
-                    ':self_assurance' => $form_enfant_assurance,
-                    ':self_assurance_expiration_date' => $assurance_validite,
-                    ':cpam_attestation' => $form_enfant_attestation_cpam,
-                    ':cpam_attestation_expiration_date' => $cpam_validite,
-                    ':vaccination' => $form_enfant_carnet_vaccination,
-                    ':health_record' => $form_enfant_fiche_sanitaire,
-                    ':stay_record' => $form_enfant_fiche_sejour,
-                    ':note' => $form_enfant_note
-                    );
-
-                $result = enfant::update($datas, $_GET['id']);
-
-            ?>
-                <?php //tool::output($result); ?>
-                <?php if($result): ?>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-success">
-                            <i class="icon-ok-sign"></i> 
-                            L'enfant <strong><?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?></strong> a bien été modifié
-                        </div>
-                        <a href="/enfants/" class="btn-flat default">Retourner à la liste des enfants</a>
-                    </div>
-                </div>
-                <?php else: ?>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-danger">
-                            <i class="icon-remove-sign"></i> 
-                            Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
-                        </div>
-                        <a href="/enfants/ajouter" class="btn-flat default">Retourner au formulaire d'ajout</a>
-                    </div>
-                </div>
-                <?php endif; ?>
-            <?php else: ?>
-            <form id="form-add-children" method="post" parsley-validate>
+            <form id="form-add-children" method="post" action="/enfants/infos/id/<?=$enfant->id ?>" parsley-validate>
                    <!--  <h2>Informations sur l'enfant</h2> -->
                      <div class="row form-wrapper">
                      <div class="col-md-12">
@@ -661,7 +568,7 @@
 
                         <div class="field-box actions">
                             <div class="col-md-6 col-md-offset-2">
-                                <input type="submit" class="btn btn-primary" name="submit" value="Modifier la fiche">
+                                <input type="submit" class="btn btn-primary" name="submit-update" value="Modifier la fiche">
                                 <span>OU</span>
                                 <a href="/enfants/" class="reset">Annuler</a>
                             </div>
@@ -669,7 +576,7 @@
                     </div>
                     </div>
             </form>
-            <?php endif; ?>
+
         </div>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

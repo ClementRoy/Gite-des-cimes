@@ -113,7 +113,7 @@
 
                         <div class="field-box actions">
                             <div class="col-md-6  col-md-offset-2">
-                                <input type="submit" class="btn btn-primary" name="submit" value="valider">
+                                <input type="submit" class="btn btn-primary" name="submit-update" value="valider">
                                 <span>OU</span>
                                 <a href="/utilisateurs/" class="reset">Annuler</a>
                             </div>

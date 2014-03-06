@@ -3,9 +3,49 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
+    <?php if(isset($_POST['submit-add'])): ?>
+
+        <?php 
+                extract($_POST);
+                $datas = array(
+                    ':identifier' => $form_utilisateur_identifiant,
+                    ':firstname' => $form_utilisateur_prenom,
+                    ':lastname' => $form_utilisateur_nom,
+                    ':password' => md5($form_utilisateur_password),
+                    ':email' => $form_utilisateur_mail,
+                    ':rank' => $form_utilisateur_lvl
+                    );
+
+                $result = user::update($datas, $_GET['id']);
+
+         ?>
+            <?php if($result): ?>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-success">
+                            <i class="icon-ok-sign"></i> 
+                            L'utilisateur <?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?> a bien été ajouté
+                        </div>
+                    </div>
+                </div>
+
+            <?php else: ?>
 
 
-   <?php if(isset($_POST['submit'])): ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger">
+                            <i class="icon-remove-sign"></i> 
+                            Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+    <?php endif; ?>
+
+
+   <?php if(isset($_POST['submit-update'])): ?>
         <?php  
         extract($_POST);
         $datas = array(
@@ -41,11 +81,6 @@
 <?php $editor = user::get($utilisateur->editor); ?>
 <?php $date_created = new DateTime($utilisateur->created); ?>
 <?php $date_edited = new DateTime($utilisateur->edited); ?>
-
-
-
-
-<?php echo user::getLastID(); ?>
 
 
 <div class="title">

@@ -16,62 +16,11 @@
 <div class="content">
 
 
-    <?php if(isset($_POST['submit'])): ?>
-        <?php //tool::output($_POST); ?>
-        <?php //tool::output($_SESSION); ?>
-        <?php 
-        extract($_POST);
-        $datas = array(
-            ':firstname' => $form_contact_firstname,
-            ':lastname' => $form_contact_lastname,
-            ':title' => $form_contact_title,
-            ':ref_structure' => $form_contact_structure,
-            ':civility' => $form_contact_civility,
-            ':email' => $form_contact_email,
-            ':phone' => $form_contact_telephone,
-            ':mobile_phone' => $form_contact_mobile_phone,
-            ':fax' => $form_contact_fax,
-            ':note' => $form_contact_note
-            );
-
-        $result = contact::update($datas, $_GET['id']);
-//tool::output($result);
-        ?>
-
-        <?php if($result): ?>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        Le contact <?=$form_contact_firstname; ?> <?=$form_contact_lastname ?> a bien été modifée
-                    </div>
-                    <a href="/contacts/">Retourner à la liste des contacts</a>
-
-                </div>
-            </div>
-
-        <?php else: ?>
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant la modification du contact, veuillez réessayer
-                    </div>
-                    <a href="/contacts/editer/id/<?=$contact->id ?>">Retourner au formulaire d'édition</a>
-                </div>
-            </div>
-        <?php endif; ?>
-
-
-
-    <?php else: ?>
+ 
         <div class="row">
             <div class="col-md-12">
 
-                <form id="form-add-contact" method="post" parsley-validate>
+                <form id="form-add-contact" method="post" action="/contacts/infos/id/<?$contact->id ?>" parsley-validate>
 
 
                     <div class="field-box row">
@@ -177,7 +126,7 @@
                     </div>
                     <div class="field-box actions">
                         <div class="col-md-6  col-md-offset-2">
-                            <input type="submit" class="btn btn-primary" name="submit" value="Modifier le contact">
+                            <input type="submit" class="btn btn-primary" name="submit-update" value="Modifier le contact">
                             <span>OU</span>
                             <a href="/contacts/" class="reset">Annuler</a>
                         </div>
@@ -186,7 +135,7 @@
                 </form>
             </div>
         </div>
-    <?php endif; ?>
+
 </div>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

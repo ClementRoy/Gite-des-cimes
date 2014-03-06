@@ -14,58 +14,7 @@
 </div>
 <div class="content">
 
-
-    <?php if(isset($_POST['submit'])): ?>
-        <?php //tool::output($_POST); ?>
-        <?php //tool::output($_SESSION); ?>
-        <?php 
-        extract($_POST);
-        $datas = array(
-            ':name' => $form_hebergement_name,
-            ':address_number' => $form_hebergement_adresse_numero,
-            ':address_street' => $form_hebergement_adresse_voirie,
-            ':address_postal_code' => $form_hebergement_adresse_code_postal,
-            ':address_city' => $form_hebergement_adresse_code_ville,
-            ':note' => $form_hebergement_note
-            );
-
-        $result = hebergement::update($datas,  $_GET['id']);
-        //tool::output($result);
-        ?>
-
-        <?php if($result): ?>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        l'hébergement <?=$form_hebergement_name; ?> a bien été modifée
-                    </div>
-                    <a href="/hebergements/">Retourner à la liste des hebergements</a>
-
-                </div>
-            </div>
-
-
-        <?php else: ?>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant la modification de l'hébergement, veuillez réessayer
-                    </div>
-                    <a href="/hebergements/editer/<?=$hebergement->id ?>">Retourner au formulaire d'édition</a>
-                </div>
-            </div>
-
-        <?php endif; ?>
-
-
-
-    <?php else: ?>
-
-        <form id="form-add-hebergement" method="post" parsley-validate>
+        <form id="form-add-hebergement" method="post" action="/hebergements/infos/id/<?=$hebergement->id ?>" parsley-validate>
             <div class="row form-wrapper">
                 <div class="field-box row">
                     <label class="col-md-2" for="form-hebergement-nom">Nom de l'hébergement</label>
@@ -102,7 +51,7 @@
 
                 <div class="field-box actions">
                     <div class="col-md-6 col-md-offset-2">
-                        <input type="submit" class="btn btn-primary" name="submit" value="Modifier l'hébergement">
+                        <input type="submit" class="btn btn-primary" name="submit-update" value="Modifier l'hébergement">
                         <span>OU</span>
                         <a href="/hebergements/" class="reset">Annuler</a>
                     </div>
@@ -110,7 +59,6 @@
             </div>
         </form>
 
-    <?php endif; ?>
 </div>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

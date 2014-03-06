@@ -4,6 +4,56 @@
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
+
+    <?php if(isset($_POST['submit-update'])): ?>
+        <?php 
+        extract($_POST);
+        $datas = array(
+            ':name' => $form_hebergement_name,
+            ':address_number' => $form_hebergement_adresse_numero,
+            ':address_street' => $form_hebergement_adresse_voirie,
+            ':address_postal_code' => $form_hebergement_adresse_code_postal,
+            ':address_city' => $form_hebergement_adresse_code_ville,
+            ':note' => $form_hebergement_note
+            );
+
+        $result = hebergement::update($datas,  $_GET['id']);
+        //tool::output($result);
+        ?>
+
+        <?php if($result): ?>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success">
+                        <i class="icon-ok-sign"></i> 
+                        l'hébergement <?=$form_hebergement_name; ?> a bien été modifée
+                    </div>
+                    <a href="/hebergements/">Retourner à la liste des hebergements</a>
+
+                </div>
+            </div>
+
+
+        <?php else: ?>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger">
+                        <i class="icon-remove-sign"></i> 
+                        Une erreur s'est produite durant la modification de l'hébergement, veuillez réessayer
+                    </div>
+                    <a href="/hebergements/editer/<?=$hebergement->id ?>">Retourner au formulaire d'édition</a>
+                </div>
+            </div>
+
+        <?php endif; ?>
+
+
+
+    <?php endif; ?>
+
+
 <?php // TODO : ne pas oublier de lister les contacts associés  ?>
 <?php $hebergement = hebergement::get($_GET['id']); ?>
 <?php $creator = user::get($hebergement->creator); ?>

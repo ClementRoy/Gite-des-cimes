@@ -4,6 +4,43 @@
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
+    <?php if(isset($_POST['submit-update'])): ?>
+        <?php  
+
+        extract($_POST);
+        $form_sejour_date_debut = tool::generateDatetime($form_sejour_date_debut);
+        $form_sejour_date_fin = tool::generateDatetime($form_sejour_date_fin);
+
+        $datas = array(
+            ':name' => $form_sejour_name,
+            ':date_from' => $form_sejour_date_debut,
+            ':date_to' => $form_sejour_date_fin,
+            ':ref_hebergement' => $form_sejour_hebergement,
+            ':capacity_max' => $form_sejour_capacite_max,
+            ':capacity_min' => $form_sejour_capacite_min,
+            ':numero' => $form_sejour_numero,
+            ':price' => $form_sejour_prix
+            );
+
+        $result = sejour::update($datas, $_GET['id']);
+
+        ?>
+        <?php if($result): ?>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-info">
+                        <i class="icon-exclamation-sign"></i>
+                        Le séjour <strong><?=$form_sejour_name; ?></strong> a bien été modifié.
+                    </div>
+                    <a href="/sejours/">Retourner à la liste des séjours</a>
+
+                </div>
+            </div>
+        <?php else: ?>
+
+        <?php endif; ?>
+    <?php endif; ?>
+
 
 <?php $sejour = sejour::get($_GET['id']); ?>
 <?php //tool::output($sejour); ?>

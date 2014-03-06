@@ -3,6 +3,58 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 
 
+   <?php if(isset($_POST['submit-update'])): ?>
+        <?php //tool::output($_POST); ?>
+        <?php //tool::output($_SESSION); ?>
+        <?php 
+        extract($_POST);
+        $datas = array(
+            ':firstname' => $form_contact_firstname,
+            ':lastname' => $form_contact_lastname,
+            ':title' => $form_contact_title,
+            ':ref_structure' => $form_contact_structure,
+            ':civility' => $form_contact_civility,
+            ':email' => $form_contact_email,
+            ':phone' => $form_contact_telephone,
+            ':mobile_phone' => $form_contact_mobile_phone,
+            ':fax' => $form_contact_fax,
+            ':note' => $form_contact_note
+            );
+
+        $result = contact::update($datas, $_GET['id']);
+//tool::output($result);
+        ?>
+
+        <?php if($result): ?>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success">
+                        <i class="icon-ok-sign"></i> 
+                        Le contact <?=$form_contact_firstname; ?> <?=$form_contact_lastname ?> a bien été modifée
+                    </div>
+
+                </div>
+            </div>
+
+        <?php else: ?>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger">
+                        <i class="icon-remove-sign"></i> 
+                        Une erreur s'est produite durant la modification du contact, veuillez réessayer
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
+
+
+    <?php endif; ?>
+
+
 <?php $contact = contact::get($_GET['id']); ?>
 <?php 
 if($contact->ref_structure && $contact->ref_structure != 0) {

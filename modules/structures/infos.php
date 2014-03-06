@@ -4,6 +4,60 @@
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
+    <?php if(isset($_POST['submit-update'])): ?>
+        <?php //tool::output($_POST); ?>
+        <?php //tool::output($_SESSION); ?>
+        <?php 
+        extract($_POST);
+        $datas = array(
+            ':name' => $form_structure_name,
+            ':service' => $form_structure_service,
+            ':payer' => $form_structure_payer,
+            ':email' => $form_structure_email,
+            ':phone' => $form_structure_telephone,
+            ':fax' => $form_structure_fax,
+            ':address_number' => $form_structure_adresse_numero,
+            ':address_street' => $form_structure_adresse_voirie,
+            ':address_postal_code' => $form_structure_adresse_code_postal,
+            ':address_city' => $form_structure_adresse_code_ville,
+            ':address_comp' => $form_structure_addresse_comp,
+            ':note' => $form_structure_note
+            );
+
+        $result = structure::update($datas,  $_GET['id']);
+        ?>
+
+        <?php if($result): ?>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success">
+                        <i class="icon-ok-sign"></i> 
+                        La structure <strong><?=$form_structure_name; ?></strong> a bien été modifée
+                    </div>
+                    <a href="/structures/">Retourner à la liste des structures</a>
+
+                </div>
+            </div>
+
+        <?php else: ?>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger">
+                        <i class="icon-remove-sign"></i> 
+                        Une erreur s'est produite durant la modification de la structure, veuillez réessayer
+                    </div>
+                    <a href="/structures/editer/<?=$structure->id ?>">Retourner au formulaire d'édition</a>
+                </div>
+            </div>
+        <?php endif; ?>
+
+
+
+    <?php endif; ?>
+
 <?php // TODO : ne pas oublier de lister les contacts associés  ?>
 <?php $structure = structure::get($_GET['id']); ?>
 <?php $contacts = contact::getByStructure($structure->id); ?>

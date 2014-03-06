@@ -3,6 +3,9 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 
 
+<?php  $result = user::add(array()); ?>
+<?php $id = user::getLastID(); ?>
+
 <div class="title">
     <div class="row header">
         <div class="col-md-12">
@@ -62,7 +65,10 @@
 
         <div class="row">
             <div class="col-md-12">
-                <form id="form-add-user" method="post" parsley-validate>
+                <form id="form-add-user" method="post" action="/utilisateurs/infos/id/<?=$id ?>" parsley-validate>
+
+                    <input type="hidden" value="<?=$id ?>" name="id" />
+
                     <div class="field-box row">
                         <label class="col-md-2" for="form-utilisateur-prenom">Prénom</label>
                         <div class="col-md-5">
@@ -124,7 +130,7 @@
                     </div>
                     <div class="field-box actions">
                         <div class="col-md-6  col-md-offset-2">
-                            <input type="submit" class="btn btn-primary" name="submit" value="Ajouter l'utilisateur">
+                            <input type="submit" class="btn btn-primary" name="submit-add" value="Ajouter l'utilisateur">
                             <span>OU</span>
                             <a href="/utilisateurs/" class="reset">Annuler</a>
                         </div>
