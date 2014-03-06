@@ -3,6 +3,73 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
+    <?php if(isset($_POST['submit-add'])): ?>
+        <?php  
+        extract($_POST);
+        $form_sejour_date_debut = tool::generateDatetime($form_sejour_date_debut);
+        $form_sejour_date_fin = tool::generateDatetime($form_sejour_date_fin);
+
+        $datas = array(
+            ':name' => $form_sejour_name,
+            ':date_from' => $form_sejour_date_debut,
+            ':date_to' => $form_sejour_date_fin,
+            ':ref_hebergement' => $form_sejour_hebergement,
+            ':capacity_max' => $form_sejour_capacite_max,
+            ':capacity_min' => $form_sejour_capacite_min,
+            ':numero' => $form_sejour_numero,
+            ':price' => $form_sejour_prix
+            );
+
+        $result = sejour::update($datas, $_GET['id']);
+
+        ?>
+
+        <?php //tool::output($_POST); ?>
+
+        <?php if($result): ?>
+
+            <div class="title">
+                <div class="row header">
+                    <div class="col-md-12">
+                        <h3>Ajouter un séjour</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="content action-page">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-success">
+                            <i class="icon-ok-sign"></i> 
+                            Le séjour <strong><?=$form_sejour_name; ?></strong> a bien été ajouté
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <?php else: ?>
+
+            <div class="title">
+                <div class="row header">
+                    <div class="col-md-12">
+                        <h3>Ajouter un séjour</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="content action-page">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger">
+                            <i class="icon-remove-sign"></i> 
+                            Une erreur s'est produite durant l'ajout du séjour, veuillez réessayer
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <?php endif; ?>
+
+    <?php endif; ?>
+
 
     <?php if(isset($_POST['submit-update'])): ?>
         <?php  

@@ -3,6 +3,10 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
+
+<?php $result = structure::add(array()); ?>
+<?php $id = structure::getLastID(); ?>
+
 <div class="title">
     <div class="row header">
         <div class="col-md-12">
@@ -12,65 +16,12 @@
 </div>
 <div class="content">
 
-    <?php if(isset($_POST['submit'])): ?>
-        <?php //tool::output($_POST); ?>
-        <?php //tool::output($_SESSION); ?>
-        <?php 
-        extract($_POST);
-        $datas = array(
-            ':name' => $form_structure_name,
-            ':service' => $form_structure_service,
-            ':payer' => $form_structure_payer,
-            ':email' => $form_structure_email,
-            ':phone' => $form_structure_telephone,
-            ':fax' => $form_structure_fax,
-            ':address_number' => $form_structure_adresse_numero,
-            ':address_street' => $form_structure_adresse_voirie,
-            ':address_postal_code' => $form_structure_adresse_code_postal,
-            ':address_city' => $form_structure_adresse_code_ville,
-            ':address_comp' => $form_structure_addresse_comp,
-            ':note' => $form_structure_note
-            );
-
-        $result = structure::add($datas);
-
-        ?>
-
-        <?php if($result): ?>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        La structure <strong><?=$form_structure_name; ?></strong> a bien été ajoutée
-                    </div>
-                    <a href="/structures/">Retourner à la liste des structures</a>
-
-                </div>
-            </div>
-
-        <?php else: ?>
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant l'ajout de la structure, veuillez réessayer
-                    </div>
-                    <a href="/structures/ajouter">Retourner au formulaire d'ajout</a>
-                </div>
-            </div>
-        <?php endif; ?>
-
-
-
-    <?php else: ?>
-
         <div class="row">
             <div class="col-md-12">
 
-                <form id="form-add-structure" method="post" parsley-validate>
+                <form id="form-add-structure" action="/structure/infos/id/<?=$id ?>" method="post" parsley-validate>
+
+                    <input type="hidden" value="<?=$id ?>" name="id" />
 
                     <div class="field-box row">
                         <label class="col-md-2" for="form-structure-nom">Nom de la structure</label>
@@ -169,7 +120,7 @@
 
                     <div class="field-box actions">
                         <div class="col-md-6  col-md-offset-2">
-                            <input type="submit" class="btn btn-primary" name="submit" value="Ajouter la structure">
+                            <input type="submit" class="btn btn-primary" name="submit-add" value="Ajouter la structure">
                             <span>OU</span>
                             <a href="/structures/" class="reset">Annuler</a>
                         </div>
@@ -178,6 +129,6 @@
                 </form>
             </div>
         </div>
-    <?php endif; ?>
+
 </div>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

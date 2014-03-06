@@ -3,6 +3,8 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
+<?php $result = hebergement::add(array()); ?>
+<?php $id = hebergement::getLastID(); ?>
 
     <div class="title">
         <div class="row header">
@@ -13,55 +15,12 @@
     </div>
     <div class="content">
 
-    <?php if(isset($_POST['submit'])): ?>
-    <?php //tool::output($_POST); ?>
-    <?php //tool::output($_SESSION); ?>
-    <?php 
-    extract($_POST);
-    $datas = array(
-        ':name' => $form_hebergement_name,
-        ':address_number' => $form_hebergement_adresse_numero,
-        ':address_street' => $form_hebergement_adresse_voirie,
-        ':address_postal_code' => $form_hebergement_adresse_code_postal,
-        ':address_city' => $form_hebergement_adresse_code_ville,
-        ':note' => $form_hebergement_note
-        );
 
-    $result = hebergement::add($datas);
+        <form id="form-add-hebergement" method="post" action="/hebergement/infos/id/<?=$id ?>" parsley-validate>
 
-    ?>
-    <?php if($result): ?>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        L'hébergement <?=$form_hebergement_name; ?> a bien été ajoutée
-                    </div>
-                    <a href="/hebergements/">Retourner à la liste des hébergements</a>
-
-                </div>
-            </div>
-
-    <?php else: ?>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant l'ajout de l'hébergement, veuillez réessayer
-                    </div>
-                    <a href="/hebergements/ajouter">Retourner au formulaire d'ajout</a>
-                </div>
-            </div>
-
-    <?php endif; ?>
+                    <input type="hidden" value="<?=$id ?>" name="id" />
 
 
-
-<?php else: ?>
-
-        <form id="form-add-hebergement" method="post" parsley-validate>
             <div class="row">
                 <div class="field-box row">
                     <label class="col-md-2" for="form-hebergement-nom">Nom de l'hébergement</label>
@@ -97,7 +56,7 @@
 
                 <div class="field-box actions">
                     <div class="col-md-6 col-md-offset-2">
-                        <input type="submit" class="btn btn-primary" name="submit" value="Ajouter l'hébergement">
+                        <input type="submit" class="btn btn-primary" name="submit-add" value="Ajouter l'hébergement">
                         <span>OU</span>
                         <a href="/hebergements/" class="reset">Annuler</a>
                     </div>
@@ -105,7 +64,7 @@
 
             </div>
         </form>
-<?php endif; ?>
+
     </div>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

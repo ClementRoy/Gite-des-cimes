@@ -3,6 +3,10 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
+
+<?php $result = inscription::add(array()); ?>
+<?php $id = inscription::getLastID(); ?>
+
 <div class="title">
     <div class="row header">
         <div class="col-md-12">
@@ -12,65 +16,12 @@
 </div>
 <div class="content">
 
-    <?php if(isset($_POST['submit'])): ?>
-        <?php  
-//tool::output($_POST);
-        extract($_POST);
-        $form_inscription_date_debut = tool::generateDatetime($form_inscription_date_debut);
-        $form_inscription_date_fin = tool::generateDatetime($form_inscription_date_fin);
-
-        $datas = array(
-            ':ref_sejour' => $form_inscription_sejour,
-            ':finished' => $form_inscription_option,
-            ':ref_enfant' => $form_inscription_enfant,
-            ':date_from' => $form_inscription_date_debut,
-            ':date_to' => $form_inscription_date_fin,
-            ':ref_structure_payer' => $form_inscription_structure,
-            ':structure_payer' => $form_inscription_structure_name,
-            ':supported' => $form_inscription_supported,
-            ':note' => $form_inscription_note,
-            ':place' => $form_inscription_lieu,
-            ':hour_departure' => $form_inscription_heure_aller.'h'.$form_inscription_min_aller,
-            ':hour_return' => $form_inscription_heure_retour.'h'.$form_inscription_min_retour,
-            ':pique_nique' => $form_inscription_pique_nique,
-            ':sac' => $form_inscription_sac
-            );
-
-        $result = inscription::add($datas);
-
-        ?>
-        <?php //tool::output($_POST); ?>
-        <?php if($result): ?>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        L'inscription de <strong><?=$form_inscription_enfant; ?></strong> au séjour <strong></strong> a bien été ajoutée
-                    </div>
-                    <a href="/inscriptions/">Retourner à la liste des inscriptions</a>
-                </div>
-            </div>
-
-        <?php else: ?>
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant la création de l'inscription, veuillez réessayer
-                    </div>
-                    <a href="/inscriptions/ajouter">Retourner au formulaire de création</a>
-                </div>
-            </div>
-        <?php endif; ?>
-
-    <?php else: ?>
-
         <div class="row">
             <div class="col-md-12">
-                <form id="form-add-sejour" method="post" parsley-validate>
+                <form id="form-add-sejour" method="post" action="/inscription/infos/id/<?=$id ?>" parsley-validate>
+
+                    <input type="hidden" value="<?=$id ?>" name="id" />
+
 
                     <div class="field-box row">
                         <label class="col-md-2" for="form-inscription-enfant-select">Nom de l'enfant</label>
@@ -290,7 +241,7 @@
 
                     <div class="field-box actions">
                         <div class="col-md-6  col-md-offset-2">
-                            <input type="submit" class="btn btn-primary" name="submit" value="Valider l'inscription">
+                            <input type="submit" class="btn btn-primary" name="submit-add" value="Valider l'inscription">
                             <span>OU</span>
                             <a href="/inscriptions/" class="reset">Annuler</a>
                         </div>
@@ -349,6 +300,6 @@ if($(this).val() == 'Choisissez la structure'){
 
 </div>
 </div>
-<?php endif; ?>
+
 </div>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

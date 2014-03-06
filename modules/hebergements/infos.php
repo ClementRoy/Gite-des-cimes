@@ -4,6 +4,52 @@
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
+    <?php if(isset($_POST['submit-add'])): ?>
+    <?php //tool::output($_POST); ?>
+    <?php //tool::output($_SESSION); ?>
+    <?php 
+    extract($_POST);
+    $datas = array(
+        ':name' => $form_hebergement_name,
+        ':address_number' => $form_hebergement_adresse_numero,
+        ':address_street' => $form_hebergement_adresse_voirie,
+        ':address_postal_code' => $form_hebergement_adresse_code_postal,
+        ':address_city' => $form_hebergement_adresse_code_ville,
+        ':note' => $form_hebergement_note
+        );
+
+    $result = hebergement::update($datas, $_GET['id']);
+
+    ?>
+    <?php if($result): ?>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success">
+                        <i class="icon-ok-sign"></i> 
+                        L'hébergement <?=$form_hebergement_name; ?> a bien été ajoutée
+                    </div>
+                </div>
+            </div>
+
+    <?php else: ?>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger">
+                        <i class="icon-remove-sign"></i> 
+                        Une erreur s'est produite durant l'ajout de l'hébergement, veuillez réessayer
+                    </div>
+                </div>
+            </div>
+
+    <?php endif; ?>
+
+
+
+<?php endif; ?>
+
+
 
     <?php if(isset($_POST['submit-update'])): ?>
         <?php 

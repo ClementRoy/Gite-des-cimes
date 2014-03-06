@@ -3,6 +3,62 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
+
+   <?php if(isset($_POST['submit-add'])): ?>
+        <?php  
+//tool::output($_POST);
+        extract($_POST);
+        $form_inscription_date_debut = tool::generateDatetime($form_inscription_date_debut);
+        $form_inscription_date_fin = tool::generateDatetime($form_inscription_date_fin);
+
+        $datas = array(
+            ':ref_sejour' => $form_inscription_sejour,
+            ':finished' => $form_inscription_option,
+            ':ref_enfant' => $form_inscription_enfant,
+            ':date_from' => $form_inscription_date_debut,
+            ':date_to' => $form_inscription_date_fin,
+            ':ref_structure_payer' => $form_inscription_structure,
+            ':structure_payer' => $form_inscription_structure_name,
+            ':supported' => $form_inscription_supported,
+            ':note' => $form_inscription_note,
+            ':place' => $form_inscription_lieu,
+            ':hour_departure' => $form_inscription_heure_aller.'h'.$form_inscription_min_aller,
+            ':hour_return' => $form_inscription_heure_retour.'h'.$form_inscription_min_retour,
+            ':pique_nique' => $form_inscription_pique_nique,
+            ':sac' => $form_inscription_sac
+            );
+
+        $result = inscription::update($datas, $_GET['id']);
+
+        ?>
+        <?php //tool::output($_POST); ?>
+        <?php if($result): ?>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success">
+                        <i class="icon-ok-sign"></i> 
+                        L'inscription de <strong><?=$form_inscription_enfant; ?></strong> au séjour <strong></strong> a bien été ajoutée
+                    </div>
+                </div>
+            </div>
+
+        <?php else: ?>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger">
+                        <i class="icon-remove-sign"></i> 
+                        Une erreur s'est produite durant la création de l'inscription, veuillez réessayer
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
+    <?php endif; ?>
+
+
     <?php $inscription = inscription::getDetails($_GET['id']); ?>
     <?php tool::output($inscription); ?>
     <?php $creator = user::get($inscription->creator); ?>

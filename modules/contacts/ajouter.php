@@ -3,6 +3,9 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
+<?php $result = contact::add(array()); ?>
+<?php $id = contact::getLastID(); ?>
+
 <div class="title">
     <div class="row header">
         <div class="col-md-12">
@@ -12,62 +15,12 @@
 </div>
 <div class="content">
 
-    <?php if(isset($_POST['submit'])): ?>
-        <?php //tool::output($_POST); ?>
-        <?php //tool::output($_SESSION); ?>
-        <?php 
-        extract($_POST);
-        $datas = array(
-            ':firstname' => $form_contact_firstname,
-            ':lastname' => $form_contact_lastname,
-            ':title' => $form_contact_title,
-            ':ref_structure' => $form_contact_structure,
-            ':civility' => $form_contact_civility,
-            ':email' => $form_contact_email,
-            ':phone' => $form_contact_telephone,
-            ':mobile_phone' => $form_contact_mobile_phone,
-            ':fax' => $form_contact_fax,
-            ':note' => $form_contact_note
-            );
-
-        $result = contact::add($datas);
-
-        ?>
-
-        <?php if($result): ?>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        Le contact <strong><?=$form_contact_firstname; ?> <?=$form_contact_lastname; ?></strong> a bien été ajoutée
-                    </div>
-                    <a href="/contacts/">Retourner à la liste des contacts</a>
-
-                </div>
-            </div>
-        <?php else: ?>
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant l'ajout de la contact, veuillez réessayer
-                    </div>
-                    <a href="/contacts/ajouter">Retourner au formulaire d'ajout</a>
-                </div>
-            </div>
-        <?php endif; ?>
-
-
-
-    <?php else: ?>
 
         <div class="row">
             <div class="col-md-12">
-                <form id="form-add-contact" method="post" parsley-validate>
+                <form id="form-add-contact" method="post" action="/contact/infos/id/<?=$id ?>" parsley-validate>
 
+                    <input type="hidden" value="<?=$id ?>" name="id" />
 
                     <div class="field-box row">
                         <label class="col-md-2" for="form-enfant-structure-select">Nom de la structure</label>
@@ -172,7 +125,7 @@
 
                     <div class="field-box actions">
                         <div class="col-md-6  col-md-offset-2">
-                            <input type="submit" class="btn btn-primary" name="submit" value="Ajouter le contact">
+                            <input type="submit" class="btn btn-primary" name="submit-add" value="Ajouter le contact">
                             <span>OU</span>
                             <a href="/contacts/" class="reset">Annuler</a>
                         </div>

@@ -2,79 +2,9 @@
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
     <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
-    
 
-    <?php if(isset($_POST['submit'])): ?>
-        <?php  
-        extract($_POST);
-        $form_sejour_date_debut = tool::generateDatetime($form_sejour_date_debut);
-        $form_sejour_date_fin = tool::generateDatetime($form_sejour_date_fin);
-
-        $datas = array(
-            ':name' => $form_sejour_name,
-            ':date_from' => $form_sejour_date_debut,
-            ':date_to' => $form_sejour_date_fin,
-            ':ref_hebergement' => $form_sejour_hebergement,
-            ':capacity_max' => $form_sejour_capacite_max,
-            ':capacity_min' => $form_sejour_capacite_min,
-            ':numero' => $form_sejour_numero,
-            ':price' => $form_sejour_prix
-            );
-
-        $result = sejour::add($datas);
-
-        ?>
-
-        <?php //tool::output($_POST); ?>
-
-        <?php if($result): ?>
-
-            <div class="title">
-                <div class="row header">
-                    <div class="col-md-12">
-                        <h3>Ajouter un séjour</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="content action-page">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-success">
-                            <i class="icon-ok-sign"></i> 
-                            Le séjour <strong><?=$form_sejour_name; ?></strong> a bien été ajouté
-                        </div>
-                        <a href="/sejours/">Retourner à la liste des séjours</a>
-
-                    </div>
-                </div>
-            </div>
-
-        <?php else: ?>
-
-            <div class="title">
-                <div class="row header">
-                    <div class="col-md-12">
-                        <h3>Ajouter un séjour</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="content action-page">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-danger">
-                            <i class="icon-remove-sign"></i> 
-                            Une erreur s'est produite durant l'ajout du séjour, veuillez réessayer
-                        </div>
-                        <a href="/sejours/ajouter">Retourner au formulaire d'ajout</a>
-                    </div>
-                </div>
-            </div>
-
-        <?php endif; ?>
-
-    <?php else: ?>
-
-
+<?php $result = sejour::add(array()); ?>
+<?php $id = sejour::getLastID(); ?>
 
         <div class="title">
             <div class="row header">
@@ -84,8 +14,12 @@
             </div>
         </div>
         <div class="content action-page">
-            <form id="form-add-sejour" method="post" parsley-validate>
+            <form id="form-add-sejour" method="post" action="/sejour/infos/id/<?=$id ?>" parsley-validate>
              <!--  <h2>Informations sur le séjour</h2> -->
+
+                    <input type="hidden" value="<?=$id ?>" name="id" />
+
+
              <div class="field-box row">
                 <label class="col-md-2" for="form-sejour-nom">Nom du séjour</label>
                 <div class="col-md-4">
@@ -154,7 +88,7 @@
 
             <div class="field-box actions">
                 <div class="col-md-6 col-md-offset-2">
-                    <input type="submit" class="btn btn-primary" name="submit" value="Ajouter le séjour">
+                    <input type="submit" class="btn btn-primary" name="submit-add" value="Ajouter le séjour">
                     <span>OU</span>
                     <a href="/sejours/" class="reset">Annuler</a>
                 </div>
@@ -162,7 +96,5 @@
 
         </form>
     </div>
-
-<?php endif; ?>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

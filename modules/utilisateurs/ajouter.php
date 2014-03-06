@@ -3,7 +3,7 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 
 
-<?php  $result = user::add(array()); ?>
+<?php $result = user::add(array()); ?>
 <?php $id = user::getLastID(); ?>
 
 <div class="title">
@@ -14,53 +14,6 @@
     </div>
 </div>
 <div class="content">
-
-    <?php if(isset($_POST['submit'])): ?>
-
-        <?php 
-        extract($_POST);
-        $datas = array(
-            ':identifier' => $form_utilisateur_identifiant,
-            ':firstname' => $form_utilisateur_prenom,
-            ':lastname' => $form_utilisateur_nom,
-            ':password' => md5($form_utilisateur_password),
-            ':email' => $form_utilisateur_mail,
-            ':rank' => $form_utilisateur_lvl
-            );
-
-        $result = user::add($datas);
-
-        ?>
-
-        <?php if($result): ?>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        L'utilisateur <?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?> a bien été ajouté
-                    </div>
-                    <a href="/utilisateurs/">Retourner à la liste des utilisateurs</a>
-
-                </div>
-            </div>
-
-        <?php else: ?>
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
-                    </div>
-                    <a href="/enfants/ajouter">Retourner au formulaire d'ajout</a>
-                </div>
-            </div>
-        <?php endif; ?>
-
-
-    <?php else: ?>
 
 
         <div class="row">
@@ -138,6 +91,6 @@
                 </form>
             </div>
         </div>
-    <?php endif; ?>
+
 </div>
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
