@@ -575,7 +575,7 @@
             </div>
             </form>
         </div>
-    <div class="col-md-2 form-nav">
+    <div class="col-md-2 form-nav" data-spy="affix" data-offset-top="60">
             <h6>Vue d'ensemble</h6>
             <ul class="form-map">
                 <li><a href="#form-enfant-prenom">Prénom</a></li>

@@ -212,6 +212,12 @@ class structure
         return $db->lastInsertId('id');
     }
     
+    public static function cleanEmpty(){
+        global $db;
+        $sql = 'DELETE FROM '.self::$table.' WHERE name = ""';
+        $result = $db->delete($sql);
+        return $result;
+    }
 
 }
 

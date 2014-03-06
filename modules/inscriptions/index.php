@@ -2,6 +2,8 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 
+<?php inscription::cleanEmpty(); ?>
+
 
 <?php $inscriptions = inscription::getList(); ?>
 <?php //tool::output($sejours); ?>

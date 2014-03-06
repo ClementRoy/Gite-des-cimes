@@ -2,6 +2,10 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 
+
+<?php user::cleanEmpty(); ?>
+
+
 <?php  $users = user::getList(); ?>
 
 
@@ -33,6 +37,8 @@
             Unexpected error. Please try again later.
             </div>
             -->
+
+            
     <div class="row">
         <div class="col-md-12">
 

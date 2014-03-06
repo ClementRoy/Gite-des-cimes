@@ -39,7 +39,8 @@
                     </div>
 
                     <?php // TODO: ne prendre que les FUTURS séjours ?>
-                    <?php $sejours = sejour::getList(); ?>
+
+                    <?php $sejours = sejour::getListFuturSejour(); ?>
                     <div class="field-box row">
                         <label class="col-md-2" for="form-inscription-sejour-select">Séjour</label>
                         <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez le séjour">
@@ -61,28 +62,6 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="field-box row">
-                        <label class="col-md-2">Inscription finalisée</label>
-                        <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si l'inscription est finalisé.">
-                            <label class="radio-inline col-md-7" for="form-inscription-option-oui">
-                                <div class="radio" id="uniform-form-inscription-option-oui">
-                                    <span>
-                                        <input type="radio" name="form_inscription_option" id="form-inscription-option-oui" value="1">
-                                    </span>
-                                </div>
-                                Oui
-                            </label>
-                            <label class="radio-inline col-md-4 col-sm-5" for="form-inscription-option-non">
-                                <div class="radio" id="uniform-form-inscription-option-non">
-                                    <span class="checked">
-                                        <input type="radio" name="form_inscription_option" id="form-inscription-option-non" value="0" checked="checked">
-                                    </span>
-                                </div>
-                                Non
-                            </label>
                         </div>
                     </div>
 
@@ -238,6 +217,28 @@
                         </div>
                     </div>
 
+                    <div class="field-box row">
+                        <label class="col-md-2">Inscription finalisée</label>
+                        <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si l'inscription est finalisé.">
+                            <label class="radio-inline col-md-7" for="form-inscription-option-oui">
+                                <div class="radio" id="uniform-form-inscription-option-oui">
+                                    <span>
+                                        <input type="radio" name="form_inscription_option" id="form-inscription-option-oui" value="1">
+                                    </span>
+                                </div>
+                                Oui
+                            </label>
+                            <label class="radio-inline col-md-4 col-sm-5" for="form-inscription-option-non">
+                                <div class="radio" id="uniform-form-inscription-option-non">
+                                    <span class="checked">
+                                        <input type="radio" name="form_inscription_option" id="form-inscription-option-non" value="0" checked="checked">
+                                    </span>
+                                </div>
+                                Non
+                            </label>
+                        </div>
+                    </div>
+                    
 
                     <div class="field-box actions">
                         <div class="col-md-6  col-md-offset-2">
