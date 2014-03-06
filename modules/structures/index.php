@@ -2,6 +2,8 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 
+<?php structure::cleanEmpty(); ?>
+
 
 <div class="title">
     <div class="row header">

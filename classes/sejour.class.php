@@ -57,6 +57,26 @@ class sejour
     }
 
 
+    public static function getListPastSejour(){
+        $date = new DateTime();
+        $datetime = $date->format("Y-m-d H:i:s");
+        global $db;
+        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 AND date_from <= "'.$datetime.'" ORDER BY date_from');
+
+        return $result;
+    }
+
+
+    public static function getListFuturSejour(){
+        $date = new DateTime();
+        $datetime = $date->format("Y-m-d H:i:s");
+        global $db;
+        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 AND date_from >= "'.$datetime.'" ORDER BY date_from');
+
+        return $result;
+    }
+
+
     public static function getListByHebergement(){
         return false;
     }
@@ -67,7 +87,7 @@ class sejour
         return $result;
     }
 
-    
+
     /**
      * Count the number of entries in the database table
      *
@@ -203,6 +223,15 @@ class sejour
         global $db;
         return $db->lastInsertId('id');
     }
+
+
+    public static function cleanEmpty(){
+        global $db;
+        $sql = 'DELETE FROM '.self::$table.' WHERE name = ""';
+        $result = $db->delete($sql);
+        return $result;
+    }
+
     
 }
 

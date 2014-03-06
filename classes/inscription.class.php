@@ -55,7 +55,7 @@ class inscription
         return $result;        
     }
 
-
+    
     public static function getBySejourBetweenDates($id, $date_from = false, $date_to = false){
         global $db;
         
@@ -233,7 +233,14 @@ class inscription
         global $db;
         return $db->lastInsertId('id');
     }
-    
+
+    public static function cleanEmpty(){
+        global $db;
+        $sql = 'DELETE FROM '.self::$table.' WHERE ref_sejour = "" AND ref_enfant = ""';
+        $result = $db->delete($sql);
+        return $result;
+    }
+
 
 }
 

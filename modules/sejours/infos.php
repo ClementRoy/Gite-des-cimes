@@ -332,7 +332,9 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
         <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$geo[0]; ?>,<?=$geo[1]; ?>&zoom=12&size=210x200&scale=2&markers=<?=$geo[0]; ?>,<?=$geo[1]; ?>&sensor=false" width="100%" alt="">
         <ul>
             <li><strong>Adresse</strong></li>
+            <?php if( !empty($hebergement->address_number) OR !empty($hebergement->address_street) ): ?>
             <li><?=$hebergement->address_number; ?> <?=$hebergement->address_street; ?></li>
+            <?php endif; ?>
             <li><?=$hebergement->address_postal_code; ?> <?=$hebergement->address_city; ?></li>
         </ul>
     <?php endif; ?>

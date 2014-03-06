@@ -52,10 +52,6 @@ $menus = array(
 						'index' => 'Liste des inscriptions'
 					)
 	),
-	'export' => array(
-		'name' => 'Export',
-		'icon' => 'cog'
-	),
 	'corbeille' => array(
 		'name' => 'Corbeille',
 		'icon' => 'trash'
@@ -68,6 +64,12 @@ $menus = array(
 	'factures' => array(
 		'name' => 'Factures',
 		'icon' => 'edit')
+
+	'export' => array(
+		'name' => 'Export',
+		'icon' => 'cog'
+	),
+	
 */
 
 // Build active element from REQUEST URI
