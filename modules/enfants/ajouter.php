@@ -575,7 +575,7 @@
             </div>
         </div>
         <div class="col-md-2 form-nav">
-            <h5>Liste des champs</h5>
+            <h6>Vue d'ensemble</h6>
             <ul>
                 <li><a href="#form-enfant-prenom">a</a></li>
                 <li><a href="#form-enfant-nom">a</a></li>
