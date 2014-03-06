@@ -6,7 +6,26 @@ $(function () {
 // 		$('.form-map').append('<li><a href="#' + anchor + '">' + label + '</a></li>');
 // });
 
-$('body').scrollspy({ target: '.form-nav' })
+//$('body').scrollspy({ target: '.form-map' })
+
+
+$('.form-nav a').click(function (e) {
+    var the_id = $(this).attr("href");  
+  
+    $('html, body').animate({  
+        scrollTop:$(the_id).offset().top - 40 
+    }, 'slow');  
+    return false;
+});
+
+
+
+setTimeout(function() {
+	$('.animated').removeClass('fadeInUp');
+	$('.animated').removeClass('animated');
+}, 1000);
+
+$("#form-add-children").scrollspy({target: "#form-nav", offset:50});
 
 $('.metadata').popover();
 

@@ -328,6 +328,7 @@ h6,
   border: 1px solid #DBDCE2;
   overflow: hidden;
   margin-top: 10px;
+  position: relative;
 }
 .wrap > .content.content-table {
   padding: 0;
@@ -594,9 +595,10 @@ table.dataTable tfoot {
 .address .contact p {
   margin: 2px 0;
 }
-.form-nav > div.affix {
-  position: fixed;
+.form-nav.affix {
   top: 0;
+  right: 96px;
+  padding-top: 30px;
 }
 .icon-male {
   color: #4396B6;
