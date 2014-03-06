@@ -237,7 +237,12 @@ class enfant
         return $result;
     }
 
+    public static function getLastID(){
+        global $db;
+        return $db->lastInsertId('id');
+    }
 
+    
 }
 
 ?>

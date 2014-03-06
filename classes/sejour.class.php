@@ -198,6 +198,11 @@ class sejour
         //$result = self::archive($id);
         return $result;
     }
+
+    public static function getLastID(){
+        global $db;
+        return $db->lastInsertId('id');
+    }
     
 }
 
