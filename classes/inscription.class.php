@@ -56,6 +56,11 @@ class inscription
     }
 
 
+    public static function getNextSejour(){
+        $date_from = $date_from->format("Y-m-d H:i:s");
+    }
+
+    
     public static function getBySejourBetweenDates($id, $date_from = false, $date_to = false){
         global $db;
         
