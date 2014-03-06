@@ -270,6 +270,13 @@ class user
     }
 
 
+    public static function getLastID(){
+        global $db;
+        return $db->lastInsertId('id');
+    }
+
+    
+
 /*
 http://www.grafikart.fr/tutoriels/php/securiser-sessions-php-58
 http://www.grafikart.fr/tutoriels/php/poo-models-php-90

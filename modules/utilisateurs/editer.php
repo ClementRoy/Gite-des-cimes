@@ -25,7 +25,7 @@
             ':email' => $form_utilisateur_mail,
             ':rank' => $form_utilisateur_lvl,
             ':id' => $_GET['id']
-            );
+        );
 
         $result = user::update($datas);
 
@@ -50,7 +50,7 @@
     <?php else: ?>
         <div class="row">
             <div class="col-md-12">
-                <form id="form-add-children" method="post" parsley-validate>
+                <form id="form-add-children" method="post" action="/utilisateurs/infos/id/<?=$utilisateur->id; ?>" parsley-validate>
                         <div class="field-box row">
                             <label class="col-md-2" for="form-utilisateur-prenom">Prénom</label>
                             <div class="col-md-5">
@@ -113,12 +113,11 @@
 
                         <div class="field-box actions">
                             <div class="col-md-6  col-md-offset-2">
-                                <input type="submit" class="btn btn-primary" name="submit" value="Ajouter l'enfant">
+                                <input type="submit" class="btn btn-primary" name="submit" value="valider">
                                 <span>OU</span>
                                 <a href="/utilisateurs/" class="reset">Annuler</a>
                             </div>
                         </div>
-
 
                     </form>
                 </div>

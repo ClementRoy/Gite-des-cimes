@@ -4,6 +4,7 @@ class app
 {
 
 	const VERSION = 'dev';
+	const URL = "http://gitedescimes.local";
 	public static $name = "Gîte des Cimes";
 	
 	function __construct()

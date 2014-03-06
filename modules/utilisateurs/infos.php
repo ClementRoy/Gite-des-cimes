@@ -4,11 +4,49 @@
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
+
+   <?php if(isset($_POST['submit'])): ?>
+        <?php  
+        extract($_POST);
+        $datas = array(
+            ':firstname' => $form_utilisateur_prenom,
+            ':lastname' => $form_utilisateur_nom,
+            ':email' => $form_utilisateur_mail,
+            ':rank' => $form_utilisateur_lvl,
+        );
+
+        $result = user::update($datas, $_GET['id']);
+
+        ?>
+        <?php if($result): ?>
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="alert alert-info">
+                        <i class="icon-exclamation-sign"></i>
+                        L'utilisateur <strong><?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?></strong> a bien été modifié.
+                    </div>
+                </div>
+            </div>
+        <?php else: ?>
+
+        <?php endif; ?>
+
+    <?php endif; ?>
+
+
 <?php $utilisateur = user::get($_GET['id']); ?>
 <?php $creator = user::get($utilisateur->creator); ?>
 <?php $editor = user::get($utilisateur->editor); ?>
 <?php $date_created = new DateTime($utilisateur->created); ?>
 <?php $date_edited = new DateTime($utilisateur->edited); ?>
+
+
+
+
+<?php echo user::getLastID(); ?>
+
 
 <div class="title">
     <div class="row header">
