@@ -153,6 +153,9 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                 <th>
                                     Statut
                                 </th>
+                                <th>
+                                    Prise en charge
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -191,6 +194,13 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                             <span class="label label-success">Confirmé</span>
                                         <?php else: ?>
                                             <span class="label label-danger">Non confirmé</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php if($inscription->supported): ?>
+                                            <span class="label label-success">Oui</span>
+                                        <?php else: ?>
+                                            <span class="label label-danger">Non</span>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
