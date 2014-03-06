@@ -1,7 +1,14 @@
 $(function () {
 
+// $('.maped-form .field-box').each(function(index, val) {
+// 		var label = $(this).children('label').text();
+// 		var anchor = $(this).find('[id^=form-]').attr('id');
+// 		$('.form-map').append('<li><a href="#' + anchor + '">' + label + '</a></li>');
+// });
 
-	$('.metadata').popover();
+$('body').scrollspy({ target: '.form-nav' })
+
+$('.metadata').popover();
 
 $('.input-phone').mask('00 00 00 00 00');
 $('.input-securite-social').mask('0 00 00 00 000 000 00');

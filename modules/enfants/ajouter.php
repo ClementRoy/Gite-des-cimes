@@ -18,12 +18,12 @@
 
 
         
-        <form id="form-add-children" method="post" action="/enfant/infos/id/<?=$id ?>" parsley-validate>
-
-            <input type="hidden" value="<?=$id ?>" name="id" />
 
 
             <div class="col-md-10">
+        <form id="form-add-children" method="post" action="/enfant/infos/id/<?=$id ?>" class="maped-form" parsley-validate>
+
+            <input type="hidden" value="<?=$id ?>" name="id" />
              <!--  <h2>Informations sur l'enfant</h2> -->
              <div class="row form-wrapper">
                 <div class="field-box row">
@@ -330,7 +330,7 @@
                     <div class="field-box row">
                         <label class="col-md-2" for="form-enfant-telephone-fixe-famille">Téléphone fixe</label>
                         <div class="col-md-4 col-sm-5">
-                            <input id="form-enfant-pere-telephone" name="form_enfant_telephone_fixe_famille" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe de la famille d'accueil.">
+                            <input id="form-enfant-telephone-fixe-famille" name="form_enfant_telephone_fixe_famille" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe de la famille d'accueil.">
                         </div>
                     </div>
                     <div class="field-box row">
@@ -573,69 +573,72 @@
                     </div>
                 </div>
             </div>
+            </form>
         </div>
-        <div class="col-md-2 form-nav">
+    <div class="col-md-2 form-nav">
             <h6>Vue d'ensemble</h6>
-            <ul>
-                <li><a href="#form-enfant-prenom">a</a></li>
-                <li><a href="#form-enfant-nom">a</a></li>
-                <li><a href="#birthdate">a</a></li>
-                <li><a href="#form-enfant-sexe">a</a></li>
-                <li><a href="#form-enfant-inscription">a</a></li>
-                <li><a href="#form-enfant-structure">a</a></li>
-                <li><a href="#form-enfant-contact">a</a></li>
-                <li><a href="#form-enfant-responsable">a</a></li>
-                <li><a href="#form-enfant-nom-pere">a</a></li>
-                <li><a href="#form-enfant-telephone-fixe-pere">a</a></li>
-                <li><a href="#form-enfant-telephone-portable-pere">a</a></li>
-                <li><a href="#form-enfant-telephone-professionnel-pere">a</a></li>
-                <li><a href="#form-enfant-adresse-numero-pere">a</a></li>
-                <li><a href="#form-enfant-adresse-voirie-pere">a</a></li>
-                <li><a href="#form-enfant-adresse-code-postal-pere">a</a></li>
-                <li><a href="#form-enfant-adresse-code-ville-pere">a</a></li>
-                <li><a href="#form-enfant-nom-mere">a</a></li>
-                <li><a href="#form-enfant-telephone-fixe-mere">a</a></li>
-                <li><a href="#form-enfant-telephone-portable-mere">a</a></li>
-                <li><a href="#form-enfant-telephone-professionnel-mere">a</a></li>
-                <li><a href="#form-enfant-adresse-numero-mere">a</a></li>
-                <li><a href="#form-enfant-adresse-voirie-mere">a</a></li>
-                <li><a href="#form-enfant-adresse-code-postal-mere">a</a></li>
-                <li><a href="#form-enfant-adresse-code-ville-mere">a</a></li>
-                <li><a href="#form-enfant-nom-tuteur">a</a></li>
-                <li><a href="#form-enfant-telephone-fixe-tuteur">a</a></li>
-                <li><a href="#form-enfant-telephone-portable-tuteur">a</a></li>
-                <li><a href="#form-enfant-telephone-professionnel-tuteur">a</a></li>
-                <li><a href="#form-enfant-adresse-numero-tuteur">a</a></li>
-                <li><a href="#form-enfant-adresse-voirie-tuteur">a</a></li>
-                <li><a href="#form-enfant-adresse-code-postal-tuteur">a</a></li>
-                <li><a href="#form-enfant-adresse-code-ville-tuteur">a</a></li>
-                <li><a href="#form-enfant-nom-urgence">a</a></li>
-                <li><a href="#form-enfant-telephone-urgence">a</a></li>
-                <li><a href="#form-enfant-domiciliation">a</a></li>
-                <li><a href="#form-enfant-nom-famille">a</a></li>
-                <li><a href="#form-enfant-telephone-fixe-famille">a</a></li>
-                <li><a href="#form-enfant-telephone-portable-famille">a</a></li>
-                <li><a href="#form-enfant-telephone-professionnel-famille">a</a></li>
-                <li><a href="#form-enfant-adresse-numero-famille">a</a></li>
-                <li><a href="#form-enfant-adresse-voirie-famille">a</a></li>
-                <li><a href="#form-enfant-adresse-code-postal-famille">a</a></li>
-                <li><a href="#form-enfant-adresse-code-ville-famille">a</a></li>
-                <li><a href="#form-enfant-droit-image">a</a></li>
-                <li><a href="#form-enfant-traitement-medical">a</a></li>
-                <li><a href="#form-enfant-contre-indication">a</a></li>
-                <li><a href="#form-enfant-numero-securite">a</a></li>
-                <li><a href="#form-enfant-assurance">a</a></li>
-                <li><a href="#assurance-validite">a</a></li>
-                <li><a href="#form-enfant-attestation-cpam">a</a></li>
-                <li><a href="#cpam-validite">a</a></li>
-                <li><a href="#form-enfant-carnet-vaccination-oui">a</a></li>
-                <li><a href="#form-enfant-fiche-sanitaire-oui">a</a></li>
-                <li><a href="#form-enfant-fiche-sejour-oui">a</a></li>
-                <li><a href="#form-enfant-note">a</a></li>
+            <ul class="form-map">
+                <li><a href="#form-enfant-prenom">Prénom</a></li>
+                <li><a href="#form-enfant-nom">Nom</a></li>
+                <li><a href="#form-enfant-naissance">Date de naissance</a></li>
+                <li><a href="#form-enfant-sexe-m">Sexe de l'enfant</a></li>
+                <li><a href="#form-enfant-inscription-structure">L'enfant est inscrit par</a></li>
+                <div data-group="structure">
+                    <li><a href="#form-enfant-structure-select">Nom de la structure</a></li>
+                    <li><a href="#form-enfant-contact-select">Nom du contact</a></li>
+                </div>
+                <li><a href="#form-enfant-responsable-structure">Responsable légal de l'enfant</a></li>
+                <div data-responsable="parents">
+                    <div data-responsable="pere">
+                        <li><a href="#form-enfant-nom-pere">Nom du père</a></li>
+                        <li><a href="#form-enfant-telephone-pere">Téléphone fixe</a></li>
+                        <li><a href="#form-enfant-telephone-pere">Téléphone portable</a></li>
+                        <li><a href="#form-enfant-professionnel-pere">Téléphone professionnel</a></li>
+                        <li><a href="#form-enfant-adresse-numero-pere">Adresse du père</a></li>
+                    </div>
+                    <div data-responsable="mere">
+                        <li><a href="#form-enfant-nom-mere">Nom de la mère</a></li>
+                        <li><a href="#form-enfant-telephone-fixe-mere">Téléphone fixe</a></li>
+                        <li><a href="#form-enfant-telephone-portable-mere">Téléphone portable</a></li>
+                        <li><a href="#form-enfant-telephone-professionnel-mere">Téléphone professionnel</a></li>
+                        <li><a href="#form-enfant-adresse-numero-mere">Adresse de la mère</a></li>
+                    </div>
+                </div>
+                <div data-responsable="tuteur">
+                    <li><a href="#form-enfant-nom-tuteur">Nom du tuteur</a></li>
+                    <li><a href="#form-enfant-telephone-fixe-tuteur">Téléphone fixe</a></li>
+                    <li><a href="#form-enfant-telephone-portable-tuteur">Téléphone portable</a></li>
+                    <li><a href="#form-enfant-telephone-professionnel-tuteur">Téléphone professionnel</a></li>
+                    <li><a href="#form-enfant-adresse-numero-tuteur">Adresse du tuteur</a></li>
+                </div>
+                <li><a href="#form-enfant-domiciliation-responsable">Domiciliation de l'enfant</a></li>
+                <div data-domiciliation="famille">
+                    <li><a href="#form-enfant-nom-famille">Nom de la famille d'accueil</a></li>
+                    <li><a href="#form-enfant-telephone-fixe-famille">Téléphone fixe</a></li>
+                    <li><a href="#form-enfant-telephone-portable-famille">Téléphone portable</a></li>
+                    <li><a href="#form-enfant-telephone-professionnel-famille">Téléphone professionnel</a></li>
+                    <li><a href="#form-enfant-adresse-numero-famille">Adresse de la famille d'accueil</a></li>
+                </div>
+                <li><a href="#form-enfant-nom-urgence">Contact d'urgence</a></li>
+                <li><a href="#form-enfant-telephone-urgence">Téléphone d'urgence</a></li>
+                <li><a href="#form-enfant-droit-image-oui">Droit à l'image</a></li>
+                <li><a href="#form-enfant-traitement-medical-oui">Traitement(s) médical(s)</a></li>
+                <li><a href="#form-enfant-contre-indication">Contre-indications / allergies</a></li>
+                <li><a href="#form-enfant-numero-securite">N° de sécurité sociale</a></li>
+                <li><a href="#form-enfant-assurance-oui">Assurance (RC)</a></li>
+                <div data-assurance="oui">
+                        <li><a href="#form-enfant-assurance-validite">Date de fin de validité</a></li>
+                </div>
+                        <li><a href="#form-enfant-attestation-cpam-oui">Attestation CPAM</a></li>
+                 <div data-cpam="oui">
+                        <li><a href="#form-enfant-cpam-validite">Date de fin de validité</a></li>
+                </div>
+                <li><a href="#form-enfant-carnet-vaccination-oui">Carnet de vaccination</a></li>
+                <li><a href="#form-enfant-fiche-sanitaire-oui">Fiche sanitaire de liaison</a></li>
+                <li><a href="#form-enfant-fiche-sejour-oui">Fiche de séjour</a></li>
+                <li><a href="#form-enfant-note">Notes</a></li>
             </ul>
         </div>
-</form>
-
 </div>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
