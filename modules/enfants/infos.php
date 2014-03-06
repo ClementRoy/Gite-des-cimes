@@ -179,21 +179,21 @@
                         <?php elseif($enfant->guardian == 'tuteur'): ?>
                             <li class="list-group-item">
                                 <p><strong>Tuteur :</strong></p>
-                                <p><?=(!empty($enfant->guardian_name))? $enfant->guardian_name : EMPTYVAL; ?> <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->guardian_phone))? $enfant->guardian_phone : EMPTYVAL; ?></span></p>
+                                <p><?=(!empty($enfant->guardian_name))? $enfant->guardian_name : EMPTYVAL; ?> <p><i class="icon-phone"></i><?=(!empty($enfant->guardian_phone))? $enfant->guardian_phone : EMPTYVAL; ?></p>
                             </li>
                         <?php elseif($enfant->guardian == 'parents'): ?>
                             <li class="list-group-item">
                                 <p><strong>Père :</strong></p>
-                                <p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?> <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->father_phone))? $enfant->father_phone : EMPTYVAL; ?></span></p>
+                                <p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?> <p><i class="icon-phone"></i><?=(!empty($enfant->father_phone))? $enfant->father_phone : EMPTYVAL; ?></p>
                             </li>
                             <li class="list-group-item">
                                 <p><strong>Mère :</strong></p>
-                                <p><?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?> <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->mother_phone))? $enfant->mother_phone : EMPTYVAL; ?></span></p>
+                                <p><?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?> <p><i class="icon-phone"></i><?=(!empty($enfant->mother_phone))? $enfant->mother_phone : EMPTYVAL; ?></p>
                             </li>
                         <?php elseif($enfant->guardian == 'pere'): ?>
                             <li class="list-group-item">
                                 <p><strong>Père :</strong></p>
-                                <p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?> <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->father_phone))? $enfant->father_phone : EMPTYVAL; ?></span></p>
+                                <p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?> <p><i class="icon-phone"></i><?=(!empty($enfant->father_phone))? $enfant->father_phone : EMPTYVAL; ?></p>
                             </li>
                         <?php elseif($enfant->guardian == 'mere'): ?>
                             <li class="list-group-item">
@@ -214,7 +214,7 @@
                         <li class="list-group-item">
                             <p><strong>Nom de la famille d'accueil :</strong></p>
                             <?=(!empty($enfant->host_family_name))? $enfant->host_family_name : EMPTYVAL; ?>
-                            <span class="pull-right"><i class="icon-phone"></i><?=(!empty($enfant->host_family_phone))? $enfant->host_family_phone : EMPTYVAL; ?></span></p>
+                            <p><i class="icon-phone"></i><?=(!empty($enfant->host_family_phone))? $enfant->host_family_phone : EMPTYVAL; ?></p>
                         </li>
                         <li class="list-group-item">
                             <p><strong>Adresse de la famille d'accueil :</strong></p>
@@ -229,7 +229,7 @@
                     <ul class="list-group">
                         <li class="list-group-item">
                             <p><strong>Urgence :</strong></p>
-                            <p><?=$enfant->emergency_name;?> <?php if (!empty($enfant->host_family_phone)): ?><span class="pull-right"><i class="icon-phone"></i><?=$enfant->emergency_phone;?></span><?php endif ?></p>
+                            <p><?=$enfant->emergency_name;?> <?php if (!empty($enfant->host_family_phone)): ?><p><i class="icon-phone"></i><?=$enfant->emergency_phone;?></span><?php endif ?></p>
                         </li>
                     </ul>
                 </div>
@@ -249,7 +249,7 @@
                         </li>
                         <?php if (!empty($enfant->allergies)): ?>
                             <li class="list-group-item">
-                                <p><strong>Contre-indications / allergies :</strong></p>
+                                <p><strong>Contre-indications / allergies :</strong></span></p>
                                 <p><?=$enfant->allergies;?></p>
                             </li>   
                         <?php endif ?>
@@ -290,6 +290,7 @@
 
 
         <div class="col-md-3 address">
+        <div class="row">
             <?php  
 /*
 [guardian] => 
@@ -331,13 +332,13 @@
 */
 
     ?>
-    <div>
+    <div class="contact">
         <?php if(!empty($enfant->father_phone_pro) || !empty($enfant->father_phone_mobile) || !empty($enfant->father_phone_home)): ?>
             <h6>Père</h6>
             <p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?> 
-                <span class="pull-right"><?=(!empty($enfant->father_phone_home))? '<i class="icon-phone"></i> Fixe : '.$enfant->father_phone_home : ''; ?></span>
-                <span class="pull-right"><?=(!empty($enfant->father_phone_mobile))? '<i class="icon-phone"></i> Portable : '.$enfant->father_phone_mobile : ''; ?></span>
-                <span class="pull-right"><?=(!empty($enfant->father_phone_pro))? '<i class="icon-phone"></i> Pro : '.$enfant->father_phone_pro : ''; ?></span>
+                <p><?=(!empty($enfant->father_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->father_phone_home : ''; ?></span>
+                <p><?=(!empty($enfant->father_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->father_phone_mobile : ''; ?></span>
+                <p><?=(!empty($enfant->father_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->father_phone_pro : ''; ?></span>
             <?php endif; ?>
 
         </p>
@@ -348,13 +349,13 @@
     [father_address_city] => 
 -->
 </div>
-<div>
+<div class="contact">
     <?php if(!empty($enfant->mother_phone_pro) || !empty($enfant->mother_phone_mobile) || !empty($enfant->mother_phone_home)): ?>
         <h6>Mère</h6>
         <p><?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?>
-            <span class="pull-right"><?=(!empty($enfant->mother_phone_home))? '<i class="icon-phone"></i> Fixe : '.$enfant->mother_phone_home : ''; ?></span>
-            <span class="pull-right"><?=(!empty($enfant->mother_phone_mobile))? '<i class="icon-phone"></i> Portable : '.$enfant->mother_phone_mobile : ''; ?></span>
-            <span class="pull-right"><?=(!empty($enfant->mother_phone_pro))? '<i class="icon-phone"></i> Pro : '.$enfant->mother_phone_pro : ''; ?></span>
+            <p><?=(!empty($enfant->mother_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->mother_phone_home : ''; ?></span>
+            <p><?=(!empty($enfant->mother_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->mother_phone_mobile : ''; ?></span>
+            <p><?=(!empty($enfant->mother_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->mother_phone_pro : ''; ?></span>
         <?php endif; ?>
     </p>
 <!--
@@ -364,13 +365,13 @@
     [mother_address_city] => 
 -->
 </div>
-<div>
+<div class="contact">
     <?php if(!empty($enfant->guardian_phone_pro) && !empty($enfant->guardian_phone_mobile) && !empty($enfant->guardian_phone_home)): ?>
         <h6>Responsable légale</h6>
         <p><?=(!empty($enfant->guardian_name))? $enfant->guardian_name : EMPTYVAL; ?> 
-            <span class="pull-right"><?=(!empty($enfant->guardian_phone_home))? '<i class="icon-phone"></i> Fixe : '.$enfant->guardian_phone_home : ''; ?></span>
-            <span class="pull-right"><?=(!empty($enfant->guardian_phone_mobile))? '<i class="icon-phone"></i> Portable : '.$enfant->guardian_phone_mobile : ''; ?></span>
-            <span class="pull-right"><?=(!empty($enfant->guardian_phone_pro))? '<i class="icon-phone"></i> Pro : '.$enfant->guardian_phone_pro : ''; ?></span>
+            <p><?=(!empty($enfant->guardian_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->guardian_phone_home : ''; ?></span>
+            <p><?=(!empty($enfant->guardian_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->guardian_phone_mobile : ''; ?></span>
+            <p><?=(!empty($enfant->guardian_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->guardian_phone_pro : ''; ?></span>
         <?php endif; ?>
 
     </p>
@@ -381,20 +382,20 @@
     [guardian_address_city] => 
 -->
 </div>
-<div>
+<div class="contact">
     <?php if(!empty($enfant->emergency_phone)): ?>
         <h6>Contact d'urgence</h6>
         <p><?=(!empty($enfant->emergency_name))? $enfant->emergency_name : EMPTYVAL; ?></p> 
-        <p><span class="pull-right"><i class="icon-phone"></i> <?=$enfant->emergency_phone;?></span></p>
+        <p><p><i class="icon-phone"></i> <?=$enfant->emergency_phone;?></p>
     <?php endif; ?>
 </div>
-<div>
+<div class="contact">
     <?php if(!empty($enfant->host_family_phone_pro) || !empty($enfant->host_family_phone_mobile) || !empty($enfant->host_family_phone_home)): ?>
         <h6>Famille d'accueil</h6>
         <p><?=(!empty($enfant->host_family_name))? $enfant->host_family_name : EMPTYVAL; ?> 
-            <span class="pull-right"><?=(!empty($enfant->host_family_phone_home))? '<i class="icon-phone"></i> Fixe : '.$enfant->host_family_phone_home : ''; ?></span>
-            <span class="pull-right"><?=(!empty($enfant->host_family_phone_mobile))? '<i class="icon-phone"></i> Portable : '.$enfant->host_family_phone_mobile : ''; ?></span>
-            <span class="pull-right"><?=(!empty($enfant->host_family_phone_pro))? '<i class="icon-phone"></i> Pro : '.$enfant->host_family_phone_pro : ''; ?></span>
+            <p><?=(!empty($enfant->host_family_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->host_family_phone_home : ''; ?></span>
+            <p><?=(!empty($enfant->host_family_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->host_family_phone_mobile : ''; ?></span>
+            <p><?=(!empty($enfant->host_family_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->host_family_phone_pro : ''; ?></span>
         <?php endif; ?>
     </p>
 <!--
@@ -404,7 +405,7 @@
     [host_family_address_city] => 
 -->
 </div>
-
+</div>
 </div>
 
 </div>
