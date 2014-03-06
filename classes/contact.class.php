@@ -220,7 +220,14 @@ class contact
         global $db;
         return $db->lastInsertId('id');
     }
-    
+
+    public static function cleanEmpty(){
+        global $db;
+        $sql = 'DELETE FROM '.self::$table.' WHERE firstname = "" AND lastname = ""';
+        $result = $db->delete($sql);
+        return $result;
+    }
+       
 }
 
 ?>

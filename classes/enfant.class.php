@@ -237,13 +237,6 @@ class enfant
         return $result;
     }
 
-    public static function cleanEmpty(){
-        global $db;
-        $sql = 'DELETE FROM '.self::$table.' WHERE firstname = ""';
-        $result = $db->delete($sql);
-        return $result;
-    }
-
     public static function getLastID(){
         global $db;
         return $db->lastInsertId('id');
