@@ -4,7 +4,7 @@
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
-    <?php if(isset($_POST['submit-add'])): ?>
+<?php if(isset($_POST['submit-add'])): ?>
     <?php //tool::output($_POST); ?>
     <?php //tool::output($_SESSION); ?>
     <?php 
@@ -23,25 +23,25 @@
     ?>
     <?php if($result): ?>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        L'hébergement <?=$form_hebergement_name; ?> a bien été ajoutée
-                    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success">
+                    <i class="icon-ok-sign"></i> 
+                    L'hébergement <?=$form_hebergement_name; ?> a bien été ajoutée
                 </div>
             </div>
+        </div>
 
     <?php else: ?>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant l'ajout de l'hébergement, veuillez réessayer
-                    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    <i class="icon-remove-sign"></i> 
+                    Une erreur s'est produite durant l'ajout de l'hébergement, veuillez réessayer
                 </div>
             </div>
+        </div>
 
     <?php endif; ?>
 
@@ -51,53 +51,53 @@
 
 
 
-    <?php if(isset($_POST['submit-update'])): ?>
-        <?php 
-        extract($_POST);
-        $datas = array(
-            ':name' => $form_hebergement_name,
-            ':address_number' => $form_hebergement_adresse_numero,
-            ':address_street' => $form_hebergement_adresse_voirie,
-            ':address_postal_code' => $form_hebergement_adresse_code_postal,
-            ':address_city' => $form_hebergement_adresse_code_ville,
-            ':note' => $form_hebergement_note
-            );
+<?php if(isset($_POST['submit-update'])): ?>
+    <?php 
+    extract($_POST);
+    $datas = array(
+        ':name' => $form_hebergement_name,
+        ':address_number' => $form_hebergement_adresse_numero,
+        ':address_street' => $form_hebergement_adresse_voirie,
+        ':address_postal_code' => $form_hebergement_adresse_code_postal,
+        ':address_city' => $form_hebergement_adresse_code_ville,
+        ':note' => $form_hebergement_note
+        );
 
-        $result = hebergement::update($datas,  $_GET['id']);
+    $result = hebergement::update($datas,  $_GET['id']);
         //tool::output($result);
-        ?>
+    ?>
 
-        <?php if($result): ?>
+    <?php if($result): ?>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        l'hébergement <?=$form_hebergement_name; ?> a bien été modifée
-                    </div>
-                    <a href="/hebergements/">Retourner à la liste des hebergements</a>
-
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success">
+                    <i class="icon-ok-sign"></i> 
+                    l'hébergement <?=$form_hebergement_name; ?> a bien été modifée
                 </div>
+                <a href="/hebergements/">Retourner à la liste des hebergements</a>
+
             </div>
+        </div>
 
 
-        <?php else: ?>
+    <?php else: ?>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant la modification de l'hébergement, veuillez réessayer
-                    </div>
-                    <a href="/hebergements/editer/<?=$hebergement->id ?>">Retourner au formulaire d'édition</a>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    <i class="icon-remove-sign"></i> 
+                    Une erreur s'est produite durant la modification de l'hébergement, veuillez réessayer
                 </div>
+                <a href="/hebergements/editer/<?=$hebergement->id ?>">Retourner au formulaire d'édition</a>
             </div>
-
-        <?php endif; ?>
-
-
+        </div>
 
     <?php endif; ?>
+
+
+
+<?php endif; ?>
 
 
 <?php // TODO : ne pas oublier de lister les contacts associés  ?>
@@ -146,11 +146,9 @@
     </div>
 </div>
 
-<div class="content<?=($hebergement->archived)?' archived':' ';?>">
-
-    <div class="row">
-
-        <div class="col-md-9">
+<div class="row">
+    <div class="col-md-9">
+        <div class="content<?=($hebergement->archived)?' archived':' ';?>">
             <div class="profile-box">
                 <?php tool::output($hebergement); ?>
                 <?php if(!empty($hebergement->note)): ?>
@@ -172,20 +170,19 @@
             </div>
         </div>
 
-        <div class="col-md-3">
-            <h6>Coordonnées</h6>
-            <?php $geo = tool::getLatLng($hebergement->address_number.' '.$hebergement->address_street.' '.$hebergement->address_postal_code.' '.$hebergement->address_city); ?>
-            <?php if($geo[0]): ?>
-                <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$geo[0]; ?>,<?=$geo[1]; ?>&zoom=12&size=210x200&scale=2&markers=<?=$geo[0]; ?>,<?=$geo[1]; ?>&sensor=false" width="100%" alt="">
+    </div>
+    <div class="col-md-3 address">
+        <?php $geo = tool::getLatLng($hebergement->address_number.' '.$hebergement->address_street.' '.$hebergement->address_postal_code.' '.$hebergement->address_city); ?>
+        <div class="contact">
+            <h6><strong><?=$hebergement->address_postal_code; ?> <?=$hebergement->address_city; ?></strong></h6>
+            <p>        <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$geo[0]; ?>,<?=$geo[1]; ?>&zoom=12&size=210x200&scale=2&markers=<?=$geo[0]; ?>,<?=$geo[1]; ?>&sensor=false" width="100%" alt="">
+            </p>
+            <?php if( !empty($hebergement->address_number) OR !empty($hebergement->address_street) ): ?>
+                <p><?=$hebergement->address_number; ?> <?=$hebergement->address_street; ?></p>
             <?php endif; ?>
-            <ul>
-                <li><strong>Adresse</strong></li>
-                <li><?=$hebergement->address_number; ?> <?=$hebergement->address_street; ?></li>
-                <li><?=$hebergement->address_postal_code; ?> <?=$hebergement->address_city; ?></li>              
-            </ul>
-
         </div>
     </div>
 </div>
+
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

@@ -275,31 +275,40 @@ h6,
   padding: 40px 50px 30px 112px;
   background: #ebedf3;
 }
-.wrap > .title {
+.wrap .progress {
+  margin-top: 25px;
+}
+.wrap .nav-tabs {
+  border: none;
+}
+.wrap .nav-tabs + .content {
+  margin-top: 0;
+}
+.wrap .title {
   padding-top: 30px;
 }
-.wrap > .title .nav-tabs {
+.wrap .title .nav-tabs {
   border-bottom: none;
   margin-bottom: -10px;
 }
-.wrap > .title .pop-dialog.is-visible {
+.wrap .title .pop-dialog.is-visible {
   display: block;
   position: absolute;
   top: 69px;
 }
-.wrap > .title h3 {
+.wrap .title h3 {
   font-weight: 100;
   font-size: 50px;
   margin: 0 0 10px;
   color: #333;
 }
-.wrap > .title h3 small {
+.wrap .title h3 small {
   font-size: 16px;
   display: block;
-  padding: 10px 0 0 76px;
+  padding: 10px 0 5px 76px;
   color: #828692;
 }
-.wrap > .title h3 .trigger {
+.wrap .title h3 .trigger {
   background: #CA3636;
   border-radius: 50%;
   width: 60px;
@@ -314,34 +323,41 @@ h6,
   transition: all .3s ease;
   position: relative;
 }
-.wrap > .title h3 .trigger:hover {
+.wrap .title h3 .trigger:hover {
   text-decoration: none;
   background: #E04B4B;
 }
-.wrap > .title .btn {
+.wrap .title .btn {
   margin-top: 15px;
 }
-.wrap > .content {
+.wrap .content {
   padding: 30px;
   background: #FFF;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
   border: 1px solid #DBDCE2;
-  overflow: hidden;
   margin-top: 10px;
   position: relative;
 }
-.wrap > .content.content-table {
+.wrap .content.content-table {
   padding: 0;
-}
-.wrap > .content.content-table .col-md-12 {
-  padding-top: 49px;
   background: #F2F3F6;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+.wrap .content.content-table .col-md-12 {
+  padding-top: 49px;
+}
+.wrap .content .content-table .dataTables_wrapper {
+  margin: 30px -15px -30px;
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.wrap .content + .title {
+  margin-top: 20px;
+}
+.table tr {
+  position: relative;
 }
 .dataTables_wrapper {
   background: #f2f3f6;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  overflow: hidden;
   margin: -49px 0 0 0;
 }
 .dataTables_length,
@@ -371,7 +387,7 @@ h6,
   border-radius: 0 !important;
 }
 .paging_full_numbers a.paginate_active {
-  padding: 11px;
+  padding: 10px 11px;
 }
 .paging_full_numbers a.paginate_button {
   background-color: transparent;
@@ -410,8 +426,7 @@ table.datatable thead:after,
 table.dataTable thead:after {
   display: block;
   height: 1px;
-  width: 120%;
-  margin-left: -10%;
+  width: 100%;
   background: #D3D5E5;
   content: ' ';
   position: absolute;
@@ -496,6 +511,7 @@ table.dataTable tfoot {
   display: block;
   position: absolute;
   top: 100%;
+  margin-left: -36px;
 }
 .pop-dialog .item {
   display: block;
@@ -617,4 +633,14 @@ table.dataTable tfoot {
 }
 .footer {
   padding: 10px 50px 10px 112px;
+}
+.dataTables_wrapper:before,
+.dataTables_wrapper:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.dataTables_wrapper:after {
+  clear: both;
 }
