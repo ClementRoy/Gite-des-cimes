@@ -671,7 +671,9 @@ table.dataTable {
 
 
 .dataTables_wrapper:before,
-.dataTables_wrapper:after {
+.content:before,
+.dataTables_wrapper:after,
+.content:after {
   content: " ";
   /* 1 */
 
@@ -679,6 +681,7 @@ table.dataTable {
   /* 2 */
 
 }
+.content:after,
 .dataTables_wrapper:after {
   clear: both;
 }

@@ -635,12 +635,15 @@ table.dataTable tfoot {
   padding: 10px 50px 10px 112px;
 }
 .dataTables_wrapper:before,
-.dataTables_wrapper:after {
+.content:before,
+.dataTables_wrapper:after,
+.content:after {
   content: " ";
   /* 1 */
   display: table;
   /* 2 */
 }
+.content:after,
 .dataTables_wrapper:after {
   clear: both;
 }
