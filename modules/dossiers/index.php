@@ -30,11 +30,11 @@ foreach($dossiers as $key => $dossier){
 
     // create each inscription
     // $datas = array(
-    //     ':ref_enfant' => $inscriptionList->ref_enfant,
-    //     ':ref_sejour' => $inscriptionList->ref_sejour,
-    //     ':ref_inscription' => $inscriptionList->id,
-    //     ':date_from' => $inscriptionList->date_from,
-    //     ':date_to' => $inscriptionList->date_to
+    //     ':ref_enfant' => $dossier->ref_enfant,
+    //     ':ref_sejour' => $dossier->ref_sejour,
+    //     ':ref_dossier' => $dossier->id,
+    //     ':date_from' => $dossier->date_from,
+    //     ':date_to' => $dossier->date_to
     // );
 
     // $result = inscription::add($datas);
@@ -42,6 +42,56 @@ foreach($dossiers as $key => $dossier){
 
 }
 
+/*
+
+$inscriptions = inscription::getList();
+
+foreach ($inscriptions as $key => $inscription) {
+    $date_from = new DateTime($inscription->date_from);
+    $date_to = new DateTime($inscription->date_to);
+
+    $nb_weeks = tool::getNbWeeks($date_from, $date_to);
+    echo $nb_weeks;
+    if($nb_weeks > 1) {
+        for ($i=0; $i < $nb_weeks; $i++) { 
+            tool::output($inscription);
+            if($i == 0){
+                $date_to_inject = new DateTime($inscription->date_from);
+                $date_to_inject->modify('+1 weeks');
+
+                $datas = array(
+                    ':ref_enfant' => $inscription->ref_enfant,
+                    ':ref_sejour' => $inscription->ref_sejour,
+                    ':ref_dossier' => $inscription->ref_dossier,
+                    ':date_from' => $inscription->date_from,
+                    ':date_to' => $date_to_inject->format('Y-m-d H:i:s')
+                );
+                tool::output($datas);
+                $result = inscription::update($datas, $inscription->id );
+            }else {
+                $date_from_inject = new DateTime($inscription->date_from);
+                $diff = '+'.$i.' weeks';
+                $date_from_inject->modify($diff);
+
+                $date_to_inject = new DateTime($inscription->date_from);
+                $diff2 = '+'.++$i.' weeks';
+                $date_to_inject->modify($diff2);
+
+                $datas = array(
+                    ':ref_enfant' => $inscription->ref_enfant,
+                    ':ref_sejour' => $inscription->ref_sejour,
+                    ':ref_dossier' => $inscription->ref_dossier,
+                    ':date_from' => $date_from_inject->format('Y-m-d H:i:s'),
+                    ':date_to' => $date_to_inject->format('Y-m-d H:i:s')
+                );
+                tool::output($datas);
+                $result = inscription::add($datas);
+            }            
+        }
+    }
+
+}
+*/
 ?>
 <div class="content content-table">
     <div class="row">
@@ -52,8 +102,8 @@ foreach($dossiers as $key => $dossier){
                     <tr>
                         <th class="sortable">Nom du séjour</th>
                         <th class="sortable">Nom de l'enfant</th>
-                        <th class="sortable">Date de début</th>
-                        <th>Date de fin</th>
+                        <th class="sortable">Satut</th>
+                        <th>Pris en charge</th>
                     </tr>
                 </thead>
 
@@ -62,13 +112,14 @@ foreach($dossiers as $key => $dossier){
                         <th class="sortable">Numéro</th>
                     </tr>
                 </tfoot>
-                <tbody>
+               
                     <?php foreach($dossiers as $key => $dossier): ?>
+                    <tbody>
                         <?php $enfant = enfant::get($dossier->ref_enfant); ?>
-                        <?php $sejour = sejour::get($dossier->ref_sejour); ?>
+                        <?php $inscriptions_dossier = inscription::getByDossier($dossier->id); ?>
                         <tr>
                             <td>
-                                <a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a>
+                                <a href="/dossiers/infos/id/<?=$dossier->id; ?>">#<?=$dossier->id; ?></a>
                                 <div class="pop-dialog tr">
                                     <div class="pointer">
                                         <div class="arrow"></div>
@@ -86,22 +137,44 @@ foreach($dossiers as $key => $dossier){
                             <td>
                                 <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname ?> <?=$enfant->firstname ?></a>
                             </td>
-                            <td class="text-right">
-                                <?php $date_from = new DateTime($inscription->date_from); ?>
-                                <?php if($date_from->getTimestamp() != '-62169987600'): ?>
-                                    <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>
+                            <td>
+                                <?php if($dossier->finished): ?>
+                                    <span class="label label-success">Confirmé</span>
+                                <?php else: ?>
+                                    <span class="label label-danger">Non confirmé</span>
                                 <?php endif; ?>
                             </td>
-                            <td class="text-right">
-                                <?php $date_to = new DateTime($inscription->date_to); ?>
-                                <?php if($date_to->getTimestamp() != '-62169987600'): ?>
-                                    <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?>
+                            <td>
+                                <?php if($dossier->supported): ?>
+                                    <span class="label label-success">Oui</span>
+                                <?php else: ?>
+                                    <span class="label label-danger">Non</span>
                                 <?php endif; ?>
                             </td>
 
                         </tr>
+                        <?php foreach($inscriptions_dossier as $inscription_dossier): ?>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <?php $sejour = sejour::get($inscription_dossier->ref_sejour); ?>
+                                <?=$sejour->name; ?> du 
+                                <?php $date_from = new DateTime($inscription_dossier->date_from); ?>
+                                <?php if($date_from->getTimestamp() != '-62169987600'): ?>
+                                    <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>
+                                <?php endif; ?> au 
+                                <?php $date_to = new DateTime($inscription_dossier->date_to); ?>
+                                <?php if($date_to->getTimestamp() != '-62169987600'): ?>
+                                    <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?>
+                                <?php endif; ?>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
                     <?php endforeach; ?>
-                </tbody>
+               
             </table>
         </div>
     </div>
