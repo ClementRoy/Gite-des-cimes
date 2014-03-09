@@ -227,6 +227,8 @@ class dossier
 
     public static function delete($id){
         global $db;
+        inscription::deleteByDossier($id);
+        
         $data = array(':id' => $id);
         $sql = 'DELETE FROM '.self::$table.' WHERE id = :id';
         $result = $db->delete($sql, $data);
@@ -240,7 +242,7 @@ class dossier
 
     public static function cleanEmpty(){
         global $db;
-        $sql = 'DELETE FROM '.self::$table.' WHERE ref_sejour = "" AND ref_enfant = ""';
+        $sql = 'DELETE FROM '.self::$table.' WHERE ref_enfant = ""';
         $result = $db->delete($sql);
         return $result;
     }

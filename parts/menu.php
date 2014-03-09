@@ -21,6 +21,14 @@ $menus = array(
 						'ajouter' => 'Ajouter un séjour'
 					)
 	),
+	'dossiers' => array(
+		'name' => 'Dossiers d\'inscription',
+		'icon' => 'folder-open',
+		'submenu' => array(
+						'index' => 'Liste des dossiers',
+						'ajouter' => 'Ajouter un nouveau dossier'
+					)
+	),
 	'hebergements' => array(
 		'name' => 'Hébergements',
 		'icon' => 'globe',
@@ -43,13 +51,6 @@ $menus = array(
 		'submenu' => array(
 						'index' => 'Liste des contact',
 						'ajouter' => 'Ajouter un contact'
-					)
-	),
-	'dossiers' => array(
-		'name' => 'Dossiers d\'inscription',
-		'icon' => 'folder-open',
-		'submenu' => array(
-						'index' => 'Liste des dossiers'
 					)
 	),
 	'corbeille' => array(

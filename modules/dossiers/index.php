@@ -22,6 +22,11 @@
 </div>
 
 <?php 
+
+/*
+
+// MIGRATION TOOL
+
 foreach($dossiers as $key => $dossier){
 
     //tool::output($dossier);
@@ -42,7 +47,7 @@ foreach($dossiers as $key => $dossier){
 
 }
 
-/*
+
 
 $inscriptions = inscription::getList();
 
@@ -100,21 +105,24 @@ foreach ($inscriptions as $key => $inscription) {
             <table class="datatable">
                 <thead>
                     <tr>
-                        <th class="sortable">Nom du séjour</th>
+                        <th class="sortable">Numéro du séjour</th>
                         <th class="sortable">Nom de l'enfant</th>
                         <th class="sortable">Satut</th>
-                        <th>Pris en charge</th>
+                        <th class="sortable">Pris en charge</th>
                     </tr>
                 </thead>
 
                 <tfoot>
                     <tr>
-                        <th class="sortable">Numéro</th>
+                        <th class="sortable">Numéro du séjour</th>
+                        <th class="sortable">Nom de l'enfant</th>
+                        <th class="sortable">Satut</th>
+                        <th class="sortable">Pris en charge</th>
                     </tr>
                 </tfoot>
-               
+                <tbody>
                     <?php foreach($dossiers as $key => $dossier): ?>
-                    <tbody>
+                    
                         <?php $enfant = enfant::get($dossier->ref_enfant); ?>
                         <?php $inscriptions_dossier = inscription::getByDossier($dossier->id); ?>
                         <tr>
@@ -127,15 +135,27 @@ foreach ($inscriptions as $key => $inscription) {
                                     </div>
                                     <div class="body">
                                         <div class="menu">
-                                            <a href="/dossiers/infos/id/<?=$inscription->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
-                                            <a href="/dossiers/editer/id/<?=$inscription->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
-                                            <a href="/dossiers/supprimer/id/<?=$inscription->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                            <a href="/dossiers/infos/id/<?=$dossier->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                            <a href="/dossiers/editer/id/<?=$dossier->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                            <a href="/dossiers/supprimer/id/<?=$dossier->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
                                         </div>
                                     </div>
                                 </div> 
                             </td>
                             <td>
                                 <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname ?> <?=$enfant->firstname ?></a>
+                                - <?php foreach($inscriptions_dossier as $inscription_dossier): ?>
+                                    <?php $sejour = sejour::get($inscription_dossier->ref_sejour); ?>
+                                    <?=$sejour->name; ?> du 
+                                    <?php $date_from = new DateTime($inscription_dossier->date_from); ?>
+                                    <?php if($date_from->getTimestamp() != '-62169987600'): ?>
+                                        <?=strftime('%d %b %Y', $date_from->getTimestamp()); ?>
+                                    <?php endif; ?> au 
+                                    <?php $date_to = new DateTime($inscription_dossier->date_to); ?>
+                                    <?php if($date_to->getTimestamp() != '-62169987600'): ?>
+                                        <?=strftime('%d %b %Y', $date_to->getTimestamp()); ?>
+                                    <?php endif; ?>
+                            <?php endforeach; ?>
                             </td>
                             <td>
                                 <?php if($dossier->finished): ?>
@@ -153,27 +173,10 @@ foreach ($inscriptions as $key => $inscription) {
                             </td>
 
                         </tr>
-                        <?php foreach($inscriptions_dossier as $inscription_dossier): ?>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <?php $sejour = sejour::get($inscription_dossier->ref_sejour); ?>
-                                <?=$sejour->name; ?> du 
-                                <?php $date_from = new DateTime($inscription_dossier->date_from); ?>
-                                <?php if($date_from->getTimestamp() != '-62169987600'): ?>
-                                    <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>
-                                <?php endif; ?> au 
-                                <?php $date_to = new DateTime($inscription_dossier->date_to); ?>
-                                <?php if($date_to->getTimestamp() != '-62169987600'): ?>
-                                    <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?>
-                                <?php endif; ?>
-                            </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
+
+                    
                     <?php endforeach; ?>
+                    </tbody>
                
             </table>
         </div>

@@ -303,8 +303,6 @@
                                 $('.selector').trigger('change');
                             <?php endif; ?>
 
-
-
                             var i = 1;
                             $('.duplicate').click(function(e){
                                 e.preventDefault();
@@ -312,7 +310,8 @@
                                 $('.date-range').first().clone().insertBefore($(this));
                                 i++;
 
-                            })
+                            });
+
                         });
                     </script>
 

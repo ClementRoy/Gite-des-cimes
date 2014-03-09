@@ -63,12 +63,10 @@ class inscription
         $params = array(
                         ':id' => $id
                         );
-        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:id AND archived = 0 AND finished = 0';
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:id';
         $result = $db->query($sql, $params);
         return $result;
     }
-
-
 
     public static function getUnconfirmedBySejourBetweenDates($id, $date_from = false, $date_to = false) {
         global $db;
@@ -77,7 +75,7 @@ class inscription
                         );
         $date_from = $date_from->format("Y-m-d H:i:s");
         $date_to = $date_to->format("Y-m-d H:i:s");
-        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:id AND archived = 0 AND finished = 0 AND date_from <= "'.$date_from.'" AND date_to >="'.$date_to.'"';
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:id AND date_from <= "'.$date_from.'" AND date_to >="'.$date_to.'"';
         $result = $db->query($sql, $params);
         return $result;
     }
@@ -91,7 +89,12 @@ class inscription
                         ':id' => $id
                         );
         // Ne pas faire un étoile ici ....
-        $sql = 'SELECT *, inscription.id as inscription_id, dossier.id as dossier_id FROM '.self::$table.' LEFT JOIN dossier ON inscription.ref_dossier = dossier.id LEFT JOIN enfant ON inscription.ref_enfant = enfant.id LEFT JOIN structure ON enfant.organization = structure.id LEFT JOIN structure_contact ON enfant.contact = structure_contact.id WHERE ref_sejour=:id AND date_from <= "'.$date_from.'" AND date_to >="'.$date_to.'" ORDER BY enfant.lastname';
+        $sql = 'SELECT *, inscription.id as inscription_id, dossier.id as dossier_id FROM '.self::$table.' 
+                LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
+                LEFT JOIN enfant ON inscription.ref_enfant = enfant.id 
+                LEFT JOIN structure ON enfant.organization = structure.id 
+                LEFT JOIN structure_contact ON enfant.contact = structure_contact.id 
+                WHERE ref_sejour=:id AND date_from <= "'.$date_from.'" AND date_to >="'.$date_to.'" ORDER BY enfant.lastname';
         $result = $db->query($sql, $params);
         return $result;
     }
@@ -140,19 +143,6 @@ class inscription
     public static function add($data = array(), $metadata = false){
         global $db;
 
-        // // Handle Metadata infos
-        // if(!$metadata) {
-        //     $metadata = array(
-        //                         ':created' => tool::currentTime(),
-        //                         ':edited' => tool::currentTime(),
-        //                         ':creator' => user::getCurrentUser(), 
-        //                         ':editor' => user::getCurrentUser(), 
-        //                     );
-        // }
-
-        // // Merge the data and metadatas arrays
-        // $data = array_merge($metadata, $data);
-
         // Build the Query, be careful, vars must be prefixed with ":"
         $bind = implode(', ', array_keys($data)); 
         $entries = '';
@@ -179,17 +169,6 @@ class inscription
      */
     public static function update($data = array(), $id, $metadata = false){
         global $db;
-
-        // Handle the metadatas
-        // if(!$metadata) {
-        //     $metadata = array(
-        //                         ':edited' => tool::currentTime(),
-        //                         ':editor' => user::getCurrentUser(), 
-        //                     );
-        // }
-
-        // // Merge the data and metadatas arrays
-        // $data = array_merge($metadata, $data);
 
         // Build the Query, be careful, vars must be prefixed with ":"
         $entries = '';
@@ -221,26 +200,6 @@ class inscription
         return $result;
     }
 
-    // public static function archive($id){
-    //     $data = array(
-    //         ':archived' => 1,
-    //         ':archived_on' => tool::currentTime(),
-    //         ':archived_by' => user::getCurrentUser() 
-    //     ); 
-    //     $result = self::update($data, $id);
-    //     return $result;       
-    // }
-
-    // public static function unarchive($id){
-    //     $data = array(
-    //         ':archived' => 0,
-    //         ':archived_on' => '',
-    //         ':archived_by' => ''
-    //     ); 
-    //     $result = self::update($data, $id);
-    //     return $result;       
-    // }
-
     public static function delete($id){
         global $db;
         $data = array(':id' => $id);
@@ -249,6 +208,16 @@ class inscription
         //$result = self::archive($id);
         return $result;
     }
+
+    public static function deleteByDossier($id){
+        global $db;
+        $data = array(':id' => $id);
+        $sql = 'DELETE FROM '.self::$table.' WHERE ref_dossier = :id';
+        $result = $db->delete($sql, $data);
+        //$result = self::archive($id);
+        return $result;
+    }
+
     public static function getLastID(){
         global $db;
         return $db->lastInsertId('id');
