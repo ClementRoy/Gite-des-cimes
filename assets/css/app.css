@@ -32,6 +32,13 @@ h1 small,
   padding: 10px 0 5px 76px;
   color: #828692;
 }
+h3,
+.h3 {
+  font-size: 22px;
+  margin-bottom: 13px;
+  margin-top: 0px;
+  font-weight: bold;
+}
 h4,
 .h4 {
   font-size: 30px;
@@ -350,10 +357,13 @@ h6,
 .wrap .content {
   padding: 30px;
   background: #FFF;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
   border: 1px solid #DBDCE2;
   margin-top: 10px;
   position: relative;
+}
+.wrap .content small {
+  font-size: 90%;
 }
 .wrap .content.content-table {
   padding: 0;

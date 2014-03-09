@@ -175,9 +175,13 @@
     <div class="col-md-9">
         <div class="content">
             <div class="row">
+            <?php if ($dossier->finished): ?>
             <a href="/pdf/generate/id/<?=$dossier->id?>/type/contrat/" class="btn btn-primary">Contrat</a>
                 <a href="/pdf/generate/id/<?=$dossier->id?>/type/convocation/" class="btn btn-primary">Convocation</a>
                 <a href="/pdf/generate/id/<?=$dossier->id?>/type/dossier/" class="btn btn-primary">Dossier d'inscription</a>
+            <?php else: ?>
+                Ce dossier d'inscription n'est pas finalisé.
+            <?php endif ?>
             </div>
         </div>
     </div>
