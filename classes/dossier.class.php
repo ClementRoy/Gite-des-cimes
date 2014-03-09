@@ -83,15 +83,9 @@ class dossier
      * @param
      * @return
      */
-	public static function getList($limit = false, $offset = 0){
+	public static function getList(){
 		global $db;
-        if(!empty($limit)){
-            $data = array();
-            $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0');
-        }
-        else {
-            $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0');
-        }
+        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY id');
 		return $result;
 	}
 
@@ -228,7 +222,7 @@ class dossier
     public static function delete($id){
         global $db;
         inscription::deleteByDossier($id);
-        
+
         $data = array(':id' => $id);
         $sql = 'DELETE FROM '.self::$table.' WHERE id = :id';
         $result = $db->delete($sql, $data);

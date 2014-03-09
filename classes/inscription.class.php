@@ -41,7 +41,7 @@ class inscription
         $params = array(
                         ':id' => $id
                         );
-        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_enfant=:id';
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_enfant=:id ORDER BY date_from DESC';
         $result = $db->query($sql, $params);
         return $result;        
     }
@@ -94,7 +94,7 @@ class inscription
                 LEFT JOIN enfant ON inscription.ref_enfant = enfant.id 
                 LEFT JOIN structure ON enfant.organization = structure.id 
                 LEFT JOIN structure_contact ON enfant.contact = structure_contact.id 
-                WHERE ref_sejour=:id AND date_from <= "'.$date_from.'" AND date_to >="'.$date_to.'" ORDER BY enfant.lastname';
+                WHERE '.self::$table.'.ref_sejour=:id AND '.self::$table.'.date_from <= "'.$date_from.'" AND '.self::$table.'.date_to >="'.$date_to.'" ORDER BY enfant.lastname';
         $result = $db->query($sql, $params);
         return $result;
     }
