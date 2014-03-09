@@ -94,7 +94,7 @@ class inscription
                 LEFT JOIN enfant ON inscription.ref_enfant = enfant.id 
                 LEFT JOIN structure ON enfant.organization = structure.id 
                 LEFT JOIN structure_contact ON enfant.contact = structure_contact.id 
-                WHERE '.self::$table.'.ref_sejour=:id AND dossier.finished = 1 AND '.self::$table.'.date_from <= "'.$date_from.'" AND '.self::$table.'.date_to >="'.$date_to.'" ORDER BY enfant.lastname';
+                WHERE '.self::$table.'.ref_sejour=:id AND '.self::$table.'.date_from <= "'.$date_from.'" AND '.self::$table.'.date_to >="'.$date_to.'" ORDER BY enfant.lastname';
         $result = $db->query($sql, $params);
         return $result;
     }
