@@ -645,7 +645,7 @@ $content = ob_get_clean();
 try{
 	$pdf = new HTML2PDF('P', 'A4', 'fr');
 	$pdf->writeHTML($content);
-	$pdf->Output('test.pdf');
+	$pdf->Output('test.pdf', 'D');
 }catch(HTML2PDF_exception $e){
 	die($e);
 }
