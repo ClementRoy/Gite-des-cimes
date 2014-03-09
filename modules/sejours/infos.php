@@ -210,7 +210,7 @@ $date_to_query->modify("+$i weeks");
                 <button class="btn glow dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu text-left">
                     <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp() ?>">Récapitulatif mineurs</a></li>
                     <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp() ?>">Suivi sanitaire</a></li>
                     <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp() ?>">Registre des mineurs</a></li>
