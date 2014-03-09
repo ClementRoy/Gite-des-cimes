@@ -57,15 +57,6 @@ class inscription
         return $result;        
     }
 
-    public static function getByDossier($id){
-        global $db;
-        $params = array(
-                        ':id' => $id
-                        );
-        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_dossier=:id';
-        $result = $db->query($sql, $params);
-        return $result;        
-    }
 
     public static function getUnconfirmedBySejour($id) {
         global $db;
