@@ -22,7 +22,7 @@
 
 
     <?php $contacts = contact::getList(); ?>
-
+    <?php //tool::output($contacts); ?>
     <?php //$contacts = contact::getList(); 
     /*
     Array (

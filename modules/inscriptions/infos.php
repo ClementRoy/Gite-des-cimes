@@ -12,6 +12,62 @@
         $form_inscription_date_fin = tool::generateDatetime($form_inscription_date_fin);
 
         $datas = array(
+            ':finished' => $form_inscription_option,
+            ':ref_enfant' => $form_inscription_enfant,
+            ':ref_structure_payer' => $form_inscription_structure,
+            ':structure_payer' => $form_inscription_structure_name,
+            ':supported' => $form_inscription_supported,
+            ':note' => $form_inscription_note,
+            ':place' => $form_inscription_lieu,
+            ':hour_departure' => $form_inscription_heure_aller.'h'.$form_inscription_min_aller,
+            ':hour_return' => $form_inscription_heure_retour.'h'.$form_inscription_min_retour,
+            ':pique_nique' => $form_inscription_pique_nique,
+            ':sac' => $form_inscription_sac
+        );
+
+        // ':ref_sejour' => $form_inscription_sejour,
+        // ':date_from' => $form_inscription_date_debut,
+        // ':date_to' => $form_inscription_date_fin,
+
+
+        $result = inscription::update($datas, $_GET['id']);
+
+        ?>
+        <?php //tool::output($_POST); ?>
+        <?php if($result): ?>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success">
+                        <i class="icon-ok-sign"></i> 
+                        L'inscription de <strong><?=$form_inscription_enfant; ?></strong> au séjour <strong></strong> a bien été ajoutée
+                    </div>
+                </div>
+            </div>
+
+        <?php else: ?>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger">
+                        <i class="icon-remove-sign"></i> 
+                        Une erreur s'est produite durant la création de l'inscription, veuillez réessayer
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
+    <?php endif; ?>
+
+    <?php if(isset($_POST['submit-update'])): ?>
+        <?php  
+//tool::output($_POST);
+        extract($_POST);
+        $form_inscription_date_debut = tool::generateDatetime($form_inscription_date_debut);
+        $form_inscription_date_fin = tool::generateDatetime($form_inscription_date_fin);
+
+        $datas = array(
             ':ref_sejour' => $form_inscription_sejour,
             ':finished' => $form_inscription_option,
             ':ref_enfant' => $form_inscription_enfant,
@@ -38,8 +94,9 @@
                 <div class="col-md-12">
                     <div class="alert alert-success">
                         <i class="icon-ok-sign"></i> 
-                        L'inscription de <strong><?=$form_inscription_enfant; ?></strong> au séjour <strong></strong> a bien été ajoutée
+                        L'inscription de <strong><?=$form_inscription_enfant; ?></strong> au séjour <strong></strong> a bien été modifiée
                     </div>
+                    <a href="/inscriptions/">Retourner à la liste des inscriptions</a>
                 </div>
             </div>
 
@@ -50,8 +107,9 @@
                 <div class="col-md-12">
                     <div class="alert alert-danger">
                         <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant la création de l'inscription, veuillez réessayer
+                        Une erreur s'est produite durant la modification de l'inscription, veuillez réessayer
                     </div>
+                    <a href="/inscriptions/edit/id/<?=$inscription->id ?>">Retourner au formulaire de modification</a>
                 </div>
             </div>
         <?php endif; ?>

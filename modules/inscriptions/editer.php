@@ -16,64 +16,9 @@
 </div>
 <div class="content">
 
-    <?php if(isset($_POST['submit'])): ?>
-        <?php  
-//tool::output($_POST);
-        extract($_POST);
-        $form_inscription_date_debut = tool::generateDatetime($form_inscription_date_debut);
-        $form_inscription_date_fin = tool::generateDatetime($form_inscription_date_fin);
-
-        $datas = array(
-            ':ref_sejour' => $form_inscription_sejour,
-            ':finished' => $form_inscription_option,
-            ':ref_enfant' => $form_inscription_enfant,
-            ':date_from' => $form_inscription_date_debut,
-            ':date_to' => $form_inscription_date_fin,
-            ':ref_structure_payer' => $form_inscription_structure,
-            ':structure_payer' => $form_inscription_structure_name,
-            ':supported' => $form_inscription_supported,
-            ':note' => $form_inscription_note,
-            ':place' => $form_inscription_lieu,
-            ':hour_departure' => $form_inscription_heure_aller.'h'.$form_inscription_min_aller,
-            ':hour_return' => $form_inscription_heure_retour.'h'.$form_inscription_min_retour,
-            ':pique_nique' => $form_inscription_pique_nique,
-            ':sac' => $form_inscription_sac
-            );
-
-        $result = inscription::update($datas, $_GET['id']);
-
-        ?>
-        <?php //tool::output($_POST); ?>
-        <?php if($result): ?>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        L'inscription de <strong><?=$form_inscription_enfant; ?></strong> au séjour <strong></strong> a bien été modifiée
-                    </div>
-                    <a href="/inscriptions/">Retourner à la liste des inscriptions</a>
-                </div>
-            </div>
-
-        <?php else: ?>
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant la modification de l'inscription, veuillez réessayer
-                    </div>
-                    <a href="/inscriptions/edit/id/<?=$inscription->id ?>">Retourner au formulaire de modification</a>
-                </div>
-            </div>
-        <?php endif; ?>
-
-    <?php else: ?>
         <div class="row">
             <div class="col-md-12">
-                <form id="form-add-sejour" method="post" parsley-validate>
+                <form id="form-add-sejour" action="/inscription/infos/id/<?=$inscription->id ?>" method="post" parsley-validate>
 
 
                     <div class="field-box row">
@@ -299,9 +244,9 @@
 
                     <div class="field-box actions">
                         <div class="col-md-6  col-md-offset-2">
-                            <input type="submit" class="btn btn-primary" name="submit" value="Valider l'inscription">
+                            <input type="submit" class="btn btn-primary" name="submit-update" value="Modifier l'inscription">
                             <span>OU</span>
-                            <a href="/inscriptions/" class="reset">Annuler</a>
+                            <a href="/inscriptions/infos/id/<?=$inscription->id ?>" class="reset">Annuler</a>
                         </div>
                     </div>
 
@@ -310,40 +255,40 @@
                         $(document).ready(function(){
 
                             $('#form-inscription-sejour-select').change(function(){
-// Si on est sur un week end
-var $option = $(this).find('option:selected');
-if($option.data('date-end') == $option.data('date-end-2')){
-// on set les values de début et de fin
-$('#form-inscription-date-debut').val($option.data('date-start')).attr('disabled', 'disabled');
-$('#form-inscription-date-fin').val($option.data('date-end')).attr('disabled', 'disabled');
+                            // Si on est sur un week end
+                            var $option = $(this).find('option:selected');
+                            if($option.data('date-end') == $option.data('date-end-2')){
+                            // on set les values de début et de fin
+                            $('#form-inscription-date-debut').val($option.data('date-start')).attr('disabled', 'disabled');
+                            $('#form-inscription-date-fin').val($option.data('date-end')).attr('disabled', 'disabled');
 
-$('#form-inscription-date-debut-hidden').val($option.data('date-start')).removeAttr('disabled', 'disabled');
-$('#form-inscription-date-fin-hidden').val($option.data('date-end')).removeAttr('disabled', 'disabled');
-// On met en disabled les champs
-}else {
-// On met en set les values début et fin
-$('#form-inscription-date-debut').val($option.data('date-start')).data('date-startdate',$option.data('date-start')).data('date-enddate',$option.data('date-end')).removeAttr('disabled');
-$('#form-inscription-date-fin').val($option.data('date-end')).data('date-startdate',$option.data('date-start')).data('date-enddate',$option.data('date-end')).removeAttr('disabled');
-// On set les data-debut et data-fin des patepickers
-$('.input-datepicker-light').datepicker('startDate', $option.data('date-start'));
+                            $('#form-inscription-date-debut-hidden').val($option.data('date-start')).removeAttr('disabled', 'disabled');
+                            $('#form-inscription-date-fin-hidden').val($option.data('date-end')).removeAttr('disabled', 'disabled');
+                            // On met en disabled les champs
+                            }else {
+                            // On met en set les values début et fin
+                            $('#form-inscription-date-debut').val($option.data('date-start')).data('date-startdate',$option.data('date-start')).data('date-enddate',$option.data('date-end')).removeAttr('disabled');
+                            $('#form-inscription-date-fin').val($option.data('date-end')).data('date-startdate',$option.data('date-start')).data('date-enddate',$option.data('date-end')).removeAttr('disabled');
+                            // On set les data-debut et data-fin des patepickers
+                            $('.input-datepicker-light').datepicker('startDate', $option.data('date-start'));
 
-$('#form-inscription-date-debut-hidden').val('').attr('disabled', 'disabled');
-$('#form-inscription-date-fin-hidden').val('').attr('disabled', 'disabled');
+                            $('#form-inscription-date-debut-hidden').val('').attr('disabled', 'disabled');
+                            $('#form-inscription-date-fin-hidden').val('').attr('disabled', 'disabled');
 
-}
-});
+                            }
+                            });
 
-$('#form-inscription-structure-select').change(function(){
-    console.log($(this).val());
-    if($(this).val() == 'Choisissez la structure'){
-        $('#form-inscription-centre-payeur').removeAttr('disabled'); 
-        $('#form-inscription-centre-payeur-hidden').attr('disabled', 'disabled'); 
-    }else {
-        $('#form-inscription-centre-payeur').val('');
-        $('#form-inscription-centre-payeur').attr('disabled','disabled');
-        $('#form-inscription-centre-payeur-hidden').removeAttr('disabled');
-    }
-});
+                            $('#form-inscription-structure-select').change(function(){
+                                console.log($(this).val());
+                                if($(this).val() == 'Choisissez la structure'){
+                                    $('#form-inscription-centre-payeur').removeAttr('disabled'); 
+                                    $('#form-inscription-centre-payeur-hidden').attr('disabled', 'disabled'); 
+                                }else {
+                                    $('#form-inscription-centre-payeur').val('');
+                                    $('#form-inscription-centre-payeur').attr('disabled','disabled');
+                                    $('#form-inscription-centre-payeur-hidden').removeAttr('disabled');
+                                }
+                            });
 
 <?php if(isset($inscription->ref_sejour )): ?>
 //$('#form-inscription-sejour-select').trigger('change');
@@ -356,7 +301,7 @@ $('#form-inscription-structure-select').change(function(){
 
 </div>
 </div>
-<?php endif; ?>
+
 </div>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

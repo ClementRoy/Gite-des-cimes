@@ -3,6 +3,12 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
+<?php 
+
+tool::output($_POST);
+extract($_POST);
+
+?>
 
 <?php $result = inscription::add(array()); ?>
 <?php $id = inscription::getLastID(); ?>
@@ -18,7 +24,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <form id="form-add-sejour" method="post" action="/inscription/infos/id/<?=$id ?>" parsley-validate>
+                <form id="form-add-sejour" method="post" parsley-validate>
 
                     <input type="hidden" value="<?=$id ?>" name="id" />
 
@@ -41,11 +47,11 @@
                     <?php // TODO: ne prendre que les FUTURS séjours ?>
 
                     <?php $sejours = sejour::getListFuturSejour(); ?>
-                    <div class="field-box row">
+                    <div class="field-box row sejour-select">
                         <label class="col-md-2" for="form-inscription-sejour-select">Séjour</label>
                         <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez le séjour">
                             <div class="ui-select">
-                                <select class="form-control" id="form-inscription-sejour-select" name="form_inscription_sejour" parsley-required="true">
+                                <select class="form-control" id="form-inscription-sejour-select" name="form_inscription_sejour[]" parsley-required="true">
                                     <option selected="selected">Choisissez le séjour</option>
                                     <?php foreach($sejours as $sejour): ?>
                                         <?php $date_from = new DateTime($sejour->date_from); ?>
@@ -65,23 +71,32 @@
                         </div>
                     </div>
 
-                    <div class="field-box row">
+                    <div class="field-box row date-range">
                         <label class="col-md-2" for="form-inscription-nom">Dates</label>
                         <div class="col-md-2">
-                            <input id="form-inscription-date-debut" name="form_inscription_date_debut" type="text" class="form-control input-datepicker-light"
+                            <input id="form-inscription-date-debut" name="form_inscription_date_debut[]" type="text" class="form-control input-datepicker-light"
                             placeholder="Date de début" data-toggle="tooltip" title="Renseignez la date à laquelle commence le séjour (jj/mm/aaaa)." 
                             parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})"
                             parsley-required="true">
-                            <input type="hidden" id="form-inscription-date-debut-hidden" name="form_inscription_date_debut" value="" disabled="disabled">
+                            <input type="hidden" id="form-inscription-date-debut-hidden" name="form_inscription_date_debut[]" value="" disabled="disabled">
                         </div> 
                         <div class="col-md-2">
-                            <input id="form-inscription-date-fin" name="form_inscription_date_fin" type="text" class="form-control input-datepicker-light" 
+                            <input id="form-inscription-date-fin" name="form_inscription_date_fin[]" type="text" class="form-control input-datepicker-light" 
                             placeholder="Date de fin" data-toggle="tooltip" title="Renseignez la date à laquelle se termine le séjour (jj/mm/aaaa)." 
                             parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})"
                             parsley-required="true"><!-- parsley-afterdate="#form-sejour-date-debut" CR : not working properly with french dates -->
-                            <input type="hidden" id="form-inscription-date-fin-hidden" name="form_inscription_date_fin" value="" disabled="disabled">
+                            <input type="hidden" id="form-inscription-date-fin-hidden" name="form_inscription_date_fin[]" value="" disabled="disabled">
                         </div>                              
                     </div>   
+
+
+
+
+
+                    <button class="btn btn-default duplicate">Ajouter un autre séjour</button>
+
+
+
 
 
                     <div class="field-box row">
@@ -217,6 +232,7 @@
                         </div>
                     </div>
 
+
                     <div class="field-box row">
                         <label class="col-md-2">Inscription finalisée</label>
                         <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si l'inscription est finalisé.">
@@ -253,47 +269,59 @@
                         $(document).ready(function(){
 
                             $('#form-inscription-sejour-select').change(function(){
-// Si on est sur un week end
-var $option = $(this).find('option:selected');
-if($option.data('date-end') == $option.data('date-end-2')){
-// on set les values de début et de fin
-$('#form-inscription-date-debut').val($option.data('date-start')).attr('disabled', 'disabled');
-$('#form-inscription-date-fin').val($option.data('date-end')).attr('disabled', 'disabled');
+                                // Si on est sur un week end
+                                var $option = $(this).find('option:selected');
+                                if($option.data('date-end') == $option.data('date-end-2')){
+                                    // on set les values de début et de fin
+                                    console.log($(this).next('#form-inscription-date-debut'));
+                                    $(this).next('#form-inscription-date-debut').val($option.data('date-start')).attr('disabled', 'disabled');
+                                    $(this).next('#form-inscription-date-fin').val($option.data('date-end')).attr('disabled', 'disabled');
 
-$('#form-inscription-date-debut-hidden').val($option.data('date-start')).removeAttr('disabled', 'disabled');
-$('#form-inscription-date-fin-hidden').val($option.data('date-end')).removeAttr('disabled', 'disabled');
-// On met en disabled les champs
-}else {
-// On met en set les values début et fin
-$('#form-inscription-date-debut').val($option.data('date-start')).data('date-startdate',$option.data('date-start')).data('date-enddate',$option.data('date-end')).removeAttr('disabled');
-$('#form-inscription-date-fin').val($option.data('date-end')).data('date-startdate',$option.data('date-start')).data('date-enddate',$option.data('date-end')).removeAttr('disabled');
-// On set les data-debut et data-fin des patepickers
-//console.log($option.data('date-start'));
-//$('.input-datepicker-light').datepicker('startDate', $option.data('date-start'));
+                                    $(this).next('#form-inscription-date-debut-hidden').val($option.data('date-start')).removeAttr('disabled', 'disabled');
+                                    $(this).next('#form-inscription-date-fin-hidden').val($option.data('date-end')).removeAttr('disabled', 'disabled');
+                                    // On met en disabled les champs
+                                }else {
+                                    console.log($(this).next('#form-inscription-date-debut'));
+                                    // On met en set les values début et fin
+                                    $(this).next('#form-inscription-date-debut').val($option.data('date-start')).data('date-startdate',$option.data('date-start')).data('date-enddate',$option.data('date-end')).removeAttr('disabled');
+                                    $(this).next('#form-inscription-date-fin').val($option.data('date-end')).data('date-startdate',$option.data('date-start')).data('date-enddate',$option.data('date-end')).removeAttr('disabled');
+                                    // On set les data-debut et data-fin des patepickers
+                                    //console.log($option.data('date-start'));
+                                    //$('.input-datepicker-light').datepicker('startDate', $option.data('date-start'));
 
-$('#form-inscription-date-debut-hidden').val('').attr('disabled', 'disabled');
-$('#form-inscription-date-fin-hidden').val('').attr('disabled', 'disabled');
+                                    $(this).next('#form-inscription-date-debut-hidden').val('').attr('disabled', 'disabled');
+                                    $(this).next('#form-inscription-date-fin-hidden').val('').attr('disabled', 'disabled');
 
-}
-});
+                                }
+                            });
 
-$('#form-inscription-structure-select').change(function(){
-//console.log($(this).val());
-if($(this).val() == 'Choisissez la structure'){
-    $('#form-inscription-centre-payeur').removeAttr('disabled'); 
-    $('#form-inscription-centre-payeur-hidden').attr('disabled', 'disabled'); 
-}else {
-    $('#form-inscription-centre-payeur').val('');
-    $('#form-inscription-centre-payeur').attr('disabled','disabled');
-    $('#form-inscription-centre-payeur-hidden').removeAttr('disabled');
-}
-});
 
-<?php if(isset($_GET['sejour'] )): ?>
-    $('#form-inscription-sejour-select').trigger('change');
-<?php endif; ?>
-});
-</script>
+                            $('#form-inscription-structure-select').change(function(){
+                            //console.log($(this).val());
+                            if($(this).val() == 'Choisissez la structure'){
+                                $('#form-inscription-centre-payeur').removeAttr('disabled'); 
+                                $('#form-inscription-centre-payeur-hidden').attr('disabled', 'disabled'); 
+                            }else {
+                                $('#form-inscription-centre-payeur').val('');
+                                $('#form-inscription-centre-payeur').attr('disabled','disabled');
+                                $('#form-inscription-centre-payeur-hidden').removeAttr('disabled');
+                            }
+                            });
+
+                            <?php if(isset($_GET['sejour'] )): ?>
+                                $('#form-inscription-sejour-select').trigger('change');
+                            <?php endif; ?>
+
+                            var i = 1;
+                            $('.duplicate').click(function(e){
+                                e.preventDefault();
+                                $('.sejour-select').first().clone().insertBefore($(this));
+                                $('.date-range').first().clone().insertBefore($(this));
+                                i++;
+
+                            })
+                        });
+                    </script>
 
 
 </form>

@@ -9,12 +9,12 @@
         <?php 
         extract($_POST);
         $datas = array(
-            ':firstname' => $form_contact_firstname,
-            ':lastname' => $form_contact_lastname,
-            ':title' => $form_contact_title,
+            ':firstname' => tool::cleanInput($form_contact_firstname),
+            ':lastname' => tool::cleanInput($form_contact_lastname),
+            ':title' => tool::cleanInput($form_contact_title),
             ':ref_structure' => $form_contact_structure,
-            ':civility' => $form_contact_civility,
-            ':email' => $form_contact_email,
+            ':civility' => tool::cleanInput($form_contact_civility),
+            ':email' => tool::cleanInput($form_contact_email),
             ':phone' => $form_contact_telephone,
             ':mobile_phone' => $form_contact_mobile_phone,
             ':fax' => $form_contact_fax,

@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <form id="form-add-contact" method="post" action="/contacts/infos/id/<?$contact->id ?>" parsley-validate>
+                <form id="form-add-contact" method="post" action="/contacts/infos/id/<?=$contact->id ?>" parsley-validate>
 
 
                     <div class="field-box row">
