@@ -4,7 +4,6 @@ body {
   min-height: 100%;
 }
 body {
-  padding-bottom: 50px;
   position: relative;
   font-family: 'Lato';
   background: #ebedf3;
@@ -19,18 +18,37 @@ h5,
 h6 {
   font-family: 'Open sans';
 }
+h1,
+.h1 {
+  font-weight: 100;
+  font-size: 50px;
+  margin: 0 0 10px;
+  color: #333;
+}
+h1 small,
+.h1 small {
+  font-size: 16px;
+  display: block;
+  padding: 10px 0 5px 76px;
+  color: #828692;
+}
 h4,
 .h4 {
-  font-size: 28px;
-  font-weight: 600;
-  margin-top: 15px;
-  margin-bottom: 0;
+  font-size: 30px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 h6,
 .h6 {
   font-weight: 900;
   font-size: 14px;
   margin-bottom: 5px;
+}
+.list-group-item p {
+  display: inline-block;
+}
+.list-group-item p:first-child {
+  width: 150px;
 }
 /*	Page de login
 --------------------------------------------------------------------------- */
@@ -137,21 +155,24 @@ h6,
   float: left;
   position: absolute;
   min-height: 100%;
-  top: 52px;
+  top: 0;
+  padding-top: 52px;
   z-index: 999;
   transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   overflow: hidden;
   width: 62px;
   background: #2F323A;
+  box-shadow: 0 52px 0 #2F323A;
 }
 #sidebar-nav.affix {
   position: fixed;
   top: 0;
+  padding-top: 0;
 }
 #sidebar-nav:hover {
   width: 200px;
   transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 52px 0 #2f323a, 3px 0 15px rgba(0, 0, 0, 0.5);
 }
 #sidebar-nav:hover > ul {
   width: 200px;
@@ -272,14 +293,16 @@ h6,
 }
 .wrap {
   overflow: hidden;
-  padding: 40px 50px 30px 112px;
+  padding: 80px 50px 30px 112px;
   background: #ebedf3;
 }
 .wrap .progress {
   margin-top: 25px;
+  margin-bottom: 40px;
 }
 .wrap .nav-tabs {
   border: none;
+  margin-top: 20px;
 }
 .wrap .nav-tabs + .content {
   margin-top: 0;
@@ -296,19 +319,7 @@ h6,
   position: absolute;
   top: 69px;
 }
-.wrap .title h3 {
-  font-weight: 100;
-  font-size: 50px;
-  margin: 0 0 10px;
-  color: #333;
-}
-.wrap .title h3 small {
-  font-size: 16px;
-  display: block;
-  padding: 10px 0 5px 76px;
-  color: #828692;
-}
-.wrap .title h3 .trigger {
+.wrap .title h1 .trigger {
   background: #CA3636;
   border-radius: 50%;
   width: 60px;
@@ -323,7 +334,7 @@ h6,
   transition: all .3s ease;
   position: relative;
 }
-.wrap .title h3 .trigger:hover {
+.wrap .title h1 .trigger:hover {
   text-decoration: none;
   background: #E04B4B;
 }
@@ -613,8 +624,8 @@ table.dataTable tfoot {
 }
 .form-nav.affix {
   top: 0;
-  right: 96px;
   padding-top: 30px;
+  right: 81px;
 }
 .icon-male {
   color: #4396B6;
@@ -626,10 +637,11 @@ table.dataTable tfoot {
 }
 .icon-ok-sign {
   color: #519E1E;
-  font-size: 20px;
+  font-size: 16px;
 }
 .icon-remove-sign {
   color: #AD1D1D;
+  font-size: 16px;
 }
 .footer {
   padding: 10px 50px 10px 112px;
@@ -646,4 +658,23 @@ table.dataTable tfoot {
 .content:after,
 .dataTables_wrapper:after {
   clear: both;
+}
+#top-nav {
+  position: absolute;
+  width: 100%;
+}
+html,
+body {
+  height: 100%;
+}
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -50px;
+  padding-bottom: 50px;
+}
+.footer {
+  height: 50px;
+  /* .push must be the same height as .footer */
 }

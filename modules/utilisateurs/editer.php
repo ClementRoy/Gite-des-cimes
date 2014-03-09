@@ -9,7 +9,7 @@
 <div class="title">
     <div class="row header">
         <div class="col-md-12">
-            <h3>Modifier un utilisateur</h3>
+            <h1>Modifier un utilisateur</h1>
         </div>
     </div>
 </div>

@@ -13,7 +13,7 @@
 <div class="title">
     <div class="row header">
         <div class="col-md-6">
-            <h3>Les utilisateurs</h3>
+            <h1>Les utilisateurs</h1>
         </div>
         <div class="col-md-6 text-right">
             <a href="/utilisateurs/ajouter" class="btn btn-primary">

@@ -151,6 +151,7 @@
 <?php // Get enfantInfos by inscription id, (on a déjà l'id de l'enfant) ?>
                 <hr />
 <h2>Dossier d'inscription</h2>
+
 <pre>
 
 Adressé à : <?=$inscription->name; ?>  
@@ -237,7 +238,9 @@ Le.   .   .   .   .   .   .   .   .   .   .   .   .   
 
 
                 <hr />
-
+<a href="/pdf/generate/id/<?=$inscription->id?>/type/contrat/">Contrat</a>
+<a href="/pdf/generate/id/<?=$inscription->id?>/type/convocation/">Convocation</a>
+<a href="/pdf/generate/id/<?=$inscription->id?>/type/dossier/">Dossier d'inscription</a>
 
             </div>
 

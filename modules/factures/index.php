@@ -9,7 +9,7 @@
 <div id="pad-wrapper">
             <div class="row header">
                 <div class="col-md-3">
-                    <h3>Les factures</h3>
+                    <h1>Les factures</h1>
                 </div>
                 <div class="col-md-9 text-right">
                     <input type="text" id="table-enfant-search" class="col-md-5 search" placeholder="Tapez le numéro d'une facture..." autofocus="autofocus">

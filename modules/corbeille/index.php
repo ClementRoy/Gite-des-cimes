@@ -8,7 +8,7 @@
 <div class="title">
     <div class="row header">
         <div class="col-md-12">
-            <h3>Corbeille</h3>
+            <h1>Corbeille</h1>
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#enfants">Enfants</a></li>
                 <li class=""><a href="#structures">Structures</a></li>

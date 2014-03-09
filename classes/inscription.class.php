@@ -47,6 +47,32 @@ class inscription
         return $result;        
     }
 
+<<<<<<< HEAD
+=======
+    public static function getUnconfirmedBySejour($id) {
+        global $db;
+        $params = array(
+                        ':id' => $id
+                        );
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:id AND archived = 0 AND finished = 0';
+        $result = $db->query($sql, $params);
+        return $result;
+    }
+
+
+
+    public static function getUnconfirmedBySejourBetweenDates($id, $date_from = false, $date_to = false) {
+        global $db;
+        $params = array(
+                        ':id' => $id
+                        );
+        $date_from = $date_from->format("Y-m-d H:i:s");
+        $date_to = $date_to->format("Y-m-d H:i:s");
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:id AND archived = 0 AND finished = 0 AND date_from <= "'.$date_from.'" AND date_to >="'.$date_to.'"';
+        $result = $db->query($sql, $params);
+        return $result;
+    }
+>>>>>>> FETCH_HEAD
 
     public static function getBySejourBetweenDates($id, $date_from = false, $date_to = false){
         global $db;

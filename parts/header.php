@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Gîte des Cîmes - Outil de gestion</title>
-
+    <meta name="robots" CONTENT="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="description" content="">
@@ -17,8 +17,6 @@
 <!--      <link href="/assets/css/lib/jquery-ui-1.10.2.custom.css" rel="stylesheet" type="text/css" />
 
     <link href="/assets/css/lib/jquery.steps.css" type="text/css" rel="stylesheet"> -->
-
-    <link href="/assets/css/lib/uniform.default.css" type="text/css" rel="stylesheet">
     <link href="/assets/css/lib/select2.css" type="text/css" rel="stylesheet">
     <link href="/assets/css/lib/bootstrap.datepicker.css" type="text/css" rel="stylesheet">
     <link href="/assets/css/animate.css" rel="stylesheet" />
@@ -40,3 +38,4 @@
      <script src="/assets/js/jquery.js"></script>
 </head>
 <body class="clearfix">
+    <div class="wrapper">

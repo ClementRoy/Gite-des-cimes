@@ -31,7 +31,7 @@
         <div class="title">
             <div class="row header">
                 <div class="col-md-12">
-                    <h3>Ajouter un séjour</h3>
+                    <h1>Ajouter un séjour</h1>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
         <div class="title">
             <div class="row header">
                 <div class="col-md-12">
-                    <h3>Ajouter un séjour</h3>
+                    <h1>Ajouter un séjour</h1>
                 </div>
             </div>
         </div>
@@ -131,10 +131,10 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
     <div class="row header">
         <div class="col-md-9">
 
-            <h3>
+            <h1>
                 <a href="#" class="trigger"><i class="big-icon icon-plane"></i></a> <?=$sejour->name; ?>
                 <small><i class="icon icon-calendar"></i> Du <?=strftime('%d %B %Y', $date_from->getTimestamp()) ?> au <?=strftime('%d %B %Y', $date_to->getTimestamp()) ?></small>
-            </h3>
+            </h1>
 
             <div class="pop-dialog">
                 <div class="pointer">
@@ -219,15 +219,51 @@ $date_to_query->modify("+$i weeks");
         </div>
     </div>
 
+    <?php 
 
+        $min = min($sejour->capacity_min,count($inscriptions));
+        $max = min($sejour->capacity_max,count($inscriptions));
+        $nb = count($inscriptions);
+        $options = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $date_from_query, $date_to_query);
+        $options = count($options);
+
+        
+            $total = $nb + $options;
+            $totalPourcent = 100*$total/$max;
+            echo $nb + $options;
+             echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;—&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+            echo 100*$nb/$max + 100*$options/$max;
+            echo '=';
+            echo $totalPourcent;
+             echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;—&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+
+        if ($options > 0) {
+            // $total = $nb + $options;
+            // $totalPourcent = 100*$total/$max;
+        } else {
+            // $nbPourcent = 100*$nb/$max;
+            // if($nbPourcent > 100) { $nbPourcent = 100; }
+        }
+
+        // if($nb > 100) { $nb = 100; }
+        echo $nb;
+
+     ?>
+    <span>0</span>
+    <span><?=min($sejour->capacity_min,count($inscriptions)) ?></span>
+    <span class="pull-right"><?=min($sejour->capacity_max,count($inscriptions)) ?></span>
     <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="<?=min($sejour->capacity_min,count($inscriptions)) ?>" aria-valuemin="0" aria-valuemax="<?=$sejour->capacity_min ?>" style="width: <?php echo (min($sejour->capacity_min,count($inscriptions))/$sejour->capacity_max)*100; ?>%;">
+        <div class="progress-bar" role="progressbar"
+        aria-valuenow="<?=min($sejour->capacity_min,count($inscriptions)) ?>"
+        aria-valuemin="0" aria-valuemax="<?=$sejour->capacity_min ?>"
+        style="width: <?=$nb?>%;">
             <span><?=min($sejour->capacity_min,count($inscriptions)) ?></span>
+            <span><?=$sejour->capacity_max ?></span>
         </div>
-        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?=count($inscriptions) ?>" aria-valuemin="0" aria-valuemax="7" style="width: <?php echo (min($sejour->capacity_max,count($inscriptions))/$sejour->capacity_max)*100-(min($sejour->capacity_min,count($inscriptions))/$sejour->capacity_max)*100; ?>%;">
+<!--         <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?=count($inscriptions) ?>" aria-valuemin="0" aria-valuemax="7" style="width: <?php echo (min($sejour->capacity_max,count($inscriptions))/$sejour->capacity_max)*100-(min($sejour->capacity_min,count($inscriptions))/$sejour->capacity_max)*100; ?>%;">
             <span><?=count($inscriptions) ?></span>
-        </div>
-        <span><?=$sejour->capacity_max ?></span>
+        </div> -->
+        
     </div>
 
     <?php if(count($inscriptions) > 0): ?>
@@ -235,9 +271,9 @@ $date_to_query->modify("+$i weeks");
             <table class="datatable">
                 <thead>
                     <tr>
-                        <th>
+                        <!-- <th>
                             id
-                        </th>
+                        </th> -->
                         <th >
                             Prénom
                         </th>
@@ -261,8 +297,10 @@ $date_to_query->modify("+$i weeks");
                     <?php foreach($inscriptions as $key => $inscription): ?>
                         <?php $enfant = enfant::get($inscription->ref_enfant); ?>
                         <tr>
-                            <td>
+                   <!--          <td>
                                 <a href="/inscriptions/infos/id/<?=$inscription->inscription_id; ?>">#<?=$key+1 ?></a>
+                            </td> -->
+                            <td>
                                 <div class="pop-dialog tr">
                                     <div class="pointer">
                                         <div class="arrow"></div>
@@ -276,8 +314,6 @@ $date_to_query->modify("+$i weeks");
                                         </div>
                                     </div>
                                 </div> 
-                            </td>
-                            <td>
                                 <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->firstname ?></a>
                             </td>
                             <td>

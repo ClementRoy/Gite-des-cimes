@@ -100,7 +100,6 @@ $result = enfant::update($datas, $_GET['id']);
     <?php //tool::output($_SESSION); ?>
     <?php 
     extract($_POST);
-// Create enfant entry
     $birthdate = tool::generateDatetime($form_enfant_naissance);
     $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
     $cpam_validite = tool::generateDatetime($form_enfant_cpam_validite);
@@ -166,7 +165,7 @@ $result = enfant::update($datas, $_GET['id']);
 $result = enfant::update($datas, $_GET['id']);
 
 ?>
-<?php //tool::output($result); ?>
+
 <?php if($result): ?>
     <div class="row">
         <div class="col-md-12">
@@ -174,7 +173,6 @@ $result = enfant::update($datas, $_GET['id']);
                 <i class="icon-ok-sign"></i> 
                 L'enfant <strong><?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?></strong> a bien été modifié
             </div>
-            <a href="/enfants/" class="btn-flat default">Retourner à la liste des enfants</a>
         </div>
     </div>
 <?php else: ?>
@@ -205,7 +203,7 @@ $result = enfant::update($datas, $_GET['id']);
     <div class="row header">
         <div class="col-md-9">
 
-            <h3><a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
+            <h1><a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
                 <?=$enfant->firstname; ?> <strong><?=$enfant->lastname; ?></strong><br />
                 <small class="area">
                     <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i>' : '<i class="icon-male"></i>'; ?>
@@ -215,7 +213,7 @@ $result = enfant::update($datas, $_GET['id']);
                         (<?=tool::getAgeFromDate($enfant->birthdate); ?> ans)
                     <?php endif; ?>
                 </small>
-            </h3>
+            </h1>
 
             <div class="pop-dialog">
                 <div class="pointer">
@@ -276,203 +274,285 @@ $result = enfant::update($datas, $_GET['id']);
 
             <div class="row">
 
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">A propos de l'enfant</div>
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <p><strong>Date de naissance :</strong></p>
+                <div class="col-md-12">
+                    <h3 id="a-propos">À propos de l'enfant</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                                <strong>Date de naissance :</strong> 
                                 <?php $birthdate = new DateTime($enfant->birthdate); ?>
-                                <p><?=($birthdate->getTimestamp() != '-62169987600')? strftime('%d %B %Y', $birthdate->getTimestamp()) : '<em>Non renseignée</em>';?></p>
-                            </li>
-                            <li class="list-group-item">
-                                <p><strong>Age :</strong></p>
-                                <p><?=($birthdate->getTimestamp() != '-62169987600')? tool::getAgeFromDate($enfant->birthdate).' ans' : '<em>Non renseigné</em>';?></p>
-                            </li>
-                            <li class="list-group-item">
-                                <p><strong>Sexe :</strong></p>
-                                <p><?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?></p>
+                                <?=($birthdate->getTimestamp() != '-62169987600')? strftime('%d %B %Y', $birthdate->getTimestamp()) : '<em>Non renseignée</em>';?>
+                                (<?=($birthdate->getTimestamp() != '-62169987600')? tool::getAgeFromDate($enfant->birthdate).' ans' : '<em>Non renseigné</em>';?>)
+                            </p>
 
-                            </li>
-                            <li class="list-group-item">
-                                <p><strong>Domiciliation :</strong></p>
-                                <?php if ($enfant->domiciliation === 'responsable'): ?>
-                                    <p>Responsable légal</p>
-                                <?php elseif($enfant->domiciliation === 'famille'): ?>
-                                    <p>Famille d'accueil</p>
-                                <?php else: ?>
-                                    <p><?=EMPTYVAL; ?></p>
-                                <?php endif ?>
-                            </li>
-                        </ul>
-                    </div>
-                    <?php if (!empty($enfant->note)): ?>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Notes</div>
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <p><?=$enfant->note;?></p>
-                                </li>
-                            </ul>
-                        </div>
-                    <?php endif; ?>
-                </div>
-
-
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Inscription de l'enfant</div>
-                        <ul class="list-group">
-                            <?php if($enfant->registration_by === 'structure'): ?>
-                                <li class="list-group-item">
-                                    <p><strong>Structure :</strong></p>
+                            <p>
+                                <strong>Reponsable légal :</strong>
+                                <?php if($enfant->guardian == 'structure'): ?>
                                     <?php if ($enfant->organization != 0): ?>
                                         <?php $structure = structure::get($enfant->organization); ?>
-                                        <p><a href="/structures/infos/id/<?=$structure->id ?>"><?=$structure->name;?></a></p>
+                                        <a href=""><?=$structure->name;?></a>
                                     <?php else: ?>
-                                        <p><?=EMPTYVAL; ?></p>
+                                        Structure
                                     <?php endif ?>
-                                </li>
-                                <li class="list-group-item">
-                                    <p><strong>Contact :</strong></p>
-                                    <?php if ($enfant->contact != 0): ?>
-                                        <?php $contact = contact::get($enfant->contact); ?>
-                                        <p><a href="/contacts/infos/id/<?=$contact->id ?>"><?=$contact->civility.' '.$contact->firstname.' '.$contact->lastname;?></a></p>
-                                    <?php else: ?>
-                                        <p><?=EMPTYVAL; ?></p>
-                                    <?php endif ?>
-                                </li>
-                            <?php else: ?>
-                                <li class="list-group-item">
-                                    <p><?=ucfirst($enfant->registration_by); ?></p>
-                                </li>
-                            <?php endif; ?>
-                        </ul>
-                    </div>
+                                <?php elseif($enfant->guardian == 'tuteur'): ?>
+                                    Tuteur
+                                    <!-- <?=(!empty($enfant->guardian_name))? $enfant->guardian_name : EMPTYVAL; ?> -->
+                                <?php elseif($enfant->guardian == 'parents'): ?>
+                                    Parents
+                                    <!-- <?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?> -->
+                                    <!-- <?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?> -->
+                                <?php elseif($enfant->guardian == 'pere'): ?>
+                                    Père
+                                    <!-- <?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?> -->
+                                <?php elseif($enfant->guardian == 'mere'): ?>
+                                    Mère
+                                    <!-- <?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?> -->
+                                <?php endif; ?>
+                            </p>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Responsable légal de l'enfant</div>
-                        <ul class="list-group">
-                            <?php if($enfant->guardian == 'structure'): ?>
-                                <li class="list-group-item">
-                                    <p><strong>Structure :</strong></p>
-                                    <?php if ($enfant->organization != 0): ?>
-                                        <p><a href=""><?=$enfant->organization;?></a></p>
-                                    <?php else: ?>
-                                        <p><?=EMPTYVAL; ?></p>
-                                    <?php endif ?>
-                                </li>
-                            <?php elseif($enfant->guardian == 'tuteur'): ?>
-                                <li class="list-group-item">
-                                    <p><strong>Tuteur :</strong></p>
-                                    <p><?=(!empty($enfant->guardian_name))? $enfant->guardian_name : EMPTYVAL; ?> <p><i class="icon-phone"></i><?=(!empty($enfant->guardian_phone))? $enfant->guardian_phone : EMPTYVAL; ?></p>
-                                </li>
-                            <?php elseif($enfant->guardian == 'parents'): ?>
-                                <li class="list-group-item">
-                                    <p><strong>Père :</strong></p>
-                                    <p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?> <p><i class="icon-phone"></i><?=(!empty($enfant->father_phone))? $enfant->father_phone : EMPTYVAL; ?></p>
-                                </li>
-                                <li class="list-group-item">
-                                    <p><strong>Mère :</strong></p>
-                                    <p><?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?> <p><i class="icon-phone"></i><?=(!empty($enfant->mother_phone))? $enfant->mother_phone : EMPTYVAL; ?></p>
-                                </li>
-                            <?php elseif($enfant->guardian == 'pere'): ?>
-                                <li class="list-group-item">
-                                    <p><strong>Père :</strong></p>
-                                    <p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?> <p><i class="icon-phone"></i><?=(!empty($enfant->father_phone))? $enfant->father_phone : EMPTYVAL; ?></p>
-                                </li>
-                            <?php elseif($enfant->guardian == 'mere'): ?>
-                                <li class="list-group-item">
-                                    <p><strong>Adresse  :</strong></p>
-                                    <p><?=(!empty($enfant->guardian_address_number) && !empty($enfant->guardian_address_street) && !empty($enfant->guardian_address_postal_code) && !empty($enfant->guardian_address_city))? $enfant->guardian_address_number.' '.$enfant->guardian_address_street.', <br />'.$enfant->guardian_address_postal_code.' '.$enfant->guardian_address_city : EMPTYVAL; ?></p>
-                                </li>
-
-                            <?php else: ?>
-                                <li class="list-group-item">Aucun responsable légal de défini pour le moment</li>
-                            <?php endif; ?>
-                        </ul>
-                    </div>
-
-                    <?php if ($enfant->domiciliation == 'famille'): ?>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Famille d'accueil</div>
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <p><strong>Nom de la famille d'accueil :</strong></p>
-                                    <?=(!empty($enfant->host_family_name))? $enfant->host_family_name : EMPTYVAL; ?>
-                                    <p><i class="icon-phone"></i><?=(!empty($enfant->host_family_phone))? $enfant->host_family_phone : EMPTYVAL; ?></p>
-                                </li>
-                                <li class="list-group-item">
-                                    <p><strong>Adresse de la famille d'accueil :</strong></p>
-                                    <p><?=(!empty($enfant->host_family_address_number) && !empty($enfant->host_family_address_street) && !empty($enfant->host_family_address_postal_code) && !empty($enfant->host_family_address_city))? $enfant->host_family_address_number.' '.$enfant->host_family_address_street.', <br />'.$enfant->host_family_address_postal_code.' '.$enfant->host_family_address_city : EMPTYVAL; ?></p>
-                                </li>
-                            </ul>
                         </div>
-                    <?php endif ?>
 
-                    <?php if (!empty($enfant->emergency_name)): ?>
-                        <div class="panel panel-default noheader">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <p><strong>Urgence :</strong></p>
-                                    <p><?=$enfant->emergency_name;?> <?php if (!empty($enfant->host_family_phone)): ?><p><i class="icon-phone"></i><?=$enfant->emergency_phone;?></span><?php endif ?></p>
-                                </li>
-                            </ul>
-                        </div>
-                    <?php endif ?>
+                        <div class="col-md-6">
+                            <p>
+                                <strong>Sexe :</strong>
+                                <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i> Féminin' : '<i class="icon-male"></i> Masculin'; ?>
+                            </p>
 
-                </div>
 
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Dossier</div>
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <p><strong>Droit à l'image :</strong> <span class="pull-right"><?=($enfant->image_rights > 0)?'Oui':'Non'; ?></span></p>
-                            </li>
-                            <li class="list-group-item">
-                                <p><strong>Traitements médicaux :</strong> <span class="pull-right"><?=($enfant->medicals_treatments > 0)?'Oui':'Non'; ?></span></p>
-                            </li>
-                            <?php if (!empty($enfant->allergies)): ?>
-                                <li class="list-group-item">
-                                    <p><strong>Contre-indications / allergies :</strong></span></p>
-                                    <p><?=$enfant->allergies;?></p>
-                                </li>   
-                            <?php endif ?>
-                            <li class="list-group-item">
-                                <p><strong>N° de sécurité sociale :</strong><span class="pull-right"><?=(isset($enfant->number_ss) && $enfant->number_ss != null)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?></span></p>
-                                <?php if (isset($enfant->number_ss) && $enfant->number_ss != null): ?>
-                                    <p><?=$enfant->number_ss;?></p>
+                            <p>
+                                <strong>Domiciliation :</strong>
+                                <?php if ($enfant->domiciliation === 'responsable'): ?>
+                                    Responsable légal
+                                <?php elseif($enfant->domiciliation === 'famille'): ?>
+                                    Famille d'accueil
+                                <?php else: ?>
+                                    <?=EMPTYVAL; ?>
                                 <?php endif ?>
-                            </li>
-                            <li class="list-group-item">
-                                <p><strong>Assurance (RC) :</strong><span class="pull-right"><?=($enfant->self_assurance > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?></span></p>
+                            </p>
+                        </div>
+
+
+                        <?php if (!empty($enfant->note)): ?>
+                            <div class="col-md-12">
+                                <p><strong>Notes :</strong><br />
+                                    <?=$enfant->note;?></p>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+
+                        <hr>
+                        <h3 id="inscription">Inscription</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <?php if($enfant->registration_by === 'structure'): ?>
+
+                                    <p>
+                                        <strong>Structure :</strong>
+                                        <?php if ($enfant->organization != 0): ?>
+                                            <?php $structure = structure::get($enfant->organization); ?>
+                                            <a href="/structures/infos/id/<?=$structure->id ?>"><?=$structure->name;?></a>
+                                        <?php else: ?>
+                                            <?=EMPTYVAL; ?>
+                                        <?php endif ?>
+                                    </p>
+
+                                    <p>
+                                        <strong>Contact :</strong>
+                                        <?php if ($enfant->contact != 0): ?>
+                                            <?php $contact = contact::get($enfant->contact); ?>
+                                            <a href="/contacts/infos/id/<?=$contact->id ?>"><?=$contact->civility.' '.$contact->firstname.' '.$contact->lastname;?></a>
+                                        <?php else: ?>
+                                            <?=EMPTYVAL; ?>
+                                        <?php endif ?>
+                                    </p>
+                                <?php else: ?>
+                                    <?=ucfirst($enfant->registration_by); ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <h3 id="coordonnees">Coordonnées</h3>
+                        <div class="row">
+                            <?php if(!empty($enfant->father_name) || !empty($enfant->father_phone_pro) || !empty($enfant->father_phone_mobile) || !empty($enfant->father_phone_home)): ?>
+                                <div class="col-md-4">
+                                    <p>
+                                        <strong>Père :</strong><br>
+                                        <?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?><br>
+                                        <?=(!empty($enfant->father_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->father_phone_home : ''; ?><br>
+                                        <?=(!empty($enfant->father_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->father_phone_mobile : ''; ?><br>
+                                        <?=(!empty($enfant->father_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->father_phone_pro : ''; ?>
+                                    </p>
+                                    <?php if(!empty($enfant->father_address_number) &&
+                                        !empty($enfant->father_address_street) &&
+                                        !empty($enfant->father_address_postal_code) &&
+                                        !empty($enfant->father_address_city)): ?>
+                                        <p>
+                                            <strong><i class="icon-home"></i> Adresse :</strong><br>
+                                            <?=$enfant->father_address_number?> <?=$enfant->father_address_street?> <br />
+                                            <?=$enfant->father_address_postal_code?> <?=$enfant->father_address_city?>
+                                        </p>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if(!empty($enfant->mother_name) || !empty($enfant->mother_phone_pro) || !empty($enfant->mother_phone_mobile) || !empty($enfant->mother_phone_home)): ?>
+                                <div class="col-md-4">
+                                    <p>
+                                        <strong>Mère :</strong><br>
+                                        <?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?><br>
+                                        <?=(!empty($enfant->mother_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->mother_phone_home : ''; ?><br>
+                                        <?=(!empty($enfant->mother_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->mother_phone_mobile : ''; ?><br>
+                                        <?=(!empty($enfant->mother_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->mother_phone_pro : ''; ?>
+                                    </p>
+                                    <?php if(!empty($enfant->mother_address_number) &&
+                                        !empty($enfant->mother_address_street) &&
+                                        !empty($enfant->mother_address_postal_code) &&
+                                        !empty($enfant->mother_address_city)): ?>
+                                        <p>
+                                            <strong><i class="icon-home"></i> Adresse :</strong><br>
+                                            <?=$enfant->mother_address_number?> <?=$enfant->mother_address_street?> <br />
+                                            <?=$enfant->mother_address_postal_code?> <?=$enfant->mother_address_city?>
+                                        </p>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if(!empty($enfant->guardian_name) || !empty($enfant->guardian_phone_pro) && !empty($enfant->guardian_phone_mobile) && !empty($enfant->guardian_phone_home)): ?>
+                                <div class="col-md-4">
+                                    <p>
+                                        <strong>Tuteur :</strong><br>
+                                        <?=(!empty($enfant->guardian_name))? $enfant->guardian_name : EMPTYVAL; ?><br>
+                                        <?=(!empty($enfant->guardian_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->guardian_phone_home : ''; ?><br>
+                                        <?=(!empty($enfant->guardian_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->guardian_phone_mobile : ''; ?><br>
+                                        <?=(!empty($enfant->guardian_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->guardian_phone_pro : ''; ?>
+                                    </p>
+                                    <?php if(!empty($enfant->guardian_address_number) &&
+                                        !empty($enfant->guardian_address_street) &&
+                                        !empty($enfant->guardian_address_postal_code) &&
+                                        !empty($enfant->guardian_address_city)): ?>
+                                        <p>
+                                            <strong><i class="icon-home"></i> Adresse :</strong><br>
+                                            <?=$enfant->guardian_address_number?> <?=$enfant->guardian_address_street?> <br />
+                                            <?=$enfant->guardian_address_postal_code?> <?=$enfant->guardian_address_city?>
+                                        </p>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if(!empty($enfant->host_family_name) || !empty($enfant->host_family_phone_pro) || !empty($enfant->host_family_phone_mobile) || !empty($enfant->host_family_phone_home)): ?>
+                                <div class="col-md-4">
+                                    <p>
+                                    <strong>Famille d'accueil :</strong><br>
+                                        <?=(!empty($enfant->host_family_name))? $enfant->host_family_name : EMPTYVAL; ?><br>
+                                        <?=(!empty($enfant->host_family_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->host_family_phone_home : ''; ?><br>
+                                        <?=(!empty($enfant->host_family_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->host_family_phone_mobile : ''; ?><br>
+                                        <?=(!empty($enfant->host_family_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->host_family_phone_pro : ''; ?>
+                                    </p>
+                                    <?php if(!empty($enfant->host_family_address_number) &&
+                                        !empty($enfant->host_family_address_street) &&
+                                        !empty($enfant->host_family_address_postal_code) &&
+                                        !empty($enfant->host_family_address_city)): ?>
+                                        <p>
+                                            <strong><i class="icon-home"></i> Adresse :</strong><br>
+                                            <?=$enfant->host_family_address_number?> <?=$enfant->host_family_address_street?> <br />
+                                            <?=$enfant->host_family_address_postal_code?> <?=$enfant->host_family_address_city?>
+                                        </p>
+                                    <?php endif; ?>
+
+                                </div>
+                            <?php endif; ?>
+                            <?php if(!empty($enfant->emergency_name) || !empty($enfant->emergency_phone)): ?>
+                                <div class="col-md-4">
+                                    <p>
+                                        <strong>Contact d'urgence :</strong><br>
+                                        <?=(!empty($enfant->emergency_name))? $enfant->emergency_name : EMPTYVAL; ?><br>
+                                        <i class="icon-phone"></i> <?=(!empty($enfant->emergency_phone))? $enfant->emergency_phone : EMPTYVAL; ?>
+                                    </p>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+
+                        <hr>
+                        <h3 id="dossier">Dossier de l'enfant</h3>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p>
+                                    <strong>Droit à l'image :</strong>
+                                    <?=($enfant->image_rights > 0)?'Oui':'Non'; ?>
+                                </p>
+
+                                <p>
+                                    <strong>Traitements médicaux :</strong>
+                                    <?=($enfant->medicals_treatments > 0)?'Oui':'Non'; ?>
+                                </p>
+
+
+                                <?php if (!empty($enfant->allergies)): ?>
+                                    <p>
+                                        <strong>Contre-indications / allergies :</strong><br />
+                                        <?=$enfant->allergies;?>
+                                    </p>
+                                <?php endif ?>
+
+
+                                <p>
+                                    <strong>N° de sécurité sociale :</strong>
+                                    <?=(isset($enfant->number_ss) && $enfant->number_ss != null)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>
+                                    <?php if (isset($enfant->number_ss) && $enfant->number_ss != null): ?>
+                                        <p><?=$enfant->number_ss;?></p>
+                                    <?php endif ?>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>
+                                    <strong>Assurance (RC) :</strong>
+                                    <?=($enfant->self_assurance > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>
+                                </p>
                                 <?php if ($enfant->self_assurance > 0): ?>
-                                    <p><small>Validité : <?=(!empty($enfant->self_assurance_expiration_date))? $enfant->self_assurance_expiration_date : EMPTYVAL; ?></small></p>
+                                    <p>
+                                        <strong>Validité :</strong>
+                                        <?=(!empty($enfant->self_assurance_expiration_date))? $enfant->self_assurance_expiration_date : EMPTYVAL; ?>
+                                    </p>
                                 <?php endif ?>
-                            </li>
-                            <li class="list-group-item">
-                                <p><strong>Attestation CPAM :</strong><span class="pull-right"><?=($enfant->cpam_attestation > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?></span></p>
-                                <?php if ($enfant->cpam_attestation > 0): ?>
-                                    <p><small>Validité : <?=(!empty($enfant->cpam_attestation_expiration_date))? $enfant->cpam_attestation_expiration_date : EMPTYVAL; ?></small></p>
-                                <?php endif ?>
-                            </li>
-                            <li class="list-group-item">
-                                <p><strong>Fiche sanitaire de liaison :</strong><span class="pull-right"><?=($enfant->health_record > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?></span></p>
-                            </li>
-                            <li class="list-group-item">
-                                <p><strong>Carnet de vaccination :</strong><span class="pull-right"><?=($enfant->vaccination > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?></span></p>
 
-                            </li>
-                            <li class="list-group-item">
-                                <p><strong>Fiche de séjour :</strong><span class="pull-right"><?=($enfant->stay_record > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?></span></p>
-                            </li>
-                        </ul>
+
+                                <p>
+                                    <strong>Attestation CPAM :</strong>
+                                    <?=($enfant->cpam_attestation > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>
+                                </p>
+
+                                <?php if ($enfant->cpam_attestation > 0): ?>
+                                    <p>
+                                        <strong>Validité :</strong>
+                                        <?=(!empty($enfant->cpam_attestation_expiration_date))? $enfant->cpam_attestation_expiration_date : EMPTYVAL; ?>
+                                    </p>
+                                <?php endif ?>
+                            </div>
+                            <div class="col-md-4">
+                                <p>
+                                    <strong>Fiche sanitaire de liaison :</strong>
+                                    <?=($enfant->health_record > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>
+                                </p>
+
+
+                                <p>
+                                    <strong>Carnet de vaccination :</strong>
+                                    <?=($enfant->vaccination > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>
+                                </p>
+
+
+                                <p>
+                                    <strong>Fiche de séjour :</strong>
+                                    <?=($enfant->stay_record > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
+
+
+
                 </div>
             </div>
-        </div>
-
 
 
         <div class="title">
@@ -484,13 +564,12 @@ $result = enfant::update($datas, $_GET['id']);
                     <a href="/dossier/ajouter/enfant/<?=$enfant->id; ?>" class="btn btn-primary"><span>+</span> Créer un nouveau dossier d'inscription</a>
                 </div>
             </div>
-        </div>
 
 
-        <div class="content content-table">
+            <div class="content content-table">
 
-            <div class="row">
-                <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
 
                     <?php $inscriptions = inscription::getByEnfant($enfant->id); ?>
                     <?php //tool::output($inscriptions); ?>
@@ -546,19 +625,16 @@ $result = enfant::update($datas, $_GET['id']);
                                                 <span class="label label-danger">Non confirmé</span>
                                             <?php endif; ?>
                                         </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    <?php else: ?>
-                        <p>Aucun séjour à venir pour cet enfant</p>
-                    <?php endif; ?>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        <?php else: ?>
+                            <p>Aucun séjour à venir pour cet enfant</p>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
-
-        </div>
-
-
 
 <h3>Notes relatives aux séjours</h3>
 <div class="panel-group" id="accordion">
@@ -610,10 +686,6 @@ $result = enfant::update($datas, $_GET['id']);
     </div>
     <div class="col-md-3 address">
         <div class="row">
-            <?php  
-
-
-            ?>
             <div class="contact">
                 <?php if(!empty($enfant->father_phone_pro) || !empty($enfant->father_phone_mobile) || !empty($enfant->father_phone_home)): ?>
                     <h6>Père</h6>
@@ -639,32 +711,59 @@ $result = enfant::update($datas, $_GET['id']);
                         <p><?=(!empty($enfant->guardian_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->guardian_phone_home : ''; ?></p>
                         <p><?=(!empty($enfant->guardian_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->guardian_phone_mobile : ''; ?></p>
                         <p><?=(!empty($enfant->guardian_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->guardian_phone_pro : ''; ?></p>
+                <?php endif; ?>
+                
+                <div class="contact">
+                    <?php if(!empty($enfant->father_phone_pro) || !empty($enfant->father_phone_mobile) || !empty($enfant->father_phone_home)): ?>
+                        <h6>Père</h6>
+                        <p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?></p>
+                        <p><?=(!empty($enfant->father_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->father_phone_home : ''; ?></p>
+                        <p><?=(!empty($enfant->father_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->father_phone_mobile : ''; ?></p>
+                        <p><?=(!empty($enfant->father_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->father_phone_pro : ''; ?></p>
                     <?php endif; ?>
+                </div>
+                <div class="contact">
+                    <?php if(!empty($enfant->mother_phone_pro) || !empty($enfant->mother_phone_mobile) || !empty($enfant->mother_phone_home)): ?>
+                        <h6>Mère</h6>
+                        <p><?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?></p>
+                        <p><?=(!empty($enfant->mother_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->mother_phone_home : ''; ?></p>
+                        <p><?=(!empty($enfant->mother_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->mother_phone_mobile : ''; ?></p>
+                        <p><?=(!empty($enfant->mother_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->mother_phone_pro : ''; ?></p>
+                    <?php endif; ?>
+                </div>
+                <div class="contact">
+                    <?php if(!empty($enfant->guardian_phone_pro) && !empty($enfant->guardian_phone_mobile) && !empty($enfant->guardian_phone_home)): ?>
+                        <h6>Responsable légale</h6>
+                        <p><?=(!empty($enfant->guardian_name))? $enfant->guardian_name : EMPTYVAL; ?> 
+                            <p><?=(!empty($enfant->guardian_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->guardian_phone_home : ''; ?></p>
+                            <p><?=(!empty($enfant->guardian_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->guardian_phone_mobile : ''; ?></p>
+                            <p><?=(!empty($enfant->guardian_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->guardian_phone_pro : ''; ?></p>
+                        <?php endif; ?>
 
-                </div>
-                <div class="contact">
-                    <?php if(!empty($enfant->emergency_phone)): ?>
-                        <h6>Contact d'urgence</h6>
-                        <p><?=(!empty($enfant->emergency_name))? $enfant->emergency_name : EMPTYVAL; ?></p> 
-                        <p><p><i class="icon-phone"></i> <?=$enfant->emergency_phone;?></p>
-                    <?php endif; ?>
-                </div>
-                <div class="contact">
-                    <?php if(!empty($enfant->host_family_phone_pro) || !empty($enfant->host_family_phone_mobile) || !empty($enfant->host_family_phone_home)): ?>
-                        <h6>Famille d'accueil</h6>
-                        <p><?=(!empty($enfant->host_family_name))? $enfant->host_family_name : EMPTYVAL; ?> 
-                            <p><?=(!empty($enfant->host_family_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->host_family_phone_home : ''; ?></p>
-                            <p><?=(!empty($enfant->host_family_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->host_family_phone_mobile : ''; ?></p>
-                            <p><?=(!empty($enfant->host_family_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->host_family_phone_pro : ''; ?></p>
+                    </div>
+                    <div class="contact">
+                        <?php if(!empty($enfant->emergency_phone)): ?>
+                            <h6>Contact d'urgence</h6>
+                            <p><?=(!empty($enfant->emergency_name))? $enfant->emergency_name : EMPTYVAL; ?></p> 
+                            <p><p><i class="icon-phone"></i> <?=$enfant->emergency_phone;?></p>
                         <?php endif; ?>
                     </div>
+                    <div class="contact">
+                        <?php if(!empty($enfant->host_family_phone_pro) || !empty($enfant->host_family_phone_mobile) || !empty($enfant->host_family_phone_home)): ?>
+                            <h6>Famille d'accueil</h6>
+                            <p><?=(!empty($enfant->host_family_name))? $enfant->host_family_name : EMPTYVAL; ?> 
+                                <p><?=(!empty($enfant->host_family_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->host_family_phone_home : ''; ?></p>
+                                <p><?=(!empty($enfant->host_family_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->host_family_phone_mobile : ''; ?></p>
+                                <p><?=(!empty($enfant->host_family_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->host_family_phone_pro : ''; ?></p>
+                            <?php endif; ?>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
 
 
-<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
+    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

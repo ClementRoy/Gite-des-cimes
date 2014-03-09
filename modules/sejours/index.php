@@ -13,7 +13,7 @@
     <div class="title">
         <div class="row header">
             <div class="col-md-4">
-               <h3>Les séjours</h3>
+               <h1>Les séjours</h1>
                <ul class="nav nav-tabs">
                   <li class="active"><a href="#present">A venir</a></li>
                   <li class=""><a href="#past">Achevés</a></li>
