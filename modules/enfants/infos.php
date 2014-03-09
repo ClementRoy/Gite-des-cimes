@@ -441,7 +441,7 @@ $result = enfant::update($datas, $_GET['id']);
                             <?php if(!empty($enfant->host_family_name) || !empty($enfant->host_family_phone_pro) || !empty($enfant->host_family_phone_mobile) || !empty($enfant->host_family_phone_home)): ?>
                                 <div class="col-md-4">
                                     <p>
-                                    <strong>Famille d'accueil :</strong><br>
+                                        <strong>Famille d'accueil :</strong><br>
                                         <?=(!empty($enfant->host_family_name))? $enfant->host_family_name : EMPTYVAL; ?><br>
                                         <?=(!empty($enfant->host_family_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->host_family_phone_home : ''; ?><br>
                                         <?=(!empty($enfant->host_family_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->host_family_phone_mobile : ''; ?><br>
@@ -546,200 +546,194 @@ $result = enfant::update($datas, $_GET['id']);
                                 </p>
                             </div>
                         </div>
-
                     </div>
-
-
-
                 </div>
             </div>
 
 
-        <div class="title">
-            <div class="row header">
-                <div class="col-md-8">
-                    <h4>Séjours de l'enfant</h4>
+            <div class="title">
+                <div class="row header">
+                    <div class="col-md-8">
+                        <h4>Séjours de l'enfant</h4>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <a href="/dossiers/ajouter/enfant/<?=$enfant->id; ?>" class="btn btn-primary"><span>+</span> Créer un nouveau dossier d'inscription</a>
+                    </div>
                 </div>
-                <div class="col-md-4 text-right">
-                    <a href="/dossier/ajouter/enfant/<?=$enfant->id; ?>" class="btn btn-primary"><span>+</span> Créer un nouveau dossier d'inscription</a>
-                </div>
-            </div>
 
 
-            <div class="content content-table">
+                <div class="content content-table">
 
-                <div class="row">
-                    <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
 
-                    <?php $inscriptions = inscription::getByEnfant($enfant->id); ?>
-                    <?php //tool::output($inscriptions); ?>
-                    <?php if(count($inscriptions)>0): ?>
-                        <table class="datatable">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>
-                                        Nom du séjour
-                                    </th>
-                                    <th>
-                                        Dates
-                                    </th>
-                                    <th>
-                                        Satut
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach($inscriptions as $key => $inscription): ?>
-                                    <?php $sejour = sejour::get($inscription->ref_sejour); ?>
-                                    <?php $dossier = dossier::get($inscription->ref_dossier); ?>
-                                    <tr>
-                                        <td>
-                                            <a href="/dossiers/infos/id/<?=$dossier->id; ?>">#<?=$dossier->id ?></a>
-                                            <div class="pop-dialog tr">
-                                                <div class="pointer">
-                                                    <div class="arrow"></div>
-                                                    <div class="arrow_border"></div>
-                                                </div>
-                                                <div class="body">
-                                                    <div class="menu">
-                                                        <a href="/dossiers/infos/id/<?=$dossier->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
-                                                        <a href="/dossiers/editer/id/<?=$dossier->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
-                                                        <a href="/dossiers/supprimer/id/<?=$dossier->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                        </td>
-                                        <td>
-                                            <a href="/sejours/infos/id/<?=$sejour->id ?>"><?=$sejour->name ?></a>
-                                        </td>
-                                        <td>
-                                            <?php $date_from = new DateTime($inscription->date_from); ?>
-                                            <?php $date_to = new DateTime($inscription->date_to); ?>
-                                            du <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?> 
-                                        </td>
-                                        <td>
-                                            <?php if($dossier->finished): ?>
-                                                <span class="label label-success">Confirmé</span>
-                                            <?php else: ?>
-                                                <span class="label label-danger">Non confirmé</span>
-                                            <?php endif; ?>
-                                        </td>
+                            <?php $inscriptions = inscription::getByEnfant($enfant->id); ?>
+                            <?php //tool::output($inscriptions); ?>
+                            <?php if(count($inscriptions)>0): ?>
+                                <table class="datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>
+                                                Nom du séjour
+                                            </th>
+                                            <th>
+                                                Dates
+                                            </th>
+                                            <th>
+                                                Satut
+                                            </th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        <?php else: ?>
-                            <p>Aucun séjour à venir pour cet enfant</p>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($inscriptions as $key => $inscription): ?>
+                                            <?php $sejour = sejour::get($inscription->ref_sejour); ?>
+                                            <?php $dossier = dossier::get($inscription->ref_dossier); ?>
+                                            <tr>
+                                                <td>
+                                                    <a href="/dossiers/infos/id/<?=$dossier->id; ?>">#<?=$dossier->id ?></a>
+                                                    <div class="pop-dialog tr">
+                                                        <div class="pointer">
+                                                            <div class="arrow"></div>
+                                                            <div class="arrow_border"></div>
+                                                        </div>
+                                                        <div class="body">
+                                                            <div class="menu">
+                                                                <a href="/dossiers/infos/id/<?=$dossier->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                                                <a href="/dossiers/editer/id/<?=$dossier->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                                                <a href="/dossiers/supprimer/id/<?=$dossier->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </td>
+                                                <td>
+                                                    <a href="/sejours/infos/id/<?=$sejour->id ?>"><?=$sejour->name ?></a>
+                                                </td>
+                                                <td>
+                                                    <?php $date_from = new DateTime($inscription->date_from); ?>
+                                                    <?php $date_to = new DateTime($inscription->date_to); ?>
+                                                    du <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?> 
+                                                </td>
+                                                <td>
+                                                    <?php if($dossier->finished): ?>
+                                                        <span class="label label-success">Confirmé</span>
+                                                    <?php else: ?>
+                                                        <span class="label label-danger">Non confirmé</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            <?php else: ?>
+                                <p>Aucun séjour à venir pour cet enfant</p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Notes relatives aux séjours</h3>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    Séjour #1
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                    Séjour #2
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                    Séjour #3
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            <div class="col-md-3 address">
+                <div class="row">
+                    <div class="contact">
+                        <?php if(!empty($enfant->father_phone_pro) || !empty($enfant->father_phone_mobile) || !empty($enfant->father_phone_home)): ?>
+                            <h6>Père</h6>
+                            <p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?></p>
+                            <p><?=(!empty($enfant->father_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->father_phone_home : ''; ?></p>
+                            <p><?=(!empty($enfant->father_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->father_phone_mobile : ''; ?></p>
+                            <p><?=(!empty($enfant->father_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->father_phone_pro : ''; ?></p>
                         <?php endif; ?>
                     </div>
-                </div>
-            </div>
-
-<h3>Notes relatives aux séjours</h3>
-<div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-         Séjour #1
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-          Séjour #2
-        </a>
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-          Séjour #3
-        </a>
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-</div>
-
-
-    </div>
-    <div class="col-md-3 address">
-        <div class="row">
-            <div class="contact">
-                <?php if(!empty($enfant->father_phone_pro) || !empty($enfant->father_phone_mobile) || !empty($enfant->father_phone_home)): ?>
-                    <h6>Père</h6>
-                    <p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?></p>
-                    <p><?=(!empty($enfant->father_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->father_phone_home : ''; ?></p>
-                    <p><?=(!empty($enfant->father_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->father_phone_mobile : ''; ?></p>
-                    <p><?=(!empty($enfant->father_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->father_phone_pro : ''; ?></p>
-                <?php endif; ?>
-            </div>
-            <div class="contact">
-                <?php if(!empty($enfant->mother_phone_pro) || !empty($enfant->mother_phone_mobile) || !empty($enfant->mother_phone_home)): ?>
-                    <h6>Mère</h6>
-                    <p><?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?></p>
-                    <p><?=(!empty($enfant->mother_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->mother_phone_home : ''; ?></p>
-                    <p><?=(!empty($enfant->mother_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->mother_phone_mobile : ''; ?></p>
-                    <p><?=(!empty($enfant->mother_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->mother_phone_pro : ''; ?></p>
-                <?php endif; ?>
-            </div>
-            <div class="contact">
-                <?php if(!empty($enfant->guardian_phone_pro) && !empty($enfant->guardian_phone_mobile) && !empty($enfant->guardian_phone_home)): ?>
-                    <h6>Responsable légale</h6>
-                    <p><?=(!empty($enfant->guardian_name))? $enfant->guardian_name : EMPTYVAL; ?> 
-                        <p><?=(!empty($enfant->guardian_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->guardian_phone_home : ''; ?></p>
-                        <p><?=(!empty($enfant->guardian_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->guardian_phone_mobile : ''; ?></p>
-                        <p><?=(!empty($enfant->guardian_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->guardian_phone_pro : ''; ?></p>
-                <?php endif; ?>
-                
-                <div class="contact">
-                    <?php if(!empty($enfant->father_phone_pro) || !empty($enfant->father_phone_mobile) || !empty($enfant->father_phone_home)): ?>
-                        <h6>Père</h6>
-                        <p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?></p>
-                        <p><?=(!empty($enfant->father_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->father_phone_home : ''; ?></p>
-                        <p><?=(!empty($enfant->father_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->father_phone_mobile : ''; ?></p>
-                        <p><?=(!empty($enfant->father_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->father_phone_pro : ''; ?></p>
-                    <?php endif; ?>
-                </div>
-                <div class="contact">
-                    <?php if(!empty($enfant->mother_phone_pro) || !empty($enfant->mother_phone_mobile) || !empty($enfant->mother_phone_home)): ?>
-                        <h6>Mère</h6>
-                        <p><?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?></p>
-                        <p><?=(!empty($enfant->mother_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->mother_phone_home : ''; ?></p>
-                        <p><?=(!empty($enfant->mother_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->mother_phone_mobile : ''; ?></p>
-                        <p><?=(!empty($enfant->mother_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->mother_phone_pro : ''; ?></p>
-                    <?php endif; ?>
-                </div>
-                <div class="contact">
-                    <?php if(!empty($enfant->guardian_phone_pro) && !empty($enfant->guardian_phone_mobile) && !empty($enfant->guardian_phone_home)): ?>
-                        <h6>Responsable légale</h6>
-                        <p><?=(!empty($enfant->guardian_name))? $enfant->guardian_name : EMPTYVAL; ?> 
+                    <div class="contact">
+                        <?php if(!empty($enfant->mother_phone_pro) || !empty($enfant->mother_phone_mobile) || !empty($enfant->mother_phone_home)): ?>
+                            <h6>Mère</h6>
+                            <p><?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?></p>
+                            <p><?=(!empty($enfant->mother_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->mother_phone_home : ''; ?></p>
+                            <p><?=(!empty($enfant->mother_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->mother_phone_mobile : ''; ?></p>
+                            <p><?=(!empty($enfant->mother_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->mother_phone_pro : ''; ?></p>
+                        <?php endif; ?>
+                    </div>
+                    <div class="contact">
+                        <?php if(!empty($enfant->guardian_phone_pro) && !empty($enfant->guardian_phone_mobile) && !empty($enfant->guardian_phone_home)): ?>
+                            <h6>Responsable légale</h6>
+                            <p><?=(!empty($enfant->guardian_name))? $enfant->guardian_name : EMPTYVAL; ?></p>
                             <p><?=(!empty($enfant->guardian_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->guardian_phone_home : ''; ?></p>
                             <p><?=(!empty($enfant->guardian_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->guardian_phone_mobile : ''; ?></p>
                             <p><?=(!empty($enfant->guardian_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->guardian_phone_pro : ''; ?></p>
                         <?php endif; ?>
-
+                    </div>
+                    <div class="contact">
+                        <?php if(!empty($enfant->father_phone_pro) || !empty($enfant->father_phone_mobile) || !empty($enfant->father_phone_home)): ?>
+                            <h6>Père</h6>
+                            <p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?></p>
+                            <p><?=(!empty($enfant->father_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->father_phone_home : ''; ?></p>
+                            <p><?=(!empty($enfant->father_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->father_phone_mobile : ''; ?></p>
+                            <p><?=(!empty($enfant->father_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->father_phone_pro : ''; ?></p>
+                        <?php endif; ?>
+                    </div>
+                    <div class="contact">
+                        <?php if(!empty($enfant->mother_phone_pro) || !empty($enfant->mother_phone_mobile) || !empty($enfant->mother_phone_home)): ?>
+                            <h6>Mère</h6>
+                            <p><?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?></p>
+                            <p><?=(!empty($enfant->mother_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->mother_phone_home : ''; ?></p>
+                            <p><?=(!empty($enfant->mother_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->mother_phone_mobile : ''; ?></p>
+                            <p><?=(!empty($enfant->mother_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->mother_phone_pro : ''; ?></p>
+                        <?php endif; ?>
+                    </div>
+                    <div class="contact">
+                        <?php if(!empty($enfant->guardian_phone_pro) && !empty($enfant->guardian_phone_mobile) && !empty($enfant->guardian_phone_home)): ?>
+                            <h6>Responsable légale</h6>
+                            <p><?=(!empty($enfant->guardian_name))? $enfant->guardian_name : EMPTYVAL; ?></p>
+                            <p><?=(!empty($enfant->guardian_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->guardian_phone_home : ''; ?></p>
+                            <p><?=(!empty($enfant->guardian_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->guardian_phone_mobile : ''; ?></p>
+                            <p><?=(!empty($enfant->guardian_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->guardian_phone_pro : ''; ?></p>
+                        <?php endif; ?>
                     </div>
                     <div class="contact">
                         <?php if(!empty($enfant->emergency_phone)): ?>
@@ -751,19 +745,17 @@ $result = enfant::update($datas, $_GET['id']);
                     <div class="contact">
                         <?php if(!empty($enfant->host_family_phone_pro) || !empty($enfant->host_family_phone_mobile) || !empty($enfant->host_family_phone_home)): ?>
                             <h6>Famille d'accueil</h6>
-                            <p><?=(!empty($enfant->host_family_name))? $enfant->host_family_name : EMPTYVAL; ?> 
-                                <p><?=(!empty($enfant->host_family_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->host_family_phone_home : ''; ?></p>
-                                <p><?=(!empty($enfant->host_family_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->host_family_phone_mobile : ''; ?></p>
-                                <p><?=(!empty($enfant->host_family_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->host_family_phone_pro : ''; ?></p>
-                            <?php endif; ?>
-                        </div>
-
+                            <p><?=(!empty($enfant->host_family_name))? $enfant->host_family_name : EMPTYVAL; ?></p>
+                            <p><?=(!empty($enfant->host_family_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->host_family_phone_home : ''; ?></p>
+                            <p><?=(!empty($enfant->host_family_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->host_family_phone_mobile : ''; ?></p>
+                            <p><?=(!empty($enfant->host_family_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->host_family_phone_pro : ''; ?></p>
+                        <?php endif; ?>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+</div>
 
 
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

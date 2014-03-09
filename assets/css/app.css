@@ -334,6 +334,12 @@ h6,
   transition: all .3s ease;
   position: relative;
 }
+.wrap .title h1 .trigger.blue {
+  background: #428BCA;
+}
+.wrap .title h1 .trigger.blue:hover {
+  background: #e77777;
+}
 .wrap .title h1 .trigger:hover {
   text-decoration: none;
   background: #E04B4B;

@@ -7,11 +7,10 @@
 
 <?php $dossiers = dossier::getList(); ?>
 <?php //tool::output($sejours); ?>
-
 <div class="title">
     <div class="row header">
         <div class="col-md-6">
-            <h3>Les dossiers d'inscription</h3>
+            <h1>Les dossiers d'inscription</h1>
         </div>
         <div class="col-md-6 text-right">
             <a href="/inscriptions/ajouter" class="btn btn-primary">

@@ -32,9 +32,9 @@ h1, .h1 {
 	}
 }
 h4, .h4 {
-font-size: 30px;
-margin-top: 20px;
-margin-bottom: 10px;
+	font-size: 30px;
+	margin-top: 20px;
+	margin-bottom: 10px;
 }
 h6, .h6 {
 	font-weight: 900;
@@ -329,9 +329,9 @@ h6, .h6 {
 	padding: 80px 50px 30px 112px;
 	background: #ebedf3;
 	.progress {
-	margin-top: 25px;
-	margin-bottom: 40px;
-}
+		margin-top: 25px;
+		margin-bottom: 40px;
+	}
 	.nav-tabs {
 		border: none;
 		margin-top: 20px;
@@ -352,6 +352,12 @@ h6, .h6 {
 		}
 		h1 {
 			.trigger {
+				&.blue {
+					background: #428BCA;
+					&:hover {
+						background: lighten(#E04B4B, 10%);
+					}
+				}
 				background: #CA3636;
 				border-radius: 50%;
 				width: 60px;
@@ -669,7 +675,7 @@ table.dataTable {
 	top: 0;
 
 	padding-top: 30px;
-right: 81px;
+	right: 81px;
 }
 
 
@@ -700,16 +706,16 @@ right: 81px;
 .content:before,
 .dataTables_wrapper:after,
 .content:after {
-  content: " ";
-  /* 1 */
+	content: " ";
+	/* 1 */
 
-  display: table;
-  /* 2 */
+	display: table;
+	/* 2 */
 
 }
 .content:after,
 .dataTables_wrapper:after {
-  clear: both;
+	clear: both;
 }
 
 
@@ -724,8 +730,8 @@ html, body {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-margin: 0 auto -50px;
-padding-bottom: 50px;
+	margin: 0 auto -50px;
+	padding-bottom: 50px;
 }
 .footer {
 	height: 50px; /* .push must be the same height as .footer */
