@@ -125,7 +125,10 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
 <?php $date_to = new DateTime($sejour->date_to); ?>
 
 <?php $nb_weeks = tool::getNbWeeks($date_from, $date_to); ?>
-
+<?php if($nb_weeks == 0){
+    $nb_weeks = 1;
+    } 
+?>
 
 <div class="title">
     <div class="row header">
@@ -171,24 +174,23 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
 
 
                 <div class="tab-content">
+
                     <?php for ($i=1; $i <= $nb_weeks; $i++) : ?>
 
 
                         <?php 
-/*
-$i donne la semaine de la recherche
-on recherche toujours de +$i-1 week à +$i week
-*/
-
-$date_from_query = new DateTime($sejour->date_from);
-$date_to_query = new DateTime($sejour->date_from);
-$diff_date_from = $i-1;
-$date_from_query->modify("+$diff_date_from weeks");
-$date_to_query->modify("+$i weeks");
-?>
+                            $date_from_query = new DateTime($sejour->date_from);
+                            $date_to_query = new DateTime($sejour->date_from);
+                            if($date_from->diff($date_to)->format('%d') != 2){
+                                $diff_date_from = $i-1;
+                                $date_from_query->modify("+$diff_date_from weeks");
+                                $date_to_query->modify("+$i weeks");
+                            }
+                        ?>
 
 
 <?php $inscriptions = inscription::getBySejourBetweenDates($sejour->id, $date_from_query, $date_to_query); ?>
+
 
 <div class="tab-pane <?php if($i == 1): ?>active<?php endif; ?>" id="week-<?=$i ?>">
 
