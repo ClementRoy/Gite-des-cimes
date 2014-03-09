@@ -100,6 +100,27 @@ class inscription
     }
 
 
+    public static function getDateDeparture($dossier_id){
+        global $db;
+        $params = array(
+                        ':id' => $dossier_id
+                        );
+        $sql = 'SELECT MIN(date_from) as date_departure FROM '.self::$table.' WHERE ref_dossier = :id';
+        $result = $db->row($sql, $params);
+        return $result;
+    }
+
+    public static function getDateReturn($dossier_id){
+        global $db;
+        $params = array(
+                        ':id' => $dossier_id
+                        );
+        $sql = 'SELECT MAX(date_to) as date_return FROM '.self::$table.' WHERE ref_dossier = :id';
+        $result = $db->row($sql, $params);
+        return $result;
+    }
+
+
     /**
      * desc
      *
