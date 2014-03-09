@@ -3,6 +3,8 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
+<?php ob_start(); ?>
+
 
    <?php if(isset($_POST['submit-add'])): ?>
         <?php  
@@ -130,9 +132,9 @@
         <div class="row header">
             <div class="col-md-9">
 
-                <h3><a href="#" class="trigger"><i class="big-icon icon-folder-open"></i></a>
+                <h1><a href="#" class="trigger"><i class="big-icon icon-folder-open"></i></a>
                     Inscription <strong>n°<?=$inscription->id; ?></strong>
-                </h3>
+                </h1>
                 <ul>
                     <li> éditer le contrat, </li>
                     <li>le dossier d'inscription </li>
@@ -142,6 +144,7 @@
 <?php // Get enfantInfos by inscription id, (on a déjà l'id de l'enfant) ?>
                 <hr />
 <h2>Dossier d'inscription</h2>
+
 <pre>
 
 Adressé à : <?=$inscription->name; ?>  
@@ -228,7 +231,9 @@ Le.   .   .   .   .   .   .   .   .   .   .   .   .   
 
 
                 <hr />
-
+<a href="/pdf/generate/id/<?=$inscription->id?>/type/contrat/">Contrat</a>
+<a href="/pdf/generate/id/<?=$inscription->id?>/type/convocation/">Convocation</a>
+<a href="/pdf/generate/id/<?=$inscription->id?>/type/dossier/">Dossier d'inscription</a>
 
             </div>
 

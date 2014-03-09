@@ -8,7 +8,7 @@
     <div class="title">
         <div class="row header">
             <div class="col-md-6">
-                <h3>Les hébergements</h3>
+                <h1>Les hébergements</h1>
             </div>
             <div class="col-md-6 text-right">
                 <a href="/hebergements/ajouter" class="btn btn-primary"><span>+</span>

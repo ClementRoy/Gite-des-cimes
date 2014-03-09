@@ -9,7 +9,7 @@
         <div class="title">
             <div class="row header">
                 <div class="col-md-4">
-                    <h3>Les enfants</h3>
+                    <h1>Les enfants</h1>
                 </div>
                 <div class="col-md-8 text-right">
                     <a href="/enfants/ajouter" class="btn btn-primary"><span>+</span>

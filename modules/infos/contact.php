@@ -24,7 +24,7 @@
        <div id="pad-wrapper" class="new-user">
             <div class="row header">
                 <div class="col-md-12">
-                    <h3>Message envoyé</h3>
+                    <h1>Message envoyé</h1>
                 </div>                
             </div>
 
@@ -41,7 +41,7 @@
        <div id="pad-wrapper" class="new-user">
             <div class="row header">
                 <div class="col-md-12">
-                    <h3>Signaler un problème sur l'outil</h3>
+                    <h1>Signaler un problème sur l'outil</h1>
                 </div>                
             </div>
 

@@ -62,5 +62,9 @@
 	"export" : {
 		"name" : "export",
 		"views" : ["index", "sejour"]
+	},
+	"pdf" : {
+		"name" : "pdf",
+		"views" : ["index", "generate", "view"]
 	}
 }

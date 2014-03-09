@@ -9,7 +9,7 @@
         <div class="title">
             <div class="row header">
                 <div class="col-md-12">
-                    <h3>Editer <?=$enfant->firstname.' '.$enfant->lastname; ?></h3>
+                    <h1>Editer <?=$enfant->firstname.' '.$enfant->lastname; ?></h1>
                 </div>
             </div>
         </div>

@@ -7,7 +7,7 @@
 <div class="title">
     <div class="row header">
         <div class="col-md-6">
-            <h3>Les contacts</h3>
+            <h1>Les contacts</h1>
         </div>
         <div class="col-md-6 text-right">
             <a href="/contacts/ajouter" class="btn btn-primary">

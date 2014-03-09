@@ -4,7 +4,6 @@ html, body {
 	min-height: 100%;
 }
 body {
-	padding-bottom: 50px;
 	position: relative;
 	font-family: 'Lato';
 	background: #ebedf3;
@@ -14,17 +13,42 @@ body {
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Open sans';
 }
+// h4, .h4 {
+// 	font-size: 28px;
+// 	font-weight: 600;
+// 	margin-top: 15px;
+// 	margin-bottom: 0;
+// }
+h1, .h1 {
+	font-weight: 100;
+	font-size: 50px;
+	margin: 0 0 10px;
+	color: #333;
+	small {
+		font-size: 16px;
+		display: block;
+		padding: 10px 0 5px 76px;
+		color: #828692;
+	}
+}
 h4, .h4 {
-	font-size: 28px;
-	font-weight: 600;
-	margin-top: 15px;
-	margin-bottom: 0;
+font-size: 30px;
+margin-top: 20px;
+margin-bottom: 10px;
 }
 h6, .h6 {
 	font-weight: 900;
 	font-size: 14px;
 	margin-bottom: 5px;
 }
+
+.list-group-item p {
+	display: inline-block;
+	&:first-child {
+		width: 150px;
+	}
+}
+
 
 /*	Page de login
 --------------------------------------------------------------------------- */
@@ -150,20 +174,23 @@ h6, .h6 {
 	float: left;
 	position: absolute;
 	min-height: 100%;
-	top: 52px;
+	top: 0;
+	padding-top: 52px;
 	z-index: 999;
 	transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 	overflow: hidden;
 	width: 62px;
 	background: #2F323A;
+	box-shadow: 0 52px 0 #2F323A;
 	&.affix {
 		position: fixed;
 		top: 0;
+		padding-top: 0;
 	}
 	&:hover {
 		width: 200px;
 		transition: width .3s cubic-bezier(0.175, 0.885, 0.320, 1.275);
-		box-shadow: 3px 0 15px rgba(0, 0, 0, 0.5);
+		box-shadow: 0 52px 0 #2F323A, 3px 0 15px rgba(0, 0, 0, 0.5);
 		& > ul {
 			width: 200px;
 			a {
@@ -299,13 +326,15 @@ h6, .h6 {
 
 .wrap {
 	overflow: hidden;
-	padding: 40px 50px 30px 112px;
+	padding: 80px 50px 30px 112px;
 	background: #ebedf3;
 	.progress {
 	margin-top: 25px;
+	margin-bottom: 40px;
 }
 	.nav-tabs {
 		border: none;
+		margin-top: 20px;
 	}
 	.nav-tabs + .content {
 		margin-top: 0;
@@ -321,17 +350,7 @@ h6, .h6 {
 			position: absolute;
 			top: 69px;
 		}
-		h3 {
-			font-weight: 100;
-			font-size: 50px;
-			margin: 0 0 10px;
-			color: #333;
-			small {
-				font-size: 16px;
-				display: block;
-				padding: 10px 0 5px 76px;
-				color: #828692;
-			}
+		h1 {
 			.trigger {
 				background: #CA3636;
 				border-radius: 50%;
@@ -364,6 +383,11 @@ h6, .h6 {
 		//overflow: hidden;
 		margin-top: 10px;
 		position: relative;
+		// h3 {
+		// 	border-bottom: 1px solid #EEE;
+		// 	margin: -30px -30px 20px;
+		// 	padding: 20px 30px 20px;
+		// }
 		&.content-table {
 			padding: 0;
 			background: #F2F3F6;
@@ -643,8 +667,9 @@ table.dataTable {
 
 .form-nav.affix {
 	top: 0;
-	right: 96px;
+
 	padding-top: 30px;
+right: 81px;
 }
 
 
@@ -658,10 +683,11 @@ table.dataTable {
 }
 .icon-ok-sign {
 	color: #519E1E;
-	font-size: 20px;
+	font-size: 16px;
 }
 .icon-remove-sign {
 	color: #AD1D1D;
+	font-size: 16px;
 }
 .footer {
 	padding: 10px 50px 10px 112px;
@@ -684,5 +710,24 @@ table.dataTable {
 .content:after,
 .dataTables_wrapper:after {
   clear: both;
+}
+
+
+#top-nav {
+	position: absolute;
+	width: 100%;
+}
+html, body {
+	height: 100%;
+}
+.wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+margin: 0 auto -50px;
+padding-bottom: 50px;
+}
+.footer {
+	height: 50px; /* .push must be the same height as .footer */
 }
 

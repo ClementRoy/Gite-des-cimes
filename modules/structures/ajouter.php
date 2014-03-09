@@ -10,7 +10,7 @@
 <div class="title">
     <div class="row header">
         <div class="col-md-12">
-            <h3>Ajouter une structure</h3>
+            <h1>Ajouter une structure</h1>
         </div>
     </div>
 </div>

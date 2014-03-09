@@ -12,7 +12,7 @@
             <div class="row header img">
                 <div class="col-md-5">
                     <img src="http://placehold.it/70x70" class="img-circle" alt="">
-                    <h3><?=$enfant->firstname; ?> <?=$enfant->lastname; ?></h3>
+                    <h1><?=$enfant->firstname; ?> <?=$enfant->lastname; ?></h1>
                 </div>
                 <div class="col-md-5 text-right pull-right">
                     <!-- <a href="/enfants/supprimer/id/<?=$enfant->id; ?>" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a> -->

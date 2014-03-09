@@ -9,7 +9,7 @@
 <div id="pad-wrapper">
             <div class="row header">
                 <div class="col-md-4">
-                    <h3>Les enfants</h3>
+                    <h1>Les enfants</h1>
                 </div>
                 <div class="col-md-8 text-right">
                     <input type="text" id="table-enfant-search" data-search="enfant" class="col-md-5 search" placeholder="Tapez le nom d'un enfant..." autofocus="autofocus">

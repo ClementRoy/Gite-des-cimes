@@ -87,10 +87,10 @@
     <div class="row header">
         <div class="col-md-9">
 
-            <h3><a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
+            <h1><a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
                 <?=$utilisateur->firstname; ?> <strong><?=$utilisateur->lastname; ?></strong>
-                <small><?php if ($utilisateur->rank == 1): ?>Utilisateur<?php elseif ($utilisateur->rank == 3): ?>Gestionnaire<?php elseif ($utilisateur->rank == 5): ?>Administrateur<?php endif; ?></small></h3>
-            </h3>
+                <small><?php if ($utilisateur->rank == 1): ?>Utilisateur<?php elseif ($utilisateur->rank == 3): ?>Gestionnaire<?php elseif ($utilisateur->rank == 5): ?>Administrateur<?php endif; ?></small></h1>
+            </h1>
 
             <div class="pop-dialog">
                 <div class="pointer">

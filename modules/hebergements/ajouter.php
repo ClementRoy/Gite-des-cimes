@@ -9,7 +9,7 @@
     <div class="title">
         <div class="row header">
             <div class="col-md-12">
-                <h3>Ajouter un hébergement</h3>
+                <h1>Ajouter un hébergement</h1>
             </div>
         </div>
     </div>

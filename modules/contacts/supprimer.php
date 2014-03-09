@@ -6,7 +6,7 @@
     <div class="title">
         <div class="row header">
             <div class="col-md-12">
-                <h3>Suppression</h3>
+                <h1>Suppression</h1>
             </div>
         </div>
     </div>

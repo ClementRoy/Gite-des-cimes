@@ -8,7 +8,7 @@
 <div class="title">
     <div class="row header">
         <div class="col-md-6">
-            <h3>Les structures</h3>
+            <h1>Les structures</h1>
         </div>
         <div class="col-md-6 text-right">
             <a href="/structures/ajouter" class="btn btn-primary">

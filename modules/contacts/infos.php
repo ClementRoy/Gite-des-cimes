@@ -126,10 +126,10 @@ $enfants = enfant::getByContact($contact->id);
     <div class="row header">
         <div class="col-md-9">
 
-            <h3><a href="#" class="trigger"><i class="big-icon icon-comments"></i></a>
+            <h1><a href="#" class="trigger"><i class="big-icon icon-comments"></i></a>
                 <?=$contact->civility; ?> <?=$contact->firstname; ?> <strong><?=$contact->lastname; ?></strong>
                 <small><?=$contact->title ?></small>
-            </h3>
+            </h1>
 
             <div class="pop-dialog">
                 <div class="pointer">

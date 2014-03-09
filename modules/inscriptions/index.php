@@ -11,7 +11,7 @@
 <div class="title">
     <div class="row header">
         <div class="col-md-6">
-            <h3>Les inscriptions</h3>
+            <h1>Les inscriptions</h1>
         </div>
         <div class="col-md-6 text-right">
             <a href="/inscriptions/ajouter" class="btn btn-primary">

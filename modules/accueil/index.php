@@ -6,7 +6,7 @@
     <div class="title">
         <div class="row header">
             <div class="col-md-12">
-                <h3>Tableau de bord</h3>
+                <h1>Tableau de bord</h1>
             </div>
         </div>
     </div>

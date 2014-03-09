@@ -7,7 +7,7 @@
         <div class="title">
             <div class="row header">
                 <div class="col-md-12">
-                    <h3>Les exports</h3>
+                    <h1>Les exports</h1>
                 </div>
             </div>
         </div>

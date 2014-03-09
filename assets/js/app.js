@@ -32,7 +32,7 @@ $('.metadata').popover();
 $('.input-phone').mask('00 00 00 00 00');
 $('.input-securite-social').mask('0 00 00 00 000 000 00');
 
-$('input:checkbox, input:radio').uniform();
+//$('input:checkbox, input:radio').uniform();
 $('.select2').select2();
 
 $('.input-datepicker').datepicker({

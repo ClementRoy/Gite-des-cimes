@@ -11,7 +11,7 @@
     <div class="content">
 <div id="pad-wrapper">
             <div class="row header">
-                <h3>Les séjours</h3>
+                <h1>Les séjours</h1>
                 <div class="col-md-10 col-sm-12 col-xs-12 pull-right">
                     <input type="text" id="table-sejour-search" data-search="sejour" class="col-md-5 search" placeholder="Tapez le nom d'un séjour...">
                     <a href="/sejours/ajouter" class="btn-flat primary pull-right"><span>+</span>

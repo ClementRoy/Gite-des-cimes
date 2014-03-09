@@ -118,10 +118,10 @@
     <div class="row header">
         <div class="col-md-9">
 
-            <h3>
+            <h1>
                 <a href="#" class="trigger"><i class="big-icon icon-globe"></i></a>
                 <?=$hebergement->name; ?>
-            </h3>
+            </h1>
 
             <div class="pop-dialog">
                 <div class="pointer">

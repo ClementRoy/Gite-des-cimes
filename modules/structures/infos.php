@@ -121,10 +121,10 @@
   <div class="row header">
     <div class="col-md-9">
 
-      <h3><a href="#" class="trigger"><i class="big-icon icon-building"></i></a>
+      <h1><a href="#" class="trigger"><i class="big-icon icon-building"></i></a>
 
         <?=$structure->name; ?>
-      </h3>
+      </h1>
 
       <div class="pop-dialog">
         <div class="pointer">
