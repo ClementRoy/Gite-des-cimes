@@ -28,7 +28,11 @@ class dossier
     public static function getDetails($id){
         global $db;
         $params = array(':id' => $id);
-        $sql = 'SELECT * FROM '.self::$table.' LEFT JOIN enfant ON inscription.ref_enfant = enfant.id LEFT JOIN structure ON enfant.organization = structure.id LEFT JOIN structure_contact ON enfant.contact = structure_contact.id WHERE inscription.id=:id';
+        $sql = 'SELECT * ,
+                dossier.id as dossier_id,
+                enfant.id as enfant_id
+                FROM '.self::$table.'  LEFT JOIN enfant ON dossier.ref_enfant = enfant.id 
+                                        WHERE dossier.id=:id';
         $result = $db->row($sql, $params);
         return $result;        
     }

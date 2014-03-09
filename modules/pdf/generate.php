@@ -11,14 +11,28 @@ if(isset($_GET['type'])){
 	die();
 }
 
-$inscription = inscription::getDetails($id);
+$dossier = dossier::getDetails($id);
+$inscriptions = inscription::getByDossier($id);
+
 ob_start(); ?>
 
 
 
 <?php if($type == 'contrat'): ?>
 
-	<?php //tool::output($inscription);?>
+	<?php tool::output($dossier);?>
+
+	<?php 
+	foreach ($inscriptions as $key => $inscription) {
+		tool::output($inscription);
+		$sejour = sejour::get($inscription->ref_sejour);
+		tool::output($sejour);
+	}
+
+// Get contact structure from enfant
+
+// get strucutre from contact
+	?>
 	<style type="text/css">
 		table {
 			width: 100%;
@@ -97,28 +111,80 @@ ob_start(); ?>
 
 				<td style="width:50%;padding:15px;" border="1">
 					<h4>LE RESPONSABLE LEGAL EFFECTUANT L’INSCRIPTION</h4>
-					<p style="width:50%;"><strong>Père :</strong>
-						<span style="color:#333;"></span>
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						<strong>Mère :</strong>
-						<span style="color:#333;"></span>
-					</p>
-					<p><strong>Tuteur :</strong><span style="color:#333;"></span></p>
 
-					<p><strong>NOM, Prénom :</strong><span style="color:#333;"></span></p>
 
-					<p><strong>Adresse :</strong><span style="color:#333;"></span></p>
-					<p>
+					
+					<?php if ($dossier->guardian == 'parents'): ?>
+						<p><strong>Responsable légal : </strong> Parents </p>
+						<p>
+							<strong>NOM, Prénom : </strong> <?=$dossier->mother_name; ?><br>
+							<strong>NOM, Prénom : </strong> <?=$dossier->father_name; ?>
+						</p>
+						<p>
+							<strong>Adresse : </strong>
+							<?=$dossier->father_address_number; ?>
+							<?=$dossier->father_address_street; ?><br>
+							<?=$dossier->father_address_postal_code; ?>
+							<?=$dossier->father_address_city; ?>
+						</p>
+						<p><strong>Tél. domicile : </strong><?=$dossier->father_phone_home; ?></p>
+					<?php elseif ($dossier->guardian == 'mere'): ?>
+						<p><strong>Responsable légal : </strong> Mère </p>
+						<p><strong>NOM, Prénom : </strong> <?=$dossier->mother_name; ?></p>
+						<p>
+							<strong>Adresse : </strong>
+							<?=$dossier->mother_address_number; ?>
+							<?=$dossier->mother_address_street; ?><br>
+							<?=$dossier->mother_address_postal_code; ?>
+							<?=$dossier->mother_address_city; ?>
+						</p>
+						<p><strong>Tél. domicile : </strong><?=$dossier->mother_phone_home; ?></p>
+					<?php elseif ($dossier->guardian == 'father'): ?>
+						<p><strong>Responsable légal : </strong> Père </p>
+						<p><strong>NOM, Prénom : </strong> <?=$dossier->father_name; ?></p>
+						<p>
+							<strong>Adresse : </strong>
+							<?=$dossier->father_address_number; ?>
+							<?=$dossier->father_address_street; ?><br>
+							<?=$dossier->father_address_postal_code; ?>
+							<?=$dossier->father_address_city; ?>
+						</p>
+						<p><strong>Tél. domicile : </strong><?=$dossier->father_phone_home; ?></p>
+					<?php elseif ($dossier->guardian == 'structure'): ?>
+						<?php 
+							$structure = structure::get($dossier->organization);
+							$contact = contact::get($dossier->contact);
+						?>
 
-					</p>
-
-					<p><strong>Tél. domicile :</strong><span style="color:#333;"></span></p>
-					<p style="margin-bottom:0;"><strong>Structure interlocutrice :</strong><span style="color:#333;"> </span></p>
+						<p><strong>Responsable légal : </strong> Structure </p>
+						<p><strong>NOM, Prénom : </strong> <?=$contact->name; ?></p>
+						<p>
+							<strong>Adresse : </strong>
+							<?=$structure->address_number; ?>
+							<?=$structure->address_street; ?><br>
+							<?php if (!empty($structure->address_comp)): ?>
+								<?=$structure->address_comp; ?><br>
+							<?php endif; ?>
+							<?=$structure->address_postal_code; ?>
+							<?=$structure->address_city; ?>
+						</p>
+						<p><strong>Tél. domicile : </strong><?=$structure->phone; ?></p>
+					<?php elseif ($dossier->guardian == 'tuteur'): ?>
+						<p><strong>Responsable légal : </strong> Tuteur </p>
+						<p><strong>NOM, Prénom : </strong> <?=$dossier->guardian_name; ?></p>
+						<p>
+							<strong>Adresse : </strong>
+							<?=$dossier->guardian_address_number; ?>
+							<?=$dossier->guardian_address_street; ?><br>
+							<?=$dossier->guardian_address_postal_code; ?>
+							<?=$dossier->guardian_address_city; ?>
+						</p>
+						<p><strong>Tél. domicile : </strong><?=$dossier->guardian_phone_home; ?></p>
+					<?php endif; ?>
+					<?php 
+						$structure = structure::get($dossier->organization);
+					?>
+					<p style="margin-bottom:0;"><strong>Structure interlocutrice : </strong> <?=$structure->name; ?></p>
 				</td>
 			</tr>
 		</table>
@@ -132,20 +198,24 @@ ob_start(); ?>
 			</tr>
 			<tr>
 				<td>
+					<p><strong>NOM, Prénom : </strong> <?=$dossier->lastname; ?> <?=$dossier->firstname; ?></p>
 					<p>
-						<strong>NOM : </strong><span style="color:#333;">. . . . . . . . . . . . . . . . . . . . . . . . .</span>
+						<strong>Sexe : </strong><?=ucfirst($dossier->sex); ?>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						<strong>Prénom : </strong><span style="color:#333;">. . . . . . . . . . . . . . . . . . . . . . . . .</span>
+						<strong>Né (e) le : </strong>
+						<?php $birthdate = new DateTime($dossier->birthdate); ?>
+						<?php if($birthdate->getTimestamp() != '-62169987600'): ?>
+						<?=strftime('%d %B %Y', $birthdate->getTimestamp()); ?>
+						<?php endif; ?>
+						
 					</p>
-					<p>
-						<strong>Sexe : M/F</strong>
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						<strong>Né (e) le :</strong><span style="color:#333;">&nbsp;&nbsp; . . . . / . . . . / . . . . . .</span>
-					</p>
+
+
+
+
+
 
 				</td>
 
@@ -170,7 +240,7 @@ ob_start(); ?>
 
 			<tr>
 				<td style="text-align:center;">
-					<h3>MODALITES DE RESERVATION :</h3>
+					<h3>MODALITES DE RESERVATION : </h3>
 				</td>
 			</tr>
 		</table>
@@ -204,7 +274,12 @@ ob_start(); ?>
 				<td style="width:40%;padding-top:15px;">
 					<p><span style="text-decoration:underline;">Signature du responsable du séjour</span></p>
 					<p>Fait à : Bonneuil-en-Valois</p>
-					<p>Le : 11/01/2014</p>
+					<p>Le : 
+						<?php $date = new DateTime(); ?>
+						<?php if($date->getTimestamp() != '-62169987600'): ?>
+						<?=strftime('%d/%m/%Y', $date->getTimestamp()); ?>
+						<?php endif; ?>
+					</p>
 				</td>
 			</tr>
 		</table>
@@ -283,7 +358,7 @@ ob_start(); ?>
 			<tr>
 				<td>
 					<p style="margin-top:40px;">
-						<strong>Il comprend :</strong>
+						<strong>Il comprend : </strong>
 					</p>
 					<div style="padding-left:30px;">
 						<p>•&nbsp;&nbsp;Le contrat de séjour</p>
@@ -303,7 +378,7 @@ ob_start(); ?>
 			<tr>
 				<td>
 					<p style="margin-top:40px;">
-						<strong>Vous devez <span style="text-decoration:underline;">impérativement</span> fournir les documents ci-dessous :</strong>
+						<strong>Vous devez <span style="text-decoration:underline;">impérativement</span> fournir les documents ci-dessous : </strong>
 					</p>
 
 					<div style="padding-left:30px;">
@@ -398,25 +473,25 @@ ob_start(); ?>
 					<p style="margin-top:60px;">
 
 
-						<strong>Nom de l’Enfant :</strong><br>
+						<strong>Nom de l’Enfant : </strong><br>
 						Rachid AGUERCIF
 					</p>
 					<p>
-						<strong>Inscrit au Séjour :</strong><br>
+						<strong>Inscrit au Séjour : </strong><br>
 						Glisses Vosgiennes — <strong>à</strong> : Cornimont — <strong>du</strong> : 15 au 01/03/2014
 					</p>
 					<p>
-						<strong>Est attendu par notre équipe d’animation :</strong><br>
+						<strong>Est attendu par notre équipe d’animation : </strong><br>
 						Date de départ : 15/02/2014<br>
 						Lieu : Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle<br>
 						Heure : 8h30
 					</p>
 					<p>
-						<strong>Petit rappel :</strong><br>
+						<strong>Petit rappel : </strong><br>
 						Prévoir le pique nique et amener un sac de couchage
 					</p>
 					<p>
-						<strong>Date de retour :</strong> 01/03/2014<br>
+						<strong>Date de retour : </strong> 01/03/2014<br>
 						Lieu : Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle<br>
 						Heure : 12h
 					</p>

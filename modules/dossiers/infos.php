@@ -238,9 +238,9 @@ Le.   .   .   .   .   .   .   .   .   .   .   .   .   
 
 
                 <hr />
-<a href="/pdf/generate/id/<?=$inscription->id?>/type/contrat/">Contrat</a>
-<a href="/pdf/generate/id/<?=$inscription->id?>/type/convocation/">Convocation</a>
-<a href="/pdf/generate/id/<?=$inscription->id?>/type/dossier/">Dossier d'inscription</a>
+<a href="/pdf/generate/id/<?=$dossier->id?>/type/contrat/">Contrat</a>
+<a href="/pdf/generate/id/<?=$dossier->id?>/type/convocation/">Convocation</a>
+<a href="/pdf/generate/id/<?=$dossier->id?>/type/dossier/">Dossier d'inscription</a>
 
             </div>
 
