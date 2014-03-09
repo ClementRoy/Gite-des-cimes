@@ -47,8 +47,6 @@ class inscription
         return $result;        
     }
 
-<<<<<<< HEAD
-=======
     public static function getUnconfirmedBySejour($id) {
         global $db;
         $params = array(
@@ -72,7 +70,6 @@ class inscription
         $result = $db->query($sql, $params);
         return $result;
     }
->>>>>>> FETCH_HEAD
 
     public static function getBySejourBetweenDates($id, $date_from = false, $date_to = false){
         global $db;
