@@ -17,24 +17,24 @@
             <div class="row">
                 <div class="col-md-12">
                     <?php 
-                    $result = inscription::remove($_GET['id']);
+                    $result = dossier::remove($_GET['id']);
                     ?>
-                    <p>L'inscription a bien été supprimé</p>
-                    <a href="/inscriptions/">Retourner à la liste des inscriptions</a>
+                    <p>Le dossier d'inscription a bien été supprimé</p>
+                    <a href="/dossiers/">Retourner à la liste des dossiers d'inscriptions</a>
                 </div>                
             </div>
         <?php else: ?>
-            <?php $inscription = inscription::get($_GET['id']); ?>
+            <?php $dossier = dossier::get($_GET['id']); ?>
             <div class="row" class="message">
                 <div class="col-md-12 message">
-                 <p>Vous êtes sur le point de supprimer l'inscription <strong><?=$inscription->id; ?> </strong>.<br /></p>
+                 <p>Vous êtes sur le point de supprimer le dossier d'inscription <strong><?=$dossier->id; ?> </strong>.<br /></p>
              </div>
          </div>
 
          <div class="row">
             <div class="col-md-12">
-                <a href="/inscriptions/infos/id/<?=$inscription->id; ?>" class="btn-flat white" data-dismiss="modal">Annuler</a>
-                <a href="/inscriptions/supprimer/id/<?=$inscription->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
+                <a href="/dossiers/infos/id/<?=$inscription->id; ?>" class="btn-flat white" data-dismiss="modal">Annuler</a>
+                <a href="/dossiers/supprimer/id/<?=$inscription->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
             </div>                
         </div>
 

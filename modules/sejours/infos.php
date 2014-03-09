@@ -110,7 +110,7 @@
 
 
 <?php $sejour = sejour::get($_GET['id']); ?>
-<?php //tool::output($sejour); ?>
+
 <?php 
 if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
     $hebergement = hebergement::get($sejour->ref_hebergement);
@@ -153,8 +153,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
         </div>
 
         <div class="col-md-3 text-right">
-            <a href="/inscriptions/ajouter/sejour/<?=$sejour->id; ?>" class="btn btn-primary"><span>+</span> Ajouter un enfant à ce séjour</a>
-
+            <a href="/dossiers/ajouter/sejour/<?=$sejour->id; ?>" class="btn btn-primary"><span>+</span> Ajouter un enfant à ce séjour</a>
         </div>
     </div>
 </div>

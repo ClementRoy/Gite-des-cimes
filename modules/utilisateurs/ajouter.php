@@ -15,7 +15,6 @@
 </div>
 <div class="content">
 
-
         <div class="row">
             <div class="col-md-12">
                 <form id="form-add-user" method="post" action="/utilisateurs/infos/id/<?=$id ?>" parsley-validate>

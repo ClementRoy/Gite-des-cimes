@@ -1,7 +1,6 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
-<?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 <?php $structure = structure::get($_GET['id']); ?>
 

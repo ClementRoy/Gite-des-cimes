@@ -15,16 +15,16 @@
 		"name" :  "inscriptions",
 		"views" : ["index", "editer", "supprimer", "ajouter", "infos"]
 	},
+	"dossiers" : {
+		"name" :  "dossiers",
+		"views" : ["index", "editer", "supprimer", "ajouter", "infos"]
+	},
 	"structures" : {
 		"name" : "structures",
 		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"contacts" : {
 		"name" : "contacts",
-		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
-	},
-	"convocations" : {
-		"name" : "convocations",
 		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"factures" : {
@@ -62,5 +62,9 @@
 	"export" : {
 		"name" : "export",
 		"views" : ["index", "sejour"]
+	},
+	"pdf" : {
+		"name" : "pdf",
+		"views" : ["index", "generate", "view"]
 	}
 }

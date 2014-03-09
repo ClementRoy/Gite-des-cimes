@@ -1,0 +1,4 @@
+migrate
+
+
+RENAME TABLE  `inscription` TO  `inscriptions` ;

@@ -15,39 +15,6 @@
 </div>
 <div class="content">
 
-
-    <?php if(isset($_POST['submit'])): ?>
-        <?php  
-        extract($_POST);
-        $datas = array(
-            ':firstname' => $form_utilisateur_prenom,
-            ':lastname' => $form_utilisateur_nom,
-            ':email' => $form_utilisateur_mail,
-            ':rank' => $form_utilisateur_lvl,
-            ':id' => $_GET['id']
-        );
-
-        $result = user::update($datas);
-
-        ?>
-        <?php if($result): ?>
-
-            <div class="row">
-                <div class="col-md-12">
-
-                    <div class="alert alert-info">
-                        <i class="icon-exclamation-sign"></i>
-                        L'utilisateur <strong><?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?></strong> a bien été modifié.
-                    </div>
-                    <a href="/utilisateurs/">Retourner à la liste des utilisateurs</a>
-
-                </div>
-            </div>
-        <?php else: ?>
-
-        <?php endif; ?>
-
-    <?php else: ?>
         <div class="row">
             <div class="col-md-12">
                 <form id="form-add-children" method="post" action="/utilisateurs/infos/id/<?=$utilisateur->id; ?>" parsley-validate>
@@ -122,7 +89,6 @@
                     </form>
                 </div>
             </div>
-        <?php endif; ?>
     </div>
 
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

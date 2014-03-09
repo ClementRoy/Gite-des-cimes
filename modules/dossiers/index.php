@@ -2,16 +2,16 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 
-<?php inscription::cleanEmpty(); ?>
+<?php dossier::cleanEmpty(); ?>
 
 
-<?php $inscriptions = inscription::getList(); ?>
+<?php $dossiers = dossier::getList(); ?>
 <?php //tool::output($sejours); ?>
 
 <div class="title">
     <div class="row header">
         <div class="col-md-6">
-            <h3>Les inscriptions</h3>
+            <h3>Les dossiers d'inscription</h3>
         </div>
         <div class="col-md-6 text-right">
             <a href="/inscriptions/ajouter" class="btn btn-primary">
@@ -20,6 +20,29 @@
         </div>
     </div>
 </div>
+
+<?php 
+foreach($dossiers as $key => $dossier){
+
+    //tool::output($dossier);
+
+    // update each inscriptionList
+
+    // create each inscription
+    // $datas = array(
+    //     ':ref_enfant' => $inscriptionList->ref_enfant,
+    //     ':ref_sejour' => $inscriptionList->ref_sejour,
+    //     ':ref_inscription' => $inscriptionList->id,
+    //     ':date_from' => $inscriptionList->date_from,
+    //     ':date_to' => $inscriptionList->date_to
+    // );
+
+    // $result = inscription::add($datas);
+
+
+}
+
+?>
 <div class="content content-table">
     <div class="row">
         <div class="col-md-12">
@@ -40,9 +63,9 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    <?php foreach($inscriptions as $key => $inscription): ?>
-                        <?php $enfant = enfant::get($inscription->ref_enfant); ?>
-                        <?php $sejour = sejour::get($inscription->ref_sejour); ?>
+                    <?php foreach($dossiers as $key => $dossier): ?>
+                        <?php $enfant = enfant::get($dossier->ref_enfant); ?>
+                        <?php $sejour = sejour::get($dossier->ref_sejour); ?>
                         <tr>
                             <td>
                                 <a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a>
@@ -53,9 +76,9 @@
                                     </div>
                                     <div class="body">
                                         <div class="menu">
-                                            <a href="/inscriptions/infos/id/<?=$inscription->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
-                                            <a href="/inscriptions/editer/id/<?=$inscription->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
-                                            <a href="/inscriptions/supprimer/id/<?=$inscription->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                            <a href="/dossiers/infos/id/<?=$inscription->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                            <a href="/dossiers/editer/id/<?=$inscription->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                            <a href="/dossiers/supprimer/id/<?=$inscription->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
                                         </div>
                                     </div>
                                 </div> 

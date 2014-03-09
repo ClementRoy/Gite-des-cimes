@@ -3,15 +3,9 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
-<?php 
 
-tool::output($_POST);
-extract($_POST);
-
-?>
-
-<?php $result = inscription::add(array()); ?>
-<?php $id = inscription::getLastID(); ?>
+<?php $result = dossier::add(array()); ?>
+<?php $id = dossier::getLastID(); ?>
 
 <div class="title">
     <div class="row header">
@@ -24,7 +18,7 @@ extract($_POST);
 
         <div class="row">
             <div class="col-md-12">
-                <form id="form-add-sejour" method="post" parsley-validate>
+                <form id="form-add-sejour" action="/dossiers/infos/id/<?=$id ?>" method="post" parsley-validate>
 
                     <input type="hidden" value="<?=$id ?>" name="id" />
 
@@ -44,59 +38,54 @@ extract($_POST);
                         </div>
                     </div>
 
-                    <?php // TODO: ne prendre que les FUTURS séjours ?>
-
                     <?php $sejours = sejour::getListFuturSejour(); ?>
+
                     <div class="field-box row sejour-select">
                         <label class="col-md-2" for="form-inscription-sejour-select">Séjour</label>
                         <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez le séjour">
                             <div class="ui-select">
-                                <select class="form-control" id="form-inscription-sejour-select" name="form_inscription_sejour[]" parsley-required="true">
+                                <select class="form-control selector" id="form-inscription-sejour-select" name="form_inscription_sejour[]" parsley-required="true">
                                     <option selected="selected">Choisissez le séjour</option>
                                     <?php foreach($sejours as $sejour): ?>
                                         <?php $date_from = new DateTime($sejour->date_from); ?>
-                                        <?php $date_from_2 = new DateTime($sejour->date_from); ?>
-                                        <?php $date_from_2 = $date_from_2->modify('+2 day'); ?>
-                                        <?php if($date_from->getTimestamp() != '-62169987600'): ?>
-                                            <?php $date_from = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
-                                        <?php endif; ?>
                                         <?php $date_to = new DateTime($sejour->date_to); ?>
+                                        <?php $nb_weeks = tool::getNbWeeks($date_from, $date_to); ?>
+
                                         <?php if($date_to->getTimestamp() != '-62169987600'): ?>
-                                            <?php $date_to = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
+                                            <?php $date_to_string = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
                                         <?php endif; ?>
-                                        <option <?php if( isset($_GET['sejour']) && $sejour->id == $_GET['sejour']): ?>selected="selected"<?php endif; ?> value="<?=$sejour->id ?>" data-date-start="<?=$date_from; ?>" data-date-end-2="<?=$date_from_2->format('d/m/Y'); ?>" data-date-end="<?=$date_to; ?>"><?=$sejour->name ?> du <?=$date_from; ?> au <?=$date_to; ?></option>
+
+                                        <?php if($date_from->getTimestamp() != '-62169987600'): ?>
+                                            <?php $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
+                                        <?php endif; ?>
+
+
+                                        <option <?php if( isset($_GET['sejour']) && $sejour->id == $_GET['sejour']): ?>selected="selected"<?php endif; ?> 
+                                                value="<?=$sejour->id ?>"
+                                                data-nbweek="<?=$nb_weeks ?>"
+                                                data-datesfrom="<?=sejour::getAllBeginsWeek($sejour->id) ?>"
+                                                data-datesto="<?=sejour::getAllEndsWeek($sejour->id) ?>">
+                                                <?=$sejour->name ?> du <?=$date_from_string; ?> au <?=$date_to_string; ?>
+                                        </option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
                     </div>
 
+
                     <div class="field-box row date-range">
-                        <label class="col-md-2" for="form-inscription-nom">Dates</label>
-                        <div class="col-md-2">
-                            <input id="form-inscription-date-debut" name="form_inscription_date_debut[]" type="text" class="form-control input-datepicker-light"
-                            placeholder="Date de début" data-toggle="tooltip" title="Renseignez la date à laquelle commence le séjour (jj/mm/aaaa)." 
-                            parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})"
-                            parsley-required="true">
-                            <input type="hidden" id="form-inscription-date-debut-hidden" name="form_inscription_date_debut[]" value="" disabled="disabled">
-                        </div> 
-                        <div class="col-md-2">
-                            <input id="form-inscription-date-fin" name="form_inscription_date_fin[]" type="text" class="form-control input-datepicker-light" 
-                            placeholder="Date de fin" data-toggle="tooltip" title="Renseignez la date à laquelle se termine le séjour (jj/mm/aaaa)." 
-                            parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})"
-                            parsley-required="true"><!-- parsley-afterdate="#form-sejour-date-debut" CR : not working properly with french dates -->
-                            <input type="hidden" id="form-inscription-date-fin-hidden" name="form_inscription_date_fin[]" value="" disabled="disabled">
-                        </div>                              
-                    </div>   
+                        <label class="col-md-2" for="form-inscription-dates">Dates</label>
+                        <div class="col-md-10 col-sm-5" data-toggle="tooltip" title="Sélectionnez les dates d'inscription">
+                            
+                            <div class="btn-group-vertical" data-toggle="buttons">
+                                <p>Sélectionnez d'abord un séjour</p>
+                            </div>
+                        </div>
+                    </div>
 
 
-
-
-
-                    <button class="btn btn-default duplicate">Ajouter un autre séjour</button>
-
-
-
+                    <button class="btn btn-default duplicate">Inscrire à un autre séjour</button>
 
 
                     <div class="field-box row">
@@ -260,7 +249,7 @@ extract($_POST);
                         <div class="col-md-6  col-md-offset-2">
                             <input type="submit" class="btn btn-primary" name="submit-add" value="Valider l'inscription">
                             <span>OU</span>
-                            <a href="/inscriptions/" class="reset">Annuler</a>
+                            <a href="/dossiers/" class="reset">Annuler</a>
                         </div>
                     </div>
 
@@ -268,49 +257,53 @@ extract($_POST);
                     <script>
                         $(document).ready(function(){
 
-                            $('#form-inscription-sejour-select').change(function(){
-                                // Si on est sur un week end
-                                var $option = $(this).find('option:selected');
-                                if($option.data('date-end') == $option.data('date-end-2')){
-                                    // on set les values de début et de fin
-                                    console.log($(this).next('#form-inscription-date-debut'));
-                                    $(this).next('#form-inscription-date-debut').val($option.data('date-start')).attr('disabled', 'disabled');
-                                    $(this).next('#form-inscription-date-fin').val($option.data('date-end')).attr('disabled', 'disabled');
+                            $(document).on('change', '.selector', function(){
+                                //console.log('triggering select');
+                                $sejour = $(this).find('option:selected');
 
-                                    $(this).next('#form-inscription-date-debut-hidden').val($option.data('date-start')).removeAttr('disabled', 'disabled');
-                                    $(this).next('#form-inscription-date-fin-hidden').val($option.data('date-end')).removeAttr('disabled', 'disabled');
-                                    // On met en disabled les champs
+                                var $select = $(this).parents('.sejour-select');
+                                //console.log($sejour.data('nbweek'));
+                                $dates_from = $sejour.data('datesfrom');
+                                $dates_to = $sejour.data('datesto');
+                                if($sejour.data('nbweek') == 0){
+                                    // On ne choisit pas de dates, il s'agit d'un week end
+                                    $select.next('.date-range').find('.btn-group-vertical').html('L\'enfant est inscrit sur le week end en intégralité. <input type="hidden" name="dates[]" value="'+$dates_from+'#'+$dates_to+'">');
                                 }else {
-                                    console.log($(this).next('#form-inscription-date-debut'));
-                                    // On met en set les values début et fin
-                                    $(this).next('#form-inscription-date-debut').val($option.data('date-start')).data('date-startdate',$option.data('date-start')).data('date-enddate',$option.data('date-end')).removeAttr('disabled');
-                                    $(this).next('#form-inscription-date-fin').val($option.data('date-end')).data('date-startdate',$option.data('date-start')).data('date-enddate',$option.data('date-end')).removeAttr('disabled');
-                                    // On set les data-debut et data-fin des patepickers
-                                    //console.log($option.data('date-start'));
-                                    //$('.input-datepicker-light').datepicker('startDate', $option.data('date-start'));
+                                    // L'utilisateur peut choisir chaque semaine en checkbox 
+                                    console.log($dates_from);
+                                    $dates_from = $dates_from.split('#');
+                                    $dates_to = $dates_to.split('#');
+                                    var date_range = '';
+                                    for ( var i = 0; i < $sejour.data('nbweek'); i++ ) {
+                                        date_range += '<label class="btn btn-primary"><input type="checkbox" name="dates[]" value="'+$dates_from[i]+'#'+$dates_to[i]+'"> Semaine '+(i+1)+' du '+$dates_from[i]+' au '+$dates_to[i]+'</label>';
+                                    }
+                                    $select.next('.date-range').find('.btn-group-vertical').html(date_range)
+                                }
 
-                                    $(this).next('#form-inscription-date-debut-hidden').val('').attr('disabled', 'disabled');
-                                    $(this).next('#form-inscription-date-fin-hidden').val('').attr('disabled', 'disabled');
+                            });
 
+                            /*
+                             Handling Structure Behavior
+                            */
+                            $('#form-inscription-structure-select').change(function(){
+                                //console.log($(this).val());
+                                if($(this).val() == 'Choisissez la structure'){
+                                    $('#form-inscription-centre-payeur').removeAttr('disabled'); 
+                                    $('#form-inscription-centre-payeur-hidden').attr('disabled', 'disabled'); 
+                                }else {
+                                    $('#form-inscription-centre-payeur').val('');
+                                    $('#form-inscription-centre-payeur').attr('disabled','disabled');
+                                    $('#form-inscription-centre-payeur-hidden').removeAttr('disabled');
                                 }
                             });
 
 
-                            $('#form-inscription-structure-select').change(function(){
-                            //console.log($(this).val());
-                            if($(this).val() == 'Choisissez la structure'){
-                                $('#form-inscription-centre-payeur').removeAttr('disabled'); 
-                                $('#form-inscription-centre-payeur-hidden').attr('disabled', 'disabled'); 
-                            }else {
-                                $('#form-inscription-centre-payeur').val('');
-                                $('#form-inscription-centre-payeur').attr('disabled','disabled');
-                                $('#form-inscription-centre-payeur-hidden').removeAttr('disabled');
-                            }
-                            });
-
+                            // Trigger first shot
                             <?php if(isset($_GET['sejour'] )): ?>
-                                $('#form-inscription-sejour-select').trigger('change');
+                                $('.selector').trigger('change');
                             <?php endif; ?>
+
+
 
                             var i = 1;
                             $('.duplicate').click(function(e){

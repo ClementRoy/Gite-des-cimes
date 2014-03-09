@@ -4,15 +4,12 @@
 
 
 <?php if(isset($_POST['submit-add'])): ?>
-    <?php //tool::output($_POST); ?>
-    <?php //tool::output($_SESSION); ?>
     <?php 
     extract($_POST);
 
     $birthdate = tool::generateDatetime($form_enfant_naissance);
     $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
     $cpam_validite = tool::generateDatetime($form_enfant_cpam_validite);
-
 
     $datas = array(                
         ':firstname' => $form_enfant_prenom,
@@ -484,7 +481,7 @@ $result = enfant::update($datas, $_GET['id']);
                     <h4>Séjours de l'enfant</h4>
                 </div>
                 <div class="col-md-4 text-right">
-                    <a href="/inscriptions/ajouter/enfant/<?=$enfant->id; ?>" class="btn btn-primary"><span>+</span> Inscrire à un séjour</a>
+                    <a href="/dossier/ajouter/enfant/<?=$enfant->id; ?>" class="btn btn-primary"><span>+</span> Créer un nouveau dossier d'inscription</a>
                 </div>
             </div>
         </div>
@@ -506,21 +503,20 @@ $result = enfant::update($datas, $_GET['id']);
                                         Nom du séjour
                                     </th>
                                     <th>
-                                        <span class="line"></span>
                                         Dates
                                     </th>
                                     <th>
-                                        <span class="line"></span>
-                                        Note
+                                        Satut
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach($inscriptions as $key => $inscription): ?>
                                     <?php $sejour = sejour::get($inscription->ref_sejour); ?>
+                                    <?php $dossier = dossier::get($inscription->ref_dossier); ?>
                                     <tr>
                                         <td>
-                                            <a href="/inscriptions/infos/id/<?=$inscription->id; ?>">#<?=$key+1 ?></a>
+                                            <a href="/dossiers/infos/id/<?=$dossier->id; ?>">#<?=$dossier->id ?></a>
                                             <div class="pop-dialog tr">
                                                 <div class="pointer">
                                                     <div class="arrow"></div>
@@ -528,9 +524,9 @@ $result = enfant::update($datas, $_GET['id']);
                                                 </div>
                                                 <div class="body">
                                                     <div class="menu">
-                                                        <a href="/inscriptions/infos/id/<?=$inscription->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
-                                                        <a href="/inscriptions/editer/id/<?=$inscription->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
-                                                        <a href="/inscriptions/supprimer/id/<?=$inscription->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                                        <a href="/dossiers/infos/id/<?=$dossier->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                                        <a href="/dossiers/editer/id/<?=$dossier->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                                        <a href="/dossiers/supprimer/id/<?=$dossier->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
                                                     </div>
                                                 </div>
                                             </div> 
@@ -544,7 +540,11 @@ $result = enfant::update($datas, $_GET['id']);
                                             du <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?> 
                                         </td>
                                         <td>
-                                            <?=$inscription->note ?>
+                                            <?php if($dossier->finished): ?>
+                                                <span class="label label-success">Confirmé</span>
+                                            <?php else: ?>
+                                                <span class="label label-danger">Non confirmé</span>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -555,7 +555,57 @@ $result = enfant::update($datas, $_GET['id']);
                     <?php endif; ?>
                 </div>
             </div>
+
         </div>
+
+
+
+<h3>Notes relatives aux séjours</h3>
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+         Séjour #1
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          Séjour #2
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          Séjour #3
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+
 
     </div>
     <div class="col-md-3 address">

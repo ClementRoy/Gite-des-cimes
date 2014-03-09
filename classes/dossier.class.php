@@ -1,23 +1,14 @@
 <?php
 
-class sejour
+class dossier
 {
-    private static $table = 'sejour';
 
-    
-    /**
-     * desc
-     *
-     * @note 
-     *
-     * @param
-     * @return
-     */
-	function __construct()
-	{
-		# code...
-	}
+	private static $table = 'dossier';
 
+
+
+
+	function __construct(){}
 
 
     /**
@@ -34,6 +25,50 @@ class sejour
         return $result;
     }
 
+    public static function getDetails($id){
+        global $db;
+        $params = array(':id' => $id);
+        $sql = 'SELECT * FROM '.self::$table.' LEFT JOIN enfant ON inscription.ref_enfant = enfant.id LEFT JOIN structure ON enfant.organization = structure.id LEFT JOIN structure_contact ON enfant.contact = structure_contact.id WHERE inscription.id=:id';
+        $result = $db->row($sql, $params);
+        return $result;        
+    }
+
+
+    public static function getByEnfant($id){
+        global $db;
+        $params = array(
+                        ':id' => $id
+                        );
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_enfant=:id';
+        $result = $db->query($sql, $params);
+        return $result;        
+    }
+
+
+    public static function getBySejour($id){
+        global $db;
+        $params = array(
+                        ':id' => $id
+                        );
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:id AND archived = 0';
+        $result = $db->query($sql, $params);
+        return $result;        
+    }
+
+    
+    public static function getBySejourBetweenDates($id, $date_from = false, $date_to = false){
+        global $db;
+        
+        $date_from = $date_from->format("Y-m-d H:i:s");
+        $date_to = $date_to->format("Y-m-d H:i:s");
+        $params = array(
+                        ':id' => $id
+                        );
+        // Ne pas faire un étoile ici ....
+        $sql = 'SELECT *, inscription.id as inscription_id FROM '.self::$table.' LEFT JOIN enfant ON inscription.ref_enfant = enfant.id LEFT JOIN structure ON enfant.organization = structure.id LEFT JOIN structure_contact ON enfant.contact = structure_contact.id WHERE ref_sejour=:id AND inscription.archived = 0 AND date_from <= "'.$date_from.'" AND date_to >="'.$date_to.'" ORDER BY enfant.lastname';
+        $result = $db->query($sql, $params);
+        return $result;
+    }
 
 
     /**
@@ -44,102 +79,35 @@ class sejour
      * @param
      * @return
      */
-    public static function getList($limit = false, $offset = 0){
-        global $db;
+	public static function getList($limit = false, $offset = 0){
+		global $db;
         if(!empty($limit)){
             $data = array();
-            $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0 ORDER BY date_from', $data);
+            $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0');
         }
         else {
-            $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY date_from');
+            $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0');
         }
-        return $result;
-    }
-
-
-    public static function getListPastSejour(){
-        $date = new DateTime();
-        $datetime = $date->format("Y-m-d H:i:s");
-        global $db;
-        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 AND date_from <= "'.$datetime.'" ORDER BY date_from');
-
-        return $result;
-    }
-
-
-    public static function getListFuturSejour(){
-        $date = new DateTime();
-        $datetime = $date->format("Y-m-d H:i:s");
-        global $db;
-        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 AND date_from >= "'.$datetime.'" ORDER BY date_from');
-
-        return $result;
-    }
-
-
-    public static function getListByHebergement(){
-        return false;
-    }
+		return $result;
+	}
 
     public static function getFromTrash(){
         global $db;
-        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1 ORDER BY name');
+        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1');
         return $result;
     }
-
-
-
-    public static function getAllBeginsWeek($sejour_id){
-        $sejour = self::get($sejour_id);
-        $date_from = new DateTime($sejour->date_from);
-        $date_to = new DateTime($sejour->date_to);
-        $nb_weeks = tool::getNbWeeks($date_from, $date_to);
-
-        if($nb_weeks > 0){
-             $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp());
-            for ($i=1; $i < $nb_weeks; ++$i) { 
-                $date_from->modify("+1 weeks");
-                $date_from_string .= '#'.strftime('%d/%m/%Y', $date_from->getTimestamp());
-            }
-        }else {
-            $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp());
-        }
-        
-        return $date_from_string;
-    }
-
-    public static function getAllEndsWeek($sejour_id){
-        $sejour = self::get($sejour_id);
-        $date_from = new DateTime($sejour->date_from);
-        $date_to = new DateTime($sejour->date_to);
-        $nb_weeks = tool::getNbWeeks($date_from, $date_to);
-
-        if($nb_weeks > 0){
-            $date_to_string = '';
-            for ($i=0; $i < $nb_weeks; ++$i) { 
-                $date_from->modify("+1 weeks");
-                if($i > 0){
-                    $date_to_string .= '#';
-                }
-                $date_to_string .= strftime('%d/%m/%Y', $date_from->getTimestamp());
-            }
-        }else {
-            $date_to_string = strftime('%d/%m/%Y', $date_to->getTimestamp());
-        }
-        
-        return $date_to_string;
-    }
-
+    
     /**
      * Count the number of entries in the database table
      *
      * @return int number of the entries in the table
      */
-    public static function countAll(){
-        global $db;
-        $result = $db->row('SELECT COUNT(*) FROM '.self::$table.'');
-        return $result;
-    }
+	public static function countAll(){
+		global $db;
+		$result = $db->row('SELECT COUNT(*) FROM '.self::$table.'');
+		return $result;
+	}
+
 
 
     /**
@@ -217,6 +185,7 @@ class sejour
         return $result;
     }
 
+
     /**
      * Remove object
      *
@@ -260,21 +229,19 @@ class sejour
         //$result = self::archive($id);
         return $result;
     }
-
     public static function getLastID(){
         global $db;
         return $db->lastInsertId('id');
     }
 
-
     public static function cleanEmpty(){
         global $db;
-        $sql = 'DELETE FROM '.self::$table.' WHERE name = ""';
+        $sql = 'DELETE FROM '.self::$table.' WHERE ref_sejour = "" AND ref_enfant = ""';
         $result = $db->delete($sql);
         return $result;
     }
 
-    
+
 }
 
 ?>

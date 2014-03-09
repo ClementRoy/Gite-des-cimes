@@ -3,13 +3,10 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
-
    <?php if(isset($_POST['submit-add'])): ?>
         <?php  
-//tool::output($_POST);
+
         extract($_POST);
-        $form_inscription_date_debut = tool::generateDatetime($form_inscription_date_debut);
-        $form_inscription_date_fin = tool::generateDatetime($form_inscription_date_fin);
 
         $datas = array(
             ':finished' => $form_inscription_option,
@@ -25,12 +22,22 @@
             ':sac' => $form_inscription_sac
         );
 
-        // ':ref_sejour' => $form_inscription_sejour,
-        // ':date_from' => $form_inscription_date_debut,
-        // ':date_to' => $form_inscription_date_fin,
+        $result = dossier::update($datas, $_GET['id']);
 
+        foreach($form_inscription_sejour as $key => $inscription_entry){
 
-        $result = inscription::update($datas, $_GET['id']);
+            $dates = explode('#', $dates[$key]);
+            $form_inscription_date_debut = tool::generateDatetime($dates[0]);
+            $form_inscription_date_fin = tool::generateDatetime($dates[1]);
+            $datas = array(
+                ':ref_enfant' => $form_inscription_enfant,
+                ':ref_sejour' => $form_inscription_sejour[$key],
+                ':ref_dossier' => $id,
+                ':date_from' => $form_inscription_date_debut,
+                ':date_to' => $form_inscription_date_fin
+            );
+            $result = inscription::add($datas);
+        }
 
         ?>
         <?php //tool::output($_POST); ?>
@@ -60,6 +67,8 @@
 
     <?php endif; ?>
 
+
+
     <?php if(isset($_POST['submit-update'])): ?>
         <?php  
 //tool::output($_POST);
@@ -84,7 +93,7 @@
             ':sac' => $form_inscription_sac
             );
 
-        $result = inscription::update($datas, $_GET['id']);
+        $result = dossier::update($datas, $_GET['id']);
 
         ?>
         <?php //tool::output($_POST); ?>
@@ -94,9 +103,9 @@
                 <div class="col-md-12">
                     <div class="alert alert-success">
                         <i class="icon-ok-sign"></i> 
-                        L'inscription de <strong><?=$form_inscription_enfant; ?></strong> au séjour <strong></strong> a bien été modifiée
+                        Le dossier d'inscription de <strong><?=$form_inscription_enfant; ?></strong> au séjour <strong></strong> a bien été modifiée
                     </div>
-                    <a href="/inscriptions/">Retourner à la liste des inscriptions</a>
+                    <a href="/folders/">Retourner à la liste des dossiers d'inscription</a>
                 </div>
             </div>
 
@@ -109,7 +118,7 @@
                         <i class="icon-remove-sign"></i> 
                         Une erreur s'est produite durant la modification de l'inscription, veuillez réessayer
                     </div>
-                    <a href="/inscriptions/edit/id/<?=$inscription->id ?>">Retourner au formulaire de modification</a>
+                    <a href="/folders/edit/id/<?=$inscription->id ?>">Retourner au formulaire de modification</a>
                 </div>
             </div>
         <?php endif; ?>
@@ -117,12 +126,12 @@
     <?php endif; ?>
 
 
-    <?php $inscription = inscription::getDetails($_GET['id']); ?>
-    <?php tool::output($inscription); ?>
-    <?php $creator = user::get($inscription->creator); ?>
-    <?php $editor = user::get($inscription->editor); ?>
-    <?php $date_created = new DateTime($inscription->created); ?>
-    <?php $date_edited = new DateTime($inscription->edited); ?>
+    <?php $dossier = dossier::get($_GET['id']); ?>
+    <?php tool::output($dossier); ?>
+    <?php $creator = user::get($dossier->creator); ?>
+    <?php $editor = user::get($dossier->editor); ?>
+    <?php $date_created = new DateTime($dossier->created); ?>
+    <?php $date_edited = new DateTime($dossier->edited); ?>
 
 
 
@@ -131,7 +140,7 @@
             <div class="col-md-9">
 
                 <h3><a href="#" class="trigger"><i class="big-icon icon-folder-open"></i></a>
-                    Inscription <strong>n°<?=$inscription->id; ?></strong>
+                    Inscription <strong>n°<?=$dossier->id; ?></strong>
                 </h3>
                 <ul>
                     <li> éditer le contrat, </li>

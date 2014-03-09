@@ -4,13 +4,13 @@
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
-<?php $inscription = inscription::get($_GET['id']); ?>
+<?php $dossier = dossier::get($_GET['id']); ?>
 
 
 <div class="title">
     <div class="row header">
         <div class="col-md-12">
-            <h3>Modifier une inscription</h3>
+            <h3>Modifier un dossier d'inscription</h3>
         </div>
     </div>
 </div>
@@ -18,7 +18,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <form id="form-add-sejour" action="/inscription/infos/id/<?=$inscription->id ?>" method="post" parsley-validate>
+                <form id="form-add-sejour" action="/dossiers/infos/id/<?=$inscription->id ?>" method="post" parsley-validate>
 
 
                     <div class="field-box row">
@@ -244,9 +244,9 @@
 
                     <div class="field-box actions">
                         <div class="col-md-6  col-md-offset-2">
-                            <input type="submit" class="btn btn-primary" name="submit-update" value="Modifier l'inscription">
+                            <input type="submit" class="btn btn-primary" name="submit-update" value="Modifier le dossier d'inscription">
                             <span>OU</span>
-                            <a href="/inscriptions/infos/id/<?=$inscription->id ?>" class="reset">Annuler</a>
+                            <a href="/dossiers/infos/id/<?=$inscription->id ?>" class="reset">Annuler</a>
                         </div>
                     </div>
 
@@ -290,11 +290,11 @@
                                 }
                             });
 
-<?php if(isset($inscription->ref_sejour )): ?>
-//$('#form-inscription-sejour-select').trigger('change');
-<?php endif; ?>
-});
-</script>
+                            <?php if(isset($inscription->ref_sejour )): ?>
+                            //$('#form-inscription-sejour-select').trigger('change');
+                            <?php endif; ?>
+                            });
+                            </script>
 
 </form>
 

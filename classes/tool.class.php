@@ -126,10 +126,15 @@ class tool
         elseif($fromDate->diff($toDate)->format('%d') > 7){
             return 2;
         }
-        else {
+        elseif($fromDate->diff($toDate)->format('%d') > 6){
             return 1;
         }
+        else {
+            return 0;
+        }
     }
+
+    
 
     public static function getCurrentUser(){
         return $_SESSION['Auth']['id'];

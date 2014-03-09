@@ -45,11 +45,11 @@ $menus = array(
 						'ajouter' => 'Ajouter un contact'
 					)
 	),
-	'inscriptions' => array(
-		'name' => 'Inscriptions',
+	'dossiers' => array(
+		'name' => 'Dossiers d\'inscription',
 		'icon' => 'folder-open',
 		'submenu' => array(
-						'index' => 'Liste des inscriptions'
+						'index' => 'Liste des dossiers'
 					)
 	),
 	'corbeille' => array(
