@@ -100,6 +100,25 @@ class inscription
     }
 
 
+    public static function getBySejourBetweenDatesFinished($id, $date_from = false, $date_to = false){
+        global $db;
+        
+        $date_from = $date_from->format("Y-m-d H:i:s");
+        $date_to = $date_to->format("Y-m-d H:i:s");
+        $params = array(
+                        ':id' => $id
+                        );
+        // Ne pas faire un étoile ici ....
+        $sql = 'SELECT *, inscription.id as inscription_id, dossier.id as dossier_id FROM '.self::$table.' 
+                LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
+                LEFT JOIN enfant ON inscription.ref_enfant = enfant.id 
+                LEFT JOIN structure ON enfant.organization = structure.id 
+                LEFT JOIN structure_contact ON enfant.contact = structure_contact.id 
+                WHERE '.self::$table.'.ref_sejour=:id AND dossier.finished = 1 AND'.self::$table.'.date_from <= "'.$date_from.'" AND '.self::$table.'.date_to >="'.$date_to.'" ORDER BY enfant.lastname';
+        $result = $db->query($sql, $params);
+        return $result;
+    }
+
     public static function getDateDeparture($dossier_id){
         global $db;
         $params = array(

@@ -18,7 +18,7 @@ $date_to_query->setTimestamp($dateto);
 if($type == 1){
 // Récapitulatif mineur
 
-	$inscriptions = inscription::getBySejourBetweenDates($id, $date_from_query, $date_to_query);
+	$inscriptions = inscription::getBySejourBetweenDatesFinished($id, $date_from_query, $date_to_query);
 
 
 	$datas = array();
@@ -48,7 +48,7 @@ if($type == 1){
 }
 elseif($type == 2){
 
-	$inscriptions = inscription::getBySejourBetweenDates($id, $date_from_query, $date_to_query);
+	$inscriptions = inscription::getBySejourBetweenDatesFinished($id, $date_from_query, $date_to_query);
 
 	$datas = array();
 
@@ -85,7 +85,7 @@ elseif($type == 2){
 }
 elseif($type == 3){
 
-	$inscriptions = inscription::getBySejourBetweenDates($id, $date_from_query, $date_to_query);
+	$inscriptions = inscription::getBySejourBetweenDatesFinished($id, $date_from_query, $date_to_query);
 	$datas = array();
 
 	foreach ($inscriptions as $key => $inscription) {
