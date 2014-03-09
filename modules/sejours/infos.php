@@ -310,9 +310,9 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                     </div>
                                     <div class="body">
                                         <div class="menu">
-                                            <a href="/inscriptions/infos/id/<?=$inscription->inscription_id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
-                                            <a href="/inscriptions/editer/id/<?=$inscription->inscription_id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
-                                            <a href="/inscriptions/supprimer/id/<?=$inscription->inscription_id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                            <a href="/dossiers/infos/id/<?=$inscription->inscription_id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                            <a href="/dossiers/editer/id/<?=$inscription->inscription_id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                            <a href="/dossiers/supprimer/id/<?=$inscription->inscription_id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
                                         </div>
                                     </div>
                                 </div> 
