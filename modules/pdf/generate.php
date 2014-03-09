@@ -194,253 +194,252 @@ ob_start(); ?>
 			</tr>
 			<tr>
 				<td style="width:60%;padding-top:15px;">
-					<p><span style="text-decoration:underline;">Signature du responsable légale du (des) mineur(s)</span><br>
-						Précédée de la mention manuscrite "lu et approuvé"</p>
-						<p>Fait à : <span style="color:#333;">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . </span></p>
-						<p>Le : <span style="color:#333;">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span></p>
-					</td>
-					<td style="width:40%;padding-top:15px;">
-						<p><span style="text-decoration:underline;">Signature du responsable du séjour</span></p>
-						<p>Fait à : Bonneuil-en-Valois</p>
-						<p>Le : 11/01/2014</p>
-					</td>
-				</tr>
-			</table>
-		</page>
-	<?php elseif($type == 'dossier'): ?>
+					<p>
+						<span style="text-decoration:underline;">Signature du responsable légale du (des) mineur(s)</span><br>
+						Précédée de la mention manuscrite "lu et approuvé"
+					</p>
+					<p>Fait à : <span style="color:#333;">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . </span></p>
+					<p>Le : <span style="color:#333;">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span></p>
+				</td>
+				<td style="width:40%;padding-top:15px;">
+					<p><span style="text-decoration:underline;">Signature du responsable du séjour</span></p>
+					<p>Fait à : Bonneuil-en-Valois</p>
+					<p>Le : 11/01/2014</p>
+				</td>
+			</tr>
+		</table>
+	</page>
+<?php elseif($type == 'dossier'): ?>
 
-		<style type="text/css">
-			table {
-				width: 100%;
-				font-size: 16px;
-				vertical-align: top;
-			}
-			td {width: 100%;}
-			tr {width: 100%;}
-			.title {
-				font-weight: bold;
-				text-transform: uppercase;
-			}
-			h1,h2,h3,h4 {
-				margin: 0 0 10px;
-			}
-			h1 {
-				margin-bottom: 0;
-				font-size: 30px;
-			}
-			h2 {
-				font-size: 20px;
-				margin-top: 5px;
-			}
-			h3 {
-				margin-top: 20px;
-				font-size: 16px;
-				margin-bottom: 5px;
-			}
-			table.special p {
-				margin: 5px 0;
-			}
-			p {
-				margin: 7px 0;
-			}
-			ul {
-				margin: 0;
-				padding-left: 0;
-			}
-			ul li {
-				margin: 0;
-				padding-left: 20px;
-			}
-		</style>
-		<page backtop="6mm" backleft="6mm" backright="6mm" backbottom="0mm">
-			<table style="width:100%;">
-				<tr style="text-align:right;">
-					<td>
-						<p>
-							Adressé à : <br>
-							A l'attention de :
-						</p>
-					</td>
-				</tr>
-				<tr style="text-align:center;">
-					<td>
-						<h1 style="margin-top:100px;">Dossier d'inscription</h1>
-						<h2>Pour prénom nom</h2>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p style="margin-top:40px;">
-							Madame, Monsieur,
-						</p>
-						<p>
-							Nous avons le plaisir de vous présenter ce dossier d’inscription pour un séjour organisé par le Gîte des Cimes.
-						</p>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p style="margin-top:40px;">
-							<strong>Il comprend :</strong>
-						</p>
-						<div style="padding-left:30px;">
-							<p>•&nbsp;&nbsp;Le contrat de séjour</p>
+	<style type="text/css">
+		table {
+			width: 100%;
+			font-size: 16px;
+			vertical-align: top;
+		}
+		td {width: 100%;}
+		tr {width: 100%;}
+		.title {
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+		h1,h2,h3,h4 {
+			margin: 0 0 10px;
+		}
+		h1 {
+			margin-bottom: 0;
+			font-size: 30px;
+		}
+		h2 {
+			font-size: 20px;
+			margin-top: 5px;
+		}
+		h3 {
+			margin-top: 20px;
+			font-size: 16px;
+			margin-bottom: 5px;
+		}
+		table.special p {
+			margin: 5px 0;
+		}
+		p {
+			margin: 7px 0;
+		}
+		ul {
+			margin: 0;
+			padding-left: 0;
+		}
+		ul li {
+			margin: 0;
+			padding-left: 20px;
+		}
+	</style>
+	<page backtop="6mm" backleft="6mm" backright="6mm" backbottom="0mm">
+		<table style="width:100%;">
+			<tr style="text-align:right;">
+				<td>
+					<p>
+						Adressé à : <br>
+						A l'attention de :
+					</p>
+				</td>
+			</tr>
+			<tr style="text-align:center;">
+				<td>
+					<h1 style="margin-top:100px;">Dossier d'inscription</h1>
+					<h2>Pour prénom nom</h2>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p style="margin-top:40px;">
+						Madame, Monsieur,
+					</p>
+					<p>
+						Nous avons le plaisir de vous présenter ce dossier d’inscription pour un séjour organisé par le Gîte des Cimes.
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p style="margin-top:40px;">
+						<strong>Il comprend :</strong>
+					</p>
+					<div style="padding-left:30px;">
+						<p>•&nbsp;&nbsp;Le contrat de séjour</p>
 
-							<p>•&nbsp;&nbsp;La fiche de séjour</p>
+						<p>•&nbsp;&nbsp;La fiche de séjour</p>
 
-							<p>•&nbsp;&nbsp;La fiche sanitaire</p>
+						<p>•&nbsp;&nbsp;La fiche sanitaire</p>
 
-							<p>•&nbsp;&nbsp;L'autorisation parentale</p>
+						<p>•&nbsp;&nbsp;L'autorisation parentale</p>
 
-							<p>•&nbsp;&nbsp;Un exemple de trousseau</p>
+						<p>•&nbsp;&nbsp;Un exemple de trousseau</p>
 
-							<p>•&nbsp;&nbsp;Recommandations</p>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p style="margin-top:40px;">
-							<strong>Vous devez <span style="text-decoration:underline;">impérativement</span> fournir les documents ci-dessous :</strong>
-						</p>
+						<p>•&nbsp;&nbsp;Recommandations</p>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p style="margin-top:40px;">
+						<strong>Vous devez <span style="text-decoration:underline;">impérativement</span> fournir les documents ci-dessous :</strong>
+					</p>
 
-						<div style="padding-left:30px;">
+					<div style="padding-left:30px;">
 
-							<p>•&nbsp;&nbsp;Le contrat de séjour accompagné de l’acompte (ou une prise en charge financière)</p>
+						<p>•&nbsp;&nbsp;Le contrat de séjour accompagné de l’acompte (ou une prise en charge financière)</p>
 
-							<p>•&nbsp;&nbsp;La fiche de séjour complétée et signée</p>
-							<p>•&nbsp;&nbsp;La fiche sanitaire remplie et la copie du carnet de vaccinations</p>
+						<p>•&nbsp;&nbsp;La fiche de séjour complétée et signée</p>
+						<p>•&nbsp;&nbsp;La fiche sanitaire remplie et la copie du carnet de vaccinations</p>
 
-							<p>•&nbsp;&nbsp;L'autorisation parentale signée</p>
+						<p>•&nbsp;&nbsp;L'autorisation parentale signée</p>
 
-							<p>•&nbsp;&nbsp;Une attestation d’assurance responsabilité civile.</p>
+						<p>•&nbsp;&nbsp;Une attestation d’assurance responsabilité civile.</p>
 
-							<p>•&nbsp;&nbsp;La copie de l'attestation de CPAM</p>
+						<p>•&nbsp;&nbsp;La copie de l'attestation de CPAM</p>
 
-						</div>
+					</div>
 
-					</td>
-				</tr>
-			</table>
-		</page>
+				</td>
+			</tr>
+		</table>
+	</page>
 
-	<?php elseif($type == 'convocation'): ?>
-
-
-		<style type="text/css">
-			table {
-				width: 100%;
-				font-size: 16px;
-				vertical-align: top;
-			}
-			td {width: 100%;}
-			tr {width: 100%;}
-			.title {
-				font-weight: bold;
-				text-transform: uppercase;
-			}
-			h1,h2,h3,h4 {
-				margin: 0 0 10px;
-			}
-			h1 {
-				margin-bottom: 0;
-				font-size: 30px;
-			}
-			h2 {
-				font-size: 20px;
-				margin-top: 5px;
-			}
-			h3 {
-				margin-top: 20px;
-				font-size: 16px;
-				margin-bottom: 5px;
-			}
-			table.special p {
-				margin: 5px 0;
-			}
-			p {
-				margin: 15px 0;
-				line-height: 20px;
-			}
-			ul {
-				margin: 0;
-				padding-left: 0;
-			}
-			ul li {
-				margin: 0;
-				padding-left: 20px;
-			}
-			hr {
-				border: 1px dashed lightgrey;
-				margin: 20px 0;
-			}
-		</style>
-		<page backtop="6mm" backleft="6mm" backright="6mm" backbottom="0mm">
-			<table style="width:100%;">
-				<tr style="text-align:right;">
-					<td>
-						<p>
-							Adressé à : <br>
-							A l'attention de :
-						</p>
-					</td>
-				</tr>
-				<tr style="text-align:center;">
-					<td>
-						<h1 style="margin-top:80px;">Convocation</h1>
-						<h2>Pour prénom nom</h2>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p style="margin-top:60px;">
-			
-
-<strong>Nom de l’Enfant :</strong><br>
-Rachid AGUERCIF
-</p>
-<p>
-<strong>Inscrit au Séjour :</strong><br>
-Glisses Vosgiennes — <strong>à</strong> : Cornimont — <strong>du</strong> : 15 au 01/03/2014
-</p>
-<p>
-<strong>Est attendu par notre équipe d’animation :</strong><br>
-Date de départ : 15/02/2014<br>
-Lieu : Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle<br>
-Heure : 8h30
-</p>
-<p>
-<strong>Petit rappel :</strong><br>
-Prévoir le pique nique et amener un sac de couchage
-</p>
-<p>
-<strong>Date de retour :</strong> 01/03/2014<br>
-Lieu : Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle<br>
-Heure : 12h
-</p>
-<hr>
-<p style="margin-top:30px;">
-Nous restons à votre disposition pour tous renseignements complémentaires.<br>
-Au plaisir de ces prochaines vacances !<br>
-L’équipe du Gite des Cimes
-</p>
-					</td>
-				</tr>
-			</table>
-		</page>
+<?php elseif($type == 'convocation'): ?>
 
 
+	<style type="text/css">
+		table {
+			width: 100%;
+			font-size: 16px;
+			vertical-align: top;
+		}
+		td {width: 100%;}
+		tr {width: 100%;}
+		.title {
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+		h1,h2,h3,h4 {
+			margin: 0 0 10px;
+		}
+		h1 {
+			margin-bottom: 0;
+			font-size: 30px;
+		}
+		h2 {
+			font-size: 20px;
+			margin-top: 5px;
+		}
+		h3 {
+			margin-top: 20px;
+			font-size: 16px;
+			margin-bottom: 5px;
+		}
+		table.special p {
+			margin: 5px 0;
+		}
+		p {
+			margin: 15px 0;
+			line-height: 20px;
+		}
+		ul {
+			margin: 0;
+			padding-left: 0;
+		}
+		ul li {
+			margin: 0;
+			padding-left: 20px;
+		}
+		hr {
+			border: 1px dashed lightgrey;
+			margin: 20px 0;
+		}
+	</style>
+	<page backtop="6mm" backleft="6mm" backright="6mm" backbottom="0mm">
+		<table style="width:100%;">
+			<tr style="text-align:right;">
+				<td>
+					<p>
+						Adressé à : <br>
+						A l'attention de :
+					</p>
+				</td>
+			</tr>
+			<tr style="text-align:center;">
+				<td>
+					<h1 style="margin-top:80px;">Convocation</h1>
+					<h2>Pour prénom nom</h2>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p style="margin-top:60px;">
 
-	<?php endif; ?>
-	<?php
 
-	$content = ob_get_clean(); 
-	try{
-		$pdf = new HTML2PDF('P', 'A4', 'fr');
-		$pdf->writeHTML($content);
-		$pdf->Output('test.pdf');
-	}catch(HTML2PDF_exception $e){
-		die($e);
-	}
+						<strong>Nom de l’Enfant :</strong><br>
+						Rachid AGUERCIF
+					</p>
+					<p>
+						<strong>Inscrit au Séjour :</strong><br>
+						Glisses Vosgiennes — <strong>à</strong> : Cornimont — <strong>du</strong> : 15 au 01/03/2014
+					</p>
+					<p>
+						<strong>Est attendu par notre équipe d’animation :</strong><br>
+						Date de départ : 15/02/2014<br>
+						Lieu : Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle<br>
+						Heure : 8h30
+					</p>
+					<p>
+						<strong>Petit rappel :</strong><br>
+						Prévoir le pique nique et amener un sac de couchage
+					</p>
+					<p>
+						<strong>Date de retour :</strong> 01/03/2014<br>
+						Lieu : Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle<br>
+						Heure : 12h
+					</p>
+					<hr>
+					<p style="margin-top:30px;">
+						Nous restons à votre disposition pour tous renseignements complémentaires.<br>
+						Au plaisir de ces prochaines vacances !<br>
+						L’équipe du Gite des Cimes
+					</p>
+				</td>
+			</tr>
+		</table>
+	</page>
+<?php endif; ?>
+<?php
 
-	?>
+$content = ob_get_clean(); 
+try{
+	$pdf = new HTML2PDF('P', 'A4', 'fr');
+	$pdf->writeHTML($content);
+	$pdf->Output('test.pdf');
+}catch(HTML2PDF_exception $e){
+	die($e);
+}
+
+?>
