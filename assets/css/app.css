@@ -315,8 +315,8 @@ h6,
   font-weight: bold;
   position: absolute;
 }
-.wrap .progress-label span .min,
-.wrap .progress-label span .max {
+.wrap .progress-label span.min,
+.wrap .progress-label span.max {
   margin-left: -13px;
 }
 .wrap .progress-label span.min:after,
