@@ -303,8 +303,38 @@ h6,
   padding: 80px 50px 30px 112px;
   background: #ebedf3;
 }
-.wrap .progress {
+.wrap .progress-label {
+  position: relative;
+  width: 100%;
+  height: 32px;
   margin-top: 25px;
+  text-align: center;
+  line-height: 1em;
+}
+.wrap .progress-label span {
+  font-weight: bold;
+  position: absolute;
+}
+.wrap .progress-label span .min,
+.wrap .progress-label span .max {
+  margin-left: -13px;
+}
+.wrap .progress-label span.min:after,
+.wrap .progress-label span.max:after {
+  width: 1px;
+  height: 26px;
+  margin-left: -1px;
+  left: 50%;
+  top: 110%;
+  content: ' ';
+  background: rgba(0, 0, 0, 0.3);
+  position: absolute;
+}
+.wrap .progress-label span.zero {
+  padding-top: 13px;
+}
+.wrap .progress {
+  margin-top: 0;
   margin-bottom: 40px;
 }
 .wrap .nav-tabs {

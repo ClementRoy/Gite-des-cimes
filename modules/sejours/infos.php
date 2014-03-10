@@ -223,37 +223,42 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
 
     <?php 
 
-        $min = min($sejour->capacity_min,count($inscriptions));
-        $max = min($sejour->capacity_max,count($inscriptions));
+        $min = $sejour->capacity_min;
+        $max = $sejour->capacity_max;
         $nb = count($inscriptions);
         $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $date_from_query, $date_to_query);
         $opt = count($opt);
 
-        if ($nb + $opt > $max) {
-            $total = $nb + $opt;
-            $pc_nb = $nb*100/$total;
-            $pc_opt = $opt*100/$total;
+        $total = $nb;
+        $nb = $total - $opt;
+
+        if ($total > $max) {
+            $base = $total;
+        } else {
+           $base = $max;
         }
 
-
-
-        echo $nb;
+        $pc_nb = $nb*100/$base;
+        $pc_opt = $opt*100/$base;
+        $pos_min = $min*100/$base;
+        $pos_max = $max*100/$base;
      ?>
-
-    <span>0</span>
-    <span><?=min($sejour->capacity_min,count($inscriptions)) ?></span>
-    <span class="pull-right"><?=min($sejour->capacity_max,count($inscriptions)) ?></span>
+    <div class="progress-label">
+        <span class="zero" style="left:0;">0</span>
+        <span class="min" style="left:<?=$pos_min;?>%;"><small>min</small><br><?=$min;?></span>
+        <span class="max" style="left:<?=$pos_max;?>%;"><small>max</small><br><?=$max;?></span>
+    </div>
     <div class="progress">
-        <div class="progress-bar" role="progressbar"
-        aria-valuenow="<?=min($sejour->capacity_min,count($inscriptions)) ?>"
-        aria-valuemin="0" aria-valuemax="<?=$sejour->capacity_min ?>"
-        style="width: <?=$nb?>%;">
-            <span><?=min($sejour->capacity_min,count($inscriptions)) ?></span>
-            <span><?=$sejour->capacity_max ?></span>
+
+        <div class="progress-bar progress-bar-primary" role="progressbar"
+        aria-valuenow="<?=$pc_nb;?>"
+        aria-valuemin="0" aria-valuemax="<?=$min;?>"
+        style="width: <?=$pc_nb;?>%;">
+            <span><?=$nb;?></span>
         </div>
-<!--         <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?=count($inscriptions) ?>" aria-valuemin="0" aria-valuemax="7" style="width: <?php echo (min($sejour->capacity_max,count($inscriptions))/$sejour->capacity_max)*100-(min($sejour->capacity_min,count($inscriptions))/$sejour->capacity_max)*100; ?>%;">
-            <span><?=count($inscriptions) ?></span>
-        </div> -->
+        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?=$opt;?>" aria-valuemin="0" aria-valuemax="7" style="width: <?=$pc_opt;?>%;">
+            <span><?=$opt;?></span>
+        </div>
         
     </div>
 

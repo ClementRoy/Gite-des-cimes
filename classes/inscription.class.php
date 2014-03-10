@@ -98,7 +98,10 @@ class inscription
                         );
         $date_from = $date_from->format("Y-m-d H:i:s");
         $date_to = $date_to->format("Y-m-d H:i:s");
-        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:id AND date_from <= "'.$date_from.'" AND date_to >="'.$date_to.'"';
+        $sql = 'SELECT * FROM '.self::$table.' 
+        LEFT JOIN dossier ON inscription.ref_dossier = dossier.id  
+        WHERE dossier.finished = 0 AND
+        ref_sejour=:id AND date_from <= "'.$date_from.'" AND date_to >="'.$date_to.'"';
         $result = $db->query($sql, $params);
         return $result;
     }
