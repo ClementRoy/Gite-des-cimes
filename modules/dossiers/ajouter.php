@@ -76,11 +76,11 @@
 
                     <div class="field-box row date-range">
                         <label class="col-md-2" for="form-inscription-dates">Dates</label>
-                        <div class="col-md-10 col-sm-5" data-toggle="tooltip" title="Sélectionnez les dates d'inscription">
+                        <div class="col-md-10 col-sm-5 inject-dates" data-toggle="tooltip" title="Sélectionnez les dates d'inscription">
                             
-                            <div class="btn-group-vertical" data-toggle="buttons">
+                            <!--<div class="btn-group-vertical" data-toggle="buttons">-->
                                 <p>Sélectionnez d'abord un séjour</p>
-                            </div>
+                            <!--</div>-->
                         </div>
                     </div>
 
@@ -267,7 +267,7 @@
                                 $dates_to = $sejour.data('datesto');
                                 if($sejour.data('nbweek') == 0){
                                     // On ne choisit pas de dates, il s'agit d'un week end
-                                    $select.next('.date-range').find('.btn-group-vertical').html('L\'enfant est inscrit sur le week end en intégralité. <input type="hidden" name="dates[]" value="'+$dates_from+'#'+$dates_to+'">');
+                                    $select.next('.date-range').find('.inject-dates').html('L\'enfant est inscrit sur le week end en intégralité. <input type="hidden" name="dates[]" value="'+$dates_from+'#'+$dates_to+'">');
                                 }else {
                                     // L'utilisateur peut choisir chaque semaine en checkbox 
                                     console.log($dates_from);
@@ -275,9 +275,9 @@
                                     $dates_to = $dates_to.split('#');
                                     var date_range = '';
                                     for ( var i = 0; i < $sejour.data('nbweek'); i++ ) {
-                                        date_range += '<label class="btn btn-primary"><input type="checkbox" name="dates[]" value="'+$dates_from[i]+'#'+$dates_to[i]+'"> Semaine '+(i+1)+' du '+$dates_from[i]+' au '+$dates_to[i]+'</label>';
+                                        date_range += '<label style="display: block;"><input type="checkbox" name="dates[]" value="'+$dates_from[i]+'#'+$dates_to[i]+'"> Semaine '+(i+1)+' du '+$dates_from[i]+' au '+$dates_to[i]+'</label>';
                                     }
-                                    $select.next('.date-range').find('.btn-group-vertical').html(date_range)
+                                    $select.next('.date-range').find('.inject-dates').html(date_range)
                                 }
 
                             });
