@@ -8,7 +8,7 @@
 
     <?php if(isset($_POST['submit-update'])): ?>
         <?php  
-//tool::output($_POST);
+tool::output($_POST);
         extract($_POST);
 
         $datas = array(
@@ -24,7 +24,7 @@
             ':pique_nique' => $form_inscription_pique_nique,
             ':sac' => $form_inscription_sac
         );
-
+        tool::output($datas);
         $result = dossier::update($datas, $_GET['id']);
 
         $inscription = inscription::deleteByDossier($dossier->id);
@@ -37,10 +37,11 @@
             $datas = array(
                 ':ref_enfant' => $form_inscription_enfant,
                 ':ref_sejour' => $form_inscription_sejour[$key],
-                ':ref_dossier' => $id,
+                ':ref_dossier' => $_GET['id'],
                 ':date_from' => $form_inscription_date_debut,
                 ':date_to' => $form_inscription_date_fin
             );
+            tool::output($datas);
             $result = inscription::add($datas);
         }
 
@@ -118,12 +119,11 @@
 
                     <?php //Handle Sejour here ?> 
                     <?php $sejours = sejour::getList(); ?>
-                    <?php $inscriptions = inscription::getByDossier($dossier->id); ?>
-                    <?php tool::output($inscriptions); ?>
+                    <?php $sejours_linked = inscription::getLinkedSejours($dossier->id); ?>
+                    <?php //tool::output($sejours_linked); ?>
 
-                    <?php foreach($inscriptions as $inscription): ?>
-                    
-
+                    <?php foreach($sejours_linked as $sejour_linked): ?>
+                
                     <div class="field-box row sejour-select">
                         <label class="col-md-2" for="form-inscription-sejour-select">Séjour</label>
                         <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez le séjour">
@@ -143,7 +143,7 @@
                                             <?php $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
                                         <?php endif; ?>
 
-                                        <option <?php if( $inscription->ref_sejour == $sejour->id ): ?>selected="selected"<?php endif; ?> 
+                                        <option <?php if( $sejour_linked->ref_sejour == $sejour->id ): ?>selected="selected"<?php endif; ?> 
                                                 value="<?=$sejour->id ?>"
                                                 data-nbweek="<?=$nb_weeks ?>"
                                                 data-datesfrom="<?=sejour::getAllBeginsWeek($sejour->id) ?>"
@@ -155,19 +155,21 @@
                             </div>
                         </div>
                     </div>
-
+                     <?php $dates_inscriptions = inscription::getBySejourAndDossier($sejour_linked->ref_sejour, $dossier->id); ?>
+                     <?php //tool::output($dates_inscriptions); ?>
                     <div class="field-box row date-range">
                         <label class="col-md-2" for="form-inscription-dates">Dates</label>
-                        <div class="col-md-10 col-sm-5" data-toggle="tooltip" title="Sélectionnez les dates d'inscription">
-                            <?php if($nb_weeks > 0): ?>
-
-                            <?php else: ?>
-                            <div class="btn-group-vertical" data-toggle="buttons">
-                                <label class="btn btn-primary">
-                                    <input type="checkbox" name="dates[]" value=""> Semaine 1
+                        <div class="col-md-10 col-sm-5 inject-dates" data-toggle="tooltip" title="Sélectionnez les dates d'inscription">
+                        <?php foreach($dates_inscriptions as $key => $dates_inscription): ?>
+                                <?php // Il faut aussi choper le séjour en question ?>
+                                <?php $date_from = new DateTime($dates_inscription->date_from); ?>
+                                <?php $date_to = new DateTime($dates_inscription->date_to); ?>
+                                <?php $date_to_string = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
+                                <?php $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
+                                <label style="display: block;">
+                                    <input type="checkbox" name="dates[]" value="<?=$date_from_string; ?>#<?=$date_to_string; ?>" checked="checked"> Semaine <?=$key+1 ?> du <?=$date_from_string; ?> au <?=$date_to_string; ?>
                                 </label>
-                            </div>
-                            <?php endif; ?>
+                            <?php endforeach; ?>
                         </div>
                     </div>
 
@@ -344,6 +346,52 @@
 
                     <script>
                     $(document).ready(function(){
+
+                           $(document).on('change', '.selector', function(){
+                                //console.log('triggering select');
+                                $sejour = $(this).find('option:selected');
+
+                                var $select = $(this).parents('.sejour-select');
+                                //console.log($sejour.data('nbweek'));
+                                $dates_from = $sejour.data('datesfrom');
+                                $dates_to = $sejour.data('datesto');
+                                if($sejour.data('nbweek') == 0){
+                                    // On ne choisit pas de dates, il s'agit d'un week end
+                                    $select.next('.date-range').find('.inject-dates').html('L\'enfant est inscrit sur le week end en intégralité. <input type="hidden" name="dates[]" value="'+$dates_from+'#'+$dates_to+'">');
+                                }else {
+                                    // L'utilisateur peut choisir chaque semaine en checkbox 
+                                    console.log($dates_from);
+                                    $dates_from = $dates_from.split('#');
+                                    $dates_to = $dates_to.split('#');
+                                    var date_range = '';
+                                    for ( var i = 0; i < $sejour.data('nbweek'); i++ ) {
+                                        date_range += '<label style="display: block;"><input type="checkbox" name="dates[]" value="'+$dates_from[i]+'#'+$dates_to[i]+'"> Semaine '+(i+1)+' du '+$dates_from[i]+' au '+$dates_to[i]+'</label>';
+                                    }
+                                    $select.next('.date-range').find('.inject-dates').html(date_range)
+                                }
+
+                            });
+
+                            /*
+                             Handling Structure Behavior
+                            */
+                            $('#form-inscription-structure-select').change(function(){
+                                //console.log($(this).val());
+                                if($(this).val() == 'Choisissez la structure'){
+                                    $('#form-inscription-centre-payeur').removeAttr('disabled'); 
+                                    $('#form-inscription-centre-payeur-hidden').attr('disabled', 'disabled'); 
+                                }else {
+                                    $('#form-inscription-centre-payeur').val('');
+                                    $('#form-inscription-centre-payeur').attr('disabled','disabled');
+                                    $('#form-inscription-centre-payeur-hidden').removeAttr('disabled');
+                                }
+                            });
+
+
+                            // Trigger first shot
+                            <?php if(isset($_GET['sejour'] )): ?>
+                                $('.selector').trigger('change');
+                            <?php endif; ?>
 
 
                         var i = 1;

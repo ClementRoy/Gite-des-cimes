@@ -5,7 +5,6 @@
 
 <?php if(isset($_POST['submit-add'])): ?>
     <?php  
-tool::output($_POST);
     extract($_POST);
 
     $datas = array(
@@ -21,7 +20,7 @@ tool::output($_POST);
         ':pique_nique' => $form_inscription_pique_nique,
         ':sac' => $form_inscription_sac
         );
-tool::output($datas);
+
     $result = dossier::update($datas, $_GET['id']);
 
     foreach($form_inscription_sejour as $key => $inscription_entry){
@@ -36,7 +35,7 @@ tool::output($datas);
             ':date_from' => $form_inscription_date_debut,
             ':date_to' => $form_inscription_date_fin
             );
-        tool::output($datas);
+
         $result = inscription::add($datas);
     }
 
@@ -132,10 +131,6 @@ tool::output($datas);
 <?php $editor = user::get($dossier->editor); ?>
 <?php $date_created = new DateTime($dossier->created); ?>
 <?php $date_edited = new DateTime($dossier->edited); ?>
-
-
-
-
 
 
 <div class="title">

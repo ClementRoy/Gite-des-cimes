@@ -36,6 +36,18 @@ class inscription
         return $result;        
     }
 
+
+    public static function getLinkedSejours($id){
+        global $db;
+        $params = array(
+                        ':id' => $id
+                        );
+        $sql = 'SELECT DISTINCT ref_sejour FROM '.self::$table.' WHERE ref_dossier=:id ORDER BY date_from';
+        //echo $sql;
+        $result = $db->query($sql, $params);
+        return $result;        
+    }
+
     public static function getByEnfant($id){
         global $db;
         $params = array(
@@ -53,6 +65,17 @@ class inscription
                         ':id' => $id
                         );
         $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:id';
+        $result = $db->query($sql, $params);
+        return $result;        
+    }
+
+    public static function getBySejourAndDossier($sejour_id, $dossier_id){
+        global $db;
+        $params = array(
+                        ':sejour_id' => $sejour_id,
+                        ':dossier_id' => $dossier_id
+                        );
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:sejour_id AND ref_dossier = :dossier_id';
         $result = $db->query($sql, $params);
         return $result;        
     }
