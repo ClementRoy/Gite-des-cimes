@@ -226,31 +226,20 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
         $min = min($sejour->capacity_min,count($inscriptions));
         $max = min($sejour->capacity_max,count($inscriptions));
         $nb = count($inscriptions);
-        $options = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $date_from_query, $date_to_query);
-        $options = count($options);
+        $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $date_from_query, $date_to_query);
+        $opt = count($opt);
 
-        
-            $total = $nb + $options;
-            $totalPourcent = 100*$total/$max;
-            echo $nb + $options;
-             echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;—&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-            echo 100*$nb/$max + 100*$options/$max;
-            echo '=';
-            echo $totalPourcent;
-             echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;—&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-
-        if ($options > 0) {
-            // $total = $nb + $options;
-            // $totalPourcent = 100*$total/$max;
-        } else {
-            // $nbPourcent = 100*$nb/$max;
-            // if($nbPourcent > 100) { $nbPourcent = 100; }
+        if ($nb + $opt > $max) {
+            $total = $nb + $opt;
+            $pc_nb = $nb*100/$total;
+            $pc_opt = $opt*100/$total;
         }
 
-        // if($nb > 100) { $nb = 100; }
-        echo $nb;
 
+
+        echo $nb;
      ?>
+
     <span>0</span>
     <span><?=min($sejour->capacity_min,count($inscriptions)) ?></span>
     <span class="pull-right"><?=min($sejour->capacity_max,count($inscriptions)) ?></span>
@@ -296,6 +285,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                     </tr>
                 </thead>
                 <tbody>
+                <?php //tool::output($inscriptions); ?>
                     <?php foreach($inscriptions as $key => $inscription): ?>
                         <?php $enfant = enfant::get($inscription->ref_enfant); ?>
                         <tr>
