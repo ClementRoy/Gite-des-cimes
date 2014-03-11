@@ -365,7 +365,7 @@ ob_start(); ?>
 			padding-left: 20px;
 		}
 	</style>
-	<page backtop="6mm" backleft="6mm" backright="6mm" backbottom="0mm">
+	<page backtop="6mm" backleft="12mm" backright="12mm" backbottom="0mm">
 		
 		<?php $structure = structure::get($dossier->organization); ?>
 		<?php $contact = contact::get($dossier->contact); ?>
@@ -558,7 +558,7 @@ ob_start(); ?>
 			margin: 20px 0;
 		}
 	</style>
-	<page backtop="6mm" backleft="6mm" backright="6mm" backbottom="0mm">
+	<page backtop="6mm" backleft="12mm" backright="12mm" backbottom="0mm">
 		<?php $structure = structure::get($dossier->organization); ?>
 		<?php $contact = contact::get($dossier->contact); ?>
 		<table style="width:100%;">
@@ -681,7 +681,7 @@ try{
 	$pdf = new HTML2PDF('P', 'A4', 'fr');
 	$pdf->writeHTML($content);
 	//$pdf->Output($type.'_'.$id.'.pdf');
-	$pdf->Output($type.'_'.$id.'.pdf', 'D');
+	$pdf->Output($type.'_'.$id.'.pdf');
 }catch(HTML2PDF_exception $e){
 	die($e);
 }
