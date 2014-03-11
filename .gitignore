@@ -8,3 +8,5 @@ config/error.log
 robots.txt
 
 /ressources
+
+/node_modules

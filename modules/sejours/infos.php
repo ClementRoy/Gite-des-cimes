@@ -174,7 +174,6 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
 
         <div class="content<?=($sejour->archived)?' archived':' ';?>">
             <div class="tab-content">
-
                 <?php for ($i=1; $i <= $nb_weeks; $i++) : ?>
                     <?php 
                         $date_from_query = new DateTime($sejour->date_from);
@@ -193,6 +192,16 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                 <div class="tab-pane <?php if($i == 1): ?>active<?php endif; ?>" id="week-<?=$i ?>">
                     <div class="row">
                         <div class="col-md-9">
+                            <?php 
+                                $min = $sejour->capacity_min;
+                                $max = $sejour->capacity_max;
+                                $nb = count($inscriptions);
+                                $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $date_from_query, $date_to_query);
+                                $opt = count($opt);
+
+                                $total = $nb;
+                                $nb = $total - $opt;
+                            ?>
                             <h6><strong><?=count($inscriptions) ?></strong> Enfants inscrits à ce séjour <?php if($date_from->diff($date_to)->format('%d') != 2): ?> pour la semaine <?=$i ?> <?php endif; ?>
                                 (min : <?=$sejour->capacity_min ?> -  max : <?=$sejour->capacity_max ?>)
                             </h6>
@@ -213,17 +222,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                        <?php 
-
-                            $min = $sejour->capacity_min;
-                            $max = $sejour->capacity_max;
-                            $nb = count($inscriptions);
-                            $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $date_from_query, $date_to_query);
-                            $opt = count($opt);
-
-                            $total = $nb;
-                            $nb = $total - $opt;
-
+                        <?php
                             if ($total > $max) {
                                 $base = $total;
                             } else {

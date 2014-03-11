@@ -13,7 +13,6 @@ if(isset($_GET['type'])){
 
 $dossier = dossier::getDetails($id);
 $inscriptions = inscription::getByDossier($id);
-
 ob_start(); ?>
 
 
@@ -62,6 +61,8 @@ ob_start(); ?>
 		}
 	</style>
 	<page backtop="2mm" backleft="6mm" backright="6mm" backbottom="0mm">
+
+
 		<table style="width:100%;">
 			<tr style="text-align:center;">
 				<td>
@@ -87,12 +88,20 @@ ob_start(); ?>
 						607 rue du Château d’eau<br>
 						60123 Bonneuil en Valois
 					</p>
-					<p>03 44 88 51 13</p>
-					<p>gite.cimes@orange.fr</p>
+					<p><strong>Tél :</strong> 03 44 88 51 13</p>
+					<p><strong>Email :</strong> gite.cimes@orange.fr</p>
 
-					<p>Directeur : Marie Christine Behlouli 06 50 31 22 88</p>
+					<!-- <p>Directeur : Lyazid Behlouli 06 50 31 22 88</p> -->
 
-					<p>N° d’enregistrement du séjour Multi­activités : 0600292SV001413</p>
+					<p>
+						<strong>N° d’enregistrement du ou des séjours :</strong><br>
+						<?php foreach ($inscriptions as $key => $inscription): ?>
+							<?php $sejour = sejour::get($inscription->ref_sejour); ?>
+							<?=$sejour->name ?> - <?=$sejour->numero ?><br>
+						<?php endforeach ?>
+					</p>
+
+
 				</td>
 
 				<td style="width:50%;padding:15px;" border="1">
@@ -167,8 +176,9 @@ ob_start(); ?>
 					<?php endif; ?>
 					<?php 
 					$structure = structure::get($dossier->organization);
+					$contact = contact::get($dossier->contact);
 					?>
-					<p style="margin-bottom:0;"><strong>Structure interlocutrice : </strong> <?=$structure->name; ?></p>
+					<p style="margin-bottom:0;"><strong>Structure interlocutrice : </strong> <?=$structure->name; ?> - <?=$contact->civility; ?> <?=$contact->lastname; ?> <?=$contact->firstname; ?></p>
 				</td>
 			</tr>
 		</table>
@@ -253,7 +263,7 @@ ob_start(); ?>
 		<tr>
 			<td border="0">
 				<p><strong>•&nbsp;&nbsp;Afin d’effectuer la réservation, nous devons avoir reçu avant le départ une prise en charge financière ou un acompte de 30% avec un solde au plus tard 15 jours avant le départ,</strong> 1 exemplaire signé du présent contrat, accompagné de tous les documents demandés (cf. article 2 du présent contrat).</p>
-				<p><strong>•&nbsp;&nbsp;Vous devez avoir impérativement complété le dossier d’inscription</strong> de l'enfant par <span style="text-decoration:underline;">TOUTES</span> les pièces listées à l’article 2 de ce contrat. En l’absence de l’une de ces pièces, le contrat pourra être considéré comme annulé à l’initiative du responsable légal de l'enfant (cf. article 3­1).</p>
+				<p><strong>•&nbsp;&nbsp;Vous devez avoir impérativement complété le dossier d’inscription</strong> de l'enfant par <span style="text-decoration:underline;">TOUTES</span> les pièces listées à l’article 2 de ce contrat. En l’absence de l’une de ces pièces, le contrat pourra être considéré comme annulé à l’initiative du responsable légal de l'enfant (cf. article 3­.1).</p>
 				<p><strong>•&nbsp;&nbsp;Le prix du séjour sera réglé par : </strong><span style="color:#333;">. . . . . . . . . . . . . . .</span></p>
 			</td>
 		</tr>
@@ -429,8 +439,8 @@ ob_start(); ?>
 							<p>•&nbsp;&nbsp;La fiche sanitaire remplie</p>
 						<?php endif ?>
 
-						<?php if ($dossier->health_record != 1): ?>
-							<p>•&nbsp;&nbsp;La copie du carnet de vaccinations</p>
+						<?php if ($dossier->vaccinations != 1): ?>
+							<p>•&nbsp;&nbsp;La copie du carnet de vaccination</p>
 						<?php endif ?>
 
 						<p>•&nbsp;&nbsp;L'autorisation parentale signée</p>
@@ -645,6 +655,7 @@ $content = ob_get_clean();
 try{
 	$pdf = new HTML2PDF('P', 'A4', 'fr');
 	$pdf->writeHTML($content);
+	//$pdf->Output($type.'_'.$id.'.pdf');
 	$pdf->Output($type.'_'.$id.'.pdf', 'D');
 }catch(HTML2PDF_exception $e){
 	die($e);
