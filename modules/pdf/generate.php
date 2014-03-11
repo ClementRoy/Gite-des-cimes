@@ -624,7 +624,7 @@ ob_start(); ?>
 					<p>
 						<strong>Petit rappel : </strong><br>
 						<?php if ($dossier->pique_nique): ?>
-							•&nbsp;&nbsp;Prévoir le pique nique<br>
+							•&nbsp;&nbsp;Prévoir le pique nique.<br>
 						<?php endif ?>
 						<?php if ($dossier->pique_nique): ?>
 							•&nbsp;&nbsp;Amener un sac de couchage.
