@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-10">
             
-    <form id="form-add-children" method="post" action="/enfant/infos/id/<?=$id ?>" class="maped-form" parsley-validate>
+    <form id="form-add-children" method="post" action="/enfants/infos/id/<?=$id ?>" class="maped-form" parsley-validate>
         <input type="hidden" value="<?=$id ?>" name="id" />
         <div class="row form-wrapper">
             <div class="field-box row">
@@ -107,8 +107,14 @@
                 <label class="col-md-2">Responsable légal de l'enfant</label>
                 <div class="col-md-5" data-toggle="tooltip" title="Précisez qui est le responsable légal de l'enfant.">
                     <div class="radio">
+                        <label for="form-enfant-responsable-defaut">
+                            <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-defaut" value="" checked="cheked">
+                            Non renseigné
+                        </label>
+                    </div>
+                    <div class="radio">
                         <label for="form-enfant-responsable-structure">
-                            <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-structure" value="structure" checked="cheked">
+                            <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-structure" value="structure">
                             Structure
                         </label>
                     </div>

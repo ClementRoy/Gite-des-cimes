@@ -95,9 +95,13 @@ ob_start(); ?>
 
 					<p style="margin-bottom:0;">
 						<strong>N° d’enregistrement du ou des séjours :</strong><br>
+						<?php $numero_sejour = ''; ?>
 						<?php foreach ($inscriptions as $key => $inscription): ?>
 							<?php $sejour = sejour::get($inscription->ref_sejour); ?>
-							<?=$sejour->name ?> - <?=$sejour->numero ?><br>
+							<?php if ($numero_sejour != $sejour->numero): ?>
+								<?=$sejour->name ?> - <?=$sejour->numero ?><br>
+								<?php $numero_sejour = $sejour->numero; ?>
+							<?php endif ?>
 						<?php endforeach ?>
 					</p>
 
@@ -173,6 +177,20 @@ ob_start(); ?>
 							<?=$dossier->guardian_address_city; ?>
 						</p>
 						<p><strong>Tél. domicile : </strong><?=$dossier->guardian_phone_home; ?></p>
+
+					<?php else: ?>
+
+						<p><strong>Responsable légal : </strong></p>
+						<p>
+							<strong>NOM, Prénom :</strong> <br>
+						</p>
+						<p>
+							<strong>Adresse : </strong>
+							<br>
+							<br>
+						</p>
+						<p><strong>Tél. domicile : </strong></p>
+
 					<?php endif; ?>
 					<?php 
 					$structure = structure::get($dossier->organization);
@@ -348,7 +366,7 @@ ob_start(); ?>
 		}
 	</style>
 	<page backtop="6mm" backleft="6mm" backright="6mm" backbottom="0mm">
-
+		
 		<?php $structure = structure::get($dossier->organization); ?>
 		<?php $contact = contact::get($dossier->contact); ?>
 		<table style="width:100%;">
@@ -414,8 +432,9 @@ ob_start(); ?>
 						<?php if ($dossier->health_record != 1): ?>
 							<p>•&nbsp;&nbsp;La fiche sanitaire</p>
 						<?php endif ?>
-
+						<?php if ($dossier->image_rights != 1): ?>
 						<p>•&nbsp;&nbsp;L'autorisation parentale</p>
+						<?php endif ?>
 
 						<p>•&nbsp;&nbsp;Un exemple de trousseau</p>
 

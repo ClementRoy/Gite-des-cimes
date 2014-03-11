@@ -376,9 +376,9 @@ $result = enfant::update($datas, $_GET['id']);
                             <p>
                                 <strong>Père :</strong><br>
                                 <?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?><br>
-                                <?=(!empty($enfant->father_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->father_phone_home : ''; ?><br>
-                                <?=(!empty($enfant->father_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->father_phone_mobile : ''; ?><br>
-                                <?=(!empty($enfant->father_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->father_phone_pro : ''; ?>
+                                <?=(!empty($enfant->father_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.tool::formatTel($enfant->father_phone_home) : ''; ?><br>
+                                <?=(!empty($enfant->father_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.tool::formatTel($enfant->father_phone_mobile) : ''; ?><br>
+                                <?=(!empty($enfant->father_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.tool::formatTel($enfant->father_phone_pro) : ''; ?>
                             </p>
                             <?php if(!empty($enfant->father_address_number) &&
                                 !empty($enfant->father_address_street) &&
@@ -397,9 +397,9 @@ $result = enfant::update($datas, $_GET['id']);
                             <p>
                                 <strong>Mère :</strong><br>
                                 <?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?><br>
-                                <?=(!empty($enfant->mother_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->mother_phone_home : ''; ?><br>
-                                <?=(!empty($enfant->mother_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->mother_phone_mobile : ''; ?><br>
-                                <?=(!empty($enfant->mother_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->mother_phone_pro : ''; ?>
+                                <?=(!empty($enfant->mother_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.tool::formatTel($enfant->mother_phone_home) : ''; ?><br>
+                                <?=(!empty($enfant->mother_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.tool::formatTel($enfant->mother_phone_mobile) : ''; ?><br>
+                                <?=(!empty($enfant->mother_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.tool::formatTel($enfant->mother_phone_pro) : ''; ?>
                             </p>
                             <?php if(!empty($enfant->mother_address_number) &&
                                 !empty($enfant->mother_address_street) &&
@@ -418,9 +418,9 @@ $result = enfant::update($datas, $_GET['id']);
                             <p>
                                 <strong>Tuteur :</strong><br>
                                 <?=(!empty($enfant->guardian_name))? $enfant->guardian_name : EMPTYVAL; ?><br>
-                                <?=(!empty($enfant->guardian_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->guardian_phone_home : ''; ?><br>
-                                <?=(!empty($enfant->guardian_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->guardian_phone_mobile : ''; ?><br>
-                                <?=(!empty($enfant->guardian_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->guardian_phone_pro : ''; ?>
+                                <?=(!empty($enfant->guardian_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.tool::formatTel($enfant->guardian_phone_home) : ''; ?><br>
+                                <?=(!empty($enfant->guardian_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.tool::formatTel($enfant->guardian_phone_mobile) : ''; ?><br>
+                                <?=(!empty($enfant->guardian_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.tool::formatTel($enfant->guardian_phone_pro) : ''; ?>
                             </p>
                             <?php if(!empty($enfant->guardian_address_number) &&
                                 !empty($enfant->guardian_address_street) &&
@@ -439,9 +439,9 @@ $result = enfant::update($datas, $_GET['id']);
                             <p>
                                 <strong>Famille d'accueil :</strong><br>
                                 <?=(!empty($enfant->host_family_name))? $enfant->host_family_name : EMPTYVAL; ?><br>
-                                <?=(!empty($enfant->host_family_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->host_family_phone_home : ''; ?><br>
-                                <?=(!empty($enfant->host_family_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->host_family_phone_mobile : ''; ?><br>
-                                <?=(!empty($enfant->host_family_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->host_family_phone_pro : ''; ?>
+                                <?=(!empty($enfant->host_family_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.tool::formatTel($enfant->host_family_phone_home) : ''; ?><br>
+                                <?=(!empty($enfant->host_family_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.tool::formatTel($enfant->host_family_phone_mobile) : ''; ?><br>
+                                <?=(!empty($enfant->host_family_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.tool::formatTel($enfant->host_family_phone_pro) : ''; ?>
                             </p>
                             <?php if(!empty($enfant->host_family_address_number) &&
                                 !empty($enfant->host_family_address_street) &&
@@ -461,7 +461,7 @@ $result = enfant::update($datas, $_GET['id']);
                             <p>
                                 <strong>Contact d'urgence :</strong><br>
                                 <?=(!empty($enfant->emergency_name))? $enfant->emergency_name : EMPTYVAL; ?><br>
-                                <i class="icon-phone"></i> <?=(!empty($enfant->emergency_phone))? $enfant->emergency_phone : EMPTYVAL; ?>
+                                <i class="icon-phone"></i> <?=(!empty($enfant->emergency_phone))? tool::formatTel($enfant->emergency_phone) : EMPTYVAL; ?>
                             </p>
                         </div>
                     <?php endif; ?>
@@ -683,43 +683,43 @@ $result = enfant::update($datas, $_GET['id']);
             <?php if(!empty($enfant->father_phone_pro) || !empty($enfant->father_phone_mobile) || !empty($enfant->father_phone_home)): ?>
                 <h6>Père</h6>
                 <p><?=(!empty($enfant->father_name))? $enfant->father_name : EMPTYVAL; ?></p>
-                <p><?=(!empty($enfant->father_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->father_phone_home : ''; ?></p>
-                <p><?=(!empty($enfant->father_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->father_phone_mobile : ''; ?></p>
-                <p><?=(!empty($enfant->father_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->father_phone_pro : ''; ?></p>
+                <p><?=(!empty($enfant->father_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.tool::formatTel($enfant->father_phone_home) : ''; ?></p>
+                <p><?=(!empty($enfant->father_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.tool::formatTel($enfant->father_phone_mobile) : ''; ?></p>
+                <p><?=(!empty($enfant->father_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.tool::formatTel($enfant->father_phone_pro) : ''; ?></p>
             <?php endif; ?>
         </div>
         <div class="contact">
             <?php if(!empty($enfant->mother_phone_pro) || !empty($enfant->mother_phone_mobile) || !empty($enfant->mother_phone_home)): ?>
                 <h6>Mère</h6>
                 <p><?=(!empty($enfant->mother_name))? $enfant->mother_name : EMPTYVAL; ?></p>
-                <p><?=(!empty($enfant->mother_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->mother_phone_home : ''; ?></p>
-                <p><?=(!empty($enfant->mother_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->mother_phone_mobile : ''; ?></p>
-                <p><?=(!empty($enfant->mother_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->mother_phone_pro : ''; ?></p>
+                <p><?=(!empty($enfant->mother_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.tool::formatTel($enfant->mother_phone_home) : ''; ?></p>
+                <p><?=(!empty($enfant->mother_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.tool::formatTel($enfant->mother_phone_mobile) : ''; ?></p>
+                <p><?=(!empty($enfant->mother_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.tool::formatTel($enfant->mother_phone_pro) : ''; ?></p>
             <?php endif; ?>
         </div>
         <div class="contact">
             <?php if(!empty($enfant->guardian_phone_pro) && !empty($enfant->guardian_phone_mobile) && !empty($enfant->guardian_phone_home)): ?>
                 <h6>Responsable légale</h6>
                 <p><?=(!empty($enfant->guardian_name))? $enfant->guardian_name : EMPTYVAL; ?></p>
-                <p><?=(!empty($enfant->guardian_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->guardian_phone_home : ''; ?></p>
-                <p><?=(!empty($enfant->guardian_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->guardian_phone_mobile : ''; ?></p>
-                <p><?=(!empty($enfant->guardian_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->guardian_phone_pro : ''; ?></p>
+                <p><?=(!empty($enfant->guardian_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.tool::formatTel($enfant->guardian_phone_home) : ''; ?></p>
+                <p><?=(!empty($enfant->guardian_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.tool::formatTel($enfant->guardian_phone_mobile) : ''; ?></p>
+                <p><?=(!empty($enfant->guardian_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.tool::formatTel($enfant->guardian_phone_pro) : ''; ?></p>
             <?php endif; ?>
         </div>
         <div class="contact">
             <?php if(!empty($enfant->emergency_phone)): ?>
                 <h6>Contact d'urgence</h6>
                 <p><?=(!empty($enfant->emergency_name))? $enfant->emergency_name : EMPTYVAL; ?></p> 
-                <p><i class="icon-phone"></i> <?=$enfant->emergency_phone;?></p>
+                <p><i class="icon-phone"></i> <?=tool::formatTel($enfant->emergency_phone);?></p>
             <?php endif; ?>
         </div>
         <div class="contact">
             <?php if(!empty($enfant->host_family_phone_pro) || !empty($enfant->host_family_phone_mobile) || !empty($enfant->host_family_phone_home)): ?>
                 <h6>Famille d'accueil</h6>
                 <p><?=(!empty($enfant->host_family_name))? $enfant->host_family_name : EMPTYVAL; ?></p>
-                <p><?=(!empty($enfant->host_family_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.$enfant->host_family_phone_home : ''; ?></p>
-                <p><?=(!empty($enfant->host_family_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.$enfant->host_family_phone_mobile : ''; ?></p>
-                <p><?=(!empty($enfant->host_family_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.$enfant->host_family_phone_pro : ''; ?></p>
+                <p><?=(!empty($enfant->host_family_phone_home))? '<i class="icon-phone"></i> <strong>Fixe :</strong> '.tool::formatTel($enfant->host_family_phone_home) : ''; ?></p>
+                <p><?=(!empty($enfant->host_family_phone_mobile))? '<i class="icon-phone"></i> <strong>Portable :</strong> '.tool::formatTel($enfant->host_family_phone_mobile) : ''; ?></p>
+                <p><?=(!empty($enfant->host_family_phone_pro))? '<i class="icon-phone"></i> <strong>Pro :</strong> '.tool::formatTel($enfant->host_family_phone_pro) : ''; ?></p>
             <?php endif; ?>
         </div>
     </div>

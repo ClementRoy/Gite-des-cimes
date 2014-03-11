@@ -156,6 +156,13 @@ class tool
 
         return array($lat, $lng);
     }
+
+    public static function formatTel($tel){
+        $tel = str_replace(' ', '', $tel);
+        $tel = chunk_split($tel, 2, " ");
+        return $tel;
+
+    }
 }
 
 ?>

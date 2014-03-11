@@ -8,7 +8,7 @@
 
     <?php if(isset($_POST['submit-update'])): ?>
         <?php  
-tool::output($_POST);
+//tool::output($_POST);
         extract($_POST);
 
         $datas = array(
@@ -24,7 +24,7 @@ tool::output($_POST);
             ':pique_nique' => $form_inscription_pique_nique,
             ':sac' => $form_inscription_sac
         );
-        tool::output($datas);
+        //tool::output($datas);
         $result = dossier::update($datas, $_GET['id']);
 
         //$inscription = inscription::deleteByDossier($dossier->id);
