@@ -93,7 +93,7 @@ ob_start(); ?>
 
 					<!-- <p>Directeur : Lyazid Behlouli 06 50 31 22 88</p> -->
 
-					<p>
+					<p style="margin-bottom:0;">
 						<strong>N° d’enregistrement du ou des séjours :</strong><br>
 						<?php foreach ($inscriptions as $key => $inscription): ?>
 							<?php $sejour = sejour::get($inscription->ref_sejour); ?>
@@ -116,7 +116,7 @@ ob_start(); ?>
 						<p>
 							<strong>Adresse : </strong>
 							<?=$dossier->father_address_number; ?>
-							<?=$dossier->father_address_street; ?><br>
+							<?=$dossier->father_address_street; ?>,<br>
 							<?=$dossier->father_address_postal_code; ?>
 							<?=$dossier->father_address_city; ?>
 						</p>
@@ -127,7 +127,7 @@ ob_start(); ?>
 						<p>
 							<strong>Adresse : </strong>
 							<?=$dossier->mother_address_number; ?>
-							<?=$dossier->mother_address_street; ?><br>
+							<?=$dossier->mother_address_street; ?>,<br>
 							<?=$dossier->mother_address_postal_code; ?>
 							<?=$dossier->mother_address_city; ?>
 						</p>
@@ -138,7 +138,7 @@ ob_start(); ?>
 						<p>
 							<strong>Adresse : </strong>
 							<?=$dossier->father_address_number; ?>
-							<?=$dossier->father_address_street; ?><br>
+							<?=$dossier->father_address_street; ?>,<br>
 							<?=$dossier->father_address_postal_code; ?>
 							<?=$dossier->father_address_city; ?>
 						</p>
@@ -154,7 +154,7 @@ ob_start(); ?>
 						<p>
 							<strong>Adresse : </strong>
 							<?=$structure->address_number; ?>
-							<?=$structure->address_street; ?><br>
+							<?=$structure->address_street; ?>,<br>
 							<?php if (!empty($structure->address_comp)): ?>
 								<?=$structure->address_comp; ?><br>
 							<?php endif; ?>
@@ -168,7 +168,7 @@ ob_start(); ?>
 						<p>
 							<strong>Adresse : </strong>
 							<?=$dossier->guardian_address_number; ?>
-							<?=$dossier->guardian_address_street; ?><br>
+							<?=$dossier->guardian_address_street; ?>,<br>
 							<?=$dossier->guardian_address_postal_code; ?>
 							<?=$dossier->guardian_address_city; ?>
 						</p>
@@ -178,7 +178,10 @@ ob_start(); ?>
 					$structure = structure::get($dossier->organization);
 					$contact = contact::get($dossier->contact);
 					?>
-					<p style="margin-bottom:0;"><strong>Structure interlocutrice : </strong> <?=$structure->name; ?> - <?=$contact->civility; ?> <?=$contact->lastname; ?> <?=$contact->firstname; ?></p>
+					<p style="margin-bottom:0;">
+					<strong>Structure interlocutrice : </strong><br>
+					<?=$structure->name; ?> - <?=$contact->civility; ?> <?=$contact->lastname; ?> <?=$contact->firstname; ?>
+					</p>
 				</td>
 			</tr>
 		</table>
