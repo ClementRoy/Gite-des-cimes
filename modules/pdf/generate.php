@@ -198,7 +198,9 @@ ob_start(); ?>
 					?>
 					<p style="margin-bottom:0;">
 					<strong>Structure interlocutrice : </strong><br>
+					<?php if (!empty($structure->name)): ?>
 					<?=$structure->name; ?> - <?=$contact->civility; ?> <?=$contact->lastname; ?> <?=$contact->firstname; ?>
+					<?php endif ?>
 					</p>
 				</td>
 			</tr>
