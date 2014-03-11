@@ -439,11 +439,13 @@ ob_start(); ?>
 							<p>•&nbsp;&nbsp;La fiche sanitaire remplie</p>
 						<?php endif ?>
 
-						<?php if ($dossier->vaccinations != 1): ?>
+						<?php if ($dossier->vaccination != 1): ?>
 							<p>•&nbsp;&nbsp;La copie du carnet de vaccination</p>
 						<?php endif ?>
 
-						<p>•&nbsp;&nbsp;L'autorisation parentale signée</p>
+						<?php if ($dossier->image_rights != 1): ?>
+							<p>•&nbsp;&nbsp;L'autorisation parentale signée</p>
+						<?php endif ?>
 
 
 						<?php $self_assurance_expiration_date = new DateTime($dossier->self_assurance_expiration_date); ?>
@@ -605,6 +607,7 @@ ob_start(); ?>
 						<?php endforeach; ?>
 
 					</p>
+
 					<p>
 						<?php $date_depart = inscription::getDateDeparture($id); ?>
 						<?php $date_depart = new DateTime($date_depart->date_departure); ?>
@@ -616,8 +619,8 @@ ob_start(); ?>
 						<strong>Date de départ :</strong> <?=$date_depart; ?><br>
 						Lieu : <?=$dossier->place; ?><br>
 						Heure : <?=$dossier->hour_return; ?>
-
 					</p>
+
 					<p>
 						<strong>Petit rappel : </strong><br>
 						<?php if ($dossier->pique_nique): ?>
