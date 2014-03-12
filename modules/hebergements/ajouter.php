@@ -16,7 +16,7 @@
     <div class="content">
 
 
-        <form id="form-add-hebergement" method="post" action="/hebergement/infos/id/<?=$id ?>" parsley-validate>
+        <form id="form-add-hebergement" method="post" action="/hebergements/infos/id/<?=$id ?>" parsley-validate>
 
                     <input type="hidden" value="<?=$id ?>" name="id" />
 

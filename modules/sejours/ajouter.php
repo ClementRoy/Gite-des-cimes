@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="content action-page">
-            <form id="form-add-sejour" method="post" action="/sejour/infos/id/<?=$id ?>" parsley-validate>
+            <form id="form-add-sejour" method="post" action="/sejours/infos/id/<?=$id ?>" parsley-validate>
              <!--  <h2>Informations sur le séjour</h2> -->
 
                     <input type="hidden" value="<?=$id ?>" name="id" />

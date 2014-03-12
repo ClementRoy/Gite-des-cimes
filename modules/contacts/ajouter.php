@@ -18,7 +18,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <form id="form-add-contact" method="post" action="/contact/infos/id/<?=$id ?>" parsley-validate>
+                <form id="form-add-contact" method="post" action="/contacts/infos/id/<?=$id ?>" parsley-validate>
 
                     <input type="hidden" value="<?=$id ?>" name="id" />
 
