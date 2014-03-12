@@ -288,6 +288,9 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                             <thead>
                                 <tr>
                                     <th>
+                                        Dossier
+                                    </th>
+                                    <th>
                                         Prénom
                                     </th>
                                     <th >
@@ -309,8 +312,10 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                             <tbody>
                                 <?php foreach($inscriptions as $key => $inscription): ?>
                                     <?php $enfant = enfant::get($inscription->ref_enfant); ?>
+                                     <?php $dossier = dossier::get($inscription->ref_dossier); ?>
                                     <tr>
                                         <td>
+                                            <a href="/dossiers/infos/id/<?=$dossier->id; ?>"><strong>#<?=$dossier->id ?></strong></a>
                                             <div class="pop-dialog tr">
                                                 <div class="pointer">
                                                     <div class="arrow"></div>
@@ -318,12 +323,14 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                                 </div>
                                                 <div class="body">
                                                     <div class="menu">
-                                                        <a href="/dossiers/infos/id/<?=$inscription->inscription_id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
-                                                        <a href="/dossiers/editer/id/<?=$inscription->inscription_id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
-                                                        <a href="/dossiers/supprimer/id/<?=$inscription->inscription_id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                                        <a href="/dossiers/infos/id/<?=$dossier->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                                        <a href="/dossiers/editer/id/<?=$dossier->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                                        <a href="/dossiers/supprimer/id/<?=$dossier->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
                                                     </div>
                                                 </div>
-                                            </div> 
+                                            </div>
+                                        </td>
+                                        <td>
                                             <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->firstname ?></a>
                                         </td>
                                         <td>
