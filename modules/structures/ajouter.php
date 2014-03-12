@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <form id="form-add-structure" action="/structure/infos/id/<?=$id ?>" method="post" parsley-validate>
+                <form id="form-add-structure" action="/structures/infos/id/<?=$id ?>" method="post" parsley-validate>
 
                     <input type="hidden" value="<?=$id ?>" name="id" />
 
