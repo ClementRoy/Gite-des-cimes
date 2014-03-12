@@ -51,7 +51,7 @@ class contact
         $params = array(
                         ':id' => $id
                         );
-        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_structure=:id';
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_structure=:id AND archived=0';
         $result = $db->query($sql, $params);
         return $result;        
     }

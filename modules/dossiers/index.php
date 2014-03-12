@@ -13,7 +13,7 @@
             <h1>Les dossiers d'inscription</h1>
         </div>
         <div class="col-md-6 text-right">
-            <a href="/inscriptions/ajouter" class="btn btn-primary">
+            <a href="/dossiers/ajouter" class="btn btn-primary">
                 <span>+</span>Ajouter une inscription
             </a>
         </div>
