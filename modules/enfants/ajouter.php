@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-10">
             
-    <form id="form-add-children" method="post" action="/enfant/infos/id/<?=$id ?>" class="maped-form" parsley-validate>
+    <form id="form-add-children" method="post" action="/enfants/infos/id/<?=$id ?>" class="maped-form" parsley-validate>
         <input type="hidden" value="<?=$id ?>" name="id" />
         <div class="row form-wrapper">
             <div class="field-box row">
