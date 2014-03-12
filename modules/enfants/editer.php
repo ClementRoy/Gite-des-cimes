@@ -126,9 +126,17 @@
                                 <label class="col-md-2">Responsable légal de l'enfant</label>
                                 <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez qui est le responsable légal de l'enfant.">
                                     <label class="radio" for="form-enfant-responsable-structure">
+                                        <div class="radio" id="uniform-form-enfant-responsable-defaut">
+                                            <span <?php if ($enfant->guardian == 'structure'): ?> class="checked"<?php endif ?>>
+                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-defaut" value="" <?php if (empty($enfant->guardian)): ?> checked="checked"<?php endif ?>>
+                                            </span>
+                                        </div>
+                                        Non renseigné
+                                    </label>
+                                    <label class="radio" for="form-enfant-responsable-structure">
                                         <div class="radio" id="uniform-form-enfant-responsable-structure">
                                             <span <?php if ($enfant->guardian == 'structure'): ?> class="checked"<?php endif ?>>
-                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-structure" value="structure" checked="checked"<?php if ($enfant->guardian == 'structure'): ?> checked="checked"<?php endif ?>>
+                                                <input type="radio" name="form_enfant_responsable" id="form-enfant-responsable-structure" value="structure" <?php if ($enfant->guardian == 'structure'): ?> checked="checked"<?php endif ?>>
                                             </span>
                                         </div>
                                         Structure

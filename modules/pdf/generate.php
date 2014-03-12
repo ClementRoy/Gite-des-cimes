@@ -107,7 +107,6 @@ ob_start(); ?>
 
 
 				</td>
-
 				<td style="width:50%;padding:15px;" border="1">
 					<h4>LE RESPONSABLE LEGAL EFFECTUANT L’INSCRIPTION</h4>
 					
@@ -136,7 +135,7 @@ ob_start(); ?>
 							<?=$dossier->mother_address_city; ?>
 						</p>
 						<p><strong>Tél. domicile : </strong><?=$dossier->mother_phone_home; ?></p>
-					<?php elseif ($dossier->guardian == 'father'): ?>
+					<?php elseif ($dossier->guardian == 'pere'): ?>
 						<p><strong>Responsable légal : </strong> Père </p>
 						<p><strong>NOM, Prénom : </strong> <?=$dossier->father_name; ?></p>
 						<p>
