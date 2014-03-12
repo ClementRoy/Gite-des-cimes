@@ -246,27 +246,46 @@ ob_start(); ?>
 			<tr>
 				<td>
 					<p style="margin-top:2px;">
-						<?php $price = 0 ?>
-						<?php
-						foreach ($inscriptions as $key => $inscription):
+						<?php $price = 0; ?>
+						<?php $sejours_temp = array(); ?>
+						<?php $sejour_index = 0; ?>
+						<?php foreach ($inscriptions as $key => $inscription):
 							$sejour = sejour::get($inscription->ref_sejour);
-						$hebergement = hebergement::get($sejour->ref_hebergement);
-						$price = $price+$sejour->price; ?>
 
-						<?php $date_from = new DateTime($inscription->date_from); ?>
-						<?php if($date_from->getTimestamp() != '-62169987600'): ?>
-							<?php $date_from = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
-						<?php endif; ?>
+							$hebergement = hebergement::get($sejour->ref_hebergement);
+							$price = $price+$sejour->price;
+							
+							$date_from = new DateTime($inscription->date_from);
+								if($date_from->getTimestamp() != '-62169987600'):
+								$date_from = strftime('%d/%m/%Y', $date_from->getTimestamp());
+							endif;
 
-						<?php $date_to = new DateTime($inscription->date_to); ?>
-						<?php if($date_to->getTimestamp() != '-62169987600'): ?>
-							<?php $date_to = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
-						<?php endif; ?>
+							$date_to = new DateTime($inscription->date_to);
+								if($date_to->getTimestamp() != '-62169987600'):
+								$date_to = strftime('%d/%m/%Y', $date_to->getTimestamp());
+							endif; 
+
+							$temp = array($sejour->numero, $sejour->name, $hebergement->name, $date_from, $date_to, $sejour->price);							
+
+							if (!empty($sejours_temp)) {
+								if ($sejours_temp[$sejour_index-1][0] == $temp[0]) {
+									$sejours_temp[$sejour_index-1] = array($sejour->numero, $sejour->name, $hebergement->name, $sejours_temp[$sejour_index-1][3], $date_to, $sejour->price+$sejours_temp[$sejour_index-1][5]);
+								} else {
+									array_push($sejours_temp, $temp);
+								}
+							} else {
+								array_push($sejours_temp, $temp);
+							}
+							
+							$sejour_index++;
 						
-
-						•&nbsp;&nbsp;Séjour <?=$sejour->name;?> au <?=$hebergement->name;?> : Du <?=$date_from;?> au <?=$date_to;?> - Prix : <?=$sejour->price;?> €<br> 
-						
+							?>
+						<?php endforeach; ?>
+					<?php foreach ($sejours_temp as $key => $sejour_temp): ?>
+					•&nbsp;&nbsp;Séjour <?=$sejour_temp[1];?> au <?=$sejour_temp[2];?> : Du <?=$sejour_temp[3];?> au <?=$sejour_temp[4];?> - Prix : <?=$sejour_temp[5];?> €<br> 
 					<?php endforeach; ?>
+
+
 					•&nbsp;&nbsp;Prix total des séjours : <?=$price ?> €<br>
 					•&nbsp;&nbsp;Renseignements sur l'organisation des départs – retours : Se reporter à la convocation jointe.<br>
 
@@ -608,29 +627,48 @@ ob_start(); ?>
 						<strong>Inscrit au Séjour : </strong><br>
 
 
-						<?php
 
-						foreach ($inscriptions as $key => $inscription):
+						<?php $sejours_temp = array(); ?>
+						<?php $sejour_index = 0; ?>
+						<?php foreach ($inscriptions as $key => $inscription):
 							$sejour = sejour::get($inscription->ref_sejour);
+
 							$hebergement = hebergement::get($sejour->ref_hebergement);
-						?>
+							
+							$date_from = new DateTime($inscription->date_from);
+								if($date_from->getTimestamp() != '-62169987600'):
+								$date_from = strftime('%d/%m/%Y', $date_from->getTimestamp());
+							endif;
 
-						<?php $date_from = new DateTime($inscription->date_from); ?>
-						<?php if($date_from->getTimestamp() != '-62169987600'): ?>
-							<?php $date_from = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
-						<?php endif; ?>
+							$date_to = new DateTime($inscription->date_to);
+								if($date_to->getTimestamp() != '-62169987600'):
+								$date_to = strftime('%d/%m/%Y', $date_to->getTimestamp());
+							endif; 
 
-						<?php $date_to = new DateTime($inscription->date_to); ?>
-						<?php if($date_to->getTimestamp() != '-62169987600'): ?>
-						<?php $date_to = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
-						<?php endif; ?>
+							$temp = array($sejour->numero, $sejour->name, $hebergement->name, $date_from, $date_to);							
+
+							if (!empty($sejours_temp)) {
+								if ($sejours_temp[$sejour_index-1][0] == $temp[0]) {
+									$sejours_temp[$sejour_index-1] = array($sejour->numero, $sejour->name, $hebergement->name, $sejours_temp[$sejour_index-1][3], $date_to);
+								} else {
+									array_push($sejours_temp, $temp);
+								}
+							} else {
+								array_push($sejours_temp, $temp);
+							}
+							
+							$sejour_index++;
 						
-
-							<?=ucfirst($sejour->name);?> — <strong>à</strong> <?=$hebergement->name;?> — <strong>du</strong> : <?=$date_from;?> au <?=$date_to;?><br>
-						
+							?>
 						<?php endforeach; ?>
+					<?php foreach ($sejours_temp as $key => $sejour_temp): ?>
+							<?=ucfirst($sejour_temp[1]);?> — <strong>à</strong> <?=$sejour_temp[2];?> — <strong>du</strong> : <?=$sejour_temp[3];?> au <?=$sejour_temp[4];?><br>
 
-					</p>
+					<?php endforeach; ?>
+
+
+				</p>
+
 
 					<p>
 						<?php $date_depart = inscription::getDateDeparture($id); ?>
@@ -642,7 +680,7 @@ ob_start(); ?>
 						<strong>Est attendu par notre équipe d’animation : </strong><br>
 						<strong>Date de départ :</strong> <?=$date_depart; ?><br>
 						Lieu : <?=$dossier->place; ?><br>
-						Heure : <?=$dossier->hour_return; ?>
+						Heure : <?=$dossier->hour_departure; ?>
 					</p>
 
 					<p>
