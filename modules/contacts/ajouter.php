@@ -134,6 +134,6 @@
                 </form>
             </div>
         </div>
-    <?php endif; ?>
+
 </div>
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
