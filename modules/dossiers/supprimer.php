@@ -33,8 +33,8 @@
 
          <div class="row">
             <div class="col-md-12">
-                <a href="/dossiers/infos/id/<?=$inscription->id; ?>" class="btn-flat white" data-dismiss="modal">Annuler</a>
-                <a href="/dossiers/supprimer/id/<?=$inscription->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
+                <a href="/dossiers/infos/id/<?=$dossier->id; ?>" class="btn-flat white" data-dismiss="modal">Annuler</a>
+                <a href="/dossiers/supprimer/id/<?=$dossier->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
             </div>                
         </div>
 

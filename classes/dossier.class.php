@@ -195,7 +195,7 @@ class dossier
         // $data = array(':id' => $id);
         // $sql = 'DELETE FROM '.self::$table.' WHERE id = :id';
         // $result = $db->delete($sql, $data);
-        $result = self::archive($id);
+        $result = self::delete($id);
         return $result;
     }
 
