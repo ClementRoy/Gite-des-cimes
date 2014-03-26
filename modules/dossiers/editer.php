@@ -98,7 +98,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <form id="form-add-sejour" action="/dossiers/editer/id/<?=$dossier->id ?>" method="post" parsley-validate>
+                <form id="form-add-sejour" action="/dossiers/infos/id/<?=$dossier->id ?>" method="post" parsley-validate>
 
 
                     <div class="field-box row">
@@ -227,10 +227,8 @@
                         <label class="col-md-2" for="form-inscription-lieu-select">Lieu de rendez-vous</label>
                         <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Renseignez le lieu de rendez-vous.">
                             <div class="ui-select">
-                            lieu : <?=$dossier->place; ?><br>
                                 <select class="form-control" id="form-inscription-lieu-select" name="form_inscription_lieu">
                                     <option selected="selected" value="">Choisissez le lieu de rendez-vous</option>
-
                                     <option <?php if( $dossier->place == "Aulnay sous bois, au Parking d'Intermarché"): ?>selected="selected"<?php endif; ?> value="Aulnay sous bois, au Parking d'Intermarché">Aulnay sous bois, au Parking d'Intermarché</option>
                                     <option <?php if( $dossier->place == "Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle"): ?>selected="selected"<?php endif; ?> value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>
                                     <option <?php if( $dossier->place == "Bonneuil en Valois, au Gite"): ?>selected="selected"<?php endif; ?> value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>

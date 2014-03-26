@@ -71,32 +71,46 @@
 
 
 <?php if(isset($_POST['submit-update'])): ?>
-    <?php  
-        //tool::output($_POST);
-    extract($_POST);
-    $form_inscription_date_debut = tool::generateDatetime($form_inscription_date_debut);
-    $form_inscription_date_fin = tool::generateDatetime($form_inscription_date_fin);
+        <?php  
+//tool::output($_POST);
+        extract($_POST);
 
-    $datas = array(
-        ':ref_sejour' => $form_inscription_sejour,
-        ':finished' => $form_inscription_option,
-        ':ref_enfant' => $form_inscription_enfant,
-        ':date_from' => $form_inscription_date_debut,
-        ':date_to' => $form_inscription_date_fin,
-        ':ref_structure_payer' => $form_inscription_structure,
-        ':structure_payer' => $form_inscription_structure_name,
-        ':supported' => $form_inscription_supported,
-        ':note' => $form_inscription_note,
-        ':place' => $form_inscription_lieu,
-        ':hour_departure' => $form_inscription_heure_aller.'h'.$form_inscription_min_aller,
-        ':hour_return' => $form_inscription_heure_retour.'h'.$form_inscription_min_retour,
-        ':pique_nique' => $form_inscription_pique_nique,
-        ':sac' => $form_inscription_sac
+        $datas = array(
+            ':finished' => $form_inscription_option,
+            ':ref_enfant' => $form_inscription_enfant,
+            ':ref_structure_payer' => $form_inscription_structure,
+            ':structure_payer' => $form_inscription_structure_name,
+            ':supported' => $form_inscription_supported,
+            ':note' => $form_inscription_note,
+            ':place' => $form_inscription_lieu,
+            ':hour_departure' => $form_inscription_heure_aller.'h'.$form_inscription_min_aller,
+            ':hour_return' => $form_inscription_heure_retour.'h'.$form_inscription_min_retour,
+            ':pique_nique' => $form_inscription_pique_nique,
+            ':sac' => $form_inscription_sac
         );
+        //tool::output($datas);
+        $result = dossier::update($datas, $_GET['id']);
 
-    $result = dossier::update($datas, $_GET['id']);
+        //$inscription = inscription::deleteByDossier($dossier->id);
 
-    ?>
+        // foreach($form_inscription_sejour as $key => $inscription_entry){
+
+        //     $dates = explode('#', $dates[$key]);
+        //     $form_inscription_date_debut = tool::generateDatetime($dates[0]);
+        //     $form_inscription_date_fin = tool::generateDatetime($dates[1]);
+        //     $datas = array(
+        //         ':ref_enfant' => $form_inscription_enfant,
+        //         ':ref_sejour' => $form_inscription_sejour[$key],
+        //         ':ref_dossier' => $_GET['id'],
+        //         ':date_from' => $form_inscription_date_debut,
+        //         ':date_to' => $form_inscription_date_fin
+        //     );
+        //     tool::output($datas);
+        //     $result = inscription::add($datas);
+        // }
+
+        ?>
+        
     <?php //tool::output($_POST); ?>
     <?php if($result): ?>
 
