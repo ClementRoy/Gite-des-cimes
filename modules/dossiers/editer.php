@@ -6,75 +6,6 @@
 
 <?php $dossier = dossier::get($_GET['id']); ?>
 
-    <?php if(isset($_POST['submit-update'])): ?>
-        <?php  
-//tool::output($_POST);
-        extract($_POST);
-
-        $datas = array(
-            ':finished' => $form_inscription_option,
-            ':ref_enfant' => $form_inscription_enfant,
-            ':ref_structure_payer' => $form_inscription_structure,
-            ':structure_payer' => $form_inscription_structure_name,
-            ':supported' => $form_inscription_supported,
-            ':note' => $form_inscription_note,
-            ':place' => $form_inscription_lieu,
-            ':hour_departure' => $form_inscription_heure_aller.'h'.$form_inscription_min_aller,
-            ':hour_return' => $form_inscription_heure_retour.'h'.$form_inscription_min_retour,
-            ':pique_nique' => $form_inscription_pique_nique,
-            ':sac' => $form_inscription_sac
-        );
-        //tool::output($datas);
-        $result = dossier::update($datas, $_GET['id']);
-
-        //$inscription = inscription::deleteByDossier($dossier->id);
-
-        // foreach($form_inscription_sejour as $key => $inscription_entry){
-
-        //     $dates = explode('#', $dates[$key]);
-        //     $form_inscription_date_debut = tool::generateDatetime($dates[0]);
-        //     $form_inscription_date_fin = tool::generateDatetime($dates[1]);
-        //     $datas = array(
-        //         ':ref_enfant' => $form_inscription_enfant,
-        //         ':ref_sejour' => $form_inscription_sejour[$key],
-        //         ':ref_dossier' => $_GET['id'],
-        //         ':date_from' => $form_inscription_date_debut,
-        //         ':date_to' => $form_inscription_date_fin
-        //     );
-        //     tool::output($datas);
-        //     $result = inscription::add($datas);
-        // }
-
-        ?>
-        <?php //tool::output($_POST); ?>
-        <?php if($result): ?>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        Le dossier d'inscription de <strong><?=$form_inscription_enfant; ?></strong> au séjour <strong></strong> a bien été modifiée
-                    </div>
-                    <a href="/dossiers/">Retourner à la liste des dossiers d'inscription</a>
-                </div>
-            </div>
-
-        <?php else: ?>
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant la modification de l'inscription, veuillez réessayer
-                    </div>
-                    <a href="/dossiers/edit/id/<?=$dossier->id ?>">Retourner au formulaire de modification</a>
-                </div>
-            </div>
-        <?php endif; ?>
-
-    <?php endif; ?>
-
 <div class="title">
     <div class="row header">
         <div class="col-md-12">
@@ -117,6 +48,13 @@
                     </div>
 
 
+                    <?php // TEMPLATE ?>
+
+
+                    <?php // END OF TEMPLATE  ?>
+
+
+
                     <?php //Handle Sejour here ?> 
                     <?php $sejours = sejour::getList(); ?>
                     <?php $sejours_linked = inscription::getLinkedSejours($dossier->id); ?>
@@ -147,7 +85,8 @@
                                                 value="<?=$sejour->id ?>"
                                                 data-nbweek="<?=$nb_weeks ?>"
                                                 data-datesfrom="<?=sejour::getAllBeginsWeek($sejour->id) ?>"
-                                                data-datesto="<?=sejour::getAllEndsWeek($sejour->id) ?>">
+                                                data-datesto="<?=sejour::getAllEndsWeek($sejour->id) ?>"
+                                                data-sejour-id="<?=$sejour->id; ?>">
                                                 <?=$sejour->name ?> du <?=$date_from_string; ?> au <?=$date_to_string; ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -167,13 +106,18 @@
                                 <?php $date_to_string = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
                                 <?php $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
                                 <label style="display: block;">
-                                    <input type="checkbox" name="dates[]" value="<?=$date_from_string; ?>#<?=$date_to_string; ?>" checked="checked"> Semaine <?=$key+1 ?> du <?=$date_from_string; ?> au <?=$date_to_string; ?>
+                                    <input type="checkbox" name="dates[]" value="<?=$date_from_string; ?>#<?=$date_to_string; ?>#<?=$sejour_linked->ref_sejour ?>" checked="checked"> Semaine <?=$key+1 ?> du <?=$date_from_string; ?> au <?=$date_to_string; ?>
                                 </label>
                             <?php endforeach; ?>
                         </div>
                     </div>
 
+                    <div class="field-box row">
+                        <a href="#" class="remove">Retirer cette inscription</a>
+                    </div>
+
                     <?php endforeach; ?>
+
 
                     <button class="btn btn-default duplicate">Inscrire à un autre séjour</button>
                     
@@ -355,9 +299,10 @@
                                 //console.log($sejour.data('nbweek'));
                                 $dates_from = $sejour.data('datesfrom');
                                 $dates_to = $sejour.data('datesto');
+                                $sejour_id = $sejour.data('sejour-id');
                                 if($sejour.data('nbweek') == 0){
                                     // On ne choisit pas de dates, il s'agit d'un week end
-                                    $select.next('.date-range').find('.inject-dates').html('L\'enfant est inscrit sur le week end en intégralité. <input type="hidden" name="dates[]" value="'+$dates_from+'#'+$dates_to+'">');
+                                    $select.next('.date-range').find('.inject-dates').html('L\'enfant est inscrit sur le week end en intégralité. <input type="hidden" name="dates[]" value="'+$dates_from+'#'+$dates_to+'#'+$sejour_id+'">');
                                 }else {
                                     // L'utilisateur peut choisir chaque semaine en checkbox 
                                     console.log($dates_from);
@@ -365,7 +310,7 @@
                                     $dates_to = $dates_to.split('#');
                                     var date_range = '';
                                     for ( var i = 0; i < $sejour.data('nbweek'); i++ ) {
-                                        date_range += '<label style="display: block;"><input type="checkbox" name="dates[]" value="'+$dates_from[i]+'#'+$dates_to[i]+'"> Semaine '+(i+1)+' du '+$dates_from[i]+' au '+$dates_to[i]+'</label>';
+                                        date_range += '<label style="display: block;"><input type="checkbox" name="dates[]" value="'+$dates_from[i]+'#'+$dates_to[i]+'#'+$sejour_id+'"> Semaine '+(i+1)+' du '+$dates_from[i]+' au '+$dates_to[i]+'</label>';
                                     }
                                     $select.next('.date-range').find('.inject-dates').html(date_range)
                                 }
@@ -399,8 +344,17 @@
                             e.preventDefault();
                             $('.sejour-select').first().clone().insertBefore($(this));
                             $('.date-range').first().clone().insertBefore($(this));
+                            $('.remove').first().clone().insertBefore($(this));
                             i++;
 
+                        });
+
+                        $('.remove').click(function(e){
+                            e.preventDefault();
+                            console.log( $(this));
+                            $(this).parent().prev('.date-range').remove();
+                            $(this).parent().prev('.sejour-select').remove();
+                            $(this).remove();
                         });
 
 

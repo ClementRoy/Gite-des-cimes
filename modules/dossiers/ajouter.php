@@ -64,7 +64,8 @@
                                                 value="<?=$sejour->id ?>"
                                                 data-nbweek="<?=$nb_weeks ?>"
                                                 data-datesfrom="<?=sejour::getAllBeginsWeek($sejour->id) ?>"
-                                                data-datesto="<?=sejour::getAllEndsWeek($sejour->id) ?>">
+                                                data-datesto="<?=sejour::getAllEndsWeek($sejour->id) ?>"
+                                                data-sejour-id="<?=$sejour->id; ?>">
                                                 <?=$sejour->name ?> du <?=$date_from_string; ?> au <?=$date_to_string; ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -265,9 +266,10 @@
                                 //console.log($sejour.data('nbweek'));
                                 $dates_from = $sejour.data('datesfrom');
                                 $dates_to = $sejour.data('datesto');
+                                $sejour_id = $sejour.data('sejour-id');
                                 if($sejour.data('nbweek') == 0){
                                     // On ne choisit pas de dates, il s'agit d'un week end
-                                    $select.next('.date-range').find('.inject-dates').html('L\'enfant est inscrit sur le week end en intégralité. <input type="hidden" name="dates[]" value="'+$dates_from+'#'+$dates_to+'">');
+                                    $select.next('.date-range').find('.inject-dates').html('L\'enfant est inscrit sur le week end en intégralité. <input type="hidden" name="dates[]" value="'+$dates_from+'#'+$dates_to+'#'+sejour_id+'">');
                                 }else {
                                     // L'utilisateur peut choisir chaque semaine en checkbox 
                                     console.log($dates_from);
@@ -275,7 +277,7 @@
                                     $dates_to = $dates_to.split('#');
                                     var date_range = '';
                                     for ( var i = 0; i < $sejour.data('nbweek'); i++ ) {
-                                        date_range += '<label style="display: block;"><input type="checkbox" name="dates[]" value="'+$dates_from[i]+'#'+$dates_to[i]+'"> Semaine '+(i+1)+' du '+$dates_from[i]+' au '+$dates_to[i]+'</label>';
+                                        date_range += '<label style="display: block;"><input type="checkbox" name="dates[]" value="'+$dates_from[i]+'#'+$dates_to[i]+'#'+sejour_id+'"> Semaine '+(i+1)+' du '+$dates_from[i]+' au '+$dates_to[i]+'</label>';
                                     }
                                     $select.next('.date-range').find('.inject-dates').html(date_range)
                                 }

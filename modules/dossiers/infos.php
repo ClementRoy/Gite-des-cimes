@@ -5,7 +5,7 @@
 
 <?php if(isset($_POST['submit-add'])): ?>
     <?php  
-     tool::output($_POST);
+    //tool::output($_POST);
     extract($_POST);
 
     $datas = array(
@@ -21,22 +21,22 @@
         ':pique_nique' => $form_inscription_pique_nique,
         ':sac' => $form_inscription_sac
         );
-    tool::output($datas);
+    //tool::output($datas);
     $result = dossier::update($datas, $_GET['id']);
 
-    foreach($dates as $key => $date){
+    foreach($dates as $key => $inscription_entry){
 
-        $date = explode('#', $date);
-        $form_inscription_date_debut = tool::generateDatetime($date[0]);
-        $form_inscription_date_fin = tool::generateDatetime($date[1]);
+        $inscription_entry = explode('#', $inscription_entry);
+        $form_inscription_date_debut = tool::generateDatetime($inscription_entry[0]);
+        $form_inscription_date_fin = tool::generateDatetime($inscription_entry[1]);
         $datas = array(
             ':ref_enfant' => $form_inscription_enfant,
-            ':ref_sejour' => $form_inscription_sejour['0'],
-            ':ref_dossier' => $id,
+            ':ref_sejour' => $inscription_entry['2'],
+            ':ref_dossier' => $_GET['id'],
             ':date_from' => $form_inscription_date_debut,
             ':date_to' => $form_inscription_date_fin
-            );
-        tool::output($datas);
+        );
+        //tool::output($datas);
         $result = inscription::add($datas);
     }
 
@@ -72,7 +72,7 @@
 
 <?php if(isset($_POST['submit-update'])): ?>
         <?php  
-//tool::output($_POST);
+        //tool::output($_POST);
         extract($_POST);
 
         $datas = array(
@@ -91,26 +91,27 @@
         //tool::output($datas);
         $result = dossier::update($datas, $_GET['id']);
 
-        //$inscription = inscription::deleteByDossier($dossier->id);
+        $inscription = inscription::deleteByDossier($_GET['id']);
 
-        // foreach($form_inscription_sejour as $key => $inscription_entry){
+        //tool::output($form_inscription_sejour);
+        foreach($dates as $key => $inscription_entry){
 
-        //     $dates = explode('#', $dates[$key]);
-        //     $form_inscription_date_debut = tool::generateDatetime($dates[0]);
-        //     $form_inscription_date_fin = tool::generateDatetime($dates[1]);
-        //     $datas = array(
-        //         ':ref_enfant' => $form_inscription_enfant,
-        //         ':ref_sejour' => $form_inscription_sejour[$key],
-        //         ':ref_dossier' => $_GET['id'],
-        //         ':date_from' => $form_inscription_date_debut,
-        //         ':date_to' => $form_inscription_date_fin
-        //     );
-        //     tool::output($datas);
-        //     $result = inscription::add($datas);
-        // }
+            $inscription_entry = explode('#', $inscription_entry);
+            $form_inscription_date_debut = tool::generateDatetime($inscription_entry[0]);
+            $form_inscription_date_fin = tool::generateDatetime($inscription_entry[1]);
+            $datas = array(
+                ':ref_enfant' => $form_inscription_enfant,
+                ':ref_sejour' => $inscription_entry['2'],
+                ':ref_dossier' => $_GET['id'],
+                ':date_from' => $form_inscription_date_debut,
+                ':date_to' => $form_inscription_date_fin
+            );
+            //tool::output($datas);
+            $result = inscription::add($datas);
+        }
 
         ?>
-        
+
     <?php //tool::output($_POST); ?>
     <?php if($result): ?>
 
