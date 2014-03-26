@@ -151,9 +151,9 @@ ob_start(); ?>
 						$structure = structure::get($dossier->organization);
 						$contact = contact::get($dossier->contact);
 						?>
-
+					
 						<p><strong>Responsable légal : </strong> Structure </p>
-						<p><strong>NOM, Prénom : </strong> <?=$contact->civility; ?> <?=$contact->lastname; ?> <?=$contact->firstname; ?></p>
+						<p><strong>NOM : </strong> <?=$structure->name; ?></p>
 						<p>
 							<strong>Adresse : </strong>
 							<?=$structure->address_number; ?>
@@ -221,8 +221,9 @@ ob_start(); ?>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<strong>Né (e) le : </strong>
+						
 						<?php $birthdate = new DateTime($dossier->birthdate); ?>
-						<?php if($birthdate->getTimestamp() != '-62169987600'): ?>
+						<?php if($birthdate->getTimestamp() > '-62169984560'): ?>
 							<?=strftime('%d %B %Y', $birthdate->getTimestamp()); ?>
 						<?php endif; ?>
 						
