@@ -474,7 +474,15 @@ $result = enfant::update($datas, $_GET['id']);
                     <div class="col-md-4">
                         <p>
                             <strong>Droit à l'image :</strong>
-                            <?=($enfant->image_rights > 0)?'Oui':'Non'; ?>
+                            <?php if(!$enfant->image_rights): ?>
+                                <i class="icon-remove-sign"></i>
+                            <?php elseif($enfant->image_rights): ?>
+                                Oui
+                            <?php else: ?>
+                                Non
+                            <?php endif; ?>
+
+    
                         </p>
 
                         <p>

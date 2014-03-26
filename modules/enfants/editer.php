@@ -387,28 +387,29 @@
                             </div>
                         </div>
 
-                        <div class="field-box row">
-                            <label class="col-md-2">Droit à l'image</label>
-                            <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Précisez si des photos/vidéos de l'enfant peuvent être utilisé par le gîte.">
-                                <label class="radio-inline col-md-7" for="form-enfant-droit-image-oui">
-                                    <div class="radio" id="uniform-form-enfant-droit-image-oui">
-                                        <span<?php if ($enfant->image_rights): ?> class="checked"<?php endif ?>>
-                                            <input type="radio" name="form_enfant_droit_image" id="form-enfant-droit-image-oui" value="1"<?php if ($enfant->image_rights): ?> checked="checked"<?php endif ?>>
-                                        </span>
-                                    </div>
-                                    Oui
-                                </label>
-                                <label class="radio-inline col-md-4 col-sm-5" for="form-enfant-droit-image-non">
-                                    <div class="radio" id="uniform-form-enfant-droit-image-non">
-                                        <span<?php if (!$enfant->image_rights): ?> class="checked"<?php endif ?>>
-                                            <input type="radio" name="form_enfant_droit_image" id="form-enfant-droit-image-non" value="0"<?php if (!$enfant->image_rights): ?> checked="checked"<?php endif ?>>
-                                        </span>
-                                    </div>
-                                    Non
-                                </label>
-                            </div>
-                        </div>
-     
+
+
+            <div class="field-box row">
+                <label class="col-md-2">Droit à l'image</label>
+                <div class="col-md-5" data-toggle="tooltip" title="Précisez si des photos/vidéos de l'enfant peuvent être utilisé par le gîte.">
+                    <label class="radio-inline col-md-3" for="form-enfant-droit-image-oui">
+                        <input type="radio" name="form_enfant_droit_image" id="form-enfant-droit-image-oui" value="0" <?php if (!$enfant->image_rights): ?> checked="checked"<?php endif ?>>
+                        Non fourni
+                    </label>
+                    <label class="radio-inline col-md-3" for="form-enfant-droit-image-oui">
+                        <input type="radio" name="form_enfant_droit_image" id="form-enfant-droit-image-oui" value="1"<?php if ($enfant->image_rights): ?> checked="checked"<?php endif ?>>
+                        Oui
+                    </label>
+                    <label class="radio-inline col-md-3" for="form-enfant-droit-image-non">
+                        <input type="radio" name="form_enfant_droit_image" id="form-enfant-droit-image-non" value="2"<?php if ($enfant->image_rights > 2): ?> checked="checked"<?php endif ?>>
+                        Non
+                    </label>
+                </div>
+            </div>
+
+
+
+
 
                     <!-- <h2>Informations sanitaires</h2> -->
                         <div class="field-box row">

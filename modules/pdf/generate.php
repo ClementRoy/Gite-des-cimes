@@ -447,13 +447,13 @@ ob_start(); ?>
 					</p>
 					<div style="padding-left:30px;">
 						<p>•&nbsp;&nbsp;Le contrat de séjour</p>
-						<?php if ($dossier->stay_record != 1): ?>
+						<?php if (!$dossier->stay_record): ?>
 							<p>•&nbsp;&nbsp;La fiche de séjour</p>
 						<?php endif ?>
-						<?php if ($dossier->health_record != 1): ?>
+						<?php if (!$dossier->health_record): ?>
 							<p>•&nbsp;&nbsp;La fiche sanitaire</p>
 						<?php endif ?>
-						<?php if ($dossier->image_rights != 1): ?>
+						<?php if (!$dossier->image_rights): ?>
 						<p>•&nbsp;&nbsp;L'autorisation parentale</p>
 						<?php endif ?>
 
@@ -474,19 +474,19 @@ ob_start(); ?>
 
 						<p>•&nbsp;&nbsp;Le contrat de séjour accompagné de l’acompte (ou une prise en charge financière)</p>
 						
-						<?php if ($dossier->stay_record != 1): ?>
+						<?php if (!$dossier->stay_record): ?>
 							<p>•&nbsp;&nbsp;La fiche de séjour complétée et signée</p>
 						<?php endif ?>
 
-						<?php if ($dossier->health_record != 1): ?>
+						<?php if (!$dossier->health_record): ?>
 							<p>•&nbsp;&nbsp;La fiche sanitaire remplie</p>
 						<?php endif ?>
 
-						<?php if ($dossier->vaccination != 1): ?>
+						<?php if (!$dossier->vaccination): ?>
 							<p>•&nbsp;&nbsp;La copie du carnet de vaccination</p>
 						<?php endif ?>
 
-						<?php if ($dossier->image_rights != 1): ?>
+						<?php if (!$dossier->image_rights): ?>
 							<p>•&nbsp;&nbsp;L'autorisation parentale signée</p>
 						<?php endif ?>
 
