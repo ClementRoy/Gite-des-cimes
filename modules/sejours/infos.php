@@ -255,23 +255,23 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                     $tel_mother .= 'pro : '.$enfant->mother_phone_pro."\n";
                                 }
                                 $datas[] = array(
-                                    'Nom' => utf8_decode($enfant->lastname),
-                                    utf8_decode('Prénom') => utf8_decode($enfant->firstname),
+                                    'Nom' => $enfant->lastname,
+                                    utf8_decode('Prénom') => $enfant->firstname,
                                     'Date de naissance' => $birthdate_string,
                                     'Age' => tool::getAgeDetailFromDate($enfant->birthdate),
-                                    utf8_decode('N° sécurité sociale') => utf8_decode($enfant->number_ss),
+                                    utf8_decode('N° sécurité sociale') => $enfant->number_ss,
                                     'Carnet de vaccination' => ($enfant->vaccination > 0)?'oui':'non',
                                     utf8_decode('Traitement médical') => ($enfant->medicals_treatments > 0)?'oui':'non',
-                                    'Contre indications' => utf8_decode($enfant->allergies),
+                                    'Contre indications' => $enfant->allergies,
                                     'Fiche sanitaire' => ($enfant->health_record > 0)?'oui':'non',
-                                    'Adresse' => utf8_decode($address),
-                                    utf8_decode('Famille d\'accueil') => utf8_decode($enfant->host_family_name).(isset($address_host))?utf8_decode($address_host):'',
-                                    'Structure' => (isset($organization->name))?utf8_decode($organization->name):'',
-                                    'Contact' => (!empty($contact))?utf8_decode($contact->civility).' '.utf8_decode($contact->lastname).' '.utf8_decode($contact->firstname):'',
-                                    utf8_decode('Tél contact') => (isset($organization->phone))?utf8_decode($organization->phone):'',
-                                    utf8_decode('Père') => utf8_decode($enfant->father_name),
+                                    'Adresse' => $address,
+                                    utf8_decode('Famille d\'accueil') => $enfant->host_family_name.(isset($address_host))?utf8_decode($address_host):'',
+                                    'Structure' => (isset($organization->name))?$organization->name:'',
+                                    'Contact' => (!empty($contact))?$contact->civility.' '.$contact->lastname.' '.$contact->firstname:'',
+                                    utf8_decode('Tél contact') => (isset($organization->phone))?$organization->phone:'',
+                                    utf8_decode('Père') => $enfant->father_name,
                                     utf8_decode('Tél père') => $tel_father,
-                                    utf8_decode('Mère') => utf8_decode($enfant->mother_name),
+                                    utf8_decode('Mère') => $enfant->mother_name,
                                     utf8_decode('Tél mère') => $tel_mother
                                     );
 }
