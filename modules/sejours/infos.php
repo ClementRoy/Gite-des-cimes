@@ -127,7 +127,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
 <?php $nb_weeks = tool::getNbWeeks($date_from, $date_to); ?>
 <?php if($nb_weeks == 0){
     $nb_weeks = 1;
-    } 
+} 
 ?>
 
 <div class="title">
@@ -176,23 +176,23 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
             <div class="tab-content">
                 <?php for ($i=1; $i <= $nb_weeks; $i++) : ?>
                     <?php 
-                        $date_from_query = new DateTime($sejour->date_from);
-                        $date_to_query = new DateTime($sejour->date_from);
-                        if($date_from->diff($date_to)->format('%d') != 2){
-                            $diff_date_from = $i-1;
-                            $date_from_query->modify("+$diff_date_from weeks");
-                            $date_to_query->modify("+$i weeks");
-                        }
+                    $date_from_query = new DateTime($sejour->date_from);
+                    $date_to_query = new DateTime($sejour->date_from);
+                    if($date_from->diff($date_to)->format('%d') != 2){
+                        $diff_date_from = $i-1;
+                        $date_from_query->modify("+$diff_date_from weeks");
+                        $date_to_query->modify("+$i weeks");
+                    }
                     ?>
 
                     <?php $inscriptions = inscription::getBySejourBetweenDates($sejour->id, $date_from_query, $date_to_query); ?>
 
 
 
-                <div class="tab-pane <?php if($i == 1): ?>active<?php endif; ?>" id="week-<?=$i ?>">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <?php 
+                    <div class="tab-pane <?php if($i == 1): ?>active<?php endif; ?>" id="week-<?=$i ?>">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <?php 
                                 $min = $sejour->capacity_min;
                                 $max = $sejour->capacity_max;
                                 $nb = count($inscriptions);
@@ -201,194 +201,438 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
 
                                 $total = $nb;
                                 $nb = $total - $opt;
-                            ?>
-                            <h6><strong><?=count($inscriptions) ?></strong> Enfants inscrits à ce séjour <?php if($date_from->diff($date_to)->format('%d') != 2): ?> pour la semaine <?=$i ?> <?php endif; ?>
-                                (min : <?=$sejour->capacity_min ?> -  max : <?=$sejour->capacity_max ?>)
-                            </h6>
-                        </div>
-                        <div class="col-md-3 text-right">
-                            <div class="btn-group">
-                                <button class="btn glow"><i class="icon-download-alt"></i></button>
-                                <button class="btn glow dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu text-left">
-                                    <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp() ?>">Récapitulatif mineurs</a></li>
-                                    <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp() ?>">Suivi sanitaire</a></li>
-                                    <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp() ?>">Registre des mineurs</a></li>
-                                </ul>
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                        <?php
-                            if ($total > $max) {
-                                $base = $total;
-                            } else {
-                               $base = $max;
-                            }
-
-                            $pc_nb = $nb*100/$base;
-                            $pc_opt = $opt*100/$base;
-                            $pos_min = $min*100/$base;
-                            $pos_max = $max*100/$base;
-                         ?>
-                            
-                            <div class="progress-label">
-                                <span class="zero" style="left:0;">0</span>
-                                <span class="min" style="left:<?=$pos_min;?>%;"><small>min</small><br><?=$min;?></span>
-                                <span class="max" style="left:<?=$pos_max;?>%;"><small>max</small><br><?=$max;?></span>
-                            <?php if ($total > $max): ?>
-                                <span class="total" style="right:0;"><small>total</small><br><?=$total;?></span>
-                            <?php endif ?>
+                                ?>
+                                <h6><strong><?=count($inscriptions) ?></strong> Enfants inscrits à ce séjour <?php if($date_from->diff($date_to)->format('%d') != 2): ?> pour la semaine <?=$i ?> <?php endif; ?>
+                                    (min : <?=$sejour->capacity_min ?> -  max : <?=$sejour->capacity_max ?>)
+                                </h6>
                             </div>
+                            <div class="col-md-6 text-right">
 
-                            <div class="progress stats">
-                                <div class="progress-bar progress-bar-primary" role="progressbar"
-                                aria-valuenow="<?=$pc_nb;?>"
-                                aria-valuemin="0" aria-valuemax="<?=$min;?>"
-                                style="width: <?=$pc_nb;?>%;">
-                                    <span><?=$nb;?></span>
-                                </div>
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?=$opt;?>" style="width: <?=$pc_opt;?>%;">
-                                    <span><?=$opt;?></span>
-                                </div>
-                            </div>
+             <?php 
+                            $inscriptions = inscription::getBySejourBetweenDatesFinished($sejour->id, $date_from_query, $date_to_query);
+                            $datas = array();
+                            foreach ($inscriptions as $key => $inscription) {
+                                $enfant = enfant::get($inscription->ref_enfant);
+                                $birthdate = new DateTime($enfant->birthdate);
+                                if( $enfant->birthdate != '0000-00-00 00:00:00') {
+                                    $birthdate_string = utf8_decode(strftime('%d %B %Y', $birthdate->getTimestamp()));
+                                }
+                                else {
+                                    $birthdate_string = ' ';
+                                }
+                                $address_host = '';
+                                if(!empty($enfant->father_address_number)){
+                                    $address = $enfant->father_address_number.' '.$enfant->father_address_street.'<br />'.$enfant->father_address_postal_code.' '.$enfant->father_address_city;
+                                }elseif(!empty($enfant->mother_address_postal_code)){
+                                    $address = $enfant->mother_address_number.' '.$enfant->mother_address_street.'<br />'.$enfant->mother_address_postal_code.' '.$enfant->mother_address_city;
+                                }elseif(!empty($enfant->guardian_address_street)){
+                                    $address = $enfant->guardian_address_number.' '.$enfant->guardian_address_street.'<br />'.$enfant->guardian_address_postal_code.' '.$enfant->guardian_address_city;
+                                }elseif(!empty($enfant->host_family_address_street)){
+                                    $address = $enfant->host_family_address_number.' '.$enfant->host_family_address_street.'<br />'.$enfant->host_family_address_postal_code.' '.$enfant->host_family_address_city;
+                                    $address_host = $enfant->host_family_address_number.' '.$enfant->host_family_address_street.'<br />'.$enfant->host_family_address_postal_code.' '.$enfant->host_family_address_city;
+                                }else{
+                                    $address = '';
+                                }
+                                $tel_father = '';
+                                if(isset($enfant->father_phone_home) && !empty($enfant->father_phone_home)){
+                                    $tel_father .= 'tel : '.$enfant->father_phone_home."\n";
+                                }
+                                if(isset($enfant->father_phone_mobile) && !empty($enfant->father_phone_mobile)){
+                                    $tel_father .= 'mobile : '.$enfant->father_phone_mobile."\n";
+                                }
+                                if(isset($enfant->father_phone_pro) && !empty($enfant->father_phone_pro)){
+                                    $tel_father .= 'pro : '.$enfant->father_phone_pro."\n";
+                                }
 
-                            <div class="progress minmax">
-                                <div class="progress-bar progress-bar-danger" role="progressbar"
-                                aria-valuenow="<?=$pos_min;?>"
-                                aria-valuemin="0"
-                                style="width: <?=$pos_min;?>%;">
-                                </div>
-                                <div class="progress-bar progress-bar-success" role="progressbar"
-                                aria-valuenow="<?=$pos_max-$pos_min;?>"
-                                aria-valuemin="0"
-                                style="width: <?=$pos_max-$pos_min;?>%;">
-                                </div>
-                            <?php if ($total > $max): ?>
-                                <div class="progress-bar progress-bar-danger" role="progressbar"
-                                aria-valuenow="<?=100-$pos_max;?>"
-                                aria-valuemin="0"
-                                style="width: <?=100-$pos_max;?>%;">
-                                </div>
-                            <?php endif ?>
+                                $tel_mother = '';
+                                if(isset($enfant->mother_phone_home) && !empty($enfant->mother_phone_home)){
+                                    $tel_mother .= 'tel : '.$enfant->mother_phone_home."\n";
+                                }
+                                if(isset($enfant->mother_phone_mobile) && !empty($enfant->mother_phone_mobile)){
+                                    $tel_mother .= 'mobile : '.$enfant->mother_phone_mobile."\n";
+                                }
+                                if(isset($enfant->mother_phone_pro) && !empty($enfant->mother_phone_pro)){
+                                    $tel_mother .= 'pro : '.$enfant->mother_phone_pro."\n";
+                                }
+                                $datas[] = array(
+                                    'Nom' => utf8_decode($enfant->lastname),
+                                    utf8_decode('Prénom') => utf8_decode($enfant->firstname),
+                                    'Date de naissance' => $birthdate_string,
+                                    'Age' => tool::getAgeDetailFromDate($enfant->birthdate),
+                                    utf8_decode('N° sécurité sociale') => utf8_decode($enfant->number_ss),
+                                    'Carnet de vaccination' => ($enfant->vaccination > 0)?'oui':'non',
+                                    utf8_decode('Traitement médical') => ($enfant->medicals_treatments > 0)?'oui':'non',
+                                    'Contre indications' => utf8_decode($enfant->allergies),
+                                    'Fiche sanitaire' => ($enfant->health_record > 0)?'oui':'non',
+                                    'Adresse' => utf8_decode($address),
+                                    utf8_decode('Famille d\'accueil') => utf8_decode($enfant->host_family_name).(isset($address_host))?utf8_decode($address_host):'',
+                                    'Structure' => (isset($organization->name))?utf8_decode($organization->name):'',
+                                    'Contact' => (!empty($contact))?utf8_decode($contact->civility).' '.utf8_decode($contact->lastname).' '.utf8_decode($contact->firstname):'',
+                                    utf8_decode('Tél contact') => (isset($organization->phone))?utf8_decode($organization->phone):'',
+                                    utf8_decode('Père') => utf8_decode($enfant->father_name),
+                                    utf8_decode('Tél père') => $tel_father,
+                                    utf8_decode('Mère') => utf8_decode($enfant->mother_name),
+                                    utf8_decode('Tél mère') => $tel_mother
+                                    );
+}
+                                //tool::output($datas);
+
+?>
+
+<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-recapitulatif-mineurs">
+    Récapitulatif mineurs
+</button>
+<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-suivi-sanitaire">
+    Suivi sanitaire
+</button>
+<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-registre-des-mineurs">
+    Registre des mineurs
+</button>
+
+
+
+
+
+
+
+<!--                                 <div class="btn-group">
+                                    <button class="btn glow"><i class="icon-download-alt"></i></button>
+                                    <button class="btn glow dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu text-left">
+                                        <li><a href="/export/sejour/type/1/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp() ?>">Récapitulatif mineurs</a></li>
+                                        <li><a href="/export/sejour/type/2/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp() ?>">Suivi sanitaire</a></li>
+                                        <li><a href="/export/sejour/type/3/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp() ?>">Registre des mineurs</a></li>
+                                    </ul>
+                                </div>  -->
                             </div>
                         </div>
-                    </div>
+                        <div class="row">
 
 
+               
 
-                <div class="row">
-                <?php if(count($inscriptions) > 0): ?>
-                    <div class="content-table">
 
-                        <table class="datatable">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        Dossier
-                                    </th>
-                                    <th>
-                                        Prénom
-                                    </th>
-                                    <th >
-                                        <span class="line"></span>
-                                        Nom
-                                    </th>
-                                    <th >
-                                        <span class="line"></span>
-                                        Dates
-                                    </th>
-                                    <th>
-                                        Statut
-                                    </th>
-                                    <th >
-                                        Prise en charge
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach($inscriptions as $key => $inscription): ?>
-                                    <?php $enfant = enfant::get($inscription->ref_enfant); ?>
-                                     <?php $dossier = dossier::get($inscription->ref_dossier); ?>
-                                    <tr>
-                                        <td>
-                                            <a href="/dossiers/infos/id/<?=$dossier->id; ?>"><strong>#<?=$dossier->id ?></strong></a>
-                                            <div class="pop-dialog tr">
-                                                <div class="pointer">
-                                                    <div class="arrow"></div>
-                                                    <div class="arrow_border"></div>
-                                                </div>
-                                                <div class="body">
-                                                    <div class="menu">
-                                                        <a href="/dossiers/infos/id/<?=$dossier->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
-                                                        <a href="/dossiers/editer/id/<?=$dossier->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
-                                                        <a href="/dossiers/supprimer/id/<?=$dossier->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->firstname ?></a>
-                                        </td>
-                                        <td>
-                                            <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->lastname ?></a>
-                                        </td>
-                                        <td>
-                                            <?php $date_from = new DateTime($inscription->date_from); ?>
-                                            <?php $date_to = new DateTime($inscription->date_to); ?>
-                                            du <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?> 
-                                        </td>
-                                        <td>
-                                            <?php if($inscription->finished): ?>
-                                                <span class="label label-success">Confirmé</span>
-                                            <?php else: ?>
-                                                <span class="label label-danger">Non confirmé</span>
-                                            <?php endif; ?>
-                                        </td>
-                                        <td>
-                                            <?php if($inscription->supported): ?>
-                                                <span class="label label-success">Oui</span>
-                                            <?php else: ?>
-                                                <span class="label label-danger">Non</span>
-                                            <?php endif; ?>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-
-                    </div>
-                    <?php else: ?>
-                        <em>Aucune inscription pour le moment</em>
-                    <?php endif; ?>
-                    </div>
-                </div>
-            <?php endfor; ?>
+<div class="modal fade modal-table" id="modal-recapitulatif-mineurs" tabindex="-1" role="dialog" aria-labelledby="modal-recapitulatif-mineurs" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal-label-recapitulatif-mineurs">
+                    Récapitulatif mineurs par âge
+                    <span><?=$sejour->name;?> du <?=strftime('%d %B %Y', $date_from_query->getTimestamp()); ?> au <?=strftime('%d %B %Y', $date_to_query->getTimestamp()); ?></span>
+                </h4>
             </div>
+            <div class="modal-body"><table class="table table table-striped table-bordered" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Date de naissance</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($datas as $key => $data): ?>
+                        <tr>
+                            <td style="font-weight:bold;"><?=$data['Nom'] ?></td>
+                            <td><?=$data[utf8_decode('Prénom')] ?></td>
+                            <td><?=$data['Date de naissance'] ?></td>
+                            <td><?=$data['Age'] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            <a href="/export/sejour/type/1/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp()?>" class="btn btn-primary">
+                <i class="icon icon-download-alt"></i> Télécharger le document
+            </a>
         </div>
     </div>
+</div>
+</div>
 
-
-    <div class="col-md-3 address">
-        <?php if(isset($hebergement )): ?>
-            <?php $geo = tool::getLatLng($hebergement->address_number.' '.$hebergement->address_street.' '.$hebergement->address_postal_code.' '.$hebergement->address_city); ?>
-            <div class="contact">
-                <h6><?=$hebergement->name; ?></h6>
-                <p>
-                    <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$geo[0]; ?>,<?=$geo[1]; ?>&zoom=12&size=210x200&scale=2&markers=<?=$geo[0]; ?>,<?=$geo[1]; ?>&sensor=false" width="100%" alt="">
-                </p>
-                <?php if( !empty($hebergement->address_number) OR !empty($hebergement->address_street) ): ?>
-                    <p>
-                        <?=$hebergement->address_number; ?> <?=$hebergement->address_street; ?><br>
-                        <?=$hebergement->address_postal_code; ?> <?=$hebergement->address_city; ?>
-                    </p>
-                <?php endif; ?>
+<div class="modal fade modal-table" id="modal-suivi-sanitaire" tabindex="-1" role="dialog" aria-labelledby="modal-suivi-sanitaire" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal-label-suivi-sanitaire">
+                    Suivi sanitaire
+                    <span><?=$sejour->name;?> du <?=strftime('%d %B %Y', $date_from_query->getTimestamp()); ?> au <?=strftime('%d %B %Y', $date_to_query->getTimestamp()); ?></span>
+                </h4>
             </div>
-        <?php endif; ?>
+            <div class="modal-body"><table class="table table table-striped table-bordered" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Date de naissance</th>
+                        <th>N° sécurité sociale</th>
+                        <th>Carnet de vaccination</th>
+                        <th>Traitement médical</th>
+                        <th>Contre indications</th>
+                        <th>Fiche sanitaire</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($datas as $key => $data): ?>
+                        <tr>
+                            <td style="font-weight:bold;"><?=$data['Nom'] ?></td>
+                            <td><?=$data[utf8_decode('Prénom')] ?></td>
+                            <td><?=$data['Date de naissance'] ?></td>
+                            <td><?=$data[utf8_decode('N° sécurité sociale')] ?></td>
+                            <td><?=$data['Carnet de vaccination'] ?></td>
+                            <td><?=$data[utf8_decode('Traitement médical')] ?></td>
+                            <td><?=$data['Contre indications'] ?></td>
+                            <td><?=$data['Fiche sanitaire'] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            <a href="/export/sejour/type/2/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp()?>" class="btn btn-primary">
+                <i class="icon icon-download-alt"></i> Télécharger le document
+            </a>
+        </div>
     </div>
+</div>
+</div>
+
+
+
+
+<div class="modal fade modal-table" id="modal-registre-des-mineurs" tabindex="-1" role="dialog" aria-labelledby="modal-registre-des-mineurs" aria-hidden="true">
+    <div class="modal-dialog" style="width: 92%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal-label-registre-des-mineurs">
+                    Registre des mineurs
+                    <span><?=$sejour->name;?> du <?=strftime('%d %B %Y', $date_from_query->getTimestamp()); ?> au <?=strftime('%d %B %Y', $date_to_query->getTimestamp()); ?></span>
+                </h4>
+            </div>
+            <div class="modal-body"><table class="table table table-striped table-bordered" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th >Date de naissance</th>
+                        <th>Adresse de l'enfant</th>
+                        <th>Famille d'accueil</th>
+                        <th>Structure</th>
+                        <th>Nom du contact</th>
+                        <th>Tél structure</th>
+                        <th>Père</th>
+                        <th>Tél père</th>
+                        <th>Mère</th>
+                        <th>Tél mère</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($datas as $key => $data): ?>
+                        <tr>
+                            <td style="font-weight:bold;"><?=$data['Nom'] ?></td>
+                            <td><?=$data[utf8_decode('Prénom')] ?></td>
+                            <td><?=$data['Date de naissance'] ?></td>
+                            <td><?=$data['Adresse'] ?></td>
+                            <td><?=$data[utf8_decode('Famille d\'accueil')] ?></td>
+                            <td><?=$data['Structure'] ?></td>
+                            <td><?=$data['Contact'] ?></td>
+                            <td><?=$data[utf8_decode('Tél contact')] ?></td>
+                            <td><?=$data[utf8_decode('Père')] ?></td>
+                            <td><?=$data[utf8_decode('Tél père')] ?></td>
+                            <td><?=$data[utf8_decode('Mère')] ?></td>
+                            <td><?=$data[utf8_decode('Tél mère')] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            <a href="/export/sejour/type/3/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp()?>" class="btn btn-primary">
+                <i class="icon icon-download-alt"></i> Télécharger le document
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="col-md-12">
+    <?php
+    if ($total > $max) {
+        $base = $total;
+    } else {
+     $base = $max;
+ }
+
+ $pc_nb = $nb*100/$base;
+ $pc_opt = $opt*100/$base;
+ $pos_min = $min*100/$base;
+ $pos_max = $max*100/$base;
+ ?>
+
+ <div class="progress-label">
+    <span class="zero" style="left:0;">0</span>
+    <span class="min" style="left:<?=$pos_min;?>%;"><small>min</small><br><?=$min;?></span>
+    <span class="max" style="left:<?=$pos_max;?>%;"><small>max</small><br><?=$max;?></span>
+    <?php if ($total > $max): ?>
+        <span class="total" style="right:0;"><small>total</small><br><?=$total;?></span>
+    <?php endif ?>
+</div>
+
+<div class="progress stats">
+    <div class="progress-bar progress-bar-primary" role="progressbar"
+    aria-valuenow="<?=$pc_nb;?>"
+    aria-valuemin="0" aria-valuemax="<?=$min;?>"
+    style="width: <?=$pc_nb;?>%;">
+    <span><?=$nb;?></span>
+</div>
+<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?=$opt;?>" style="width: <?=$pc_opt;?>%;">
+    <span><?=$opt;?></span>
+</div>
+</div>
+
+<div class="progress minmax">
+    <div class="progress-bar progress-bar-danger" role="progressbar"
+    aria-valuenow="<?=$pos_min;?>"
+    aria-valuemin="0"
+    style="width: <?=$pos_min;?>%;">
+</div>
+<div class="progress-bar progress-bar-success" role="progressbar"
+aria-valuenow="<?=$pos_max-$pos_min;?>"
+aria-valuemin="0"
+style="width: <?=$pos_max-$pos_min;?>%;">
+</div>
+<?php if ($total > $max): ?>
+    <div class="progress-bar progress-bar-danger" role="progressbar"
+    aria-valuenow="<?=100-$pos_max;?>"
+    aria-valuemin="0"
+    style="width: <?=100-$pos_max;?>%;">
+</div>
+<?php endif ?>
+</div>
+</div>
+</div>
+
+
+
+<div class="row">
+    <?php if(count($inscriptions) > 0): ?>
+        <div class="content-table">
+
+            <table class="datatable">
+                <thead>
+                    <tr>
+                        <th>
+                            Dossier
+                        </th>
+                        <th>
+                            Prénom
+                        </th>
+                        <th >
+                            <span class="line"></span>
+                            Nom
+                        </th>
+                        <th >
+                            <span class="line"></span>
+                            Dates
+                        </th>
+                        <th>
+                            Statut
+                        </th>
+                        <th >
+                            Prise en charge
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($inscriptions as $key => $inscription): ?>
+                        <?php $enfant = enfant::get($inscription->ref_enfant); ?>
+                        <?php $dossier = dossier::get($inscription->ref_dossier); ?>
+                        <tr>
+                            <td>
+                                <a href="/dossiers/infos/id/<?=$dossier->id; ?>"><strong>#<?=$dossier->id ?></strong></a>
+                                <div class="pop-dialog tr">
+                                    <div class="pointer">
+                                        <div class="arrow"></div>
+                                        <div class="arrow_border"></div>
+                                    </div>
+                                    <div class="body">
+                                        <div class="menu">
+                                            <a href="/dossiers/infos/id/<?=$dossier->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                            <a href="/dossiers/editer/id/<?=$dossier->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                            <a href="/dossiers/supprimer/id/<?=$dossier->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->firstname ?></a>
+                            </td>
+                            <td>
+                                <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->lastname ?></a>
+                            </td>
+                            <td>
+                                <?php $date_from = new DateTime($inscription->date_from); ?>
+                                <?php $date_to = new DateTime($inscription->date_to); ?>
+                                du <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?> 
+                            </td>
+                            <td>
+                                <?php if($inscription->finished): ?>
+                                    <span class="label label-success">Confirmé</span>
+                                <?php else: ?>
+                                    <span class="label label-danger">Non confirmé</span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <?php if($inscription->supported): ?>
+                                    <span class="label label-success">Oui</span>
+                                <?php else: ?>
+                                    <span class="label label-danger">Non</span>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+
+        </div>
+    <?php else: ?>
+        <em>Aucune inscription pour le moment</em>
+    <?php endif; ?>
+</div>
+</div>
+<?php endfor; ?>
+</div>
+</div>
+</div>
+
+
+<div class="col-md-3 address">
+    <?php if(isset($hebergement )): ?>
+        <?php $geo = tool::getLatLng($hebergement->address_number.' '.$hebergement->address_street.' '.$hebergement->address_postal_code.' '.$hebergement->address_city); ?>
+        <div class="contact">
+            <h6><?=$hebergement->name; ?></h6>
+            <p>
+                <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$geo[0]; ?>,<?=$geo[1]; ?>&zoom=12&size=210x200&scale=2&markers=<?=$geo[0]; ?>,<?=$geo[1]; ?>&sensor=false" width="100%" alt="">
+            </p>
+            <?php if( !empty($hebergement->address_number) OR !empty($hebergement->address_street) ): ?>
+                <p>
+                    <?=$hebergement->address_number; ?> <?=$hebergement->address_street; ?><br>
+                    <?=$hebergement->address_postal_code; ?> <?=$hebergement->address_city; ?>
+                </p>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+</div>
 
 </div>
 

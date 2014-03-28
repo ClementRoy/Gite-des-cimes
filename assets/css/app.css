@@ -713,6 +713,48 @@ table.dataTable tfoot {
 .footer {
   padding: 10px 50px 10px 112px;
 }
+.modal-backdrop {
+  background-color: rgba(40, 40, 40, 0.85);
+}
+.modal-table h4,
+.modal-table .h4 {
+  font-size: 25px;
+  font-weight: 700;
+}
+.modal-table h4 span,
+.modal-table .h4 span {
+  font-weight: normal;
+  display: block;
+  font-size: 18px;
+  line-height: 1.4em;
+  color: #797979;
+}
+.modal-table .modal-body {
+  padding: 10px 20px;
+}
+.modal-table .table {
+  margin: 0;
+}
+.modal-table .modal-header {
+  padding: 30px 20px 10px;
+  border-bottom: none;
+  min-height: 0;
+}
+.modal-table .modal-content {
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+  border-radius: 0;
+}
+.modal-table .modal-footer {
+  margin-top: 0;
+  padding: 10px 20px 20px;
+  text-align: right;
+  border-top: none;
+}
+.modal-table .modal-dialog {
+  width: 80%;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
 .dataTables_wrapper:before,
 .content:before,
 .dataTables_wrapper:after,

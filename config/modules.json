@@ -65,6 +65,6 @@
 	},
 	"pdf" : {
 		"name" : "pdf",
-		"views" : ["index", "generate", "view"]
+		"views" : ["index", "generate", "generate-registre", "view"]
 	}
 }
