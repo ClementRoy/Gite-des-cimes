@@ -752,8 +752,9 @@ table.dataTable tfoot {
 }
 .modal-table .modal-dialog {
   width: 80%;
-  padding-top: 80px;
-  padding-bottom: 80px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  padding: 0;
 }
 .dataTables_wrapper:before,
 .content:before,

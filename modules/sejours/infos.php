@@ -215,7 +215,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                 $enfant = enfant::get($inscription->ref_enfant);
                                 $birthdate = new DateTime($enfant->birthdate);
                                 if( $enfant->birthdate != '0000-00-00 00:00:00') {
-                                    $birthdate_string = utf8_decode(strftime('%d %B %Y', $birthdate->getTimestamp()));
+                                    $birthdate_string = strftime('%d %B %Y', $birthdate->getTimestamp());
                                 }
                                 else {
                                     $birthdate_string = ' ';
@@ -256,23 +256,23 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                 }
                                 $datas[] = array(
                                     'Nom' => $enfant->lastname,
-                                    utf8_decode('Prénom') => $enfant->firstname,
+                                    'Prénom' => $enfant->firstname,
                                     'Date de naissance' => $birthdate_string,
                                     'Age' => tool::getAgeDetailFromDate($enfant->birthdate),
-                                    utf8_decode('N° sécurité sociale') => $enfant->number_ss,
+                                    'N° sécurité sociale' => $enfant->number_ss,
                                     'Carnet de vaccination' => ($enfant->vaccination > 0)?'oui':'non',
-                                    utf8_decode('Traitement médical') => ($enfant->medicals_treatments > 0)?'oui':'non',
+                                    'Traitement médical' => ($enfant->medicals_treatments > 0)?'oui':'non',
                                     'Contre indications' => $enfant->allergies,
                                     'Fiche sanitaire' => ($enfant->health_record > 0)?'oui':'non',
                                     'Adresse' => $address,
-                                    utf8_decode('Famille d\'accueil') => $enfant->host_family_name.(isset($address_host))?utf8_decode($address_host):'',
+                                    'Famille d\'accueil' => $enfant->host_family_name.(isset($address_host))?$address_host:'',
                                     'Structure' => (isset($organization->name))?$organization->name:'',
                                     'Contact' => (!empty($contact))?$contact->civility.' '.$contact->lastname.' '.$contact->firstname:'',
-                                    utf8_decode('Tél contact') => (isset($organization->phone))?$organization->phone:'',
-                                    utf8_decode('Père') => $enfant->father_name,
-                                    utf8_decode('Tél père') => $tel_father,
-                                    utf8_decode('Mère') => $enfant->mother_name,
-                                    utf8_decode('Tél mère') => $tel_mother
+                                    'Tél contact' => (isset($organization->phone))?$organization->phone:'',
+                                    'Père' => $enfant->father_name,
+                                    'Tél père' => $tel_father,
+                                    'Mère' => $enfant->mother_name,
+                                    'Tél mère' => $tel_mother
                                     );
 }
                                 //tool::output($datas);
@@ -337,7 +337,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                     <?php foreach($datas as $key => $data): ?>
                         <tr>
                             <td style="font-weight:bold;"><?=$data['Nom'] ?></td>
-                            <td><?=$data[utf8_decode('Prénom')] ?></td>
+                            <td><?=$data['Prénom'] ?></td>
                             <td><?=$data['Date de naissance'] ?></td>
                             <td><?=$data['Age'] ?></td>
                         </tr>
@@ -382,11 +382,11 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                     <?php foreach($datas as $key => $data): ?>
                         <tr>
                             <td style="font-weight:bold;"><?=$data['Nom'] ?></td>
-                            <td><?=$data[utf8_decode('Prénom')] ?></td>
+                            <td><?=$data['Prénom'] ?></td>
                             <td><?=$data['Date de naissance'] ?></td>
-                            <td><?=$data[utf8_decode('N° sécurité sociale')] ?></td>
+                            <td><?=$data['N° sécurité sociale'] ?></td>
                             <td><?=$data['Carnet de vaccination'] ?></td>
-                            <td><?=$data[utf8_decode('Traitement médical')] ?></td>
+                            <td><?=$data['Traitement médical'] ?></td>
                             <td><?=$data['Contre indications'] ?></td>
                             <td><?=$data['Fiche sanitaire'] ?></td>
                         </tr>
@@ -438,17 +438,17 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                     <?php foreach($datas as $key => $data): ?>
                         <tr>
                             <td style="font-weight:bold;"><?=$data['Nom'] ?></td>
-                            <td><?=$data[utf8_decode('Prénom')] ?></td>
-                            <td><?=$data[utf8_decode('Date de naissance')] ?></td>
+                            <td><?=$data['Prénom'] ?></td>
+                            <td><?=$data['Date de naissance'] ?></td>
                             <td><?=$data['Adresse'] ?></td>
-                            <td><?=$data[utf8_decode('Famille d\'accueil')] ?></td>
+                            <td><?=$data['Famille d\'accueil'] ?></td>
                             <td><?=$data['Structure'] ?></td>
                             <td><?=$data['Contact'] ?></td>
-                            <td><?=$data[utf8_decode('Tél contact')] ?></td>
-                            <td><?=$data[utf8_decode('Père')] ?></td>
-                            <td><?=$data[utf8_decode('Tél père')] ?></td>
-                            <td><?=$data[utf8_decode('Mère')] ?></td>
-                            <td><?=$data[utf8_decode('Tél mère')] ?></td>
+                            <td><?=$data['Tél contact'] ?></td>
+                            <td><?=$data['Père'] ?></td>
+                            <td><?=$data['Tél père'] ?></td>
+                            <td><?=$data['Mère'] ?></td>
+                            <td><?=$data['Tél mère'] ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
