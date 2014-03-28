@@ -439,7 +439,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                         <tr>
                             <td style="font-weight:bold;"><?=$data['Nom'] ?></td>
                             <td><?=$data[utf8_decode('Prénom')] ?></td>
-                            <td><?=$data['Date de naissance'] ?></td>
+                            <td><?=$data[utf8_decode('Date de naissance')] ?></td>
                             <td><?=$data['Adresse'] ?></td>
                             <td><?=$data[utf8_decode('Famille d\'accueil')] ?></td>
                             <td><?=$data['Structure'] ?></td>
