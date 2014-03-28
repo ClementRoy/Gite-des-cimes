@@ -208,8 +208,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                             </div>
                             <div class="col-md-6 text-right">
 
-             <?php 
-                            $inscriptions = inscription::getBySejourBetweenDatesFinished($sejour->id, $date_from_query, $date_to_query);
+             <?
                             $datas = array();
                             foreach ($inscriptions as $key => $inscription) {
                                 $enfant = enfant::get($inscription->ref_enfant);
@@ -279,13 +278,13 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
 
 ?>
 
-<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-recapitulatif-mineurs">
+<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-recapitulatif-mineurs-<?=$i?>">
     Récapitulatif mineurs
 </button>
-<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-suivi-sanitaire">
+<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-suivi-sanitaire-<?=$i?>">
     Suivi sanitaire
 </button>
-<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-registre-des-mineurs">
+<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-registre-des-mineurs-<?=$i?>">
     Registre des mineurs
 </button>
 
@@ -314,12 +313,12 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                
 
 
-<div class="modal fade modal-table" id="modal-recapitulatif-mineurs" tabindex="-1" role="dialog" aria-labelledby="modal-recapitulatif-mineurs" aria-hidden="true">
+<div class="modal fade modal-table" id="modal-recapitulatif-mineurs-<?=$i?>" tabindex="-1" role="dialog" aria-labelledby="modal-recapitulatif-mineurs-<?=$i?>" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="modal-label-recapitulatif-mineurs">
+                <h4 class="modal-title" id="modal-label-recapitulatif-mineurs-<?=$i?>">
                     Récapitulatif mineurs par âge
                     <span><?=$sejour->name;?> du <?=strftime('%d %B %Y', $date_from_query->getTimestamp()); ?> au <?=strftime('%d %B %Y', $date_to_query->getTimestamp()); ?></span>
                 </h4>
@@ -355,12 +354,12 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
 </div>
 </div>
 
-<div class="modal fade modal-table" id="modal-suivi-sanitaire" tabindex="-1" role="dialog" aria-labelledby="modal-suivi-sanitaire" aria-hidden="true">
+<div class="modal fade modal-table" id="modal-suivi-sanitaire-<?=$i?>" tabindex="-1" role="dialog" aria-labelledby="modal-suivi-sanitaire-<?=$i?>" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="modal-label-suivi-sanitaire">
+                <h4 class="modal-title" id="modal-label-suivi-sanitaire-<?=$i?>">
                     Suivi sanitaire
                     <span><?=$sejour->name;?> du <?=strftime('%d %B %Y', $date_from_query->getTimestamp()); ?> au <?=strftime('%d %B %Y', $date_to_query->getTimestamp()); ?></span>
                 </h4>
@@ -407,12 +406,12 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
 
 
 
-<div class="modal fade modal-table" id="modal-registre-des-mineurs" tabindex="-1" role="dialog" aria-labelledby="modal-registre-des-mineurs" aria-hidden="true">
+<div class="modal fade modal-table" id="modal-registre-des-mineurs-<?=$i?>" tabindex="-1" role="dialog" aria-labelledby="modal-registre-des-mineurs-<?=$i?>" aria-hidden="true">
     <div class="modal-dialog" style="width: 92%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="modal-label-registre-des-mineurs">
+                <h4 class="modal-title" id="modal-label-registre-des-mineurs-<?=$i?>">
                     Registre des mineurs
                     <span><?=$sejour->name;?> du <?=strftime('%d %B %Y', $date_from_query->getTimestamp()); ?> au <?=strftime('%d %B %Y', $date_to_query->getTimestamp()); ?></span>
                 </h4>
