@@ -735,6 +735,10 @@ table.dataTable tfoot {
 .modal-table .table {
   margin: 0;
 }
+.modal-table .table tbody > tr > td {
+  padding: 3px 7px;
+  line-height: 1.25em;
+}
 .modal-table .modal-header {
   padding: 30px 20px 10px;
   border-bottom: none;
