@@ -3,6 +3,9 @@
 	<div class="footer" role="contentinfo">
 		<p>Conçu et développé avec tout l'♥ du monde par <a href="https://twitter.com/C_Beghin">@C_Beghin</a> and <a href="https://twitter.com/ClementRoy">@ClementRoy</a> - version <?=app::VERSION?>.</p>
 	</div>
+    <?php if (APP_VERSION != 'dev'): ?>
+    <script src="/assets/dist/js/s.js"></script>
+    <?php else: ?>
 
 	<!-- Communs -->
     <?php //<script src="/assets/js/wysihtml5-0.3.0.js"></script> ?>
@@ -28,14 +31,7 @@
     <script src="/assets/js/app.js"></script>
     <script src="/assets/js/ajax.js"></script>
 
-    <script>
-        $(function(){
-
-    
-    
-        });
-    </script>
-    <?php // TODO: create a dalyed system, with obtstart ?>
+    <?php endif; ?>
                                         
 <body>
 </html>

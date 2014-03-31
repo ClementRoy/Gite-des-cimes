@@ -3,17 +3,11 @@
   "version": "0.0.0",
   "description": "Gite-des-cimes",
   "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-contrib-less": "~0.9.0",
-    "load-grunt-tasks": "~0.3.0",
-    "clean-css": "~2.1.1",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-autoprefixer": "~0.7.1",
-    "grunt-contrib-imagemin": "~0.5.0",
-    "grunt-contrib-csslint": "~0.2.0",
-    "grunt-contrib-cssmin": "~0.8.0",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": "~0.3.2",
-    "install": "~0.1.7"
+    "grunt": "~0.4.4",
+    "load-grunt-tasks": "~0.4.0",
+    "grunt-contrib-less": "~0.11.0",
+    "grunt-contrib-cssmin": "~0.9.0",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-uglify": "~0.4.0"
   }
 }

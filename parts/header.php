@@ -10,12 +10,12 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="/assets/img/favicon.png">
 
-    <?php if (APP_VERSION != 'dev'): ?>
-        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,800,700,600,300' rel='stylesheet' type='text/css'>
-        <link href="/assets/dist/css/app.css" rel="stylesheet" />
-        <script src="/assets/dist/js/jquery.js"></script>
-    <?php else: ?>
+<?php if (APP_VERSION != 'dev'): ?>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,800,700,600,300' rel='stylesheet' type='text/css'>
+    <link href="/assets/dist/css/s.css" rel="stylesheet" />
+    <script src="/assets/dist/js/jquery.min.js"></script>
+<?php else: ?>
     <!-- bootstrap -->
     <link href="/assets/css/bootstrap.css" rel="stylesheet" />
     <!--     <link href="/assets/css/bootstrap-overrides.css" type="text/css" rel="stylesheet" /> -->
@@ -40,7 +40,7 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <script src="/assets/js/jquery.js"></script>
-    <?php endif ?>
+<?php endif ?>
 </head>
 <body class="clearfix">
     <div class="wrapper">
