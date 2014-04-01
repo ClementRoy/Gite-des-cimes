@@ -42,6 +42,22 @@
 $enfants = enfant::getDisplayedList();   
 $the_datas = array();
 foreach($enfants as $key => $enfant) {
+
+    $popup = '
+     <div class="pop-dialog tr">
+        <div class="pointer">
+            <div class="arrow"></div>
+            <div class="arrow_border"></div>
+        </div>
+        <div class="body">
+            <div class="menu">
+                <a href="/enfants/infos/id/'.$enfant->id.'" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                <a href="/enfants/editer/id/'.$enfant->id.'" class="item"><i class="icon-edit"></i> Modifier</a>
+                <a href="/enfants/supprimer/id/'.$enfant->id.'" class="item"><i class="icon-remove"></i> Supprimer</a>
+            </div>
+        </div>
+    </div>';
+
     if( $enfant->number_ss != 0 && $enfant->self_assurance > 0 && $enfant->cpam_attestation > 0 && !empty($enfant->self_assurance_expiration_date) && $enfant->health_record > 0 && $enfant->vaccination > 0 ) {
         $complete = '<span class="label label-success">Complète</span>';
     } else {
@@ -68,7 +84,7 @@ foreach($enfants as $key => $enfant) {
     } else {
         $sex = '<i class="icon-male"></i> Masculin';
     }
-    $the_data = ['<a href="/enfants/infos/id/'.$enfant->id.'">'.$enfant->lastname.'</a>', '<a href="/enfants/infos/id/'.$enfant->id.'">'.$enfant->firstname.'</a>', $sex, $complete, $birth, $age];
+    $the_data = ['<a href="/enfants/infos/id/'.$enfant->id.'">'.$enfant->lastname.'</a>'.$popup, '<a href="/enfants/infos/id/'.$enfant->id.'">'.$enfant->firstname.'</a>', $sex, $complete, $birth, $age];
     $the_datas[] = $the_data;
 }
 ?>
