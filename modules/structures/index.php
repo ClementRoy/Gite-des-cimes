@@ -29,6 +29,7 @@
                 <thead>
                     <tr>
                         <th class="sortable">Nom</th>
+                        <th class="sortable">Service</th>
                         <th class="sortable">Téléphone</th>
                         <th class="sortable">Email</th>
                         <th class="sortable">Ville</th>
@@ -38,6 +39,7 @@
                 <tfoot>
                     <tr>
                         <th class="sortable">Nom</th>
+                        <th class="sortable">Service</th>
                         <th class="sortable">Téléphone</th>
                         <th class="sortable">Email</th>
                         <th class="sortable">Ville</th>
@@ -63,7 +65,10 @@
                                 </div>
                             </td>
                             <td>
-                                <?=$structure->phone; ?>
+                                <?=tool::check($structure->service); ?>
+                            </td>
+                            <td style="min-width: 110px;">
+                                <?=tool::formatTel($structure->phone); ?>
                             </td>
                             <td>
                                 <a href="mailto:<?=$structure->email; ?>"><?=$structure->email; ?></a>

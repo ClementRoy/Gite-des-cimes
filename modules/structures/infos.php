@@ -170,11 +170,11 @@
                 </li>
                 <li class="list-group-item">
                   <p><strong>Téléphone :</strong></p>
-                  <p><?=(!empty($structure->phone)) ? $structure->phone : EMPTYVAL; ?></p>
+                  <p><?=(!empty($structure->phone)) ? tool::formatTel($structure->phone) : EMPTYVAL; ?></p>
                 </li>
                 <li class="list-group-item">
                   <p><strong>Fax :</strong></p>
-                  <p><?=(!empty($structure->fax)) ? $structure->fax : EMPTYVAL; ?></p>
+                  <p><?=(!empty($structure->fax)) ? tool::formatTel($structure->fax) : EMPTYVAL; ?></p>
                 </li>
               </ul>
             </div>
@@ -282,7 +282,7 @@
     <?php if(!empty($structure->email)): ?>
     <div class="contact">
       <h6><strong>Téléphone :</strong></h6>
-      <p><i class="icon-phone"></i> <?=(!empty($structure->phone)) ? $structure->phone : EMPTYVAL; ?></p>
+      <p><i class="icon-phone"></i> <?=(!empty($structure->phone)) ? tool::formatTel($structure->phone) : EMPTYVAL; ?></p>
       </div>
        <?php endif; ?>
 

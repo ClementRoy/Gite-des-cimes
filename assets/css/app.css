@@ -517,7 +517,7 @@ table.dataTable thead > tr > th {
 }
 table.datatable td,
 table.dataTable td {
-  padding: 8px 20px;
+  padding: 8px 15px;
   position: relative;
   border-bottom: 1px solid #EDF2F7;
 }

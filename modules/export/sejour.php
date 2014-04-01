@@ -117,25 +117,25 @@ elseif($type == 3){
 // (isset($organization->father_phone_home))?'tel : '.utf8_decode($enfant->father_phone_home)."\n ".:''.(isset($organization->father_phone_mobile))?"mobile : ".utf8_decode($enfant->father_phone_mobile)."\n":''.(isset($organization->father_phone_pro))?" pro : ".utf8_decode($enfant->father_phone_pro):'',
 $tel_father = '';
 if(isset($enfant->father_phone_home) && !empty($enfant->father_phone_home)){
-	$tel_father .= 'tel : '.$enfant->father_phone_home."\n";
+	$tel_father .= 'tel : '.tool::formatTel($enfant->father_phone_home)."\n";
 }
 if(isset($enfant->father_phone_mobile) && !empty($enfant->father_phone_mobile)){
-	$tel_father .= 'mobile : '.$enfant->father_phone_mobile."\n";
+	$tel_father .= 'mobile : '.tool::formatTel($enfant->father_phone_mobile)."\n";
 }
 if(isset($enfant->father_phone_pro) && !empty($enfant->father_phone_pro)){
-	$tel_father .= 'pro : '.$enfant->father_phone_pro."\n";
+	$tel_father .= 'pro : '.tool::formatTel($enfant->father_phone_pro)."\n";
 }
 
 $tel_mother = '';
 
 if(isset($enfant->mother_phone_home) && !empty($enfant->mother_phone_home)){
-	$tel_mother .= 'tel : '.$enfant->mother_phone_home."\n";
+	$tel_mother .= 'tel : '.tool::formatTel($enfant->mother_phone_home)."\n";
 }
 if(isset($enfant->mother_phone_mobile) && !empty($enfant->mother_phone_mobile)){
-	$tel_mother .= 'mobile : '.$enfant->mother_phone_mobile."\n";
+	$tel_mother .= 'mobile : '.tool::formatTel($enfant->mother_phone_mobile)."\n";
 }
 if(isset($enfant->mother_phone_pro) && !empty($enfant->mother_phone_pro)){
-	$tel_mother .= 'pro : '.$enfant->mother_phone_pro."\n";
+	$tel_mother .= 'pro : '.tool::formatTel($enfant->mother_phone_pro)."\n";
 }
 
 // 'tel : '.utf8_decode($enfant->mother_phone_home)."\n mobile : ".utf8_decode($enfant->mother_phone_mobile)."\n pro : ".utf8_decode($enfant->mother_phone_pro),
@@ -147,7 +147,7 @@ if(isset($enfant->mother_phone_pro) && !empty($enfant->mother_phone_pro)){
 			utf8_decode("Famille d'accueil") => utf8_decode($enfant->host_family_name).(isset($address_host))?utf8_decode($address_host):'',
 			utf8_decode('Structure') => (isset($organization->name))?utf8_decode($organization->name):'',
 			utf8_decode('Nom Contact') => (!empty($contact))?utf8_decode($contact->civility).' '.utf8_decode($contact->lastname).' '.utf8_decode($contact->firstname):'',
-			utf8_decode('Tél structure') => (isset($organization->phone))?utf8_decode($organization->phone):'',
+			utf8_decode('Tél structure') => (isset($organization->phone))?utf8_decode(tool::formatTel($organization->phone)):'',
 			utf8_decode('Père') => utf8_decode($enfant->father_name),
 			utf8_decode('Tél père') => $tel_father,
 			utf8_decode('Mère') => utf8_decode($enfant->mother_name),

@@ -123,7 +123,7 @@ ob_start(); ?>
 							<?=$dossier->father_address_postal_code; ?>
 							<?=$dossier->father_address_city; ?>
 						</p>
-						<p><strong>Tél. domicile : </strong><?=$dossier->father_phone_home; ?></p>
+						<p><strong>Tél. domicile : </strong><?=tool::formatTel($dossier->father_phone_home); ?></p>
 					<?php elseif ($dossier->guardian == 'mere'): ?>
 						<p><strong>Responsable légal : </strong> Mère </p>
 						<p><strong>NOM, Prénom : </strong> <?=$dossier->mother_name; ?></p>
@@ -134,7 +134,7 @@ ob_start(); ?>
 							<?=$dossier->mother_address_postal_code; ?>
 							<?=$dossier->mother_address_city; ?>
 						</p>
-						<p><strong>Tél. domicile : </strong><?=$dossier->mother_phone_home; ?></p>
+						<p><strong>Tél. domicile : </strong><?=tool::formatTel($dossier->mother_phone_home); ?></p>
 					<?php elseif ($dossier->guardian == 'pere'): ?>
 						<p><strong>Responsable légal : </strong> Père </p>
 						<p><strong>NOM, Prénom : </strong> <?=$dossier->father_name; ?></p>
@@ -145,26 +145,35 @@ ob_start(); ?>
 							<?=$dossier->father_address_postal_code; ?>
 							<?=$dossier->father_address_city; ?>
 						</p>
-						<p><strong>Tél. domicile : </strong><?=$dossier->father_phone_home; ?></p>
+						<p><strong>Tél. domicile : </strong><?=tool::formatTel($dossier->father_phone_home); ?></p>
 					<?php elseif ($dossier->guardian == 'structure'): ?>
 						<?php 
 						$structure = structure::get($dossier->organization);
 						$contact = contact::get($dossier->contact);
 						?>
-					
-						<p><strong>Responsable légal : </strong> Structure </p>
-						<p><strong>NOM : </strong> <?=$structure->name; ?></p>
-						<p>
-							<strong>Adresse : </strong>
-							<?=$structure->address_number; ?>
-							<?=$structure->address_street; ?>,<br>
-							<?php if (!empty($structure->address_comp)): ?>
-								<?=$structure->address_comp; ?><br>
-							<?php endif; ?>
-							<?=$structure->address_postal_code; ?>
-							<?=$structure->address_city; ?>
-						</p>
-						<p><strong>Tél. domicile : </strong><?=$structure->phone; ?></p>
+						<?php if(tool::check($structure)): ?>
+							<p><strong>Responsable légal : </strong> Structure </p>
+							<p><strong>NOM : </strong> <?=$structure->name; ?></p>
+							<p>
+								<strong>Adresse : </strong>
+								<?=$structure->address_number; ?>
+								<?=$structure->address_street; ?>,<br>
+								<?php if (!empty($structure->address_comp)): ?>
+									<?=$structure->address_comp; ?><br>
+								<?php endif; ?>
+								<?=$structure->address_postal_code; ?>
+								<?=$structure->address_city; ?>
+							</p>
+							<p><strong>Tél. domicile : </strong><?=tool::formatTel($structure->phone); ?></p>
+						<?php else: ?>
+							<p><strong>Responsable légal : </strong> Structure </p>
+							<p><strong>NOM : </strong></p>
+							<p>
+								<strong>Adresse : </strong>
+								<br>
+							</p>
+							<p><strong>Tél. domicile :</strong></p>
+						<?php endif; ?>
 					<?php elseif ($dossier->guardian == 'tuteur'): ?>
 						<p><strong>Responsable légal : </strong> Tuteur </p>
 						<p><strong>NOM, Prénom : </strong> <?=$dossier->guardian_name; ?></p>
@@ -175,7 +184,7 @@ ob_start(); ?>
 							<?=$dossier->guardian_address_postal_code; ?>
 							<?=$dossier->guardian_address_city; ?>
 						</p>
-						<p><strong>Tél. domicile : </strong><?=$dossier->guardian_phone_home; ?></p>
+						<p><strong>Tél. domicile : </strong><?=tool::formatTel($dossier->guardian_phone_home); ?></p>
 
 					<?php else: ?>
 
@@ -394,12 +403,12 @@ ob_start(); ?>
 			<tr style="text-align:right;">
 				<td>
 					<?php if ($dossier->registration_by == 'structure'): ?>
-
+						<?php if(tool::check($structure)): ?>
 						<p>
 							<strong>Adressé à :</strong> <?=$structure->name; ?><br>
 							<strong>A l'attention de :</strong> <?=$contact->civility; ?> <?=$contact->lastname; ?> <?=$contact->firstname; ?>
 						</p>
-
+						<?php endif; ?>
 					<?php else: ?>
 
 						<?php if ($dossier->guardian == 'parents'): ?>
@@ -586,12 +595,12 @@ ob_start(); ?>
 			<tr style="text-align:right;">
 				<td>
 					<?php if ($dossier->registration_by == 'structure'): ?>
-
+						<?php if(tool::check($structure)): ?>
 						<p>
 							<strong>Adressé à :</strong> <?=$structure->name; ?><br>
 							<strong>A l'attention de :</strong> <?=$contact->civility; ?> <?=$contact->lastname; ?> <?=$contact->firstname; ?>
 						</p>
-
+						<?php endif; ?>
 					<?php else: ?>
 
 						<?php if ($dossier->guardian == 'parents'): ?>
@@ -699,7 +708,7 @@ ob_start(); ?>
 						<?php $date_retour = strftime('%d/%m/%Y', $date_retour->getTimestamp()); ?>
 						<?php endif; ?>
 						
-						<strong>Date de départ :</strong> <?=$date_retour; ?><br>
+						<strong>Date de retour :</strong> <?=$date_retour; ?><br>
 						Lieu : <?=$dossier->place; ?><br>
 						Heure : <?=$dossier->hour_return; ?>
 					</p>

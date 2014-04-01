@@ -214,47 +214,49 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                 $enfant = enfant::get($inscription->ref_enfant);
                                 $birthdate = new DateTime($enfant->birthdate);
                                 if( $enfant->birthdate != '0000-00-00 00:00:00') {
-                                    $birthdate_string = strftime('%d %B %Y', $birthdate->getTimestamp());
+                                    $birthdate_string = strftime('%d/%m/%Y', $birthdate->getTimestamp());
                                 }
                                 else {
                                     $birthdate_string = ' ';
                                 }
                                 $address_host = '';
-                                if(!empty($enfant->father_address_number)){
+                                if(tool::check($enfant->father_address_number)){
                                     $address = $enfant->father_address_number.' '.$enfant->father_address_street.'<br />'.$enfant->father_address_postal_code.' '.$enfant->father_address_city;
-                                }elseif(!empty($enfant->mother_address_postal_code)){
+                                }elseif(tool::check($enfant->mother_address_postal_code)){
                                     $address = $enfant->mother_address_number.' '.$enfant->mother_address_street.'<br />'.$enfant->mother_address_postal_code.' '.$enfant->mother_address_city;
-                                }elseif(!empty($enfant->guardian_address_street)){
+                                }elseif(tool::check($enfant->guardian_address_street)){
                                     $address = $enfant->guardian_address_number.' '.$enfant->guardian_address_street.'<br />'.$enfant->guardian_address_postal_code.' '.$enfant->guardian_address_city;
-                                }elseif(!empty($enfant->host_family_address_street)){
+                                }elseif(tool::check($enfant->host_family_address_street)){
                                     $address = $enfant->host_family_address_number.' '.$enfant->host_family_address_street.'<br />'.$enfant->host_family_address_postal_code.' '.$enfant->host_family_address_city;
                                     $address_host = $enfant->host_family_address_number.' '.$enfant->host_family_address_street.'<br />'.$enfant->host_family_address_postal_code.' '.$enfant->host_family_address_city;
                                 }else{
                                     $address = '';
                                 }
                                 $tel_father = '';
-                                if(isset($enfant->father_phone_home) && !empty($enfant->father_phone_home)){
-                                    $tel_father .= 'tel : '.$enfant->father_phone_home."\n";
+                                if(tool::check($enfant->father_phone_home)){
+                                    $tel_father .= 'Fixe : '.tool::formatTel($enfant->father_phone_home)."\n";
                                 }
-                                if(isset($enfant->father_phone_mobile) && !empty($enfant->father_phone_mobile)){
-                                    $tel_father .= 'mobile : '.$enfant->father_phone_mobile."\n";
+                                if(tool::check($enfant->father_phone_mobile)){
+                                    $tel_father .= 'Mobile : '.tool::formatTel($enfant->father_phone_mobile)."\n";
                                 }
-                                if(isset($enfant->father_phone_pro) && !empty($enfant->father_phone_pro)){
-                                    $tel_father .= 'pro : '.$enfant->father_phone_pro."\n";
+                                if(tool::check($enfant->father_phone_pro)){
+                                    $tel_father .= 'Pro : '.tool::formatTel($enfant->father_phone_pro)."\n";
                                 }
 
                                 $tel_mother = '';
-                                if(isset($enfant->mother_phone_home) && !empty($enfant->mother_phone_home)){
-                                    $tel_mother .= 'tel : '.$enfant->mother_phone_home."\n";
+                                if(tool::check($enfant->mother_phone_home)){
+                                    $tel_mother .= 'Fixe : '.tool::formatTel($enfant->mother_phone_home)."\n";
                                 }
-                                if(isset($enfant->mother_phone_mobile) && !empty($enfant->mother_phone_mobile)){
-                                    $tel_mother .= 'mobile : '.$enfant->mother_phone_mobile."\n";
+                                if(tool::check($enfant->mother_phone_mobile)){
+                                    $tel_mother .= 'Mobile : '.tool::formatTel($enfant->mother_phone_mobile)."\n";
                                 }
-                                if(isset($enfant->mother_phone_pro) && !empty($enfant->mother_phone_pro)){
-                                    $tel_mother .= 'pro : '.$enfant->mother_phone_pro."\n";
+                                if(tool::check($enfant->mother_phone_pro)){
+                                    $tel_mother .= 'Pro : '.tool::formatTel($enfant->mother_phone_pro)."\n";
                                 }
                                 $organization = structure::get($enfant->organization);
                                 $contact = contact::get($enfant->contact);
+
+
                                 $datas[] = array(
                                     'Nom' => $enfant->lastname,
                                     'Prénom' => $enfant->firstname,
@@ -267,9 +269,9 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                     'Fiche sanitaire' => ($enfant->health_record > 0)?'oui':'non',
                                     'Adresse' => $address,
                                     'Famille d\'accueil' => $enfant->host_family_name.'<br>'.$address_host,
-                                    'Structure' => (isset($organization->name) && !empty($organization->name))?$organization->name:'',
-                                    'Contact' => (isset($contact) && !empty($contact))?$contact->civility.' '.$contact->lastname.' '.$contact->firstname:'',
-                                    'Tél contact' => (isset($organization->phone) && !empty($organization->phone))?$organization->phone:'',
+                                    'Structure' => (tool::check($organization))?$organization->name:'',
+                                    'Contact' => (tool::check($contact))?$contact->civility.' '.$contact->lastname.' '.$contact->firstname:'',
+                                    'Tél contact' => (tool::check($organization))?tool::formatTel($organization->phone):'',
                                     'Père' => $enfant->father_name,
                                     'Tél père' => $tel_father,
                                     'Mère' => $enfant->mother_name,

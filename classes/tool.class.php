@@ -163,6 +163,17 @@ class tool
         return $tel;
 
     }
+
+    public static function check($data){
+        if(isset($data) && !empty($data)){
+            return $data;
+        }
+        else{
+            return false;
+        }
+        
+    }
+
 }
 
 ?>
