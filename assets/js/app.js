@@ -491,6 +491,4 @@ if (typeof the_datas != "undefined") {
 	});
 }
 
-$('#DataTables_Table_0_filter').find('input').focus();
-
 });
