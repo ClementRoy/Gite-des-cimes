@@ -465,7 +465,7 @@ if (typeof the_datas != "undefined") {
 	$('.datatable').dataTable({
 		"aaSorting": [[col_sort,'asc']],
 		"sPaginationType": "full_numbers",
-		"iDisplayLength": 100,
+		"iDisplayLength": 50,
 		"oLanguage": {
 			"sProcessing":     "Traitement en cours...",
 			"sSearch":         "Rechercher&nbsp;:",
