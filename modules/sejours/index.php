@@ -231,6 +231,3 @@
 </script>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
-
-
-

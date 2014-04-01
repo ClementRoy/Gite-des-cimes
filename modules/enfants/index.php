@@ -20,7 +20,7 @@
     <div class="content content-table">
         <div class="row">
             <div class="col-md-12">
-             <table class="datatable">
+               <table class="datatable">
                 <thead>
                     <tr>
                         <th tabindex="0" rowspan="1" colspan="1">Nom</th>
@@ -32,7 +32,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
                 </tbody>
             </table>
         </div>                
@@ -74,61 +73,7 @@ foreach($enfants as $key => $enfant) {
 }
 ?>
 <script>
-    $(function(){
-        var the_datas = <?=json_encode($the_datas);?>;
-        jQuery.extend( jQuery.fn.dataTableExt.oSort, {
-            "date-uk-pre": function ( a ) {
-                var ukDatea = a.split('/');
-                return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
-            },
-
-            "date-uk-asc": function ( a, b ) {
-                return ((a < b) ? -1 : ((a > b) ? 1 : 0));
-            },
-
-            "date-uk-desc": function ( a, b ) {
-                return ((a < b) ? 1 : ((a > b) ? -1 : 0));
-            }
-        } );
-
-        if($('.datatable').data('sort') != undefined ){
-            var col_sort = $('.datatable').data('sort');
-        }
-        else {
-            var col_sort = '0';
-        }
-        $('.datatable').dataTable({
-            "aaSorting": [[col_sort,'asc']],
-            "sPaginationType": "full_numbers",
-            "iDisplayLength": 100,
-            "oLanguage": {
-                "sProcessing":     "Traitement en cours...",
-                "sSearch":         "Rechercher&nbsp;:",
-                "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
-                "sInfo":           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                "sInfoEmpty":      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-                "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                "sInfoPostFix":    "",
-                "sLoadingRecords": "Chargement en cours...",
-                "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                "sEmptyTable":     "Aucune donnée disponible dans le tableau",
-                "oPaginate": {
-                    "sFirst":      "Premier",
-                    "sPrevious":   "Pr&eacute;c&eacute;dent",
-                    "sNext":       "Suivant",
-                    "sLast":       "Dernier"
-                },
-                "oAria": {
-                    "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
-                    "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
-                }
-            },
-            "bProcessing": true,
-            "bDeferRender": true,
-            "aaData": the_datas
-        });
-        $('#DataTables_Table_0_filter').find('input').focus();
-});
+    var the_datas = <?=json_encode($the_datas);?>;
 </script>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
