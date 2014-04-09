@@ -13,4 +13,3 @@ RewriteCond %{SCRIPT_FILENAME} !-f
 #RewriteRule ^([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/?$ /index\.php?module=$1&view=$2 [L]
 #RewriteRule ^([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/?$ /index\.php?module=$1&view=$2&id=$3 [L]
 RewriteRule .* index\.php [L]
-

@@ -226,9 +226,6 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                     $address = $enfant->mother_address_number.' '.$enfant->mother_address_street.'<br />'.$enfant->mother_address_postal_code.' '.$enfant->mother_address_city;
                                 }elseif(tool::check($enfant->guardian_address_street)){
                                     $address = $enfant->guardian_address_number.' '.$enfant->guardian_address_street.'<br />'.$enfant->guardian_address_postal_code.' '.$enfant->guardian_address_city;
-                                }elseif(tool::check($enfant->host_family_address_street)){
-                                    $address = $enfant->host_family_address_number.' '.$enfant->host_family_address_street.'<br />'.$enfant->host_family_address_postal_code.' '.$enfant->host_family_address_city;
-                                    $address_host = $enfant->host_family_address_number.' '.$enfant->host_family_address_street.'<br />'.$enfant->host_family_address_postal_code.' '.$enfant->host_family_address_city;
                                 }else{
                                     $address = '';
                                 }
@@ -253,6 +250,17 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                 if(tool::check($enfant->mother_phone_pro)){
                                     $tel_mother .= 'Pro : '.tool::formatTel($enfant->mother_phone_pro)."\n";
                                 }
+
+                                $tel_host_family = '';
+                                if(tool::check($enfant->host_family_phone_home)){
+                                    $tel_host_family .= 'Fixe : '.tool::formatTel($enfant->host_family_phone_home)."\n";
+                                }
+                                if(tool::check($enfant->host_family_phone_mobile)){
+                                    $tel_host_family .= 'Mobile : '.tool::formatTel($enfant->host_family_phone_mobile)."\n";
+                                }
+                                if(tool::check($enfant->host_family_phone_pro)){
+                                    $tel_host_family .= 'Pro : '.tool::formatTel($enfant->host_family_phone_pro)."\n";
+                                }
                                 $organization = structure::get($enfant->organization);
                                 $contact = contact::get($enfant->contact);
 
@@ -268,7 +276,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                     'Contre indications' => $enfant->allergies,
                                     'Fiche sanitaire' => ($enfant->health_record > 0)?'oui':'non',
                                     'Adresse' => $address,
-                                    'Famille d\'accueil' => $enfant->host_family_name.'<br>'.$address_host,
+                                    'Famille d\'accueil' => $enfant->host_family_name.'<br>'.$tel_host_family,
                                     'Structure' => (tool::check($organization))?$organization->name:'',
                                     'Contact' => (tool::check($contact))?$contact->civility.' '.$contact->lastname.' '.$contact->firstname:'',
                                     'Tél contact' => (tool::check($organization))?tool::formatTel($organization->phone):'',
@@ -280,7 +288,6 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                 }
 
                                 ?>
-
                                 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-recapitulatif-mineurs-<?=$i?>">
                                     Récapitulatif mineurs
                                 </button>
