@@ -37,27 +37,27 @@
                     <table class="datatable" data-sort="1">
                         <thead>
                             <tr>
-                                <th class="sortable">Nom</th>
-                                <th class="sortable">Date de début</th>
-                                <th class="sortable">Date de fin</th>
-                                <th class="sortable">Lieu</th>
-                                <th class="sortable">Nb enfants</th>
-                                <th class="sortable">Capacité min</th>
-                                <th class="sortable">Capacité max</th>
-                                <th class="sortable">Tarif (€)</th>
+                                <th>Nom</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th>Lieu</th>
+                                <th>Nb enfants</th>
+                                <th>Capacité min</th>
+                                <th>Capacité max</th>
+                                <th>Tarif (€)</th>
                             </tr>
                         </thead>
 
                         <tfoot>
                             <tr>
-                                <th class="sortable">Nom</th>
-                                <th class="sortable">Date de début</th>
-                                <th class="sortable">Date de fin</th>
-                                <th class="sortable">Lieu</th>
-                                <th class="sortable">Nb enfants</th>
-                                <th class="sortable">Capacité min</th>
-                                <th class="sortable">Capacité max</th>
-                                <th class="sortable">Tarif (€)</th>
+                                <th>Nom</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th>Lieu</th>
+                                <th>Nb enfants</th>
+                                <th>Capacité min</th>
+                                <th>Capacité max</th>
+                                <th>Tarif (€)</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -128,27 +128,27 @@
                     <table class="datatable" data-sort="1">
                         <thead>
                             <tr>
-                                <th class="sortable">Nom</th>
-                                <th class="sortable">Date de début</th>
-                                <th class="sortable">Date de fin</th>
-                                <th class="sortable">Lieu</th>
-                                <th class="sortable">Nb enfants</th>
-                                <th class="sortable">Capacité min</th>
-                                <th class="sortable">Capacité max</th>
-                                <th class="sortable">Tarif (€)</th>
+                                <th>Nom</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th>Lieu</th>
+                                <th>Nb enfants</th>
+                                <th>Capacité min</th>
+                                <th>Capacité max</th>
+                                <th>Tarif (€)</th>
                             </tr>
                         </thead>
 
                         <tfoot>
                             <tr>
-                                <th class="sortable">Nom</th>
-                                <th class="sortable">Date de début</th>
-                                <th class="sortable">Date de fin</th>
-                                <th class="sortable">Lieu</th>
-                                <th class="sortable">Nb enfants</th>
-                                <th class="sortable">Capacité min</th>
-                                <th class="sortable">Capacité max</th>
-                                <th class="sortable">Tarif (€)</th>
+                                <th>Nom</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th>Lieu</th>
+                                <th>Nb enfants</th>
+                                <th>Capacité min</th>
+                                <th>Capacité max</th>
+                                <th>Tarif (€)</th>
                             </tr>
                         </tfoot>
                         <tbody>
