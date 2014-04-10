@@ -121,7 +121,7 @@
                     <i class="icon-ok-sign"></i> 
                     Le dossier d'inscription de <strong><?=$form_inscription_enfant; ?></strong> au séjour <strong></strong> a bien été modifiée
                 </div>
-                <a href="/folders/">Retourner à la liste des dossiers d'inscription</a>
+                <a href="/dossiers/">Retourner à la liste des dossiers d'inscription</a>
             </div>
         </div>
 
@@ -134,7 +134,7 @@
                     <i class="icon-remove-sign"></i> 
                     Une erreur s'est produite durant la modification de l'inscription, veuillez réessayer
                 </div>
-                <a href="/folders/edit/id/<?=$inscription->id ?>">Retourner au formulaire de modification</a>
+                <a href="/dossiers/edit/id/<?=$inscription->id ?>">Retourner au formulaire de modification</a>
             </div>
         </div>
     <?php endif; ?>
