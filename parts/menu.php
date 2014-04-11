@@ -49,7 +49,7 @@ $menus = array(
 		'name' => 'Contacts',
 		'icon' => 'comments',
 		'submenu' => array(
-						'index' => 'Liste des contact',
+						'index' => 'Liste des contacts',
 						'ajouter' => 'Ajouter un contact'
 					)
 	),

@@ -121,7 +121,7 @@
                     <i class="icon-ok-sign"></i> 
                     Le dossier d'inscription de <strong><?=$form_inscription_enfant; ?></strong> au séjour <strong></strong> a bien été modifiée
                 </div>
-                <a href="/folders/">Retourner à la liste des dossiers d'inscription</a>
+                <a href="/dossiers/">Retourner à la liste des dossiers d'inscription</a>
             </div>
         </div>
 
@@ -134,7 +134,7 @@
                     <i class="icon-remove-sign"></i> 
                     Une erreur s'est produite durant la modification de l'inscription, veuillez réessayer
                 </div>
-                <a href="/folders/edit/id/<?=$inscription->id ?>">Retourner au formulaire de modification</a>
+                <a href="/dossiers/editer/id/<?=$inscription->id ?>">Retourner au formulaire de modification</a>
             </div>
         </div>
     <?php endif; ?>
@@ -194,6 +194,41 @@
             <?php else: ?>
                 Ce dossier d'inscription n'est pas finalisé.
             <?php endif ?>
+            </div>
+
+            <div class="row">
+                <ul>
+                    <li>Liste des séjours</li>
+                    <li>Dates à chaque fois</li>
+                    <li>Centre payeur</li>
+                    <li>Prise en charge de l'enfant</li>
+                    <li>Lieu de rendez-vous</li>
+                    <li>Heure de rendez-vous pour le départ</li>
+                    <li>Heure de rendez-vous pour le retour</li>
+                    <li>Pique Nique</li>
+                    <li>Sac de couchage</li>
+                    <li>Notes</li>
+                    <li>Inscription finalisée</li>
+                </ul>
+
+<?php 
+/*
+
+        ':finished' => $form_inscription_option,
+        ':ref_enfant' => $form_inscription_enfant,
+        ':ref_structure_payer' => $form_inscription_structure,
+        ':structure_payer' => $form_inscription_structure_name,
+        ':supported' => $form_inscription_supported,
+        ':note' => $form_inscription_note,
+        ':place' => $form_inscription_lieu,
+        ':hour_departure' => $form_inscription_heure_aller.'h'.$form_inscription_min_aller,
+        ':hour_return' => $form_inscription_heure_retour.'h'.$form_inscription_min_retour,
+        ':pique_nique' => $form_inscription_pique_nique,
+        ':sac' => $form_inscription_sac
+
+*/
+
+?>
             </div>
         </div>
     </div>
