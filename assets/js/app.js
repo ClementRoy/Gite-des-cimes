@@ -330,7 +330,7 @@ $(window).resize(function() {
 });
 
 
-$('#form-enfant-structure-select').trigger('change');dat
+$('#form-enfant-structure-select').trigger('change');
 
 
 
@@ -393,7 +393,6 @@ $("table").on("contextmenu", "tr", function(e){
 	e.preventDefault();
 	e.stopPropagation();
 });
-dat
 
 if($('.datatable').data('sort') != undefined ){
 	var col_sort = $('.datatable').data('sort');
