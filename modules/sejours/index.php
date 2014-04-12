@@ -157,7 +157,7 @@
 
                             $date_to = new DateTime($sejour->date_to);
                             if($date_to->getTimestamp() != '-62169987600') {
-                                $date_to = '<p class="sr-only">'.utf8_encode(strftime('%Y%m%d', $date_to->getTimestamp())).'</p> '.utf8_encode(strftime('%d %B %Y', $date_to->getTimestamp()));
+                                $date_to = '<p class="sr-only">'.strftime('%Y%m%d', $date_to->getTimestamp()).'</p> '.strftime('%d %B %Y', $date_to->getTimestamp());
                             }
 
                             if($sejour->ref_hebergement) {
