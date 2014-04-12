@@ -73,7 +73,7 @@ class enfant
 
     public static function getDisplayedList(){
         global $db;
-        $result = $db->query('SELECT id, firstname, lastname, birthdate, sex, number_ss, self_assurance, cpam_attestation, self_assurance_expiration_date, health_record, vaccination FROM '.self::$table.' WHERE archived = 0 ORDER BY lastname');
+        $result = $db->query('SELECT id, firstname, lastname, birthdate, sex, image_rights, number_ss, self_assurance, cpam_attestation, self_assurance_expiration_date, health_record, vaccination FROM '.self::$table.' WHERE archived = 0 ORDER BY lastname');
         return $result;
     }
 
