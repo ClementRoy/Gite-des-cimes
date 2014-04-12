@@ -17,8 +17,8 @@ ini_set('log_errros', 1);
 ini_set('error_log', dirname(__FILE__) . '/error.log');
 error_reporting(E_ALL);
 
-$locale = 'fr_FR.UTF-8';
-setlocale(LC_ALL, $locale);
+date_default_timezone_set('Europe/Paris');
+setlocale(LC_TIME, "fr_FR");
 
 
 /*
