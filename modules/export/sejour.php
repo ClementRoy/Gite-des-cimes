@@ -14,10 +14,9 @@ $date_from_query = new DateTime();
 $date_from_query->setTimestamp($datefrom);
 $date_to_query = new DateTime();
 $date_to_query->setTimestamp($dateto);
+$inscriptions = inscription::getBySejourBetweenDatesFinished($id, $date_from_query, $date_to_query);
 
-
-if($type == 1){
-
+if($type == 1) {
 	foreach ($inscriptions as $key => $inscription) {
 	$enfant = enfant::get($inscription->ref_enfant);
 	$birthdate = new DateTime($enfant->birthdate);
@@ -40,11 +39,8 @@ if($type == 1){
 	$headline = utf8_decode('Récapitulatif mineurs par âge - '.$sejour->name.' du '.strftime('%d %B %Y', $date_from_query->getTimestamp()).' au '.strftime('%d %B %Y', $date_to_query->getTimestamp()));
 	$filename = 'Récapitulatif mineurs par age - '.$sejour->name.' - ';
 	CSV::export($datas, $filename, $headline);
+} elseif($type == 2) {
 
-}
-elseif($type == 2){
-
-	$inscriptions = inscription::getBySejourBetweenDatesFinished($id, $date_from_query, $date_to_query);
 
 	$datas = array();
 
@@ -76,10 +72,8 @@ elseif($type == 2){
 	CSV::export($datas, $filename, $headline);
 	//tool::output($datas);
 
-}
-elseif($type == 3){
+} elseif($type == 3) {
 
-	$inscriptions = inscription::getBySejourBetweenDatesFinished($id, $date_from_query, $date_to_query);
 	$datas = array();
 
 	foreach ($inscriptions as $key => $inscription) {
@@ -93,45 +87,45 @@ $enfant = enfant::get($inscription->ref_enfant);
                                 }
                                 $address_host = '';
                                 if(tool::check($enfant->father_address_number)){
-                                    $address = $enfant->father_address_number." ".$enfant->father_address_street."\r".$enfant->father_address_postal_code." ".$enfant->father_address_city;
+                                    $address = $enfant->father_address_number." ".$enfant->father_address_street."\r"."\n".$enfant->father_address_postal_code." ".$enfant->father_address_city;
                                 }elseif(tool::check($enfant->mother_address_postal_code)){
-                                    $address = $enfant->mother_address_number." ".$enfant->mother_address_street."\r".$enfant->mother_address_postal_code." ".$enfant->mother_address_city;
+                                    $address = $enfant->mother_address_number." ".$enfant->mother_address_street."\r"."\n".$enfant->mother_address_postal_code." ".$enfant->mother_address_city;
                                 }elseif(tool::check($enfant->guardian_address_street)){
-                                    $address = $enfant->guardian_address_number." ".$enfant->guardian_address_street."\r".$enfant->guardian_address_postal_code." ".$enfant->guardian_address_city;
+                                    $address = $enfant->guardian_address_number." ".$enfant->guardian_address_street."\r"."\n".$enfant->guardian_address_postal_code." ".$enfant->guardian_address_city;
                                 }else{
                                     $address = '';
                                 }
                                 $tel_father = '';
                                 if(tool::check($enfant->father_phone_home)){
-                                    $tel_father .= 'Fixe : '.tool::formatTel($enfant->father_phone_home)."\r";
+                                    $tel_father .= "\r"."\n".'Fixe : '.tool::formatTel($enfant->father_phone_home);
                                 }
                                 if(tool::check($enfant->father_phone_mobile)){
-                                    $tel_father .= 'Mobile : '.tool::formatTel($enfant->father_phone_mobile)."\r";
+                                    $tel_father .= "\r"."\n".'Mobile : '.tool::formatTel($enfant->father_phone_mobile);
                                 }
                                 if(tool::check($enfant->father_phone_pro)){
-                                    $tel_father .= 'Pro : '.tool::formatTel($enfant->father_phone_pro)."\r";
+                                    $tel_father .= "\r"."\n".'Pro : '.tool::formatTel($enfant->father_phone_pro);
                                 }
 
                                 $tel_mother = '';
                                 if(tool::check($enfant->mother_phone_home)){
-                                    $tel_mother .= 'Fixe : '.tool::formatTel($enfant->mother_phone_home)."\r";
+                                    $tel_mother .= "\r"."\n".'Fixe : '.tool::formatTel($enfant->mother_phone_home);
                                 }
                                 if(tool::check($enfant->mother_phone_mobile)){
-                                    $tel_mother .= 'Mobile : '.tool::formatTel($enfant->mother_phone_mobile)."\r";
+                                    $tel_mother .= "\r"."\n".'Mobile : '.tool::formatTel($enfant->mother_phone_mobile);
                                 }
                                 if(tool::check($enfant->mother_phone_pro)){
-                                    $tel_mother .= 'Pro : '.tool::formatTel($enfant->mother_phone_pro)."\r";
+                                    $tel_mother .= "\r"."\n".'Pro : '.tool::formatTel($enfant->mother_phone_pro);
                                 }
 
                                 $tel_host_family = '';
                                 if(tool::check($enfant->host_family_phone_home)){
-                                    $tel_host_family .= 'Fixe : '.tool::formatTel($enfant->host_family_phone_home)."\r";
+                                    $tel_host_family .= "\r"."\n".'Fixe : '.tool::formatTel($enfant->host_family_phone_home);
                                 }
                                 if(tool::check($enfant->host_family_phone_mobile)){
-                                    $tel_host_family .= 'Mobile : '.tool::formatTel($enfant->host_family_phone_mobile)."\r";
+                                    $tel_host_family .= "\r"."\n".'Mobile : '.tool::formatTel($enfant->host_family_phone_mobile);
                                 }
                                 if(tool::check($enfant->host_family_phone_pro)){
-                                    $tel_host_family .= 'Pro : '.tool::formatTel($enfant->host_family_phone_pro)."\r";
+                                    $tel_host_family .= "\r"."\n".'Pro : '.tool::formatTel($enfant->host_family_phone_pro);
                                 }
                                 $organization = structure::get($enfant->organization);
                                 $contact = contact::get($enfant->contact);
@@ -141,7 +135,7 @@ $enfant = enfant::get($inscription->ref_enfant);
                                     utf8_decode('Prénom') => utf8_decode($enfant->firstname),
                                     utf8_decode('Date de naissance') => utf8_decode($birthdate_string),
                                     utf8_decode('Adresse') => utf8_decode($address),
-                                    utf8_decode('Famille d\'accueil') => utf8_decode($enfant->host_family_name."\r".$tel_host_family),
+                                    utf8_decode('Famille d\'accueil') => utf8_decode($enfant->host_family_name.$tel_host_family),
                                     utf8_decode('Structure') => utf8_decode((tool::check($organization))?$organization->name:''),
                                     utf8_decode('Contact') => utf8_decode((tool::check($contact))?$contact->civility.' '.$contact->lastname.' '.$contact->firstname:''),
                                     utf8_decode('Tél contact') => utf8_decode((tool::check($organization))?tool::formatTel($organization->phone):''),

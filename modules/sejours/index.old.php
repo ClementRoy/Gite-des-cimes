@@ -37,27 +37,27 @@
                     <table class="datatable" data-sort="1">
                         <thead>
                             <tr>
-                                <th class="sortable">Nom</th>
-                                <th class="sortable">Date de début</th>
-                                <th class="sortable">Date de fin</th>
-                                <th class="sortable">Lieu</th>
-                                <th class="sortable">Nb enfants</th>
-                                <th class="sortable">Capacité min</th>
-                                <th class="sortable">Capacité max</th>
-                                <th class="sortable">Tarif (€)</th>
+                                <th>Nom</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th>Lieu</th>
+                                <th>Nb enfants</th>
+                                <th>Capacité min</th>
+                                <th>Capacité max</th>
+                                <th>Tarif (€)</th>
                             </tr>
                         </thead>
 
                         <tfoot>
                             <tr>
-                                <th class="sortable">Nom</th>
-                                <th class="sortable">Date de début</th>
-                                <th class="sortable">Date de fin</th>
-                                <th class="sortable">Lieu</th>
-                                <th class="sortable">Nb enfants</th>
-                                <th class="sortable">Capacité min</th>
-                                <th class="sortable">Capacité max</th>
-                                <th class="sortable">Tarif (€)</th>
+                                <th>Nom</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th>Lieu</th>
+                                <th>Nb enfants</th>
+                                <th>Capacité min</th>
+                                <th>Capacité max</th>
+                                <th>Tarif (€)</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -90,12 +90,14 @@
                                     <td class="text-right">
                                         <?php $date_from = new DateTime($sejour->date_from); ?>
                                         <?php if($date_from->getTimestamp() != '-62169987600'): ?>
+                                            <p class="sr-only"> <?=strftime('%Y%m%d', $date_from->getTimestamp()); ?></p>
                                             <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>
                                         <?php endif; ?>
                                     </td>
                                     <td class="text-right">
                                         <?php $date_to = new DateTime($sejour->date_to); ?>
                                         <?php if($date_to->getTimestamp() != '-62169987600'): ?>
+                                            <p class="sr-only"> <?=strftime('%Y%m%d', $date_to->getTimestamp()); ?></p>
                                             <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?>
                                         <?php endif; ?>
                                     </td>
@@ -128,27 +130,27 @@
                     <table class="datatable" data-sort="1">
                         <thead>
                             <tr>
-                                <th class="sortable">Nom</th>
-                                <th class="sortable">Date de début</th>
-                                <th class="sortable">Date de fin</th>
-                                <th class="sortable">Lieu</th>
-                                <th class="sortable">Nb enfants</th>
-                                <th class="sortable">Capacité min</th>
-                                <th class="sortable">Capacité max</th>
-                                <th class="sortable">Tarif (€)</th>
+                                <th>Nom</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th>Lieu</th>
+                                <th>Nb enfants</th>
+                                <th>Capacité min</th>
+                                <th>Capacité max</th>
+                                <th>Tarif (€)</th>
                             </tr>
                         </thead>
 
                         <tfoot>
                             <tr>
-                                <th class="sortable">Nom</th>
-                                <th class="sortable">Date de début</th>
-                                <th class="sortable">Date de fin</th>
-                                <th class="sortable">Lieu</th>
-                                <th class="sortable">Nb enfants</th>
-                                <th class="sortable">Capacité min</th>
-                                <th class="sortable">Capacité max</th>
-                                <th class="sortable">Tarif (€)</th>
+                                <th>Nom</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th>Lieu</th>
+                                <th>Nb enfants</th>
+                                <th>Capacité min</th>
+                                <th>Capacité max</th>
+                                <th>Tarif (€)</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -181,12 +183,14 @@
                                     <td class="text-right">
                                         <?php $date_from = new DateTime($sejour->date_from); ?>
                                         <?php if($date_from->getTimestamp() != '-62169987600'): ?>
+                                            <p class="sr-only"> <?=strftime('%Y%m%d', $date_from->getTimestamp()); ?></p>
                                             <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>
                                         <?php endif; ?>
                                     </td>
                                     <td class="text-right">
                                         <?php $date_to = new DateTime($sejour->date_to); ?>
                                         <?php if($date_to->getTimestamp() != '-62169987600'): ?>
+                                            <p class="sr-only"> <?=strftime('%Y%m%d', $date_to->getTimestamp()); ?></p>
                                             <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?>
                                         <?php endif; ?>
                                     </td>
