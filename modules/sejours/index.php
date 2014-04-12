@@ -91,14 +91,14 @@
                                         <?php $date_from = new DateTime($sejour->date_from); ?>
                                         <?php if($date_from->getTimestamp() != '-62169987600'): ?>
                                             <p class="sr-only"> <?=strftime('%Y%m%d', $date_from->getTimestamp()); ?></p>
-                                            <?=utf8_encode(strftime('%d %B %Y', $date_from->getTimestamp())); ?>
+                                            <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>
                                         <?php endif; ?>
                                     </td>
                                     <td class="text-right">
                                         <?php $date_to = new DateTime($sejour->date_to); ?>
                                         <?php if($date_to->getTimestamp() != '-62169987600'): ?>
                                             <p class="sr-only"> <?=strftime('%Y%m%d', $date_to->getTimestamp()); ?></p>
-                                            <?=utf8_encode(strftime('%d %B %Y', $date_to->getTimestamp())); ?>
+                                            <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?>
                                         <?php endif; ?>
                                     </td>
                                     <td>
@@ -184,14 +184,14 @@
                                         <?php $date_from = new DateTime($sejour->date_from); ?>
                                         <?php if($date_from->getTimestamp() != '-62169987600'): ?>
                                             <p class="sr-only"> <?=strftime('%Y%m%d', $date_from->getTimestamp()); ?></p>
-                                            <?=utf8_encode(strftime('%d %B %Y', $date_from->getTimestamp())); ?>
+                                            <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>
                                         <?php endif; ?>
                                     </td>
                                     <td class="text-right">
                                         <?php $date_to = new DateTime($sejour->date_to); ?>
                                         <?php if($date_to->getTimestamp() != '-62169987600'): ?>
                                             <p class="sr-only"> <?=strftime('%Y%m%d', $date_to->getTimestamp()); ?></p>
-                                            <?=utf8_encode(strftime('%d %B %Y', $date_to->getTimestamp())); ?>
+                                            <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?>
                                         <?php endif; ?>
                                     </td>
                                     <td>
