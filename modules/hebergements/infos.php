@@ -107,8 +107,8 @@
 <?php $date_created = new DateTime($hebergement->created); ?>
 <?php $date_edited = new DateTime($hebergement->edited); ?>
 
-<?php $sejours_current = sejour::getListByHebergement(); ?>
-<?php $sejours_past = sejour::getListByHebergement(); ?>
+<?php //$sejours_current = sejour::getListByHebergement(); ?>
+<?php //$sejours_past = sejour::getListByHebergement(); ?>
 
 
 
@@ -150,13 +150,14 @@
     <div class="col-md-9">
         <div class="content<?=($hebergement->archived)?' archived':' ';?>">
             <div class="profile-box">
-                <?php tool::output($hebergement); ?>
+                <?php //tool::output($hebergement); ?>
                 <?php if(!empty($hebergement->note)): ?>
                     <div class="">
                         <h6>Description</h6>
                         <p><?=$hebergement->note; ?></p>
                     </div>
                 <?php endif; ?>
+                <?php /* ?>
                 <?php if($sejours_current): ?>
                     <div class="">
                         <h6>Séjours à venir à cet endroit</h6>
@@ -166,6 +167,10 @@
                     <div class="">
                         <h6>Séjours ayant eut lieu à cet endroit</h6>
                     </div>
+                <?php endif; ?>
+                <?php */ ?>
+                <?php if(empty($hebergement->note) ): ?>
+                    <p><em>Aucune information au sujet de cet hébergement pour le moment</em></p>
                 <?php endif; ?>
             </div>
         </div>
