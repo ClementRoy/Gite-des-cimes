@@ -9,7 +9,7 @@
 	},
 	"sejours" : {
 		"name" :  "sejours",
-		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
+		"views" : ["index", "calendrier", "ajouter", "infos", "editer", "supprimer"]
 	},
 	"inscriptions" : {
 		"name" :  "inscriptions",

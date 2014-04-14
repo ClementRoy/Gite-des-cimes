@@ -91,7 +91,7 @@
                             }
 
                             $the_data = [
-                            '<a href="/sejours/infos/id/'.$sejour->id.'">'.$sejour->name.'</a>',
+                            '<a href="/sejours/infos/id/'.$sejour->id.'">'.$sejour->name.'</a>'.$popup,
                             $date_from,
                             $date_to,
                             $hebergement,
