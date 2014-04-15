@@ -71,7 +71,7 @@
                                         <a href="/sejours/supprimer/id/<?=$sejour->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
                                     </div>
                                 </div>
-                            </div> ';
+                            </div>';
 
                             $date_from = new DateTime($sejour->date_from);
                             if($date_from->getTimestamp() != '-62169987600') {
@@ -112,7 +112,7 @@
             </div>
 
             <div class="tab-pane" id="past">
-                
+
                 <table class="datatable" data-sort="1">
                     <thead>
                         <tr>
@@ -193,22 +193,18 @@
     </div>                
 </div>
 
-<!-- end users table -->
-</div>
-</div><!-- /.container -->
-
 <script>
     var the_datas = [];
     <?php foreach ($the_json as $key => $value): ?>
     the_datas.push(<?=json_encode($the_json[$key]);?>);
-    <?php endforeach; ?>
+<?php endforeach; ?>
 
-    $(function () {
-        $('.nav-tabs a').click(function (e) {
-            e.preventDefault();
-            $(this).tab('show');
-        });
+$(function () {
+    $('.nav-tabs a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
     });
+});
 </script>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

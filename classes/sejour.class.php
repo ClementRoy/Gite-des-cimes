@@ -61,7 +61,7 @@ class sejour
         $date = new DateTime();
         $datetime = $date->format("Y-m-d H:i:s");
         global $db;
-        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 AND date_from <= "'.$datetime.'" ORDER BY date_from');
+        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 AND date_to <= "'.$datetime.'" ORDER BY date_from');
 
         return $result;
     }
@@ -71,7 +71,7 @@ class sejour
         $date = new DateTime();
         $datetime = $date->format("Y-m-d H:i:s");
         global $db;
-        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 AND date_from >= "'.$datetime.'" ORDER BY date_from');
+        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 AND date_to >= "'.$datetime.'" ORDER BY date_from');
 
         return $result;
     }

@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="content content-table">
+    <div class="content">
         <div class="row">
             <div class="col-md-12">
 
@@ -45,25 +45,27 @@
 <?php $i = 0; ?>
 
 <script>
-$(function($) {
-    $('#calendar').fullCalendar({
-        firstDay: 1,
-        dayNamesShort: ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'],
-        monthNames: ['Janvier','Février','Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-        eventSources: [{
-            events: [
+    $(function($) {
+        $('#calendar').fullCalendar({
+            firstDay: 1,
+            dayNamesShort: ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'],
+            monthNames: ['Janvier','Février','Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+            eventSources: [{
+                events: [
                 <?php foreach($sejours as $key => $sejour): ?>
                 <?php
                 $inscriptions = inscription::getBySejour($sejour->id);
 
                 $date_from = new DateTime($sejour->date_from);
                 if ($date_from->getTimestamp() != '-62169987600') {
-                    $date_from = strftime("%Y-%m-%d", $date_from->getTimestamp());
+                    $date_from1 = strftime("%Y-%m-%d", $date_from->getTimestamp());
+                    $date_from2 = strftime("%d %B %Y", $date_from->getTimestamp());
                 }
 
                 $date_to = new DateTime($sejour->date_to);
                 if ($date_to->getTimestamp() != '-62169987600') {
-                    $date_to = strftime("%Y-%m-%d", $date_to->getTimestamp());
+                    $date_to1 = strftime("%Y-%m-%d", $date_to->getTimestamp());
+                    $date_to2 = strftime("%d %B %Y", $date_to->getTimestamp());
                 }
 
                 if ($sejour->ref_hebergement) {
@@ -75,30 +77,41 @@ $(function($) {
 
                 $i++;
 
+                $nb_weeks = tool::getNbWeeks(new DateTime($sejour->date_from), new DateTime($sejour->date_to));
+                if ($nb_weeks < 1) {
+                    $nb_weeks = 'un week-end';
+                } else if ($nb_weeks == 1) {
+                    $nb_weeks = '1 semaine';
+                } else {
+                    $nb_weeks = $nb_weeks.' semaines';
+                }
+                $type = '';
+                if ($nb_weeks < 1) {
+                    $type = 'week-end';
+                } else {
+                    $type = 'semaine';
+                }
                 ?>
                 {
                     title       : '<?=addslashes($sejour->name)?>',
                     url         : '/sejours/infos/id/<?=$sejour->id?>',
-                    start       : '<?=$date_from?>',
-                    end         : '<?=$date_to?>',
-                    description : 'test'
+                    start       : '<?=$date_from1?>',
+                    end         : '<?=$date_to1?>',
+                    description : '<p><span class="plabel"><i class="icon-calendar icon"></i> :</span> <span class="pcontent"><?=$date_from2?> au <?=$date_to2?></span></p><p><span class="plabel"><i class="icon-map-marker icon"></i> :</span> <span class="pcontent"><?=addslashes($hebergement)?></span></p><p><span class="plabel"><i class="icon-group icon"></i> :</span> <span class="pcontent"><?=count($inscriptions)?> <?=(count($inscriptions) > 1)?"enfants":"enfant";?> inscrits <br />sur <?=$nb_weeks?></span></p><p><span class="plabel"><i class="icon-tag icon"></i> :</span> <span class="pcontent"><?=$sejour->price?> €/<small><?=$type?></small></span></p>'
                     
                 }<?=($i < $nb_sejours) ? ',' : '' ; ?>
-                <?php endforeach; ?>
+            <?php endforeach; ?>
 
             ]
         }],
         eventRender: function (event, element) {
-            console.log(element.text());
-            console.log(event);
-
             element.popover({
                 title: event.title,
-                placement: 'left',
+                placement: 'top',
                 trigger: 'hover',
                 container: '.wrapper',
                 html: 'true',
-                content: '<br />Start: ' + event.start + '<br />End: ' + event.ends + '<br />Description: '
+                content: event.description
             });
         }
 

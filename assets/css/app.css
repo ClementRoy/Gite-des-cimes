@@ -820,9 +820,6 @@ body {
 .fc-event-hori.fc-event-end {
   border-radius: 0 4px 4px 0;
 }
-.fc {
-  padding: 0 50px 50px;
-}
 .fc-event-start.fc-event-end {
   background: #e04b4b;
   border-radius: 4px;
@@ -856,24 +853,23 @@ body {
   overflow: visible;
 }
 .fc-state-highlight {
-  background: #CAE9FA;
+  background: #DDF3FF;
 }
 .popover {
   position: absolute;
   top: 0;
   left: 0;
   max-width: none;
-  min-width: 200px;
-  width: 200px;
+  min-width: 260px;
+  width: 260px;
   padding: 0;
   text-align: left;
   border: none;
   border-radius: 3px;
-  box-shadow: 0 5px 40px rgba(0, 0, 0, 0.2);
-  margin-right: -20px;
+  box-shadow: 0 5px 40px rgba(0, 0, 0, 0.3);
 }
 .popover.top {
-  margin-top: -10px;
+  margin-top: -6px;
 }
 .popover.right {
   margin-left: 10px;
@@ -882,7 +878,7 @@ body {
   margin-top: 10px;
 }
 .popover.left {
-  margin-left: -10px;
+  margin-left: -5px;
 }
 .popover-title {
   margin: 0;
@@ -896,7 +892,33 @@ body {
   text-align: center;
 }
 .popover-content {
-  padding: 9px 14px;
+  font-size: 14px;
+  padding: 14px 14px 8px;
+}
+.popover-content p {
+  overflow: hidden;
+}
+.popover-content .plabel {
+  width: 10px;
+  display: inline-block;
+  font-size: 14px;
+  width: 24px;
+  text-align: right;
+  float: left;
+  margin-right: 8px;
+}
+.popover-content .plabel i {
+  float: left;
+  text-align: left;
+  font-size: 16px;
+  margin-top: 1px;
+  width: 17px;
+  text-align: center;
+}
+.popover-content .pcontent {
+  float: right;
+  width: 199px;
+  line-height: 1.2em;
 }
 .popover .arrow,
 .popover .arrow:after {
@@ -912,8 +934,6 @@ body {
 }
 .popover.top .arrow {
   content: " ";
-  bottom: 1px;
-  margin-left: -10px;
   border-bottom-width: 0;
   border-top-color: #ffffff;
 }
