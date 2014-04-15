@@ -241,6 +241,16 @@ $result = enfant::update($datas, $_GET['id']);
 <div class="row">
     <div class="col-md-9">
 
+<?php 
+    if( $enfant->number_ss = 0 || $enfant->self_assurance <= 0 || $enfant->cpam_attestation <= 0 || empty($enfant->self_assurance_expiration_date) || $enfant->health_record <= 0 || $enfant->vaccination <= 0 ):
+?>
+            <div class="alert alert-warning">
+                <i class="icon-warning-sign"></i> 
+                La fiche de l'enfant est pour le moment incomplète
+            </div>
+<?php
+    endif;
+?>
         <div class="content <?=($enfant->archived)?' archived':' ';?>">
             <?php if(isset($_POST['activate'])): ?>
                 <div class="alert alert-success">
@@ -554,7 +564,7 @@ $result = enfant::update($datas, $_GET['id']);
                     <h4>Séjours de l'enfant</h4>
                 </div>
                 <div class="col-md-4 text-right">
-                    <a href="/dossiers/ajouter/enfant/<?=$enfant->id; ?>" class="btn btn-primary"><span>+</span> Créer un nouveau dossier d'inscription</a>
+                    <a href="/dossiers/ajouter/enfant/<?=$enfant->id; ?>" class="btn btn-primary"><span>+</span> Inscrire l'enfant à un séjour</a>
                 </div>
             </div>
         </div>

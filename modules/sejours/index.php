@@ -6,10 +6,6 @@
 <?php sejour::cleanEmpty(); ?>
 
 
-
-<?php //tool::output($sejours); ?>
-
-
 <div class="title">
     <div class="row header">
         <div class="col-md-4">
