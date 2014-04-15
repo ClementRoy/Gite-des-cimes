@@ -47,6 +47,11 @@
 <script>
     $(function($) {
         $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'year,month'
+            },
             firstDay: 1,
             dayNamesShort: ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'],
             monthNames: ['Janvier','Février','Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
@@ -85,12 +90,14 @@
                 } else {
                     $nb_weeks = $nb_weeks.' semaines';
                 }
+
                 $type = '';
                 if ($nb_weeks < 1) {
                     $type = 'week-end';
                 } else {
                     $type = 'semaine';
                 }
+
                 ?>
                 {
                     title       : '<?=addslashes($sejour->name)?>',

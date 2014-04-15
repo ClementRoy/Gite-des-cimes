@@ -26,7 +26,7 @@ module.exports = function(grunt){
 				stripBanners: false
 			},
 			dist: {
-				src: ['assets/js/bootstrap.min.js', 'assets/js/bootstrap.datepicker.js', 'assets/js/select2.js', 'assets/js/jquery.mask.js', 'assets/js/parsley.js', 'assets/js/parsley.extend.js', 'assets/js/jquery.dataTables.js', 'assets/js/app.js', 'assets/js/ajax.js'],
+				src: ['assets/js/bootstrap.min.js', 'assets/js/bootstrap.datepicker.js', 'assets/js/select2.js', 'assets/js/jquery.mask.js', 'assets/js/parsley.js', 'assets/js/parsley.extend.js', 'assets/js/jquery.dataTables.js', 'assets/js/fullcalendar.js', 'assets/js/fullcalendar.year.js' 'assets/js/app.js', 'assets/js/ajax.js'],
 				dest: 'assets/dist/js/s.js',
 			}
 		},

@@ -909,7 +909,69 @@ html, body {
 
 
 
+.fc-view-year {
+	.fc-widget-header > div,
+	.fc-widget-content > div {
+		margin: 5px;
+		border-top: none;
+	}
 
+	.fc-year-month-separator {
+		width: 40px;
+	}
+
+	.fc-event-hori.fc-event {
+		padding: 0;
+		height: 7px;
+		font-size: 12px;
+		font-weight: 600;
+		border: none;
+		transition: all .3s;
+		opacity: .4;
+		.fc-event-title {
+			display: none;
+		}
+	}
+
+	.fc-sat,
+	.fc-sun {
+		background: rgba(0,0, 0, 0.03);
+	}
+	.fc-year-weekly-head.fc-sat,
+	.fc-year-weekly-head.fc-sun {
+		background: transparent;
+	}
+
+}
+
+.fc-border-separate tr.fc-last .fc-year-weekly-head,
+.fc-border-separate tr.fc-last .fc-year-weekly-head {
+	color: #919191;
+	font-size: 11px;
+	padding: 5px;
+	text-align: center;
+}
+.fc-year-monthly-name {
+	font-size: 16px;
+
+	font-weight: 600;
+	padding-bottom: 5px;
+	& > a {
+		color: #333;
+		text-transform: lowercase;
+	}
+}
+
+.fc-year-month > tbody .fc-widget-content {
+	border-right: 1px solid white;
+border-bottom: 1px solid white;
+}
+.fc-year-month > tbody > .fc-last {
+	padding-bottom: 20px;}
+.fc-year-month > tbody > .fc-first .fc-widget-content {
+	border-top: 1px solid rgba(0,0,0,.2);
+
+}
 
 
 
@@ -958,26 +1020,27 @@ html, body {
 		overflow: hidden;
 	}
 	.plabel {
-		width: 10px;
 		display: inline-block;
 		font-size: 14px;
 		width: 24px;
 		text-align: right;
 		float: left;
 		margin-right: 8px;
+		margin-top: -2px;
 		i {
 			float: left;
 			text-align: left;
 			font-size: 16px;
-			margin-top: 1px;
+			margin-top: 0px;
 			width: 17px;
+			margin-top: 1px;
 			text-align: center;
 		}
 	}
 	.pcontent {
-float: right;
-width: 199px;
-line-height: 1.2em;
+		float: right;
+		width: 199px;
+		line-height: 1.2em;
 	}
 }
 .popover .arrow,
