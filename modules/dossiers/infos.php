@@ -205,9 +205,9 @@
             ?>
 
             <?php if ($dossier->finished): ?>
-            <a href="/pdf/generate/id/<?=$dossier->id?>/type/contrat/" class="btn btn-primary">Contrat</a>
-                <a href="/pdf/generate/id/<?=$dossier->id?>/type/convocation/" class="btn btn-primary">Convocation</a>
-                <a href="/pdf/generate/id/<?=$dossier->id?>/type/dossier/" class="btn btn-primary">Dossier d'inscription</a>
+            <a href="/pdf/generate/id/<?=$dossier->id?>/type/contrat/" target="_blank" class="btn btn-primary">Contrat</a>
+                <a href="/pdf/generate/id/<?=$dossier->id?>/type/convocation/" target="_blank" class="btn btn-primary">Convocation</a>
+                <a href="/pdf/generate/id/<?=$dossier->id?>/type/dossier/" target="_blank" class="btn btn-primary">Dossier d'inscription</a>
             <?php else: ?>
                 Ce dossier d'inscription n'est pas finalisé.
             <?php endif ?>

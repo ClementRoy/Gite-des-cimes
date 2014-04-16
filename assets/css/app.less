@@ -928,22 +928,30 @@ html, body {
 		border: none;
 		transition: all .3s;
 		opacity: .4;
+		&:hover {
+			opacity: .9;
+		}
 		.fc-event-title {
 			display: none;
 		}
 	}
 
-	.fc-sat,
-	.fc-sun {
-		background: rgba(0,0, 0, 0.03);
-	}
-	.fc-year-weekly-head.fc-sat,
-	.fc-year-weekly-head.fc-sun {
-		background: transparent;
-	}
+
 
 }
-
+	.fc-widget-header.fc-sat,
+	.fc-widget-header.fc-sun {
+		background: transparent;
+	}
+	.fc-sat,
+	.fc-sun {
+		background: rgba(0,0, 0, 0.04);
+	}
+.fc-header .fc-button {
+margin-right: -1px;
+height: auto;
+padding: 3px 12px;
+}
 .fc-border-separate tr.fc-last .fc-year-weekly-head,
 .fc-border-separate tr.fc-last .fc-year-weekly-head {
 	color: #919191;
