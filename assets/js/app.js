@@ -395,7 +395,7 @@ $("table").on("contextmenu", "tr", function(e){
 });
 
 if($('.datatable').data('sort') != undefined ){
-	var col_sort = $('.datatable').data('sort');
+	var col_sort = $(this).data('sort');
 }
 else {
 	var col_sort = '0';
@@ -404,7 +404,7 @@ else {
 if (typeof the_datas != "undefined") {
 	$('.datatable').each(function(index, el) {
 		$(this).dataTable({
-			"aaSorting": [[col_sort,'asc']],
+			"aaSorting": [[$(this).data('sort'),'asc']],
 			"sPaginationType": "full_numbers",
 			"iDisplayLength": 50,
 			"oLanguage": {

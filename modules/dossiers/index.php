@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <table class="datatable">
+            <table class="datatable" data-sort="1">
                 <thead>
                     <tr>
                         <th class="sortable" style="width: 65px;">N°</th>
@@ -69,13 +69,13 @@
                             $date_from = new DateTime($inscription_dossier->date_from);
 
                             if($date_from->getTimestamp() != '-62169987600') {
-                                $sejours .= strftime('%d %b %Y', $date_from->getTimestamp());
+                                $sejours .= strftime('%d %B %Y', $date_from->getTimestamp());
                             }
                             $sejours .= ' au ';
                             $date_to = new DateTime($inscription_dossier->date_to);
                             if($date_to->getTimestamp() != '-62169987600') {
 
-                                $sejours .= strftime('%d %b %Y', $date_to->getTimestamp());
+                                $sejours .= strftime('%d %B %Y', $date_to->getTimestamp());
                             }
                                 $i++;
                             

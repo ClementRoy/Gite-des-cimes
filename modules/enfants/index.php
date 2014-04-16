@@ -20,7 +20,7 @@
     <div class="content content-table">
         <div class="row">
             <div class="col-md-12">
-             <table class="datatable">
+             <table class="datatable" data-sort="1">
                 <thead>
                     <tr>
                         <th tabindex="0" rowspan="1" colspan="1">Nom</th>

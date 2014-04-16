@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <table class="datatable">
+            <table class="datatable" data-sort="1">
                 <thead>
                     <tr>
                         <th class="sortable style="width: 320px;">Nom</th>

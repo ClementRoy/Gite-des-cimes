@@ -149,6 +149,8 @@
 <?php $date_edited = new DateTime($dossier->edited); ?>
 
 
+
+
 <div class="title">
     <div class="row header">
         <div class="col-md-9">
@@ -185,8 +187,23 @@
 
 <div class="row">
     <div class="col-md-9">
+
+
+
         <div class="content">
             <div class="row">
+
+            <?php 
+                if(!$dossier->supported):
+            ?>
+                        <div class="alert alert-warning">
+                            <i class="icon-warning-sign"></i> 
+                            L'inscription n'est pas encore été prise en charge
+                        </div>
+            <?php
+                endif;
+            ?>
+
             <?php if ($dossier->finished): ?>
             <a href="/pdf/generate/id/<?=$dossier->id?>/type/contrat/" class="btn btn-primary">Contrat</a>
                 <a href="/pdf/generate/id/<?=$dossier->id?>/type/convocation/" class="btn btn-primary">Convocation</a>

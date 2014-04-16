@@ -241,17 +241,20 @@ $result = enfant::update($datas, $_GET['id']);
 <div class="row">
     <div class="col-md-9">
 
-<?php 
-    if( $enfant->number_ss = 0 || $enfant->self_assurance <= 0 || $enfant->cpam_attestation <= 0 || empty($enfant->self_assurance_expiration_date) || $enfant->health_record <= 0 || $enfant->vaccination <= 0 ):
-?>
-            <div class="alert alert-warning">
-                <i class="icon-warning-sign"></i> 
-                La fiche de l'enfant est pour le moment incomplète
-            </div>
-<?php
-    endif;
-?>
+
         <div class="content <?=($enfant->archived)?' archived':' ';?>">
+
+            <?php 
+                if( $enfant->number_ss = 0 || $enfant->self_assurance <= 0 || $enfant->cpam_attestation <= 0 || empty($enfant->self_assurance_expiration_date) || $enfant->health_record <= 0 || $enfant->vaccination <= 0 ):
+            ?>
+                        <div class="alert alert-warning">
+                            <i class="icon-warning-sign"></i> 
+                            La fiche de l'enfant est pour le moment incomplète
+                        </div>
+            <?php
+                endif;
+            ?>
+
             <?php if(isset($_POST['activate'])): ?>
                 <div class="alert alert-success">
                     <i class="icon-ok-sign"></i>

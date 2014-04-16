@@ -109,7 +109,7 @@
 
             <div class="tab-pane" id="past">
 
-                <table class="datatable" data-sort="1">
+                <table class="datatable" data-sort="0">
                     <thead>
                         <tr>
                             <th>Nom</th>
