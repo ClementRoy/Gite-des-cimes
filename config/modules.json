@@ -47,6 +47,10 @@
 		"name" : "hebergements",
 		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
 	},
+	"accompagnateurs" : {
+		"name" : "accompagnateurs",
+		"views" : ["index", "ajouter", "infos", "editer", "supprimer"]
+	},
 	"infos" : {
 		"name" : "infos",
 		"views" : ["contact", "index", "infos", "debug"]

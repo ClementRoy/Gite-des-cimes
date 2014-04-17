@@ -53,6 +53,14 @@ $menus = array(
 						'ajouter' => 'Ajouter un contact'
 					)
 	),
+	'accompagnateurs' => array(
+		'name' => 'Accompagnateurs',
+		'icon' => 'user',
+		'submenu' => array(
+						'index' => 'Liste des accompagnateurs',
+						'ajouter' => 'Ajouter un accompagnateur'
+					)
+	),
 	'corbeille' => array(
 		'name' => 'Corbeille',
 		'icon' => 'trash'

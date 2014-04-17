@@ -201,8 +201,8 @@ ob_start(); ?>
 
 					<?php endif; ?>
 					<?php 
-					$structure = structure::get($dossier->organization);
-					$contact = contact::get($dossier->contact);
+						$structure = structure::get($dossier->organization);
+						$contact = contact::get($dossier->contact);
 					?>
 					<p style="margin-bottom:0;">
 					<strong>Structure interlocutrice : </strong><br>
@@ -274,11 +274,11 @@ ob_start(); ?>
 								$date_to = strftime('%d/%m/%Y', $date_to->getTimestamp());
 							endif; 
 
-							$temp = array($sejour->numero, $sejour->name, $hebergement->name, $date_from, $date_to, $sejour->price);							
+							$temp = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $date_from, $date_to, $sejour->price);							
 
 							if (!empty($sejours_temp)) {
 								if ($sejours_temp[$sejour_index-1][0] == $temp[0]) {
-									$sejours_temp[$sejour_index-1] = array($sejour->numero, $sejour->name, $hebergement->name, $sejours_temp[$sejour_index-1][3], $date_to, $sejour->price+$sejours_temp[$sejour_index-1][5]);
+									$sejours_temp[$sejour_index-1] = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $sejours_temp[$sejour_index-1][5], $date_to, $sejour->price+$sejours_temp[$sejour_index-1][5]);
 								} else {
 									array_push($sejours_temp, $temp);
 								}
@@ -291,7 +291,7 @@ ob_start(); ?>
 							?>
 						<?php endforeach; ?>
 					<?php foreach ($sejours_temp as $key => $sejour_temp): ?>
-					•&nbsp;&nbsp;Séjour <?=$sejour_temp[1];?> au <?=$sejour_temp[2];?> : Du <?=$sejour_temp[3];?> au <?=$sejour_temp[4];?> - Prix : <?=$sejour_temp[5];?> €<br> 
+					•&nbsp;&nbsp;Séjour <?=$sejour_temp[1];?> au <?=$sejour_temp[2];?> (<?=$sejour_temp[3];?> <?=$sejour_temp[4];?>) : Du <?=$sejour_temp[5];?> au <?=$sejour_temp[6];?> - Prix : <?=$sejour_temp[7];?> €<br> 
 					<?php endforeach; ?>
 
 
@@ -350,6 +350,8 @@ ob_start(); ?>
 		</tr>
 	</table>
 </page>
+
+
 <?php elseif($type == 'dossier'): ?>
 
 	<style type="text/css">
@@ -654,31 +656,28 @@ ob_start(); ?>
 								$date_to = strftime('%d/%m/%Y', $date_to->getTimestamp());
 							endif; 
 
-							$temp = array($sejour->numero, $sejour->name, $hebergement->name, $date_from, $date_to);							
+							$temp = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $date_from, $date_to);							
 
 							if (!empty($sejours_temp)) {
 								if ($sejours_temp[$sejour_index-1][0] == $temp[0]) {
-									$sejours_temp[$sejour_index-1] = array($sejour->numero, $sejour->name, $hebergement->name, $sejours_temp[$sejour_index-1][3], $date_to);
+									$sejours_temp[$sejour_index-1] = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $sejours_temp[$sejour_index-1][6], $date_to);
 								} else {
 									array_push($sejours_temp, $temp);
 								}
 							} else {
 								array_push($sejours_temp, $temp);
 							}
-							
 							$sejour_index++;
 						
 							?>
 						<?php endforeach; ?>
+						<?php //tool::output($sejours_temp); ?>
 					<?php foreach ($sejours_temp as $key => $sejour_temp): ?>
-							<?=ucfirst($sejour_temp[1]);?> — <strong>à</strong> <?=$sejour_temp[2];?> — <strong>du</strong> : <?=$sejour_temp[3];?> au <?=$sejour_temp[4];?><br>
-
+							<?=ucfirst($sejour_temp[1]);?> — <?=$sejour_temp[3];?> <?=$sejour_temp[4];?> — <?=$sejour_temp[2];?> — <strong>du</strong> : <?=$sejour_temp[5];?> au <?=$sejour_temp[6];?><br>
 					<?php endforeach; ?>
 
 
 				</p>
-
-
 					<p>
 						<?php $date_depart = inscription::getDateDeparture($id); ?>
 						<?php $date_depart = new DateTime($date_depart->date_departure); ?>
