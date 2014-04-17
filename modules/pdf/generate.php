@@ -716,7 +716,7 @@ ob_start(); ?>
 					</p>
 					<hr>
 					<p style="margin-top:30px;">
-						Nous restons à votre disposition pour tous renseignements complémentaires.<br>
+						Nous restons à votre disposition pour tous renseignements complémentaires au 03 44 88 57 13.<br>
 						Au plaisir de ces prochaines vacances !<br>
 						L’équipe du Gite des Cimes
 					</p>

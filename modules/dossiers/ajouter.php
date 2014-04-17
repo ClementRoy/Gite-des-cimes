@@ -140,7 +140,7 @@
                             <div class="ui-select">
                                 <select class="form-control" id="form-inscription-lieu-select" name="form_inscription_lieu">
                                     <option selected="selected" value="">Choisissez le lieu de rendez-vous</option>
-                                    <option value="Aulnay sous bois, au Parking d'Intermarché">Aulnay sous bois, au Parking d'Intermarché</option>
+                                    <option value="Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle</option>
                                     <option value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>
                                     <option value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>
                                 </select>
