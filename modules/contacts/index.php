@@ -88,8 +88,8 @@
                     $the_data = ['
                     <a href="/contacts/infos/id/'.$contact->id.'">'.$contact->lastname.'</a>'.$popup,
                     '<a href="/contacts/infos/id/'.$contact->id.'">'.$contact->firstname.'</a>',
-                    tool::formatTel($contact->phone),
-                    tool::formatTel($contact->mobile_phone),
+                    '<span class="sr-only">'.tool::removeSpaces($contact->phone).'</span>'.tool::formatTel($contact->phone),
+                    '<span class="sr-only">'.tool::removeSpaces($contact->mobile_phone).'</span>'.tool::formatTel($contact->mobile_phone),
                     '<a href="mailto:'.$contact->email.'">'.$contact->email.'</a>',
                     $contact_structure,
                     count($enfants)

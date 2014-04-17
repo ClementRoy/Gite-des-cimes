@@ -62,7 +62,7 @@
                         $the_data = ['
                         <a href="/structures/infos/id/'.$structure->id.'">'.$structure->name.'</a>'.$popup,
                         $structure->service,
-                        tool::formatTel($structure->phone),
+                        '<span class="sr-only">'.tool::removeSpaces($structure->phone).'</span>'.tool::formatTel($structure->phone),
                         '<a href="mailto:'.$structure->email.'">'.$structure->email.'</a>',
                         $structure->address_city
                         ];

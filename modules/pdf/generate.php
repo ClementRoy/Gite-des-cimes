@@ -408,7 +408,8 @@ ob_start(); ?>
 						<?php if(tool::check($structure)): ?>
 						<p>
 							<strong>Adressé à :</strong> <?=$structure->name; ?><br>
-							<strong>A l'attention de :</strong> <?=$contact->civility; ?> <?=$contact->lastname; ?> <?=$contact->firstname; ?>
+							<strong>A l'attention de :</strong> <?=$contact->civility; ?> <?=$contact->lastname; ?> <?=$contact->firstname; ?><br>
+							<strong>Fax :</strong> <?=tool::formatTel($structure->fax); ?>
 						</p>
 						<?php endif; ?>
 					<?php else: ?>
@@ -458,6 +459,7 @@ ob_start(); ?>
 					</p>
 					<div style="padding-left:30px;">
 						<p>•&nbsp;&nbsp;Le contrat de séjour</p>
+						<p>•&nbsp;&nbsp;La convocation</p>
 						<?php if (!$dossier->stay_record): ?>
 							<p>•&nbsp;&nbsp;La fiche de séjour</p>
 						<?php endif ?>
@@ -600,7 +602,8 @@ ob_start(); ?>
 						<?php if(tool::check($structure)): ?>
 						<p>
 							<strong>Adressé à :</strong> <?=$structure->name; ?><br>
-							<strong>A l'attention de :</strong> <?=$contact->civility; ?> <?=$contact->lastname; ?> <?=$contact->firstname; ?>
+							<strong>A l'attention de :</strong> <?=$contact->civility; ?> <?=$contact->lastname; ?> <?=$contact->firstname; ?><br>
+							<strong>Fax :</strong> <?=tool::formatTel($structure->fax); ?>
 						</p>
 						<?php endif; ?>
 					<?php else: ?>

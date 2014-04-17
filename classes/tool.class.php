@@ -161,7 +161,11 @@ class tool
         $tel = str_replace(' ', '', $tel);
         $tel = chunk_split($tel, 2, " ");
         return $tel;
+    }
 
+    public static function RemoveSpaces($string){
+        $string = str_replace(' ', '', $string);
+        return $string;
     }
 
     public static function check($data){
