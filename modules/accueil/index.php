@@ -3,57 +3,105 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
-    <div class="title">
-        <div class="row header">
-            <div class="col-md-12">
-                <h1>Tableau de bord</h1>
+<div class="title">
+    <div class="row header">
+        <div class="col-md-12">
+            <h1>Tableau de bord</h1>
+        </div>
+    </div>
+</div>
+<div class="main-stats hidden-xs">
+    <div class="row stats-row">
+        <div class="col-md-12">
+            <div class="stat">
+                <div class="data">
+                    <p class="datalabel">
+                        <i class="icon icon-group"></i>
+                        <span class="title">enfants</span>
+                        <span class="subtitle">dans la base</span>
+                    </p>
+                    <p class="datanumber">
+                        <a id="number-enfants" class="odometer" href="/enfants/">0</a>
+                    </p>
+                </div>
+            </div>
+            <div class="stat">
+                <div class="data">
+                    <p class="datalabel">
+                        <i class="icon icon-comments"></i>
+                        <span class="title">contacts</span>
+                        <span class="subtitle">dans la base</span>
+                    </p>
+                    <p class="datanumber">
+                        <a id="number-contacts" class="odometer" href="/contacts/">0</a>
+                    </p>
+                </div>
+            </div>
+            <div class="stat">
+                <div class="data">
+                    <p class="datalabel">
+                        <i class="icon icon-building"></i>
+                        <span class="title">structures</span>
+                        <span class="subtitle">dans la base</span>
+                    </p>
+                    <p class="datanumber">
+                        <a id="number-structures" class="odometer" href="/structures/">0</a>
+                    </p>
+                </div>
+            </div>
+            <div class="stat">
+                <div class="data">
+                    <p class="datalabel">
+                        <i class="icon icon-plane" style="padding: 6px 5px 4px;"></i>
+                        <span class="title">séjours</span>
+                        <span class="subtitle">dans la base</span>
+                    </p>
+                    <p class="datanumber">
+                        <a id="number-sejours" class="odometer" href="/sejours/">0</a>
+                    </p>
+                </div>
+            </div>
+            <div class="stat">
+                <div class="data">
+                    <p class="datalabel">
+                        <i class="icon icon-folder-open" style="padding: 6px 4px 4px 6px;"></i>
+                        <span class="title">inscriptions</span>
+                        <span class="subtitle">dans la base</span>
+                    </p>
+                    <p class="datanumber">
+                        <a id="number-dossiers" class="odometer" href="/dossiers/">0</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="content">
-        <div class="main-stats hidden-xs">
-            <div class="row stats-row">
-                <div class="col-md-3 col-sm-3 stat">
-                    <div class="data">
-                        <span class="number"><a href="/enfants/"><?php echo count(enfant::getList()); ?></a></span>
-                        enfants
-                    </div>
-                    <span class="date">dans la base</span>
-                </div>
-                <div class="col-md-3 col-sm-3 stat">
-                    <div class="data">
-                        <span class="number"><a href="/contacts/"><?php echo count(contact::getList()); ?></a></span>
-                        contacts
-                    </div>
-                    <span class="date">dans la base</span>
-                </div>
-                <div class="col-md-3 col-sm-3 stat">
-                    <div class="data">
-                        <span class="number"><a href="/structures/"><?php echo count(structure::getList()); ?></a></span>
-                        structures
-                    </div>
-                    <span class="date">dans la base</span>
-                </div>
-                <div class="col-md-3 col-sm-3 stat last">
-                    <div class="data">
-                        <span class="number"><a href="/sejours/"><?php echo count(sejour::getList()); ?></a></span>
-                        Séjours
-                    </div>
-                    <span class="date">dans la base</span>
-                </div>
+</div>
+<div class="row">
+
+    <div class="col-md-6">
+        <p class="bloc-title">Prise en charge non reçues</p>
+        <div class="content">
+
+
+            <div class="jumbotron">
+                <h1>En cours de construction !</h1>
             </div>
         </div>
 
+    </div>
 
-        <div class="row">
+    <div class="col-md-6">
+        <p class="bloc-title">Prochains séjours</p>
+        <div class="content">
 
-            <div class="col-md-12">
-                <div class="jumbotron">
-                    <h1>En cours de construction !</h1>
-                </div>
+
+            <div class="jumbotron">
+                <h1>En cours de construction !</h1>
             </div>
-
         </div>
+
+    </div>
+    <div class="col-md-6">
 
         <div class="row">
 
@@ -66,6 +114,7 @@
             <h6>Taux de remplissage</h6>
 
         </div>
+    </div>
 <!--
                 <div class="row">
                     <div class="col-md-6">
@@ -134,6 +183,18 @@
                     </div>                  
                 </div>
             -->
-    </div>
+        </div>
+        <script>
+            $(function() {
+                setTimeout(function() {
+                    $('#number-enfants').text('<?php echo count(enfant::getList()); ?>');
+                    $('#number-contacts').text('<?php echo count(contact::getList()); ?>');
+                    $('#number-structures').text('<?php echo count(structure::getList()); ?>');
+                    $('#number-sejours').text('<?php echo count(sejour::getList()); ?>');
+                    $('#number-dossiers').text('<?php echo count(dossier::getList()); ?>');
+                }, 10);
 
-<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
+            });
+        </script>
+        
+        <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
