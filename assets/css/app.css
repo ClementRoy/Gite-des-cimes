@@ -399,6 +399,74 @@ h6,
 .wrap .title .btn {
   margin-top: 15px;
 }
+.wrap .main-stats {
+  margin-left: -50px;
+  background: white;
+  margin-right: -50px;
+  margin-bottom: 50px;
+}
+.wrap .main-stats .stat {
+  padding: 40px 0 25px;
+  text-align: center;
+  width: 20%;
+  float: left;
+  border-right: 1px solid #ececec;
+}
+.wrap .main-stats .data {
+  text-align: left;
+  margin-left: -25px;
+  display: inline-block;
+}
+.wrap .main-stats .data .datalabel {
+  padding-left: 45px;
+  position: relative;
+}
+.wrap .main-stats .data .datalabel i {
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  font-size: 17px;
+  border: 1px solid lightgrey;
+  padding: 5px;
+  width: 31px;
+  border-radius: 2px;
+  text-align: center;
+}
+.wrap .main-stats .data .title,
+.wrap .main-stats .data .subtitle {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+.wrap .main-stats .data .title {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 13px;
+}
+.wrap .main-stats .data .subtitle {
+  margin-top: -3px;
+  color: #B6B6B6;
+  font-weight: bold;
+  font-size: 13px;
+}
+.wrap .main-stats .data .datanumber {
+  font-size: 60px;
+  font-weight: 100;
+  margin: 0;
+  margin-top: -23px;
+}
+.wrap .main-stats .data .datanumber a {
+  color: #444;
+}
+.wrap .main-stats .data .datanumber a:hover {
+  text-decoration: none;
+}
+.wrap .bloc-title {
+  font-weight: bold;
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 15px;
+}
 .wrap .content {
   padding: 30px;
   background: #FFF;
@@ -855,6 +923,68 @@ body {
 .fc-state-highlight {
   background: #DDF3FF;
 }
+.fc-view-year .fc-widget-header > div,
+.fc-view-year .fc-widget-content > div {
+  margin: 5px;
+  border-top: none;
+}
+.fc-view-year .fc-year-month-separator {
+  width: 40px;
+}
+.fc-view-year .fc-event-hori.fc-event {
+  padding: 0;
+  height: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  transition: all .3s;
+  opacity: .4;
+}
+.fc-view-year .fc-event-hori.fc-event:hover {
+  opacity: .9;
+}
+.fc-view-year .fc-event-hori.fc-event .fc-event-title {
+  display: none;
+}
+.fc-widget-header.fc-sat,
+.fc-widget-header.fc-sun {
+  background: transparent;
+}
+.fc-sat,
+.fc-sun {
+  background: rgba(0, 0, 0, 0.04);
+}
+.fc-header .fc-button {
+  margin-right: -1px;
+  height: auto;
+  padding: 3px 12px;
+}
+.fc-border-separate tr.fc-last .fc-year-weekly-head,
+.fc-border-separate tr.fc-last .fc-year-weekly-head {
+  color: #919191;
+  font-size: 11px;
+  padding: 5px;
+  text-align: center;
+}
+.fc-year-monthly-name {
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 5px;
+}
+.fc-year-monthly-name > a {
+  color: #333;
+  text-transform: lowercase;
+}
+.fc-year-month > tbody .fc-widget-content {
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+}
+.fc-year-month > tbody > .fc-last {
+  padding-bottom: 20px;
+}
+.fc-year-month > tbody > .fc-first .fc-widget-content {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
 .popover {
   position: absolute;
   top: 0;
@@ -899,20 +1029,21 @@ body {
   overflow: hidden;
 }
 .popover-content .plabel {
-  width: 10px;
   display: inline-block;
   font-size: 14px;
   width: 24px;
   text-align: right;
   float: left;
   margin-right: 8px;
+  margin-top: -2px;
 }
 .popover-content .plabel i {
   float: left;
   text-align: left;
   font-size: 16px;
-  margin-top: 1px;
+  margin-top: 0px;
   width: 17px;
+  margin-top: 1px;
   text-align: center;
 }
 .popover-content .pcontent {

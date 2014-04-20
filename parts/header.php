@@ -27,10 +27,10 @@
     <!-- <link href="/assets/css/lib/select2.css" type="text/css" rel="stylesheet"> -->
 
     <link href="/assets/css/lib/bootstrap.datepicker.css" type="text/css" rel="stylesheet">
-    <link href="/assets/css/animate.css" rel="stylesheet" />
+    <link href="/assets/css/animate.css" type="text/css" rel="stylesheet" />
     <link href="/assets/css/lib/jquery.dataTables.css" type="text/css" rel="stylesheet">
     <link href="/assets/css/fullcalendar.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/odometer-theme-default.css">
+    <link href="/assets/css/odometer-theme-default.css" type="text/css" rel="stylesheet">
 
 
     <!-- global styles -->
