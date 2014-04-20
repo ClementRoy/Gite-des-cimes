@@ -1,7 +1,8 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
-
+     <?php $enfant = enfant::get($_GET['id']); ?>
+     <?php tool::output($enfant); ?>
 
 <?php if(isset($_POST['submit-add'])): ?>
     <?php 
@@ -245,14 +246,14 @@ $result = enfant::update($datas, $_GET['id']);
         <div class="content <?=($enfant->archived)?' archived':' ';?>">
 
             <?php 
-                if( $enfant->number_ss = 0 || $enfant->self_assurance <= 0 || $enfant->cpam_attestation <= 0 || empty($enfant->self_assurance_expiration_date) || $enfant->health_record <= 0 || $enfant->vaccination <= 0 ):
-            ?>
-                        <div class="alert alert-warning">
-                            <i class="icon-warning-sign"></i> 
-                            La fiche de l'enfant est pour le moment incomplète
-                        </div>
+            if( $enfant->number_ss = 0 || $enfant->self_assurance <= 0 || $enfant->cpam_attestation <= 0 || empty($enfant->self_assurance_expiration_date) || $enfant->health_record <= 0 || $enfant->vaccination <= 0 ):
+                ?>
+            <div class="alert alert-warning">
+                <i class="icon-warning-sign"></i> 
+                La fiche de l'enfant est pour le moment incomplète
+            </div>
             <?php
-                endif;
+            endif;
             ?>
 
             <?php if(isset($_POST['activate'])): ?>
@@ -281,7 +282,7 @@ $result = enfant::update($datas, $_GET['id']);
             <?php endif; ?>
 
 
-            <?php //tool::output($enfant); ?>
+            <?php tool::output($enfant); ?>
 
 
             <h3 id="a-propos">À propos de l'enfant</h3>
@@ -495,7 +496,7 @@ $result = enfant::update($datas, $_GET['id']);
                                 Non
                             <?php endif; ?>
 
-    
+
                         </p>
 
                         <p>
@@ -514,10 +515,10 @@ $result = enfant::update($datas, $_GET['id']);
                     </div>
                     <div class="col-md-4">
                         <p>
-                            <strong>N° de sécurité sociale :</strong>
+                            <strong>N° de sécurité sociale : <?=$enfant->number_ss; ?></strong>
                             <?=(isset($enfant->number_ss) && $enfant->number_ss != null)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>
                             <?php if (isset($enfant->number_ss) && $enfant->number_ss != null): ?>
-                                <br><small><?=$enfant->number_ss;?></small>
+                                <br><small><?=$enfant->number_ss; ?></small>
                             <?php endif ?>
                         </p>
                         <p>
@@ -534,11 +535,11 @@ $result = enfant::update($datas, $_GET['id']);
                             <?=($enfant->cpam_attestation > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>
 
                             <?php if ($enfant->cpam_attestation > 0): ?>
-                             <br><small>Validité : <?=(!empty($enfant->cpam_attestation_expiration_date))? $enfant->cpam_attestation_expiration_date : EMPTYVAL; ?></small>
-                         <?php endif ?>
-                     </p>
-                 </div>
-                 <div class="col-md-4">
+                               <br><small>Validité : <?=(!empty($enfant->cpam_attestation_expiration_date))? $enfant->cpam_attestation_expiration_date : EMPTYVAL; ?></small>
+                           <?php endif ?>
+                       </p>
+                   </div>
+                   <div class="col-md-4">
                     <p>
                         <strong>Fiche sanitaire de liaison :</strong>
                         <?=($enfant->health_record > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>

@@ -16,7 +16,7 @@
         
         <div class="content">
 
-         <?php //tool::output($enfant); ?>
+         <?php tool::output($enfant); ?>
 
 
             <form id="form-add-children" method="post" action="/enfants/infos/id/<?=$enfant->id ?>" parsley-validate>
@@ -472,7 +472,7 @@
                             <div class="field-box row">
                                 <label class="col-md-2" for="form-enfant-assurance-validite">Date de fin de validité</label>
                                 <div class="col-md-4 col-sm-5">
-                                    <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" value="<?=tool::getDatefromDatetime($enfant->self_assurance_expiration_date); ?>" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa)." value="<?=$enfant->self_assurance_expiration_date; ?>">
+                                    <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" value="<?=tool::getDatefromDatetime($enfant->self_assurance_expiration_date); ?>" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa).">
                                 </div>                            
                             </div>
                         </div>
