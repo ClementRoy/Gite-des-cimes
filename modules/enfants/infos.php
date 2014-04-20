@@ -2,7 +2,7 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
      <?php $enfant = enfant::get($_GET['id']); ?>
-     <?php tool::output($enfant); ?>
+
 
 <?php if(isset($_POST['submit-add'])): ?>
     <?php 
@@ -68,30 +68,30 @@
         ':health_record' => $form_enfant_fiche_sanitaire,
         ':stay_record' => $form_enfant_fiche_sejour,
         ':note' => $form_enfant_note
-        );
+    );
 
-$result = enfant::update($datas, $_GET['id']);
+    $result = enfant::update($datas, $_GET['id']);
 
-?>
-<?php if($result): ?>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="alert alert-success">
-                <i class="icon-ok-sign"></i> 
-                L'enfant <strong><?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?></strong> a bien été ajouté
+    ?>
+    <?php if($result): ?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success">
+                    <i class="icon-ok-sign"></i> 
+                    L'enfant <strong><?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?></strong> a bien été ajouté
+                </div>
             </div>
         </div>
-    </div>
-<?php else: ?>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="alert alert-danger">
-                <i class="icon-remove-sign"></i> 
-                Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
+    <?php else: ?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    <i class="icon-remove-sign"></i> 
+                    Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
+                </div>
             </div>
         </div>
-    </div>
-<?php endif; ?>
+    <?php endif; ?>
 
 <?php endif; ?>
 
@@ -161,43 +161,39 @@ $result = enfant::update($datas, $_GET['id']);
         ':health_record' => $form_enfant_fiche_sanitaire,
         ':stay_record' => $form_enfant_fiche_sejour,
         ':note' => $form_enfant_note
-        );
+    );
 
-$result = enfant::update($datas, $_GET['id']);
+    $result = enfant::update($datas, $_GET['id']);
 
-?>
+    ?>
 
-<?php if($result): ?>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="alert alert-success">
-                <i class="icon-ok-sign"></i> 
-                L'enfant <strong><?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?></strong> a bien été modifié
+    <?php if($result): ?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success">
+                    <i class="icon-ok-sign"></i> 
+                    L'enfant <strong><?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?></strong> a bien été modifié
+                </div>
             </div>
         </div>
-    </div>
-<?php else: ?>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="alert alert-danger">
-                <i class="icon-remove-sign"></i> 
-                Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
+    <?php else: ?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    <i class="icon-remove-sign"></i> 
+                    Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
+                </div>
+                <a href="/enfants/ajouter" class="btn-flat default">Retourner au formulaire d'ajout</a>
             </div>
-            <a href="/enfants/ajouter" class="btn-flat default">Retourner au formulaire d'ajout</a>
         </div>
-    </div>
+    <?php endif; ?>
 <?php endif; ?>
-<?php endif; ?>
-
 
 <?php $enfant = enfant::get($_GET['id']); ?>
 <?php $creator = user::get($enfant->creator); ?>
 <?php $editor = user::get($enfant->editor); ?>
 <?php $date_created = new DateTime($enfant->created); ?>
 <?php $date_edited = new DateTime($enfant->edited); ?>
-
-
-
 
 
 <div class="title">
@@ -242,20 +238,14 @@ $result = enfant::update($datas, $_GET['id']);
 <div class="row">
     <div class="col-md-9">
 
-
-        <div class="content <?=($enfant->archived)?' archived':' ';?>">
-
-            <?php 
-            if( $enfant->number_ss = 0 || $enfant->self_assurance <= 0 || $enfant->cpam_attestation <= 0 || empty($enfant->self_assurance_expiration_date) || $enfant->health_record <= 0 || $enfant->vaccination <= 0 ):
-                ?>
-            <div class="alert alert-warning">
-                <i class="icon-warning-sign"></i> 
-                La fiche de l'enfant est pour le moment incomplète
-            </div>
-            <?php
-            endif;
-            ?>
-
+        <div class="content <?=($enfant->archived)? 'archived' : ' ';?>">
+            <?php if( $enfant->number_ss == 0 || $enfant->self_assurance <= 0 || $enfant->cpam_attestation <= 0 || empty($enfant->self_assurance_expiration_date) || $enfant->health_record <= 0 || $enfant->vaccination <= 0 ): ?>
+                <div class="alert alert-warning">
+                    <i class="icon-warning-sign"></i> 
+                    La fiche de l'enfant est pour le moment incomplète
+                </div>
+            <?php endif; ?>
+           
             <?php if(isset($_POST['activate'])): ?>
                 <div class="alert alert-success">
                     <i class="icon-ok-sign"></i>
@@ -272,6 +262,7 @@ $result = enfant::update($datas, $_GET['id']);
                     </form>
                 </div>
             <?php endif; ?>
+
             <?php if($enfant->archived) :?>
                 <div class="alert alert-danger">
                     <i class="icon-remove-sign"></i> Cette fiche est archivée voulez-vous la supprimer ?
@@ -280,9 +271,6 @@ $result = enfant::update($datas, $_GET['id']);
                     </form>
                 </div>
             <?php endif; ?>
-
-
-            <?php tool::output($enfant); ?>
 
 
             <h3 id="a-propos">À propos de l'enfant</h3>
@@ -488,15 +476,13 @@ $result = enfant::update($datas, $_GET['id']);
                     <div class="col-md-4">
                         <p>
                             <strong>Droit à l'image :</strong>
-                            <?php if(!$enfant->image_rights): ?>
-                                <i class="icon-remove-sign"></i>
-                            <?php elseif($enfant->image_rights): ?>
-                                Oui
+                            <?php if($enfant->image_rights == 1): ?>
+                            Oui
+                            <?php elseif($enfant->image_rights == 2): ?>
+                            Non
                             <?php else: ?>
-                                Non
+                            <i class="icon-remove-sign"></i>
                             <?php endif; ?>
-
-
                         </p>
 
                         <p>
@@ -515,7 +501,7 @@ $result = enfant::update($datas, $_GET['id']);
                     </div>
                     <div class="col-md-4">
                         <p>
-                            <strong>N° de sécurité sociale : <?=$enfant->number_ss; ?></strong>
+                            <strong>N° de sécurité sociale :</strong>
                             <?=(isset($enfant->number_ss) && $enfant->number_ss != null)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>
                             <?php if (isset($enfant->number_ss) && $enfant->number_ss != null): ?>
                                 <br><small><?=$enfant->number_ss; ?></small>

@@ -16,7 +16,7 @@
         
         <div class="content">
 
-         <?php tool::output($enfant); ?>
+         <?php // tool::output($enfant); ?>
 
 
             <form id="form-add-children" method="post" action="/enfants/infos/id/<?=$enfant->id ?>" parsley-validate>
@@ -401,7 +401,7 @@
                         Oui
                     </label>
                     <label class="radio-inline col-md-3" for="form-enfant-droit-image-non">
-                        <input type="radio" name="form_enfant_droit_image" id="form-enfant-droit-image-non" value="2"<?php if ($enfant->image_rights > 2): ?> checked="checked"<?php endif ?>>
+                        <input type="radio" name="form_enfant_droit_image" id="form-enfant-droit-image-non" value="2"<?php if ($enfant->image_rights > 1): ?> checked="checked"<?php endif ?>>
                         Non
                     </label>
                 </div>
