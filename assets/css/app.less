@@ -10,7 +10,8 @@ html, body {
 }
 body {
 	position: relative;
-	font-family: 'Lato';
+	font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+	font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
 	background: #ebedf3;
 	-webkit-font-smoothing: antialiased;
 	font-size: 13px;
@@ -179,7 +180,71 @@ h6, .h6 {
 #top-nav {
 	border-radius: 0;
 	margin: 0;
+	min-height: 60px;
+	border: none;
+	background: white;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	a {
+		transition: all .2s;
+	}
+	.navbar-brand {
+		background: #51d2b7;
+		background: @blue;
+		font-weight: 400;
+		color: white;
+		padding: 20px;
+		font-size: 20px;
+		&:hover {
+			background: darken(@blue, 10%);
+		}
+	}
+	.nav {
 
+
+		.dropdown {
+			background: #fafafa;
+			font-size: 14px;
+			.caret {
+				border-top-color: #8a8a8a;
+			}
+			& > a {
+				color: #8a8a8a;
+				padding: 20px 15px;
+			}
+		}
+		.create-new {
+			background: white;
+			padding: 12px;
+			margin-right: 20px;
+			& > a {
+				padding: 7px 15px;
+				color: white;
+				.caret {
+					color: white;
+					margin-left: 4px;
+					border-top-color: white;
+				}
+			}
+
+			&.open > a:hover,
+			&.open > a:focus,
+			&.open > a:hover,
+			& > a:hover {
+				color: #ffffff;
+				background-color: #d2322d;
+				border-color: #ac2925;
+			}
+		}
+		.settings > a {
+			font-size: 14px;
+			color: #333;
+			padding: 20px 15px;
+			&:hover {
+				color: white;
+				background: #d9534f;
+			}
+		}
+	}
 }
 #sidebar-nav {
 	float: left;

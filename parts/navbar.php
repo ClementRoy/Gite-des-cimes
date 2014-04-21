@@ -1,5 +1,5 @@
    <!-- navbar -->
-    <header id="top-nav" class="navbar navbar-inverse" role="banner">
+    <header id="top-nav" class="navbar" role="banner">
         <div class="navbar-header">
             <button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
                 <span class="sr-only">Toggle navigation</span>
@@ -53,6 +53,17 @@
                 </div>
             </li>
             -->
+            <li class="dropdown create-new">
+                <a href="#" class="btn btn-danger dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
+                    Ajouter un nouveau <strong class="caret"></strong>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="">Enfant</a></li>
+                    <li><a href="">Séjour</a></li>
+                    <li><a href="">Structure</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+            </li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
                     Bonjour <strong><?=$user->firstname; ?> <?=$user->lastname; ?></strong>
