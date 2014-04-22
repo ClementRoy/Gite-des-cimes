@@ -258,6 +258,11 @@
                     <script>
                         $(document).ready(function(){
 
+                            // https://github.com/janl/mustache.js/
+
+
+                            
+
                             $(document).on('change', '.selector', function(){
                                 //console.log('triggering select');
                                 $sejour = $(this).find('option:selected');
