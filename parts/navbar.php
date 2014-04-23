@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </li>
-            -->
+            
             <li class="dropdown create-new">
                 <a href="#" class="btn btn-danger dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
                     Ajouter un nouveau <strong class="caret"></strong>
@@ -64,6 +64,7 @@
                     <li><a href="">Contact</a></li>
                 </ul>
             </li>
+            -->
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
                     Bonjour <strong><?=$user->firstname; ?> <?=$user->lastname; ?></strong>
