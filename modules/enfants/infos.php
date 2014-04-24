@@ -1,7 +1,7 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
-     <?php $enfant = enfant::get($_GET['id']); ?>
+<?php $enfant = enfant::get($_GET['id']); ?>
 
 
 <?php if(isset($_POST['submit-add'])): ?>
@@ -68,30 +68,30 @@
         ':health_record' => $form_enfant_fiche_sanitaire,
         ':stay_record' => $form_enfant_fiche_sejour,
         ':note' => $form_enfant_note
-    );
+        );
 
-    $result = enfant::update($datas, $_GET['id']);
+$result = enfant::update($datas, $_GET['id']);
 
-    ?>
-    <?php if($result): ?>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-success">
-                    <i class="icon-ok-sign"></i> 
-                    L'enfant <strong><?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?></strong> a bien été ajouté
-                </div>
+?>
+<?php if($result): ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success">
+                <i class="icon-ok-sign"></i> 
+                L'enfant <strong><?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?></strong> a bien été ajouté
             </div>
         </div>
-    <?php else: ?>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-danger">
-                    <i class="icon-remove-sign"></i> 
-                    Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
-                </div>
+    </div>
+<?php else: ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+                <i class="icon-remove-sign"></i> 
+                Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
             </div>
         </div>
-    <?php endif; ?>
+    </div>
+<?php endif; ?>
 
 <?php endif; ?>
 
@@ -161,32 +161,32 @@
         ':health_record' => $form_enfant_fiche_sanitaire,
         ':stay_record' => $form_enfant_fiche_sejour,
         ':note' => $form_enfant_note
-    );
+        );
 
-    $result = enfant::update($datas, $_GET['id']);
+$result = enfant::update($datas, $_GET['id']);
 
-    ?>
+?>
 
-    <?php if($result): ?>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-success">
-                    <i class="icon-ok-sign"></i> 
-                    L'enfant <strong><?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?></strong> a bien été modifié
-                </div>
+<?php if($result): ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success">
+                <i class="icon-ok-sign"></i> 
+                L'enfant <strong><?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?></strong> a bien été modifié
             </div>
         </div>
-    <?php else: ?>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-danger">
-                    <i class="icon-remove-sign"></i> 
-                    Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
-                </div>
-                <a href="/enfants/ajouter" class="btn-flat default">Retourner au formulaire d'ajout</a>
+    </div>
+<?php else: ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+                <i class="icon-remove-sign"></i> 
+                Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
             </div>
+            <a href="/enfants/ajouter" class="btn-flat default">Retourner au formulaire d'ajout</a>
         </div>
-    <?php endif; ?>
+    </div>
+<?php endif; ?>
 <?php endif; ?>
 
 <?php $enfant = enfant::get($_GET['id']); ?>
@@ -245,7 +245,7 @@
                     La fiche de l'enfant est pour le moment incomplète
                 </div>
             <?php endif; ?>
-           
+
             <?php if(isset($_POST['activate'])): ?>
                 <div class="alert alert-success">
                     <i class="icon-ok-sign"></i>
@@ -288,7 +288,7 @@
                         <?php if($enfant->guardian == 'structure'): ?>
                             <?php if ($enfant->organization != 0): ?>
                                 <?php $structure = structure::get($enfant->organization); ?>
-                                <a href=""><?=$structure->name;?></a>
+                                <a href="/structures/infos/id/<?=$structure->id;?>"><?=$structure->name;?></a>
                             <?php else: ?>
                                 Structure
                             <?php endif ?>
@@ -329,13 +329,16 @@
                     </p>
                 </div>
 
-
+                </div>
+                <div class="row">
                 <?php if (!empty($enfant->note)): ?>
                     <div class="col-md-12">
-                        <p><strong>Notes :</strong><br />
-                            <?=$enfant->note;?></p>
-                        </div>
-                    <?php endif; ?>
+                        <p>
+                            <strong>Notes :</strong><br />
+                            <?=$enfant->note;?>
+                        </p>
+                    </div>
+                <?php endif; ?>
                 </div>
 
                 <hr>
@@ -477,11 +480,11 @@
                         <p>
                             <strong>Droit à l'image :</strong>
                             <?php if($enfant->image_rights == 1): ?>
-                            Oui
+                                Oui
                             <?php elseif($enfant->image_rights == 2): ?>
-                            Non
+                                Non
                             <?php else: ?>
-                            <i class="icon-remove-sign"></i>
+                                <i class="icon-remove-sign"></i>
                             <?php endif; ?>
                         </p>
 
@@ -521,11 +524,11 @@
                             <?=($enfant->cpam_attestation > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>
 
                             <?php if ($enfant->cpam_attestation > 0): ?>
-                               <br><small>Validité : <?=(!empty($enfant->cpam_attestation_expiration_date))? $enfant->cpam_attestation_expiration_date : EMPTYVAL; ?></small>
-                           <?php endif ?>
-                       </p>
-                   </div>
-                   <div class="col-md-4">
+                             <br><small>Validité : <?=(!empty($enfant->cpam_attestation_expiration_date))? $enfant->cpam_attestation_expiration_date : EMPTYVAL; ?></small>
+                         <?php endif ?>
+                     </p>
+                 </div>
+                 <div class="col-md-4">
                     <p>
                         <strong>Fiche sanitaire de liaison :</strong>
                         <?=($enfant->health_record > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>
