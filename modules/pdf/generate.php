@@ -82,28 +82,33 @@ ob_start(); ?>
 		<table class="special" bordercolor="#000000" border="1" CELLPADDING="10" CELLSPACING="0" style="margin-top:5px; height:40px;">
 			<tr>
 				<td style="width:50%;padding:15px 15px 0;" border="1">
-					<h4>GITE DES CIMES / N° organisateur : 060ORG0292</h4>
+					<h4><!-- GITE DES CIMES /  -->N° organisateur : 060ORG0292</h4>
 
-					<p>
+					<p style="margin:5px 0;">
 						607 rue du Château d’eau<br>
 						60123 Bonneuil en Valois
 					</p>
-					<p><strong>Tél :</strong> 03 44 88 51 13</p>
-					<p><strong>Email :</strong> gite.cimes@orange.fr</p>
+					<p style="margin:5px 0;"><strong>Tél :</strong> 03 44 88 51 13</p>
+					<p style="margin:5px 0;"><strong>Email :</strong> gite.cimes@orange.fr</p>
 
 					<!-- <p>Directeur : Lyazid Behlouli 06 50 31 22 88</p> -->
 
 					<p style="margin-bottom:0;">
-						<strong>N° d’enregistrement du ou des séjours :</strong><br>
+						<strong>N° d’enregistrement du ou des séjours :</strong></p>
 						<?php $numero_sejour = ''; ?>
 						<?php foreach ($inscriptions as $key => $inscription): ?>
+							
+
 							<?php $sejour = sejour::get($inscription->ref_sejour); ?>
 							<?php if ($numero_sejour != $sejour->numero): ?>
-								<?=$sejour->name ?> - <?=$sejour->numero ?><br>
+								<?php $hebergement = hebergement::get($sejour->ref_hebergement); ?>
+								<p style="margin:3px 0;"><?=$sejour->name ?> - <?=$sejour->numero ?><br>
+								<?=$hebergement->name.', '.$hebergement->address_postal_code.' '.$hebergement->address_city;?>
 								<?php $numero_sejour = $sejour->numero; ?>
+								</p>
 							<?php endif ?>
 						<?php endforeach ?>
-					</p>
+				
 
 
 				</td>
@@ -676,20 +681,20 @@ ob_start(); ?>
 						<?php endforeach; ?>
 						<?php //tool::output($sejours_temp); ?>
 					<?php foreach ($sejours_temp as $key => $sejour_temp): ?>
-							<?=ucfirst($sejour_temp[1]);?> — <?=$sejour_temp[3];?> <?=$sejour_temp[4];?> — <?=$sejour_temp[2];?> — <strong>du</strong> : <?=$sejour_temp[5];?> au <?=$sejour_temp[6];?><br>
+							<?=ucfirst($sejour_temp[1]);?> — <?=$sejour_temp[3];?> <?=$sejour_temp[4];?>, <?=$sejour_temp[2];?> — <strong>du</strong> : <?=$sejour_temp[5];?> au <?=$sejour_temp[6];?><br>
 					<?php endforeach; ?>
 
 
 				</p>
-					<p>
+					
 						<?php $date_depart = inscription::getDateDeparture($id); ?>
 						<?php $date_depart = new DateTime($date_depart->date_departure); ?>
 						<?php if($date_depart->getTimestamp() != '-62169987600'): ?>
 							<?php $date_depart = strftime('%d/%m/%Y', $date_depart->getTimestamp()); ?>
 						<?php endif; ?>
 
-						<strong>Est attendu par notre équipe d’animation : </strong><br>
-						<strong>Date de départ :</strong> <?=$date_depart; ?><br>
+						<p style="margin-bottom: 0;"><strong>Est attendu par notre équipe d’animation : </strong></p>
+						<p><strong>Date de départ :</strong> <?=$date_depart; ?><br>
 						Lieu : <?=$dossier->place; ?><br>
 						Heure : <?=$dossier->hour_departure; ?>
 					</p>
@@ -715,8 +720,9 @@ ob_start(); ?>
 						Heure : <?=$dossier->hour_return; ?>
 					</p>
 					<hr>
-					<p style="margin-top:30px;">
-						Nous restons à votre disposition pour tous renseignements complémentaires au 03 44 88 51 13.<br>
+					<p style="margin-top:30px;margin-bottom:0;font-size:15px;">
+						Nous restons à votre disposition pour tous renseignements complémentaires au 03 44 88 51 13.<br></p>
+						<p>
 						Au plaisir de ces prochaines vacances !<br>
 						L’équipe du Gite des Cimes
 					</p>
