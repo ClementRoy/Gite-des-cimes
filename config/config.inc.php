@@ -52,6 +52,8 @@ define('DEFAULT_VIEW', 'index');
 
 define('EMPTYVAL', 'NC');
 
+define('UPLOAD_FOLDER','uploads/');
+
 /*
 Tous les widgets sont dans /widgets
 Les widgets sont appelés sur le dashboard (module)

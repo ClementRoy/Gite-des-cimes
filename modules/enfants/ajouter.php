@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-10">
             
-            <form id="form-add-children" method="post" action="/enfants/infos/id/<?=$id ?>" class="maped-form" parsley-validate>
+            <form id="form-add-children" method="post" action="/enfants/infos/id/<?=$id ?>" class="maped-form" parsley-validate enctype="multipart/form-data">
                 <input type="hidden" value="<?=$id ?>" name="id" />
                 <div class="row form-wrapper">
                     <div class="field-box row">
@@ -32,6 +32,14 @@
                             <input id="form-enfant-nom" name="form_enfant_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'enfant." parsley-required="true">
                         </div>
                     </div>
+
+                    <div class="field-box row">
+                        <label class="col-md-2" for="form-enfant-picture">Photo</label>
+                        <div class="col-md-5">
+                            <input type="file" name="form_enfant_picture" id="form-enfant-picture">
+                        </div>
+                    </div>
+
                     <div class="field-box row">
                         <label class="col-md-2" for="form-enfant-naissance">Date de naissance</label>
                         <div class="col-md-5">

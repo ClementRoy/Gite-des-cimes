@@ -3,10 +3,15 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php $enfant = enfant::get($_GET['id']); ?>
 
-
 <?php if(isset($_POST['submit-add'])): ?>
     <?php 
     extract($_POST);
+
+    $ref_picture = '';
+    if(isset($_FILES['form_enfant_picture']) && !$_FILES['form_enfant_picture']['error']){
+        $file = $_FILES['form_enfant_picture'];
+        $ref_picture = media::upload($_FILES['form_enfant_picture']);
+    }
 
     $birthdate = tool::generateDatetime($form_enfant_naissance);
     $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
@@ -15,6 +20,7 @@
     $datas = array(                
         ':firstname' => $form_enfant_prenom,
         ':lastname' => $form_enfant_nom,
+        ':ref_picture' => $ref_picture,
         ':birthdate' => $birthdate,
         ':sex' => $form_enfant_sexe,
         ':registration_by' => $form_enfant_inscription,
@@ -101,6 +107,13 @@ $result = enfant::update($datas, $_GET['id']);
     <?php //tool::output($_SESSION); ?>
     <?php 
     extract($_POST);
+
+    $ref_picture = $enfant->ref_picture;
+    if(isset($_FILES['form_enfant_picture']) && !$_FILES['form_enfant_picture']['error']){
+        $file = $_FILES['form_enfant_picture'];
+        $ref_picture = media::upload($_FILES['form_enfant_picture']);
+    }
+
     $birthdate = tool::generateDatetime($form_enfant_naissance);
     $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
     $cpam_validite = tool::generateDatetime($form_enfant_cpam_validite);
@@ -108,6 +121,7 @@ $result = enfant::update($datas, $_GET['id']);
     $datas = array(                 
         ':firstname' => $form_enfant_prenom,
         ':lastname' => $form_enfant_nom,
+        ':ref_picture' => $ref_picture,
         ':birthdate' => $birthdate,
         ':sex' => $form_enfant_sexe,
         ':registration_by' => $form_enfant_inscription,
@@ -189,7 +203,6 @@ $result = enfant::update($datas, $_GET['id']);
 <?php endif; ?>
 <?php endif; ?>
 
-<?php $enfant = enfant::get($_GET['id']); ?>
 <?php $creator = user::get($enfant->creator); ?>
 <?php $editor = user::get($enfant->editor); ?>
 <?php $date_created = new DateTime($enfant->created); ?>
@@ -200,7 +213,14 @@ $result = enfant::update($datas, $_GET['id']);
     <div class="row header">
         <div class="col-md-9">
 
-            <h1><a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
+            <h1><a href="#" class="trigger">
+            <?php if(!empty($enfant->ref_picture)): ?>
+                <?php $picture = media::get($enfant->ref_picture); ?>
+                <img src="<?php echo '/'.UPLOAD_FOLDER.$picture->file_name; ?>" width="60" class="img-thumbnail"/>
+            <?php else: ?>
+                <i class="big-icon icon-user"></i>
+            <?php endif; ?>
+            </a>
                 <?=$enfant->firstname; ?> <strong><?=$enfant->lastname; ?></strong><br />
                 <small class="area">
                     <?=($enfant->sex == 'féminin') ? '<i class="icon-female"></i>' : '<i class="icon-male"></i>'; ?>
