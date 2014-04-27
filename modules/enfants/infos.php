@@ -216,7 +216,7 @@ $result = enfant::update($datas, $_GET['id']);
             <h1><a href="#" class="trigger">
             <?php if(!empty($enfant->ref_picture)): ?>
                 <?php $picture = media::get($enfant->ref_picture); ?>
-                <img src="<?php echo '/'.UPLOAD_FOLDER.$picture->file_name; ?>" width="60" class="img-thumbnail"/>
+                <img src="<?php echo '/'.UPLOAD_FOLDER.$picture->file_name; ?>" width="60" class="img-circle"/>
             <?php else: ?>
                 <i class="big-icon icon-user"></i>
             <?php endif; ?>
