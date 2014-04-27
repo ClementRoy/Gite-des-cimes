@@ -89,7 +89,7 @@
 
             <h1><a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
                 <?=$utilisateur->firstname; ?> <strong><?=$utilisateur->lastname; ?></strong>
-                <small><?php if ($utilisateur->rank == 1): ?>Utilisateur<?php elseif ($utilisateur->rank == 3): ?>Gestionnaire<?php elseif ($utilisateur->rank == 5): ?>Administrateur<?php endif; ?></small></h1>
+                <small><?php if ($utilisateur->rank == 1): ?>Utilisateur<?php elseif ($utilisateur->rank == 3): ?>Gestionnaire<?php elseif ($utilisateur->rank == 5): ?>Administrateur<?php endif; ?></small>
             </h1>
 
             <div class="pop-dialog">

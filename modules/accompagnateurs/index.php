@@ -45,26 +45,28 @@
             <table class="datatable" data-sort="0">
                 <thead>
                     <tr>
-                        <th class="sortable">Prénom</th>
-                        <th class="sortable">Nom</th>
-                        <th class="sortable">Téléphone</th>
-                        <th class="sortable">Rôle</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Téléphone</th>
+                        <th>Email</th>
+                        <!--<th class="sortable">Rôle</th>-->
                     </tr>
                 </thead>
 
                 <tfoot>
                     <tr>
-                        <th class="sortable">Prénom</th>
-                        <th class="sortable">Nom</th>
-                        <th class="sortable">Téléphone</th>
-                        <th class="sortable">Rôle</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Téléphone</th>
+                        <th>Email</th>
+                        <!--<th class="sortable">Rôle</th>-->
                     </tr>
                 </tfoot>
                 <tbody>
                     <?php foreach($accompagnateurs as $key => $accompagnateur): ?>
                         <tr <?php if($key == 0): ?>class="first"<?php endif; ?>>
                             <td>
-                                <a href="/accompagnateurs/infos/id/<?=$user->id; ?>" class="name"><?=$accompagnateur->firstname; ?></a>
+                                <a href="/accompagnateurs/infos/id/<?=$accompagnateur->id; ?>" class="name"><?=$accompagnateur->firstname; ?></a>
                                 <div class="pop-dialog tr">
                                     <div class="pointer">
                                         <div class="arrow"></div>
@@ -72,29 +74,25 @@
                                     </div>
                                     <div class="body">
                                         <div class="menu">
-                                            <a href="/accompagnateurs/infos/id/<?=$user->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
-                                            <a href="/accompagnateurs/editer/id/<?=$user->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
-                                            <a href="/accompagnateurs/supprimer/id/<?=$user->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
+                                            <a href="/accompagnateurs/infos/id/<?=$accompagnateur->id; ?>" class="item"><i class="icon-share"></i> Voir la fiche</a>
+                                            <a href="/accompagnateurs/editer/id/<?=$accompagnateur->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
+                                            <a href="/accompagnateurs/supprimer/id/<?=$accompagnateur->id; ?>" class="item"><i class="icon-remove"></i> Supprimer</a>
                                         </div>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <a href="/accompagnateurs/infos/id/<?=$user->id; ?>" class="name"><?=$accompagnateur->lastname; ?></a>
+                                <a href="/accompagnateurs/infos/id/<?=$accompagnateur->id; ?>" class="name"><?=$accompagnateur->lastname; ?></a>
                             </td>
                             <td>
                                 <?=$accompagnateur->tel; ?>
                             </td>
                             <td>
-                                <span class="label label-info">
-                                    <?php if ($accompagnateur->rank == 1): ?>
-                                        Utilisateur
-                                    <?php elseif ($accompagnateur->rank == 3): ?>
-                                        Gestionnaire
-                                    <?php elseif ($accompagnateur->rank == 5): ?>
-                                        Administrateur
-                                    <?php endif; ?>
-                                </span>
+                                <?php if(!empty($accompagnateur->email)): ?>
+                                <?=$accompagnateur->email; ?>
+                                <?php else: ?>
+                                NC
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

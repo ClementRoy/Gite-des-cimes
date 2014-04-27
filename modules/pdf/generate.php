@@ -90,8 +90,22 @@ ob_start(); ?>
 					</p>
 					<p style="margin:5px 0;"><strong>Tél :</strong> 03 44 88 51 13</p>
 					<p style="margin:5px 0;"><strong>Email :</strong> gite.cimes@orange.fr</p>
+					
+					<?php $directors = array(); ?>
+					<?php foreach ($inscriptions as $key => $inscription): ?>
+						<?php $ref_accompagnateur = accompagnateur::getBySejour($inscription->ref_sejour); ?>
+						<?php if(!in_array($ref_accompagnateur, $directors)): ?>
+							<?php $directors[] = $ref_accompagnateur; ?>
+							<?php if(!empty($ref_accompagnateur)): ?>
+								<?php $accompagnateur = accompagnateur::get($ref_accompagnateur->ref_accompagnateur); ?>
+								<p><strong>Directeur de séjour :</strong> <?=$accompagnateur->lastname ?> <?=$accompagnateur->firstname ?> <?=$accompagnateur->tel ?></p>
+							<?php endif; ?>
+						<?php endif; ?>
+					<?php endforeach ?>
 
-					<!-- <p>Directeur : Lyazid Behlouli 06 50 31 22 88</p> -->
+
+					<!-- <p>Direc
+					teur : Lyazid Behlouli 06 50 31 22 88</p> -->
 
 					<p style="margin-bottom:0;">
 						<strong>N° d’enregistrement du ou des séjours :</strong></p>
@@ -296,7 +310,7 @@ ob_start(); ?>
 							?>
 						<?php endforeach; ?>
 					<?php foreach ($sejours_temp as $key => $sejour_temp): ?>
-					•&nbsp;&nbsp;Séjour <?=$sejour_temp[1];?> au <?=$sejour_temp[2];?> (<?=$sejour_temp[3];?> <?=$sejour_temp[4];?>) : Du <?=$sejour_temp[5];?> au <?=$sejour_temp[6];?> - Prix : <?=$sejour_temp[7];?> €<br> 
+					•&nbsp;&nbsp;Séjour <?=$sejour_temp[1];?> au <?=$sejour_temp[2];?> (<?=$sejour_temp[3];?> <?=$sejour_temp[4];?>) : <br />Du <?=$sejour_temp[5];?> au <?=$sejour_temp[6];?> - Prix : <?=$sejour_temp[7];?> €<br> 
 					<?php endforeach; ?>
 
 

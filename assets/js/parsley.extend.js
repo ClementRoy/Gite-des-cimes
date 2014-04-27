@@ -48,6 +48,16 @@ window.ParsleyConfig = window.ParsleyConfig || {};
           , priority: 32
         }
       }
+      , greaterorequalthan: function () {
+        return {
+          validate: function ( val, elem, self ) {
+            self.options.validateIfUnchanged = true;
+
+            return new Number(val) >= new Number($( elem ).val());
+          }
+          , priority: 32
+        }
+      }
       , lessthan: function () {
         return {
           validate: function ( val, elem, self ) {
@@ -139,6 +149,7 @@ window.ParsleyConfig = window.ParsleyConfig || {};
       , maxwords:       "This value should have %s words maximum."
       , rangewords:     "This value should have between %s and %s words."
       , greaterthan:    "Cette valeur doit être plus grande que le nombre précédent."
+      , greaterorequalthan : "Cette valeur doit être plus grande ou égale au nombre précédent."
       , lessthan:       "This value should be less than %s."
       , beforedate:     "This date should be before %s."
       , afterdate:      "Cette date doit être plus récente que la date précédente."

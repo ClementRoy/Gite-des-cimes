@@ -22,6 +22,13 @@
 
     $result = sejour::update($datas, $_GET['id']);
 
+    $datas_accompagnateur = array(
+        ':ref_sejour' => $_GET['id'],
+        ':ref_accompagnateur' => $form_sejour_accompagnateur
+    );
+
+    $result = accompagnateur::addToSejour($datas_accompagnateur);
+
     ?>
 
     <?php //tool::output($_POST); ?>
@@ -90,6 +97,17 @@
         );
 
     $result = sejour::update($datas, $_GET['id']);
+
+    $accompagnateur = accompagnateur::deleteBySejour($_GET['id']);
+
+    $datas_accompagnateur = array(
+        ':ref_sejour' => $_GET['id'],
+        ':ref_accompagnateur' => $form_sejour_accompagnateur
+    );
+
+    $result = accompagnateur::addToSejour($datas_accompagnateur);
+
+
 
     ?>
     <?php if($result): ?>
@@ -186,8 +204,6 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                     ?>
 
                     <?php $inscriptions = inscription::getBySejourBetweenDates($sejour->id, $date_from_query, $date_to_query); ?>
-
-
 
                     <div class="tab-pane <?php if($i == 1): ?>active<?php endif; ?>" id="week-<?=$i ?>">
                         <div class="row">
@@ -620,6 +636,18 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
             <?php endif; ?>
         </div>
     <?php endif; ?>
+
+    <?php $ref_accompagnateur = accompagnateur::getBySejour($sejour->id); ?>
+    <?php if(!empty($ref_accompagnateur)): ?>
+        <h6>Directeur du séjour</h6>
+            <?php $accompagnateur = accompagnateur::get($ref_accompagnateur->ref_accompagnateur); ?>
+            <ul>
+                <li><strong><?=$accompagnateur->firstname ?> <?=$accompagnateur->lastname; ?></strong></li>
+                <?php if(!empty($accompagnateur->tel)): ?><li><strong>Téléphone : </strong><?=tool::formatTel($accompagnateur->tel) ?></li><?php endif; ?>
+                <?php if(!empty($accompagnateur->email)): ?><li><strong>Email : </strong><a href="mailto:<?=$accompagnateur->email ?>"><?=$accompagnateur->email ?></a></li><?php endif; ?>
+            </ul>
+    <?php endif; ?>
+
 </div>
 
 </div>

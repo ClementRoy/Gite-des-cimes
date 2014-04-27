@@ -394,17 +394,18 @@ $("table").on("contextmenu", "tr", function(e){
 	e.stopPropagation();
 });
 
-if($('.datatable').data('sort') != undefined ){
-	var col_sort = $(this).data('sort');
-}
-else {
-	var col_sort = '0';
-}
 
 if (typeof the_datas != "undefined") {
 	$('.datatable').each(function(index, el) {
+		if($(this).data('sort') != undefined ){
+			var col_sort = $(this).data('sort');
+		}
+		else {
+			var col_sort = '0';
+		}
+
 		$(this).dataTable({
-			"aaSorting": [[$(this).data('sort'),'asc']],
+			"aaSorting": [[col_sort,'asc']],
 			"sPaginationType": "full_numbers",
 			"iDisplayLength": 50,
 			"oLanguage": {
@@ -436,6 +437,14 @@ if (typeof the_datas != "undefined") {
 });
 
 } else {
+
+		if($(this).data('sort') != undefined ){
+			var col_sort = $(this).data('sort');
+		}
+		else {
+			var col_sort = '0';
+		}
+		
 	$('.datatable').dataTable({
 		"aaSorting": [[col_sort,'asc']],
 		"sPaginationType": "full_numbers",

@@ -8,10 +8,11 @@
         <?php 
                 extract($_POST);
                 $datas = array(
-                    ':identifier' => $form_utilisateur_identifiant,
-                    ':firstname' => $form_utilisateur_prenom,
-                    ':rank' => $form_utilisateur_lvl
-                    );
+                    ':lastname' => $form_accompagnateur_nom,
+                    ':firstname' => $form_accompagnateur_prenom,
+                    ':tel' => $form_accompagnateur_tel,
+                    ':email' => $form_accompagnateur_email,
+                );
 
                 $result = accompagnateur::update($datas, $_GET['id']);
 
@@ -22,7 +23,7 @@
                     <div class="col-md-12">
                         <div class="alert alert-success">
                             <i class="icon-ok-sign"></i> 
-                            L'accompagnateur <?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?> a bien été ajouté
+                            L'accompagnateur <?=$form_accompagnateur_prenom; ?> <?=$form_accompagnateur_nom; ?> a bien été ajouté
                         </div>
                     </div>
                 </div>
@@ -46,9 +47,10 @@
         <?php  
         extract($_POST);
         $datas = array(
-            ':firstname' => $form_utilisateur_prenom,
-            ':lastname' => $form_utilisateur_nom,
-            ':rank' => $form_utilisateur_lvl,
+            ':firstname' => $form_accompagnateur_prenom,
+            ':lastname' => $form_accompagnateur_nom,
+            ':tel' => $form_accompagnateur_tel,
+            ':email' => $form_accompagnateur_email,
         );
 
         $result = accompagnateur::update($datas, $_GET['id']);
@@ -61,7 +63,7 @@
 
                     <div class="alert alert-info">
                         <i class="icon-exclamation-sign"></i>
-                        L'accompagnateur <strong><?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?></strong> a bien été modifié.
+                        L'accompagnateur <strong><?=$form_accompagnateur_prenom; ?> <?=$form_accompagnateur_nom; ?></strong> a bien été modifié.
                     </div>
                 </div>
             </div>
@@ -83,9 +85,10 @@
     <div class="row header">
         <div class="col-md-9">
 
-            <h1><a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
+            <h1>
+                <a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
                 <?=$accompagnateur->firstname; ?> <strong><?=$accompagnateur->lastname; ?></strong>
-                <small><?php if ($accompagnateur->rank == 1): ?>Utilisateur<?php elseif ($accompagnateur->rank == 3): ?>Gestionnaire<?php elseif ($accompagnateur->rank == 5): ?>Administrateur<?php endif; ?></small></h1>
+                <?php /* ?><small><?php if ($accompagnateur->rank == 1): ?>Utilisateur<?php elseif ($accompagnateur->rank == 3): ?>Gestionnaire<?php elseif ($accompagnateur->rank == 5): ?>Administrateur<?php endif; ?></small><?php */ ?>
             </h1>
 
             <div class="pop-dialog">
@@ -140,38 +143,37 @@
     <div class="row">
         <div class="col-md-6">
             <dl>
+                <dt>Nom :</dt> <dd><?=$accompagnateur->lastname; ?></dd>
+            </dl>
+            <dl>
                 <dt>Prénom :</dt> <dd><?=$accompagnateur->firstname; ?></dd>
-            </dl>
-            <dl>
-                <dt>Identifiant :</dt> <dd><?=$accompagnateur->identifier; ?></dd>
-            </dl>
-            <dl>
-                <dt>Rôle :</dt>
-                <dd>
-                    <?php if ($accompagnateur->rank == 1): ?>
-                        Utilisateur
-                    <?php elseif ($accompagnateur->rank == 3): ?>
-                        Gestionnaire
-                    <?php elseif ($accompagnateur->rank == 5): ?>
-                        Administrateur
-                    <?php endif; ?>
-                </dd>
-
             </dl>
         </div>
         <div class="col-md-6">
-
             <dl>
-                <dt>Nom :</dt>
-                <dd><?=$accompagnateur->lastname; ?></dd>
+                <dt>Téléphone :</dt>
+                <dd>
+                    <?php if(!empty($accompagnateur->tel)): ?>
+                        <?=tool::formatTel($accompagnateur->tel); ?>
+                    <?php else: ?>
+                        NC
+                    <?php endif; ?>
+                </dd>
             </dl>
             <dl>
-                <dt>Email</dt>
-                <dd><a href="mailto:<?=$utilisateur->email;?>" target="_blank"><?=$accompagnateur->email;?></a></dd>
+                <dt>Email :</dt>
+                <dd>
+                    <?php if(!empty($accompagnateur->email)): ?>
+                        <a href="mailto:<?=$accompagnateur->email;?>" target="_blank"><?=$accompagnateur->email;?></a>
+                    <?php else: ?>
+                        NC
+                    <?php endif; ?>
+                </dd>
             </dl>
         </div>
     </div>
-    <?php //tool::output($utilisateur); ?>
+
+    <?php //tool::output($accompagnateur); ?>
 
     <!-- <small class="metadata pull-right">Créé par <?=$creator->firstname; ?> le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?>, modifié par <?=$editor->firstname ?> le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?> </small> -->
 </div>

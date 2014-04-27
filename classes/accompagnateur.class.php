@@ -49,15 +49,26 @@ class accompagnateur
             $result = $db->query('SELECT * FROM '.self::$table.' LIMIT 5 OFFSET 0', $data);
         }
         else {
-            $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY name');
+            $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY lastname');
         }
+        return $result;
+    }
+
+
+    public static function getBySejour($id){
+        global $db;
+        $params = array(
+                        ':id' => $id
+                        );
+        $sql = 'SELECT * FROM accompagnateur_sejour WHERE ref_sejour=:id';
+        $result = $db->row($sql, $params);
         return $result;
     }
 
 
     public static function getFromTrash(){
         global $db;
-        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1 ORDER BY name');
+        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1 ORDER BY lastname');
         return $result;
     }
 
@@ -74,6 +85,24 @@ class accompagnateur
     }
 
 
+
+
+    public static function addToSejour($data = array()){
+        global $db;
+         // Build the Query, be careful, vars must be prefixed with ":"
+        $bind = implode(', ', array_keys($data)); 
+        $entries = '';
+        foreach (array_keys($data) as $key => $name) {
+            if($key !=0)
+                $entries .= ',';
+            $entries .=  substr($name, 1);
+        }    
+        $sql = 'INSERT INTO accompagnateur_sejour (' . $entries . ') ' . 'values (' . $bind . ')';
+
+        $result = $db->insert($sql, $data);
+        
+        return $result;       
+    }
     /**
      * Insert a new object into the database
      *
@@ -184,6 +213,17 @@ class accompagnateur
         return $result;       
     }
 
+
+    public static function deleteBySejour($id){
+        global $db;
+        $data = array(':id' => $id);
+        $sql = 'DELETE FROM accompagnateur_sejour WHERE ref_sejour = :id';
+        $result = $db->delete($sql, $data);
+        //$result = self::archive($id);
+        return $result;
+    }
+
+
     public static function delete($id){
         global $db;
         $data = array(':id' => $id);
@@ -201,7 +241,7 @@ class accompagnateur
 
     public static function cleanEmpty(){
         global $db;
-        $sql = 'DELETE FROM '.self::$table.' WHERE name = ""';
+        $sql = 'DELETE FROM '.self::$table.' WHERE lastname = ""';
         $result = $db->delete($sql);
         return $result;
     }

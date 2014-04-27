@@ -16,8 +16,7 @@
             <form id="form-add-sejour" method="post" action="/sejours/infos/id/<?=$id ?>" parsley-validate>
              <!--  <h2>Informations sur le séjour</h2> -->
 
-                    <input type="hidden" value="<?=$id ?>" name="id" />
-
+            <input type="hidden" value="<?=$id ?>" name="id" />
 
              <div class="field-box row">
                 <label class="col-md-2" for="form-sejour-nom">Nom du séjour</label>
@@ -64,7 +63,7 @@
                 </div>        
                 <div class="col-md-2">
                     <input id="form-sejour-capacite-max" name="form_sejour_capacite_max" class="form-control" type="text" 
-                    data-toggle="tooltip" placeholder="Maximum" title="Renseignez le nombre d'enfant maximum pour ce séjour." parsley-required="true" parsley-type="digits" parsley-greaterthan="#form-sejour-capacite-min">
+                    data-toggle="tooltip" placeholder="Maximum" title="Renseignez le nombre d'enfant maximum pour ce séjour." parsley-required="true" parsley-type="digits" parsley-greaterorequalthan="#form-sejour-capacite-min">
                 </div>                         
             </div>
 
@@ -84,6 +83,23 @@
                 </div>                            
             </div>
 
+             <div class="field-box row">
+           
+                <label class="col-md-2">Directeur du séjour</label>
+                <?php  $accompagnateurs = accompagnateur::getList(); ?>
+
+                <div class="col-md-4 col-sm-5">
+                    <?php foreach($accompagnateurs as $key => $accompagnateur): ?>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="form_sejour_accompagnateur" id="form-sejour-accompagnater" value="<?=$accompagnateur->id ?>">
+                        <?=$accompagnateur->lastname ?> <?=$accompagnateur->firstname ?>
+                      </label>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+    
+            </div>
 
             <div class="field-box actions">
                 <div class="col-md-6 col-md-offset-2">
