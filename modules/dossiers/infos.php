@@ -193,6 +193,16 @@
         <div class="content">
             <div class="row">
 
+
+            <?php  if(!$dossier->finished): ?>
+                        <div class="alert alert-warning">
+                            <i class="icon-warning-sign"></i> 
+                            L'inscription n'est pas encore été finalisée
+                        </div>
+            <?php
+                endif;
+            ?>
+
             <?php 
                 if(!$dossier->supported):
             ?>
@@ -204,19 +214,23 @@
                 endif;
             ?>
 
-            <?php if ($dossier->finished): ?>
-            <a href="/pdf/generate/id/<?=$dossier->id?>/type/contrat/" target="_blank" class="btn btn-primary">Contrat</a>
-                <a href="/pdf/generate/id/<?=$dossier->id?>/type/convocation/" target="_blank" class="btn btn-primary">Convocation</a>
-                <a href="/pdf/generate/id/<?=$dossier->id?>/type/dossier/" target="_blank" class="btn btn-primary">Dossier d'inscription</a>
-            <?php else: ?>
-                Ce dossier d'inscription n'est pas finalisé.
-            <?php endif ?>
+
+
+            <?php $inscriptions = inscription::getByDossier($dossier->id); ?>
+            <h3>Séjours</h3>
+            <ul>
+                <?php foreach($inscriptions as $inscription): ?>
+                    <?php $sejour = sejour::get($inscription->ref_sejour); ?>
+                    <?php $date_from = new DateTime($inscription->date_from); ?>
+                    <?php $date_to = new DateTime($inscription->date_to); ?>
+                <li><?=$sejour->name ?> du <?=strftime("%d %B %Y", $date_from->getTimestamp()) ?> au <?=strftime("%d %B %Y", $date_to->getTimestamp()) ?></li>
+                <?php endforeach; ?>
+            </ul>
+
             </div>
 
             <div class="row">
                 <ul>
-                    <li>Liste des séjours</li>
-                    <li>Dates à chaque fois</li>
                     <li>Centre payeur</li>
                     <li>Prise en charge de l'enfant</li>
                     <li>Lieu de rendez-vous</li>
@@ -247,6 +261,17 @@
 
 ?>
             </div>
+
+            <div class="row">
+                <?php if ($dossier->finished): ?>
+                <a href="/pdf/generate/id/<?=$dossier->id?>/type/contrat/" target="_blank" class="btn btn-primary">Contrat</a>
+                    <a href="/pdf/generate/id/<?=$dossier->id?>/type/convocation/" target="_blank" class="btn btn-primary">Convocation</a>
+                    <a href="/pdf/generate/id/<?=$dossier->id?>/type/dossier/" target="_blank" class="btn btn-primary">Dossier d'inscription</a>
+                <?php else: ?>
+                    Ce dossier d'inscription n'est pas finalisé.
+                <?php endif ?>
+            </div>
+
         </div>
     </div>
 </div>

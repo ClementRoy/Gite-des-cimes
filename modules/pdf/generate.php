@@ -284,12 +284,12 @@ ob_start(); ?>
 							$price = $price+$sejour->price;
 							
 							$date_from = new DateTime($inscription->date_from);
-								if($date_from->getTimestamp() != '-62169987600'):
+							if($date_from->getTimestamp() != '-62169987600'):
 								$date_from = strftime('%d/%m/%Y', $date_from->getTimestamp());
 							endif;
 
 							$date_to = new DateTime($inscription->date_to);
-								if($date_to->getTimestamp() != '-62169987600'):
+							if($date_to->getTimestamp() != '-62169987600'):
 								$date_to = strftime('%d/%m/%Y', $date_to->getTimestamp());
 							endif; 
 
