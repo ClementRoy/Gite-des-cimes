@@ -3,6 +3,59 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php $enfant = enfant::get($_GET['id']); ?>
 
+
+<?php if(isset($_POST['submit-note'])): ?>
+<?php  
+    
+    extract($_POST);
+
+    if(!empty($note_id)){
+        // update
+        $datas = array(
+            ':ref_sejour' => $note_ref_sejour,
+            ':ref_enfant' => $note_ref_enfant,
+            ':message' => tool::cleanInput($note_message)
+        );
+
+        $result = note::update($datas, $note_id);
+
+    }else {
+        // add
+        $datas = array(
+            ':ref_sejour' => $note_ref_sejour,
+            ':ref_enfant' => $note_ref_enfant,
+            ':message' => tool::cleanInput($note_message)
+        );
+
+        $result = note::add($datas);
+
+    }
+
+?>
+    <?php if($result): ?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success">
+                    <i class="icon-ok-sign"></i> 
+                    Le commentaire a bien été enregistré
+                </div>
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    <i class="icon-remove-sign"></i> 
+                    Une erreur s'est produite durant l'enregistrement du commentaire =(
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+
+<?php endif; ?>
+
+
 <?php if(isset($_POST['submit-add'])): ?>
     <?php 
     extract($_POST);
@@ -644,7 +697,8 @@ $result = enfant::update($datas, $_GET['id']);
                                         <?php endif; ?>
                                     </td>
                                     <td>
-                                        <button type="button" class="comment-popover btn btn-default" data-toggle="popover" data-comment="<?=$enfant->firstname ?>">
+                                    <?php $note = note::get($enfant->id, $sejour->id) ?>
+                                    <button type="button" class="comment-popover btn btn-default" data-toggle="popover" data-note="<?php if(!empty($note)): ?><?=$note->message ?><?php endif; ?>" data-note-id="<?php if(!empty($note)): ?><?=$note->id ?><?php endif; ?>" data-ref-sejour="<?=$sejour->id ?>" data-ref-enfant="<?=$enfant->id ?>">
                                             <i class="icon icon-comments"></i>
                                         </button>
                                     </td>
@@ -659,60 +713,75 @@ $result = enfant::update($datas, $_GET['id']);
         </div>
     </div>
 
-            <!--
-            <div class="title">
-                <div class="row header">
-                    <div class="col-md-8">
-                        <h4>Notes relatives aux séjours</h4>
-                    </div>
-                </div>
-            </div>
 
-            <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                Séjour #1
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                Séjour #2
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseTwo" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                Séjour #3
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseThree" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
-                </div>
+    <div class="title">
+        <div class="row header">
+            <div class="col-md-8">
+                <h4>Notes de séjour de l'enfant</h4>
             </div>
-        -->
+            <div class="col-md-4 text-right">
+                <a href="/pdf/export_notes/enfant/<?=$enfant->id; ?>" class="btn btn-primary">Exporter les notes</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content content-table">
+        <div class="row">
+            <div class="col-md-12">
+
+                <?php $notes = note::getByEnfant($enfant->id); ?>
+                <?php //tool::output($notes); ?>
+                <?php if(count($notes)>0): ?>
+                    <table class="datatable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Nom du séjour
+                                </th>
+                                <th>
+                                    Dates
+                                </th>
+                                <th>
+                                    Commentaire
+                                </th>
+                                <th>
+                                    Auteur
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($notes as $key => $note): ?>
+                                <?php $sejour = sejour::get($note->ref_sejour); ?>
+                                <?php $note_creator = user::get($note->creator); ?>
+                                <?php $note_editor = user::get($note->editor); ?>
+                                <?php $note_date_created = new DateTime($note->created); ?>
+                                <?php $note_date_edited = new DateTime($note->edited); ?>
+                                <tr>
+                                    <td>
+                                        <a href="/sejours/infos/id/<?=$sejour->id ?>"><?=$sejour->name; ?></a>
+                                    </td>
+                                    <td>
+                                        <?php $date_from = new DateTime($sejour->date_from); ?>
+                                        <?php $date_to = new DateTime($sejour->date_to); ?>
+                                        du <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?> 
+                                    </td>
+                                    <td>
+                                        <?=$note->message; ?>
+                                    </td>
+                                    <td>
+                                        Par <?=$note_editor->firstname ?> <?=$note_editor->lastname ?> le <?=strftime('%d %B %Y', $note_date_edited->getTimestamp()); ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php else: ?>
+                    <p>Aucun commentaire au sujet de l'enfant pour le moment</p>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+
 
     </div>
 
@@ -772,13 +841,18 @@ $result = enfant::update($datas, $_GET['id']);
             html: true,
             placement: 'top',
             container: 'body',
-            content: '<div class="popover-form clearfix"><form><div class="form-group"><textarea class="form-control" cols="50" rows="5" placeholder="Entrez un commentaire"></textarea></div> <div class="pull-right"><a href="#" class="btn btn-default btn-sm btn-close">Annuler</a><button type="submit" class="btn btn-primary btn-sm sumbit-comment">Enregistrer</button></div></form></div>'
+            content: '<div class="popover-form clearfix"><form action="" method="post"><div class="form-group"><textarea class="form-control" name="note_message" cols="50" rows="5" placeholder="Entrez un commentaire"></textarea></div> <div class="pull-right"><a href="#" class="btn btn-default btn-sm btn-close">Annuler</a><button type="submit" name="submit-note" class="btn btn-primary btn-sm sumbit-comment">Enregistrer</button></div></form></div>'
         });
         $('[data-toggle=popover]').on('show.bs.popover', function () {
-            var comment = $(this).data('comment');
+            var note = $(this).data('note');
+            var note_id = $(this).data('note-id');
+            var ref_sejour = $(this).data('ref-sejour');
+            var ref_enfant = $(this).data('ref-enfant');
             setTimeout(function() {
-                $('body').find('.popover:last-child').find('textarea').text(comment);
-                
+                $('body').find('.popover:last-child').find('form').prepend('<input type="hidden" name="note_ref_sejour" value="'+ref_sejour+'">');
+                $('body').find('.popover:last-child').find('form').prepend('<input type="hidden" name="note_ref_enfant" value="'+ref_enfant+'">');
+                $('body').find('.popover:last-child').find('form').prepend('<input type="hidden" name="note_id" value="'+note_id+'">');
+                $('body').find('.popover:last-child').find('textarea').text(note);
             }, 1);
         });
         $('[data-toggle=popover]').on('click', function (e) {

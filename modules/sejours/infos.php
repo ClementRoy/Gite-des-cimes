@@ -3,6 +3,56 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
+<?php if(isset($_POST['submit-note'])): ?>
+<?php  
+    
+    extract($_POST);
+
+    if(!empty($note_id)){
+        // update
+        $datas = array(
+            ':ref_sejour' => $note_ref_sejour,
+            ':ref_enfant' => $note_ref_enfant,
+            ':message' => tool::cleanInput($note_message)
+        );
+
+        $result = note::update($datas, $note_id);
+
+    }else {
+        // add
+        $datas = array(
+            ':ref_sejour' => $note_ref_sejour,
+            ':ref_enfant' => $note_ref_enfant,
+            ':message' => tool::cleanInput($note_message)
+        );
+
+        $result = note::add($datas);
+
+    }
+
+?>
+    <?php if($result): ?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success">
+                    <i class="icon-ok-sign"></i> 
+                    Le commentaire a bien été enregistré
+                </div>
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    <i class="icon-remove-sign"></i> 
+                    Une erreur s'est produite durant l'enregistrement du commentaire =(
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+
+<?php endif; ?>
 <?php if(isset($_POST['submit-add'])): ?>
     <?php  
     extract($_POST);
@@ -189,6 +239,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
 
 <div class="row">
     <div class="col-md-9">
+            
 
         <div class="content<?=($sejour->archived)?' archived':' ';?>">
             <div class="tab-content">
@@ -595,7 +646,8 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <button type="button" class="comment-popover btn btn-default" data-toggle="popover" data-comment="<?=$enfant->firstname ?>">
+                                <?php $note = note::get($enfant->id, $sejour->id) ?>
+                                <button type="button" class="comment-popover btn btn-default" data-toggle="popover" data-note="<?php if(!empty($note)): ?><?=$note->message ?><?php endif; ?>" data-note-id="<?php if(!empty($note)): ?><?=$note->id ?><?php endif; ?>" data-ref-sejour="<?=$sejour->id ?>" data-ref-enfant="<?=$enfant->id ?>">
                                     <i class="icon icon-comments"></i>
                                 </button>
                             </td>
@@ -658,23 +710,32 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
             e.preventDefault();
             $(this).tab('show');
         });
+
         $('[data-toggle=popover]').popover({
             trigger:"click",
             html: true,
             placement: 'bottom',
             container: 'body',
-            content: '<div class="popover-form clearfix"><form><div class="form-group"><textarea class="form-control" cols="50" rows="5" placeholder="Entrez un commentaire"></textarea></div> <div class="pull-right"><a href="#" class="btn btn-default btn-sm btn-close">Annuler</a><button type="submit" class="btn btn-primary btn-sm sumbit-comment">Enregistrer</button></div></form></div>'
+            content: '<div class="popover-form clearfix"><form action="" method="post"><div class="form-group"><textarea class="form-control" name="note_message" cols="50" rows="5" placeholder="Entrez un commentaire"></textarea></div> <div class="pull-right"><a href="#" class="btn btn-default btn-sm btn-close">Annuler</a><button type="submit" name="submit-note" class="btn btn-primary btn-sm sumbit-comment">Enregistrer</button></div></form></div>'
         });
+
         $('[data-toggle=popover]').on('show.bs.popover', function () {
-            var comment = $(this).data('comment');
+            var note = $(this).data('note');
+            var note_id = $(this).data('note-id');
+            var ref_sejour = $(this).data('ref-sejour');
+            var ref_enfant = $(this).data('ref-enfant');
             setTimeout(function() {
-            $('body').find('.popover:last-child').find('textarea').text(comment);
-                
+                $('body').find('.popover:last-child').find('form').prepend('<input type="hidden" name="note_ref_sejour" value="'+ref_sejour+'">');
+                $('body').find('.popover:last-child').find('form').prepend('<input type="hidden" name="note_ref_enfant" value="'+ref_enfant+'">');
+                $('body').find('.popover:last-child').find('form').prepend('<input type="hidden" name="note_id" value="'+note_id+'">');
+                $('body').find('.popover:last-child').find('textarea').text(note);
             }, 1);
         });
+
         $('[data-toggle=popover]').on('click', function (e) {
             $('[data-toggle=popover]').not(this).popover('hide');
         });
+
         $('body').on('click', '.btn-close', function (e) {
             e.preventDefault();
             $('[data-toggle=popover]').popover('hide');

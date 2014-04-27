@@ -26,30 +26,6 @@ class inscription
     }
 
 
-    public static function getNotes(){
-        global $db;
-        $params = array(':id' => $id);
-        $sql = 'SELECT * FROM '.self::$table.' WHERE id=:id';
-        $result = $db->row($sql, $params);
-        return $result;        
-    }
-
-    public static function getNote($id){
-        global $db;
-        $params = array(':id' => $id);
-        $sql = 'SELECT * FROM note WHERE id = :id';
-        $result = $db->row($sql, $params);
-        return $result;        
-    }
-
-    public static function getNoteByInscription($id_inscription){
-        global $db;
-        $params = array(':id_inscription' => $id_inscription);
-        $sql = 'SELECT * FROM note WHERE ref_inscription = :id_inscription';
-        $result = $db->row($sql, $params);
-        return $result;
-    }
-
     public static function getByDossier($id){
         global $db;
         $params = array(
