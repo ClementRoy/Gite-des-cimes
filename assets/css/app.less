@@ -38,7 +38,7 @@ h1, .h1 {
 	}
 }
 h3, .h3 {
-	font-size: 22px;
+	font-size: 21px;
 	margin-bottom: 13px;
 	margin-top: 0px;
 	font-weight: bold;
@@ -60,7 +60,9 @@ h6, .h6 {
 		width: 150px;
 	}
 }
-
+.btn + .btn {
+margin-left: 7px;
+}
 
 /*	Page de login
 --------------------------------------------------------------------------- */
@@ -478,6 +480,9 @@ h6, .h6 {
 		}
 		h1 {
 			.trigger {
+				i.icon-folder-open {
+				padding-left: 8px;
+				}
 				&.blue {
 					background: @blue;
 					&:hover {

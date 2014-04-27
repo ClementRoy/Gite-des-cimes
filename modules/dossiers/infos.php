@@ -35,7 +35,7 @@
             ':ref_dossier' => $_GET['id'],
             ':date_from' => $form_inscription_date_debut,
             ':date_to' => $form_inscription_date_fin
-        );
+            );
         //tool::output($datas);
         $result = inscription::add($datas);
     }
@@ -71,46 +71,46 @@
 
 
 <?php if(isset($_POST['submit-update'])): ?>
-        <?php  
+    <?php  
         //tool::output($_POST);
-        extract($_POST);
+    extract($_POST);
 
-        $datas = array(
-            ':finished' => $form_inscription_option,
-            ':ref_enfant' => $form_inscription_enfant,
-            ':ref_structure_payer' => $form_inscription_structure,
-            ':structure_payer' => $form_inscription_structure_name,
-            ':supported' => $form_inscription_supported,
-            ':note' => $form_inscription_note,
-            ':place' => $form_inscription_lieu,
-            ':hour_departure' => $form_inscription_heure_aller.'h'.$form_inscription_min_aller,
-            ':hour_return' => $form_inscription_heure_retour.'h'.$form_inscription_min_retour,
-            ':pique_nique' => $form_inscription_pique_nique,
-            ':sac' => $form_inscription_sac
+    $datas = array(
+        ':finished' => $form_inscription_option,
+        ':ref_enfant' => $form_inscription_enfant,
+        ':ref_structure_payer' => $form_inscription_structure,
+        ':structure_payer' => $form_inscription_structure_name,
+        ':supported' => $form_inscription_supported,
+        ':note' => $form_inscription_note,
+        ':place' => $form_inscription_lieu,
+        ':hour_departure' => $form_inscription_heure_aller.'h'.$form_inscription_min_aller,
+        ':hour_return' => $form_inscription_heure_retour.'h'.$form_inscription_min_retour,
+        ':pique_nique' => $form_inscription_pique_nique,
+        ':sac' => $form_inscription_sac
         );
         //tool::output($datas);
-        $result = dossier::update($datas, $_GET['id']);
+    $result = dossier::update($datas, $_GET['id']);
 
-        $inscription = inscription::deleteByDossier($_GET['id']);
+    $inscription = inscription::deleteByDossier($_GET['id']);
 
         //tool::output($form_inscription_sejour);
-        foreach($dates as $key => $inscription_entry){
+    foreach($dates as $key => $inscription_entry){
 
-            $inscription_entry = explode('#', $inscription_entry);
-            $form_inscription_date_debut = tool::generateDatetime($inscription_entry[0]);
-            $form_inscription_date_fin = tool::generateDatetime($inscription_entry[1]);
-            $datas = array(
-                ':ref_enfant' => $form_inscription_enfant,
-                ':ref_sejour' => $inscription_entry['2'],
-                ':ref_dossier' => $_GET['id'],
-                ':date_from' => $form_inscription_date_debut,
-                ':date_to' => $form_inscription_date_fin
+        $inscription_entry = explode('#', $inscription_entry);
+        $form_inscription_date_debut = tool::generateDatetime($inscription_entry[0]);
+        $form_inscription_date_fin = tool::generateDatetime($inscription_entry[1]);
+        $datas = array(
+            ':ref_enfant' => $form_inscription_enfant,
+            ':ref_sejour' => $inscription_entry['2'],
+            ':ref_dossier' => $_GET['id'],
+            ':date_from' => $form_inscription_date_debut,
+            ':date_to' => $form_inscription_date_fin
             );
             //tool::output($datas);
-            $result = inscription::add($datas);
-        }
+        $result = inscription::add($datas);
+    }
 
-        ?>
+    ?>
 
     <?php //tool::output($_POST); ?>
     <?php if($result): ?>
@@ -187,60 +187,109 @@
 
 <div class="row">
     <div class="col-md-9">
-
-
-
         <div class="content">
-            <div class="row">
-
-
             <?php  if(!$dossier->finished): ?>
-                        <div class="alert alert-warning">
-                            <i class="icon-warning-sign"></i> 
-                            L'inscription n'est pas encore été finalisée
-                        </div>
-            <?php
-                endif;
-            ?>
+                <div class="alert alert-warning">
+                    <i class="icon-warning-sign"></i> 
+                    L'inscription n'est pas encore été finalisée
+                </div>
+            <?php endif; ?>
 
             <?php 
-                if(!$dossier->supported):
-            ?>
-                        <div class="alert alert-warning">
-                            <i class="icon-warning-sign"></i> 
-                            L'inscription n'est pas encore été prise en charge
-                        </div>
-            <?php
-                endif;
-            ?>
-
-
-
-            <?php $inscriptions = inscription::getByDossier($dossier->id); ?>
-            <h3>Séjours</h3>
-            <ul>
-                <?php foreach($inscriptions as $inscription): ?>
-                    <?php $sejour = sejour::get($inscription->ref_sejour); ?>
-                    <?php $date_from = new DateTime($inscription->date_from); ?>
-                    <?php $date_to = new DateTime($inscription->date_to); ?>
-                <li><?=$sejour->name ?> du <?=strftime("%d %B %Y", $date_from->getTimestamp()) ?> au <?=strftime("%d %B %Y", $date_to->getTimestamp()) ?></li>
-                <?php endforeach; ?>
-            </ul>
-
+            if(!$dossier->supported): ?>
+            <div class="alert alert-warning">
+                <i class="icon-warning-sign"></i> 
+                L'inscription n'est pas encore été prise en charge
             </div>
+        <?php endif; ?>
 
-            <div class="row">
-                <ul>
-                    <li>Centre payeur</li>
-                    <li>Prise en charge de l'enfant</li>
-                    <li>Lieu de rendez-vous</li>
-                    <li>Heure de rendez-vous pour le départ</li>
-                    <li>Heure de rendez-vous pour le retour</li>
-                    <li>Pique Nique</li>
-                    <li>Sac de couchage</li>
-                    <li>Notes</li>
-                    <li>Inscription finalisée</li>
-                </ul>
+        <?php $inscriptions = inscription::getByDossier($dossier->id); ?>
+        <h3>Documents</h3>
+        <div class="row">
+            <div class="col-md-12">
+              <?php if ($dossier->finished): ?>
+                <a href="/pdf/generate/id/<?=$dossier->id?>/type/contrat/" target="_blank" class="btn btn-primary">Contrat</a>
+                <a href="/pdf/generate/id/<?=$dossier->id?>/type/convocation/" target="_blank" class="btn btn-primary">Convocation</a>
+                <a href="/pdf/generate/id/<?=$dossier->id?>/type/dossier/" target="_blank" class="btn btn-primary">Dossier d'inscription</a>
+            <?php else: ?>
+                <p><em>Ce dossier d'inscription n'est pas finalisé.</em></p>
+            <?php endif ?>
+        </div>
+    </div>
+    <hr>
+    <h3>Séjour(s)</h3>
+    <div class="row">
+
+        <?php foreach($inscriptions as $inscription): ?>
+            <?php $sejour = sejour::get($inscription->ref_sejour); ?>
+            <?php $date_from = new DateTime($inscription->date_from); ?>
+            <?php $date_to = new DateTime($inscription->date_to); ?>
+            <div class="col-md-6">
+                <p><strong><?=$sejour->name ?></strong> du <?=strftime("%d %B %Y", $date_from->getTimestamp()) ?> au <?=strftime("%d %B %Y", $date_to->getTimestamp()) ?></p>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <hr>
+    <h3>Rendez-vous</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                <strong>Lieu de rendez-vous :</strong><br>
+                <?=$dossier->place; ?>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p>
+                <strong>Heure de départ :</strong>
+                <?=$dossier->hour_departure; ?>
+            </p>
+            <p>
+                <strong>Heure de retour:</strong>
+                <?=$dossier->hour_return; ?>
+            </p>
+        </div>
+    </div>
+    <hr>
+    <h3>Informations complémentaires</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                <strong>Centre payeur :</strong>
+                <?php $structure_payer = structure::get($dossier->ref_structure_payer); ?>
+                <a href="/structures/infos/id/<?=$structure_payer->id; ?>"><?=$structure_payer->name; ?></a>
+            </p>
+            <p>
+                <strong>Prise en charge de l'enfant :</strong> 
+                <?php $structure_payer = structure::get($dossier->ref_structure_payer); ?>
+                <?=($dossier->supported) ? '<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p>
+                <strong>Pique Nique :</strong>
+                <?=($dossier->pique_nique) ? '<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>
+            </p>
+            <p>
+                <strong>Sac de couchage :</strong>
+                <?=($dossier->sac) ? '<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>
+            </p>
+        </div>
+    </div>
+    <hr>
+    <h3>Notes</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <?php $note = trim($dossier->note) ?>
+            <?php if ($dossier->note): ?>
+                <p><?=$dossier->note; ?></p>
+            <?php else: ?>
+                <p><em>Aucune note pour le moment</em></p>
+            <?php endif; ?>
+
+        </div>
+    </div>
+</div>
+</div>
 
 <?php 
 /*
@@ -259,21 +308,10 @@
 
 */
 
-?>
-            </div>
-
-            <div class="row">
-                <?php if ($dossier->finished): ?>
-                <a href="/pdf/generate/id/<?=$dossier->id?>/type/contrat/" target="_blank" class="btn btn-primary">Contrat</a>
-                    <a href="/pdf/generate/id/<?=$dossier->id?>/type/convocation/" target="_blank" class="btn btn-primary">Convocation</a>
-                    <a href="/pdf/generate/id/<?=$dossier->id?>/type/dossier/" target="_blank" class="btn btn-primary">Dossier d'inscription</a>
-                <?php else: ?>
-                    Ce dossier d'inscription n'est pas finalisé.
-                <?php endif ?>
-            </div>
-
-        </div>
+        ?>
     </div>
+
+
 </div>
 
 
