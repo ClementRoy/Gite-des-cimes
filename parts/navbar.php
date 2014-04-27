@@ -1,5 +1,5 @@
    <!-- navbar -->
-    <header id="top-nav" class="navbar" role="banner">
+    <header id="top-nav" class="navbar navbar-inverse" role="banner">
         <div class="navbar-header">
             <button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
                 <span class="sr-only">Toggle navigation</span>
