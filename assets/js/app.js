@@ -20,6 +20,8 @@ $('.form-nav a').click(function (e) {
 
 
 
+
+
 setTimeout(function() {
 	$('.animated').removeClass('fadeInUp');
 	$('.animated').removeClass('animated');

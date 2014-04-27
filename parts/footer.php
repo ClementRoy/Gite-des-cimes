@@ -10,7 +10,7 @@
     <!-- Communs -->
     <?php //<script src="/assets/js/wysihtml5-0.3.0.js"></script> ?>
 
-    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="/assets/js/bootstrap.datepicker.js"></script>
 
     <!-- Ajouter

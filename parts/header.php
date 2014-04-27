@@ -17,7 +17,8 @@
         <script src="/assets/dist/js/jquery.min.js"></script>
     <?php else: ?>
         <!-- bootstrap -->
-        <link href="/assets/css/bootstrap.css" rel="stylesheet" />
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <!-- <link href="/assets/css/bootstrap.css" rel="stylesheet" /> -->
         <!--     <link href="/assets/css/bootstrap-overrides.css" type="text/css" rel="stylesheet" /> -->
         <!-- libraries -->
     <!--      <link href="/assets/css/lib/jquery-ui-1.10.2.custom.css" rel="stylesheet" type="text/css" />

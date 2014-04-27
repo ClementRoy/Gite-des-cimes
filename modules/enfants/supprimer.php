@@ -31,18 +31,18 @@
             <?php $enfant = enfant::get($_GET['id']); ?>
             <div class="row">
                 <div class="col-md-12 message">
-                   <p>Vous êtes sur le point de supprimer la fiche de <strong><?=$enfant->firstname; ?> <?=$enfant->lastname; ?></strong>.<br />
+                 <p>Vous êtes sur le point de supprimer la fiche de <strong><?=$enfant->firstname; ?> <?=$enfant->lastname; ?></strong>.<br />
                     Cette action est irréversible.</p>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="/enfants/infos/id/<?=$enfant->id; ?>" class="btn-flat white" data-dismiss="modal">Annuler</a>
-                    <a href="/enfants/supprimer/id/<?=$enfant->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
-                </div>                
+            <div class="field-box actions">
+                <div class="col-md-6 col-md-offset-2">
+                    <a href="/enfants/supprimer/id/<?=$enfant->id; ?>/confirm/true" class="btn btn-primary">Supprimer la fiche</a>
+                    <span>OU</span>
+                    <a href="/enfants/infos/id/<?=$enfant->id; ?>" class="reset">Annuler</a>
+                </div>
             </div>
 
         <?php endif; ?>
     </div>
-<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
+    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
