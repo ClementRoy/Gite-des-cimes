@@ -43,8 +43,11 @@
 
                 <hr>
                 <?php $sejours = sejour::getListFuturSejour(); ?>
-                <div class="row">
-                    <div class="col-md-6">
+
+
+                <div class="field-box row">
+                    <label class="col-md-2">Séjour(s)</label>
+                    <div class="col-md-4">
                         <div class="sejours-group">
                             <div class="sejour-form init" style="display:none;">
                                 <fieldset class="form-group">
@@ -195,29 +198,25 @@
 
                     $(function () {
                         var dataSejours = [
-                        <?php $i = 0; ?>
-                        <?php foreach ($sejours as $key => $sejour): ?>
-                        {
-                            <?php $date_from = new DateTime($sejour->date_from); ?>
-                            <?php $date_to = new DateTime($sejour->date_to); ?>
-                            <?php if($date_to->getTimestamp() != '-62169987600'): ?>
-                            <?php $date_to = $date_to->getTimestamp(); ?>
-                        <?php endif; ?>
-                        <?php if($date_from->getTimestamp() != '-62169987600'): ?>
-                        <?php $date_from = $date_from->getTimestamp(); ?>
-                    <?php endif; ?>
-                    id: <?=$sejour->id; ?>,
-                    name: '<?=addslashes($sejour->name); ?>',
-                    start: '<?=$date_from; ?>',
-                    end: '<?=$date_to; ?>'
-                    <?php $i++; ?>
-                }<?=(count($sejours) != $i)? ',' : '' ; ?>
-            <?php endforeach; ?>
-            ];
-
-                        // TRIGERS
-                        // -------------------------------------------------------------------- //
-                        // -------------------------------------------------------------------- //
+                            <?php $i = 0; ?>
+                            <?php foreach ($sejours as $key => $sejour): ?>
+                            {
+                                <?php $date_from = new DateTime($sejour->date_from); ?>
+                                <?php $date_to = new DateTime($sejour->date_to); ?>
+                                <?php if($date_to->getTimestamp() != '-62169987600'): ?>
+                                <?php $date_to = $date_to->getTimestamp(); ?>
+                                <?php endif; ?>
+                                <?php if($date_from->getTimestamp() != '-62169987600'): ?>
+                                <?php $date_from = $date_from->getTimestamp(); ?>
+                                <?php endif; ?>
+                                id: <?=$sejour->id; ?>,
+                                name: '<?=addslashes($sejour->name); ?>',
+                                start: '<?=$date_from; ?>',
+                                end: '<?=$date_to; ?>'
+                                <?php $i++; ?>
+                            }<?=(count($sejours) != $i)? ',' : '' ; ?>
+                            <?php endforeach; ?>
+                        ];
 
                         $('.sejours-controls').on('click', '.add-sejour', function(e) {
                             e.preventDefault();
@@ -256,28 +255,25 @@
                                 }
                             }
 
-
                             addGroupField( newDataSejours );
                         });
 
-$('.sejours-controls').on('click', '.delete-sejour', function(e) {
-    e.preventDefault();
-    removeLastGroupField();
-});
+                        $('.sejours-controls').on('click', '.delete-sejour', function(e) {
+                            e.preventDefault();
+                            removeLastGroupField();
+                        });
 
-$('.sejours-group').on('change', 'select', function() {
-    setCheckbox( $(this).val(), dataSejours);
-});
+                        $('.sejours-group').on('change', 'select', function() {
+                            setCheckbox( $(this).val(), dataSejours);
+                        });
 
-$('.sejours-group').on('change', '[type="checkbox"]', function() {
-    setControls();
-});
+                        $('.sejours-group').on('change', '[type="checkbox"]', function() {
+                            setControls();
+                        });
 
-addGroupField( dataSejours );
-});
-
-
-</script>
+                        addGroupField( dataSejours );
+                    });
+                </script>
 
 <hr>
 
