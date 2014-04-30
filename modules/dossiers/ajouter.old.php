@@ -39,7 +39,7 @@
                     </div>
 
                     <?php $sejours = sejour::getListFuturSejour(); ?>
-
+                    <h2>Début ici</h2>
                     <div class="field-box row sejour-select">
                         <label class="col-md-2" for="form-inscription-sejour-select">Séjour</label>
                         <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez le séjour">
@@ -73,6 +73,7 @@
                             </div>
                         </div>
                     </div>
+                    
 
 
                     <div class="field-box row date-range">

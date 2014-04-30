@@ -226,8 +226,8 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
         </div>
     </div>
 </div>
-
-<div class="row">
+<?php if ($nb_weeks > 1): ?>
+<div class="row content-nav-tabs">
     <div class="col-md-12">
         <ul class="nav nav-tabs">
             <?php for ($i=1; $i <= $nb_weeks; $i++) : ?>
@@ -236,6 +236,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
         </ul>
     </div>
 </div>
+<?php endif ?>
 
 <div class="row">
     <div class="col-md-9">

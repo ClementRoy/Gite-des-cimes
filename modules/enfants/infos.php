@@ -635,12 +635,10 @@ $result = enfant::update($datas, $_GET['id']);
         </div>
     </div>
 
-    <div class="content content-table">
+    <?php $inscriptions = inscription::getByEnfant($enfant->id); ?>
+    <div class="content<?=(count($inscriptions)>0) ? ' content-table' : '' ; ?>">
         <div class="row">
             <div class="col-md-12">
-
-                <?php $inscriptions = inscription::getByEnfant($enfant->id); ?>
-                <?php //tool::output($inscriptions); ?>
                 <?php if(count($inscriptions)>0): ?>
                     <table class="datatable">
                         <thead>
@@ -707,7 +705,7 @@ $result = enfant::update($datas, $_GET['id']);
                         </tbody>
                     </table>
                 <?php else: ?>
-                    <p>Aucun séjour à venir pour cet enfant</p>
+                    <em>Aucun séjour à venir pour cet enfant</em>
                 <?php endif; ?>
             </div>
         </div>
