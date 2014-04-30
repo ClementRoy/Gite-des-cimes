@@ -277,7 +277,7 @@
 
 <hr>
 
-
+<?php /* ?>
 <h2>Début ici</h2>
 <div class="field-box row sejour-select">
     <label class="col-md-2" for="form-inscription-sejour-select">Séjour</label>
@@ -312,7 +312,7 @@
         </div>
     </div>
 </div>
-
+<?php */ ?>
 
 
 <div class="field-box row date-range">
@@ -502,7 +502,7 @@
 
 
                             
-
+                            /*
                             $(document).on('change', '.selector', function(){
                                 //console.log('triggering select');
                                 $sejour = $(this).find('option:selected');
@@ -528,6 +528,7 @@
                                 }
 
                             });
+                            */
 
                             /*
                              Handling Structure Behavior
@@ -550,14 +551,14 @@
                             $('.selector').trigger('change');
                         <?php endif; ?>
 
-                        var i = 1;
-                        $('.duplicate').click(function(e){
-                            e.preventDefault();
-                            $('.sejour-select').first().clone().insertBefore($(this));
-                            $('.date-range').first().clone().insertBefore($(this));
-                            i++;
+                        // var i = 1;
+                        // $('.duplicate').click(function(e){
+                        //     e.preventDefault();
+                        //     $('.sejour-select').first().clone().insertBefore($(this));
+                        //     $('.date-range').first().clone().insertBefore($(this));
+                        //     i++;
 
-                        });
+                        // });
 
                     });
 </script>
