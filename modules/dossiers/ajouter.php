@@ -260,20 +260,20 @@
                             addGroupField( newDataSejours );
                         });
 
-$('.sejours-controls').on('click', '.delete-sejour', function(e) {
-    e.preventDefault();
-    removeLastGroupField();
-});
+            $('.sejours-controls').on('click', '.delete-sejour', function(e) {
+                e.preventDefault();
+                removeLastGroupField();
+            });
 
-$('.sejours-group').on('change', 'select', function() {
-    setCheckbox( $(this).val(), dataSejours);
-});
+            $('.sejours-group').on('change', 'select', function() {
+                setCheckbox( $(this).val(), dataSejours);
+            });
 
-$('.sejours-group').on('change', '[type="checkbox"]', function() {
-    setControls();
-});
+            $('.sejours-group').on('change', '[type="checkbox"]', function() {
+                setControls();
+            });
 
-addGroupField( dataSejours );
+            addGroupField( dataSejours );
 });
 
 
@@ -281,7 +281,7 @@ addGroupField( dataSejours );
 
 <hr>
 
-
+<?php /* ?>
 <h2>Début ici</h2>
 <div class="field-box row sejour-select">
     <label class="col-md-2" for="form-inscription-sejour-select">Séjour</label>
@@ -316,7 +316,7 @@ addGroupField( dataSejours );
         </div>
     </div>
 </div>
-
+<?php */ ?>
 
 
 <div class="field-box row date-range">
@@ -506,7 +506,7 @@ addGroupField( dataSejours );
 
 
                             
-
+                            /*
                             $(document).on('change', '.selector', function(){
                                 //console.log('triggering select');
                                 $sejour = $(this).find('option:selected');
@@ -532,6 +532,7 @@ addGroupField( dataSejours );
                                 }
 
                             });
+                            */
 
                             /*
                              Handling Structure Behavior
@@ -554,14 +555,14 @@ addGroupField( dataSejours );
                             $('.selector').trigger('change');
                         <?php endif; ?>
 
-                        var i = 1;
-                        $('.duplicate').click(function(e){
-                            e.preventDefault();
-                            $('.sejour-select').first().clone().insertBefore($(this));
-                            $('.date-range').first().clone().insertBefore($(this));
-                            i++;
+                        // var i = 1;
+                        // $('.duplicate').click(function(e){
+                        //     e.preventDefault();
+                        //     $('.sejour-select').first().clone().insertBefore($(this));
+                        //     $('.date-range').first().clone().insertBefore($(this));
+                        //     i++;
 
-                        });
+                        // });
 
                     });
 </script>
