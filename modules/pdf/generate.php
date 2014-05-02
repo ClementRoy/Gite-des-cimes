@@ -293,10 +293,11 @@ ob_start(); ?>
 								$date_to = strftime('%d/%m/%Y', $date_to->getTimestamp());
 							endif; 
 
-							$temp = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $date_from, $date_to, $sejour->price);							
+							$temp = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $date_from, $date_to, $sejour->price);
 
 							if (!empty($sejours_temp)) {
-								if ($sejours_temp[$sejour_index-1][0] == $temp[0]) {
+								if ($sejours_temp[$sejour_index-1][0] == $temp[0] && $sejours_temp[$sejour_index-1][6] == $temp[6]) {
+
 									$sejours_temp[$sejour_index-1] = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $sejours_temp[$sejour_index-1][5], $date_to, $sejour->price+$sejours_temp[$sejour_index-1][5]);
 								} else {
 									array_push($sejours_temp, $temp);
@@ -304,18 +305,18 @@ ob_start(); ?>
 							} else {
 								array_push($sejours_temp, $temp);
 							}
+
 							
 							$sejour_index++;
 						
 							?>
 						<?php endforeach; ?>
 					<?php foreach ($sejours_temp as $key => $sejour_temp): ?>
-					•&nbsp;&nbsp;Séjour <?=$sejour_temp[1];?> au <?=$sejour_temp[2];?> (<?=$sejour_temp[3];?> <?=$sejour_temp[4];?>) : <br />Du <?=$sejour_temp[5];?> au <?=$sejour_temp[6];?> - Prix : <?=$sejour_temp[7];?> €<br> 
+					•&nbsp;&nbsp;Séjour <?=($sejour_temp[1] == 'Séjours courts') ? 'court' : $sejour_temp[1] ; ?> - <?=$sejour_temp[2];?> (<?=$sejour_temp[3];?> <?=$sejour_temp[4];?>) : Du <?=$sejour_temp[5];?> au <?=$sejour_temp[6];?> - Prix&nbsp;: <?=$sejour_temp[7];?>&nbsp;€<br> 
 					<?php endforeach; ?>
 
-
-					•&nbsp;&nbsp;Prix total des séjours : <?=$price ?> €<br>
-					•&nbsp;&nbsp;Renseignements sur l'organisation des départs – retours : Se reporter à la convocation jointe.<br>
+					<span style="margin-top:5px;">•&nbsp;&nbsp;Prix total des séjours : <?=$price ?> €<br>
+					•&nbsp;&nbsp;Renseignements sur l'organisation des départs – retours : Se reporter à la convocation jointe.<br></span>
 
 				</p>
 			</td>
@@ -657,7 +658,7 @@ ob_start(); ?>
 			<tr>
 				<td>
 					<p style="margin-top:60px;">
-						<strong>Inscrit au Séjour : </strong><br>
+						<strong>Inscrit au(x) Séjour(s) : </strong><br>
 
 
 
@@ -681,7 +682,7 @@ ob_start(); ?>
 							$temp = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $date_from, $date_to);							
 
 							if (!empty($sejours_temp)) {
-								if ($sejours_temp[$sejour_index-1][0] == $temp[0]) {
+								if ($sejours_temp[$sejour_index-1][0] == $temp[0] && $sejours_temp[$sejour_index-1][6] == $temp[6]) {
 									$sejours_temp[$sejour_index-1] = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $sejours_temp[$sejour_index-1][6], $date_to);
 								} else {
 									array_push($sejours_temp, $temp);
@@ -695,7 +696,7 @@ ob_start(); ?>
 						<?php endforeach; ?>
 						<?php //tool::output($sejours_temp); ?>
 					<?php foreach ($sejours_temp as $key => $sejour_temp): ?>
-							<?=ucfirst($sejour_temp[1]);?> — <?=$sejour_temp[3];?> <?=$sejour_temp[4];?>, <?=$sejour_temp[2];?> — <strong>du</strong> : <?=$sejour_temp[5];?> au <?=$sejour_temp[6];?><br>
+							<?=ucfirst($sejour_temp[1]);?> - <?=$sejour_temp[3];?> <?=$sejour_temp[4];?>, <?=$sejour_temp[2];?> - <strong>du</strong> : <?=$sejour_temp[5];?> au <?=$sejour_temp[6];?><br>
 					<?php endforeach; ?>
 
 

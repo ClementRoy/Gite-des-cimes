@@ -5,8 +5,8 @@
 
 <?php if(isset($_POST['submit-add'])): ?>
     <?php  
-    //tool::output($_POST);
     extract($_POST);
+    //tool::output($_POST);
 
     $datas = array(
         ':finished' => $form_inscription_option,
