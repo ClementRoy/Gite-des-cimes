@@ -274,49 +274,50 @@ ob_start(); ?>
 			<tr>
 				<td>
 					<p style="margin-top:2px;">
-						<?php $price = 0; ?>
-						<?php $sejours_temp = array(); ?>
-						<?php $sejour_index = 0; ?>
-						<?php foreach ($inscriptions as $key => $inscription):
-							$sejour = sejour::get($inscription->ref_sejour);
+					<?php $price = 0; ?>
+					<?php $sejours_temp = array(); ?>
+					<?php $sejour_index = 0; ?>
+					<?php foreach ($inscriptions as $key => $inscription):
+						$sejour = sejour::get($inscription->ref_sejour);
 
-							$hebergement = hebergement::get($sejour->ref_hebergement);
-							$price = $price+$sejour->price;
-							
-							$date_from = new DateTime($inscription->date_from);
-							if($date_from->getTimestamp() != '-62169987600'):
-								$date_from = strftime('%d/%m/%Y', $date_from->getTimestamp());
-							endif;
+						$hebergement = hebergement::get($sejour->ref_hebergement);
+						$price = $price+$sejour->price;
+						
+						$date_from = new DateTime($inscription->date_from);
+						if($date_from->getTimestamp() != '-62169987600'):
+							$date_from = strftime('%d/%m/%Y', $date_from->getTimestamp());
+						endif;
 
-							$date_to = new DateTime($inscription->date_to);
-							if($date_to->getTimestamp() != '-62169987600'):
-								$date_to = strftime('%d/%m/%Y', $date_to->getTimestamp());
-							endif; 
+						$date_to = new DateTime($inscription->date_to);
+						if($date_to->getTimestamp() != '-62169987600'):
+							$date_to = strftime('%d/%m/%Y', $date_to->getTimestamp());
+						endif; 
 
-							$temp = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $date_from, $date_to, $sejour->price);
+						$temp = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $date_from, $date_to, $sejour->price);
 
-							if (!empty($sejours_temp)) {
-								if ($sejours_temp[$sejour_index-1][0] == $temp[0] && $sejours_temp[$sejour_index-1][6] == $temp[6]) {
-
-									$sejours_temp[$sejour_index-1] = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $sejours_temp[$sejour_index-1][5], $date_to, $sejour->price+$sejours_temp[$sejour_index-1][5]);
-								} else {
-									array_push($sejours_temp, $temp);
-								}
+						if (!empty($sejours_temp)) {
+							if ($sejours_temp[$sejour_index-1][0] == $temp[0] && $sejours_temp[$sejour_index-1][6] == $temp[5]) {
+								$sejours_temp[$sejour_index-1] = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $sejours_temp[$sejour_index-1][5], $date_to, $sejour->price+$sejours_temp[$sejour_index-1][7]);
 							} else {
 								array_push($sejours_temp, $temp);
+								$sejour_index++;
 							}
-
-							
+						} else {
+							array_push($sejours_temp, $temp);
 							$sejour_index++;
+						}
+
 						
-							?>
-						<?php endforeach; ?>
+						
+					
+					?>
+					<?php endforeach; ?>
 					<?php foreach ($sejours_temp as $key => $sejour_temp): ?>
-					•&nbsp;&nbsp;Séjour <?=($sejour_temp[1] == 'Séjours courts') ? 'court' : $sejour_temp[1] ; ?> - <?=$sejour_temp[2];?> (<?=$sejour_temp[3];?> <?=$sejour_temp[4];?>) : Du <?=$sejour_temp[5];?> au <?=$sejour_temp[6];?> - Prix&nbsp;: <?=$sejour_temp[7];?>&nbsp;€<br> 
+					•&nbsp;&nbsp;Séjour <?=($sejour_temp[1] == 'Séjours courts') ? 'court' : $sejour_temp[1] ; ?> - <?=$sejour_temp[2];?> <!--(<?=$sejour_temp[3];?> <?=$sejour_temp[4];?>) -->: Du <?=$sejour_temp[5];?> au <?=$sejour_temp[6];?> - Prix&nbsp;: <?=$sejour_temp[7];?>&nbsp;€<br> 
 					<?php endforeach; ?>
 
-					<span style="margin-top:5px;">•&nbsp;&nbsp;Prix total des séjours : <?=$price ?> €<br>
-					•&nbsp;&nbsp;Renseignements sur l'organisation des départs – retours : Se reporter à la convocation jointe.<br></span>
+					•&nbsp;&nbsp;Prix total des séjours : <?=$price ?> €<br>
+					•&nbsp;&nbsp;Renseignements sur l'organisation des départs – retours : Se reporter à la convocation jointe.<br>
 
 				</p>
 			</td>
@@ -682,15 +683,17 @@ ob_start(); ?>
 							$temp = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $date_from, $date_to);							
 
 							if (!empty($sejours_temp)) {
-								if ($sejours_temp[$sejour_index-1][0] == $temp[0] && $sejours_temp[$sejour_index-1][6] == $temp[6]) {
+								if ($sejours_temp[$sejour_index-1][0] == $temp[0] && $sejours_temp[$sejour_index-1][6] == $temp[5]) {
 									$sejours_temp[$sejour_index-1] = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $sejours_temp[$sejour_index-1][6], $date_to);
 								} else {
 									array_push($sejours_temp, $temp);
+									$sejour_index++;
 								}
 							} else {
 								array_push($sejours_temp, $temp);
+								$sejour_index++;
 							}
-							$sejour_index++;
+							
 						
 							?>
 						<?php endforeach; ?>
