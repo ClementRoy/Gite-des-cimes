@@ -48,17 +48,60 @@
                 </div>
 
 
-                <?php // TEMPLATE ?>
 
 
-                <?php // END OF TEMPLATE  ?>
+
+                <hr>
+               
+
+
+
+
+
+
+                <div class="field-box row">
+                    <label class="col-md-2" for="form-inscription-sejour-select">Séjour(s)</label>
+                    <div class="col-md-4">
+                        <div class="sejours-group">
+                            <div class="sejour-form init" style="display:none;">
+                                <fieldset class="form-group">
+                                    <select class="form-control input-sm" id="form-inscription-sejour-select" name="form_inscription_sejour[]">
+                                        <option value="">Choisissez un séjour</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                          <div class="sejours-group">
+                            <div class="sejour-form init" style="display:none;">
+                                <fieldset class="form-group">
+                                    <select class="form-control input-sm" id="form-inscription-sejour-select" name="form_inscription_sejour[]">
+                                        <option value="">Choisissez un séjour</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                        </div>
+
+
+                        <div class="sejours-controls">
+                            <button href="#" class="btn btn-default btn-sm delete-sejour" disabled="disabled">Supprimer ce séjour</button>
+                            <button href="#" class="btn btn-primary btn-sm add-sejour" disabled="disabled">Ajouter un séjour</button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+
+
+
 
 
 
                 <?php //Handle Sejour here ?> 
                 <?php $sejours = sejour::getList(); ?>
                 <?php $sejours_linked = inscription::getLinkedSejours($dossier->id); ?>
-                <?php //tool::output($sejours_linked); ?>
+                <?php tool::output($sejours_linked); ?>
 
                 <?php foreach($sejours_linked as $sejour_linked): ?>
 
@@ -128,7 +171,7 @@
                         <div class="ui-select">
                             <?php $structures = structure::getList(); ?>
                             <select class="form-control" id="form-inscription-structure-select" name="form_inscription_structure">
-                                <option selected="selected">Choisissez la structure</option>
+                                <option selected="selected" value="">Choisissez la structure</option>
                                 <?php foreach($structures as $structure): ?>
                                     <option <?php if( $structure->id == $dossier->ref_structure_payer): ?>selected="selected"<?php endif; ?> value="<?=$structure->id ?>"><?=$structure->name ?></option>
                                 <?php endforeach; ?>
@@ -288,77 +331,230 @@
                 </div>
 
 
-                <script>
-                $(function(){
 
-                     $(document).on('change', '.selector', function(){
-                                //console.log('triggering select');
-                                $sejour = $(this).find('option:selected');
 
-                                var $select = $(this).parents('.sejour-select');
-                                //console.log($sejour.data('nbweek'));
-                                $dates_from = $sejour.data('datesfrom');
-                                $dates_to = $sejour.data('datesto');
-                                $sejour_id = $sejour.data('sejour-id');
-                                if($sejour.data('nbweek') == 0){
-                                    // On ne choisit pas de dates, il s'agit d'un week end
-                                    $select.next('.date-range').find('.inject-dates').html('L\'enfant est inscrit sur le week end en intégralité. <input type="hidden" name="dates[]" value="'+$dates_from+'#'+$dates_to+'#'+$sejour_id+'">');
-                                }else {
-                                    // L'utilisateur peut choisir chaque semaine en checkbox 
-                                    console.log($dates_from);
-                                    $dates_from = $dates_from.split('#');
-                                    $dates_to = $dates_to.split('#');
-                                    var date_range = '';
-                                    for ( var i = 0; i < $sejour.data('nbweek'); i++ ) {
-                                        date_range += '<label style="display: block;"><input type="checkbox" name="dates[]" value="'+$dates_from[i]+'#'+$dates_to[i]+'#'+$sejour_id+'"> Semaine '+(i+1)+' du '+$dates_from[i]+' au '+$dates_to[i]+'</label>';
-                                    }
-                                    $select.next('.date-range').find('.inject-dates').html(date_range)
+<script>
+    function toDate(timestamp) {
+        var date = new Date( timestamp*1000);
+        if (date.getDate() < 10) {
+            var day = '0' + date.getDate();
+        } else {
+            var day = date.getDate();
+        }
+        if ((date.getMonth()+1) < 10) {
+            var month = '0' + (date.getMonth()+1);
+        } else {
+            var month = (date.getMonth()+1);
+        }
+        date = day + '/' + month + '/' + date.getFullYear();
+        return date;
+    }
+
+    function toTimestamp(date) {
+        date = date.split('/');
+        var date = date[1] + ',' + date[0] + ',' + date[2];
+        return new Date(date).getTime()/1000;
+    }
+
+    function countWeeks(start, end) {
+
+        var period = end - start;
+
+        if ( period < 604800) {
+            return 0;
+        } else {
+            return Math.floor(period/604800);
+        }
+    }
+
+    function findWithAttr(array, attr, value) {
+        for(var i = 0; i < array.length; i += 1) {
+            if(array[i][attr] == value) {
+                return i;
+            }
+        }
+    }
+
+    function setControls() {
+
+        var add = $('.sejours-controls').find('.add-sejour');
+        var remove = $('.sejours-controls').find('.delete-sejour');
+
+        if ( $('.sejour-form').length < 3 ) {
+            remove.attr('disabled', 'disabled');
+        } else {
+            remove.removeAttr('disabled');
+        }
+
+        if ( $('.sejour-form:last-child').find('select').val() != '' ) {
+            if ( $('.sejour-form:last-child').find('[type="checkbox"]:checked').length ) {
+                add.removeAttr('disabled');
+            } else {
+                add.attr('disabled', 'disabled');
+            }
+        } else {
+            add.attr('disabled', 'disabled');
+        }
+
+    }
+
+    function addGroupField(data) {
+        var forms = $('.sejour-form').not('.init');
+        forms.find('fieldset').attr('disabled', 'disabled');
+        $('.sejours-group').append( $('.sejours-group').find('.init').clone() );
+        setControls();
+
+        var newSejour = $('.sejour-form:last-child');
+        newSejour.removeClass('init').fadeIn();
+
+        var selectSejour = newSejour.find('select');
+
+        for (var i = 0; i < data.length; i++) {
+            selectSejour.append('<option value="' + data[i].id + '">' + data[i].name + ' du ' + toDate(data[i].start) + ' au ' + toDate(data[i].end) + '</option>');
+        }
+    }
+
+    function removeLastGroupField() {
+        $('.sejour-form:last-child').remove();
+        $('.sejour-form:last-child').find('fieldset').removeAttr('disabled');
+        
+        setControls();
+    }
+
+    function setCheckbox(selectValue, dataSejours) {
+        var disabledBefore = 0;
+        if ( $('.sejour-form').length > 2 ) {
+            var disabledBefore = $('.sejour-form').eq($('.sejour-form').length-2).find('input[type="checkbox"]:checked').last().data('end');
+        }
+
+        setControls();
+
+        $('.sejour-form:last-child').find('.checkbox').remove();
+        if ( selectValue != '' ) {
+
+            var selectedId = findWithAttr( dataSejours, 'id', selectValue );
+            var start = dataSejours[selectedId].start;
+            var end = dataSejours[selectedId].end;
+            var id = dataSejours[selectedId].id;
+            var nbWeeks = countWeeks( start, end );
+
+            if ( nbWeeks < 1 ) {
+                $('.sejour-form:last-child').find('fieldset').append('<div class="checkbox"><label><input type="checkbox" name="dates[]" value="' + toDate(start) + '#' + toDate(end) + '#' + id + '" data-id="' + id + '" data-start="' + start + '" data-end="' + end + '" disabled checked /> L\'enfant est inscrit sur le week end en intégralité.</label></div>');
+            } else if ( nbWeeks === 1 ) {
+                $('.sejour-form:last-child').find('fieldset').append('<div class="checkbox"><label><input type="checkbox" name="dates[]" value="' + toDate(start) + '#' + toDate(end) + '#' + id + '" data-id="' + id + '" data-start="' + start + '" data-end="' + end + '" disabled checked /> L\'enfant est inscrit sur le séjour en intégralité.</label></div>');
+            } else {
+                for (var i = 0; i < nbWeeks; i++) {
+                    var weekStart = 604800 * parseInt(i) + parseInt(start);
+                    var weekEnd = parseInt(weekStart) + 604800 + 5000;
+                    var content = '<div class="checkbox"><label><input type="checkbox" name="dates[]" value="' + toDate(weekStart) + '#' + toDate(weekEnd) + '#' + id + '" data-id="' + id + '" data-start="' + weekStart + '" data-end="' + weekEnd + '"';
+                    if ( weekEnd <= disabledBefore ) {
+                        content = content + ' disabled ';
+                    } else if (i < 1) {
+                        content = content + ' checked '
+                    }
+                    content = content + '/><strong>Semaine '+ (i + 1) +'</strong> du ' + toDate(weekStart) + ' au ' + toDate(weekEnd) + '</label></div>';
+
+                    $('.sejour-form:last-child').find('fieldset').append(content);
+                }
+            }
+        }
+
+        setControls();
+
+    }
+
+    $(function () {
+        var dataSejours = [
+            <?php $sejours = sejour::getListFuturSejour(); ?>
+            <?php $i = 0; ?>
+            <?php foreach ($sejours as $key => $sejour): ?>
+            {
+                <?php $date_from = new DateTime($sejour->date_from); ?>
+                <?php $date_to = new DateTime($sejour->date_to); ?>
+                <?php if($date_to->getTimestamp() != '-62169987600'): ?>
+                <?php $date_to = $date_to->getTimestamp(); ?>
+                <?php endif; ?>
+                <?php if($date_from->getTimestamp() != '-62169987600'): ?>
+                <?php $date_from = $date_from->getTimestamp(); ?>
+                <?php endif; ?>
+                id: <?=$sejour->id; ?>,
+                name: '<?=addslashes($sejour->name); ?>',
+                start: '<?=$date_from; ?>',
+                end: '<?=$date_to; ?>'
+                <?php $i++; ?>
+            }<?=(count($sejours) != $i)? ',' : '' ; ?>
+            <?php endforeach; ?>
+        ];
+
+        $('.sejours-controls').on('click', '.add-sejour', function(e) {
+            e.preventDefault();
+            newDataSejours = [];
+
+            var lastChecked = $('.sejour-form:last-child').find('input[type="checkbox"]:checked').last();
+
+            var start = lastChecked.data('start');
+            var end = lastChecked.data('end');
+            var id = lastChecked.data('id');
+
+            if( countWeeks(start, end) < 1 ) {
+                for (var i = 0; i < dataSejours.length; i++) {
+                    if (dataSejours[i].start > end && dataSejours[i].id != id && countWeeks(dataSejours[i].start, dataSejours[i].end) < 1) {
+                        newDataSejours.push(dataSejours[i]);
+                    }
+                }
+            } else {
+                for (var i = 0; i < dataSejours.length; i++) {
+
+                    if ( dataSejours[i].end > end && dataSejours[i].id != id ) {
+                        var nbWeeks = countWeeks(dataSejours[i].start, dataSejours[i].end);
+                        var itsIn = 0;
+                        if (nbWeeks > 0) {
+                            for (var y = 0; y <= nbWeeks; y++) {
+                                var weekStart = 604800 * parseInt(y) + parseInt(dataSejours[i].start);
+                                if (toDate(weekStart) == toDate(end)) {
+                                    itsIn++;
                                 }
+                            }
+                            if (itsIn > 0) {
+                                newDataSejours.push(dataSejours[i]);
+                            }
+                        }
+                    }
+                }
+            }
 
-                            });
+            addGroupField( newDataSejours );
+        });
 
-                            /*
-                             Handling Structure Behavior
-                             */
-                             $('#form-inscription-structure-select').change(function(){
-                                //console.log($(this).val());
-                                if($(this).val() == 'Choisissez la structure'){
-                                    $('#form-inscription-centre-payeur').removeAttr('disabled'); 
-                                    $('#form-inscription-centre-payeur-hidden').attr('disabled', 'disabled'); 
-                                }else {
-                                    $('#form-inscription-centre-payeur').val('');
-                                    $('#form-inscription-centre-payeur').attr('disabled','disabled');
-                                    $('#form-inscription-centre-payeur-hidden').removeAttr('disabled');
-                                }
-                            });
+        $('.sejours-controls').on('click', '.delete-sejour', function(e) {
+            e.preventDefault();
+            removeLastGroupField();
+        });
 
+        $('.sejours-group').on('change', 'select', function() {
+            setCheckbox( $(this).val(), dataSejours);
+        });
 
-                            // Trigger first shot
-                            <?php if(isset($_GET['sejour'] )): ?>
-                            $('.selector').trigger('change');
-                        <?php endif; ?>
-
-
-                        var i = 1;
-                        $('.duplicate').click(function(e){
-                            e.preventDefault();
-                            $('.sejour-select').first().clone().insertBefore($(this));
-                            $('.date-range').first().clone().insertBefore($(this));
-                            $('.remove').first().clone().insertBefore($(this));
-                            i++;
-
-                        });
-
-                        $('.remove').click(function(e){
-                            e.preventDefault();
-                            console.log( $(this));
-                            $(this).parent().prev('.date-range').remove();
-                            $(this).parent().prev('.sejour-select').remove();
-                            $(this).remove();
-                        });
+        $('.sejours-group').on('change', '[type="checkbox"]', function() {
+            setControls();
+        });
 
 
-                    });
+        $('form').submit(function() {
+            $('[disabled]').removeAttr('disabled');
+        });
+
+        $('#form-inscription-structure-select').change( function () {
+            if( $(this).val() == '' ){
+                $('#form-inscription-centre-payeur').removeAttr('disabled'); 
+                $('#form-inscription-centre-payeur-hidden').attr('disabled', 'disabled'); 
+            } else {
+                $('#form-inscription-centre-payeur').val('');
+                $('#form-inscription-centre-payeur').attr('disabled','disabled');
+                $('#form-inscription-centre-payeur-hidden').removeAttr('disabled');
+            }
+        });
+    });
 </script>
 
 </form>
