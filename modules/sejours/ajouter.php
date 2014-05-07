@@ -74,6 +74,7 @@
                     data-toggle="tooltip" title="Renseignez le numéro jeunesse & sport du séjour.">
                 </div>                            
             </div>
+            
             <div class="field-box row">
                 <label class="col-md-2" for="form-sejour-mail">Prix unitaire</label>
                 <div class="col-md-2">
@@ -101,13 +102,8 @@
     
             </div>
 
-            <div class="field-box actions">
-                <div class="col-md-6 col-md-offset-2">
-                    <input type="submit" class="btn btn-primary" name="submit-add" value="Ajouter le séjour">
-                    <span>OU</span>
-                    <a href="/sejours/" class="reset">Annuler</a>
-                </div>
-            </div>
+            <?php html::submit('submit-add', "Ajouter le séjour") ?>
+
 
         </form>
     </div>

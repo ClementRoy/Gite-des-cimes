@@ -22,6 +22,7 @@
                     <input type="hidden" value="<?=$id ?>" name="id" />
 
                     <?php form::input('text', 'form_utilisateur_prenom', "Renseignez le prénom de l'utilisateur.", 'true'); ?>
+
                     <div class="field-box row">
                         <label class="col-md-2" for="form-utilisateur-prenom">Prénom</label>
                         <div class="col-md-5">

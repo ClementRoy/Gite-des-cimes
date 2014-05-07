@@ -220,17 +220,8 @@
                         </label>
                     </div>
                 </div>
-
-
-                <div class="field-box actions">
-                    <div class="col-md-6  col-md-offset-2">
-                        <input type="submit" class="btn btn-primary" name="submit-add" value="Valider l'inscription">
-                        <span>OU</span>
-                        <a href="/dossiers/" class="reset">Annuler</a>
-                    </div>
-                </div>
-
-
+    
+                <?php html::submit('submit-add', "Valider l'inscription") ?>
 
             </form>
 
