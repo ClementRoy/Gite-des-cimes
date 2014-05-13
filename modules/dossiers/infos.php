@@ -256,7 +256,7 @@
             <p>
                 <strong>Centre payeur :</strong>
                 <?php $structure_payer = structure::get($dossier->ref_structure_payer); ?>
-                <a href="/structures/infos/id/<?=$structure_payer->id; ?>"><?=$structure_payer->name; ?></a>
+                <?=(!empty($structure_payer)) ? '<a href="/structures/infos/id/'.$structure_payer->id.'">'.$structure_payer->name.'</a>':EMPTYVAL; ?>
             </p>
             <p>
                 <strong>Prise en charge de l'enfant :</strong> 
