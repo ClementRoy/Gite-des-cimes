@@ -422,9 +422,12 @@
                     newSejour.removeClass('init').fadeIn();
 
                     var selectSejour = newSejour.find('select');
-
-                    for (var i = 0; i < data.length; i++) {
-                        selectSejour.append('<option value="' + data[i].id + '">' + data[i].name + ' du ' + toDate(data[i].start) + ' au ' + toDate(data[i].end) + '</option>');
+                    if (data.length === 0) {
+                            selectSejour.attr('disabled', 'disabled').html('<option value="">Aucun séjour disponible</option>');
+                    } else {
+                        for (var i = 0; i < data.length; i++) {
+                            selectSejour.append('<option value="' + data[i].id + '">' + data[i].name + ' du ' + toDate(data[i].start) + ' au ' + toDate(data[i].end) + '</option>');
+                        }
                     }
                 }
 

@@ -79,9 +79,9 @@ ob_start(); ?>
 				</td>
 			</tr>
 		</table>
-		<table class="special" bordercolor="#000000" border="1" CELLPADDING="10" CELLSPACING="0" style="margin-top:5px; height:40px;">
+		<table class="special" bordercolor="#000000" border="1" cellpadding="0" cellspacing="0" style="margin-top:5px; height:40px;">
 			<tr>
-				<td style="width:50%;padding:15px 15px 0;" border="1">
+				<td style="width:50%;padding:15px 15px 0;" cellpadding="0" border="1">
 					<h4><!-- GITE DES CIMES /  -->N° organisateur : 060ORG0292</h4>
 
 					<p style="margin:5px 0;">
@@ -116,17 +116,14 @@ ob_start(); ?>
 							<?php $sejour = sejour::get($inscription->ref_sejour); ?>
 							<?php if ($numero_sejour != $sejour->numero): ?>
 								<?php $hebergement = hebergement::get($sejour->ref_hebergement); ?>
-								<p style="margin:3px 0;"><?=$sejour->name ?> - <?=$sejour->numero ?><br>
+								<p style="margin:3px 0 0;"><?=$sejour->name ?> - <?=$sejour->numero ?><br>
 								<?=$hebergement->name.', '.$hebergement->address_postal_code.' '.$hebergement->address_city;?>
 								<?php $numero_sejour = $sejour->numero; ?>
 								</p>
 							<?php endif ?>
 						<?php endforeach ?>
-				
-
-
 				</td>
-				<td style="width:50%;padding:15px;" border="1">
+				<td style="width:50%;padding:15px 15px 5px;" border="1">
 					<h4>LE RESPONSABLE LEGAL EFFECTUANT L’INSCRIPTION</h4>
 					
 					<?php if ($dossier->guardian == 'parents'): ?>
@@ -242,22 +239,20 @@ ob_start(); ?>
 			</tr>
 			<tr>
 				<td>
-					<p><strong>NOM, Prénom : </strong> <?=$dossier->lastname; ?> <?=$dossier->firstname; ?></p>
-					<p>
-						<strong>Sexe : </strong><?=ucfirst($dossier->sex); ?>
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						<strong>Né (e) le : </strong>
-						
+
+					<table style="width:100%;">
+						<tr>
+							<td style="width:40%;"><strong>NOM, Prénom : </strong> <?=$dossier->lastname; ?> <?=$dossier->firstname; ?></td>
+							<td style="width:30%;"><strong>Sexe : </strong><?=ucfirst($dossier->sex); ?></td>
+							<td style="width:30%;">
+								<strong>Né (e) le : </strong>
 						<?php $birthdate = new DateTime($dossier->birthdate); ?>
 						<?php if($birthdate->getTimestamp() > '-62169984560'): ?>
 							<?=strftime('%d %B %Y', $birthdate->getTimestamp()); ?>
 						<?php endif; ?>
-						
-					</p>
-
-
+							</td>
+						</tr>
+					</table>
 
 
 
@@ -661,10 +656,9 @@ ob_start(); ?>
 					<p style="margin-top:60px;">
 						<strong>Inscrit au(x) Séjour(s) : </strong><br>
 
-
-
 						<?php $sejours_temp = array(); ?>
 						<?php $sejour_index = 0; ?>
+
 						<?php foreach ($inscriptions as $key => $inscription):
 							$sejour = sejour::get($inscription->ref_sejour);
 
@@ -684,7 +678,7 @@ ob_start(); ?>
 
 							if (!empty($sejours_temp)) {
 								if ($sejours_temp[$sejour_index-1][0] == $temp[0] && $sejours_temp[$sejour_index-1][6] == $temp[5]) {
-									$sejours_temp[$sejour_index-1] = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $sejours_temp[$sejour_index-1][6], $date_to);
+									$sejours_temp[$sejour_index-1] = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $sejours_temp[$sejour_index-1][5], $date_to);
 								} else {
 									array_push($sejours_temp, $temp);
 									$sejour_index++;
