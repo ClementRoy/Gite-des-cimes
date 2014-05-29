@@ -100,7 +100,6 @@
                         <div class="field-box row">
                             <label class="col-md-2" for="form-enfant-contact-select">Nom du contact</label>
                             <div class="col-md-5" data-toggle="tooltip" title="Sélectionnez le contact responsable de l'enfant.">
-                                <div class="ui-select">
                                     <select class="form-control" id="form-enfant-contact-select" name="form_enfant_contact">
                                         <option selected="">Sélectionnez un contact</option>
                                         <?php if ($enfant->contact != 0): ?>
@@ -108,7 +107,6 @@
                                             <option value="<?=$contact->id ?>" selected="selected"><?php echo $contact->civility.' '.$contact->lastname.' '.$contact->firstname;?></option>
                                         <?php endif; ?>
                                     </select>
-                                </div>
                                 <?php // TODO : ajouter la possibilité de créer une structure à la volée ?>
                             </div>
                         </div>
