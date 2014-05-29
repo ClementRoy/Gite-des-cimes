@@ -88,24 +88,20 @@ ob_start(); ?>
 						607 rue du Château d’eau<br>
 						60123 Bonneuil en Valois
 					</p>
-					<p style="margin:5px 0;"><strong>Tél :</strong> 03 44 88 51 13</p>
-					<p style="margin:5px 0;"><strong>Email :</strong> gite.cimes@orange.fr</p>
+					<p style="margin:5px 0;"><strong>Contact :</strong> 03 44 88 51 13 - <a href="mailto:gite.cimes@orange.fr">gite.cimes@orange.fr</a></p>
 					
 					<?php $directors = array(); ?>
 					<?php foreach ($inscriptions as $key => $inscription): ?>
 						<?php $ref_accompagnateur = accompagnateur::getBySejour($inscription->ref_sejour); ?>
-						<?php if(!in_array($ref_accompagnateur, $directors)): ?>
-							<?php $directors[] = $ref_accompagnateur; ?>
+						<?php if(!in_array($ref_accompagnateur->ref_accompagnateur, $directors)): ?>
+							<?php $directors[] = $ref_accompagnateur->ref_accompagnateur; ?>
 							<?php if(!empty($ref_accompagnateur)): ?>
 								<?php $accompagnateur = accompagnateur::get($ref_accompagnateur->ref_accompagnateur); ?>
-								<p><strong>Directeur de séjour :</strong> <?=$accompagnateur->lastname ?> <?=$accompagnateur->firstname ?> <?=$accompagnateur->tel ?></p>
+								<p><strong>Directeur de séjour :</strong><br />
+								<?=$accompagnateur->lastname ?> <?=$accompagnateur->firstname ?> - <?=tool::formatTel($accompagnateur->tel) ?></p>
 							<?php endif; ?>
 						<?php endif; ?>
 					<?php endforeach ?>
-
-
-					<!-- <p>Direc
-					teur : Lyazid Behlouli 06 50 31 22 88</p> -->
 
 					<p style="margin-bottom:0;">
 						<strong>N° d’enregistrement du ou des séjours :</strong></p>
@@ -242,8 +238,8 @@ ob_start(); ?>
 
 					<table style="width:100%;">
 						<tr>
-							<td style="width:40%;"><strong>NOM, Prénom : </strong> <?=$dossier->lastname; ?> <?=$dossier->firstname; ?></td>
-							<td style="width:30%;"><strong>Sexe : </strong><?=ucfirst($dossier->sex); ?></td>
+							<td style="width:50%;"><strong>NOM, Prénom : </strong> <?=$dossier->lastname; ?> <?=$dossier->firstname; ?></td>
+							<td style="width:20%;"><strong>Sexe : </strong><?=ucfirst($dossier->sex); ?></td>
 							<td style="width:30%;">
 								<strong>Né (e) le : </strong>
 						<?php $birthdate = new DateTime($dossier->birthdate); ?>
