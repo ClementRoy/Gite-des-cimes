@@ -91,17 +91,18 @@ ob_start(); ?>
 					<p style="margin:5px 0;"><strong>Contact :</strong> 03 44 88 51 13 - <a href="mailto:gite.cimes@orange.fr">gite.cimes@orange.fr</a></p>
 					
 					<?php $directors = array(); ?>
+					<p><strong>Directeur(s) de séjour(s) :</strong><br />
 					<?php foreach ($inscriptions as $key => $inscription): ?>
 						<?php $ref_accompagnateur = accompagnateur::getBySejour($inscription->ref_sejour); ?>
 						<?php if(!empty($ref_accompagnateur) && !in_array($ref_accompagnateur->ref_accompagnateur, $directors)): ?>
 							<?php $directors[] = $ref_accompagnateur->ref_accompagnateur; ?>
 							<?php if(!empty($ref_accompagnateur)): ?>
 								<?php $accompagnateur = accompagnateur::get($ref_accompagnateur->ref_accompagnateur); ?>
-								<p><strong>Directeur de séjour :</strong><br />
-								<?=$accompagnateur->lastname ?> <?=$accompagnateur->firstname ?> - <?=tool::formatTel($accompagnateur->tel) ?></p>
+								<?=$accompagnateur->lastname ?> <?=$accompagnateur->firstname ?> - <?=tool::formatTel($accompagnateur->tel) ?><br />
 							<?php endif; ?>
 						<?php endif; ?>
 					<?php endforeach ?>
+					</p>
 
 					<p style="margin-bottom:0;">
 						<strong>N° d’enregistrement du ou des séjours :</strong></p>
@@ -746,7 +747,7 @@ $content = ob_get_clean();
 try{
 	$pdf = new HTML2PDF('P', 'A4', 'fr');
 	$pdf->writeHTML($content);
-	
+
 	$pdf->Output($type.'_'.$id.'.pdf');
 }catch(HTML2PDF_exception $e){
 	die($e);
