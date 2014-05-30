@@ -93,7 +93,7 @@ ob_start(); ?>
 					<?php $directors = array(); ?>
 					<?php foreach ($inscriptions as $key => $inscription): ?>
 						<?php $ref_accompagnateur = accompagnateur::getBySejour($inscription->ref_sejour); ?>
-						<?php if(!in_array($ref_accompagnateur->ref_accompagnateur, $directors)): ?>
+						<?php if(!empty($ref_accompagnateur) && !in_array($ref_accompagnateur->ref_accompagnateur, $directors)): ?>
 							<?php $directors[] = $ref_accompagnateur->ref_accompagnateur; ?>
 							<?php if(!empty($ref_accompagnateur)): ?>
 								<?php $accompagnateur = accompagnateur::get($ref_accompagnateur->ref_accompagnateur); ?>
@@ -742,10 +742,11 @@ ob_start(); ?>
 <?php
 
 $content = ob_get_clean(); 
+// echo utf8_decode($content);
 try{
 	$pdf = new HTML2PDF('P', 'A4', 'fr');
 	$pdf->writeHTML($content);
-	//$pdf->Output($type.'_'.$id.'.pdf');
+	
 	$pdf->Output($type.'_'.$id.'.pdf');
 }catch(HTML2PDF_exception $e){
 	die($e);
