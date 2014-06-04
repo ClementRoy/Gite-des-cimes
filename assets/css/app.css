@@ -985,8 +985,6 @@ body {
 .fc-border-separate tr.fc-last .fc-year-weekly-head,
 .fc-border-separate tr.fc-last .fc-year-weekly-head {
   color: #919191;
-  font-size: 11px;
-  padding: 5px;
   text-align: center;
 }
 .fc-year-monthly-name {

@@ -1,5 +1,7 @@
 $(function () {
 
+$('.nav-tabs').stickyTabs();
+
 // $('.maped-form .field-box').each(function(index, val) {
 // 		var label = $(this).children('label').text();
 // 		var anchor = $(this).find('[id^=form-]').attr('id');
@@ -17,8 +19,6 @@ $('.form-nav a').click(function (e) {
 	}, 'slow');  
 	return false;
 });
-
-
 
 
 

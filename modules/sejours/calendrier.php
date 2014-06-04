@@ -53,12 +53,12 @@
                 right: 'year,month'
             },
             buttonText : {
-    today:    'Aujourd\'hui',
-    month:    'mois',
-    week:     'semaine',
-    day:      'jour',
-    year:      'année'
-},
+                today:    'Aujourd\'hui',
+                month:    'mois',
+                week:     'semaine',
+                day:      'jour',
+                year:      'année'
+            },
             firstDay: 1,
             dayNamesShort: ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'],
             monthNames: ['Janvier','Février','Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],

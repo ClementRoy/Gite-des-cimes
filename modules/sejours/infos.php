@@ -4,7 +4,7 @@
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 <?php if(isset($_POST['submit-note'])): ?>
-<?php  
+    <?php  
     
     extract($_POST);
 
@@ -14,7 +14,7 @@
             ':ref_sejour' => $note_ref_sejour,
             ':ref_enfant' => $note_ref_enfant,
             ':message' => tool::cleanInput($note_message)
-        );
+            );
 
         $result = note::update($datas, $note_id);
 
@@ -24,13 +24,13 @@
             ':ref_sejour' => $note_ref_sejour,
             ':ref_enfant' => $note_ref_enfant,
             ':message' => tool::cleanInput($note_message)
-        );
+            );
 
         $result = note::add($datas);
 
     }
 
-?>
+    ?>
     <?php if($result): ?>
         <div class="row">
             <div class="col-md-12">
@@ -75,7 +75,7 @@
     $datas_accompagnateur = array(
         ':ref_sejour' => $_GET['id'],
         ':ref_accompagnateur' => $form_sejour_accompagnateur
-    );
+        );
 
     $result = accompagnateur::addToSejour($datas_accompagnateur);
 
@@ -153,7 +153,7 @@
     $datas_accompagnateur = array(
         ':ref_sejour' => $_GET['id'],
         ':ref_accompagnateur' => $form_sejour_accompagnateur
-    );
+        );
 
     $result = accompagnateur::addToSejour($datas_accompagnateur);
 
@@ -227,20 +227,34 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
     </div>
 </div>
 <?php if ($nb_weeks > 1): ?>
-<div class="row content-nav-tabs">
-    <div class="col-md-12">
-        <ul class="nav nav-tabs">
-            <?php for ($i=1; $i <= $nb_weeks; $i++) : ?>
-                <li <?php if($i == 1): ?>class="active"<?php endif; ?>><a href="#week-<?=$i ?>"><?php if($date_from->diff($date_to)->format('%d') == 2): ?>Week-end<?php else: ?>Semaine <?=$i ?><?php endif; ?></a></li>
-            <?php endfor; ?>
-        </ul>
+    <div class="row content-nav-tabs">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs">
+                <?php for ($i=1; $i <= $nb_weeks; $i++) : ?>
+                   <?php 
+                   $date_from_query = new DateTime($sejour->date_from);
+                   $date_to_query = new DateTime($sejour->date_from);
+                   ?>
+                   <li <?php if($i == 1): ?>class="active"<?php endif; ?>>
+                    <a href="#week-<?=$i ?>">
+                        <?php if($date_from->diff($date_to)->format('%d') == 2): ?>
+                            <strong>Week-end</strong>
+                        <?php else: ?>
+                            <strong>Semaine <?=$i ?></strong><br />
+                            Du <?=strftime('%d %B', $date_from->getTimestamp()+(($i-1)*604800)); ?>
+                        <?php endif; ?>
+
+                    </a>
+                </li>
+                <?php endfor; ?>
+            </ul>
+        </div>
     </div>
-</div>
 <?php endif ?>
 
 <div class="row">
     <div class="col-md-9">
-            
+
 
         <div class="content<?=($sejour->archived)?' archived':' ';?>">
             <div class="tab-content">
@@ -690,12 +704,12 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
     <?php $ref_accompagnateur = accompagnateur::getBySejour($sejour->id); ?>
     <?php if(!empty($ref_accompagnateur)): ?>
         <h6>Directeur du séjour</h6>
-            <?php $accompagnateur = accompagnateur::get($ref_accompagnateur->ref_accompagnateur); ?>
-            <ul>
-                <li><strong><?=$accompagnateur->firstname ?> <?=$accompagnateur->lastname; ?></strong></li>
-                <?php if(!empty($accompagnateur->tel)): ?><li><strong>Téléphone : </strong><?=tool::formatTel($accompagnateur->tel) ?></li><?php endif; ?>
-                <?php if(!empty($accompagnateur->email)): ?><li><strong>Email : </strong><a href="mailto:<?=$accompagnateur->email ?>"><?=$accompagnateur->email ?></a></li><?php endif; ?>
-            </ul>
+        <?php $accompagnateur = accompagnateur::get($ref_accompagnateur->ref_accompagnateur); ?>
+        <ul>
+            <li><strong><?=$accompagnateur->firstname ?> <?=$accompagnateur->lastname; ?></strong></li>
+            <?php if(!empty($accompagnateur->tel)): ?><li><strong>Téléphone : </strong><?=tool::formatTel($accompagnateur->tel) ?></li><?php endif; ?>
+            <?php if(!empty($accompagnateur->email)): ?><li><strong>Email : </strong><a href="mailto:<?=$accompagnateur->email ?>"><?=$accompagnateur->email ?></a></li><?php endif; ?>
+        </ul>
     <?php endif; ?>
 
 </div>

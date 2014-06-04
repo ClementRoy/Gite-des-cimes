@@ -12,6 +12,7 @@
 
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="/assets/js/bootstrap.datepicker.js"></script>
+    <script src="/assets/js/bootstrap.sticky-tabs.js"></script>
 
     <!-- Ajouter
     <script src="/assets/js/jquery-ui-1.10.2.custom.min.js"></script> -->

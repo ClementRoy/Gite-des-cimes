@@ -9,22 +9,177 @@
 <div class="title">
     <div class="row header">
         <div class="col-md-4">
-           <h1>Les séjours</h1>
-           <ul class="nav nav-tabs">
-              <li class="active"><a href="#present">A venir</a></li>
-              <li class=""><a href="#past">Achevés</a></li>
-          </ul>
-
-      </div>
-      <div class="col-md-8 text-right">
-          <a href="/sejours/ajouter" class="btn btn-primary"><span>+</span>
-            Ajouter un séjour</a>
-        </div>
+         <h1>Les séjours</h1>
+     </div>
+     <div class="col-md-8 text-right">
+      <a href="/sejours/ajouter" class="btn btn-primary"><span>+</span>
+        Ajouter un séjour</a>
     </div>
 </div>
+</div>
 
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <div id='calendar'>
+
+            </div>
+
+
+
+
+        </div>
+    </div>                
+</div>
+
+<?php $sejours = sejour::getList(); ?>
+<?php $nb_sejours = count($sejours); ?>
+<?php $i = 0; ?>
+
+<script>
+    $(function($) {
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'year,month'
+            },
+            defaultView : 'year',
+            buttonText : {
+                today:    'Aujourd\'hui',
+                month:    'mois',
+                week:     'semaine',
+                day:      'jour',
+                year:      'année'
+            },
+            firstDay: 1,
+            dayNamesShort: ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'],
+            monthNames: ['Janvier','Février','Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+            eventSources: [{
+                events: [
+                <?php foreach($sejours as $key => $sejour): ?>
+                <?php
+
+                $date_from = new DateTime($sejour->date_from);
+                $date_to = new DateTime($sejour->date_to);
+
+                if ($sejour->ref_hebergement) {
+                    $hebergement = hebergement::get($sejour->ref_hebergement);
+                    $hebergement = $hebergement->name;
+                } else {
+                    $hebergement = EMPTYVAL;
+                }
+
+                $i++;
+
+                $nb_weeks = tool::getNbWeeks(new DateTime($sejour->date_from), new DateTime($sejour->date_to));
+
+                $type = '';
+                if ($nb_weeks < 1) {
+                    $stay_kind = 'week-end';
+                } else {
+                    $stay_kind = 'semaine';
+                }
+
+                $min = $sejour->capacity_min;
+                $max = $sejour->capacity_max;
+
+                ?>
+
+                <?php if ($nb_weeks > 1): ?>
+                <?php for ($i=0; $i < $nb_weeks; $i++): ?>
+                <?php
+
+                $start_base = new DateTime($sejour->date_from);
+                $end_base = new DateTime($sejour->date_from);
+
+                $start_base->modify("+$i weeks");
+                $end_base->modify("+$i weeks");
+                $end_base->modify("+1 weeks");
+
+                $date_from1 = strftime("%Y-%m-%d", $start_base->getTimestamp());
+                $date_from2 = strftime("%d %B %Y", $start_base->getTimestamp());
+
+                $date_to1 = strftime("%Y-%m-%d",  $end_base->getTimestamp());
+                $date_to2 = strftime("%d %B %Y",  $end_base->getTimestamp());
+
+                $inscriptions = inscription::getBySejourBetweenDates($sejour->id, $start_base, $end_base);
+
+                $nb = count($inscriptions);
+                $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $start_base, $end_base);
+                $opt = count($opt);
+
+                ?>
+
+                {
+                    title       : '<?=addslashes($sejour->name)?> <small>(<?=$i+1?>)</small>',
+                    url         : '/sejours/infos/id/<?=$sejour->id?>#week-<?=$i+1;?>',
+                    start       : '<?=$date_from1?>',
+                    end         : '<?=$date_to1?>',
+                    description : '<p><span class="plabel"><i class="icon-calendar icon"></i> :</span> <span class="pcontent"><?=$date_from2?> au <?=$date_to2?></span></p><p><span class="plabel"><i class="icon-map-marker icon"></i> :</span> <span class="pcontent"><?=addslashes($hebergement)?></span></p><p><span class="plabel"><i class="icon-group icon"></i> :</span> <span class="pcontent"><?=count($inscriptions)?> <?=(count($inscriptions) > 1)?"enfants":"enfant";?> inscrits (sur <?=$max?>) <?=($opt > 0)?"<br /> dont ".$opt." option(s)":"";?> </span></p><p><span class="plabel"><i class="icon-tag icon"></i> :</span> <span class="pcontent"><?=$sejour->price?> €/<small><?=$stay_kind?></small></span></p>'
+
+                }<?=($i < $nb_sejours) ? ',' : '' ; ?>
+
+
+            <?php endfor; ?>
+        <?php else: ?>
+        <?php 
+        $inscriptions = inscription::getBySejour($sejour->id);
+
+        $nb = count($inscriptions);
+        $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $date_from, $date_to);
+        $opt = count($opt);
+
+        if ($date_from->getTimestamp() != '-62169987600') {
+            $date_from1 = strftime("%Y-%m-%d", $date_from->getTimestamp());
+            $date_from2 = strftime("%d %B %Y", $date_from->getTimestamp());
+        }
+
+        if ($date_to->getTimestamp() != '-62169987600') {
+            $date_to1 = strftime("%Y-%m-%d", $date_to->getTimestamp());
+            $date_to2 = strftime("%d %B %Y", $date_to->getTimestamp());
+        }
+        ?>
+
+        {
+            title       : '<?=addslashes($sejour->name)?>',
+            url         : '/sejours/infos/id/<?=$sejour->id?>',
+            start       : '<?=$date_from1?>',
+            end         : '<?=$date_to1?>',
+            description : '<p><span class="plabel"><i class="icon-calendar icon"></i> :</span> <span class="pcontent"><?=$date_from2?> au <?=$date_to2?></span></p><p><span class="plabel"><i class="icon-map-marker icon"></i> :</span> <span class="pcontent"><?=addslashes($hebergement)?></span></p><p><span class="plabel"><i class="icon-group icon"></i> :</span> <span class="pcontent"><?=count($inscriptions)?> <?=(count($inscriptions) > 1)?"enfants":"enfant";?> inscrits (sur <?=$max?>) <?=($opt > 0)?"<br /> dont ".$opt." option(s)":"";?> </span></p><p><span class="plabel"><i class="icon-tag icon"></i> :</span> <span class="pcontent"><?=$sejour->price?> €/<small><?=$stay_kind?></small></span></p>'
+
+        }<?=($i < $nb_sejours) ? ',' : '' ; ?>
+
+    <?php endif; ?>
+
+<?php endforeach; ?>
+
+]
+}],
+eventRender: function (event, element) {
+    element.popover({
+        title: event.title,
+        placement: 'top',
+        trigger: 'hover',
+        container: '.wrapper',
+        html: 'true',
+        content: event.description
+    });
+}
+
+});
+});
+</script>
+<hr>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#present">A venir</a></li>
+  <li class=""><a href="#past">Achevés</a></li>
+</ul>
 <div class="content content-table">
- <div class="row">
+   <div class="row">
     <div class="col-md-12">
 
         <div class="tab-content">
