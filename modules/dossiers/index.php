@@ -27,7 +27,7 @@
                         <th class="sortable" style="width: 65px;">N°</th>
                         <th class="sortable" style="width: 270px;">Nom de l'enfant</th>
                         <th class="sortable">Séjour</th>
-                        <th class="sortable" style="width: 10%;">Satut</th>
+                        <th class="sortable" style="width: 10%;">Statut</th>
                         <th class="sortable" style="width: 12%;">Pris en charge</th>
                     </tr>
                 </thead>
