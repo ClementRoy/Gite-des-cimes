@@ -651,6 +651,30 @@ input[type="checkbox"][disabled] + strong {
 .table tr {
 	position: relative;
 }
+table tbody tr:hover {
+  background: #35abdf !important;
+  color: #fff;
+}
+table.datatable tr.odd:hover td.sorting_1, table.dataTable tr.odd:hover td.sorting_1,
+table.datatable tr.even:hover td.sorting_1, table.dataTable tr.even:hover td.sorting_1  {
+background-color: #35abdf;
+}
+table tr:hover a {
+  color: #fff;
+}
+.paging_full_numbers a.paginate_active {
+	background-color: #35abdf;
+	border-color: #fff;
+	color: #fff !important;
+}
+.paging_full_numbers a.paginate_button {
+	border: 1px solid #ddd;
+	padding: 5px 10px;
+	cursor: pointer;
+	color: #35abdf !important;
+	border-left: 0px;
+}
+
 .dataTables_wrapper {
 	background: #f2f3f6;
 	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);

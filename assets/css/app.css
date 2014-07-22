@@ -515,6 +515,7 @@ input[type="checkbox"][disabled] + strong {
 .table tr {
   position: relative;
 }
+
 .dataTables_wrapper {
   background: #f2f3f6;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
