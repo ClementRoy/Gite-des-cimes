@@ -289,10 +289,11 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                 </h6>
                             </div>
                             <div class="col-md-6 text-right">
-
+                                
                                 <?
                                 $datas = array();
                                 foreach ($inscriptions as $key => $inscription) {
+                                    tool::output($inscription);
                                     $enfant = enfant::get($inscription->ref_enfant);
                                     $birthdate = new DateTime($enfant->birthdate);
                                     if( $enfant->birthdate != '0000-00-00 00:00:00') {
@@ -615,6 +616,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                     </tr>
                 </thead>
                 <tbody>
+
                     <?php foreach($inscriptions as $key => $inscription): ?>
                         <?php $enfant = enfant::get($inscription->ref_enfant); ?>
                         <?php $dossier = dossier::get($inscription->ref_dossier); ?>

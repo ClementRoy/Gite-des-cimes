@@ -114,7 +114,7 @@
                 ?>
 
                 {
-                    title       : '<?=addslashes($sejour->name)?> <small>(<?=$i+1?>)</small>',
+                    title       : '<?=addslashes($sejour->name)?> (<?=$i+1?>) - <?=$nb?>/<?=$max?> <?=($opt)?'('.$opt.' opt)':''?>',
                     url         : '/sejours/infos/id/<?=$sejour->id?>#week-<?=$i+1;?>',
                     start       : '<?=$date_from1?>',
                     end         : '<?=$date_to1?>',
