@@ -115,7 +115,7 @@ class inscription
                         ':id' => $id
                         );
         // Ne pas faire un étoile ici ....
-        $sql = 'SELECT *, inscription.id as inscription_id, dossier.id as dossier_id FROM '.self::$table.' 
+        $sql = 'SELECT *, inscription.id as inscription_id, inscription.ref_enfant as ref_enfant_id, dossier.id as dossier_id FROM '.self::$table.' 
                 LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
                 LEFT JOIN enfant ON inscription.ref_enfant = enfant.id 
                 LEFT JOIN structure ON enfant.organization = structure.id 

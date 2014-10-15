@@ -221,6 +221,7 @@ class dossier
 
     public static function delete($id){
         global $db;
+        
         inscription::deleteByDossier($id);
 
         $data = array(':id' => $id);

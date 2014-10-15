@@ -293,8 +293,10 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                 <?
                                 $datas = array();
                                 foreach ($inscriptions as $key => $inscription) {
-                                    tool::output($inscription);
-                                    $enfant = enfant::get($inscription->ref_enfant);
+                                    
+                                    //tool::output($inscription);
+                                    //if($inscription->ref_enfant != ''){
+                                    $enfant = enfant::get($inscription->ref_enfant_id);
                                     $birthdate = new DateTime($enfant->birthdate);
                                     if( $enfant->birthdate != '0000-00-00 00:00:00') {
                                         $birthdate_string = strftime('%d/%m/%Y', $birthdate->getTimestamp());
@@ -368,6 +370,8 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                         'Mère' => $enfant->mother_name,
                                         'Tél mère' => $tel_mother
                                         );
+
+                                    //}
 }
 
 ?>
@@ -618,7 +622,8 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                 <tbody>
 
                     <?php foreach($inscriptions as $key => $inscription): ?>
-                        <?php $enfant = enfant::get($inscription->ref_enfant); ?>
+                        <?php if($inscription->ref_enfant_id != ''): ?>
+                        <?php $enfant = enfant::get($inscription->ref_enfant_id); ?>
                         <?php $dossier = dossier::get($inscription->ref_dossier); ?>
                         <tr>
                             <td>
@@ -669,6 +674,7 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
                                 </button>
                             </td>
                         </tr>
+                    <?php endif; ?>
                     <?php endforeach; ?>
                 </tbody>
             </table>
