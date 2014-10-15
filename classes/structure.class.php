@@ -69,6 +69,21 @@ class structure
         return $result;
     }
 
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
+    public static function getPayerStructureList(){
+        global $db;
+        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 AND payer = 1 ORDER BY name');
+        
+        return $result;
+    }
+
 
     public static function getFromTrash(){
         global $db;

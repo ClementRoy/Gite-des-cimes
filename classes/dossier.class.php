@@ -104,6 +104,7 @@ class dossier
 		return $result;
 	}
 
+
     public static function getFromTrash(){
         global $db;
         $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1');

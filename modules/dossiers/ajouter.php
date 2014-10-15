@@ -69,7 +69,7 @@
                     <label class="col-md-2" for="form-inscription-structure-select">Centre payeur</label>
                     <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez la structure qui s'occupe de cet enfant.">
                         <div class="ui-select">
-                            <?php $structures = structure::getList(); ?>
+                            <?php $structures = structure::getPayerStructureList(); ?>
                             <select class="form-control" id="form-inscription-structure-select" name="form_inscription_structure">
                                 <option value="" selected="selected">Choisissez la structure</option>
                                 <?php foreach($structures as $structure): ?>
