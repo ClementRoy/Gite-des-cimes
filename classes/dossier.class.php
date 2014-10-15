@@ -83,6 +83,21 @@ class dossier
      * @param
      * @return
      */
+    public static function getListNotSupported(){
+        global $db;
+        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 AND supported = 0 ORDER BY id');
+        return $result;
+    }
+
+
+    /**
+     * desc
+     *
+     * @note 
+     *
+     * @param
+     * @return
+     */
 	public static function getList(){
 		global $db;
         $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 ORDER BY id');
@@ -221,7 +236,7 @@ class dossier
 
     public static function delete($id){
         global $db;
-        
+
         inscription::deleteByDossier($id);
 
         $data = array(':id' => $id);

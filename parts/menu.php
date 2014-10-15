@@ -4,7 +4,7 @@ $menus = array(
 	'accueil' => array(
 		'name' => 'Tableau de bord',
 		'icon' => 'dashboard',
-		),
+	),
 	'enfants' => array(
 		'name' => 'Enfants',
 		'icon' => 'group',
@@ -60,6 +60,10 @@ $menus = array(
 						'index' => 'Liste des accompagnateurs',
 						'ajouter' => 'Ajouter un accompagnateur'
 					)
+	),
+	'Stats' => array(
+		'name' => 'Stats',
+		'icon' => 'bar-chart',
 	),
 	'corbeille' => array(
 		'name' => 'Corbeille',

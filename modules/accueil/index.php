@@ -82,10 +82,8 @@
         <p class="bloc-title">Prise en charge non reçues</p>
         <div class="content">
 
-
-            <div class="jumbotron">
-                <h1>En cours de construction !</h1>
-            </div>
+            <?php $objects = dossier::getListNotSupported(); ?>
+            <?php tool::output($objects); ?>
         </div>
 
     </div>
