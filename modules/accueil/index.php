@@ -80,10 +80,35 @@
 
     <div class="col-md-6">
         <p class="bloc-title">Prise en charge non reçues</p>
-        <div class="content">
+        <div class="content content-table">
 
-            <?php $objects = dossier::getListNotSupported(); ?>
-            <?php tool::output($objects); ?>
+            <table class="datatable" data-sort="1" data-length="10">
+                <thead>
+                    <tr>
+                        <th class="sortable" style="width: 80px;">#</th>
+                        <th class="sortable" style="width: 270px;">Nom de l'enfant</th>
+                        <th class="sortable" style="width: 270px;">Structure</th>
+                        <th class="sortable" style="width: 12%;">Pris en charge</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $notSupported = dossier::getListNotSupported(); ?>
+                    <?php foreach ($notSupported as $key => $value): ?>
+                       <?php $enfant = enfant::get($value->ref_enfant); ?>
+                       <?php $structure = structure::get($value->ref_structure_payer); ?>
+                        <tr>
+                            <td><a href="/dossiers/infos/id/<?=$value->id?>">#<?=$value->id?></a></td>
+                            <td><?=$enfant->firstname?> <?=$enfant->lastname?></td>
+                            <td><?=(isset($structure->name))?$structure->name:'';?></td>
+                            <td>Non</td>
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+
+            
+
+            <?php //tool::output($notSupported); ?>
         </div>
 
     </div>
