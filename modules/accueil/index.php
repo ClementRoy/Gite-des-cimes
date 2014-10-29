@@ -78,7 +78,7 @@
 </div>
 <div class="row">
 
-    <div class="col-md-6">
+    <div class="col-md-7">
         <p class="bloc-title">Prise en charge non reçues</p>
         <div class="content content-table">
 
@@ -113,7 +113,7 @@
 
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-5">
         <p class="bloc-title">Prochains séjours</p>
         <div class="content">
 
@@ -124,7 +124,7 @@
         </div>
 
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
 
         <div class="row">
 

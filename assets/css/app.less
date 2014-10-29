@@ -1091,27 +1091,27 @@ html, body {
 
 
 
-table tbody tr:hover {
-	background: #35abdf !important;
+table.datatable tbody tr:hover {
+	background: @blue !important;
 	color: #fff;
 }
 table.datatable tr.odd:hover td.sorting_1, table.dataTable tr.odd:hover td.sorting_1,
 table.datatable tr.even:hover td.sorting_1, table.dataTable tr.even:hover td.sorting_1  {
-	background-color: #35abdf;
+	background-color: @blue;
 }
-table tr:hover a {
+table.datatable tr:hover a {
 	color: #fff;
 }
 .paging_full_numbers a.paginate_active {
-	background-color: #35abdf;
-	border-color: #fff;
+	background-color: @blue;
+	border-color: @blue;
 	color: #fff !important;
 }
 .paging_full_numbers a.paginate_button {
 	border: 1px solid #ddd;
-	padding: 5px 10px;
+	// padding: 5px 10px;
 	cursor: pointer;
-	color: #35abdf !important;
+	color: @blue !important;
 	border-left: 0px;
 }
 
