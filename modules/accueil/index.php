@@ -77,9 +77,8 @@
     </div>
 </div>
 <div class="row">
-
-    <div class="col-md-7">
-        <p class="bloc-title">Prise en charge non reçues</p>
+    <div class="col-md-12">
+        <h2 class="bloc-title" style="margin-bottom:60px">Prise en charge non reçues</h2>
         <div class="content content-table">
 
             <table class="datatable" data-sort="1" data-length="10">
@@ -113,7 +112,11 @@
 
     </div>
 
+<<<<<<< HEAD
     <div class="col-md-5">
+=======
+<!--     <div class="col-md-6">
+>>>>>>> FETCH_HEAD
         <p class="bloc-title">Prochains séjours</p>
         <div class="content">
 
@@ -137,7 +140,7 @@
             <h6>Taux de remplissage</h6>
 
         </div>
-    </div>
+    </div> -->
 <!--
                 <div class="row">
                     <div class="col-md-6">
