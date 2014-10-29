@@ -66,14 +66,24 @@
         $ref_picture = media::upload($_FILES['form_enfant_picture']);
     }
 
-    $birthdate = tool::generateDatetime($form_enfant_naissance);
-    $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
-    $cpam_validite = tool::generateDatetime($form_enfant_cpam_validite);
+    $attached_file = '';
+    if(isset($_FILES['form_enfant_file']) && !$_FILES['form_enfant_file']['error']){
+        $file = $_FILES['form_enfant_file'];
+        $attached_file = media::upload($_FILES['form_enfant_file']);
+    }
+
+    if(check($form_enfant_naissance))
+        $birthdate = tool::generateDatetime($form_enfant_naissance);
+    if(check($form_enfant_assurance_validite))
+        $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
+    if(check($form_enfant_cpam_validite))
+        $cpam_validite = tool::generateDatetime($form_enfant_cpam_validite);
 
     $datas = array(                
         ':firstname' => $form_enfant_prenom,
         ':lastname' => $form_enfant_nom,
         ':ref_picture' => $ref_picture,
+        ':attached_file' => $attached_file,
         ':birthdate' => $birthdate,
         ':sex' => $form_enfant_sexe,
         ':registration_by' => $form_enfant_inscription,
@@ -167,14 +177,24 @@ $result = enfant::update($datas, $_GET['id']);
         $ref_picture = media::upload($_FILES['form_enfant_picture']);
     }
 
-    $birthdate = tool::generateDatetime($form_enfant_naissance);
-    $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
-    $cpam_validite = tool::generateDatetime($form_enfant_cpam_validite);
+    $attached_file = $enfant->attached_file;
+    if(isset($_FILES['form_enfant_file']) && !$_FILES['form_enfant_file']['error']){
+        $file = $_FILES['form_enfant_file'];
+        $attached_file = media::upload($_FILES['form_enfant_file']);
+    }
+
+    if(check($form_enfant_naissance))
+        $birthdate = tool::generateDatetime($form_enfant_naissance);
+    if(check($form_enfant_assurance_validite))
+        $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
+    if(check($form_enfant_cpam_validite))
+        $cpam_validite = tool::generateDatetime($form_enfant_cpam_validite);
 
     $datas = array(                 
         ':firstname' => $form_enfant_prenom,
         ':lastname' => $form_enfant_nom,
         ':ref_picture' => $ref_picture,
+        ':attached_file' => $attached_file,
         ':birthdate' => $birthdate,
         ':sex' => $form_enfant_sexe,
         ':registration_by' => $form_enfant_inscription,
@@ -618,6 +638,14 @@ $result = enfant::update($datas, $_GET['id']);
                     <strong>Fiche de séjour :</strong>
                     <?=($enfant->stay_record > 0)?'<i class="icon-ok-sign"></i>':'<i class="icon-remove-sign"></i>'; ?>
                 </p>
+                <?php if(!empty($enfant->attached_file)): ?>
+                    <?php $file = media::get($enfant->attached_file); ?>
+                    <p>
+                        <strong>Fichier joint :</strong>
+                        <a href="<?php echo '/'.UPLOAD_FOLDER.$file->file_name; ?>" target="_blank">Télécharger le fichier</a>
+                    </p>
+                <?php endif; ?>
+
             </div>
         </div>
     </div>

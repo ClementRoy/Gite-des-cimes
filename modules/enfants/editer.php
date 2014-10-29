@@ -487,6 +487,20 @@
                         </div>
                     </div>
 
+                    <div class="field-box row">
+                        <label class="col-md-2" for="form-enfant-file">Fichier joint</label>
+                        <div class="col-md-5">
+                            <input type="file" name="form_enfant_file" id="form-enfant-file">
+                        </div>
+                        <div class="col-md-5">
+                            <?php if(!empty($enfant->attached_file)): ?>
+                            <?php $file = media::get($enfant->attached_file); ?>
+                            <a href="<?php echo '/'.UPLOAD_FOLDER.$file->file_name; ?>">Télécharger le fichier</a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+
                     <div class="field-box actions">
                         <div class="col-md-6 col-md-offset-2">
                             <input type="submit" class="btn btn-primary" name="submit-update" value="Modifier la fiche">
