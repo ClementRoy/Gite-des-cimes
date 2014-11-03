@@ -72,11 +72,11 @@
         $attached_file = media::upload($_FILES['form_enfant_file']);
     }
 
-    if(check($form_enfant_naissance))
+    if(tool::check($form_enfant_naissance))
         $birthdate = tool::generateDatetime($form_enfant_naissance);
-    if(check($form_enfant_assurance_validite))
+    if(tool::check($form_enfant_assurance_validite))
         $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
-    if(check($form_enfant_cpam_validite))
+    if(tool::check($form_enfant_cpam_validite))
         $cpam_validite = tool::generateDatetime($form_enfant_cpam_validite);
 
     $datas = array(                
@@ -183,11 +183,11 @@ $result = enfant::update($datas, $_GET['id']);
         $attached_file = media::upload($_FILES['form_enfant_file']);
     }
 
-    if(check($form_enfant_naissance))
+    if(tool::check($form_enfant_naissance))
         $birthdate = tool::generateDatetime($form_enfant_naissance);
-    if(check($form_enfant_assurance_validite))
+    if(tool::check($form_enfant_assurance_validite))
         $assurance_validite = tool::generateDatetime($form_enfant_assurance_validite);
-    if(check($form_enfant_cpam_validite))
+    if(tool::check($form_enfant_cpam_validite))
         $cpam_validite = tool::generateDatetime($form_enfant_cpam_validite);
 
     $datas = array(                 
