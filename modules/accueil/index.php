@@ -14,8 +14,8 @@
   display: inline-block;
   width: 110px;
   height: 110px;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   text-align: center;
 }
 .chart canvas {
@@ -40,20 +40,7 @@
 
 
 
-    <script>
-    $(function() {
-        $('.chart').easyPieChart({
-            easing: 'easeOutBounce',
-            onStep: function(from, to, percent) {
-                $(this.el).find('.percent').text(Math.round(percent));
-            }
-        });
-        var chart = window.chart = $('.chart').data('easyPieChart');
-        // $('.js_update').on('click', function() {
-        //     chart.update(Math.random()*200-100);
-        // });
-    });
-    </script>
+
 
 
 <div class="title">
@@ -130,7 +117,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <h2 class="bloc-title">Prise en charge non reçues</h2>
         <div class="content content-table simple-table">
 
@@ -164,8 +151,40 @@
         </div>
 
     </div>
+
+    <div class="col-md-6">
+        <h2 class="bloc-title">Remplissage des séjours à venir</h2>
+
+        <?php $futurs_sejours = sejour::getListFuturSejour(); ?>
+        <?php // http://rendro.github.io/easy-pie-chart/ ?>
+        <?php foreach($futurs_sejours as $sejour): ?>
+            <?php $inscriptions = inscription::getBySejour($sejour->id); ?>
+
+            <?php if(count($inscriptions) > 0): ?>
+                <div>
+                
+                    <span class="chart" data-percent="<?=100*count($inscriptions)/$sejour->capacity_max ?>">
+                        <span class="percent"></span>
+                    </span>
+
+                    <a href="/sejours/infos/id/<?=$sejour->id ?>"><?=$sejour->name ?></a>
+                    <?php 
+                        $date_from = new DateTime($sejour->date_from);
+                        echo ' du '.strftime('%d %B %Y', $date_from->getTimestamp());
+
+                        $date_to = new DateTime($sejour->date_to);
+                            echo ' au '.strftime('%d %B %Y', $date_to->getTimestamp());
+                    ?>
+                    <?=' - '.$sejour->capacity_max.' / '.count($inscriptions) ?>
+
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>   
+     
+    </div>
 </div>
 
+<?php /*
     <div class="col-md-5">
         <p class="bloc-title">Prochains séjours</p>
         <div class="content">
@@ -191,8 +210,22 @@
 
         </div>
     </div>
-
-
+*/ ?>
+    <script>
+    $(function() {
+        $('.chart').easyPieChart({
+            easing: 'easeOutBounce',
+            onStep: function(from, to, percent) {
+                $(this.el).find('.percent').text(Math.round(percent));
+            }
+        });
+        // var chart = window.chart = $('.chart').data('easyPieChart');
+        // $('.js_update').on('click', function() {
+        //     chart.update(Math.random()*200-100);
+        // });
+    });
+    </script>
+    
         <script>
             $(function() {
                 setTimeout(function() {
