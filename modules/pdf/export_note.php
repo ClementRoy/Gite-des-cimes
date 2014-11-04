@@ -1,12 +1,16 @@
 <?php 
-if(isset($_GET['enfant'])){
+if(isset($_GET['enfant']) && isset($_GET['sejour'])){
 	$id = $_GET['enfant'];
+	$sejour = $_GET['sejour'];
 } else {
 	echo 'Erreur, pas d\'ID';
 }
-$enfant = enfant::get($id);
 
-ob_start(); 
+
+$enfant = enfant::get($_GET['enfant']);
+$sejour = sejour::get($_GET['sejour']);
+$note = note::get($_GET['enfant'], $_GET['sejour']);
+ob_start();
 
 ?>
 
@@ -62,18 +66,17 @@ ob_start();
 				</td>
 			</tr>
 
-            <?php foreach($notes as $key => $note): ?>
-                <?php $sejour = sejour::get($note->ref_sejour); ?>
+
                 <?php $note_creator = user::get($note->creator); ?>
                 <?php $note_editor = user::get($note->editor); ?>
                 <?php $note_date_created = new DateTime($note->created); ?>
                 <?php $note_date_edited = new DateTime($note->edited); ?>
-                         <?php $date_from = new DateTime($sejour->date_from); ?>
-                        <?php $date_to = new DateTime($sejour->date_to); ?>               
+
+				<?php $date_from = new DateTime($sejour->date_from); ?>
+				<?php $date_to = new DateTime($sejour->date_to); ?>               
                 <tr>
                     <td style="">
                        <h4>Séjour "<?=$sejour->name ?>" <em>du <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?></em></h4>
-
                     </td>
                 </tr>
                 <tr>
@@ -82,29 +85,10 @@ ob_start();
                     </td>
                 </tr>
                 <tr style="text-align:right;">
-                    <td>
+                    <td style="padding-top:10px;">
                         <em style="color:#858585;font-size:12px;">Par <?=$note_editor->firstname ?> <?=$note_editor->lastname ?> le <?=strftime('%d %B %Y', $note_date_edited->getTimestamp()); ?></em>
                     </td>
                 </tr>
-                <tr>
-                	<td style="color:#4a4a4a;padding-top:30px;padding-bottom:30px;">---------------------------------------------------------------------------------------------------------------------------</td>
-                </tr>
-            <?php endforeach; ?>
-
-
-			<tr>
-				<td>
-				</td>
-			</tr>
-			<tr>
-				<td>
-
-				</td>
-			</tr>
-			<tr>
-				<td>
-				</td>
-			</tr>
 		</table>
 	</page>
 
