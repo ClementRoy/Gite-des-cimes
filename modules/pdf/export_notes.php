@@ -5,7 +5,7 @@ if(isset($_GET['enfant'])){
 	echo 'Erreur, pas d\'ID';
 }
 $enfant = enfant::get($id);
-
+$notes = note::getByEnfant($id);
 ob_start(); 
 
 ?>
