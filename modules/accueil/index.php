@@ -78,8 +78,8 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <h2 class="bloc-title" style="margin-bottom:60px">Prise en charge non reçues</h2>
-        <div class="content content-table">
+        <h2 class="bloc-title">Prise en charge non reçues</h2>
+        <div class="content content-table simple-table">
 
             <table class="datatable" data-sort="1" data-length="10">
                 <thead>
@@ -112,11 +112,7 @@
 
     </div>
 
-<<<<<<< HEAD
     <div class="col-md-5">
-=======
-<!--     <div class="col-md-6">
->>>>>>> FETCH_HEAD
         <p class="bloc-title">Prochains séjours</p>
         <div class="content">
 

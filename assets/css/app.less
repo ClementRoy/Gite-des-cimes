@@ -65,6 +65,13 @@ h4, .h4 {
 	font-size: 30px;
 	margin-top: 20px;
 	margin-bottom: 10px;
+
+font-size: 20px;
+margin-top: 21px;
+font-weight: bold;
+/* text-transform: uppercase; */
+margin-bottom: 0;
+
 }
 h6, .h6 {
 	margin-bottom: 5px;
@@ -358,8 +365,8 @@ input[type="checkbox"][disabled] + strong {
 }
 
 .wrap {
-	
 	padding: 80px 50px 0px 112px;
+	padding: 80px 70px 30px 132px;
 	background: #ebedf3;
 	.progress-label {
 		position: relative;
@@ -556,11 +563,25 @@ input[type="checkbox"][disabled] + strong {
 		small {
 			font-size: 90%;
 		}
+		&.no-paginate {
+			.dataTables_info {
+				display: none;
+			}
+			tr:last-child td {
+				border-bottom: none;
+			}
+		}
+		&.simple-table {
+			.dataTables_filter,
+			.dataTables_length {
+				display: none;
+			}
+		}
 		&.content-table {
 			padding: 0;
 			background: #F2F3F6;
 			.col-md-12 {
-				padding-top: 49px;
+				// padding-top: 49px;
 				//background: #F2F3F6;
 				//box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 			}
@@ -583,7 +604,8 @@ input[type="checkbox"][disabled] + strong {
 	background: #f2f3f6;
 	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 	//overflow: hidden;
-	margin: -49px 0 0 0;
+	// margin: -49px 0 0 0;
+	margin: 0;
 	.label {
 		float: right;
 	}
@@ -1117,10 +1139,10 @@ table.datatable tr:hover a {
 
 
 
-
-.comment-popover {
+table.datatable tbody tr:hover .btn-inrow,
+.btn-inrow {
+	color: #333;
 	padding: 2px 6px;
-	float: right;
 }
 .popover {
 	position: absolute;

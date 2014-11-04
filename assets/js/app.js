@@ -124,140 +124,140 @@ $(function() {
 
     $('input[name="form_enfant_inscription"]').on('change', function() {
         $('[data-group]')
-            .hide()
-            .find('input[type="text"]').each(function() {
-                if ($(this).val() != '') {
-                    $(this).attr('data-original-value', $(this).val());
-                    $(this).attr('value', '');
-                }
-            });
+        .hide()
+        .find('input[type="text"]').each(function() {
+            if ($(this).val() != '') {
+                $(this).attr('data-original-value', $(this).val());
+                $(this).attr('value', '');
+            }
+        });
         $('[data-group="' + $(this).val() + '"]')
-            .fadeIn(300)
-            .find('input[type="text"]').each(function() {
-                $(this).val($(this).data('original-value'));
-            });
+        .fadeIn(300)
+        .find('input[type="text"]').each(function() {
+            $(this).val($(this).data('original-value'));
+        });
     });
 
     $('input[name="form_enfant_responsable"]').on('change', function() {
         $('[data-responsable]')
-            .hide()
-            .find('input[type="text"]').each(function() {
-                if ($(this).val() != '') {
-                    $(this).attr('data-original-value', $(this).val());
-                }
-            });
+        .hide()
+        .find('input[type="text"]').each(function() {
+            if ($(this).val() != '') {
+                $(this).attr('data-original-value', $(this).val());
+            }
+        });
         if ($(this).val() === 'tuteur') {
             $('[data-responsable="' + $(this).val() + '"]')
-                .fadeIn(300)
-                .find('input[type="text"]').each(function() {
-                    $(this).val($(this).data('original-value'));
-                });
+            .fadeIn(300)
+            .find('input[type="text"]').each(function() {
+                $(this).val($(this).data('original-value'));
+            });
             $('[data-responsable="adresse"]')
-                .fadeIn(300)
-                .find('input[type="text"]').each(function() {
-                    $(this).val($(this).data('original-value'));
-                });
+            .fadeIn(300)
+            .find('input[type="text"]').each(function() {
+                $(this).val($(this).data('original-value'));
+            });
         } else if ($(this).val() === 'parents') {
             $('[data-responsable="parents"]').show();
             $('[data-responsable="parents"] [data-responsable]')
-                .fadeIn(300)
-                .find('input[type="text"]').each(function() {
-                    $(this).val($(this).data('original-value'));
-                });
+            .fadeIn(300)
+            .find('input[type="text"]').each(function() {
+                $(this).val($(this).data('original-value'));
+            });
             $('[data-responsable="adresse"]')
-                .fadeIn(300)
-                .find('input[type="text"]').each(function() {
-                    $(this).val($(this).data('original-value'));
-                });
+            .fadeIn(300)
+            .find('input[type="text"]').each(function() {
+                $(this).val($(this).data('original-value'));
+            });
         } else if ($(this).val() === 'pere') {
             $('[data-responsable="parents"]').show();
             $('[data-responsable="pere"]')
-                .fadeIn(300)
-                .find('input[type="text"]').each(function() {
-                    $(this).val($(this).data('original-value'));
-                });
+            .fadeIn(300)
+            .find('input[type="text"]').each(function() {
+                $(this).val($(this).data('original-value'));
+            });
             $('[data-responsable="adresse"]')
-                .fadeIn(300)
-                .find('input[type="text"]').each(function() {
-                    $(this).val($(this).data('original-value'));
-                });
+            .fadeIn(300)
+            .find('input[type="text"]').each(function() {
+                $(this).val($(this).data('original-value'));
+            });
         } else if ($(this).val() === 'mere') {
             $('[data-responsable="parents"]').show();
             $('[data-responsable="mere"]')
-                .fadeIn(300)
-                .find('input[type="text"]').each(function() {
-                    $(this).val($(this).data('original-value'));
-                });
+            .fadeIn(300)
+            .find('input[type="text"]').each(function() {
+                $(this).val($(this).data('original-value'));
+            });
             $('[data-responsable="adresse"]')
-                .fadeIn(300)
-                .find('input[type="text"]').each(function() {
-                    $(this).val($(this).data('original-value'));
-                });
+            .fadeIn(300)
+            .find('input[type="text"]').each(function() {
+                $(this).val($(this).data('original-value'));
+            });
         }
     });
 
-    $('input[name="form_enfant_domiciliation"]').on('change', function() {
-        if ($(this).val() != 'famille') {
-            $('[data-domiciliation="famille"]')
-                .hide()
-                .find('input[type="text"]').each(function() {
-                    if ($(this).val() != '') {
-                        $(this).attr('data-original-value', $(this).val());
-                        $(this).attr('value', '');
-                    }
-                });
-        } else {
-            $('[data-domiciliation="famille"]')
-                .fadeIn(300)
-                .find('input[type="text"]').each(function() {
-                    $(this).val($(this).data('original-value'));
-                });
-        }
-    });
+$('input[name="form_enfant_domiciliation"]').on('change', function() {
+    if ($(this).val() != 'famille') {
+        $('[data-domiciliation="famille"]')
+        .hide()
+        .find('input[type="text"]').each(function() {
+            if ($(this).val() != '') {
+                $(this).attr('data-original-value', $(this).val());
+                $(this).attr('value', '');
+            }
+        });
+    } else {
+        $('[data-domiciliation="famille"]')
+        .fadeIn(300)
+        .find('input[type="text"]').each(function() {
+            $(this).val($(this).data('original-value'));
+        });
+    }
+});
 
-    $('input[name="form_enfant_assurance"]').on('change', function() {
-        if ($(this).val() != 1) {
-            $('[data-assurance="oui"]')
-                .hide()
-                .find('input[type="text"]').each(function() {
-                    if ($(this).val() != '') {
-                        $(this).attr('data-original-value', $(this).val());
-                        $(this).attr('value', '');
-                    }
-                });
-        } else {
-            $('[data-assurance="oui"]')
-                .fadeIn(300)
-                .find('input[type="text"]').each(function() {
-                    $(this).val($(this).data('original-value'));
-                });
-        }
-    });
+$('input[name="form_enfant_assurance"]').on('change', function() {
+    if ($(this).val() != 1) {
+        $('[data-assurance="oui"]')
+        .hide()
+        .find('input[type="text"]').each(function() {
+            if ($(this).val() != '') {
+                $(this).attr('data-original-value', $(this).val());
+                $(this).attr('value', '');
+            }
+        });
+    } else {
+        $('[data-assurance="oui"]')
+        .fadeIn(300)
+        .find('input[type="text"]').each(function() {
+            $(this).val($(this).data('original-value'));
+        });
+    }
+});
 
-    $('input[name="form_enfant_attestation_cpam"]').on('change', function() {
-        if ($(this).val() != 1) {
-            $('[data-cpam="oui"]')
-                .hide()
-                .find('input[type="text"]').each(function() {
-                    if ($(this).val() != '') {
-                        $(this).attr('data-original-value', $(this).val());
-                        $(this).attr('value', '');
-                    }
-                });
-        } else {
-            $('[data-cpam="oui"]')
-                .fadeIn(300)
-                .find('input[type="text"]').each(function() {
-                    $(this).val($(this).data('original-value'));
-                });
-        }
-    });
-    $('#form-add-children').find('input[type="text"]').on('keypress', function() {
-        $(this).attr('data-original-value', $(this).val());
-    });
-    $('#form-edit-children').find('input[type="text"]').on('keypress', function() {
-        $(this).attr('data-original-value', $(this).val());
-    });
+$('input[name="form_enfant_attestation_cpam"]').on('change', function() {
+    if ($(this).val() != 1) {
+        $('[data-cpam="oui"]')
+        .hide()
+        .find('input[type="text"]').each(function() {
+            if ($(this).val() != '') {
+                $(this).attr('data-original-value', $(this).val());
+                $(this).attr('value', '');
+            }
+        });
+    } else {
+        $('[data-cpam="oui"]')
+        .fadeIn(300)
+        .find('input[type="text"]').each(function() {
+            $(this).val($(this).data('original-value'));
+        });
+    }
+});
+$('#form-add-children').find('input[type="text"]').on('keypress', function() {
+    $(this).attr('data-original-value', $(this).val());
+});
+$('#form-edit-children').find('input[type="text"]').on('keypress', function() {
+    $(this).attr('data-original-value', $(this).val());
+});
 
 
     // SORT FOR TABLE
@@ -289,30 +289,30 @@ $(function() {
     // });
 
 
-    $('#sidebar-nav .dropdown-toggle').click(function(e) {
-        e.preventDefault();
-        var $item = $(this).parent();
+$('#sidebar-nav .dropdown-toggle').click(function(e) {
+    e.preventDefault();
+    var $item = $(this).parent();
 
 
-        if ($item.hasClass('open')) {
-            $item.find(".submenu").slideUp("fast");
-            $item.removeClass("open");
+    if ($item.hasClass('open')) {
+        $item.find(".submenu").slideUp("fast");
+        $item.removeClass("open");
 
-        } else {
-            $item.addClass("open");
-            $item.find(".submenu").slideDown("fast");
-        }
-        $item.siblings().removeClass('open').find(".submenu").slideUp("fast");
-    });
+    } else {
+        $item.addClass("open");
+        $item.find(".submenu").slideDown("fast");
+    }
+    $item.siblings().removeClass('open').find(".submenu").slideUp("fast");
+});
 
     // $('#sidebar-nav').on('hover', function () {
     // 	$(this).find('li.active .submenu').slideDown("fast");
     // });
 
-    $('#sidebar-nav').on('mouseleave', function() {
-        $(this).find('li.open .submenu').slideUp("fast");
-        $(this).find('li.open').removeClass('open');
-    });
+$('#sidebar-nav').on('mouseleave', function() {
+    $(this).find('li.open .submenu').slideUp("fast");
+    $(this).find('li.open').removeClass('open');
+});
 
     // mobile side-menu slide toggler
     var $menu = $("#sidebar-nav");
@@ -410,42 +410,76 @@ $(function() {
         } else {
             var col_sort = '0';
         }
-
-        $(this).dataTable({
-            "aaSorting": [
+        if(typeof the_datas != 'undefined') {
+            $(this).dataTable({
+                "aaSorting": [
                 [col_sort, 'asc']
-            ],
-            "sPaginationType": "full_numbers",
-            "iDisplayLength": ($(this).data('length') != undefined)? $(this).data('length'): 100,
-            "bPaginate": ($(this).data('paginate') != undefined)? $(this).data('paginate'): true,
-            "oLanguage": {
-                "sProcessing": "Traitement en cours...",
-                "sSearch": "Rechercher&nbsp;:",
-                "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
-                "sInfo": "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                "sInfoEmpty": "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-                "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                "sInfoPostFix": "",
-                "sLoadingRecords": "Chargement en cours...",
-                "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                "sEmptyTable": "Aucune donnée disponible dans le tableau",
-                "oPaginate": {
-                    "sFirst": "Premier",
-                    "sPrevious": "Pr&eacute;c&eacute;dent",
-                    "sNext": "Suivant",
-                    "sLast": "Dernier"
+                ],
+                "sPaginationType": "full_numbers",
+                "iDisplayLength": ($(this).data('length') != undefined)? $(this).data('length'): 100,
+                "bPaginate": ($(this).data('paginate') != undefined)? $(this).data('paginate'): true,
+                "oLanguage": {
+                    "sProcessing": "Traitement en cours...",
+                    "sSearch": "Rechercher&nbsp;:",
+                    "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+                    "sInfo": "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    "sInfoEmpty": "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    "sInfoPostFix": "",
+                    "sLoadingRecords": "Chargement en cours...",
+                    "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    "sEmptyTable": "Aucune donnée disponible dans le tableau",
+                    "oPaginate": {
+                        "sFirst": "Premier",
+                        "sPrevious": "Pr&eacute;c&eacute;dent",
+                        "sNext": "Suivant",
+                        "sLast": "Dernier"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                        "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+                    }
                 },
-                "oAria": {
-                    "sSortAscending": ": activer pour trier la colonne par ordre croissant",
-                    "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
-                }
-            },
-            "bProcessing": true,
-            "bDeferRender": true,
-            "aaData": (typeof the_datas != undefined)? the_datas[index]:''
-        });
+                "bProcessing": true,
+                "bDeferRender": true,
+                "aaData":  the_datas[index]
+            });
+        } else {
+            $(this).dataTable({
+                "aaSorting": [
+                [col_sort, 'asc']
+                ],
+                "sPaginationType": "full_numbers",
+                "iDisplayLength": ($(this).data('length') != undefined)? $(this).data('length'): 100,
+                "bPaginate": ($(this).data('paginate') != undefined)? $(this).data('paginate'): true,
+                "oLanguage": {
+                    "sProcessing": "Traitement en cours...",
+                    "sSearch": "Rechercher&nbsp;:",
+                    "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+                    "sInfo": "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    "sInfoEmpty": "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    "sInfoPostFix": "",
+                    "sLoadingRecords": "Chargement en cours...",
+                    "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    "sEmptyTable": "Aucune donnée disponible dans le tableau",
+                    "oPaginate": {
+                        "sFirst": "Premier",
+                        "sPrevious": "Pr&eacute;c&eacute;dent",
+                        "sNext": "Suivant",
+                        "sLast": "Dernier"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                        "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+                    }
+                },
+                "bProcessing": true,
+                "bDeferRender": true,
+            });
+        }
 
-    });
+        });
 
 
 });
