@@ -3,6 +3,59 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
+<script type="text/javascript" src="/assets/js/jquery.easypiechart.min.js"></script>
+
+<!-- <link rel="stylesheet"type="text/css" href="/assets/css/jquery.easy-pie-chart.css">
+ -->
+
+<style>
+.chart {
+  position: relative;
+  display: inline-block;
+  width: 110px;
+  height: 110px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+.chart canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.percent {
+  display: inline-block;
+  line-height: 110px;
+  z-index: 2;
+}
+.percent:after {
+  content: '%';
+  margin-left: 0.1em;
+  font-size: .8em;
+}
+</style>
+
+
+
+
+
+
+    <script>
+    $(function() {
+        $('.chart').easyPieChart({
+            easing: 'easeOutBounce',
+            onStep: function(from, to, percent) {
+                $(this.el).find('.percent').text(Math.round(percent));
+            }
+        });
+        var chart = window.chart = $('.chart').data('easyPieChart');
+        // $('.js_update').on('click', function() {
+        //     chart.update(Math.random()*200-100);
+        // });
+    });
+    </script>
+
+
 <div class="title">
     <div class="row header">
         <div class="col-md-12">
@@ -77,7 +130,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <h2 class="bloc-title" style="margin-bottom:60px">Prise en charge non reçues</h2>
         <div class="content content-table">
 
@@ -111,10 +164,8 @@
         </div>
 
     </div>
+</div>
 
-<<<<<<< HEAD
-    <div class="col-md-5">
-=======
 <!--     <div class="col-md-6">
 >>>>>>> FETCH_HEAD
         <p class="bloc-title">Prochains séjours</p>
@@ -141,75 +192,8 @@
 
         </div>
     </div> -->
-<!--
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4>Enfants récemment ajoutés</h4>
-                      <?php $enfants = enfant::getList('5','0'); ?>
-                      <table id="table-enfant" class="table tablesorter table-hover extendlink">
-                            <thead>
-                                <tr>
-                                    <th class="sortable">Prénom</th>
-                                    <th class="sortable"><span class="line"></span>Nom</th>
-                                    <th class="sortable"><span class="line"></span>Sexe</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach($enfants as $key => $enfant): ?>
-                            <tr <?php if($key == 0): ?>class="first"<?php endif; ?>>
-                                <td>
-                                    <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname; ?></a>
-                                </td>
-                                <td>
-                                    <a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->lastname; ?></a>
-                                </td>
-                                <td>
-                                    <i class="icon-male"></i> Homme
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>                           
-                            </tbody>
-                        </table>                        
-                    </div>
-                    <div class="col-md-6">
-                        <h4>Séjours en cours</h4>
-                      <?php $sejours = sejour::getList('5','0'); ?>
-                      <table id="table-enfant" class="table tablesorter table-hover extendlink">
-                            <thead>
-                                <tr>
-                                    <th class="sortable">Numéro</th>
-                                    <th class="sortable"><span class="line"></span>Nom</th>
-                                    <th class="sortable"><span class="line"></span>Date de début</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach($sejours as $key => $sejour): ?>
-                            <tr <?php if($key == 0): ?>class="first"<?php endif; ?>>
-                                <td>
-                                    <a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->numero; ?></a>
-                                </td>
-                                <td>
-                                    <a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a>
-                                </td>
-                                <td>
-                                    <?=$sejour->date_from ?>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        
-                            </tbody>
-                        </table> 
-                    </div>
-                </div>
-            
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4>Rappels</h4>
-                    </div>                  
-                </div>
-            -->
-        </div>
+
         <script>
             $(function() {
                 setTimeout(function() {
