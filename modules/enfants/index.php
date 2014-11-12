@@ -112,10 +112,13 @@ foreach($enfants as $key => $enfant) {
 array_push($the_json, $the_datas);
 ?>
 
+
+
 <script>
     var the_datas = [];
     <?php foreach ($the_json as $key => $value): ?>
     the_datas.push(<?=json_encode($the_json[$key]);?>);
+
     <?php endforeach; ?>
 </script>
 

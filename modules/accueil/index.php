@@ -175,7 +175,7 @@
                         $date_to = new DateTime($sejour->date_to);
                             echo ' au '.strftime('%d %B %Y', $date_to->getTimestamp());
                     ?>
-                    <?=' - '.$sejour->capacity_max.' / '.count($inscriptions) ?>
+                    <?=' - <strong>'.count($inscriptions).' / '.$sejour->capacity_max.'</strong>' ?>
 
                 </div>
             <?php endif; ?>
@@ -225,7 +225,7 @@
         // });
     });
     </script>
-    
+
         <script>
             $(function() {
                 setTimeout(function() {
