@@ -173,14 +173,15 @@ input[type="checkbox"][disabled] + strong {
 		}
 	}
 }
-
 .carousel-fade {
 	.carousel-inner {
 		.item {
 			opacity: 0;
 			transition: opacity 1s ease;
 		}
-
+		& > .item > img {
+			min-width: 100%;
+		}
 		.active {
 			opacity: 1;
 		}
@@ -864,8 +865,8 @@ table.dataTable {
 .form-nav.affix {
 	top: 0;
 
-	padding-top: 30px;
-	right: 81px;
+	padding-top: 20px;
+	right: 101px;
 }
 
 

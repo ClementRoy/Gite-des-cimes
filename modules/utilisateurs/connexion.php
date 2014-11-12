@@ -12,7 +12,6 @@
 
     <!-- global styles -->
     <link rel="stylesheet" type="text/css" href="/assets/css/animate.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/app.css">
 
     <!-- libraries -->
     <link rel="stylesheet" type="text/css" href="/assets/css/lib/font-awesome.css">
@@ -23,6 +22,7 @@
     <!-- lato font -->
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
 
+    <link href="/assets/dist/css/s.css" rel="stylesheet" />
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
       <![endif]-->
