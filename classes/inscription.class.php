@@ -155,6 +155,16 @@ class inscription
         return $result;
     }
 
+    public static function getDatesDeparture($dossier_id){
+        global $db;
+        $params = array(
+                        ':id' => $dossier_id
+                        );
+        $sql = 'SELECT date_from FROM '.self::$table.' WHERE ref_dossier = :id  ORDER by date_to ASC';
+        $result = $db->query($sql, $params);
+        return $result;
+    }
+
     public static function getDateReturn($dossier_id){
         global $db;
         $params = array(
@@ -162,6 +172,16 @@ class inscription
                         );
         $sql = 'SELECT MAX(date_to) as date_return FROM '.self::$table.' WHERE ref_dossier = :id';
         $result = $db->row($sql, $params);
+        return $result;
+    }
+
+    public static function getDatesReturn($dossier_id){
+        global $db;
+        $params = array(
+                        ':id' => $dossier_id
+                        );
+        $sql = 'SELECT date_to FROM '.self::$table.' WHERE ref_dossier = :id ORDER by date_to ASC' ;
+        $result = $db->query($sql, $params);
         return $result;
     }
 

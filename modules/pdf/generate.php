@@ -696,18 +696,31 @@ ob_start(); ?>
 
 				</p>
 					
-						<?php $date_depart = inscription::getDateDeparture($id); ?>
-						<?php $date_depart = new DateTime($date_depart->date_departure); ?>
-						<?php if($date_depart->getTimestamp() != '-62169987600'): ?>
-							<?php $date_depart = strftime('%d/%m/%Y', $date_depart->getTimestamp()); ?>
+						<p>
+						<?php if($sejours_temp[0][1] == 'Séjours courts'): ?>
+							<?php $dates_depart = inscription::getDatesDeparture($id); ?>
+							<strong>Dates de départ :</strong> les
+							<?php foreach($dates_depart as $key => $date_depart): ?>
+								<?php $date_depart = new DateTime($date_depart->date_from); ?>
+									 <?=strftime('%d/%m/%Y', $date_depart->getTimestamp()); ?>
+									 <?php if($key < count($dates_depart)-1): ?>
+									 <?=($key < count($dates_depart)-2 )?',':'et'; ?>
+									<?php endif; ?>
+							<?php endforeach; ?>
+							<br>
+						<?php else: ?>
+							<?php $date_depart = inscription::getDateDeparture($id); ?>
+							<?php $date_depart = new DateTime($date_depart->date_departure); ?>
+							<?php if($date_depart->getTimestamp() != '-62169987600'): ?>
+								<?php $date_depart = strftime('%d/%m/%Y', $date_depart->getTimestamp()); ?>
+							<?php endif; ?>
+							<strong>Date de départ :</strong> <?=$date_depart; ?><br>
 						<?php endif; ?>
-
-						<p style="margin-bottom: 0;"><strong>Est attendu par notre équipe d’animation : </strong></p>
-						<p><strong>Date de départ :</strong> <?=$date_depart; ?><br>
 						Lieu : <?=$dossier->place; ?><br>
 						Heure : <?=$dossier->hour_departure; ?>
-					</p>
+						</p>
 
+					<?php if ($dossier->pique_nique || $dossier->sac): ?>
 					<p>
 						<strong>Petit rappel : </strong><br>
 						<?php if ($dossier->pique_nique): ?>
@@ -717,17 +730,36 @@ ob_start(); ?>
 							•&nbsp;&nbsp;Amener un sac de couchage.
 						<?php endif ?>
 					</p>
-					<p>
-						<?php $date_retour = inscription::getDateReturn($id); ?>
-						<?php $date_retour = new DateTime($date_retour->date_return); ?>
-						<?php if($date_retour->getTimestamp() != '-62169987600'): ?>
-						<?php $date_retour = strftime('%d/%m/%Y', $date_retour->getTimestamp()); ?>
+					<?php endif ?>
+
+						<p>
+						<?php if($sejours_temp[0][1] == 'Séjours courts'): ?>
+							<?php $dates_retour = inscription::getDatesReturn($id); ?>
+
+							<strong>Dates de retour :</strong> les
+							<?php foreach($dates_retour as $key => $date_retour): ?>
+								<?php $date_retour = new DateTime($date_retour->date_to); ?>
+									 <?=strftime('%d/%m/%Y', $date_retour->getTimestamp()); ?>
+									 <?php if($key < count($dates_retour)-1): ?>
+									 	<?=($key < count($dates_retour)-2 )?',':'et'; ?>
+									<?php endif; ?>
+							<?php endforeach; ?>
+							<br>
+						<?php else: ?>
+							<?php $date_retour = inscription::getDateReturn($id); ?>
+							<?php $date_retour = new DateTime($date_retour->date_return); ?>
+							<?php if($date_retour->getTimestamp() != '-62169987600'): ?>
+							<?php $date_retour = strftime('%d/%m/%Y', $date_retour->getTimestamp()); ?>
+							<?php endif; ?>
+							
+							<strong>Date de retour :</strong> <?=$date_retour; ?><br>
 						<?php endif; ?>
-						
-						<strong>Date de retour :</strong> <?=$date_retour; ?><br>
 						Lieu : <?=$dossier->place; ?><br>
 						Heure : <?=$dossier->hour_return; ?>
-					</p>
+						</p>
+
+
+
 					<hr>
 					<p style="margin-top:30px;margin-bottom:0;font-size:15px;">
 						Nous restons à votre disposition pour tous renseignements complémentaires au 03 44 88 51 13.<br></p>
