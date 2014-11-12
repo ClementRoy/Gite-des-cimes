@@ -699,7 +699,7 @@ ob_start(); ?>
 						<p>
 						<?php if($sejours_temp[0][1] == 'Séjours courts'): ?>
 							<?php $dates_depart = inscription::getDatesDeparture($id); ?>
-							<strong>Dates de départ :</strong> les
+							<strong>Dates de départ :</strong> les vendredis
 							<?php foreach($dates_depart as $key => $date_depart): ?>
 								<?php $date_depart = new DateTime($date_depart->date_from); ?>
 									 <?=strftime('%d/%m/%Y', $date_depart->getTimestamp()); ?>
@@ -736,7 +736,7 @@ ob_start(); ?>
 						<?php if($sejours_temp[0][1] == 'Séjours courts'): ?>
 							<?php $dates_retour = inscription::getDatesReturn($id); ?>
 
-							<strong>Dates de retour :</strong> les
+							<strong>Dates de retour :</strong> les dimanches
 							<?php foreach($dates_retour as $key => $date_retour): ?>
 								<?php $date_retour = new DateTime($date_retour->date_to); ?>
 									 <?=strftime('%d/%m/%Y', $date_retour->getTimestamp()); ?>
