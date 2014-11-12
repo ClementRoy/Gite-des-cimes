@@ -33,13 +33,14 @@ $(function() {
     });
     $('#form-nav').on('click', 'a', function(event) {
         event.preventDefault();
-        console.log($(this).attr('href'));
 
         var the_id = $(this).attr("href");
 
-        $('html, body').animate({
-            scrollTop: $(the_id).offset().top - 60
+        $("html, body").stop().animate({
+            scrollTop: $(the_id).offset().top - 200
         }, 'slow');
+
+        $(the_id).focus();
         return false;
 
     });
