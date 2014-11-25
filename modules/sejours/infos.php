@@ -54,10 +54,14 @@
 
 <?php endif; ?>
 <?php if(isset($_POST['submit-add'])): ?>
+   
     <?php  
     extract($_POST);
     $form_sejour_date_debut = tool::generateDatetime($form_sejour_date_debut);
     $form_sejour_date_fin = tool::generateDatetime($form_sejour_date_fin);
+
+    $hours_departure = serialize(array( 'hours' => $form_sejour_heure_aller, 'min' => $form_sejour_min_aller));
+    $hours_return = serialize(array( 'hours' => $form_sejour_heure_retour, 'min' => $form_sejour_min_retour));
 
     $datas = array(
         ':name' => $form_sejour_name,
@@ -67,17 +71,21 @@
         ':capacity_max' => $form_sejour_capacite_max,
         ':capacity_min' => $form_sejour_capacite_min,
         ':numero' => $form_sejour_numero,
-        ':price' => $form_sejour_prix
-        );
+        ':price' => $form_sejour_prix,
+        ':hours_departure' => $hours_departure,
+        ':hours_return' => $hours_return,
+    );
 
     $result = sejour::update($datas, $_GET['id']);
 
+    if(isset($form_sejour_accompagnateur)){
     $datas_accompagnateur = array(
         ':ref_sejour' => $_GET['id'],
         ':ref_accompagnateur' => $form_sejour_accompagnateur
         );
 
     $result = accompagnateur::addToSejour($datas_accompagnateur);
+    }
 
     ?>
 
@@ -143,7 +151,9 @@
         ':capacity_max' => $form_sejour_capacite_max,
         ':capacity_min' => $form_sejour_capacite_min,
         ':numero' => $form_sejour_numero,
-        ':price' => $form_sejour_prix
+        ':price' => $form_sejour_prix,
+        ':hours_departure' => '',
+        ':hours_return' => '',
         );
 
     $result = sejour::update($datas, $_GET['id']);

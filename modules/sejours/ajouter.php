@@ -39,6 +39,7 @@
                 </div>
             </div>
 
+
             <div class="field-box row">
                 <label class="col-md-2" for="form-enfant-structure-select">Hébergement</label>
                 <div class="col-md-4 col-sm-5" data-toggle="tooltip" title="Sélectionnez l'hébergement qui accueillera le séjour.">
@@ -102,6 +103,78 @@
     
             </div>
 
+
+
+            <div class="field-box row">
+                <p>Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle : </p>
+                    <label class="col-md-2" for="form-inscription-heure-aller">Heure de rendez-vous</label>
+                    <div class="col-md-1 col-sm-5">
+                        <input id="form-inscription-heure-aller" name="form_sejour_heure_aller['Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle']" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
+                        <p class="input-suffix">h</p>
+                    </div>
+                    <div class="col-md-1 col-sm-5">
+                        <input id="form-inscription-min-aller" name="form_sejour_min_aller['Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle']" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
+                    </div>
+            </div>
+
+            <div class="field-box row">
+                <label class="col-md-2" for="form-inscription-heure-retour">Heure de rendez-vous pour le retour</label>
+                <div class="col-md-1 col-sm-5">
+                    <input id="form-inscription-heure-retour" name="form_sejour_heure_retour['Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle']" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                    <p class="input-suffix">h</p>
+                </div>
+                <div class="col-md-1 col-sm-5">
+                    <input id="form-inscription-min-retour" name="form_sejour_min_retour['Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle']" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                </div>
+            </div>
+
+            <div class="field-box row">
+                <p>Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle : </p>
+                    <label class="col-md-2" for="form-inscription-heure-aller">Heure de rendez-vous</label>
+                    <div class="col-md-1 col-sm-5">
+                        <input id="form-inscription-heure-aller" name="form_sejour_heure_aller['Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle']" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
+                        <p class="input-suffix">h</p>
+                    </div>
+                    <div class="col-md-1 col-sm-5">
+                        <input id="form-inscription-min-aller" name="form_sejour_min_aller['Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle']" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
+                    </div>
+            </div>
+
+            <div class="field-box row">
+                <label class="col-md-2" for="form-inscription-heure-retour">Heure de rendez-vous pour le retour</label>
+                <div class="col-md-1 col-sm-5">
+                    <input id="form-inscription-heure-retour" name="form_sejour_heure_retour['Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle']" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                    <p class="input-suffix">h</p>
+                </div>
+                <div class="col-md-1 col-sm-5">
+                    <input id="form-inscription-min-retour" name="form_sejour_min_retour['Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle']" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                </div>
+            </div>
+
+            <div class="field-box row">
+                <p>Bonneuil en Valois, au Gite : </p>
+                    <label class="col-md-2" for="form-inscription-heure-aller">Heure de rendez-vous</label>
+                    <div class="col-md-1 col-sm-5">
+                        <input id="form-inscription-heure-aller" name="form_sejour_heure_aller['Bonneuil en Valois, au Gite']" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
+                        <p class="input-suffix">h</p>
+                    </div>
+                    <div class="col-md-1 col-sm-5">
+                        <input id="form-inscription-min-aller" name="form_sejour_min_aller['Bonneuil en Valois, au Gite']" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
+                    </div>
+            </div>
+
+            <div class="field-box row">
+                <label class="col-md-2" for="form-inscription-heure-retour">Heure de rendez-vous pour le retour</label>
+                <div class="col-md-1 col-sm-5">
+                    <input id="form-inscription-heure-retour" name="form_sejour_heure_retour['Bonneuil en Valois, au Gite']" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                    <p class="input-suffix">h</p>
+                </div>
+                <div class="col-md-1 col-sm-5">
+                    <input id="form-inscription-min-retour" name="form_sejour_min_retour['Bonneuil en Valois, au Gite']" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                </div>
+            </div>
+
+            
             <?php html::submit('submit-add', "Ajouter le séjour") ?>
 
 
