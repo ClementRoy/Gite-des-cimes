@@ -103,28 +103,37 @@
     
             </div>
 
+        <?php $hours_departure =  unserialize($sejour->hours_departure); ?>
+        <?php $hours_return =  unserialize($sejour->hours_return); ?>
+       
+        
+        <?php $hour_departure = $hours_departure['hours']; ?>
+        <?php $min_departure = $hours_departure['min']; ?>
+        <?php $hour_return = $hours_return['hours']; ?>
+        <?php $min_return = $hours_return['min']; ?>
 
+    
 
             <div class="field-box row">
                 <p>Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle : </p>
                     <label class="col-md-2" for="form-inscription-heure-aller">Heure de rendez-vous</label>
                     <div class="col-md-1 col-sm-5">
-                        <input id="form-inscription-heure-aller" name="form_sejour_heure_aller['Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle']" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
+                        <input id="form-inscription-heure-aller" name="form_sejour_heure_aller[0]" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
                         <p class="input-suffix">h</p>
                     </div>
                     <div class="col-md-1 col-sm-5">
-                        <input id="form-inscription-min-aller" name="form_sejour_min_aller['Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle']" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
+                        <input id="form-inscription-min-aller" name="form_sejour_min_aller[0]" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
                     </div>
             </div>
 
             <div class="field-box row">
                 <label class="col-md-2" for="form-inscription-heure-retour">Heure de rendez-vous pour le retour</label>
                 <div class="col-md-1 col-sm-5">
-                    <input id="form-inscription-heure-retour" name="form_sejour_heure_retour['Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle']" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                    <input id="form-inscription-heure-retour" name="form_sejour_heure_retour[0]" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
                     <p class="input-suffix">h</p>
                 </div>
                 <div class="col-md-1 col-sm-5">
-                    <input id="form-inscription-min-retour" name="form_sejour_min_retour['Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle']" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                    <input id="form-inscription-min-retour" name="form_sejour_min_retour[0]" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
                 </div>
             </div>
 
@@ -132,22 +141,22 @@
                 <p>Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle : </p>
                     <label class="col-md-2" for="form-inscription-heure-aller">Heure de rendez-vous</label>
                     <div class="col-md-1 col-sm-5">
-                        <input id="form-inscription-heure-aller" name="form_sejour_heure_aller['Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle']" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
+                        <input id="form-inscription-heure-aller" name="form_sejour_heure_aller[1]" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
                         <p class="input-suffix">h</p>
                     </div>
                     <div class="col-md-1 col-sm-5">
-                        <input id="form-inscription-min-aller" name="form_sejour_min_aller['Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle']" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
+                        <input id="form-inscription-min-aller" name="form_sejour_min_aller[1]" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
                     </div>
             </div>
 
             <div class="field-box row">
                 <label class="col-md-2" for="form-inscription-heure-retour">Heure de rendez-vous pour le retour</label>
                 <div class="col-md-1 col-sm-5">
-                    <input id="form-inscription-heure-retour" name="form_sejour_heure_retour['Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle']" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                    <input id="form-inscription-heure-retour" name="form_sejour_heure_retour[1]" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
                     <p class="input-suffix">h</p>
                 </div>
                 <div class="col-md-1 col-sm-5">
-                    <input id="form-inscription-min-retour" name="form_sejour_min_retour['Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle']" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                    <input id="form-inscription-min-retour" name="form_sejour_min_retour[1]" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
                 </div>
             </div>
 
@@ -155,22 +164,22 @@
                 <p>Bonneuil en Valois, au Gite : </p>
                     <label class="col-md-2" for="form-inscription-heure-aller">Heure de rendez-vous</label>
                     <div class="col-md-1 col-sm-5">
-                        <input id="form-inscription-heure-aller" name="form_sejour_heure_aller['Bonneuil en Valois, au Gite']" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
+                        <input id="form-inscription-heure-aller" name="form_sejour_heure_aller[2]" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
                         <p class="input-suffix">h</p>
                     </div>
                     <div class="col-md-1 col-sm-5">
-                        <input id="form-inscription-min-aller" name="form_sejour_min_aller['Bonneuil en Valois, au Gite']" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
+                        <input id="form-inscription-min-aller" name="form_sejour_min_aller[2]" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
                     </div>
             </div>
 
             <div class="field-box row">
                 <label class="col-md-2" for="form-inscription-heure-retour">Heure de rendez-vous pour le retour</label>
                 <div class="col-md-1 col-sm-5">
-                    <input id="form-inscription-heure-retour" name="form_sejour_heure_retour['Bonneuil en Valois, au Gite']" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                    <input id="form-inscription-heure-retour" name="form_sejour_heure_retour[2]" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
                     <p class="input-suffix">h</p>
                 </div>
                 <div class="col-md-1 col-sm-5">
-                    <input id="form-inscription-min-retour" name="form_sejour_min_retour['Bonneuil en Valois, au Gite']" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                    <input id="form-inscription-min-retour" name="form_sejour_min_retour[2]" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
                 </div>
             </div>
 

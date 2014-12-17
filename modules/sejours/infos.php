@@ -143,6 +143,9 @@
     $form_sejour_date_debut = tool::generateDatetime($form_sejour_date_debut);
     $form_sejour_date_fin = tool::generateDatetime($form_sejour_date_fin);
 
+    $hours_departure = serialize(array( 'hours' => $form_sejour_heure_aller, 'min' => $form_sejour_min_aller));
+    $hours_return = serialize(array( 'hours' => $form_sejour_heure_retour, 'min' => $form_sejour_min_retour));
+    
     $datas = array(
         ':name' => $form_sejour_name,
         ':date_from' => $form_sejour_date_debut,
@@ -152,8 +155,8 @@
         ':capacity_min' => $form_sejour_capacite_min,
         ':numero' => $form_sejour_numero,
         ':price' => $form_sejour_prix,
-        ':hours_departure' => '',
-        ':hours_return' => '',
+        ':hours_departure' => $hours_departure,
+        ':hours_return' => $hours_return,
         );
 
     $result = sejour::update($datas, $_GET['id']);
@@ -729,6 +732,34 @@ if($sejour->ref_hebergement && $sejour->ref_hebergement != 0) {
             <?php if(!empty($accompagnateur->email)): ?><li><strong>Email : </strong><a href="mailto:<?=$accompagnateur->email ?>"><?=$accompagnateur->email ?></a></li><?php endif; ?>
         </ul>
     <?php endif; ?>
+
+    <?php $hours_departure =  unserialize($sejour->hours_departure); ?>
+    <?php $hours_return =  unserialize($sejour->hours_return); ?>
+   
+    
+    <?php $hour_departure = $hours_departure['hours']; ?>
+    <?php $min_departure = $hours_departure['min']; ?>
+    <?php $hour_return = $hours_return['hours']; ?>
+    <?php $min_return = $hours_return['min']; ?>
+
+
+    <p>Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle</p>
+        <ul>
+            <li>départ : <?=$hour_departure[0] ?>h<?=$min_departure[0] ?></li>
+            <li>retour : <?=$hour_return[0] ?>h<?=$min_return[0] ?></li>
+        </ul>
+
+    <p>Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</p>
+        <ul>
+            <li>départ : <?=$hour_departure[1] ?>h<?=$min_departure[1] ?></li>
+            <li>retour : <?=$hour_return[1] ?>h<?=$min_return[1] ?></li>
+        </ul>
+
+    <p>Bonneuil en Valois, au Gite</p>
+        <ul>
+            <li>départ : <?=$hour_departure[2] ?>h<?=$min_departure[2] ?></li>
+            <li>retour : <?=$hour_return[2] ?>h<?=$min_return[2] ?></li>
+        </ul>
 
 </div>
 

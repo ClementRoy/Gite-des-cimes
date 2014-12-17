@@ -99,6 +99,84 @@
             
                     </div>
 
+    <?php $hours_departure =  unserialize($sejour->hours_departure); ?>
+    <?php $hours_return =  unserialize($sejour->hours_return); ?>
+   
+    
+    <?php $hour_departure = $hours_departure['hours']; ?>
+    <?php $min_departure = $hours_departure['min']; ?>
+    <?php $hour_return = $hours_return['hours']; ?>
+    <?php $min_return = $hours_return['min']; ?>
+
+
+            <div class="field-box row">
+                <p>Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle : </p>
+                    <label class="col-md-2" for="form-inscription-heure-aller">Heure de rendez-vous</label>
+                    <div class="col-md-1 col-sm-5">
+                        <input id="form-inscription-heure-aller" value="<?=$hour_departure[0] ?>" name="form_sejour_heure_aller[0]" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
+                        <p class="input-suffix">h</p>
+                    </div>
+                    <div class="col-md-1 col-sm-5">
+                        <input id="form-inscription-min-aller" value="<?=$min_departure[0] ?>" name="form_sejour_min_aller[0]" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
+                    </div>
+            </div>
+
+            <div class="field-box row">
+                <label class="col-md-2" for="form-inscription-heure-retour">Heure de rendez-vous pour le retour</label>
+                <div class="col-md-1 col-sm-5">
+                    <input id="form-inscription-heure-retour" value="<?=$hour_return[0] ?>" name="form_sejour_heure_retour[0]" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                    <p class="input-suffix">h</p>
+                </div>
+                <div class="col-md-1 col-sm-5">
+                    <input id="form-inscription-min-retour" value="<?=$min_return[0] ?>" name="form_sejour_min_retour[0]" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                </div>
+            </div>
+
+            <div class="field-box row">
+                <p>Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle : </p>
+                    <label class="col-md-2" for="form-inscription-heure-aller">Heure de rendez-vous</label>
+                    <div class="col-md-1 col-sm-5">
+                        <input id="form-inscription-heure-aller" value="<?=$hour_departure[1] ?>" name="form_sejour_heure_aller[1]" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
+                        <p class="input-suffix">h</p>
+                    </div>
+                    <div class="col-md-1 col-sm-5">
+                        <input id="form-inscription-min-aller" value="<?=$min_departure[1] ?>" name="form_sejour_min_aller[1]" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
+                    </div>
+            </div>
+
+            <div class="field-box row">
+                <label class="col-md-2" for="form-inscription-heure-retour">Heure de rendez-vous pour le retour</label>
+                <div class="col-md-1 col-sm-5">
+                    <input id="form-inscription-heure-retour" value="<?=$hour_return[1] ?>" name="form_sejour_heure_retour[1]" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                    <p class="input-suffix">h</p>
+                </div>
+                <div class="col-md-1 col-sm-5">
+                    <input id="form-inscription-min-retour" value="<?=$min_return[1] ?>" name="form_sejour_min_retour[1]" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                </div>
+            </div>
+
+            <div class="field-box row">
+                <p>Bonneuil en Valois, au Gite : </p>
+                    <label class="col-md-2" for="form-inscription-heure-aller">Heure de rendez-vous</label>
+                    <div class="col-md-1 col-sm-5">
+                        <input id="form-inscription-heure-aller" value="<?=$hour_departure[2] ?>" name="form_sejour_heure_aller[2]" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
+                        <p class="input-suffix">h</p>
+                    </div>
+                    <div class="col-md-1 col-sm-5">
+                        <input id="form-inscription-min-aller" value="<?=$min_departure[2] ?>" name="form_sejour_min_aller[2]" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
+                    </div>
+            </div>
+
+            <div class="field-box row">
+                <label class="col-md-2" for="form-inscription-heure-retour">Heure de rendez-vous pour le retour</label>
+                <div class="col-md-1 col-sm-5">
+                    <input id="form-inscription-heure-retour" value="<?=$hour_return[2] ?>" name="form_sejour_heure_retour[2]" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                    <p class="input-suffix">h</p>
+                </div>
+                <div class="col-md-1 col-sm-5">
+                    <input id="form-inscription-min-retour" value="<?=$min_return[2] ?>" name="form_sejour_min_retour[2]" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                </div>
+            </div>
 
 
 
