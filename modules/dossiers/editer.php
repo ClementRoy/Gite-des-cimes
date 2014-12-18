@@ -241,6 +241,14 @@
 
 
             <div class="field-box row">
+                <label class="col-md-2" for="form_inscription_lieu_custom">Autre lieu de rendez-vous</label>
+                <div class="col-md-4 col-sm-12">
+                    <input id="form_inscription_lieu_custom" name="form_inscription_lieu_custom" class="form-control" type="text" data-toggle="tooltip" <?php if( $dossier->place != "Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle" && $dossier->place != "Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle" && $dossier->place != "Bonneuil en Valois, au Gite" ): ?>value="<?=$dossier->place ?>"<?php endif; ?> placeholder="Ne renseigner que si le lieu n'est pas dans la liste.">
+                </div>
+            </div>
+
+
+            <div class="field-box row">
                 <label class="col-md-2" for="form-inscription-heure-aller">Heure de rendez-vous</label>
                 <div class="col-md-1 col-sm-5">
                     <?php $hour_departure = explode('h', $dossier->hour_departure); ?>

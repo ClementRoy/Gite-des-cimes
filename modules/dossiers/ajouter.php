@@ -128,7 +128,7 @@
                 <div class="field-box row">
                     <label class="col-md-2" for="form_inscription_lieu_custom">Autre lieu de rendez-vous</label>
                     <div class="col-md-4 col-sm-12">
-                        <input id="form_inscription_lieu_custom" name="form_inscription_lieu_custom" class="form-control" type="text" data-toggle="tooltip" value="" title="Ne renseigner que si le lieu n'est pas dans la liste.">
+                        <input id="form_inscription_lieu_custom" name="form_inscription_lieu_custom" class="form-control" type="text" data-toggle="tooltip" value="" placeholder="Ne renseigner que si le lieu n'est pas dans la liste.">
                     </div>
 
                 </div>
