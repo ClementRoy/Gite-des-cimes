@@ -126,6 +126,16 @@
 
 
                 <div class="field-box row">
+                    <label class="col-md-2" for="form_inscription_lieu_custom">Autre lieu de rendez-vous</label>
+                    <div class="col-md-4 col-sm-12">
+                        <input id="form_inscription_lieu_custom" name="form_inscription_lieu_custom" class="form-control" type="text" data-toggle="tooltip" value="" title="Ne renseigner que si le lieu n'est pas dans la liste.">
+                    </div>
+
+                </div>
+
+
+
+                <div class="field-box row">
                     <label class="col-md-2" for="form-inscription-heure-aller">Heure de rendez-vous</label>
                     <div class="col-md-1 col-sm-5">
                         <input id="form-inscription-heure-aller" name="form_inscription_heure_aller" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">

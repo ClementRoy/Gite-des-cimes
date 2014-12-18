@@ -15,7 +15,7 @@
         ':structure_payer' => $form_inscription_structure_name,
         ':supported' => $form_inscription_supported,
         ':note' => $form_inscription_note,
-        ':place' => $form_inscription_lieu,
+        ':place' => (!empty($form_inscription_lieu_custom))?$form_inscription_lieu_custom:$form_inscription_lieu,
         ':hour_departure' => $form_inscription_heure_aller.'h'.$form_inscription_min_aller,
         ':hour_return' => $form_inscription_heure_retour.'h'.$form_inscription_min_retour,
         ':pique_nique' => $form_inscription_pique_nique,
