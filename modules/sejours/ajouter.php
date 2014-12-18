@@ -103,15 +103,6 @@
     
             </div>
 
-        <?php $hours_departure =  unserialize($sejour->hours_departure); ?>
-        <?php $hours_return =  unserialize($sejour->hours_return); ?>
-       
-        
-        <?php $hour_departure = $hours_departure['hours']; ?>
-        <?php $min_departure = $hours_departure['min']; ?>
-        <?php $hour_return = $hours_return['hours']; ?>
-        <?php $min_return = $hours_return['min']; ?>
-
     
 
             <div class="field-box row">
