@@ -1,10 +1,4 @@
-<?php 
-require($_SERVER["DOCUMENT_ROOT"] . '/config/config.inc.php');
-
-$app = new app();
-
-$app->start();
- 
+<?php  
 	$id = $_GET['id'];
 	global $db;
 	$contacts = contact::getByStructure($id);
