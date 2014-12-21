@@ -104,6 +104,23 @@ class dossier
 		return $result;
 	}
 
+    public static function getListPresent(){
+        global $db;
+
+        $today = date("Y-m-d H:i:s");
+        $result = $db->query('SELECT *, dossier.id as dossier_id , dossier.ref_enfant as dossier_ref_enfant FROM '.self::$table.' LEFT JOIN inscription ON inscription.ref_dossier = dossier.id WHERE archived = 0 AND inscription.date_to >= "'.$today.'" ORDER BY dossier.id');
+        return $result;
+    }
+
+
+    public static function getListPast(){
+         global $db;
+        $today = date("Y-m-d H:i:s");
+        $result = $db->query('SELECT *, dossier.id as dossier_id , dossier.ref_enfant as dossier_ref_enfant FROM '.self::$table.' LEFT JOIN inscription ON inscription.ref_dossier = dossier.id WHERE archived = 0 AND inscription.date_to <= "'.$today.'" ORDER BY dossier.id DESC');
+        return $result;
+    }
+
+
 
     public static function getFromTrash(){
         global $db;

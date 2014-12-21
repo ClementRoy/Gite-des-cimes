@@ -63,6 +63,10 @@
 		"name" : "corbeille",
 		"views" : ["index"]
 	},
+	"stats" : {
+		"name" : "stats",
+		"views" : ["index"]
+	},
 	"export" : {
 		"name" : "export",
 		"views" : ["index", "sejour"]

@@ -492,6 +492,58 @@
             }); 
 
 
+
+            jQuery.ajax({
+                type: 'GET', // Le type de ma requete
+                url: '/ajax/get_nb_inscriptions.php', // L'url vers laquelle la requete sera envoyee
+                data: {
+                    sejour_id: sejour_id,
+                },
+                dataType: 'json',
+                success: function(data, textStatus, jqXHR) {
+                    //console.log(data);
+                    if(data == true){
+                        $('.sejours-group').prepend('<p class="error_nb alert alert-danger"">Attention, il n\y a plus de place sur ce séjour</p>');
+                    }
+                    else{
+                        $('.error_nb').remove();
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown, data) {
+                    console.log(errorThrown);
+                }
+            }); 
+
+
+            var enfant_id = $('#form-inscription-enfant-select').val();
+
+            if(enfant_id != ''){
+
+                jQuery.ajax({
+                    type: 'GET', // Le type de ma requete
+                    url: '/ajax/check_register.php', // L'url vers laquelle la requete sera envoyee
+                    data: {
+                        sejour_id: sejour_id,
+                        enfant_id: enfant_id
+                    },
+                    dataType: 'json',
+                    success: function(data, textStatus, jqXHR) {
+                        if(data == true){
+                            $('.sejours-group').prepend('<p class="error_check alert alert-danger"">Attention, l\'enfant est déjà inscrit à ce séjour</p>');
+                        }
+                        else{
+                            $('.error_check').remove();
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown, data) {
+                        console.log(errorThrown);
+                    }
+                }); 
+
+
+            }
+
+
             // <option value="Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle</option>
             // <option value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>
             // <option value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>

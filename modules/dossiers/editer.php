@@ -580,6 +580,111 @@ $('#form-inscription-structure-select').change( function () {
         $('#form-inscription-centre-payeur-hidden').removeAttr('disabled');
     }
 });
+
+        $('.sejours-group').on('change', '.sejour-form select', function(){
+
+            var sejour_id = $(this).val();
+            var nb_select = $('.sejour-form select').length;
+
+            jQuery.ajax({
+                type: 'GET', // Le type de ma requete
+                url: '/ajax/get_sejour.php', // L'url vers laquelle la requete sera envoyee
+                data: {
+                    id: sejour_id
+                },
+                dataType: 'json',
+                success: function(data, textStatus, jqXHR) {
+                    //console.log(data);
+                    if(data.hours_departure != ''){
+                        //console.log(data.hours_departure.min);
+                        //console.log(data.hours_departure.min['0']);
+                        $('#form-inscription-lieu-select').html('<option selected="selected" value="">Choisissez le lieu de rendez-vous</option>');
+                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[0]+'" data-min-departure="'+data.hours_departure.min[0]+'" data-hour-return="'+data.hours_return.hours[0]+'" data-min-return="'+data.hours_return.min[0]+'" value="Aulnay sous bois, au Parking d\'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d\'Intermarché, avenue Antoine Bourdelle</option>');
+                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[1]+'" data-min-departure="'+data.hours_departure.min[1]+'" data-hour-return="'+data.hours_return.hours[1]+'" data-min-return="'+data.hours_return.min[1]+'" value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>');
+                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[2]+'" data-min-departure="'+data.hours_departure.min[2]+'" data-hour-return="'+data.hours_return.hours[2]+'" data-min-return="'+data.hours_return.min[2]+'" value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown, data) {
+                    console.log(errorThrown);
+                }
+            }); 
+
+
+
+            jQuery.ajax({
+                type: 'GET', // Le type de ma requete
+                url: '/ajax/get_nb_inscriptions.php', // L'url vers laquelle la requete sera envoyee
+                data: {
+                    sejour_id: sejour_id,
+                },
+                dataType: 'json',
+                success: function(data, textStatus, jqXHR) {
+                    //console.log(data);
+                    if(data == true){
+                        $('.sejours-group').prepend('<p class="error_nb alert alert-danger"">Attention, il n\y a plus de place sur ce séjour</p>');
+                    }
+                    else{
+                        $('.error_nb').remove();
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown, data) {
+                    console.log(errorThrown);
+                }
+            }); 
+
+
+            var enfant_id = $('#form-inscription-enfant-select').val();
+
+            if(enfant_id != ''){
+
+                jQuery.ajax({
+                    type: 'GET', // Le type de ma requete
+                    url: '/ajax/check_register.php', // L'url vers laquelle la requete sera envoyee
+                    data: {
+                        sejour_id: sejour_id,
+                        enfant_id: enfant_id
+                    },
+                    dataType: 'json',
+                    success: function(data, textStatus, jqXHR) {
+                        if(data == true){
+                            $('.sejours-group').prepend('<p class="error_check alert alert-danger"">Attention, l\'enfant est déjà inscrit à ce séjour</p>');
+                        }
+                        else{
+                            $('.error_check').remove();
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown, data) {
+                        console.log(errorThrown);
+                    }
+                }); 
+
+
+            }
+
+
+            // <option value="Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle</option>
+            // <option value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>
+            // <option value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>
+
+        });
+
+
+        $('#form-inscription-lieu-select').on('change', function(){
+            //console.log('hello');
+            var elem = $(this).find(":selected");
+                if(elem.data('hour-departure') != ''){
+                //console.log($(this).find(":selected").data('hour-departure'));
+                // Aller
+                $('#form-inscription-heure-aller').val(elem.data('hour-departure'));
+                $('#form-inscription-min-aller').val(elem.data('min-departure'));
+
+                // retour
+                $('#form-inscription-heure-retour').val(elem.data('hour-return'));
+                $('#form-inscription-min-retour').val(elem.data('min-return'));
+            }
+        });
+
+        
 });
 </script>
 

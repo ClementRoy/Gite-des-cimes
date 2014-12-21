@@ -23,6 +23,23 @@
 
         $result = structure::update($datas, $_GET['id']);
 
+        if(isset($form_contact_firstname) && !empty($form_contact_firstname)){
+          $datas = array(
+              ':firstname' => tool::cleanInput($form_contact_firstname),
+              ':lastname' => tool::cleanInput($form_contact_lastname),
+              ':title' => tool::cleanInput($form_contact_title),
+              ':ref_structure' => $_GET['id'],
+              ':civility' => tool::cleanInput($form_contact_civility),
+              ':email' => tool::cleanInput($form_contact_email),
+              ':phone' => $form_contact_telephone,
+              ':mobile_phone' => $form_contact_mobile_phone,
+              ':fax' => $form_contact_fax,
+              );
+
+          $result_2 = contact::add($datas);
+        }
+
+
         ?>
 
         <?php if($result): ?>
