@@ -491,10 +491,33 @@
                 }
             }); 
 
+
+
+            jQuery.ajax({
+                type: 'GET', // Le type de ma requete
+                url: '/ajax/get_nb_inscriptions.php', // L'url vers laquelle la requete sera envoyee
+                data: {
+                    sejour_id: sejour_id,
+                },
+                dataType: 'json',
+                success: function(data, textStatus, jqXHR) {
+                    //console.log(data);
+                    if(data == true){
+                        $('.sejours-group').prepend('<p class="error_nb alert alert-danger"">Attention, il n\y a plus de place sur ce séjour</p>');
+                    }
+                    else{
+                        $('.error_nb').remove();
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown, data) {
+                    console.log(errorThrown);
+                }
+            }); 
+
+
             var enfant_id = $('#form-inscription-enfant-select').val();
 
             if(enfant_id != ''){
-                console.log('id enfant : '+enfant_id);
 
                 jQuery.ajax({
                     type: 'GET', // Le type de ma requete
@@ -505,13 +528,10 @@
                     },
                     dataType: 'json',
                     success: function(data, textStatus, jqXHR) {
-                        console.log(data);
                         if(data == true){
-                            console.log('1');
                             $('.sejours-group').prepend('<p class="error_check alert alert-danger"">Attention, l\'enfant est déjà inscrit à ce séjour</p>');
                         }
                         else{
-                             console.log('2')
                             $('.error_check').remove();
                         }
                     },

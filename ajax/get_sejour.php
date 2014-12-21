@@ -23,7 +23,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 
 	$sejour = sejour::get($id);
 	if(isset($sejour->hours_departure)){
-		echo json_encode(array('hours_departure' => unserialize($sejour->hours_departure), 'hours_return' => unserialize($sejour->hours_return) )) ;
+		echo json_encode(array('hours_departure' => unserialize($sejour->hours_departure), 'hours_return' => unserialize($sejour->hours_return))) ;
 	}
 	else {
 		echo '';

@@ -15,19 +15,23 @@ extract($_GET);
 //$sections = section::getByCP(substr($dept,0, 2));
 
 
-if(isset($_GET['id']) && !empty($_GET['id'])){
+if(isset($_GET['sejour_id']) && !empty($_GET['sejour_id'])){
 	
 	header('Content-Type: application/json; charset=utf-8');
 	//echo $_GET['cp'];
-	$id = $_GET['id'];
+	$sejour_id = $_GET['sejour_id'];
 
-	$sejour = sejour::get($id);
-	if(isset($sejour->hours_departure)){
-		echo json_encode(array('hours_departure' => unserialize($sejour->hours_departure), 'hours_return' => unserialize($sejour->hours_return) )) ;
+	$result = inscription::getBySejour($sejour_id);
+
+	$sejour = sejour::get($sejour_id);
+
+	if(count($result) >= $sejour->capacity_max){
+		echo 'true';
 	}
 	else {
-		echo '';
+		echo 'false';
 	}
+
 	
 }
 // 	$data = array();
