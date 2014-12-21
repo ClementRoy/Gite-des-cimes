@@ -491,6 +491,38 @@
                 }
             }); 
 
+            var enfant_id = $('#form-inscription-enfant-select').val();
+
+            if(enfant_id != ''){
+                console.log('id enfant : '+enfant_id);
+
+                jQuery.ajax({
+                    type: 'GET', // Le type de ma requete
+                    url: '/ajax/check_register.php', // L'url vers laquelle la requete sera envoyee
+                    data: {
+                        sejour_id: sejour_id,
+                        enfant_id: enfant_id
+                    },
+                    dataType: 'json',
+                    success: function(data, textStatus, jqXHR) {
+                        console.log(data);
+                        if(data == true){
+                            console.log('1');
+                            $('.sejours-group').prepend('<p class="error_check alert alert-danger"">Attention, l\'enfant est déjà inscrit à ce séjour</p>');
+                        }
+                        else{
+                             console.log('2')
+                            $('.error_check').remove();
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown, data) {
+                        console.log(errorThrown);
+                    }
+                }); 
+
+
+            }
+
 
             // <option value="Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle</option>
             // <option value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>

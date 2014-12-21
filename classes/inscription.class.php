@@ -80,6 +80,17 @@ class inscription
         return $result;        
     }
 
+    public static function getBySejourAndEnfant($sejour_id, $enfant_id){
+        global $db;
+        $params = array(
+                        ':sejour_id' => $sejour_id,
+                        ':enfant_id' => $enfant_id
+                        );
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:sejour_id AND ref_enfant = :enfant_id';
+        $result = $db->query($sql, $params);
+        return $result;        
+    }
+
 
     public static function getUnconfirmedBySejour($id) {
         global $db;
