@@ -1,0 +1,21 @@
+{
+  "name": "Gite-des-cimes",
+  "version": "2.0.0",
+  "homepage": "https://github.com/ClementRoy/Gite-des-cimes",
+  "authors": [
+    "Christophe Béghin <mail@christophebeghin.fr>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap-file-input": "~1.0.0",
+    "fullcalendar": "~2.2.5"
+  }
+}

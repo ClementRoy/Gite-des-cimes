@@ -368,6 +368,7 @@ $('#sidebar-nav').on('mouseleave', function() {
         $trigger.click(function(e) {
             e.preventDefault();
             e.stopPropagation();
+            console.log('this');
 
             $dialog.toggleClass("is-visible");
 

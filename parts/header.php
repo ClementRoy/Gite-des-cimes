@@ -2,53 +2,46 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Gîte des Cîmes - Outil de gestion</title>
-    <meta name="robots" CONTENT="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="/assets/img/favicon.png">
 
+    <title>Gîte des Cîmes - Outil de gestion</title>
+    <meta name="robots" CONTENT="noindex, nofollow">
+    
+    <!-- <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,400italic,700,800" rel="stylesheet" type="text/css"> -->
+    <!-- <link href="http://fonts.googleapis.com/css?family=Raleway:300,200,100" rel="stylesheet" type="text/css"> -->
+
     <?php if (APP_VERSION != 'dev'): ?>
-        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,800,700,600,300' rel='stylesheet' type='text/css'>
         <link href="/assets/dist/css/s.css" rel="stylesheet" />
-        <script src="/assets/dist/js/jquery.min.js"></script>
     <?php else: ?>
-        <!-- bootstrap -->
-        <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
-        <link href="/assets/css/bootstrap.css" rel="stylesheet" />
-        <!--     <link href="/assets/css/bootstrap-overrides.css" type="text/css" rel="stylesheet" /> -->
-        <!-- libraries -->
-        <!--      <link href="/assets/css/lib/jquery-ui-1.10.2.custom.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+        <link href="/assets/libs/font-awesome-4.2.0/css/font-awesome.css" rel="stylesheet" type="text/css">
 
-        <link href="/assets/css/lib/jquery.steps.css" type="text/css" rel="stylesheet"> -->
+        <link href="/assets/libs/jquery.easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css">
+        <link href="/assets/libs/odometer/themes/odometer-theme-default.css" rel="stylesheet" type="text/css">
+        <link href="/assets/libs/jquery.datatables/bootstrap-adapter/css/datatables.css" rel="stylesheet" type="text/css">
 
-        <!-- <link href="/assets/css/lib/select2.css" type="text/css" rel="stylesheet"> -->
-
-        <link href="/assets/css/lib/bootstrap.datepicker.css" type="text/css" rel="stylesheet">
-        <link href="/assets/css/animate.css" type="text/css" rel="stylesheet" />
-        <link href="/assets/css/lib/jquery.dataTables.css" type="text/css" rel="stylesheet">
-        <link href="/assets/css/fullcalendar.css" type="text/css" rel="stylesheet">
-        <link href="/assets/css/odometer-theme-default.css" type="text/css" rel="stylesheet">
-
-
-        <!-- global styles -->
-        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,800,700,600,300' rel='stylesheet' type='text/css'>
-        <link href="/assets/css/lib/font-awesome.css" type="text/css" rel="stylesheet" />
-
-        <script type="text/javascript">less = { env: "development" };</script>
-        <link rel="stylesheet/less" type="text/css" href="/assets/css/app.less" />
-        <script src="/assets/js/less.min.js"></script>
+        <link href="/assets/libs/jquery.gritter/css/jquery.gritter.css" rel="stylesheet" type="text/css">
+        <link href="/assets/libs/jquery.nanoscroller/nanoscroller.css" rel="stylesheet" type="text/css">
+        <link href="/assets/libs/bootstrap.datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
+        <link href="/assets/libs/jquery.icheck/skins/flat/purple.css" rel="stylesheet" type="text/css">
+        <link href="/assets/libs/jquery.select2/select2.css" rel="stylesheet" type="text/css">
+        <link href="/assets/libs/bootstrap.slider/css/slider.css" rel="stylesheet" type="text/css">
+        <link href="/assets/libs/js/jquery.pushmenu/css/jPushMenu.css" rel="stylesheet" type="text/css">
+        <link href="/assets/css/fullcalendar.css" rel="stylesheet" type="text/css">
 
 
-        <!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-        <script src="/assets/js/jquery.js"></script>
-<?php endif ?>
+        <link href="/assets/libs/flatdream/css/style.css" rel="stylesheet" type="text/css">
+        <!-- <link href="/assets/libs/flatdream/css/skin-green.css" rel="stylesheet" type="text/css"> -->
+        <link href="/assets/css/flatdream-overide.css" rel="stylesheet" type="text/css">
+    <?php endif ?>
+
+    <!--[if lt IE 9]>
+        <script src="/assets/js/html5shiv.js"></script>
+        <script src="/assets/js/respond.min.js"></script>
+    <![endif]-->
 </head>
-<body class="clearfix">
-    <div class="wrapper">
+<body>
+   <div id="cl-wrapper">

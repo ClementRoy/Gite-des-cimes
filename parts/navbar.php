@@ -1,97 +1,131 @@
-   <!-- navbar -->
-    <header id="top-nav" class="navbar navbar-inverse" role="banner">
-        <div class="navbar-header">
-            <button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/"><?=app::$name; ?></a>
-        </div>
-        <ul class="nav navbar-nav pull-right hidden-xs">
-            <!--
-            <li class="notification-dropdown hidden-xs hidden-sm">
-                <a href="#" class="trigger">
-                    <i class="icon-warning-sign"></i>
-                    <span class="count">8</span>
-                </a>
-                <div class="pop-dialog">
-                    <div class="pointer right">
-                        <div class="arrow"></div>
-                        <div class="arrow_border"></div>
-                    </div>
-                    <div class="body">
-                        <a href="#" class="close-icon"><i class="icon-remove-sign"></i></a>
-                        <div class="notifications">
-                            <h3>You have 6 new notifications</h3>
-                            <a href="#" class="item">
-                                <i class="icon-signin"></i> New user registration
-                                <span class="time"><i class="icon-time"></i> 13 min.</span>
-                            </a>
-                            <a href="#" class="item">
-                                <i class="icon-signin"></i> New user registration
-                                <span class="time"><i class="icon-time"></i> 18 min.</span>
-                            </a>
-                            <a href="#" class="item">
-                                <i class="icon-envelope-alt"></i> New message from Alejandra
-                                <span class="time"><i class="icon-time"></i> 28 min.</span>
-                            </a>
-                            <a href="#" class="item">
-                                <i class="icon-signin"></i> New user registration
-                                <span class="time"><i class="icon-time"></i> 49 min.</span>
-                            </a>
-                            <a href="#" class="item">
-                                <i class="icon-download-alt"></i> New order placed
-                                <span class="time"><i class="icon-time"></i> 1 day.</span>
-                            </a>
-                            <div class="footer">
-                                <a href="#" class="logout">View all notifications</a>
-                            </div>
-                        </div>
+
+<?php 
+
+$navbar = array(
+    'accueil' => array(
+        'name' => 'Tableau de bord',
+        'icon' => 'dashboard',
+    ),
+    'enfants' => array(
+        'name' => 'Enfants',
+        'icon' => 'group',
+        'submenu' => array(
+                        'index' => 'Liste des enfants',
+                        'ajouter' => 'Ajouter un enfant'
+                    )
+    ),
+    'sejours' => array(
+        'name' => 'Séjours',
+        'icon' => 'plane',
+        'submenu' => array(
+                        'index' => 'Liste des séjours',
+                        'ajouter' => 'Ajouter un séjour'
+                    )
+    ),
+    'dossiers' => array(
+        'name' => 'Dossiers d\'inscription',
+        'icon' => 'folder-open',
+        'submenu' => array(
+                        'index' => 'Liste des dossiers',
+                        'ajouter' => 'Ajouter un nouveau dossier'
+                    )
+    ),
+    'hebergements' => array(
+        'name' => 'Hébergements',
+        'icon' => 'globe',
+        'submenu' => array(
+                        'index' => 'Liste des hébergements',
+                        'ajouter' => 'Ajouter un hébergement'
+                    )
+    ),
+    'structures' => array(
+        'name' => 'Structures',
+        'icon' => 'building',
+        'submenu' => array(
+                        'index' => 'Liste des structures',
+                        'ajouter' => 'Ajouter une structure'
+                    )
+    ),
+    'contacts' => array(
+        'name' => 'Contacts',
+        'icon' => 'comments',
+        'submenu' => array(
+                        'index' => 'Liste des contacts',
+                        'ajouter' => 'Ajouter un contact'
+                    )
+    ),
+    'accompagnateurs' => array(
+        'name' => 'Accompagnateurs',
+        'icon' => 'user',
+        'submenu' => array(
+                        'index' => 'Liste des accompagnateurs',
+                        'ajouter' => 'Ajouter un accompagnateur'
+                    )
+    ),
+    'Stats' => array(
+        'name' => 'Stats',
+        'icon' => 'bar-chart',
+    ),
+    'corbeille' => array(
+        'name' => 'Corbeille',
+        'icon' => 'trash'
+    ),
+);
+/*
+    'convocations' => array(
+        'name' => 'Convocations',
+        'icon' => 'file-text-alt'),
+    'factures' => array(
+        'name' => 'Factures',
+        'icon' => 'edit')
+
+    'export' => array(
+        'name' => 'Export',
+        'icon' => 'cog'
+    ),
+    
+*/
+
+// Build active element from REQUEST URI
+$path_array = explode('/', $_SERVER['REQUEST_URI']);
+
+// Set default path
+if($path_array['1'] == ''){
+    $path_array['1']  = 'accueil';
+}
+
+?>
+
+
+<div class="cl-sidebar">
+    <div class="cl-toggle"><i class="fa fa-bars"></i></div>
+    <div class="cl-navblock">
+        <div class="menu-space">
+            <div class="content">
+                <!--LOGO-->
+                <div class="sidebar-logo">
+                    <div class="logo">
+                        <a href="/"><img src="/assets/img/icon-home.png" class="logo-img" width="40" height="40" alt=""><span class="visible-hover">Gite des cîmes</span></a>
                     </div>
                 </div>
-            </li>
-            
-            <li class="dropdown create-new">
-                <a href="#" class="btn btn-danger dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
-                    Ajouter un nouveau <strong class="caret"></strong>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="">Enfant</a></li>
-                    <li><a href="">Séjour</a></li>
-                    <li><a href="">Structure</a></li>
-                    <li><a href="">Contact</a></li>
+
+                <ul class="cl-vnavigation">
+                    <?php foreach($navbar as $key => $menu): ?>
+                    <?php if( isset($menu['submenu']) && count($menu['submenu']) > 0): ?>
+                    <li class="parent<?php if(in_array($key, $path_array)): ?><?php endif; ?>"><a href="#"><i class="fa fa-<?=$menu['icon']; ?>"></i><span class="visible-hover"><?=$menu['name']; ?></span></a>
+                        <ul class="sub-menu<?php if(in_array($key, $path_array)): ?> active<?php endif; ?>">
+                            <?php foreach($menu['submenu'] as $subKey => $submenu): ?>
+                            <li><a href="/<?=$key; ?>/<?=$subKey; ?>/" class="<?php if(in_array($subKey, $path_array) && in_array($key, $path_array)): ?>active<?php endif; ?>"><?=$submenu ?></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </li>
+                    <?php else: ?>
+                    <li <?php if(in_array($key, $path_array)): ?> class="active"<?php endif; ?>><a href="/<?=$key; ?>/"><i class="fa fa-<?=$menu['icon']; ?>"></i><span class="visible-hover"><?=$menu['name']; ?></span></a></li>
+                    <?php endif; ?>
+                    <?php endforeach; ?>
                 </ul>
-            </li>
-            -->
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
-                    Bonjour <strong><?=$user->firstname; ?> <?=$user->lastname; ?></strong>
-                    <strong class="caret"></strong>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/utilisateurs/infos/id/<?=$user->id; ?>"><i class="icon-user"></i> Mes infos personnelles</a></li>
-                    <li><a href="/utilisateurs/"><i class="icon-reorder"></i> Liste des utilisateurs</a></li>
-                    <li><a href="/corbeille/"><i class="icon-trash"></i> Corbeille <span class="tag">34</span></a></li>
-                </ul>
-            </li>
-            <li class="dropdown hidden-xs hidden-sm">
-                <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
-                    <i class="icon-cog"></i>
-                    <strong class="caret"></strong>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/infos/infos/">Infos</a></li>
-                    <li><a href="/infos/debug/">Debug</a></li>
-                    <!--<li><a href="/infos/contact">Repporter un bug</a></li>-->
-                </ul>
-            </li>
-            <li class="settings hidden-xs hidden-sm">
-                <a href="/?deconnexion" role="button">
-                    <i class="icon-off"></i>
-                </a>
-            </li>
-        </ul>
-    </header>
-    <!-- end navbar -->
+
+            </div>
+        </div>
+    </div>
+</div>

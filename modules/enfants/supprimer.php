@@ -4,45 +4,47 @@
     <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
-    <div class="title">
-        <div class="row header">
-            <div class="col-md-12">
-                <h1>Suppression</h1>
+    <div class="page-head">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Suppression de fiche</h1>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-7">
+            <div class="block-flat">
+                <div class="content">
+                    <?php if(isset($_GET['confirm'])): ?>
+                    <?php $enfant = enfant::get($_GET['id']); ?>
+                    <div class="alert alert-success alert-white rounded">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <div class="icon"><i class="fa fa-check"></i></div>
+                        <strong>C'est fait !</strong> La fiche de <strong><?=$enfant->firstname ?> <?=$enfant->lastname ?></strong> a bien été supprimée !
+                    </div>
+                    <?php enfant::remove($_GET['id']); ?>
+
+                    <?php else: ?>
+
+                    <?php $enfant = enfant::get($_GET['id']); ?>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <p>
+                                        Vous êtes sur le point de supprimer la fiche de <strong><?=$enfant->firstname; ?> <?=$enfant->lastname; ?></strong>.<br />
+                                        Cette action est irréversible.
+                                    </p>
+
+                                <div class="form-group actions text-center">
+                                    <a href="/enfants/supprimer/id/<?=$enfant->id; ?>/confirm/true" class="btn btn-primary btn-rad btn-lg">Supprimer la fiche</a>
+                                    <span>OU</span>
+                                    <a href="/enfants/infos/id/<?=$enfant->id; ?>" class="reset">Annuler</a>
+                                </div>
+                            </div>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="content">
-        <?php if(isset($_GET['confirm'])): ?>
-            <div class="row">
-                <div class="col-md-12">
-                    <?php 
-                    enfant::remove($_GET['id']);
-                    ?>
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i>
-                        La fiche a bien été supprimée
-                    </div>
-                    <a href="/enfants/index">Retourner à la liste des enfants</a>
-                </div>                
-            </div>
-        <?php else: ?>
-
-            <?php $enfant = enfant::get($_GET['id']); ?>
-            <div class="row">
-                <div class="col-md-12 message">
-                 <p>Vous êtes sur le point de supprimer la fiche de <strong><?=$enfant->firstname; ?> <?=$enfant->lastname; ?></strong>.<br />
-                    Cette action est irréversible.</p>
-                </div>
-            </div>
-            <div class="field-box actions">
-                <div class="col-md-6 col-md-offset-2">
-                    <a href="/enfants/supprimer/id/<?=$enfant->id; ?>/confirm/true" class="btn btn-primary">Supprimer la fiche</a>
-                    <span>OU</span>
-                    <a href="/enfants/infos/id/<?=$enfant->id; ?>" class="reset">Annuler</a>
-                </div>
-            </div>
-
-        <?php endif; ?>
-    </div>
     <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

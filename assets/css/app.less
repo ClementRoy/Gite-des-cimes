@@ -1,9 +1,9 @@
 @import url('compiled/form-showcase.css');
 
-//@blue: #5c9df5;
-@blue: #35abdf;
-@orange: #E04B4B;
-//@orange: #ef5b34;
+//blue: #5c9df5;
+blue: #35abdf;
+orange: #E04B4B;
+//orange: #ef5b34;
 //
 
 @bodyBackgroundColor: #f7f7f7;
@@ -310,14 +310,14 @@ input[type="checkbox"][disabled] + strong {
 				}
 			}
 			&:first-child > a {
-				background: @blue;
+				background: blue;
 				color: #FFF;
-				text-shadow: 0 -1px 0 darken(@blue, 15%);
+				text-shadow: 0 -1px 0 darken(blue, 15%);
 				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12),
 				inset -1px 0 0 rgba(255, 255, 255, 0.06),
 				inset 1px 0 0 rgba(255, 255, 255, 0.06);
 				i {
-					text-shadow: 0 -1px 0 darken(@blue, 15%);
+					text-shadow: 0 -1px 0 darken(blue, 15%);
 				}
 			}
 			&:last-child > a {
@@ -333,7 +333,7 @@ input[type="checkbox"][disabled] + strong {
 					background: #25282e;
 					box-shadow:
 					inset 1px 0 0 rgba(255, 255, 255, 0.03),
-					inset 3px 0 0 @blue,
+					inset 3px 0 0 blue,
 					inset 4px 0 0 #4181d8;
 					color: #FFF;
 				}
@@ -454,12 +454,12 @@ input[type="checkbox"][disabled] + strong {
 					padding-left: 8px;
 				}
 				&.blue {
-					background: @blue;
+					background: blue;
 					&:hover {
-						background: lighten(@blue, 10%);
+						background: lighten(blue, 10%);
 					}
 				}
-				background: @orange;
+				background: orange;
 				border-radius: 50%;
 				width: 60px;
 				display: block;
@@ -474,7 +474,7 @@ input[type="checkbox"][disabled] + strong {
 				position: relative;
 				&:hover {
 					text-decoration: none;
-					background: lighten(@orange, 10%);
+					background: lighten(orange, 10%);
 				}
 			}
 		}
@@ -987,12 +987,12 @@ html, body {
 	padding: 4px 9px;
 	font-size: 14px;
 	font-weight: 600;
-	background: @blue;
+	background: blue;
 	border: none;
 	transition: all .3s;
 	&:hover {
 		color: white;
-		background: lighten(@blue, 10%);
+		background: lighten(blue, 10%);
 	}
 }
 .fc-event-hori {
@@ -1009,10 +1009,10 @@ html, body {
 	//padding: 0 50px 50px;
 }
 .fc-event-start.fc-event-end {
-	background: @orange;
+	background: orange;
 	border-radius: 4px;
 	&:hover {
-		background: lighten(@orange, 10%);
+		background: lighten(orange, 10%);
 	}
 }
 .fc-border-separate tr.fc-last th, .fc-border-separate tr.fc-last td {
@@ -1118,26 +1118,26 @@ html, body {
 
 
 table.datatable tbody tr:hover {
-	background: @blue !important;
+	background: blue !important;
 	color: #fff;
 }
 table.datatable tr.odd:hover td.sorting_1, table.dataTable tr.odd:hover td.sorting_1,
 table.datatable tr.even:hover td.sorting_1, table.dataTable tr.even:hover td.sorting_1  {
-	background-color: @blue;
+	background-color: blue;
 }
 table.datatable tr:hover a {
 	color: #fff;
 }
 .paging_full_numbers a.paginate_active {
-	background-color: @blue;
-	border-color: @blue;
+	background-color: blue;
+	border-color: blue;
 	color: #fff !important;
 }
 .paging_full_numbers a.paginate_button {
 	border: 1px solid #ddd;
 	// padding: 5px 10px;
 	cursor: pointer;
-	color: @blue !important;
+	color: blue !important;
 	border-left: 0px;
 }
 
@@ -1298,15 +1298,15 @@ fieldset.form-group {
 }
 
 .parsley-error {
-	border-color: @orange;
-	background: lighten(@orange, 40%);
-	color: @orange;
+	border-color: orange;
+	background: lighten(orange, 40%);
+	color: orange;
 }
 .parsley-error-list {
 	list-style: none;
 	padding-left: 0;
 	padding-top: 4px;
-	color: @orange;
+	color: orange;
 	display: block;
 	font-weight: 600;
 }

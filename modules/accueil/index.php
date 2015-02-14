@@ -1,187 +1,150 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
-<?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
-<script type="text/javascript" src="/assets/js/jquery.easypiechart.min.js"></script>
-
-<!-- <link rel="stylesheet"type="text/css" href="/assets/css/jquery.easy-pie-chart.css">
- -->
-
-<style>
-.chart {
-  position: relative;
-  display: inline-block;
-  width: 110px;
-  height: 110px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-.chart canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.percent {
-  display: inline-block;
-  line-height: 110px;
-  z-index: 2;
-}
-.percent:after {
-  content: '%';
-  margin-left: 0.1em;
-  font-size: .8em;
-}
-</style>
-
-
-
-
-
-
-
-
-
-<div class="title">
-    <div class="row header">
-        <div class="col-md-12">
-            <h1>Tableau de bord</h1>
-        </div>
-    </div>
+<!-- Page title -->
+<div class="page-head">
+    <h2>Tableau de bord</h2>
 </div>
-<div class="main-stats hidden-xs">
-    <div class="row stats-row">
-        <div class="col-md-12">
-            <div class="stat">
-                <div class="data">
-                    <p class="datalabel">
-                        <i class="icon icon-group"></i>
-                        <span class="title">enfants</span>
-                        <span class="subtitle">dans la base</span>
-                    </p>
-                    <p class="datanumber">
-                        <a id="number-enfants" class="odometer" href="/enfants/">0</a>
-                    </p>
-                </div>
-            </div>
-            <div class="stat">
-                <div class="data">
-                    <p class="datalabel">
-                        <i class="icon icon-comments"></i>
-                        <span class="title">contacts</span>
-                        <span class="subtitle">dans la base</span>
-                    </p>
-                    <p class="datanumber">
-                        <a id="number-contacts" class="odometer" href="/contacts/">0</a>
-                    </p>
-                </div>
-            </div>
-            <div class="stat">
-                <div class="data">
-                    <p class="datalabel">
-                        <i class="icon icon-building"></i>
-                        <span class="title">structures</span>
-                        <span class="subtitle">dans la base</span>
-                    </p>
-                    <p class="datanumber">
-                        <a id="number-structures" class="odometer" href="/structures/">0</a>
-                    </p>
-                </div>
-            </div>
-            <div class="stat">
-                <div class="data">
-                    <p class="datalabel">
-                        <i class="icon icon-plane" style="padding: 6px 5px 4px;"></i>
-                        <span class="title">séjours</span>
-                        <span class="subtitle">dans la base</span>
-                    </p>
-                    <p class="datanumber">
-                        <a id="number-sejours" class="odometer" href="/sejours/">0</a>
-                    </p>
-                </div>
-            </div>
-            <div class="stat">
-                <div class="data">
-                    <p class="datalabel">
-                        <i class="icon icon-folder-open" style="padding: 6px 4px 4px 6px;"></i>
-                        <span class="title">inscriptions</span>
-                        <span class="subtitle">dans la base</span>
-                    </p>
-                    <p class="datanumber">
-                        <a id="number-dossiers" class="odometer" href="/dossiers/">0</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- /Page title -->
+
+<!-- Chiffres -->
 <div class="row">
-    <div class="col-md-6">
-        <h2 class="bloc-title">Prise en charge non reçues</h2>
-        <div class="content content-table simple-table">
-
-            <table class="datatable" data-sort="1" data-length="10">
-                <thead>
-                    <tr>
-                        <th class="sortable" style="width: 80px;">#</th>
-                        <th class="sortable" style="width: 270px;">Nom de l'enfant</th>
-                        <th class="sortable" style="width: 270px;">Structure</th>
-                        <th class="sortable" style="width: 12%;">Pris en charge</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $notSupported = dossier::getListNotSupported(); ?>
-                    <?php foreach ($notSupported as $key => $value): ?>
-                       <?php $enfant = enfant::get($value->ref_enfant); ?>
-                       <?php $structure = structure::get($value->ref_structure_payer); ?>
-                        <tr>
-                            <td><a href="/dossiers/infos/id/<?=$value->id?>">#<?=$value->id?></a></td>
-                            <td><?=$enfant->firstname?> <?=$enfant->lastname?></td>
-                            <td><?=(isset($structure->name))?$structure->name:'';?></td>
-                            <td>Non</td>
-                        </tr>
-                    <?php endforeach ?>
-                </tbody>
-            </table>
-
-            
-
-            <?php //tool::output($notSupported); ?>
+    <div class="col-md-3 col-sm-6">
+        <div class="fd-tile detail tile-purple">
+            <div class="content"><h1 class="text-left odometer" id="number-enfants">0</h1><p>enfants dans la base</p></div>
+            <div class="icon"><i class="fa fa-group"></i></div>
+            <a class="details" href="#">Tout voir <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
         </div>
-
     </div>
 
-    <div class="col-md-6">
-        <h2 class="bloc-title">Remplissage des séjours à venir</h2>
+    <div class="col-md-3 col-sm-6">
+        <div class="fd-tile detail tile-orange">
+            <div class="content"><h1 class="text-left odometer" id="number-sejours">0</h1><p>séjours dans la base</p></div>
+            <div class="icon"><i class="fa fa-plane"></i></div>
+            <a class="details" href="#">Tout voir <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+        </div>
+    </div>
 
-        <?php $futurs_sejours = sejour::getListFuturSejour(); ?>
-        <?php // http://rendro.github.io/easy-pie-chart/ ?>
-        <?php foreach($futurs_sejours as $sejour): ?>
-            <?php $inscriptions = inscription::getBySejour($sejour->id); ?>
+    <div class="col-md-3 col-sm-6">
+        <div class="fd-tile detail tile-prusia">
+            <div class="content"><h1 class="text-left odometer" id="number-structures">0</h1><p>structures dans la base</p></div>
+            <div class="icon"><i class="fa fa-building"></i></div>
+            <a class="details" href="#">Tout voir <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+        </div>
+    </div>
 
-            <?php if(count($inscriptions) > 0): ?>
-                <div>
-                
-                    <span class="chart" data-percent="<?=100*count($inscriptions)/$sejour->capacity_max ?>">
-                        <span class="percent"></span>
-                    </span>
+    <div class="col-md-3 col-sm-6">
+        <div class="fd-tile detail tile-lemon">
+            <div class="content"><h1 class="text-left odometer" id="number-dossiers">0</h1><p>inscriptions dans la base</p></div>
+            <div class="icon"><i class="fa fa-folder-open"></i></div>
+            <a class="details" href="#">Tout voir <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+        </div>
+    </div>
+</div>
+<!-- /Chiffres -->
 
-                    <a href="/sejours/infos/id/<?=$sejour->id ?>"><?=$sejour->name ?></a>
-                    <?php 
-                        $date_from = new DateTime($sejour->date_from);
-                        echo ' du '.strftime('%d %B %Y', $date_from->getTimestamp());
 
-                        $date_to = new DateTime($sejour->date_to);
-                            echo ' au '.strftime('%d %B %Y', $date_to->getTimestamp());
-                    ?>
-                    <?=' - <strong>'.count($inscriptions).' / '.$sejour->capacity_max.'</strong>' ?>
-
+<div class="row">
+    
+    <!-- Prise en charges -->
+    <div class="col-md-12">
+        <div class="section-head">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>Prise en charge non reçues</h3>
+                    </div>
+            </div>
+        </div>
+        <div class="block-flat tb-special tb-no-options">
+            <div class="content">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="datatable">
+                        <thead>
+                            <tr>
+                                <!--<th class="sortable" style="width: 60px;">#</th>-->
+                                <th class="sortable">Nom de l'enfant</th>
+                                <th class="sortable">Séjour</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $notSupported = dossier::getListNotSupported(); ?>
+                            <?php foreach ($notSupported as $key => $notSupportedDossier): ?>
+                                <?php
+                                    $enfant = enfant::get($notSupportedDossier->ref_enfant);
+                                    $structure = structure::get($notSupportedDossier->ref_structure_payer);
+                                    $inscription = inscription::getByDossier($notSupportedDossier->id);
+                                    // tool::output($notSupportedDossier);
+                                    // tool::output($inscription);
+                                    $sejour = sejour::get($inscription[0]->ref_sejour);
+                                ?>
+                                <tr>
+                                    <!--<td><a href="/dossiers/infos/id/<?=$notSupportedDossier->id?>">#<?=$notSupportedDossier->id?></a></td>-->
+                                    <td><?=$enfant->firstname?> <?=$enfant->lastname?></td>
+                                    <td><a href="/sejours/infos/<?=$sejour->id; ?>"><?=$sejour->name; ?></a></td>
+                                    <!-- <td>Non</td> -->
+                                </tr>
+                            <?php endforeach ?>
+                        </tbody>
+                    </table>
                 </div>
-            <?php endif; ?>
-        <?php endforeach; ?>   
-     
+            </div>
+        </div>
     </div>
+    <!-- /Prise en charges -->
+
+
+
+
+    <!-- Séjours à venir -->
+    <div class="col-md-12">
+        <div class="section-head">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>Les prochains séjours</h3>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+            <?php
+                $colors =  array('#4D90FD', '#FD6A5E', '#B450B2', '#fec93d', '#dd4444', '#dd4d79');
+                shuffle($colors);
+                $i = 0;
+            ?>
+            <?php $futurs_sejours = sejour::getListFuturSejour(); ?>
+            <?php foreach($futurs_sejours as $sejour): ?>
+
+                <?php $inscriptions = inscription::getBySejour($sejour->id); ?>
+                <?php if(count($inscriptions) > 0): ?>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                        <div class="block-flat">
+                            <div class="content text-center">
+                                <div class="epie-chart" data-barcolor="<?=$colors[$i]?>" data-trackcolor="#F3F3F3" data-percent="<?=100*count($inscriptions)/$sejour->capacity_max ?>">
+                                    <span>
+                                        <?=floor(100*count($inscriptions)/$sejour->capacity_max) ?>%
+                                    </span>
+                                </div>
+                                <p>
+                                    <a href="/sejours/infos/id/<?=$sejour->id ?>"><?=$sejour->name ?></a><br>
+                                    <?php 
+                                        $date_from = new DateTime($sejour->date_from);
+                                        echo ' Du '.strftime('%d', $date_from->getTimestamp());
+
+                                        $date_to = new DateTime($sejour->date_to);
+                                        echo ' au '.strftime('%d %B', $date_to->getTimestamp());
+                                    ?>
+                                    <?='<br><strong>'.count($inscriptions).' / '.$sejour->capacity_max.'</strong>' ?>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if ($i < 6) { $i++; } else { $i = 0; } ?>
+            <?php endforeach; ?>   
+  
+        </div>
+    </div>
+    <!-- /Séjours à venir -->
 </div>
 
 <?php /*
@@ -211,32 +174,52 @@
         </div>
     </div>
 */ ?>
-    <script>
+
+
+
+
+<?php ob_start(); ?>
+<script type="text/javascript" src="/assets/libs/jquery.easypiechart/jquery.easy-pie-chart.js"></script>
+<script type="text/javascript" src="/assets/libs/odometer/odometer.min.js"></script>
+<script>
     $(function() {
-        $('.chart').easyPieChart({
+        $('.epie-chart').easyPieChart({
             easing: 'easeOutBounce',
-            onStep: function(from, to, percent) {
-                $(this.el).find('.percent').text(Math.round(percent));
+            size: 140,
+            animate: 1500,
+            lineWidth: 7
+        });
+
+        setTimeout(function() {
+            $('#number-enfants').text('<?php echo count(enfant::getList()); ?>');
+            // $('#number-contacts').text('<?php echo count(contact::getList()); ?>');
+        }, 10);
+        setTimeout(function() {
+            $('#number-sejours').text('<?php echo count(sejour::getList()); ?>');
+        }, 300);
+        setTimeout(function() {
+            $('#number-structures').text('<?php echo count(structure::getList()); ?>');
+        }, 600);
+        setTimeout(function() {
+            $('#number-dossiers').text('<?php echo count(dossier::getList()); ?>');
+        }, 900);
+
+        $('#datatable').DataTable({
+            "bFilter": false,
+            "bLengthChange": false,
+            "oLanguage": {
+                "sInfo": "_START_ - _END_ sur _TOTAL_ ",
+                "oPaginate": {
+                    "sFirst": "",
+                    "sPrevious": "",
+                    "sNext": "",
+                    "sLast": ""
+                }
             }
         });
-        // var chart = window.chart = $('.chart').data('easyPieChart');
-        // $('.js_update').on('click', function() {
-        //     chart.update(Math.random()*200-100);
-        // });
     });
-    </script>
+</script>
+<?php $scripts .= ob_get_contents();
+ob_end_clean(); ?>
 
-        <script>
-            $(function() {
-                setTimeout(function() {
-                    $('#number-enfants').text('<?php echo count(enfant::getList()); ?>');
-                    $('#number-contacts').text('<?php echo count(contact::getList()); ?>');
-                    $('#number-structures').text('<?php echo count(structure::getList()); ?>');
-                    $('#number-sejours').text('<?php echo count(sejour::getList()); ?>');
-                    $('#number-dossiers').text('<?php echo count(dossier::getList()); ?>');
-                }, 10);
-
-            });
-        </script>
-        
-        <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
