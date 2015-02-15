@@ -511,11 +511,6 @@
             var end = lastChecked.data('end');
             var id = lastChecked.data('id');
 
-            console.log(dataSejours);
-            console.log(start);
-            console.log(end);
-
-            console.log(countWeeks(start, end));
             if( countWeeks(start, end) < 1 ) {
                 for (var i = 0; i < dataSejours.length; i++) {
                     if (dataSejours[i].start > end && dataSejours[i].id != id && countWeeks(dataSejours[i].start, dataSejours[i].end) < 1) {
