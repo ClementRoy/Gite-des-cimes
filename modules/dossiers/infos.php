@@ -191,7 +191,7 @@
             <?php  if(!$dossier->finished): ?>
                 <div class="alert alert-warning">
                     <i class="icon-warning-sign"></i> 
-                    L'inscription n'est pas encore été finalisée
+                    L'inscription n'a pas encore été finalisée
                 </div>
             <?php endif; ?>
 
@@ -199,7 +199,7 @@
             if(!$dossier->supported): ?>
             <div class="alert alert-warning">
                 <i class="icon-warning-sign"></i> 
-                L'inscription n'est pas encore été prise en charge
+                L'inscription n'a pas encore été prise en charge
             </div>
         <?php endif; ?>
 
