@@ -147,9 +147,6 @@
 <?php $date_edited = new DateTime($dossier->edited); ?>
 
 
-
-
-
 <div class="page-head">
     <div class="row">
         <div class="col-md-8">
@@ -190,14 +187,16 @@
 
                             <?php if(!$dossier->finished): ?>
                                 <div class="alert alert-warning alert-white rounded">
-                                    <i class="fa fa-warning"></i> 
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <div class="icon"><i class="fa fa-warning"></i></div>
                                     L'inscription n'est pas encore été finalisée
                                 </div>
                             <?php endif; ?>
 
                             <?php if(!$dossier->supported): ?>
                                 <div class="alert alert-warning alert-white rounded">
-                                    <i class="fa fa-warning"></i> 
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <div class="icon"><i class="fa fa-warning"></i></div>
                                     L'inscription n'est pas encore été prise en charge
                                 </div>
                             <?php endif; ?>
@@ -223,7 +222,9 @@
                                                         </tr>
                                                     <?php else: ?>
                                                         <tr>
-                                                            <tdcolspan="2"><b>Le contrat</b></td>
+                                                            <td colspan="2">
+                                                               <em>L'inscription doit être finalisé pour pouvoir accéder aux documents.</em>
+                                                            </td>
                                                         </tr>
                                                     <?php endif; ?>
 

@@ -32,10 +32,10 @@
     <?php if ($result): ?>
         <div class="alert alert-success rounded">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <i class="fa fa-check sign"></i><strong>C'est fait !</strong> Le commentaire a bien été enregistré.
+            <i class="fa fa-check-sign"></i><strong>C'est fait !</strong> Le commentaire a bien été enregistré.
         </div>
     <?php else: ?>
-        <div class="alert alert-danger">
+        <div class="alert alert-danger rounded">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <i class="fa fa-times-circle sign"></i><strong>Erreur !</strong> Une erreur s'est produite durant l'enregistrement du commentaire =(
         </div>

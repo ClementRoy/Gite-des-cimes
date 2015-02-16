@@ -908,3 +908,14 @@ address {
 .tab-content {
 	margin-bottom: 30px;
 }
+
+fieldset {
+border: 1px dashed lightgrey;
+padding: 15px;
+transition: background .3s;
+margin-bottom: 20px;
+}
+.help-block {
+	font-weight: normal;
+	margin-top: 0;
+}

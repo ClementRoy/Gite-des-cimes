@@ -43,26 +43,14 @@
         ?>
 
         <?php if($result): ?>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        La structure <strong><?=$form_structure_name; ?></strong> a bien été ajoutée
-                    </div>
-                </div>
+            <div class="alert alert-success rounded">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-check-sign"></i>La structure <strong><?=$form_structure_name; ?></strong> a bien été ajoutée
             </div>
-
         <?php else: ?>
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant l'ajout de la structure, veuillez réessayer
-                    </div>
-                </div>
+            <div class="alert alert-danger rounded">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-times-circle sign"></i>Une erreur s'est produite durant l'ajout de la structure, veuillez réessayer
             </div>
         <?php endif; ?>
 
@@ -95,29 +83,21 @@
 
         <?php if($result): ?>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        La structure <strong><?=$form_structure_name; ?></strong> a bien été modifée
-                    </div>
-                    <a href="/structures/">Retourner à la liste des structures</a>
-
-                </div>
-            </div>
+          <div class="alert alert-success rounded">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <i class="fa fa-check sign"></i>
+              La structure <strong><?=$form_structure_name; ?></strong> a bien été modifée<br>
+              <a href="/structures/">Retourner à la liste des structures</a>
+          </div>
 
         <?php else: ?>
 
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant la modification de la structure, veuillez réessayer
-                    </div>
-                    <a href="/structures/editer/<?=$structure->id ?>">Retourner au formulaire d'édition</a>
-                </div>
-            </div>
+          <div class="alert alert-danger">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <i class="fa fa-times-circle sign"></i>
+              Une erreur s'est produite durant la modification de la structure, veuillez réessayer<br>
+              <a href="/structures/editer/<?=$structure->id ?>">Retourner au formulaire d'édition</a>
+          </div>
         <?php endif; ?>
 
 
@@ -134,186 +114,324 @@
 <?php $date_edited = new DateTime($structure->edited); ?>
 
 
-<div class="title">
-  <div class="row header">
-    <div class="col-md-9">
 
-      <h1><a href="#" class="trigger"><i class="big-icon icon-building"></i></a>
+<div class="page-head">
+    <div class="row">
+        <div class="col-md-8">
+             <a href="#" class="trigger dropdown-toggle" data-toggle="dropdown">
+                <i class="fa big-icon fa-building"></i>
+            </a>
+            <ul class="dropdown-menu animated fadeInDown">
+                <li><a href="/structures/editer/id/<?=$structure->id; ?>" class="item"><i class="fa fa-edit"></i> Modifier</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#modal-remove" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>
+            </ul>
 
-        <?=$structure->name; ?>
-      </h1>
-
-      <div class="pop-dialog">
-        <div class="pointer">
-          <div class="arrow"></div>
-          <div class="arrow_border"></div>
+            <h1>
+                <?=$structure->name; ?>
+            </h1>
         </div>
-        <div class="body">
-          <div class="menu">
-            <a href="/structures/editer/id/<?=$structure->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
-            <a href="/structures/supprimer/id/<?=$structure->id; ?>" class="item" data-toggle="modal"><i class="icon-remove"></i> Supprimer</a>
-
-          </div>
+        <div class="col-md-4 text-right">
+            <!-- <a href="#" data-toggle="modal" data-target="#modal-remove" class="item">Supprimer cette fiche</a> -->
+            <a href="/structures/editer/id/<?=$structure->id; ?>" class="btn btn-primary btn-rad">Modifier cette structure</a>
         </div>
-      </div>
-
     </div>
-
-    <div class="col-md-3 text-right">
-      <div class="col-md-4 text-right pull-right">
-        <i class="icon-cog"></i>
-      </div>
-    </div>
-  </div>
 </div>
+
 
 <div class="row">
-<div class="col-md-9">
-  <div class="content <?=($structure->archived)?' archived':' ';?>">
+    <div class="col-sm-9">
         <div class="row">
-          <div class="col-md-6">
-            <div class="panel panel-default">
-              <div class="panel-heading">Coordonnées</div>
-              <ul class="list-group">
-                <li class="list-group-item">
-                  <p><strong>Email :</strong></p>
-                  <p><?=(!empty($structure->email)) ? $structure->email : EMPTYVAL; ?></p>
-                </li>
-                <li class="list-group-item">
-                  <p><strong>Adresse :</strong></p>
-                  <p><?=$structure->address_number; ?> <?=$structure->address_street; ?><br />
-                    <?=$structure->address_postal_code; ?> <?=$structure->address_city; ?>
-                  </p>    
-                </li>
-                <li class="list-group-item">
-                  <p><strong>Téléphone :</strong></p>
-                  <p><?=(!empty($structure->phone)) ? tool::formatTel($structure->phone) : EMPTYVAL; ?></p>
-                </li>
-                <li class="list-group-item">
-                  <p><strong>Fax :</strong></p>
-                  <p><?=(!empty($structure->fax)) ? tool::formatTel($structure->fax) : EMPTYVAL; ?></p>
-                </li>
-              </ul>
+            <div class="col-md-12">
+
+                <div class="block-flat">
+                    <div class="content">
+                        <table class="no-border no-strip information">
+                            <tbody class="no-border-x no-border-y">
+                                <tr>
+                                    <td style="width:19%;" class="category"><strong>Coordonnées</strong></td>
+                                    <td>
+                                        <table class="no-border no-strip skills">
+                                            <tbody class="no-border-x no-border-y">
+
+                                                <tr>
+                                                    <td style="width:30%;">Email</td>
+                                                    <td><?=(!empty($structure->email)) ? $structure->email : EMPTYVAL; ?></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%;">Téléphone</td>
+                                                    <td><?=(!empty($structure->phone)) ? tool::formatTel($structure->phone) : EMPTYVAL; ?></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%;">Fax</td>
+                                                    <td><?=(!empty($structure->fax)) ? tool::formatTel($structure->fax) : EMPTYVAL; ?></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%;">Adresse</td>
+                                                    <td>
+                                                        <?=$structure->address_number; ?> <?=$structure->address_street; ?><br />
+                                                        <?=$structure->address_postal_code; ?> <?=$structure->address_city; ?>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:19%;" class="category"><strong>Autres informations</strong></td>
+                                    <td>
+                                        <table class="no-border no-strip skills">
+                                            <tbody class="no-border-x no-border-y">
+
+                                                <tr>
+                                                    <td style="width:30%;">Service</td>
+                                                    <td><?=(!empty($structure->service)) ? $structure->service : EMPTYVAL; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:30%;">Structure payeuse</td>
+                                                    <td><?=($structure->payer>0)?'Oui':'Non'; ?></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="panel panel-default">
-              <div class="panel-heading">Informations</div>
-              <ul class="list-group">
-                <li class="list-group-item">
-                  <p><strong>Nom de la structure :</strong></p>
-                  <p><?=(!empty($structure->name)) ? $structure->name : EMPTYVAL; ?></p>
-                </li>
-                <?php if (!isset($structure->service)): ?>
-                  <li class="list-group-item">
-                    <p><strong>Service :</strong></p>
-                    <p><?=(!empty($structure->service)) ? $structure->service : EMPTYVAL; ?></p>
-                  </li>
-                <?php endif ?>
+        </div>
 
-                <li class="list-group-item">
-                  <p><strong>Structure payeuse  :</strong></p>
-                  <p><?=($structure->payer>0)?'Oui':'Non'; ?></p>    
-                </li>
-              </ul>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="section-head">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3>Les contacts associés</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <?php if(!empty($contacts)): ?>
+                    <div class="block-flat tb-special tb-no-options">
+                        <div class="content">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>Prénom</th>
+                                            <th>Nom</th>
+                                            <th>Email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($contacts as $contact): ?>
+                                            <tr>
+                                                <td>
+                                                    <a href="/contacts/infos/id/<?=$contact->id ?>"><?=$contact->firstname ?></a>
+                                                    <ul class="dropdown-menu">
+                                                    <li><a href="/contacts/infos/id/<?=$contact->id ?>" class="item"><i class="fa fa-share"></i> Voir le contact</a></li>
+                                                    <li><a href="/contacts/editer/id/<?=$contact->id ?>" class="item"><i class="fa fa-edit"></i> Modifier le contact</a></li>
+                                                    </ul>
+                                                </td>
+                                                <td>
+                                                    <a href="/contacts/infos/id/<?=$contact->id ?>"><?=$contact->lastname ?></a>
+                                                </td>
+                                                <td>
+                                                    <a href="/contacts/infos/id/<?=$contact->id ?>"><?=$contact->email ?></a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <?php ob_start(); ?>
+                    <script>
+                        $('#datatable').dataTable({
+                            'bFilter': false,
+                            'bLengthChange': false,
+                            'iDisplayLength': 50,
+                            'oLanguage': {
+                                'sInfo': '_START_ - _END_ sur _TOTAL_ ',
+                                'oPaginate': {
+                                    'sFirst': '',
+                                    'sPrevious': '',
+                                    'sNext': '',
+                                    'sLast': ''
+                                }
+                            }
+                        });
+                    </script>
+                    <?php $scripts .= ob_get_contents();
+                    ob_end_clean(); ?>
+                <?php else: ?>
+                    <div class="block-flat">
+                        <em>Aucun contact n'est enregistré pour cette structure</em>
+                    </div>
+                <?php endif; ?>
             </div>
-          </div>
         </div>
-        <h4>Coordonnées des contacts</h4>
-
-        <table class="table table-hover extendlink">
-          <thead>
-            <tr>
-              <th class="col-md-1">
-                Prénom
-              </th>
-              <th class="col-md-3">
-                <span class="line"></span>
-                Nom
-              </th>
-              <th class="col-md-5">
-                <span class="line"></span>
-                Email
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach($contacts as $contact): ?>
-              <tr>
-                <td>
-                  <a href="/contacts/infos/id/<?=$contact->id ?>"><?=$contact->firstname ?></a>
-                </td>
-                <td>
-                  <a href="/contacts/infos/id/<?=$contact->id ?>"><?=$contact->lastname ?></a>
-                </td>
-                <td>
-                  <a href="/contacts/infos/id/<?=$contact->id ?>"><?=$contact->email ?></a>
-                </td>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
-        </table>
 
 
-        <h4>Les enfants affiliés</h4>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="section-head">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3>Les enfants affiliés</h3>
+                        </div>
+                    </div>
+                </div>
 
-        <table class="table table-hover extendlink">
-          <thead>
-            <tr>
-              <th class="col-md-1">
-                Prénom
-              </th>
-              <th class="col-md-3">
-                <span class="line"></span>
-                Nom
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach($enfants as $enfant): ?>
-              <tr>
-                <td>
-                  <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->firstname ?></a>
-                </td>
-                <td>
-                  <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->lastname ?></a>
-                </td>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
-        </table>
-
-
-      </div>
-    </div>
-    <div class="col-md-3 address">
-     <div class="contact">
-      <h6><strong>Adresse</strong></h6>
-      <?php $geo = tool::getLatLng($structure->address_number.' '.$structure->address_street.' '.$structure->address_postal_code.' '.$structure->address_city); ?>
-      <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$geo[0]; ?>,<?=$geo[1]; ?>&zoom=12&size=210x200&scale=2&markers=<?=$geo[0]; ?>,<?=$geo[1]; ?>&sensor=false" width="100%" alt="">
-      
-      <p><?=$structure->address_number; ?> <?=$structure->address_street; ?></p>
-      <p><?=$structure->address_postal_code; ?> <?=$structure->address_city; ?></p>
-
-    </div>
-    <?php if(!empty($structure->email)): ?>
-    <div class="contact">
-      <h6><strong>Téléphone :</strong></h6>
-      <p><i class="icon-phone"></i> <?=(!empty($structure->phone)) ? tool::formatTel($structure->phone) : EMPTYVAL; ?></p>
-      </div>
-       <?php endif; ?>
-
-      <?php if(!empty($structure->email)): ?>
-        <div class="contact">
-          <h6><strong>Email :</strong></h6>
-          <p><i class="icon-envelope"></i> <a href="mailto:<?=(!empty($structure->email)) ? $structure->email : EMPTYVAL; ?>"><?=(!empty($structure->email)) ? $structure->email : EMPTYVAL; ?></a></p>
+                <?php if(!empty($enfants)): ?>
+                    <div class="block-flat tb-special tb-no-options">
+                        <div class="content">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="datatable2">
+                                    <thead>
+                                        <tr>
+                                            <th>Prénom</th>
+                                            <th>Nom</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($enfants as $enfant): ?>
+                                            <tr>
+                                                <td>
+                                                    <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->firstname ?></a>
+                                                    <ul class="dropdown-menu">
+                                                    <li><a href="/enfants/infos/id/<?=$enfant->id ?>" class="item"><i class="fa fa-share"></i> Voir la fiche</a></li>
+                                                    <li><a href="/enfants/editer/id/<?=$enfant->id ?>" class="item"><i class="fa fa-edit"></i> Modifier la fiche</a></li>
+                                                    </ul>
+                                                </td>
+                                                <td>
+                                                    <a href="/enfants/infos/id/<?=$enfant->id ?>"><?=$enfant->lastname ?></a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <?php ob_start(); ?>
+                    <script>
+                        $('#datatable2').dataTable({
+                            'bFilter': false,
+                            'bLengthChange': false,
+                            'iDisplayLength': 50,
+                            'oLanguage': {
+                                'sInfo': '_START_ - _END_ sur _TOTAL_ ',
+                                'oPaginate': {
+                                    'sFirst': '',
+                                    'sPrevious': '',
+                                    'sNext': '',
+                                    'sLast': ''
+                                }
+                            }
+                        });
+                    </script>
+                    <?php $scripts .= ob_get_contents();
+                    ob_end_clean(); ?>
+                <?php else: ?>
+                    <div class="block-flat">
+                        <em>Aucun enfant n'est enregistré pour cette structure</em>
+                    </div>
+                <?php endif; ?>
+            </div>
         </div>
-    <?php endif; ?>
+
+
     </div>
-  </div>
-  </div>
-  <?php //tool::output($structure); ?>
-  <?php //tool::output($contacts); ?>
+
+
+    <div class="col-sm-3 side-right">
+
+        <?php $geo = tool::getLatLng($structure->address_number.' '.$structure->address_street.' '.$structure->address_postal_code.' '.$structure->address_city); ?>
+        <div class="block-flat bars-widget">
+            <div class="gmap-sm">
+                <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$geo[0]; ?>,<?=$geo[1]; ?>&zoom=12&size=210x200&scale=2&markers=<?=$geo[0]; ?>,<?=$geo[1]; ?>&sensor=false" width="100%" alt="">
+            </div>
+
+            <address>
+                <p>
+                    <strong><?=$structure->name; ?></strong>
+                    <?php if ( !empty($structure->address_number) OR !empty($structure->address_street) ): ?>
+                        <br><?=$structure->address_number; ?> <?=$structure->address_street; ?>
+                        <br><?=$structure->address_postal_code; ?> <?=$structure->address_city; ?>
+                    <?php endif; ?>
+                </p>
+                <?php if(!empty($structure->phone)): ?>
+                    <p>Tél : <?=(!empty($structure->phone)) ? tool::formatTel($structure->phone) : EMPTYVAL; ?></p>
+                <?php endif; ?>
+                <?php if(!empty($structure->emal)): ?>
+                    <p>Email : <a href="mailto:<?=(!empty($structure->email)) ? $structure->email : EMPTYVAL; ?>"><?=(!empty($structure->email)) ? $structure->email : EMPTYVAL; ?></a></p>
+                <?php endif; ?>
+            </address>
+        </div>
+    </div>
+
 </div>
+
+
+<div class="modal fade" id="modal-remove" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <div class="i-circle warning"><i class="fa fa-warning"></i></div>
+                    <h4>Attention !</h4>
+                    <p>
+                        Vous êtes sur le point de supprimer la structure <strong><?=$structure->name?></strong>.<br>
+                        Êtes-vous sur de vouloir effectuer cette opération ?
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <form id="form-remove-structure" action="/structures/" method="post">
+                    <a href="#" class="btn btn-default btn-flat" data-dismiss="modal">Annuler</a>
+                    <input id="remove-id" type="hidden" name="id" value="<?=$structure->id;?>">
+                    <input type="hidden" name="action" value="supprimer">
+                    <input type="hidden" name="confirm" value="true">
+                    <input type="submit" class="btn btn-warning btn-flat" value="Supprimer la strucutre">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<?php ob_start(); ?>
+<script>
+    $(function() {
+
+        $('[data-toggle=popover]').on('click', function (e) {
+            e.preventDefault();
+            $('[data-toggle=popover]').not(this).popover('hide');
+        });
+        $('body').on('click', '.btn-close', function (e) {
+            e.preventDefault();
+            $('[data-toggle=popover]').popover('hide');
+        });
+
+    });
+</script>
+<?php $scripts .= ob_get_contents();
+ob_end_clean(); ?>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

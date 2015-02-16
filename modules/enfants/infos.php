@@ -499,7 +499,7 @@
                                                     <tr>
                                                         <td style="width:30%;"><b>Assurance (RC)</b>
                                                         <?php if ($enfant->self_assurance > 0): ?>
-                                                        <br><small>Validité :<?=(!empty($enfant->self_assurance_expiration_date))? $enfant->self_assurance_expiration_date : EMPTYVAL; ?></small>
+                                                        <br><small>Validité : <?=(!empty($enfant->self_assurance_expiration_date))? $enfant->self_assurance_expiration_date : EMPTYVAL; ?></small>
                                                         <?php endif ?>
                                                         </td>
                                                         <td>
@@ -593,7 +593,7 @@
                                                 <ul class="dropdown-menu">
                                                     <li><a href="/dossiers/infos/id/<?=$dossier->id; ?>" class="item"><i class="fa fa-share"></i> Voir la fiche</a></li>
                                                     <li><a href="/dossiers/editer/id/<?=$dossier->id; ?>" class="item"><i class="fa fa-edit"></i> Modifier</a></li>
-                                                    <li><a href="/dossiers/supprimer/id/<?=$dossier->id; ?>" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>
+                                                    <!-- <li><a href="/dossiers/supprimer/id/<?=$dossier->id; ?>" class="item"><i class="fa fa-remove"></i> Supprimer</a></li> -->
                                                 </ul>
 
                                             </td>

@@ -528,7 +528,7 @@
                         <div class="col-md-8 col-md-offset-2">
                             <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-update" value="Modifier la fiche">
                             <span>OU</span>
-                            <a href="/enfants/" class="reset">Annuler</a>
+                            <a href="/enfants/infos/id/<?=$enfant->id; ?>" class="reset">Annuler</a>
                         </div>
                     </div>
                 </form>
@@ -702,31 +702,10 @@
             }
         });
 
-        $('input[type="text"]').each(function(index, el) {
+        $('input[type="text"], textarea, label.radio, label.radio-inline').parent('div').each(function(index, el) {
             $(el).tooltip({
-                placement: $(this).data("placement") || 'right',
-                trigger: $(this).data("trigger") || 'focus',
-                container: 'body'
-            });
-        });
-        $('textarea').each(function(index, el) {
-            $(el).tooltip({
-                placement: $(this).data("placement") || 'right',
-                trigger: $(this).data("trigger") || 'focus',
-                container: 'body'
-            });
-        });
-        $('label.radio').parent('div').each(function(index, el) {
-            $(el).tooltip({
-                placement: $(this).data("placement") || 'right',
-                trigger: $(this).data("trigger") || 'hover',
-                container: 'body'
-            });
-        });
-        $('label.radio-inline').parent('div').each(function(index, el) {
-            $(el).tooltip({
-                placement: $(this).data("placement") || 'right',
-                trigger: $(this).data("trigger") || 'hover',
+                placement: 'right',
+                trigger: 'hover',
                 container: 'body'
             });
         });

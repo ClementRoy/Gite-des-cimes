@@ -6,33 +6,40 @@
 <?php $result = hebergement::add(array()); ?>
 <?php $id = hebergement::getLastID(); ?>
 
-    <div class="title">
-        <div class="row header">
-            <div class="col-md-12">
-                <h1>Ajouter un hébergement</h1>
-            </div>
+
+<!-- Page title -->
+<div class="page-head">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Ajouter un hébergement</h1>
         </div>
     </div>
+</div>
+<!-- /Page title -->
+
+
+
+<div class="block-flat">
     <div class="content">
 
 
-        <form id="form-add-hebergement" method="post" action="/hebergements/infos/id/<?=$id ?>" parsley-validate>
+        <form id="form-add-hebergement" method="post" action="/hebergements/infos/id/<?=$id ?>" class="form-horizontal group-border-dashed maped-form" parsley-validate>
 
-                    <input type="hidden" value="<?=$id ?>" name="id" />
+            <input type="hidden" value="<?=$id ?>" name="id" />
 
 
             <div class="row">
-                <div class="field-box row">
-                    <label class="col-md-2" for="form-hebergement-nom">Nom de l'hébergement</label>
-                    <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="form-hebergement-nom">Nom de l'hébergement</label>
+                    <div class="col-sm-6">
                         <input id="form-hebergement-name" name="form_hebergement_name" class="form-control" type="text" 
                         data-toggle="tooltip" title="Renseignez le nom de l'hébergement." parsley-required="true">
                     </div>                            
                 </div>
 
-                <div class="field-box row">
-                    <label class="col-md-2" for="form-hebergement-adresse-numero">Adresse de l'hébergement</label>
-                    <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="form-hebergement-adresse-numero">Adresse de l'hébergement</label>
+                    <div class="col-sm-6">
                         <div class="row">
                             <div class="col-md-3">
                                 <input id="form-hebergement-adresse-numero" name="form_hebergement_adresse_numero" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse de l'hébergement.">
@@ -47,16 +54,17 @@
                     </div>                            
                 </div>
 
-                <div class="field-box row">
-                    <label class="col-md-2" for="form-hebergement-note">Notes</label>
-                    <div class="col-md-4 col-sm-5">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="form-hebergement-note">Notes</label>
+                    <div class="col-sm-6">
                         <textarea id="form-hebergement-note" name="form_hebergement_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de la strucure."></textarea>
                     </div>
                 </div>
 
-                <div class="field-box actions">
-                    <div class="col-md-6 col-md-offset-2">
-                        <input type="submit" class="btn btn-primary" name="submit-add" value="Ajouter l'hébergement">
+
+                <div class="form-group actions text-center">
+                    <div class="col-md-8 col-md-offset-2">
+                        <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-add" value="Ajouter l'hébergement">
                         <span>OU</span>
                         <a href="/hebergements/" class="reset">Annuler</a>
                     </div>
@@ -66,5 +74,14 @@
         </form>
 
     </div>
+</div>
 
+
+<?php ob_start(); ?>
+<script>
+    $(function() {
+    });
+</script>
+<?php $scripts .= ob_get_contents();
+ob_end_clean(); ?>
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
