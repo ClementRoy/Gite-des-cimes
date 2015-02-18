@@ -29,5 +29,10 @@
     "moment": "~2.9.0",
     "jquery-stickytabs": "*",
     "jquery.gritter": "~1.7.4"
+  },
+  "resolutions": {
+    "jquery": "~1.10.2",
+    "bootstrap": ">= 3.0.0",
+    "moment": "~2.8.0"
   }
 }
