@@ -27,28 +27,28 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="form-enfant-prenom">Prénom</label>
                         <div class="col-sm-6">
-                            <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le prénom de l'enfant." parsley-required="true">
+                            <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="form-enfant-nom">Nom</label>
                         <div class="col-sm-6">
-                            <input id="form-enfant-nom" name="form_enfant_nom" class="form-control" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le nom de l'enfant." parsley-required="true">
+                            <input id="form-enfant-nom" name="form_enfant_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'enfant." parsley-required="true">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="form-enfant-picture">Photo</label>
                         <div class="col-sm-6">
-                            <input type="file" class="btn btn-primary btn-trans btn-rad" name="form_enfant_picture" id="form-enfant-picture">
+                            <input type="file"  name="form_enfant_picture" class="btn btn-primary btn-trans btn-rad" id="form-enfant-picture">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label"  for="form-enfant-naissance">Date de naissance</label>
                         <div class="col-sm-6">
-                            <input parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" id="form-enfant-naissance"  name="form_enfant_naissance" type="text" class="form-control input-datepicker" placeholder="JJ/MM/AAAA" data-toggle="tooltip" data-placement="right" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa).">
+                            <input parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" id="form-enfant-naissance"  name="form_enfant_naissance" type="text" class="form-control input-datepicker" placeholder="JJ/MM/AAAA" data-toggle="tooltip" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa).">
                         </div>
                     </div>
 
@@ -78,7 +78,7 @@
                                     <?php foreach($structures as $structure): ?>
                                         <option value="<?=$structure->id ?>"><?=$structure->name ?></option>
                                     <?php endforeach; ?>
-                                </select>                                
+                                </select>
                             </div>
                         </div>
 
@@ -86,8 +86,8 @@
                             <label class="col-sm-4 control-label" for="form-enfant-contact-select">Nom du contact</label>
                             <div class="col-sm-6">
                                 <select class="form-control" id="form-enfant-contact-select" name="form_enfant_contact">
-                                    <option selected="">Sélectionnez un contact</option>
-                                </select>                              
+                                    <option selected="" value="">Sélectionnez un contact</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -142,28 +142,28 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="form-enfant-nom-pere">Nom du père</label>
                                 <div class="col-sm-6">
-                                    <input id="form-enfant-nom-pere" name="form_enfant_nom_pere" class="form-control" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le nom et prénom du père.">
+                                    <input id="form-enfant-nom-pere" name="form_enfant_nom_pere" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom du père.">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="form-enfant-telephone-fixe-pere">Téléphone fixe</label>
                                 <div class="col-sm-6">
-                                    <input id="form-enfant-telephone-pere" name="form_enfant_telephone_fixe_pere" class="form-control input-phone" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de téléphone fixe du père.">
+                                    <input id="form-enfant-telephone-pere" name="form_enfant_telephone_fixe_pere" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe du père.">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="form-enfant-telephone-portable-pere">Téléphone portable</label>
                                 <div class="col-sm-6">
-                                    <input id="form-enfant-telephone-pere" name="form_enfant_telephone_portable_pere" class="form-control input-phone" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de téléphone portable du père.">
+                                    <input id="form-enfant-telephone-pere" name="form_enfant_telephone_portable_pere" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable du père.">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="form-enfant-telephone-professionnel-pere">Téléphone professionnel</label>
                                 <div class="col-sm-6">
-                                    <input id="form-enfant-professionnel-pere" name="form_enfant_telephone_professionnel_pere" class="form-control input-phone" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de téléphone professionnel du père.">
+                                    <input id="form-enfant-professionnel-pere" name="form_enfant_telephone_professionnel_pere" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel du père.">
                                 </div>
                             </div>
 
@@ -172,14 +172,14 @@
                                 <div class="col-sm-6">
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <input id="form-enfant-adresse-numero-pere" name="form_enfant_adresse_numero_pere" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de l'adresse du père.">
+                                            <input id="form-enfant-adresse-numero-pere" name="form_enfant_adresse_numero_pere" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse du père.">
                                         </div>
-                                        <div class="col-sm-9"><input id="form-enfant-adresse-voirie-pere" name="form_enfant_adresse_voirie_pere" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" data-placement="right" title="Renseignez le nom de la voirie de l'adresse du père."></div>
+                                        <div class="col-sm-9"><input id="form-enfant-adresse-voirie-pere" name="form_enfant_adresse_voirie_pere" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse du père."></div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-4"><input id="form-enfant-adresse-code-postal-pere" name="form_enfant_adresse_code_postal_pere" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" data-placement="right" title="Renseignez le code postal de la ville du père."></div>
-                                        <div class="col-sm-8"><input id="form-enfant-adresse-code-ville-pere" name="form_enfant_adresse_code_ville_pere" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" data-placement="right" title="Renseignez le nom de la ville du père."></div>
+                                        <div class="col-sm-4"><input id="form-enfant-adresse-code-postal-pere" name="form_enfant_adresse_code_postal_pere" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville du père."></div>
+                                        <div class="col-sm-8"><input id="form-enfant-adresse-code-ville-pere" name="form_enfant_adresse_code_ville_pere" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville du père."></div>
                                     </div>
                                 </div>
                             </div>
@@ -192,7 +192,7 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="form-enfant-nom-mere">Nom de la mère</label>
                                 <div class="col-sm-6">
-                                    <input id="form-enfant-nom-mere" name="form_enfant_nom_mere" class="form-control" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le nom et prénom de la mère.">
+                                    <input id="form-enfant-nom-mere" name="form_enfant_nom_mere" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom de la mère.">
                                 </div>
                             </div>
 
@@ -200,19 +200,19 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="form-enfant-telephone-fixe-mere">Téléphone fixe</label>
                                 <div class="col-sm-6">
-                                    <input id="form-enfant-telephone-fixe-mere" name="form_enfant_telephone_fixe_mere" class="form-control input-phone" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de téléphone fixe de la mère.">
+                                    <input id="form-enfant-telephone-fixe-mere" name="form_enfant_telephone_fixe_mere" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe de la mère.">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="form-enfant-telephone-portable-mere">Téléphone portable</label>
                                 <div class="col-sm-6">
-                                    <input id="form-enfant-telephone-portable-mere" name="form_enfant_telephone_portable_mere" class="form-control input-phone" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de téléphone portable de la mère.">
+                                    <input id="form-enfant-telephone-portable-mere" name="form_enfant_telephone_portable_mere" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable de la mère.">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="form-enfant-telephone-professionnel-mere">Téléphone professionnel</label>
                                 <div class="col-sm-6">
-                                    <input id="form-enfant-telephone-professionnel-mere" name="form_enfant_telephone_professionnel_mere" class="form-control input-phone" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de téléphone professionnel de la mère.">
+                                    <input id="form-enfant-telephone-professionnel-mere" name="form_enfant_telephone_professionnel_mere" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel de la mère.">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -220,14 +220,14 @@
                                 <div class="col-sm-6">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <input id="form-enfant-adresse-numero-mere" name="form_enfant_adresse_numero_mere" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de l'adresse de la mère.">
+                                            <input id="form-enfant-adresse-numero-mere" name="form_enfant_adresse_numero_mere" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse de la mère.">
                                         </div>
-                                        <div class="col-md-9"><input id="form-enfant-adresse-voirie-mere" name="form_enfant_adresse_voirie_mere" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" data-placement="right" title="Renseignez le nom de la voirie de l'adresse de la mère."></div>
+                                        <div class="col-md-9"><input id="form-enfant-adresse-voirie-mere" name="form_enfant_adresse_voirie_mere" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse de la mère."></div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-4"><input id="form-enfant-adresse-code-postal-mere" name="form_enfant_adresse_code_postal_mere" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" data-placement="right" title="Renseignez le code postal de la ville de la mère."></div>
-                                        <div class="col-md-8"><input id="form-enfant-adresse-code-ville-mere" name="form_enfant_adresse_code_ville_mere" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" data-placement="right" title="Renseignez le nom de la ville de la mère."></div>
+                                        <div class="col-md-4"><input id="form-enfant-adresse-code-postal-mere" name="form_enfant_adresse_code_postal_mere" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville de la mère."></div>
+                                        <div class="col-md-8"><input id="form-enfant-adresse-code-ville-mere" name="form_enfant_adresse_code_ville_mere" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville de la mère."></div>
                                     </div>
                                 </div>
                             </div>
@@ -238,25 +238,25 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-nom-tuteur">Nom du tuteur</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-nom-tuteur" name="form_enfant_nom_tuteur" class="form-control" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le nom et prénom du tuteur.">
+                                <input id="form-enfant-nom-tuteur" name="form_enfant_nom_tuteur" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom du tuteur.">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-telephone-fixe-tuteur">Téléphone fixe</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-telephone-fixe-tuteur" name="form_enfant_telephone_fixe_tuteur" class="form-control input-phone" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de téléphone fixe du tuteur.">
+                                <input id="form-enfant-telephone-fixe-tuteur" name="form_enfant_telephone_fixe_tuteur" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe du tuteur.">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-telephone-portable-tuteur">Téléphone portable</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-telephone-portable-tuteur" name="form_enfant_telephone_portable_tuteur" class="form-control input-phone" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de téléphone portable du tuteur.">
+                                <input id="form-enfant-telephone-portable-tuteur" name="form_enfant_telephone_portable_tuteur" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable du tuteur.">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-telephone-travail-tuteur">Téléphone professionnel</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-telephone-professionnel-tuteur" name="form_enfant_telephone_professionnel_tuteur" class="form-control input-phone" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de téléphone professionnel du tuteur.">
+                                <input id="form-enfant-telephone-professionnel-tuteur" name="form_enfant_telephone_professionnel_tuteur" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel du tuteur.">
                             </div>
                         </div>
                         <div class="form-group">
@@ -264,14 +264,14 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <input id="form-enfant-adresse-numero-tuteur" name="form_enfant_adresse_numero_tuteur" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de l'adresse du tuteur.">
+                                        <input id="form-enfant-adresse-numero-tuteur" name="form_enfant_adresse_numero_tuteur" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse du tuteur.">
                                     </div>
-                                    <div class="col-md-9"><input id="form-enfant-adresse-voirie-tuteur" name="form_enfant_adresse_voirie_tuteur" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" data-placement="right" title="Renseignez le nom de la voirie de l'adresse du tuteur."></div>
+                                    <div class="col-md-9"><input id="form-enfant-adresse-voirie-tuteur" name="form_enfant_adresse_voirie_tuteur" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse du tuteur."></div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><input id="form-enfant-adresse-code-postal-tuteur" name="form_enfant_adresse_code_postal_tuteur" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" data-placement="right" title="Renseignez le code postal de la ville du tuteur."></div>
-                                    <div class="col-md-8"><input id="form-enfant-adresse-code-ville-tuteur" name="form_enfant_adresse_code_ville_tuteur" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" data-placement="right" title="Renseignez le nom de la ville du tuteur."></div>
+                                    <div class="col-md-4"><input id="form-enfant-adresse-code-postal-tuteur" name="form_enfant_adresse_code_postal_tuteur" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville du tuteur."></div>
+                                    <div class="col-md-8"><input id="form-enfant-adresse-code-ville-tuteur" name="form_enfant_adresse_code_ville_tuteur" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville du tuteur."></div>
                                 </div>
                             </div>
                         </div>
@@ -280,7 +280,7 @@
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Domiciliation de l'enfant</label>
-                        <div class="col-sm-6" data-toggle="tooltip" data-placement="right" title="Précisez chez qui habite l'enfant.">
+                        <div class="col-sm-6" data-toggle="tooltip" title="Précisez chez qui habite l'enfant.">
                             <div class="radio">
                                 <label for="form-enfant-domiciliation-responsable">
                                     <input type="radio" class="icheck" name="form_enfant_domiciliation" id="form-enfant-domiciliation-responsable" value="responsable" checked="checked">
@@ -300,26 +300,26 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-nom-famille">Nom de la famille d'accueil</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-nom-famille" name="form_enfant_nom_famille" class="form-control" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le nom de la famille d'accueil.">
+                                <input id="form-enfant-nom-famille" name="form_enfant_nom_famille" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de la famille d'accueil.">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-telephone-fixe-famille">Téléphone fixe</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-telephone-fixe-famille" name="form_enfant_telephone_fixe_famille" class="form-control input-phone" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de téléphone fixe de la famille d'accueil.">
+                                <input id="form-enfant-telephone-fixe-famille" name="form_enfant_telephone_fixe_famille" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe de la famille d'accueil.">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-telephone-portable-famille">Téléphone portable</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-telephone-portable-famille" name="form_enfant_telephone_portable_famille" class="form-control input-phone" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de téléphone portable de la famille d'accueil.">
+                                <input id="form-enfant-telephone-portable-famille" name="form_enfant_telephone_portable_famille" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone portable de la famille d'accueil.">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-telephone-professionnel-famille">Téléphone professionnel</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-telephone-professionnel-famille" name="form_enfant_telephone_professionnel_famille" class="form-control input-phone" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de téléphone professionnel de la famille d'accueil.">
+                                <input id="form-enfant-telephone-professionnel-famille" name="form_enfant_telephone_professionnel_famille" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone professionnel de la famille d'accueil.">
                             </div>
                         </div>
 
@@ -328,14 +328,14 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <input id="form-enfant-adresse-numero-famille" name="form_enfant_adresse_numero_famille" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de l'adresse de la famille d'accueil.">
+                                        <input id="form-enfant-adresse-numero-famille" name="form_enfant_adresse_numero_famille" class="form-control adresse-numero" type="text" placeholder="N°" data-toggle="tooltip" title="Renseignez le numéro de l'adresse de la famille d'accueil.">
                                     </div>
-                                    <div class="col-md-9"><input id="form-enfant-adresse-voirie-famille" name="form_enfant_adresse_voirie_famille" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" data-placement="right" title="Renseignez le nom de la voirie de l'adresse de la famille d'accueil."></div>
+                                    <div class="col-md-9"><input id="form-enfant-adresse-voirie-famille" name="form_enfant_adresse_voirie_famille" class="form-control adresse-voirie" type="text" placeholder="Nom de la voirie" data-toggle="tooltip" title="Renseignez le nom de la voirie de l'adresse de la famille d'accueil."></div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><input id="form-enfant-adresse-code-postal-famille" name="form_enfant_adresse_code_postal_famille" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" data-placement="right" title="Renseignez le code postal de la ville de la famille d'accueil."></div>
-                                    <div class="col-md-8"><input id="form-enfant-adresse-code-ville-famille" name="form_enfant_adresse_code_ville_famille" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" data-placement="right" title="Renseignez le nom de la ville de la famille d'accueil."></div>
+                                    <div class="col-md-4"><input id="form-enfant-adresse-code-postal-famille" name="form_enfant_adresse_code_postal_famille" class="form-control adresse-postal" type="text" placeholder="Code postal" data-toggle="tooltip" title="Renseignez le code postal de la ville de la famille d'accueil."></div>
+                                    <div class="col-md-8"><input id="form-enfant-adresse-code-ville-famille" name="form_enfant_adresse_code_ville_famille" class="form-control adresse-ville" type="text" placeholder="Ville" data-toggle="tooltip" title="Renseignez le nom de la ville de la famille d'accueil."></div>
                                 </div>
                             </div>
                         </div>
@@ -344,20 +344,20 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="form-enfant-nom-urgence">Contact d'urgence</label>
                         <div class="col-sm-6">
-                            <input id="form-enfant-nom-urgence" name="form_enfant_nom_urgence" class="form-control" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le nom et prénom de la personne à contacter en cas d'urgence.">
+                            <input id="form-enfant-nom-urgence" name="form_enfant_nom_urgence" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom et prénom de la personne à contacter en cas d'urgence.">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="form-enfant-telephone-urgence">Téléphone d'urgence</label>
                         <div class="col-sm-6">
-                            <input id="form-enfant-telephone-urgence" name="form_enfant_telephone_urgence" class="form-control input-phone" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de téléphone de la personne à contacter en cas d'urgence.">
+                            <input id="form-enfant-telephone-urgence" name="form_enfant_telephone_urgence" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de la personne à contacter en cas d'urgence.">
                         </div>
                     </div>
 
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Droit à l'image</label>
-                        <div class="col-sm-6" data-toggle="tooltip" data-placement="right" title="Précisez si des photos/vidéos de l'enfant peuvent être utilisé par le gîte.">
+                        <div class="col-sm-6" data-toggle="tooltip" title="Précisez si des photos/vidéos de l'enfant peuvent être utilisé par le gîte.">
                             <label class="radio-inline" for="form-enfant-droit-image-non-fourni">
                                 <input type="radio" class="icheck" name="form_enfant_droit_image" id="form-enfant-droit-image-non-fourni" value="0" checked="checked">
                                 Non fourni
@@ -375,41 +375,42 @@
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Traitement(s) médical(s)</label>
-                         <div class="col-sm-6" data-toggle="tooltip" data-placement="right" title="Précisez si l'enfant suit un traitement médical.">
+                         <div class="col-sm-6" data-toggle="tooltip" title="Précisez si l'enfant suit un traitement médical.">
                             <label class="radio-inline" for="form-enfant-traitement-medical-oui">
-                                <input type="radio" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-oui" value="1">
+                                <input type="radio" class="icheck" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-oui" value="1">
                                 Oui
                             </label>
                             <label class="radio-inline" for="form-enfant-traitement-medical-non">
-                                <input type="radio" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-non" value="0" checked="checked">
+                                <input type="radio" class="icheck" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-non" value="0" checked="checked">
                                 Non
                             </label>
                         </div>
                     </div>
 
+
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="form-enfant-contre-indication">Contre-indications / allergies</label>
                         <div class="col-sm-6">
-                            <textarea id="form-enfant-contre-indication" name="form_enfant_contre_indication" class="form-control" rows="4" data-toggle="tooltip" data-placement="right" title="Renseignez les contre-indication(s) et/ou allergie(s) connue(s) de l'enfant."></textarea>
+                            <textarea id="form-enfant-contre-indication" name="form_enfant_contre_indication" class="form-control" rows="4" data-toggle="tooltip" title="Renseignez les contre-indication(s) et/ou allergie(s) connue(s) de l'enfant."></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="form-enfant-numero-securite">N° de sécurité sociale</label>
                         <div class="col-sm-6">
-                            <input id="form-enfant-numero-securite" name="form_enfant_numero_securite" class="form-control input-securite-social" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le numéro de sécurité sociale de l'enfant.">
+                            <input id="form-enfant-numero-securite" name="form_enfant_numero_securite" class="form-control input-securite-social" type="text" data-toggle="tooltip" title="Renseignez le numéro de sécurité sociale de l'enfant.">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Assurance (RC)</label>
-                        <div class="col-sm-6" data-toggle="tooltip" data-placement="right" title="Précisez si l'enfant est convert par une assurance (responsabilité civile).">
+                        <div class="col-sm-6" data-toggle="tooltip" title="Précisez si l'enfant est convert par une assurance (responsabilité civile).">
                             <label class="radio-inline" for="form-enfant-assurance-oui">
-                                <input type="radio" name="form_enfant_assurance" id="form-enfant-assurance-oui" value="1">
+                                <input type="radio" class="icheck" name="form_enfant_assurance" id="form-enfant-assurance-oui" value="1">
                                 Oui
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="form_enfant_assurance" id="form-enfant-assurance-non" value="0" checked="checked">
+                                <input type="radio" class="icheck" name="form_enfant_assurance" id="form-enfant-assurance-non" value="0" checked="checked">
                                 Non
                             </label>
                         </div>
@@ -420,19 +421,19 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-assurance-validite">Date de fin de validité</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" value="15/06/2014" data-toggle="tooltip" data-placement="right" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa).">
+                                <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" value="15/06/2014" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa).">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Attestation CPAM</label>
-                        <div class="col-sm-6" data-toggle="tooltip" data-placement="right" title="Précisez si l'attestation CPAM est dans le dossier de l'enfant.">
+                        <div class="col-sm-6" data-toggle="tooltip" title="Précisez si l'attestation CPAM est dans le dossier de l'enfant.">
                             <label class="radio-inline" for="form-enfant-attestation-cpam-oui">
-                                <input type="radio" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-oui" value="1">
+                                <input type="radio" class="icheck" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-oui" value="1">
                                 Oui
                             </label>
                             <label class="radio-inline" for="form-enfant-attestation-cpam-non">
-                                <input type="radio" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-non" value="0" checked="checked">
+                                <input type="radio" class="icheck" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-non" value="0" checked="checked">
                                 Non
                             </label>
                         </div>
@@ -441,7 +442,7 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-cpam-validite">Date de fin de validité</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-cpam-validite" name="form_enfant_cpam_validite" type="text" class="form-control input-datepicker" data-toggle="tooltip" data-placement="right" title="Renseignez la date de fin de validité de l'attestation CPAM (jj/mm/aaaa).">
+                                <input id="form-enfant-cpam-validite" name="form_enfant_cpam_validite" type="text" class="form-control input-datepicker" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'attestation CPAM (jj/mm/aaaa).">
                             </div>
                         </div>
                     </div>
@@ -452,39 +453,39 @@
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Carnet de vaccination</label>
-                        <div class="col-sm-6" data-toggle="tooltip" data-placement="right" title="Précisez si le carnet de vaccination est dans le dossier de l'enfant.">
+                        <div class="col-sm-6" data-toggle="tooltip" title="Précisez si le carnet de vaccination est dans le dossier de l'enfant.">
                             <label class="radio-inline" for="form-enfant-carnet-vaccination-oui">
-                                <input type="radio" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-oui" value="1">
+                                <input type="radio" class="icheck" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-oui" value="1">
                                 Oui
                             </label>
                             <label class="radio-inline" for="form-enfant-carnet-vaccination-non">
-                                <input type="radio" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-non" value="0" checked="checked">
+                                <input type="radio" class="icheck" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-non" value="0" checked="checked">
                                 Non
                             </label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Fiche sanitaire de liaison</label>
-                        <div class="col-sm-6" data-toggle="tooltip" data-placement="right" title="Précisez si la fiche sanitaire de liaison est dans le dossier de l'enfant.">
+                        <div class="col-sm-6" data-toggle="tooltip" title="Précisez si la fiche sanitaire de liaison est dans le dossier de l'enfant.">
                             <label class="radio-inline" for="form-enfant-fiche-sanitaire-oui">
-                                <input type="radio" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-oui" value="1">
+                                <input type="radio" class="icheck" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-oui" value="1">
                                 Oui
                             </label>
                             <label class="radio-inline" for="form-enfant-fiche-sanitaire-non">
-                                <input type="radio" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-non" value="0" checked="checked">
+                                <input type="radio" class="icheck" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-non" value="0" checked="checked">
                                 Non
                             </label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Fiche de séjour</label>
-                        <div class="col-sm-6" data-toggle="tooltip" data-placement="right" title="Précisez si la fiche de séjour est dans le dossier de l'enfant.">
+                        <div class="col-sm-6" data-toggle="tooltip" title="Précisez si la fiche de séjour est dans le dossier de l'enfant.">
                             <label class="radio-inline" for="form-enfant-fiche-sejour-oui">
-                                <input type="radio" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-oui" value="1">
+                                <input type="radio" class="icheck" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-oui" value="1">
                                 Oui
                             </label>
                             <label class="radio-inline" for="form-enfant-fiche-sejour-non">
-                                <input type="radio" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-non" value="0" checked="checked">
+                                <input type="radio" class="icheck" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-non" value="0" checked="checked">
                                 Non
                             </label>
                         </div>
@@ -493,7 +494,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="form-enfant-note">Notes</label>
                         <div class="col-sm-6">
-                            <textarea id="form-enfant-note" name="form_enfant_note" class="form-control" rows="4" data-toggle="tooltip" data-placement="right" title="Notes générales au sujet de l'enfant."></textarea>
+                            <textarea id="form-enfant-note" name="form_enfant_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de l'enfant."></textarea>
                         </div>
                     </div>
 

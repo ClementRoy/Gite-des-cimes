@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html class="login-bg">
 <head>
@@ -86,6 +85,51 @@
         </div>
     </div>
 </div>
+
+
+
+
+<div id="cl-wrapper" class="login-container">
+
+    <div class="middle-login">
+        <div class="block-flat">
+            <div class="header">                            
+                <h3 class="text-center"><img class="logo-img" src="images/logo.png" alt="logo"/></h3>
+            </div>
+            <div>
+                <form style="margin-bottom: 0px !important;" class="form-horizontal" action="index.html">
+                    <div class="content">
+                        <h4 class="title">Login Access</h4>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                        <input type="text" placeholder="Username" id="username" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                        <input type="password" placeholder="Password" id="password" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                    </div>
+                    <div class="foot">
+                        <button class="btn btn-default" data-dismiss="modal" type="button">Register</button>
+                        <button class="btn btn-primary" data-dismiss="modal" type="submit">Log me in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="text-center out-links"><a href="#">&copy; 2014 Your Company</a></div>
+    </div> 
+    
+</div>
+
 
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>

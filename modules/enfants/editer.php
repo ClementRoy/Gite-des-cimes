@@ -391,11 +391,11 @@
                         <label class="col-sm-4 control-label">Traitement(s) médical(s)</label>
                          <div class="col-sm-6" data-toggle="tooltip" data-placement="right" title="Précisez si l'enfant suit un traitement médical.">
                             <label class="radio-inline" for="form-enfant-traitement-medical-oui">
-                                <input type="radio" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-oui" value="1"<?php if ($enfant->medicals_treatments): ?> checked="checked"<?php endif ?>>
+                                <input type="radio" class="icheck" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-oui" value="1"<?php if ($enfant->medicals_treatments): ?> checked="checked"<?php endif ?>>
                                 Oui
                             </label>
                             <label class="radio-inline" for="form-enfant-traitement-medical-non">
-                                <input type="radio" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-non" value="0"<?php if (!$enfant->medicals_treatments): ?> checked="checked"<?php endif ?>>
+                                <input type="radio" class="icheck" name="form_enfant_traitement_medical" id="form-enfant-traitement-medical-non" value="0"<?php if (!$enfant->medicals_treatments): ?> checked="checked"<?php endif ?>>
                                 Non
                             </label>
                         </div>
@@ -419,11 +419,11 @@
                         <label class="col-sm-4 control-label">Assurance (RC)</label>
                         <div class="col-sm-6" data-toggle="tooltip" data-placement="right" title="Précisez si l'enfant est convert par une assurance (responsabilité civile).">
                             <label class="radio-inline" for="form-enfant-assurance-oui">
-                                <input type="radio" name="form_enfant_assurance" id="form-enfant-assurance-oui" value="1"<?php if ($enfant->self_assurance): ?> checked="checked"<?php endif ?>>
+                                <input type="radio" class="icheck" name="form_enfant_assurance" id="form-enfant-assurance-oui" value="1"<?php if ($enfant->self_assurance): ?> checked="checked"<?php endif ?>>
                                 Oui
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="form_enfant_assurance" id="form-enfant-assurance-non" value="0"<?php if (!$enfant->self_assurance): ?> checked="checked"<?php endif ?>>
+                                <input type="radio" class="icheck" name="form_enfant_assurance" id="form-enfant-assurance-non" value="0"<?php if (!$enfant->self_assurance): ?> checked="checked"<?php endif ?>>
                                 Non
                             </label>
                         </div>
@@ -442,11 +442,11 @@
                         <label class="col-sm-4 control-label">Attestation CPAM</label>
                         <div class="col-sm-6" data-toggle="tooltip" data-placement="right" title="Précisez si l'attestation CPAM est dans le dossier de l'enfant.">
                             <label class="radio-inline" for="form-enfant-attestation-cpam-oui">
-                                <input type="radio" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-oui" value="1"<?php if ($enfant->cpam_attestation): ?> checked="checked"<?php endif ?>>
+                                <input type="radio" class="icheck" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-oui" value="1"<?php if ($enfant->cpam_attestation): ?> checked="checked"<?php endif ?>>
                                 Oui
                             </label>
                             <label class="radio-inline" for="form-enfant-attestation-cpam-non">
-                                <input type="radio" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-non" value="0"<?php if (!$enfant->cpam_attestation): ?> checked="checked"<?php endif ?>>
+                                <input type="radio" class="icheck" name="form_enfant_attestation_cpam" id="form-enfant-attestation-cpam-non" value="0"<?php if (!$enfant->cpam_attestation): ?> checked="checked"<?php endif ?>>
                                 Non
                             </label>
                         </div>
@@ -468,11 +468,11 @@
                         <label class="col-sm-4 control-label">Carnet de vaccination</label>
                         <div class="col-sm-6" data-toggle="tooltip" data-placement="right" title="Précisez si le carnet de vaccination est dans le dossier de l'enfant.">
                             <label class="radio-inline" for="form-enfant-carnet-vaccination-oui">
-                                <input type="radio" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-oui" value="1"<?php if ($enfant->vaccination): ?> checked="checked"<?php endif ?>>
+                                <input type="radio" class="icheck" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-oui" value="1"<?php if ($enfant->vaccination): ?> checked="checked"<?php endif ?>>
                                 Oui
                             </label>
                             <label class="radio-inline" for="form-enfant-carnet-vaccination-non">
-                                <input type="radio" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-non" value="0"<?php if (!$enfant->vaccination): ?> checked="checked"<?php endif ?>>
+                                <input type="radio" class="icheck" name="form_enfant_carnet_vaccination" id="form-enfant-carnet-vaccination-non" value="0"<?php if (!$enfant->vaccination): ?> checked="checked"<?php endif ?>>
                                 Non
                             </label>
                         </div>
@@ -481,11 +481,11 @@
                         <label class="col-sm-4 control-label">Fiche sanitaire de liaison</label>
                         <div class="col-sm-6" data-toggle="tooltip" data-placement="right" title="Précisez si la fiche sanitaire de liaison est dans le dossier de l'enfant.">
                             <label class="radio-inline" for="form-enfant-fiche-sanitaire-oui">
-                                <input type="radio" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-oui" value="1"<?php if ($enfant->health_record): ?> checked="checked"<?php endif ?>>
+                                <input type="radio" class="icheck" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-oui" value="1"<?php if ($enfant->health_record): ?> checked="checked"<?php endif ?>>
                                 Oui
                             </label>
                             <label class="radio-inline" for="form-enfant-fiche-sanitaire-non">
-                                <input type="radio" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-non" value="0"<?php if (!$enfant->health_record): ?> checked="checked"<?php endif ?>>
+                                <input type="radio" class="icheck" name="form_enfant_fiche_sanitaire" id="form-enfant-fiche-sanitaire-non" value="0"<?php if (!$enfant->health_record): ?> checked="checked"<?php endif ?>>
                                 Non
                             </label>
                         </div>
@@ -494,11 +494,11 @@
                         <label class="col-sm-4 control-label">Fiche de séjour</label>
                         <div class="col-sm-6" data-toggle="tooltip" data-placement="right" title="Précisez si la fiche de séjour est dans le dossier de l'enfant.">
                             <label class="radio-inline" for="form-enfant-fiche-sejour-oui">
-                                <input type="radio" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-oui" value="1"<?php if ($enfant->stay_record): ?> checked="checked"<?php endif ?>>
+                                <input type="radio" class="icheck" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-oui" value="1"<?php if ($enfant->stay_record): ?> checked="checked"<?php endif ?>>
                                 Oui
                             </label>
                             <label class="radio-inline" for="form-enfant-fiche-sejour-non">
-                                <input type="radio" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-non" value="0"<?php if (!$enfant->stay_record): ?> checked="checked"<?php endif ?>>
+                                <input type="radio" class="icheck" name="form_enfant_fiche_sejour" id="form-enfant-fiche-sejour-non" value="0"<?php if (!$enfant->stay_record): ?> checked="checked"<?php endif ?>>
                                 Non
                             </label>
                         </div>
@@ -745,6 +745,7 @@
         var $form = $('#form-edit-children');
 
         $form.on('ifChanged', 'input[name="form_enfant_inscription"]', function() {
+            console.log('changeemnt');
             $('[data-group]')
             .hide()
             .find('input[type="text"]').each(function() {
