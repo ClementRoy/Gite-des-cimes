@@ -16,7 +16,15 @@ module.exports = function(grunt){
 					keepSpecialComments: 0
 				},
 				files: {
-					'assets/dist/css/s.css': ['assets/css/bootstrap.css', 'assets/css/lib/bootstrap.datepicker.css', 'assets/css/animate.css', 'assets/css/lib/jquery.dataTables.css', 'assets/css/odometer-theme-default.css', 'assets/css/lib/font-awesome.css', 'assets/css/app.css']
+					'assets/dist/css/s.css': [
+						'assets/css/bootstrap.css',
+						'assets/css/lib/bootstrap.datepicker.css',
+						'assets/css/animate.css',
+						'assets/css/lib/jquery.dataTables.css',
+						'assets/css/odometer-theme-default.css',
+						'assets/css/lib/font-awesome.css',
+						'assets/css/app.css'
+					]
 				}
 			}
 		},
@@ -26,7 +34,21 @@ module.exports = function(grunt){
 				stripBanners: false
 			},
 			dist: {
-				src: ['assets/js/bootstrap.min.js', 'assets/js/bootstrap.datepicker.js', 'assets/js/bootstrap.sticky-tabs.js', 'assets/js/select2.js', 'assets/js/jquery.mask.js', 'assets/js/parsley.js', 'assets/js/parsley.extend.js', 'assets/js/jquery.dataTables.js', 'assets/js/fullcalendar.js', 'assets/js/fullcalendar.year.js', 'assets/js/odometer.min.js', 'assets/js/app.js', 'assets/js/ajax.js'],
+				src: [
+					'assets/js/bootstrap.min.js',
+					'assets/js/bootstrap.datepicker.js',
+					'assets/js/bootstrap.sticky-tabs.js',
+					'assets/js/select2.js',
+					'assets/js/jquery.mask.js',
+					'assets/js/parsley.js',
+					'assets/js/parsley.extend.js',
+					'assets/js/jquery.dataTables.js',
+					'assets/js/fullcalendar.js',
+					'assets/js/fullcalendar.year.js',
+					'assets/js/odometer.min.js',
+					'assets/js/app.js',
+					'assets/js/ajax.js'
+				],
 				dest: 'assets/dist/js/s.js',
 			}
 		},

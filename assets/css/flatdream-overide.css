@@ -113,6 +113,7 @@ body {
 	margin-left: 5px;
 }
 .dropdown.profile_menu .dropdown-menu:before {
+	background-image: url(../img/menu-tail-up.png);
 	margin-top: 0;
 }
 .navbar-nav .dropdown.profile_menu .dropdown-menu {
@@ -144,6 +145,9 @@ table.information td.category {
 /* ========================================================= */
 /* ========================================================= */
 
+.table-responsive {
+	overflow-x: initial;
+}
 .tb-calendar,
 .tb-special {
 	padding: 0;
@@ -407,14 +411,14 @@ table.information td.category {
 
 .page-head .trigger:hover {
 	text-decoration: none;
-	background: #e77777;
+	background: #977ECF;
 }
 .page-head .trigger img {
 	vertical-align: top;
 }
 .page-head .trigger {
 	margin-top: 0;
-	background: #e04b4b;
+	background: #7761A7;
 	border-radius: 50%;
 	width: 60px;
 	display: block;
@@ -918,4 +922,31 @@ margin-bottom: 20px;
 .help-block {
 	font-weight: normal;
 	margin-top: 0;
+}
+
+.dropdown-menu > li > button, .dropdown-menu li > button {
+	font-size: 12px;
+	padding: 5px 20px;
+	clear: both;
+	color: #333333;
+	display: block;
+	font-weight: normal;
+	margin: 0;
+	line-height: 1.42857;
+	white-space: nowrap;
+	border: none;
+	background: transparent;
+	width: 100%;
+	text-align: left;
+}
+.dropdown-menu > li > button:hover,
+.dropdown-menu > li > button:focus,
+.dropdown-submenu:hover > button,
+.dropdown-menu li > button:hover {
+	background-color: #7761a7;
+	background-image: none;
+	color: #FFF;
+}
+.popover {
+	font-family: 'Open Sans', sans-serif;
 }

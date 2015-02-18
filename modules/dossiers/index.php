@@ -335,10 +335,6 @@
 <?php ob_start(); ?>
 <script>
 $(function () {
-    $('.nav-tabs a').click(function (e) {
-        e.preventDefault();
-        $(this).tab('show');
-    });
     $('.dropdown-menu').on('click', '.modal-remove-link', function(event) {
         event.preventDefault();
         /* Act on the event */

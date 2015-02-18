@@ -1,6 +1,6 @@
 {
   "name": "Gite-des-cimes",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "homepage": "https://github.com/ClementRoy/Gite-des-cimes",
   "authors": [
     "Christophe Béghin <mail@christophebeghin.fr>"
@@ -16,6 +16,18 @@
   ],
   "devDependencies": {
     "bootstrap-file-input": "~1.0.0",
-    "fullcalendar": "~2.2.5"
+    "bootstrap-daterangepicker": "~1.3.17",
+    "bootstrap-datetimepicker": "~0.0.11",
+    "fullcalendar": "1.6.4",
+    "datatables": "1.9.4",
+    "jquery-flot": "~0.8.3",
+    "jquery.easy-pie-chart": "1.2.5",
+    "jquery-icheck": "~1.0.2",
+    "jquery-maskedinput": "~1.4.1",
+    "parsleyjs": "~2.0.7",
+    "odometer": "~0.4.7",
+    "moment": "~2.9.0",
+    "jquery-stickytabs": "*",
+    "jquery.gritter": "~1.7.4"
   }
 }

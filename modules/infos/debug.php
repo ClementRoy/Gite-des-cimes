@@ -4,34 +4,47 @@
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
-	<!-- main container -->
-    <div class="content">
-		<div id="pad-wrapper">
-			<h1>Debug</h1>
+<!-- Page title -->
+<div class="page-head">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Debug</h1>
+        </div>
+    </div>
+</div>
+<!-- /Page title -->
 
-			<div class="row">
-			    <div class="col-sm-12">
-			        <h2>SESSION</h2>
-			        <?php tool::output($_SESSION); ?>
-			    </div>
-			</div>
-			<div class="row">
-			    <div class="col-sm-12">
-			        <h2>SERVER</h2>
-			        <?php tool::output($_SERVER); ?>
-			    </div>
-			</div>
-			<div class="row">
-			    <div class="col-sm-12">
-			        <h2>CONSTANTE</h2>
-			        <?php tool::output(get_defined_constants()); ?>
-			    </div>
-			</div>
-
-		</div>
+<div class="block-flat">
+	<div class="header">							
+		<h3>SESSION</h3>
 	</div>
+	<div class="content" style="max-width:100%;">
+		<pre>
+			<?php print_r($_SESSION); ?>
+		</pre>
+	</div>
+</div>
 
+<div class="block-flat">
+	<div class="header">							
+		<h3>SERVER</h3>
+	</div>
+	<div class="content">
+		<pre>
+			<?php print_r($_SERVER); ?>
+		</pre>
+	</div>
+</div>
 
-
+<div class="block-flat">
+	<div class="header">							
+		<h3>CONSTANTE</h3>
+	</div>
+	<div class="content">
+		<pre>
+			<?php print_r(get_defined_constants()); ?>
+		</pre>
+	</div>
+</div>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

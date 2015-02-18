@@ -139,7 +139,7 @@
                         </div>
                     </div>
                 <?php endif; ?>
-                <?php if ($i < 6) { $i++; } else { $i = 0; } ?>
+                <?php if ($i < 5) { $i++; } else { $i = 0; } ?>
             <?php endforeach; ?>   
   
         </div>
@@ -179,7 +179,7 @@
 
 
 <?php ob_start(); ?>
-<script type="text/javascript" src="/assets/libs/jquery.easypiechart/jquery.easy-pie-chart.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.easy-pie-chart.min.js"></script>
 <script type="text/javascript" src="/assets/libs/odometer/odometer.min.js"></script>
 <script>
     $(function() {

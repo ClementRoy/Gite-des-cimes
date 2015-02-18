@@ -3,39 +3,35 @@
         </div> 
     </div>
 
-    <script type="text/javascript" src="/assets/libs/jquery.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <?php if (APP_VERSION != 'dev'): ?>
-    <script src="/assets/dist/js/s.js"></script>
+        <script src="/assets/js/gitedescimes.min.js"></script>
     <?php else: ?>
-    <script type="text/javascript" src="/assets/libs/bootstrap/dist/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/assets/libs/jquery.datatables/jquery.datatables.min.js"></script>
-    <script type="text/javascript" src="/assets/libs/jquery.datatables/bootstrap-adapter/js/datatables.js"></script>
-    <script type="text/javascript" src="/assets/libs/jquery.datatables/i18n/french.js"></script>
+        <script src="/assets/libs/datatables/media/js/jquery.daTatables.js"></script>
+        <script src="/assets/js/datatables-bootstrap-adapter.js"></script>
+        <script src="/assets/js/datatables-french.js"></script>
 
+        <script src="/assets/libs/jquery.gritter/js/jquery.gritter.js"></script>
+        
+        <script src="/assets/libs/bootstrap-file-input/bootstrap.file-input.js"></script>
+        <script src="/assets/libs/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="/assets/libs/jquery-icheck/icheck.min.js"></script>
 
-    <script type="text/javascript" src="/assets/libs/jquery.pushmenu/js/jPushMenu.js"></script>
-    <script type="text/javascript" src="/assets/libs/bootstrap.slider/js/bootstrap-slider.js"></script>
-    <script type="text/javascript" src="/assets/libs/jquery.select2/select2.min.js"></script>
-    <script type="text/javascript" src="/assets/libs/bootstrap.datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="/assets/libs/jquery.nanoscroller/jquery.nanoscroller.js"></script>
-    <script type="text/javascript" src="/assets/libs/jquery.nestable/jquery.nestable.js"></script>
-    <script type="text/javascript" src="/assets/libs/jquery.gritter/js/jquery.gritter.js"></script>
-    <script type="text/javascript" src="/assets/libs/bootstrap-file-input/bootstrap.file-input.js"></script>
-    <script type="text/javascript" src="/assets/libs/jquery.icheck/icheck.min.js"></script>
-    <script type="text/javascript" src="/assets/libs/behaviour/core.js"></script>
+        <script src="/assets/libs/jquery-maskedinput/dist/jquery.maskedinput.min.js"></script>
+        <script src="/assets/libs/jquery-stickytabs/jquery.stickytabs.js"></script>
 
-    <script type="text/javascript" src="/assets/js/bootstrap.datepicker.js"></script>
-    <script type="text/javascript" src="/assets/js/jquery.mask.js"></script>
-    <script type="text/javascript" src="/assets/js/bootstrap.sticky-tabs.js"></script>
+        <script src="/assets/libs/fullcalendar/fullcalendar.min.js"></script>
+        <script src="/assets/js/fullcalendar.year.js"></script>
 
-    <script type="text/javascript" src="/assets/js/fullcalendar.min.js"></script>
-    <script type="text/javascript" src="/assets/js/fullcalendar.year.js"></script>
+        <script src="/assets/js/flatdream-core.js"></script>
 
-    <!-- <script type="text/javascript" src="/assets/js/app.js"></script> -->
+        <!-- <script src="/assets/js/app.js"></script> -->
     <?php endif; ?>
 
     <script>
     $(function() {
+        $('.nav-tabs').stickyTabs();
         $("table").on("contextmenu", "tr", function (event) {
             event.preventDefault();
             
@@ -59,6 +55,39 @@
         $('input[type=file]')
             .attr('title', 'Choisissez un fichier')
             .bootstrapFileInput();
+
+            
+        /*Return to top*/
+        var offset = 220,
+            duration = 500,
+            button = $('<a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>');
+        
+        button.appendTo("body");
+
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > offset) {
+                $('.back-to-top').fadeIn(duration);
+            } else {
+                $('.back-to-top').fadeOut(duration);
+            }
+        });
+
+        $('.back-to-top').click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({
+                scrollTop: 0
+            }, duration);
+            return false;
+        });
+        $('.nav-tabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+        $('.icheck').iCheck({
+            checkboxClass: 'icheckbox_flat-purple',
+            radioClass: 'iradio_flat-purple'
+        });
     });
     </script>
     <?php 

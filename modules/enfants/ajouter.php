@@ -506,7 +506,7 @@
 
                     <div class="form-group actions text-center">
                         <div class="col-md-8 col-md-offset-2">
-                            <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-add" value="Ajouter la fiche">
+                            <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-add" value="Enregistrer le nouvel enfant">
                             <span>OU</span>
                             <a href="/enfants/" class="reset">Annuler</a>
                         </div>
@@ -588,10 +588,6 @@
 <script>
     $(function() {
 
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_flat-purple',
-            radioClass: 'iradio_flat-purple'
-        });
         $('#form-nav').on('click', 'a', function (event) {
             event.preventDefault();
 
@@ -680,15 +676,6 @@
                 $('#form-enfant-contact-select').html('<option value="">Choisissez une structure</option>');
                 $('#form-enfant-contact-select').attr('disabled', 'disabled');
             }
-        });
-
-
-        $('input[type="text"], textarea, label.radio, label.radio-inline').parent('div').each(function(index, el) {
-            $(el).tooltip({
-                placement: 'right',
-                trigger: 'hover',
-                container: 'body'
-            });
         });
 
         $('[data-group]').hide();

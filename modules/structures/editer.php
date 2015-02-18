@@ -111,24 +111,4 @@
     </div>
 </div>
 
-<?php ob_start(); ?>
-<script>
-    $(function() {
-
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_flat-purple',
-            radioClass: 'iradio_flat-purple'
-        });
-
-        $('input[type="text"], textarea, label.radio, label.radio-inline').tooltip({
-            placement: 'right',
-            trigger: 'hover',
-            container: 'body'
-        });
-
-    });
-</script>
-<?php $scripts .= ob_get_contents();
-ob_end_clean(); ?>
-
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

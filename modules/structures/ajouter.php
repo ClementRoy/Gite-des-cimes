@@ -115,7 +115,7 @@
                     <label class="col-sm-4 control-label">Civilité</label>
                     <div class="col-sm-6">
                         <label class="radio-inline" for="form-contact-civility-mme"><input type="radio" class="icheck" name="form_contact_civility" id="form-contact-civility-mme" value="Mme"> Mme</label>
-                        <label class="radio-inline" for="form-contact-civility-mr"><input type="radio" class="icheck" name="form_contact_civility" id="form-contact-civility-mr" value="0" checked="checked"> Mr</label>
+                        <label class="radio-inline" for="form-contact-civility-mr"><input type="radio" class="icheck" name="form_contact_civility" id="form-contact-civility-mr" value="Mr" checked="checked"> Mr</label>
                     </div>
                 </div>
 
@@ -205,20 +205,6 @@
             event.preventDefault();
             $('#panel_add_contact').addClass('hide');
             $(this).attr('id', 'add_contact').text('Afficher le formulaire d\'ajout');
-        });
-
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_flat-purple',
-            radioClass: 'iradio_flat-purple'
-        });
-
-        $('input[type="text"], textarea, label.radio, label.radio-inline')
-        .each(function(index, el) {
-            $(el).tooltip({
-                placement: 'right',
-                trigger: 'hover',
-                container: 'body'
-            });
         });
 
     });

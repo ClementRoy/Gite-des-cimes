@@ -22,11 +22,10 @@
         <div class="block-flat">
             <div class="content">
                 <form id="form-add-sejour" method="post" action="/sejours/infos/id/<?=$id ?>"  class="form-horizontal group-border-dashed maped-form" parsley-validate  enctype="multipart/form-data">
-                    <!--  <h2>Informations sur le séjour</h2> -->
 
                     <input type="hidden" value="<?=$id ?>" name="id" />
 
-                     <div class="form-group">
+                    <div class="form-group">
                         <label class="col-md-4 control-label" for="form-sejour-name">Nom du séjour</label>
                         <div class="col-sm-6">
                             <input id="form-sejour-name" name="form_sejour_name" class="form-control" type="text" title="Renseignez le nom du séjour." parsley-required="true">
@@ -44,7 +43,7 @@
                                 <div class="col-sm-6">
                                     <input id="form-sejour-date-fin" name="form_sejour_date_fin" type="text" class="form-control input-datepicker" 
                                     placeholder="Date de fin" title="Renseignez la date à laquelle se termine le séjour (jj/mm/aaaa)." 
-                                    parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" ><!-- parsley-afterdate="#form-sejour-date-debut" CR : not working properly with french dates -->
+                                    parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" >
                                 </div>
                             </div>
                         </div>
@@ -90,7 +89,7 @@
                             title="Renseignez le numéro jeunesse & sport du séjour.">
                         </div>   
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="form-sejour-prix">Prix unitaire</label>
                         <div class="col-sm-6">
@@ -108,20 +107,19 @@
                             <div class="radio">
                                 <?php $i = 0; ?>
                                 <?php foreach($accompagnateurs as $key => $accompagnateur): ?>
-                                <div class="radio">
-                                    <label for="form-sejour-accompagnateur-<?=$i; ?>">
-                                        <input class="icheck" type="radio" name="form_sejour_accompagnateur" id="form-sejour-accompagnateur-<?=$i; ?>" value="<?=$accompagnateur->id ?>"<?php if($i < 1): ?> checked="checked"<?php endif; ?>>
-                                        <?=$accompagnateur->lastname ?> <?=$accompagnateur->firstname ?>
-                                    </label>
-                                </div>
-                                <?php $i++; ?>
+                                    <div class="radio">
+                                        <label for="form-sejour-accompagnateur-<?=$i; ?>">
+                                            <input class="icheck" type="radio" name="form_sejour_accompagnateur" id="form-sejour-accompagnateur-<?=$i; ?>" value="<?=$accompagnateur->id ?>"<?php if($i < 1): ?> checked="checked"<?php endif; ?>>
+                                            <?=$accompagnateur->lastname ?> <?=$accompagnateur->firstname ?>
+                                        </label>
+                                    </div>
+                                    <?php $i++; ?>
                                 <?php endforeach; ?>
                             </div>
                         </div>
-        
                     </div>
 
-            
+
 
                     <div class="form-group">
                         <div class="clearfix">
@@ -138,7 +136,7 @@
                                 <input id="form-inscription-min-aller-1" name="form_sejour_min_aller[0]" class="form-control adresse-numero" type="text" value="00" title="Renseignez l'heure de rendez-vous à l'aller.">
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <label class="col-md-4 control-label" for="form-inscription-heure-retour-1">Heure de rendez-vous au retour</label>
                             <div class="col-md-1 col-sm-6">
@@ -168,16 +166,16 @@
                                 <input id="form-inscription-min-aller-2" name="form_sejour_min_aller[1]" class="form-control adresse-numero" type="text" value="00" title="Renseignez l'heure de rendez-vous à l'aller.">
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <label class="col-md-4 control-label" for="form-inscription-heure-retour-2">Heure de rendez-vous au retour</label>
-                        <div class="col-md-1 col-sm-6">
-                            <input id="form-inscription-heure-retour-2" name="form_sejour_heure_retour[1]" class="form-control adresse-numero pull-left" type="text" title="Renseignez l'heure de rendez-vous au retour'.">
-                            <p class="input-suffix">h</p>
-                        </div>
-                        <div class="col-md-1 col-sm-5">
-                            <input id="form-inscription-min-retour-2" name="form_sejour_min_retour[1]" class="form-control adresse-numero" type="text" value="00" title="Renseignez l'heure de rendez-vous au retour'.">
-                        </div>
+                            <div class="col-md-1 col-sm-6">
+                                <input id="form-inscription-heure-retour-2" name="form_sejour_heure_retour[1]" class="form-control adresse-numero pull-left" type="text" title="Renseignez l'heure de rendez-vous au retour'.">
+                                <p class="input-suffix">h</p>
+                            </div>
+                            <div class="col-md-1 col-sm-5">
+                                <input id="form-inscription-min-retour-2" name="form_sejour_min_retour[1]" class="form-control adresse-numero" type="text" value="00" title="Renseignez l'heure de rendez-vous au retour'.">
+                            </div>
                         </div>
                     </div>
 
@@ -198,7 +196,7 @@
                                 <input id="form-inscription-min-aller-3" name="form_sejour_min_aller[2]" class="form-control adresse-numero" type="text" value="00" title="Renseignez l'heure de rendez-vous à l'aller.">
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <label class="col-md-4 control-label" for="form-inscription-heure-retour-3">Heure de rendez-vous au retour</label>
                             <div class="col-md-1 col-sm-6">
@@ -224,31 +222,6 @@
             </div>
         </div>
     </div>
-
-
-
-<?php ob_start(); ?>
-<script>
-    $(function() {
-
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_flat-purple',
-            radioClass: 'iradio_flat-purple'
-        });
-
-        $('input[type="text"], textarea, label.radio, label.radio-inline').parent('div').each(function(index, el) {
-            $(el).tooltip({
-                placement: 'right',
-                trigger: 'hover',
-                container: 'body'
-            });
-        });
-
-    });
-</script>
-<?php $scripts .= ob_get_contents();
-ob_end_clean(); ?>
-
-
+</div>
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

@@ -607,11 +607,7 @@
 <?php ob_start(); ?>
 <script>
     $(function() {
-
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_flat-purple',
-            radioClass: 'iradio_flat-purple'
-        });
+        
         $('#form-nav').on('click', 'a', function (event) {
             event.preventDefault();
 

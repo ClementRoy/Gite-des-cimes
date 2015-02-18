@@ -257,7 +257,7 @@ class user
             ':archived_by' => ''
         ); 
         $result = self::update($data, $id);
-        return $result;       
+        return $result;
     }
 
     public static function delete($id){

@@ -4,20 +4,26 @@
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
-	<!-- main container -->
+
+<!-- Page title -->
+<div class="page-head">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>
+            	Infos
+            </h1>
+        </div>
+    </div>
+</div>
+<!-- /Page title -->
+
+
+<div class="block-flat">
     <div class="content">
-		<div id="pad-wrapper">
-			<h1>Infos</h1>
-
-			<div class="row">
-			    <div class="col-sm-12">
-			        <h2>Version</h2>
-					<p>Dev</p>
-			    </div>
-			</div>
-
-		</div>
-	</div>
+        <h2>Version</h2>
+		<p>Dev</p>
+    </div>
+</div>
 
 
 

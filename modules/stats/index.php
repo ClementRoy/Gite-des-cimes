@@ -27,17 +27,8 @@
   
             </div>
 
-                <script>
-                    $(function () {
-                        $('.nav-tabs a').click(function (e) {
-                            e.preventDefault();
-                            $(this).tab('show');
-                        });
-                    });
-                </script>
-
         </div>
     </div>
 </div>
 
-                    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

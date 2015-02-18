@@ -478,18 +478,7 @@
                 $('#form-inscription-min-retour').val(elem.data('min-return'));
             }
         });
-         $('input[type="text"], textarea, label.radio, label.radio-inline').parent('div').each(function(index, el) {
-            $(el).tooltip({
-                placement: 'right',
-                trigger: 'hover',
-                container: 'body'
-            });
-        });
-
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_flat-purple',
-            radioClass: 'iradio_flat-purple'
-        });
+        
     });
 </script>
 <?php $scripts .= ob_get_contents();

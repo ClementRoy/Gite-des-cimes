@@ -81,102 +81,99 @@
 <?php $date_edited = new DateTime($accompagnateur->edited); ?>
 
 
-<div class="title">
-    <div class="row header">
-        <div class="col-md-9">
+
+
+<div class="page-head">
+    <div class="row">
+        <div class="col-md-8">
+             <a href="#" class="trigger dropdown-toggle" data-toggle="dropdown">
+                <i class="fa big-icon fa-user"></i>
+            </a>
+            <ul class="dropdown-menu animated fadeInDown">
+                <li><a href="/accompagnateurs/editer/id/<?=$accompagnateur->id; ?>" class="item"><i class="fa fa-edit"></i> Modifier</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#modal-remove" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>
+            </ul>
 
             <h1>
-                <a href="#" class="trigger"><i class="big-icon icon-user"></i></a>
                 <?=$accompagnateur->firstname; ?> <strong><?=$accompagnateur->lastname; ?></strong>
-                <?php /* ?><small><?php if ($accompagnateur->rank == 1): ?>Utilisateur<?php elseif ($accompagnateur->rank == 3): ?>Gestionnaire<?php elseif ($accompagnateur->rank == 5): ?>Administrateur<?php endif; ?></small><?php */ ?>
             </h1>
-
-            <div class="pop-dialog">
-                <div class="pointer">
-                    <div class="arrow"></div>
-                    <div class="arrow_border"></div>
-                </div>
-                <div class="body">
-                    <div class="menu">
-                        <a href="/accompagnateurs/editer/id/<?=$accompagnateur->id; ?>" class="item"><i class="icon-edit"></i> Modifier</a>
-                        <a href="/accompagnateurs/supprimer/id/<?=$accompagnateur->id; ?>" class="item" data-toggle="modal"><i class="icon-remove"></i> Supprimer</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
-
-        <div class="col-md-3 text-right">
-            <div class="col-md-4 text-right pull-right">
-                <i class="icon-cog"></i>
-            </div>
+        <div class="col-md-4 text-right">
+            <!-- <a href="#" data-toggle="modal" data-target="#modal-remove" class="item">Supprimer cette fiche</a> -->
+            <a href="/accompagnateurs/editer/id/<?=$accompagnateur->id; ?>" class="btn btn-primary btn-rad">Modifier ce contact</a>
         </div>
     </div>
 </div>
 
-<div class="content <?=($accompagnateur->archived)?' archived':' ';?>">
+
+<div class="row">
+    <div class="col-sm-12">
+        
+
+        <div class="block-flat">
+
+            <table class="no-border no-strip information">
+                <tbody class="no-border-x no-border-y">
+                    <tr>
+                        <td style="width:19%;" class="category"><strong>Informations</strong></td>
+                        <td>
+                            <table class="no-border no-strip skills">
+                                <tbody class="no-border-x no-border-y">
+
+                                    <tr>
+                                        <td style="width: 20%;">Email</td>
+                                        <td><?=(!empty($accompagnateur->email)) ? '<a href="mailto:'.$accompagnateur->email.'">'.$accompagnateur->email.'</a>' : EMPTYVAL; ?></td>
+                                    </tr>
 
 
+                                    <tr>
+                                        <td style="width: 20%;">Téléphone</td>
+                                        <td><?=(!empty($accompagnateur->tel)) ? tool::formatTel($accompagnateur->tel) : EMPTYVAL; ?></td>
+                                    </tr>
 
-<!-- Modal -->
-<div class="modal fade" id="remove-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal-remove" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h6 class="modal-title" id="myModalLabel">Supprimer cette fiche</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <p>Vous êtes sur le point de supprimer l'accompagnateur de <strong><?=$accompagnateur->firstname; ?> <?=$accompagnateur->lastname; ?></strong>.<br />
-                    Cette action est irréversible.</p>
+                <div class="text-center">
+                    <div class="i-circle warning"><i class="fa fa-warning"></i></div>
+                    <h4>Attention !</h4>
+                    <p>
+                        Vous êtes sur le point de supprimer la fiche de l'accompagnateur <strong><?=$accompagnateur->firstname; ?> <?=$accompagnateur->lastname; ?></strong>.<br>
+                        Êtes-vous sur de vouloir effectuer cette opération ?
+                    </p>
                 </div>
-                <div class="modal-footer">
-                    <a class="btn-flat white" data-dismiss="modal">Annuler</a>
-                    <a href="/utilisateurs/supprimer/id/<?=$utilisateur->id; ?>/confirm/true" class="btn-flat danger"><i class="icon-remove"></i> Supprimer</a>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-
-
-    <div class="row">
-        <div class="col-md-6">
-            <dl>
-                <dt>Nom :</dt> <dd><?=$accompagnateur->lastname; ?></dd>
-            </dl>
-            <dl>
-                <dt>Prénom :</dt> <dd><?=$accompagnateur->firstname; ?></dd>
-            </dl>
-        </div>
-        <div class="col-md-6">
-            <dl>
-                <dt>Téléphone :</dt>
-                <dd>
-                    <?php if(!empty($accompagnateur->tel)): ?>
-                        <?=tool::formatTel($accompagnateur->tel); ?>
-                    <?php else: ?>
-                        NC
-                    <?php endif; ?>
-                </dd>
-            </dl>
-            <dl>
-                <dt>Email :</dt>
-                <dd>
-                    <?php if(!empty($accompagnateur->email)): ?>
-                        <a href="mailto:<?=$accompagnateur->email;?>" target="_blank"><?=$accompagnateur->email;?></a>
-                    <?php else: ?>
-                        NC
-                    <?php endif; ?>
-                </dd>
-            </dl>
+            </div>
+            <div class="modal-footer">
+                <form id="form-remove-accompagnateur" action="/accompagnateurs/" method="post">
+                    <a href="#" class="btn btn-default btn-flat" data-dismiss="modal">Annuler</a>
+                    <input id="remove-id" type="hidden" name="id" value="<?=$accompagnateur->id;?>">
+                    <input type="hidden" name="action" value="supprimer">
+                    <input type="hidden" name="confirm" value="true">
+                    <input type="submit" class="btn btn-warning btn-flat" value="Supprimer le contact">
+                </form>
+            </div>
         </div>
     </div>
-
-    <?php //tool::output($accompagnateur); ?>
-
-    <!-- <small class="metadata pull-right">Créé par <?=$creator->firstname; ?> le <?=strftime('%d %B %Y', $date_created->getTimestamp()); ?>, modifié par <?=$editor->firstname ?> le <?=strftime('%d %B %Y', $date_edited->getTimestamp()); ?> </small> -->
 </div>
+
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
 

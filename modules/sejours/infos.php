@@ -285,7 +285,7 @@
                             <div class="header">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h4><em>Aucun enfant n'est encore inscrit à ce séjour</em></h4>
+                                        <em>Aucun enfant n'est inscrit à ce séjour</em>
                                     </div>
                                 </div>
                             </div>
