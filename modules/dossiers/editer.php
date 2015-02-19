@@ -50,7 +50,6 @@
                             </div>
                         </div>
 
-
                         <?php $sejours = sejour::getListFuturSejour(); ?>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-inscription-sejour-select">Séjour(s)</label>
@@ -161,14 +160,12 @@
                                     <?php endforeach; ?>
                                 </div>
 
-
                                 <div class="sejours-controls">
                                     <button href="#" class="btn btn-default btn-sm delete-sejour" disabled="disabled">Supprimer ce séjour</button>
                                     <button href="#" class="btn btn-primary btn-sm add-sejour" disabled="disabled">Ajouter un séjour</button>
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-inscription-structure-select">Centre payeur</label>
