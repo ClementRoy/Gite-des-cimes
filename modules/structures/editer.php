@@ -18,13 +18,13 @@
 <div class="block-flat">
     <div class="content">
 
-        <form id="form-edit-structure" action="/structures/infos/id/<?=$structure->id ?>" class="form-horizontal group-border-dashed maped-form" method="post" parsley-validate>
+        <form id="form-edit-structure" action="/structures/infos/id/<?=$structure->id ?>" class="form-horizontal group-border-dashed maped-form" method="post" data-parsley-validate>
 
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-structure-nom">Nom de la structure</label>
                 <div class="col-sm-6">
                     <input id="form-structure-name" name="form_structure_name" class="form-control" type="text" 
-                    data-toggle="tooltip" title="Renseignez le nom de la structure." parsley-required="true" value="<?=$structure->name ?>">
+                    data-toggle="tooltip" title="Renseignez le nom de la structure." data-parsley-required="true" value="<?=$structure->name ?>">
                 </div>
             </div>
 
@@ -49,7 +49,7 @@
                 <div class="col-sm-6">
                     <input id="form-structure-email" name="form_structure_email" type="text" class="form-control"
                     data-toggle="tooltip" title="Renseignez l'email de la structure." 
-                    parsley-type="email" value="<?=$structure->email ?>">
+                    data-parsley-type="email" value="<?=$structure->email ?>">
                 </div>
             </div>     
 
@@ -101,7 +101,7 @@
 
             <div class="form-group actions text-center">
                 <div class="col-md-8 col-md-offset-2">
-                    <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-edit" value="Modifier la structure">
+                    <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-update" value="Modifier la structure">
                     <span>OU</span>
                     <a href="/structures/infos/id/<?=$structure->id; ?>" class="reset">Annuler</a>
                 </div>

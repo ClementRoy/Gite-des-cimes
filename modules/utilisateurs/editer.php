@@ -20,36 +20,36 @@
 
 <div class="block-flat">
     <div class="content">
-        <form id="form-edit-user" method="post" action="/utilisateurs/infos/id/<?=$utilisateur->id ?>" class="form-horizontal group-border-dashed maped-form" parsley-validate>
+        <form id="form-edit-user" method="post" action="/utilisateurs/infos/id/<?=$utilisateur->id ?>" class="form-horizontal group-border-dashed maped-form" data-parsley-validate>
 
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-utilisateur-prenom">Prénom</label>
                 <div class="col-sm-6">
-                    <input id="form-utilisateur-prenom" name="form_utilisateur_prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'utilisateur." parsley-required="true" value="<?=$utilisateur->firstname; ?>">
+                    <input id="form-utilisateur-prenom" name="form_utilisateur_prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'utilisateur." data-parsley-required="true" value="<?=$utilisateur->firstname; ?>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-utilisateur-nom">Nom</label>
                 <div class="col-sm-6">
-                    <input id="form-utilisateur-nom" name="form_utilisateur_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'utilisateur." parsley-required="true" value="<?=$utilisateur->lastname; ?>">
+                    <input id="form-utilisateur-nom" name="form_utilisateur_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'utilisateur." data-parsley-required="true" value="<?=$utilisateur->lastname; ?>">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-utilisateur-identifiant">Identifiant</label>
                 <div class="col-sm-6">
-                    <input id="form-utilisateur-identifiant" name="form_utilisateur_identifiant" class="form-control" type="text" data-toggle="tooltip" title="Renseignez l'identifiant de l'utilisateur." parsley-required="true" value="<?=$utilisateur->identifier; ?>">
+                    <input id="form-utilisateur-identifiant" name="form_utilisateur_identifiant" class="form-control" type="text" data-toggle="tooltip" title="Renseignez l'identifiant de l'utilisateur." data-parsley-required="true" value="<?=$utilisateur->identifier; ?>">
                 </div>
                 </div>
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-utilisateur-password">Mot de passe</label>
                 <div class="col-sm-6">
-                    <input id="form-utilisateur-password" name="form_utilisateur_password" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le mot de passe de l'utilisateur." parsley-required="true">
+                    <input id="form-utilisateur-password" name="form_utilisateur_password" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le mot de passe de l'utilisateur." data-parsley-required="true">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-utilisateur-mail">Adresse e-mail</label>
                 <div class="col-sm-6">
-                    <input id="form-utilisateur-mail" name="form_utilisateur_mail" class="form-control" type="email" data-toggle="tooltip" title="Renseignez l'adresse e-mail de l'utilisateur." parsley-required="true" value="<?=$utilisateur->email; ?>">
+                    <input id="form-utilisateur-mail" name="form_utilisateur_mail" class="form-control" type="email" data-toggle="tooltip" title="Renseignez l'adresse e-mail de l'utilisateur." data-parsley-required="true" value="<?=$utilisateur->email; ?>">
                 </div>
             </div>
 

@@ -46,7 +46,7 @@ $GLOBALS['modules'] = JSON::get(dirname(__FILE__) . '/modules.json');
 define('DEFAULT_MODULE', 'accueil');
 define('DEFAULT_VIEW', 'index');
 
-define('EMPTYVAL', 'NC');
+define('EMPTYVAL', '–');
 
 define('UPLOAD_FOLDER','uploads/');
 

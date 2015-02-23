@@ -8,12 +8,12 @@
     <div class="col-md-12">
         <div class="block-flat">
             <div class="content">
-                <form id="form-edit-sejour" method="post" action="/sejours/infos/id/<?=$sejour->id; ?>" class="form-horizontal group-border-dashed maped-form" parsley-validate  enctype="multipart/form-data">
+                <form id="form-edit-sejour" method="post" action="/sejours/infos/id/<?=$sejour->id; ?>" class="form-horizontal group-border-dashed maped-form" data-parsley-validate  enctype="multipart/form-data">
 
                      <div class="form-group">
                         <label class="col-md-4 control-label" for="form-sejour-name">Nom du séjour</label>
                         <div class="col-sm-6">
-                            <input id="form-sejour-name" name="form_sejour_name" class="form-control" type="text" title="Renseignez le nom du séjour." parsley-required="true" value="<?=$sejour->name; ?>">
+                            <input id="form-sejour-name" name="form_sejour_name" class="form-control" type="text" title="Renseignez le nom du séjour." data-parsley-required="true" value="<?=$sejour->name; ?>">
                         </div>   
                     </div>
                     <div class="form-group">
@@ -23,12 +23,12 @@
                                 <div class="col-sm-6">
                                     <input id="form-sejour-date-debut" name="form_sejour_date_debut" type="text" class="form-control input-datepicker"
                                     placeholder="Date de début" title="Renseignez la date à laquelle commence le séjour (jj/mm/aaaa)." 
-                                    parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" value="<?=tool::getDatefromDatetime($sejour->date_from); ?>">
+                                    data-parsley-pattern="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" value="<?=tool::getDatefromDatetime($sejour->date_from); ?>">
                                 </div> 
                                 <div class="col-sm-6">
                                     <input id="form-sejour-date-fin" name="form_sejour_date_fin" type="text" class="form-control input-datepicker" 
                                     placeholder="Date de fin" title="Renseignez la date à laquelle se termine le séjour (jj/mm/aaaa)." 
-                                    parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" value="<?=tool::getDatefromDatetime($sejour->date_to); ?>"><!-- parsley-afterdate="#form-sejour-date-debut" CR : not working properly with french dates -->
+                                    data-parsley-pattern="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" value="<?=tool::getDatefromDatetime($sejour->date_to); ?>"><!-- data-parsley-afterdate="#form-sejour-date-debut" CR : not working properly with french dates -->
                                 </div>
                             </div>
                         </div>
@@ -57,11 +57,11 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <input id="form-sejour-capacite-min" name="form_sejour_capacite_min" class="form-control" type="text" 
-                                    placeholder="Minimum" title="Renseignez le nombre d'enfant minimum pour ce séjour." parsley-type="digits" parsley-required="true" value="<?=$sejour->capacity_min; ?>">
+                                    placeholder="Minimum" title="Renseignez le nombre d'enfant minimum pour ce séjour." data-parsley-type="digits" data-parsley-required="true" value="<?=$sejour->capacity_min; ?>">
                                 </div>
                                 <div class="col-sm-6">
                                     <input id="form-sejour-capacite-max" name="form_sejour_capacite_max" class="form-control" type="text" 
-                                    placeholder="Maximum" title="Renseignez le nombre d'enfant maximum pour ce séjour." parsley-required="true" parsley-type="digits" parsley-greaterorequalthan="#form-sejour-capacite-min" value="<?=$sejour->capacity_max; ?>">
+                                    placeholder="Maximum" title="Renseignez le nombre d'enfant maximum pour ce séjour." data-parsley-required="true" data-parsley-type="digits" data-parsley-gte="#form-sejour-capacite-min" value="<?=$sejour->capacity_max; ?>">
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                         <label class="col-md-4 control-label" for="form-sejour-prix">Prix unitaire</label>
                         <div class="col-sm-1">
                             <input id="form-sejour-prix" name="form_sejour_prix" class="text-right form-control" type="text" 
-                            title="Renseignez le prix unitaire du séjour du séjour." parsley-type="number" parsley-required="true" value="<?=$sejour->price; ?>">
+                            title="Renseignez le prix unitaire du séjour du séjour." data-parsley-type="number" data-parsley-required="true" value="<?=$sejour->price; ?>">
                             <span class="input-suffix">€</span>
                         </div>   
                     </div>

@@ -20,7 +20,7 @@ $(function() {
     //     return false;
     // });
 
-
+    $('[data-toggle="tooltip"]').tooltip();
 
     setTimeout(function() {
         $('.animated').removeClass('fadeInUp');

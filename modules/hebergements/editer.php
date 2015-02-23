@@ -24,7 +24,7 @@
                 <div class="content">
 
 
-                    <form id="form-edit-hebergement" method="post" action="/hebergements/infos/id/<?=$hebergement->id ?>" class="form-horizontal group-border-dashed maped-form" parsley-validate>
+                    <form id="form-edit-hebergement" method="post" action="/hebergements/infos/id/<?=$hebergement->id ?>" class="form-horizontal group-border-dashed maped-form" data-parsley-validate>
 
 
 
@@ -33,7 +33,7 @@
                                 <label class="col-sm-4 control-label" for="form-hebergement-nom">Nom de l'hébergement</label>
                                 <div class="col-sm-6">
                                     <input id="form-hebergement-name" name="form_hebergement_name" class="form-control" type="text" 
-                                    data-toggle="tooltip" title="Renseignez le nom de l'hébergement." parsley-required="true" value="<?=$hebergement->name ?>">
+                                    data-toggle="tooltip" title="Renseignez le nom de l'hébergement." data-parsley-required="true" value="<?=$hebergement->name ?>">
                                 </div>                            
                             </div>
 

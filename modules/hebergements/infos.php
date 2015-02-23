@@ -136,12 +136,14 @@
         </div>
     </div>
 
-    <div class="col-sm-3 side-right">
+    <div class="col-sm-3">
 
         <?php $geo = tool::getLatLng($hebergement->address_number.' '.$hebergement->address_street.' '.$hebergement->address_postal_code.' '.$hebergement->address_city); ?>
         <div class="block-flat bars-widget">
             <div class="gmap-sm">
-                <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$geo[0]; ?>,<?=$geo[1]; ?>&zoom=12&size=210x200&scale=2&markers=<?=$geo[0]; ?>,<?=$geo[1]; ?>&sensor=false" width="100%" alt="">
+                <a href="https://www.google.fr/maps/place/<?=$hebergement->address_number; ?>+<?=$hebergement->address_street; ?>,+<?=$hebergement->address_postal_code; ?>+<?=$hebergement->address_city; ?>/">
+                    <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$geo[0]; ?>,<?=$geo[1]; ?>&zoom=12&size=210x200&scale=2&markers=<?=$geo[0]; ?>,<?=$geo[1]; ?>&sensor=false" width="100%" alt="">
+                </a>
             </div>
 
             <address>

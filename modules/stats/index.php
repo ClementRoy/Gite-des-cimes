@@ -8,6 +8,7 @@
 <div class="title">
     <div class="row header">
         <div class="col-md-12">
+            <h1>Corbeille</h1>
             <h1>Satistiques</h1>
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#2014">2014</a></li>
@@ -35,6 +36,7 @@
         <div class="col-md-12">
             <div class="tab-content">
                 <div class="tab-pane active" id="2014">
+  
             <?php if(count($structures)): ?>
                 <table class="datatable" data-sort="1" data-length="25">
                     <thead>
@@ -91,8 +93,17 @@
                 </div>
             </div>
 
+                <script>
+                    $(function () {
+                        $('.nav-tabs a').click(function (e) {
+                            e.preventDefault();
+                            $(this).tab('show');
+                        });
+                    });
+                </script>
+
+            </div>
         </div>
     </div>
-</div>
 
-<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
+    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

@@ -189,7 +189,7 @@
                                 <div class="alert alert-warning alert-white rounded">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                     <div class="icon"><i class="fa fa-warning"></i></div>
-                                    L'inscription n'est pas encore été finalisée
+                                    L'inscription n'a pas encore été finalisée
                                 </div>
                             <?php endif; ?>
 
@@ -197,7 +197,7 @@
                                 <div class="alert alert-warning alert-white rounded">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                     <div class="icon"><i class="fa fa-warning"></i></div>
-                                    L'inscription n'est pas encore été prise en charge
+                                    L'inscription n'a pas encore été prise en charge
                                 </div>
                             <?php endif; ?>
 

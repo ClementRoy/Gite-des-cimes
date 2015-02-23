@@ -11,7 +11,7 @@ class html
 				$input = '<div class="field-box row">
 	                        <label class="col-md-2" for="'.$id.'">Prénom</label>
 	                        <div class="col-md-5">
-	                            <input id="'.$id.'" name="'.$id.'" class="form-control" type="text" data-toggle="tooltip" title="'.$tooltip.'" parsley-required="'.$required.'">
+	                            <input id="'.$id.'" name="'.$id.'" class="form-control" type="text" data-toggle="tooltip" title="'.$tooltip.'" data-parsley-required="'.$required.'">
 	                        </div>
 	                    </div>';
 		    break;

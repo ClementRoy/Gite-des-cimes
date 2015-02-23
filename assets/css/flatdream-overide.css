@@ -86,6 +86,7 @@ body {
 .cl-mcont {
 	padding: 35px 40px 30px 40px;
 	font-weight: normal;
+	position: relative;
 }
 .label-warning {
 	background: #F16E3F;
@@ -536,15 +537,21 @@ h5 {
 }
 .bars-widget.affix-bottom {
 	/*top: 15px;*/
-	/*position: absolute;*/
+	position: absolute;
 	/*bottom: 15px;*/
 /*	right: 40px;
 width: 20.8%;*/
 }
 
-.tooltip.rihgt .tooltip-inner {
-	min-width: 200px;
-	max-width: none;
+.tooltip.right .tooltip-arrow {
+	border-right-color: rgba(0,0,0,.9);
+}
+.tooltip {
+	font-family: "Open Sans",Helvetica,Arial,sans-serif;
+}
+.tooltip-inner {
+	border-radius: 2px;
+	background: rgba(0,0,0,.9);
 }
 
 
@@ -855,7 +862,7 @@ address {
 	position: relative;
 	overflow: visible;
 	border-radius: 0;
-	margin-top: 55px;
+	margin-top: 37px;
 }
 
 .progress span {
@@ -900,9 +907,6 @@ address {
 	margin-bottom: 15px;
 	padding-top: 7px;
 	text-align: right;
-}
-.tooltip-inner {
-	border-radius: 1px;
 }
 .table .list-unstyled {
 	line-height: 1.9em;
@@ -949,4 +953,101 @@ margin-bottom: 20px;
 }
 .popover {
 	font-family: 'Open Sans', sans-serif;
+}
+.cont .lead {
+	font-size: 14px;
+	margin-top: 7px;
+	/*margin-bottom: 5px;*/
+}
+
+.login-container {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.login-container .block-flat .header {
+	background: transparent;
+	border: none;
+	color: #fff;
+}
+.login-container .block-flat .header h1 {
+text-align: center;
+font-weight: 600;
+font-size: 38px;
+margin-bottom: 13px;
+color: #FFF;
+text-shadow: 0 1px 6px rgba(0,0,0,.1);
+}
+.login-container .block-flat .body {
+	background: #fff;
+	border-radius: 3px;
+	color: #fff;
+	background: rgba(255,255,255,.4);
+	box-shadow: 0 2px 5px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.3),inset -1px 0 0 rgba(255,255,255,.15),inset 1px 0 0 rgba(255,255,255,.15);
+}
+.login-container .block-flat .content {
+	padding: 25px 25px 0;
+}
+.login-container .block-flat .foot {
+	padding: 0 25px 25px;
+}
+.login-container .block-flat {
+	background: transparent;
+	box-shadow: none;
+	margin-bottom: 0;
+}
+.login-container .middle-login {
+	width: 360px;
+	left: 50%;
+	top: 50%;
+	position: absolute;
+	margin-top: -180px;
+	margin-left: -180px;
+}
+
+@-webkit-keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 30px, 0);
+            transform: translate3d(0, 30px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 30px, 0);
+            transform: translate3d(0, 30px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+          animation-name: fadeInUp;
+}
+.animated {
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+.parsley-errors-list {
+	margin: 0;
+	display: none;
+}
+.parsley-errors-list.filled {
+	margin-top: 4px;
+	display: block;
 }

@@ -62,9 +62,9 @@
                     <table class="table table-bordered" id="datatable">
                         <thead>
                             <tr>
-                                <!--<th class="sortable" style="width: 60px;">#</th>-->
-                                <th class="sortable">Nom de l'enfant</th>
-                                <th class="sortable">Séjour</th>
+                                <th>Nom de l'enfant</th>
+                                <th>Séjour</th>
+                                <th>À partir du</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,15 +74,23 @@
                                     $enfant = enfant::get($notSupportedDossier->ref_enfant);
                                     $structure = structure::get($notSupportedDossier->ref_structure_payer);
                                     $inscription = inscription::getByDossier($notSupportedDossier->id);
-                                    // tool::output($notSupportedDossier);
-                                    // tool::output($inscription);
+
+                                    $date_from = new DateTime($inscription[0]->date_from);
+                                    if($date_from->getTimestamp() != '-62169987600') {
+                                        $date_from = '<span class="sr-only">'.strftime("%Y%m%d", $date_from->getTimestamp()).'</span> '.strftime("%d %B %Y", $date_from->getTimestamp());
+                                    }
+
+                                    $date_to = new DateTime($inscription[0]->date_to);
+                                    if($date_to->getTimestamp() != '-62169987600') {
+                                        $date_to = strftime("%Y%m%d", $date_to->getTimestamp()).'</span> '.strftime("%d %B %Y", $date_to->getTimestamp());
+                                    }
+
                                     $sejour = sejour::get($inscription[0]->ref_sejour);
                                 ?>
                                 <tr>
-                                    <!--<td><a href="/dossiers/infos/id/<?=$notSupportedDossier->id?>">#<?=$notSupportedDossier->id?></a></td>-->
                                     <td><?=$enfant->firstname?> <?=$enfant->lastname?></td>
                                     <td><a href="/sejours/infos/<?=$sejour->id; ?>"><?=$sejour->name; ?></a></td>
-                                    <!-- <td>Non</td> -->
+                                    <td><?=$date_from; ?></td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
@@ -102,7 +110,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <h3>Les prochains séjours</h3>
-                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -110,77 +118,125 @@
                 $colors =  array('#4D90FD', '#FD6A5E', '#B450B2', '#fec93d', '#dd4444', '#dd4d79');
                 shuffle($colors);
                 $i = 0;
-            ?>
-            <?php $futurs_sejours = sejour::getListFuturSejour(); ?>
-            <?php foreach($futurs_sejours as $sejour): ?>
+                $y = 0;
 
-                <?php $inscriptions = inscription::getBySejour($sejour->id); ?>
-                <?php if(count($inscriptions) > 0): ?>
-                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                        <div class="block-flat">
-                            <div class="content text-center">
-                                <div class="epie-chart" data-barcolor="<?=$colors[$i]?>" data-trackcolor="#F3F3F3" data-percent="<?=100*count($inscriptions)/$sejour->capacity_max ?>">
-                                    <span>
-                                        <?=floor(100*count($inscriptions)/$sejour->capacity_max) ?>%
-                                    </span>
+                $futurs_sejours = sejour::getListFuturSejour();
+
+                foreach($futurs_sejours as $key => $sejour) {
+
+                    $date_from = new DateTime($sejour->date_from);
+                    $date_to = new DateTime($sejour->date_to);
+
+                    $i++;
+
+                    $nb_weeks = tool::getNbWeeks(new DateTime($sejour->date_from), new DateTime($sejour->date_to));
+
+                    $min = $sejour->capacity_min;
+                    $max = $sejour->capacity_max;
+
+                    if ($nb_weeks > 1) {
+
+                        for ($i = 0; $i < $nb_weeks; $i++) {
+
+                            $start_base = new DateTime($sejour->date_from);
+                            $end_base = new DateTime($sejour->date_from);
+
+                            $start_base->modify("+$i weeks");
+                            $end_base->modify("+$i weeks");
+                            $end_base->modify("+1 weeks");
+
+                            $date_from = strftime("%d", $start_base->getTimestamp());
+
+                            $date_to = strftime("%d %B",  $end_base->getTimestamp());
+
+                            $inscriptions = inscription::getBySejourBetweenDates($sejour->id, $start_base, $end_base);
+
+                            $nb = count($inscriptions);
+                            $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $start_base, $end_base);
+                            $opt = count($opt);
+
+                            ?>
+
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                <div class="block-flat">
+                                    <div class="content text-center">
+                                        <div class="epie-chart" data-barcolor="<?=$colors[$y]?>" data-trackcolor="#F3F3F3" data-percent="<?=100 * $nb / $sejour->capacity_max; ?>">
+                                            <span>
+                                                <?=floor(100 * $nb / $sejour->capacity_max); ?>%
+                                            </span>
+                                        </div>
+                                        <p>
+                                            <a href="/sejours/infos/id/<?=$sejour->id; ?>#week-<?=$i+1; ?>"><?=$sejour->name ?> (<?=$i+1; ?>)</a><br>
+                                            Du <?=$date_from; ?> au <?=$date_to; ?><br>
+                                            <strong><?=$nb; ?>/<?=$sejour->capacity_max; ?></strong>
+                                        </p>
+                                    </div>
                                 </div>
-                                <p>
-                                    <a href="/sejours/infos/id/<?=$sejour->id ?>"><?=$sejour->name ?></a><br>
-                                    <?php 
-                                        $date_from = new DateTime($sejour->date_from);
-                                        echo ' Du '.strftime('%d', $date_from->getTimestamp());
-
-                                        $date_to = new DateTime($sejour->date_to);
-                                        echo ' au '.strftime('%d %B', $date_to->getTimestamp());
-                                    ?>
-                                    <?='<br><strong>'.count($inscriptions).' / '.$sejour->capacity_max.'</strong>' ?>
-                                </p>
                             </div>
-                        </div>
-                    </div>
-                <?php endif; ?>
-                <?php if ($i < 5) { $i++; } else { $i = 0; } ?>
-            <?php endforeach; ?>   
+
+                            <?php 
+
+                            if ($y < 5) { $y++; } else { $y = 0; }
+
+                        }
+
+                    } else {
+
+                        $inscriptions = inscription::getBySejour($sejour->id);
+
+                        $nb = count($inscriptions);
+                        $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $date_from, $date_to);
+                        $opt = count($opt);
+
+                        if ($date_from->getTimestamp() != '-62169987600') {
+                            $date_from = strftime("%d", $date_from->getTimestamp());
+                        }
+
+                        if ($date_to->getTimestamp() != '-62169987600') {
+                            $date_to = strftime("%d %B", $date_to->getTimestamp());
+                        }
+
+                        ?>
+
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                <div class="block-flat">
+                                    <div class="content text-center">
+                                        <div class="epie-chart" data-barcolor="<?=$colors[$y]?>" data-trackcolor="#F3F3F3" data-percent="<?=100 * $nb / $sejour->capacity_max; ?>">
+                                            <span>
+                                                <?=floor(100 * $nb / $sejour->capacity_max); ?>%
+                                            </span>
+                                        </div>
+                                        <p>
+                                            <a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name ?></a><br>
+                                            Du <?=$date_from; ?> au <?=$date_to; ?><br>
+                                            <strong><?=$nb; ?>/<?=$sejour->capacity_max; ?></strong>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php
+                        
+                        if ($y < 5) { $y++; } else { $y = 0; }
+
+                    }
+                    
+                }
+
+            ?>
   
         </div>
     </div>
     <!-- /Séjours à venir -->
 </div>
 
-<?php /*
-    <div class="col-md-5">
-        <p class="bloc-title">Prochains séjours</p>
-        <div class="content">
-
-
-            <div class="jumbotron">
-                <h1>En cours de construction !</h1>
-            </div>
-        </div>
-
-    </div>
-    <div class="col-md-5">
-
-        <div class="row">
-
-            <h6>Inscriptions non finalisées</h6>
-
-            <h6>Séjours à venir</h6>
-
-            <h6>Fiches à compléter</h6>
-
-            <h6>Taux de remplissage</h6>
-
-        </div>
-    </div>
-*/ ?>
 
 
 
 
 <?php ob_start(); ?>
 <script type="text/javascript" src="/assets/js/jquery.easy-pie-chart.min.js"></script>
-<script type="text/javascript" src="/assets/libs/odometer/odometer.min.js"></script>
+<script type="text/javascript" src="/assets/js/odometer.min.js"></script>
 <script>
     $(function() {
         $('.epie-chart').easyPieChart({

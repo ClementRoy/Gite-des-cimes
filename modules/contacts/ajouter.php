@@ -20,7 +20,7 @@
     <div class="content">
 
 
-        <form id="form-add-contact" method="post" action="/contacts/infos/id/<?=$id ?>" class="form-horizontal group-border-dashed maped-form" parsley-validate>
+        <form id="form-add-contact" method="post" action="/contacts/infos/id/<?=$id ?>" class="form-horizontal group-border-dashed maped-form" data-parsley-validate>
 
             <input type="hidden" value="<?=$id ?>" name="id" />
 
@@ -29,8 +29,8 @@
                 <div class="col-sm-6" data-toggle="tooltip" title="Sélectionnez la structure qui s'occupe de cet enfant.">
                     <div class="ui-select">
                         <?php $structures = structure::getList(); ?>
-                        <select class="form-control" id="form-enfant-structure-select" name="form_contact_structure">
-                            <option selected="selected">Choisissez la structure</option>
+                        <select class="form-control" id="form-enfant-structure-select" name="form_contact_structure" data-parsley-required="true">
+                            <option selected="selected" value="">Choisissez la structure</option>
                             <?php foreach($structures as $structure): ?>
                                 <option value="<?=$structure->id ?>"><?=$structure->name ?></option>
                             <?php endforeach; ?>
@@ -58,7 +58,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-contact-nom">Nom</label>
                 <div class="col-sm-6">
-                    <input id="form-contact-nom" name="form_contact_lastname" class="form-control input-sm input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom du contact." parsley-required="true">
+                    <input id="form-contact-nom" name="form_contact_lastname" class="form-control input-sm input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom du contact." data-parsley-required="true">
                 </div>
             </div>
 
@@ -66,7 +66,7 @@
                 <label class="col-sm-4 control-label" for="form-contact-title">Titre</label>
                 <div class="col-sm-6">
                     <input id="form-contact-title" name="form_contact_title" class="form-control" type="text" 
-                    data-toggle="tooltip" title="Renseignez le titre de la contact." parsley-required="true">
+                    data-toggle="tooltip" title="Renseignez le titre de la contact.">
                 </div>
             </div>
 
@@ -75,7 +75,7 @@
                 <div class="col-sm-6">
                     <input id="form-contact-email" name="form_contact_email" type="text" class="form-control"
                     data-toggle="tooltip" title="Renseignez l'email de la contact." 
-                    parsley-type="email">
+                    data-parsley-type="email">
                 </div>
             </div>     
 
@@ -83,8 +83,7 @@
                 <label class="col-sm-4 control-label" for="form-contact-phone">Téléphone</label>
                 <div class="col-sm-6">
                     <input id="form-contact-phone" name="form_contact_telephone" type="text" class="form-control"
-                    data-toggle="tooltip" title="Renseignez le numéro de téléphone de la contact." 
-                    parsley-type="phone">
+                    data-toggle="tooltip" title="Renseignez le numéro de téléphone de la contact.">
                 </div>
             </div>
 
@@ -100,8 +99,7 @@
                 <label class="col-sm-4 control-label" for="form-contact-fax">Fax</label>
                 <div class="col-sm-6">
                     <input id="form-contact-fax" name="form_contact_fax" type="text" class="form-control"
-                    data-toggle="tooltip" title="Renseignez le numéro de fax de la contact." 
-                    parsley-type="phone">
+                    data-toggle="tooltip" title="Renseignez le numéro de fax de la contact.">
                     </div>
             </div>
 

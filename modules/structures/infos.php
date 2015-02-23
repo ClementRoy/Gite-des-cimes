@@ -200,6 +200,23 @@
                                     </td>
                                 </tr>
 
+                                <?php if (tool::check($structure->note)): ?>
+                                <tr>
+                                    <td style="width:19%;" class="category"><strong>Notes</strong></td>
+                                    <td>
+                                        <table class="no-border no-strip skills">
+                                            <tbody class="no-border-x no-border-y">
+
+                                                <tr>
+                                                    <td><?=$structure->note; ?></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <?php endif; ?>
+
                             </tbody>
                         </table>
 
@@ -355,12 +372,13 @@
     </div>
 
 
-    <div class="col-sm-3 side-right">
-
+    <div class="col-sm-3">
         <?php $geo = tool::getLatLng($structure->address_number.' '.$structure->address_street.' '.$structure->address_postal_code.' '.$structure->address_city); ?>
         <div class="block-flat bars-widget">
             <div class="gmap-sm">
-                <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$geo[0]; ?>,<?=$geo[1]; ?>&zoom=12&size=210x200&scale=2&markers=<?=$geo[0]; ?>,<?=$geo[1]; ?>&sensor=false" width="100%" alt="">
+                <a href="https://www.google.fr/maps/place/<?=$structure->address_number; ?>+<?=$structure->address_street; ?>,+<?=$structure->address_postal_code; ?>+<?=$structure->address_city; ?>/">
+                    <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$geo[0]; ?>,<?=$geo[1]; ?>&zoom=12&size=210x200&scale=2&markers=<?=$geo[0]; ?>,<?=$geo[1]; ?>&sensor=false" width="100%" alt="">
+                </a>
             </div>
 
             <address>
