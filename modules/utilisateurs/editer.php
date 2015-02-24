@@ -37,7 +37,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-utilisateur-identifiant">Identifiant</label>
                 <div class="col-sm-6">
-                    <input id="form-utilisateur-identifiant" name="form_utilisateur_identifiant" class="form-control" type="text" data-toggle="tooltip" title="Renseignez l'identifiant de l'utilisateur." data-parsley-required="true" value="<?=$utilisateur->identifier; ?>">
+                    <input id="form-utilisateur-identifiant" name="form_utilisateur_identifiant" class="form-control" type="text" data-toggle="tooltip" title="Renseignez l'identifiant de l'utilisateur." data-parsley-required="true" value="<?=$utilisateur->identifier; ?>" disabled="disabled">
                 </div>
                 </div>
             <div class="form-group">
@@ -49,7 +49,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-utilisateur-mail">Adresse e-mail</label>
                 <div class="col-sm-6">
-                    <input id="form-utilisateur-mail" name="form_utilisateur_mail" class="form-control" type="email" data-toggle="tooltip" title="Renseignez l'adresse e-mail de l'utilisateur." data-parsley-required="true" value="<?=$utilisateur->email; ?>">
+                    <input id="form-utilisateur-mail" name="form_utilisateur_mail" class="form-control input-email" type="email" data-toggle="tooltip" title="Renseignez l'adresse e-mail de l'utilisateur." data-parsley-required="true" value="<?=$utilisateur->email; ?>">
                 </div>
             </div>
 

@@ -235,8 +235,8 @@
 
 
 <?php ob_start(); ?>
-<script type="text/javascript" src="/assets/js/jquery.easy-pie-chart.min.js"></script>
-<script type="text/javascript" src="/assets/js/odometer.min.js"></script>
+<script type="text/javascript" src="/assets/js/libs/jquery.easy-pie-chart.min.js"></script>
+<script type="text/javascript" src="/assets/js/libs/odometer.min.js"></script>
 <script>
     $(function() {
         $('.epie-chart').easyPieChart({

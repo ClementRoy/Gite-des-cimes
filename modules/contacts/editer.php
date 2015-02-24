@@ -71,7 +71,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-contact-email">Email</label>
                 <div class="col-sm-6">
-                    <input id="form-contact-email" name="form_contact_email" type="text" class="form-control"
+                    <input id="form-contact-email" name="form_contact_email" type="text" class="form-control input-email"
                     data-toggle="tooltip" title="Renseignez l'email de la contact." 
                     data-parsley-type="email" value="<?=$contact->email ?>">
                 </div>
@@ -80,7 +80,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-contact-phone">Téléphone</label>
                 <div class="col-sm-6">
-                    <input id="form-contact-phone" name="form_contact_telephone" type="text" class="form-control"
+                    <input id="form-contact-phone" name="form_contact_telephone" type="text" class="form-control input-phone"
                     data-toggle="tooltip" title="Renseignez le numéro de téléphone de la contact." 
                     value="<?=$contact->phone ?>">
                 </div>
@@ -89,7 +89,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-contact-mobile-phone">Téléphone mobile</label>
                 <div class="col-sm-6">
-                    <input id="form-contact-mobile-phone" name="form_contact_mobile_phone" type="text" class="form-control"
+                    <input id="form-contact-mobile-phone" name="form_contact_mobile_phone" type="text" class="form-control input-phone"
                     data-toggle="tooltip" title="Renseignez le numéro de téléphone mobile du contact." value="<?=$contact->mobile_phone ?>">
                 </div>
             </div>
@@ -97,7 +97,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-contact-fax">Fax</label>
                 <div class="col-sm-6">
-                    <input id="form-contact-fax" name="form_contact_fax" type="text" class="form-control"
+                    <input id="form-contact-fax" name="form_contact_fax" type="text" class="form-control input-phone"
                     data-toggle="tooltip" title="Renseignez le numéro de fax de la contact." 
                      value="<?=$contact->fax ?>">
                     </div>

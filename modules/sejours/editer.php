@@ -124,22 +124,22 @@
                         <div class="row">
                             <label class="col-md-4 control-label" for="form-inscription-heure-aller-1">Heure de rendez-vous à l'aller</label>
                             <div class="col-md-1 col-sm-6">
-                                <input id="form-inscription-heure-aller-1" value="<?=$hour_departure[0] ?>" name="form_sejour_heure_aller[0]" class="form-control adresse-numero pull-left" type="text" title="Renseignez l'heure de rendez-vous à l'aller.">
+                                <input id="form-inscription-heure-aller-1" value="<?=$hour_departure[0] ?>" name="form_sejour_heure_aller[0]" class="form-control adresse-numero pull-left input-hour" type="text" title="Renseignez l'heure de rendez-vous à l'aller.">
                                 <p class="input-suffix">h</p>
                             </div>
                             <div class="col-md-1 col-sm-5">
-                                <input id="form-inscription-min-aller-1" value="<?=$min_departure[0] ?>" name="form_sejour_min_aller[0]" class="form-control adresse-numero" type="text" value="00" title="Renseignez l'heure de rendez-vous à l'aller.">
+                                <input id="form-inscription-min-aller-1" value="<?=$min_departure[0] ?>" name="form_sejour_min_aller[0]" class="form-control adresse-numero input-minute" type="text" value="00" title="Renseignez l'heure de rendez-vous à l'aller.">
                             </div>
                         </div>
                         
                         <div class="row">
                             <label class="col-md-4 control-label" for="form-inscription-heure-retour-1">Heure de rendez-vous au retour</label>
                             <div class="col-md-1 col-sm-6">
-                                <input id="form-inscription-heure-retour-1" value="<?=$hour_return[0] ?>" name="form_sejour_heure_retour[0]" class="form-control adresse-numero pull-left" type="text" title="Renseignez l'heure de rendez-vous au retour'.">
+                                <input id="form-inscription-heure-retour-1" value="<?=$hour_return[0] ?>" name="form_sejour_heure_retour[0]" class="form-control adresse-numero pull-left input-hour" type="text" title="Renseignez l'heure de rendez-vous au retour'.">
                                 <p class="input-suffix">h</p>
                             </div>
                             <div class="col-md-1 col-sm-5">
-                                <input id="form-inscription-min-retour-1" value="<?=$min_return[0] ?>" name="form_sejour_min_retour[0]" class="form-control adresse-numero" type="text" value="00" title="Renseignez l'heure de rendez-vous au retour'.">
+                                <input id="form-inscription-min-retour-1" value="<?=$min_return[0] ?>" name="form_sejour_min_retour[0]" class="form-control adresse-numero input-minute" type="text" value="00" title="Renseignez l'heure de rendez-vous au retour'.">
                             </div>
                         </div>
                     </div>
@@ -154,22 +154,22 @@
                         <div class="row">
                             <label class="col-md-4 control-label" for="form-inscription-heure-aller-2">Heure de rendez-vous à l'aller</label>
                             <div class="col-md-1 col-sm-6">
-                                <input id="form-inscription-heure-aller-2" value="<?=$hour_departure[1] ?>" name="form_sejour_heure_aller[1]" class="form-control adresse-numero pull-left" type="text" title="Renseignez l'heure de rendez-vous à l'aller.">
+                                <input id="form-inscription-heure-aller-2" value="<?=$hour_departure[1] ?>" name="form_sejour_heure_aller[1]" class="form-control adresse-numero pull-left input-hour" type="text" title="Renseignez l'heure de rendez-vous à l'aller.">
                                 <p class="input-suffix">h</p>
                             </div>
                             <div class="col-md-1 col-sm-5">
-                                <input id="form-inscription-min-aller-2" value="<?=$min_departure[1] ?>" name="form_sejour_min_aller[1]" class="form-control adresse-numero" type="text" value="00" title="Renseignez l'heure de rendez-vous à l'aller.">
+                                <input id="form-inscription-min-aller-2" value="<?=$min_departure[1] ?>" name="form_sejour_min_aller[1]" class="form-control adresse-numero input-minute" type="text" value="00" title="Renseignez l'heure de rendez-vous à l'aller.">
                             </div>
                         </div>
                         
                         <div class="row">
                             <label class="col-md-4 control-label" for="form-inscription-heure-retour-2">Heure de rendez-vous au retour</label>
                         <div class="col-md-1 col-sm-6">
-                            <input id="form-inscription-heure-retour-2" value="<?=$hour_return[1] ?>" name="form_sejour_heure_retour[1]" class="form-control adresse-numero pull-left" type="text" title="Renseignez l'heure de rendez-vous au retour'.">
+                            <input id="form-inscription-heure-retour-2" value="<?=$hour_return[1] ?>" name="form_sejour_heure_retour[1]" class="form-control adresse-numero pull-left input-hour" type="text" title="Renseignez l'heure de rendez-vous au retour'.">
                             <p class="input-suffix">h</p>
                         </div>
                         <div class="col-md-1 col-sm-5">
-                            <input id="form-inscription-min-retour-2" value="<?=$min_return[1] ?>" name="form_sejour_min_retour[1]" class="form-control adresse-numero" type="text" value="00" title="Renseignez l'heure de rendez-vous au retour'.">
+                            <input id="form-inscription-min-retour-2" value="<?=$min_return[1] ?>" name="form_sejour_min_retour[1]" class="form-control adresse-numero input-minute" type="text" value="00" title="Renseignez l'heure de rendez-vous au retour'.">
                         </div>
                         </div>
                     </div>
@@ -184,22 +184,22 @@
                         <div class="row">
                             <label class="col-md-4 control-label" for="form-inscription-heure-aller-3">Heure de rendez-vous à l'aller</label>
                             <div class="col-md-1 col-sm-6">
-                                <input id="form-inscription-heure-aller-3" value="<?=$hour_departure[2] ?>" name="form_sejour_heure_aller[2]" class="form-control adresse-numero pull-left" type="text" title="Renseignez l'heure de rendez-vous à l'aller.">
+                                <input id="form-inscription-heure-aller-3" value="<?=$hour_departure[2] ?>" name="form_sejour_heure_aller[2]" class="form-control adresse-numero pull-left input-hour" type="text" title="Renseignez l'heure de rendez-vous à l'aller.">
                                 <p class="input-suffix">h</p>
                             </div>
                             <div class="col-md-1 col-sm-5">
-                                <input id="form-inscription-min-aller-3" value="<?=$min_departure[2] ?>" name="form_sejour_min_aller[2]" class="form-control adresse-numero" type="text" value="00" title="Renseignez l'heure de rendez-vous à l'aller.">
+                                <input id="form-inscription-min-aller-3" value="<?=$min_departure[2] ?>" name="form_sejour_min_aller[2]" class="form-control adresse-numero input-minute" type="text" value="00" title="Renseignez l'heure de rendez-vous à l'aller.">
                             </div>
                         </div>
                         
                         <div class="row">
                             <label class="col-md-4 control-label" for="form-inscription-heure-retour-3">Heure de rendez-vous au retour</label>
                             <div class="col-md-1 col-sm-6">
-                                <input id="form-inscription-heure-retour-3" value="<?=$hour_return[2] ?>" name="form_sejour_heure_retour[2]" class="form-control adresse-numero pull-left" type="text" title="Renseignez l'heure de rendez-vous au retour'.">
+                                <input id="form-inscription-heure-retour-3" value="<?=$hour_return[2] ?>" name="form_sejour_heure_retour[2]" class="form-control adresse-numero pull-left input-hour" type="text" title="Renseignez l'heure de rendez-vous au retour'.">
                                 <p class="input-suffix">h</p>
                             </div>
                             <div class="col-md-1 col-sm-5">
-                                <input id="form-inscription-min-retour-3" value="<?=$min_return[2] ?>" name="form_sejour_min_retour[2]" class="form-control adresse-numero" type="text" value="00" title="Renseignez l'heure de rendez-vous au retour'.">
+                                <input id="form-inscription-min-retour-3" value="<?=$min_return[2] ?>" name="form_sejour_min_retour[2]" class="form-control adresse-numero input-minute" type="text" value="00" title="Renseignez l'heure de rendez-vous au retour'.">
                             </div>
                         </div>
                     </div>

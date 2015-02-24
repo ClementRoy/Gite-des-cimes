@@ -57,7 +57,7 @@
 
                             // On tri les inscriptions de la plus récement modifiées à la plus ancienne
                             $dossiers = tool::array_sort($dossiers, 'edited', SORT_DESC);
-
+                            //tool::output($dossiers);
                             $the_datas = array();
 
                             foreach($dossiers as $key => $dossier) {

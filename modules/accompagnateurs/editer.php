@@ -39,13 +39,13 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-accompagnateur-tel">Numéro de téléphone</label>
                 <div class="col-sm-6">
-                    <input id="form-accompagnateur-tel" name="form_accompagnateur_tel" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de l'accompagnateur." value="<?=$accompagnateur->tel; ?>">
+                    <input id="form-accompagnateur-tel" name="form_accompagnateur_tel" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de l'accompagnateur." value="<?=$accompagnateur->tel; ?>">
                 </div>
             </div>  
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-accompagnateur-email">Adresse e-mail</label>
                 <div class="col-sm-6">
-                    <input id="form-accompagnateur-email" name="form_accompagnateur_email" class="form-control" type="email" data-toggle="tooltip" title="Renseignez l'adresse e-mail de l'accompagnateur." value="<?=$accompagnateur->email; ?>">
+                    <input id="form-accompagnateur-email" name="form_accompagnateur_email" class="form-control input-email" type="email" data-toggle="tooltip" title="Renseignez l'adresse e-mail de l'accompagnateur." value="<?=$accompagnateur->email; ?>">
                 </div>
             </div>
             <?php /* ?>                      

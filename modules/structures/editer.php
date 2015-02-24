@@ -47,7 +47,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-structure-email">Email</label>
                 <div class="col-sm-6">
-                    <input id="form-structure-email" name="form_structure_email" type="text" class="form-control"
+                    <input id="form-structure-email" name="form_structure_email" type="text" class="form-control input-email"
                     data-toggle="tooltip" title="Renseignez l'email de la structure." 
                     data-parsley-type="email" value="<?=$structure->email ?>">
                 </div>
@@ -56,7 +56,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-structure-phone">Téléphone</label>
                 <div class="col-sm-6">
-                    <input id="form-structure-phone" name="form_structure_telephone" type="text" class="form-control"
+                    <input id="form-structure-phone" name="form_structure_telephone" type="text" class="form-control input-phone"
                     data-toggle="tooltip" title="Renseignez le numéro de téléphone de la structure." value="<?=$structure->phone ?>">
                 </div>
             </div>
@@ -64,7 +64,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-structure-fax">Fax</label>
                 <div class="col-sm-6">
-                    <input id="form-structure-fax" name="form_structure_fax" type="text" class="form-control"
+                    <input id="form-structure-fax" name="form_structure_fax" type="text" class="form-control input-phone"
                     data-toggle="tooltip" title="Renseignez le numéro de fax de la structure." value="<?=$structure->fax ?>">
                 </div>
             </div>

@@ -236,11 +236,11 @@
                             <label class="col-sm-4 control-label" for="form-inscription-heure-aller">Heure de rendez-vous à l'aller</label>
                             <div class="col-md-1">
                                 <?php $hour_departure = explode('h', $dossier->hour_departure); ?>
-                                <input id="form-inscription-heure-aller" name="form_inscription_heure_aller" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ." value="<?=$hour_departure['0'] ?>">
+                                <input id="form-inscription-heure-aller" name="form_inscription_heure_aller" class="form-control pull-left input-hour" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ." value="<?=$hour_departure['0'] ?>">
                                 <p class="input-suffix">h</p>
                             </div>
                             <div class="col-md-1">
-                                <input id="form-inscription-min-aller" name="form_inscription_min_aller" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="<?=$hour_departure['1'] ?>" title="Renseignez l'heure de rendez-vous pour le départ.">
+                                <input id="form-inscription-min-aller" name="form_inscription_min_aller" class="form-control input-minute" type="text" data-toggle="tooltip" value="<?=$hour_departure['1'] ?>" title="Renseignez l'heure de rendez-vous pour le départ.">
                             </div>
                         </div>
 
@@ -248,11 +248,11 @@
                             <label class="col-sm-4 control-label" for="form-inscription-heure-retour">Heure de rendez-vous au retour</label>
                             <div class="col-md-1 col-sm-5">
                                 <?php $hour_return = explode('h', $dossier->hour_return); ?>
-                                <input id="form-inscription-heure-retour" name="form_inscription_heure_retour" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'." value="<?=$hour_return['0'] ?>">
+                                <input id="form-inscription-heure-retour" name="form_inscription_heure_retour" class="form-control pull-left input-hour" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'." value="<?=$hour_return['0'] ?>">
                                 <p class="input-suffix">h</p>
                             </div>
                             <div class="col-md-1 col-sm-5">
-                                <input id="form-inscription-min-retour" name="form_inscription_min_retour" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="<?=$hour_return['1'] ?>" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                                <input id="form-inscription-min-retour" name="form_inscription_min_retour" class="form-control input-minute" type="text" data-toggle="tooltip" value="<?=$hour_return['1'] ?>" title="Renseignez l'heure de rendez-vous pour le retour'.">
                             </div>
                         </div>
 
@@ -503,7 +503,7 @@
                 $('#form-inscription-centre-payeur').attr('disabled','disabled');
                 $('#form-inscription-centre-payeur-hidden').removeAttr('disabled');
             }
-        });
+        }).change();
         $('.sejours-group').on('change', '.sejour-form select', function(){
             var sejour_fieldset = $(this).parent(),
                 sejour_id = $(this).val(),

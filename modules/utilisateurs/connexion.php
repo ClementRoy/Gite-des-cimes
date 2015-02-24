@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,300">
 
     <?php if (APP_VERSION != 'dev'): ?>
-    <link rel="stylesheet" href="/assets/dist/css/gitedescimes.min.css" />
+    <link rel="stylesheet" href="/assets/css/gitedescimes.min.css" />
     <?php else: ?>
 
     <link rel="stylesheet" href="/assets/libs/jquery.easy-pie-chart/jquery.easy-pie-chart.css">

@@ -108,7 +108,7 @@ class dossier
         global $db;
 
         $today = date("Y-m-d H:i:s");
-        $result = $db->query('SELECT *, dossier.id as dossier_id , dossier.ref_enfant as dossier_ref_enfant FROM '.self::$table.' LEFT JOIN inscription ON inscription.ref_dossier = dossier.id WHERE archived = 0 AND inscription.date_to >= "'.$today.'" ORDER BY dossier.id');
+        $result = $db->query('SELECT DISTINCT dossier.id, dossier.finished, dossier.supported, dossier.edited, dossier.id as dossier_id , dossier.ref_enfant as dossier_ref_enfant FROM '.self::$table.' LEFT JOIN inscription ON dossier.id = inscription.ref_dossier  WHERE archived = 0 AND inscription.date_to >= "'.$today.'" ORDER BY dossier.id');
         return $result;
     }
 
@@ -116,7 +116,7 @@ class dossier
     public static function getListPast(){
          global $db;
         $today = date("Y-m-d H:i:s");
-        $result = $db->query('SELECT *, dossier.id as dossier_id , dossier.ref_enfant as dossier_ref_enfant FROM '.self::$table.' LEFT JOIN inscription ON inscription.ref_dossier = dossier.id WHERE archived = 0 AND inscription.date_to <= "'.$today.'" ORDER BY dossier.id DESC');
+        $result = $db->query('SELECT DISTINCT dossier.id, dossier.finished, dossier.supported, dossier.edited, dossier.id as dossier_id , dossier.ref_enfant as dossier_ref_enfant FROM '.self::$table.' LEFT JOIN inscription ON inscription.ref_dossier = dossier.id WHERE archived = 0 AND inscription.date_to <= "'.$today.'" ORDER BY dossier.id DESC');
         return $result;
     }
 
