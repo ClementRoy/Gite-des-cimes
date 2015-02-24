@@ -9,8 +9,8 @@
         <script src="/assets/js/gitedescimes.min.js"></script>
     <?php else: ?>
         <script src="/assets/libs/datatables/media/js/jquery.daTatables.js"></script>
-        <script src="/assets/js/datatables-bootstrap-adapter.js"></script>
-        <script src="/assets/js/datatables-french.js"></script>
+        <script src="/assets/js/libs/datatables-bootstrap-adapter.js"></script>
+        <script src="/assets/js/libs/datatables-french.js"></script>
 
         <script src="/assets/libs/jquery.gritter/js/jquery.gritter.js"></script>
         
@@ -25,24 +25,60 @@
         <script src="/assets/libs/jquery-stickytabs/jquery.stickytabs.js"></script>
 
         <script src="/assets/libs/fullcalendar/fullcalendar.min.js"></script>
-        <script src="/assets/js/fullcalendar.year.js"></script>
+        <script src="/assets/js/libs/fullcalendar.year.js"></script>
 
-        <script src="/assets/js/flatdream-core.js"></script>
+        <script src="/assets/js/libs/flatdream-core.js"></script>
 
         <!-- <script src="/assets/js/app.js"></script> -->
     <?php endif; ?>
 
     <script>
+        function testing(testingString) {
+            var $form = $('form');
+
+            $form.find('input[type="text"]').val(testingString);
+            $form.find('textarea').val(testingString);
+            $form.find('select').each(function(index, el) {
+                var value = $(el).find('option').eq(testingString).val()
+                $(el).val(value);
+            });
+            $form.find('input.input-datepicker').val(testingString + testingString + '/' + '1' + '1' + '/20' + testingString + testingString);
+            $form.find('input.input-phone').val('0' + testingString + ' ' + testingString + testingString + ' ' + testingString + testingString + ' ' + testingString + testingString + ' ' + testingString + testingString);
+            $form.find('input.input-hour, input.input-minute').val(testingString + testingString);
+
+            var inputRadio = [],
+                inputName = '';
+            $form.find('input[type="radio"]').each(function() {
+
+                if (inputName != $(this).attr('name')) {
+                    inputRadio.push($(this).attr('name'));
+                    inputName = $(this).attr('name');
+                }
+            });
+            $.each(inputRadio, function(index, val) {
+                $form.find('input[type="radio"][name="' + val + '"]').iCheck('uncheck').eq(testingString-1).iCheck('check');
+            });
+        }
     $(function() {
         window.ParsleyValidator.setLocale('fr');
-        $('form').parsley();
+        if($('form').length > 0) {   
+            $('form').parsley();
+
+            $(".input-datepicker").mask("99/99/9999");
+            $.mask.definitions['z'] = '[0]';
+            $(".input-phone").mask("z9 99 99 99 99");
+            $.mask.definitions['g'] = '[1-2]';
+            $(".input-securite-social").mask("g 99 99 99 999 999 99");
+             $(".input-hour, .input-minute").mask("99");
+        }
+
         $('input[type="text"]').tooltip({
-            placement: 'right',
+            placement: 'top',
             container: 'body',
-            trigger: 'focus'
+            trigger: 'hover'
         });
         $('select').tooltip({
-            placement: 'right',
+            placement: 'top',
             container: 'body',
             trigger: 'hover'
         });
