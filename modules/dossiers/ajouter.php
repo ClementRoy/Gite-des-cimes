@@ -487,6 +487,11 @@
                 $('#form-inscription-heure-retour').val(elem.data('hour-return'));
                 $('#form-inscription-min-retour').val(elem.data('min-return'));
             }
+            if ($(this).val() != '') {
+                $('#form_inscription_lieu_custom').attr('disabled', 'disabled').val('');
+            } else {
+                $('#form_inscription_lieu_custom').removeAttr('disabled');
+            }
         });
 
         
