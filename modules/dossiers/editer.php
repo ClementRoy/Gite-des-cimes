@@ -21,7 +21,7 @@
         <div class="col-md-12">
             <div class="block-flat">
                 <div class="content">
-                    <form id="form-edit-dossier" method="post" action="/dossiers/infos/id/<?=$dossier->id ?>" class="form-horizontal group-border-dashed maped-form" parsley-validate enctype="multipart/form-data">
+                    <form id="form-edit-dossier" method="post" action="/dossiers/infos/id/<?=$dossier->id ?>" class="form-horizontal group-border-dashed maped-form" data-parsley-validate enctype="multipart/form-data">
 
                         <?php if($dossier->finished): ?>
                             <div class="row">
@@ -40,8 +40,8 @@
                             <div class="col-sm-6" data-toggle="tooltip" title="Sélectionnez l'enfant à inscrire">
                                 <div class="ui-select">
                                     <?php $enfants = enfant::getList(); ?>
-                                    <select class="form-control" id="form-inscription-enfant-select" name="form_inscription_enfant" parsley-required="true">
-                                        <option selected="selected">Choisissez l'enfant</option>
+                                    <select class="form-control" id="form-inscription-enfant-select" name="form_inscription_enfant" data-parsley-required="true">
+                                        <option selected="selected" value="">Choisissez l'enfant</option>
                                         <?php foreach($enfants as $enfant): ?>
                                             <option <?php if( $enfant->id == $dossier->ref_enfant): ?>selected="selected"<?php endif; ?> value="<?=$enfant->id ?>"><?=$enfant->lastname ?> <?=$enfant->firstname ?></option>
                                         <?php endforeach; ?>
@@ -110,10 +110,12 @@
                                                         <?php elseif($nb_weeks === 1): ?>
                                                             <div class="checkbox">
                                                                 <label for="">
-                                                                    <input type="checkbox" name="dates[]" value="<?=$date_from_string; ?>#<?=$date_to_string; ?>#<?=$sejour_linked->ref_sejour ?>" checked="checked"> 
-                                                                    L'enfant est inscrit sur le week end en intégralité.
+                                                                    <input type="checkbox" name="dates[]" value="<?=$date_from_string; ?>#<?=$date_to_string; ?>#<?=$sejour_linked->ref_sejour ?>" checked="checked" data-id="<?=$sejour->id ?>" data-start="<?=$date_from->getTimestamp(); ?>" data-end="<?=$date_to->getTimestamp(); ?>"> 
+                                                                    L'nfant est inscrit sur le séjour en intégralité.
                                                                 </label>
                                                             </div>
+
+
                                                         <?php else: ?>
                                                             <?php for ($i=0; $i < $nb_weeks; $i++): ?>
 
@@ -161,8 +163,8 @@
                                 </div>
 
                                 <div class="sejours-controls">
-                                    <button href="#" class="btn btn-default btn-sm delete-sejour" disabled="disabled">Supprimer ce séjour</button>
-                                    <button href="#" class="btn btn-primary btn-sm add-sejour" disabled="disabled">Ajouter un séjour</button>
+                                    <button href="#" class="btn btn-default btn-sm delete-sejour">Supprimer ce séjour</button>
+                                    <button href="#" class="btn btn-primary btn-sm add-sejour">Ajouter un séjour</button>
                                 </div>
                             </div>
                         </div>
@@ -234,11 +236,11 @@
                             <label class="col-sm-4 control-label" for="form-inscription-heure-aller">Heure de rendez-vous à l'aller</label>
                             <div class="col-md-1">
                                 <?php $hour_departure = explode('h', $dossier->hour_departure); ?>
-                                <input id="form-inscription-heure-aller" name="form_inscription_heure_aller" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ." value="<?=$hour_departure['0'] ?>">
+                                <input id="form-inscription-heure-aller" name="form_inscription_heure_aller" class="form-control pull-left input-hour" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ." value="<?=$hour_departure['0'] ?>">
                                 <p class="input-suffix">h</p>
                             </div>
                             <div class="col-md-1">
-                                <input id="form-inscription-min-aller" name="form_inscription_min_aller" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="<?=$hour_departure['1'] ?>" title="Renseignez l'heure de rendez-vous pour le départ.">
+                                <input id="form-inscription-min-aller" name="form_inscription_min_aller" class="form-control input-minute" type="text" data-toggle="tooltip" value="<?=$hour_departure['1'] ?>" title="Renseignez l'heure de rendez-vous pour le départ.">
                             </div>
                         </div>
 
@@ -246,11 +248,11 @@
                             <label class="col-sm-4 control-label" for="form-inscription-heure-retour">Heure de rendez-vous au retour</label>
                             <div class="col-md-1 col-sm-5">
                                 <?php $hour_return = explode('h', $dossier->hour_return); ?>
-                                <input id="form-inscription-heure-retour" name="form_inscription_heure_retour" class="form-control adresse-numero pull-left" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'." value="<?=$hour_return['0'] ?>">
+                                <input id="form-inscription-heure-retour" name="form_inscription_heure_retour" class="form-control pull-left input-hour" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'." value="<?=$hour_return['0'] ?>">
                                 <p class="input-suffix">h</p>
                             </div>
                             <div class="col-md-1 col-sm-5">
-                                <input id="form-inscription-min-retour" name="form_inscription_min_retour" class="form-control adresse-numero" type="text" data-toggle="tooltip" value="<?=$hour_return['1'] ?>" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                                <input id="form-inscription-min-retour" name="form_inscription_min_retour" class="form-control input-minute" type="text" data-toggle="tooltip" value="<?=$hour_return['1'] ?>" title="Renseignez l'heure de rendez-vous pour le retour'.">
                             </div>
                         </div>
 
@@ -366,9 +368,14 @@
         }
     }
     function addGroupField(data) {
-        var forms = $('.sejour-form').not('.init');
+        var forms = $('.sejour-form').not('.init'),
+            cloned = $('.sejours-group').find('.init').clone();
+
+        if ($('.sejour-form:visible').length < 1) {
+            cloned.find('select').attr('data-parsley-required', 'true');
+        }
         forms.find('fieldset').attr('disabled', 'disabled');
-        $('.sejours-group').append( $('.sejours-group').find('.init').clone() );
+        $('.sejours-group').append( cloned );
         setControls();
         var newSejour = $('.sejour-form:last-child');
         newSejour.removeClass('init').fadeIn();
@@ -418,6 +425,7 @@
         setControls();
     }
     $(function () {
+        $('.sejour-form:visible').eq(0).find('select').attr('data-parsley-required', 'true');
         var dataSejours = [
             <?php $i = 0; ?>
             <?php foreach ($sejours as $key => $sejour): ?>
@@ -482,7 +490,7 @@
         $('.sejours-group').on('change', '[type="checkbox"]', function() {
             setControls();
         });
-        addGroupField( dataSejours );
+        // addGroupField( dataSejours );
         $('form').submit(function() {
             $('[disabled]').removeAttr('disabled');
         });
@@ -495,10 +503,12 @@
                 $('#form-inscription-centre-payeur').attr('disabled','disabled');
                 $('#form-inscription-centre-payeur-hidden').removeAttr('disabled');
             }
-        });
+        }).change();
         $('.sejours-group').on('change', '.sejour-form select', function(){
-            var sejour_id = $(this).val();
-            var nb_select = $('.sejour-form select').length;
+            var sejour_fieldset = $(this).parent(),
+                sejour_id = $(this).val(),
+                nb_select = $('.sejour-form select').length;
+
             jQuery.ajax({
                 type: 'GET', // Le type de ma requete
                 url: '/ajax/get_sejour.php', // L'url vers laquelle la requete sera envoyee
@@ -531,10 +541,11 @@
                 success: function(data, textStatus, jqXHR) {
                     //console.log(data);
                     if(data == true){
-                        $('.sejours-group').prepend('<p class="error_nb alert alert-danger"">Attention, il n\y a plus de place sur ce séjour</p>');
+                        sejour_fieldset.find('.error_nb').remove();
+                        sejour_fieldset.prepend('<div class="error_nb alert alert-warning alert-white-alt"><div class="icon"><i class="fa fa-warning"></i></div> <strong>Attention</strong>, il n\y a plus de place sur ce séjour.</div>');
                     }
-                    else{
-                        $('.error_nb').remove();
+                    else {
+                        sejour_fieldset.find('.error_nb').remove();
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown, data) {
@@ -552,11 +563,12 @@
                     },
                     dataType: 'json',
                     success: function(data, textStatus, jqXHR) {
-                        if(data == true){
-                            $('.sejours-group').prepend('<p class="error_check alert alert-danger"">Attention, l\'enfant est déjà inscrit à ce séjour</p>');
+                         if(data == true){
+                            sejour_fieldset.find('.error_check').remove();
+                            sejour_fieldset.prepend('<div class="error_check alert alert-danger alert-white-alt"><div class="icon"><i class="fa fa-warning"></i></div> <strong>Attention</strong>, l\'enfant est déjà inscrit à ce séjour.</div>');
                         }
                         else{
-                            $('.error_check').remove();
+                            sejour_fieldset.find('.error_check').remove();
                         }
                     },
                     error: function(jqXHR, textStatus, errorThrown, data) {

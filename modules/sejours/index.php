@@ -63,99 +63,100 @@
             eventSources: [{
                 events: [
                 <?php foreach($sejours as $key => $sejour): ?>
-                <?php
+                    <?php
 
-                $date_from = new DateTime($sejour->date_from);
-                $date_to = new DateTime($sejour->date_to);
+                        $date_from = new DateTime($sejour->date_from);
+                        $date_to = new DateTime($sejour->date_to);
 
-                if ($sejour->ref_hebergement) {
-                    $hebergement = hebergement::get($sejour->ref_hebergement);
-                    $hebergement = $hebergement->name;
-                } else {
-                    $hebergement = EMPTYVAL;
-                }
+                        if ($sejour->ref_hebergement) {
+                            $hebergement = hebergement::get($sejour->ref_hebergement);
+                            $hebergement = $hebergement->name;
+                        } else {
+                            $hebergement = EMPTYVAL;
+                        }
 
-                $i++;
+                        $i++;
 
-                $nb_weeks = tool::getNbWeeks(new DateTime($sejour->date_from), new DateTime($sejour->date_to));
+                        $nb_weeks = tool::getNbWeeks(new DateTime($sejour->date_from), new DateTime($sejour->date_to));
 
-                $type = '';
-                if ($nb_weeks < 1) {
-                    $stay_kind = 'week-end';
-                } else {
-                    $stay_kind = 'semaine';
-                }
+                        $type = '';
+                        if ($nb_weeks < 1) {
+                            $stay_kind = 'week-end';
+                        } else {
+                            $stay_kind = 'semaine';
+                        }
 
-                $min = $sejour->capacity_min;
-                $max = $sejour->capacity_max;
+                        $min = $sejour->capacity_min;
+                        $max = $sejour->capacity_max;
 
-                ?>
+                    ?>
 
-                <?php if ($nb_weeks > 1): ?>
-                <?php for ($i=0; $i < $nb_weeks; $i++): ?>
-                <?php
+                    <?php if ($nb_weeks > 1): ?>
+                        <?php for ($i=0; $i < $nb_weeks; $i++): ?>
+                            <?php
 
-                $start_base = new DateTime($sejour->date_from);
-                $end_base = new DateTime($sejour->date_from);
+                                $start_base = new DateTime($sejour->date_from);
+                                $end_base = new DateTime($sejour->date_from);
 
-                $start_base->modify("+$i weeks");
-                $end_base->modify("+$i weeks");
-                $end_base->modify("+1 weeks");
+                                $start_base->modify("+$i weeks");
+                                $end_base->modify("+$i weeks");
+                                $end_base->modify("+1 weeks");
 
-                $date_from1 = strftime("%Y-%m-%d", $start_base->getTimestamp());
-                $date_from2 = strftime("%d %B %Y", $start_base->getTimestamp());
+                                $date_from1 = strftime("%Y-%m-%d", $start_base->getTimestamp());
+                                $date_from2 = strftime("%d %B %Y", $start_base->getTimestamp());
 
-                $date_to1 = strftime("%Y-%m-%d",  $end_base->getTimestamp());
-                $date_to2 = strftime("%d %B %Y",  $end_base->getTimestamp());
+                                $date_to1 = strftime("%Y-%m-%d",  $end_base->getTimestamp());
+                                $date_to2 = strftime("%d %B %Y",  $end_base->getTimestamp());
 
-                $inscriptions = inscription::getBySejourBetweenDates($sejour->id, $start_base, $end_base);
+                                $inscriptions = inscription::getBySejourBetweenDates($sejour->id, $start_base, $end_base);
 
-                $nb = count($inscriptions);
-                $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $start_base, $end_base);
-                $opt = count($opt);
+                                $nb = count($inscriptions);
+                                $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $start_base, $end_base);
+                                $opt = count($opt);
 
-                ?>
+                            ?>
 
-                {
-                    title       : '<?=addslashes($sejour->name)?> (<?=$i+1?>) - <?=$nb?>/<?=$max?> <?=($opt)?'('.$opt.' opt)':''?>',
-                    url         : '/sejours/infos/id/<?=$sejour->id?>#week-<?=$i+1;?>',
-                    start       : '<?=$date_from1?>',
-                    end         : '<?=$date_to1?>',
-                    description : '<p><span class="plabel"><i class="fa fa-calendar icon"></i> :</span> <span class="pcontent"><?=$date_from2?> au <?=$date_to2?></span></p><p><span class="plabel"><i class="fa fa-map-marker icon"></i> :</span> <span class="pcontent"><?=addslashes($hebergement)?></span></p><p><span class="plabel"><i class="fa fa-group icon"></i> :</span> <span class="pcontent"><?=count($inscriptions)?> <?=(count($inscriptions) > 1)?"enfants":"enfant";?> inscrits (sur <?=$max?>) <?=($opt > 0)?"<br /> dont ".$opt." option(s)":"";?> </span></p><p><span class="plabel"><i class="fa fa-tag icon"></i> :</span> <span class="pcontent"><?=$sejour->price?> €/<small><?=$stay_kind?></small></span></p>'
+                            {
+                                title       : '<?=addslashes($sejour->name)?> (<?=$i+1?>) - <?=$nb?>/<?=$max?> <?=($opt)?'('.$opt.' opt)':''?>',
+                                url         : '/sejours/infos/id/<?=$sejour->id?>#week-<?=$i+1;?>',
+                                start       : '<?=$date_from1?>',
+                                end         : '<?=$date_to1?>',
+                                description : '<p><span class="plabel"><i class="fa fa-calendar icon"></i> :</span> <span class="pcontent"><?=$date_from2?> au <?=$date_to2?></span></p><p><span class="plabel"><i class="fa fa-map-marker icon"></i> :</span> <span class="pcontent"><?=addslashes($hebergement)?></span></p><p><span class="plabel"><i class="fa fa-group icon"></i> :</span> <span class="pcontent"><?=count($inscriptions)?> <?=(count($inscriptions) > 1)?"enfants":"enfant";?> inscrits (sur <?=$max?>) <?=($opt > 0)?"<br /> dont ".$opt." option(s)":"";?> </span></p><p><span class="plabel"><i class="fa fa-tag icon"></i> :</span> <span class="pcontent"><?=$sejour->price?> €/<small><?=$stay_kind?></small></span></p>'
 
-                }<?=($i < $nb_sejours) ? ',' : '' ; ?>
+                            }<?=($i < $nb_sejours) ? ',' : '' ; ?>
 
+                        <?php endfor; ?>
 
-                <?php endfor; ?>
-                <?php else: ?>
-                <?php 
-                $inscriptions = inscription::getBySejour($sejour->id);
+                    <?php else: ?>
 
-                $nb = count($inscriptions);
-                $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $date_from, $date_to);
-                $opt = count($opt);
+                        <?php 
+                            $inscriptions = inscription::getBySejour($sejour->id);
 
-                if ($date_from->getTimestamp() != '-62169987600') {
-                    $date_from1 = strftime("%Y-%m-%d", $date_from->getTimestamp());
-                    $date_from2 = strftime("%d %B %Y", $date_from->getTimestamp());
-                }
+                            $nb = count($inscriptions);
+                            $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $date_from, $date_to);
+                            $opt = count($opt);
 
-                if ($date_to->getTimestamp() != '-62169987600') {
-                    $date_to1 = strftime("%Y-%m-%d", $date_to->getTimestamp());
-                    $date_to2 = strftime("%d %B %Y", $date_to->getTimestamp());
-                }
-                ?>
+                            if ($date_from->getTimestamp() != '-62169987600') {
+                                $date_from1 = strftime("%Y-%m-%d", $date_from->getTimestamp());
+                                $date_from2 = strftime("%d %B %Y", $date_from->getTimestamp());
+                            }
 
-                {
-                    title       : '<?=addslashes($sejour->name)?>',
-                    url         : '/sejours/infos/id/<?=$sejour->id?>',
-                    start       : '<?=$date_from1?>',
-                    end         : '<?=$date_to1?>',
-                    description : '<p><span class="plabel"><i class="fa fa-calendar icon"></i> :</span> <span class="pcontent"><?=$date_from2?> au <?=$date_to2?></span></p><p><span class="plabel"><i class="fa fa-map-marker icon"></i> :</span> <span class="pcontent"><?=addslashes($hebergement)?></span></p><p><span class="plabel"><i class="fa fa-group icon"></i> :</span> <span class="pcontent"><?=count($inscriptions)?> <?=(count($inscriptions) > 1)?"enfants":"enfant";?> inscrits (sur <?=$max?>) <?=($opt > 0)?"<br /> dont ".$opt." option(s)":"";?> </span></p><p><span class="plabel"><i class="fa fa-tag icon"></i> :</span> <span class="pcontent"><?=$sejour->price?> €/<small><?=$stay_kind?></small></span></p>'
+                            if ($date_to->getTimestamp() != '-62169987600') {
+                                $date_to1 = strftime("%Y-%m-%d", $date_to->getTimestamp());
+                                $date_to2 = strftime("%d %B %Y", $date_to->getTimestamp());
+                            }
+                        ?>
 
-                }<?=($i < $nb_sejours) ? ',' : '' ; ?>
+                        {
+                            title       : '<?=addslashes($sejour->name)?>',
+                            url         : '/sejours/infos/id/<?=$sejour->id?>',
+                            start       : '<?=$date_from1?>',
+                            end         : '<?=$date_to1?>',
+                            description : '<p><span class="plabel"><i class="fa fa-calendar icon"></i> :</span> <span class="pcontent"><?=$date_from2?> au <?=$date_to2?></span></p><p><span class="plabel"><i class="fa fa-map-marker icon"></i> :</span> <span class="pcontent"><?=addslashes($hebergement)?></span></p><p><span class="plabel"><i class="fa fa-group icon"></i> :</span> <span class="pcontent"><?=count($inscriptions)?> <?=(count($inscriptions) > 1)?"enfants":"enfant";?> inscrits (sur <?=$max?>) <?=($opt > 0)?"<br /> dont ".$opt." option(s)":"";?> </span></p><p><span class="plabel"><i class="fa fa-tag icon"></i> :</span> <span class="pcontent"><?=$sejour->price?> €/<small><?=$stay_kind?></small></span></p>'
 
-                <?php endif; ?>
+                        }<?=($i < $nb_sejours) ? ',' : '' ; ?>
+
+                    <?php endif; ?>
 
                 <?php endforeach; ?>
 
@@ -208,52 +209,141 @@ ob_end_clean(); ?>
                     <tbody>
 
                         <?php
-                        $the_json = array();
 
-                        $sejours = sejour::getListFuturSejour();
-                        $the_datas = array();
 
-                        foreach($sejours as $key => $sejour) {
-                            $inscriptions = inscription::getBySejour($sejour->id);
+                            $futurs_sejours = sejour::getListFuturSejour();
+                            $the_json = array();
+                            $the_datas = array();
 
-                            $popup = '
-                            <ul class="dropdown-menu">
-                                <li><a href="/sejours/infos/id/'.$sejour->id.'" class="item"><i class="fa fa-share"></i> Voir la fiche</a></li>
-                                <li><a href="/sejours/editer/id/'.$sejour->id.'" class="item"><i class="fa fa-edit"></i> Modifier</a></li>
-                                <li><a href="#" class="modal-remove-link" data-id="'.$sejour->id.'" data-name="'.$sejour->name.'" data-toggle="modal" data-target="#modal-remove" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>
-                            </ul>';
+                            foreach($futurs_sejours as $key => $sejour) {
 
-                            $date_from = new DateTime($sejour->date_from);
-                            if($date_from->getTimestamp() != '-62169987600') {
-                                $date_from = '<span class="sr-only">'.strftime("%Y%m%d", $date_from->getTimestamp()).'</span> '.strftime("%d %B %Y", $date_from->getTimestamp());
+                                $date_from = new DateTime($sejour->date_from);
+                                $date_to = new DateTime($sejour->date_to);
+
+                                $nb_weeks = tool::getNbWeeks(new DateTime($sejour->date_from), new DateTime($sejour->date_to));
+
+                                $min = $sejour->capacity_min;
+                                $max = $sejour->capacity_max;
+
+                                if ($nb_weeks > 1) {
+
+                                    for ($i = 0; $i < $nb_weeks; $i++) {
+
+                                        $start_base = new DateTime($sejour->date_from);
+                                        $end_base = new DateTime($sejour->date_from);
+
+                                        $start_base->modify("+$i weeks");
+                                        $end_base->modify("+$i weeks");
+                                        $end_base->modify("+1 weeks");
+
+                                        $date_from = strftime("%Y%m%d", $start_base->getTimestamp());
+
+                                        $date_to = strftime("%Y%m%d",  $end_base->getTimestamp());
+
+                                        $inscriptions = inscription::getBySejourBetweenDates($sejour->id, $start_base, $end_base);
+
+                                        $nb = count($inscriptions);
+                                        $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $start_base, $end_base);
+                                        $opt = count($opt);
+
+                                        $o = $i + 1;
+
+                                        $popup = '
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/sejours/infos/id/'.$sejour->id.'#week-'.$o.'" class="item"><i class="fa fa-share"></i> Voir la fiche</a></li>
+                                            <li><a href="/sejours/editer/id/'.$sejour->id.'" class="item"><i class="fa fa-edit"></i> Modifier</a></li>
+                                            <li><a href="#" class="modal-remove-link" data-id="'.$sejour->id.'" data-name="'.$sejour->name.'" data-toggle="modal" data-target="#modal-remove" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>
+                                        </ul>';
+
+                                        if($start_base->getTimestamp() != '-62169987600') {
+                                            $date_from = '<span class="sr-only">'.strftime("%Y%m%d", $start_base->getTimestamp()).'</span> '.strftime("%Y %B %Y", $start_base->getTimestamp());
+                                        }
+
+                                        if($end_base->getTimestamp() != '-62169987600') {
+                                            $date_to = '<span class="sr-only">'.strftime("%Y%m%d",  $end_base->getTimestamp()).'</span> '.strftime("%Y %B %Y", $end_base->getTimestamp());
+                                        }
+
+                                        if($sejour->ref_hebergement) {
+                                            $hebergement = hebergement::get($sejour->ref_hebergement);
+                                            $hebergement = '<a href="/hebergements/infos/id/'.$hebergement->id.'"><span class="label label-default">'.$hebergement->name.'</span></a>';
+                                        } else {
+                                            $hebergement = EMPTYVAL;
+                                        }
+
+                                        $the_data = [
+                                            '<a href="/sejours/infos/id/'.$sejour->id.'#week-'.$o.'">'.$sejour->name.' ('.$o.')</a>'.$popup,
+                                            $date_from,
+                                            $date_to,
+                                            $hebergement,
+                                            count($inscriptions),
+                                            '<span class="label label-default">'.$sejour->capacity_min.'</span>',
+                                            '<span class="label label-default">'.$sejour->capacity_max.'</span>',
+                                            '<span class="label label-info">'.$sejour->price.'€</span>'
+                                        ];
+
+                                        array_push($the_datas, $the_data);
+
+                                    }
+
+                                } else {
+
+                                    $inscriptions = inscription::getBySejour($sejour->id);
+
+                                    $nb = count($inscriptions);
+                                    $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $date_from, $date_to);
+                                    $opt = count($opt);
+
+                                    if ($date_from->getTimestamp() != '-62169987600') {
+                                        $date_from = strftime("%d", $date_from->getTimestamp());
+                                    }
+
+                                    if ($date_to->getTimestamp() != '-62169987600') {
+                                        $date_to = strftime("%d %B", $date_to->getTimestamp());
+                                    }
+
+                                    $popup = '
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/sejours/infos/id/'.$sejour->id.'" class="item"><i class="fa fa-share"></i> Voir la fiche</a></li>
+                                        <li><a href="/sejours/editer/id/'.$sejour->id.'" class="item"><i class="fa fa-edit"></i> Modifier</a></li>
+                                        <li><a href="#" class="modal-remove-link" data-id="'.$sejour->id.'" data-name="'.$sejour->name.'" data-toggle="modal" data-target="#modal-remove" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>
+                                    </ul>';
+
+                                    $date_from = new DateTime($sejour->date_from);
+                                    if($date_from->getTimestamp() != '-62169987600') {
+                                        $date_from = '<span class="sr-only">'.strftime("%Y%m%d", $date_from->getTimestamp()).'</span> '.strftime("%d %B %Y", $date_from->getTimestamp());
+                                    }
+
+                                    $date_to = new DateTime($sejour->date_to);
+                                    if($date_to->getTimestamp() != '-62169987600') {
+                                        $date_to = '<span class="sr-only">'.strftime("%Y%m%d", $date_to->getTimestamp()).'</span> '.strftime("%d %B %Y", $date_to->getTimestamp());
+                                    }
+
+                                    if($sejour->ref_hebergement) {
+                                        $hebergement = hebergement::get($sejour->ref_hebergement);
+                                        $hebergement = '<a href="/hebergements/infos/id/'.$hebergement->id.'"><span class="label label-default">'.$hebergement->name.'</span></a>';
+                                    }else {
+                                        $hebergement = EMPTYVAL;
+                                    }
+
+                                    $the_data = [
+                                    '<a href="/sejours/infos/id/'.$sejour->id.'">'.$sejour->name.'</a>'.$popup,
+                                    $date_from,
+                                    $date_to,
+                                    $hebergement,
+                                    count($inscriptions),
+                                    '<span class="label label-default">'.$sejour->capacity_min.'</span>',
+                                    '<span class="label label-default">'.$sejour->capacity_max.'</span>',
+                                    '<span class="label label-info">'.$sejour->price.'€</span>'
+                                    ];
+
+                                    array_push($the_datas, $the_data);
+
+
+                                }
+                                
                             }
+                                array_push($the_json, $the_datas);
 
-                            $date_to = new DateTime($sejour->date_to);
-                            if($date_to->getTimestamp() != '-62169987600') {
-                                $date_to = '<span class="sr-only">'.strftime("%Y%m%d", $date_to->getTimestamp()).'</span> '.strftime("%d %B %Y", $date_to->getTimestamp());
-                            }
-
-                            if($sejour->ref_hebergement) {
-                                $hebergement = hebergement::get($sejour->ref_hebergement);
-                                $hebergement = '<a href="/hebergements/infos/id/'.$hebergement->id.'"><span class="label label-default">'.$hebergement->name.'</span></a>';
-                            }else {
-                                $hebergement = EMPTYVAL;
-                            }
-
-                            $the_data = [
-                            '<a href="/sejours/infos/id/'.$sejour->id.'">'.$sejour->name.'</a>'.$popup,
-                            $date_from,
-                            $date_to,
-                            $hebergement,
-                            count($inscriptions),
-                            '<span class="label label-default">'.$sejour->capacity_min.'</span>',
-                            '<span class="label label-default">'.$sejour->capacity_max.'</span>',
-                            '<span class="label label-info">'.$sejour->price.'€</span>'
-                            ];
-
-                            array_push($the_datas, $the_data);
-                        }
-                        array_push($the_json, $the_datas);
                         ?>
 
                     </tbody>
@@ -295,56 +385,142 @@ ob_end_clean(); ?>
 
                     <tbody>
                         <?php
-                        unset($the_datas);
-                        unset($the_json);
+                            unset($the_datas);
+                            unset($the_json);
+
+                            $past_sejours = sejour::getListPastSejour();
+                            $the_json = array();
+                            $the_datas = array();
+
+                            foreach($past_sejours as $key => $sejour) {
+
+                                $date_from = new DateTime($sejour->date_from);
+                                $date_to = new DateTime($sejour->date_to);
+
+                                $nb_weeks = tool::getNbWeeks(new DateTime($sejour->date_from), new DateTime($sejour->date_to));
+
+                                $min = $sejour->capacity_min;
+                                $max = $sejour->capacity_max;
+
+                                if ($nb_weeks > 1) {
+
+                                    for ($i = 0; $i < $nb_weeks; $i++) {
+
+                                        $start_base = new DateTime($sejour->date_from);
+                                        $end_base = new DateTime($sejour->date_from);
+
+                                        $start_base->modify("+$i weeks");
+                                        $end_base->modify("+$i weeks");
+                                        $end_base->modify("+1 weeks");
+
+                                        $date_from = strftime("%Y%m%d", $start_base->getTimestamp());
+
+                                        $date_to = strftime("%Y%m%d",  $end_base->getTimestamp());
+
+                                        $inscriptions = inscription::getBySejourBetweenDates($sejour->id, $start_base, $end_base);
+
+                                        $nb = count($inscriptions);
+                                        $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $start_base, $end_base);
+                                        $opt = count($opt);
+
+                                        $o = $i + 1;
+
+                                        $popup = '
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/sejours/infos/id/'.$sejour->id.'#week-'.$o.'" class="item"><i class="fa fa-share"></i> Voir la fiche</a></li>
+                                            <li><a href="/sejours/editer/id/'.$sejour->id.'" class="item"><i class="fa fa-edit"></i> Modifier</a></li>
+                                            <li><a href="#" class="modal-remove-link" data-id="'.$sejour->id.'" data-name="'.$sejour->name.'" data-toggle="modal" data-target="#modal-remove" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>
+                                        </ul>';
+
+                                        if($start_base->getTimestamp() != '-62169987600') {
+                                            $date_from = '<span class="sr-only">'.strftime("%Y%m%d", $start_base->getTimestamp()).'</span> '.strftime("%Y %B %Y", $start_base->getTimestamp());
+                                        }
+
+                                        if($end_base->getTimestamp() != '-62169987600') {
+                                            $date_to = '<span class="sr-only">'.strftime("%Y%m%d",  $end_base->getTimestamp()).'</span> '.strftime("%Y %B %Y", $end_base->getTimestamp());
+                                        }
+
+                                        if($sejour->ref_hebergement) {
+                                            $hebergement = hebergement::get($sejour->ref_hebergement);
+                                            $hebergement = '<a href="/hebergements/infos/id/'.$hebergement->id.'"><span class="label label-default">'.$hebergement->name.'</span></a>';
+                                        } else {
+                                            $hebergement = EMPTYVAL;
+                                        }
+
+                                        $the_data = [
+                                            '<a href="/sejours/infos/id/'.$sejour->id.'#week-'.$o.'">'.$sejour->name.' ('.$o.')</a>'.$popup,
+                                            $date_from,
+                                            $date_to,
+                                            $hebergement,
+                                            count($inscriptions),
+                                            '<span class="label label-default">'.$sejour->capacity_min.'</span>',
+                                            '<span class="label label-default">'.$sejour->capacity_max.'</span>',
+                                            '<span class="label label-info">'.$sejour->price.'€</span>'
+                                        ];
+
+                                        array_push($the_datas, $the_data);
+
+                                    }
+
+                                } else {
+
+                                    $inscriptions = inscription::getBySejour($sejour->id);
+
+                                    $nb = count($inscriptions);
+                                    $opt = inscription::getUnconfirmedBySejourBetweenDates($sejour->id, $date_from, $date_to);
+                                    $opt = count($opt);
+
+                                    if ($date_from->getTimestamp() != '-62169987600') {
+                                        $date_from = strftime("%d", $date_from->getTimestamp());
+                                    }
+
+                                    if ($date_to->getTimestamp() != '-62169987600') {
+                                        $date_to = strftime("%d %B", $date_to->getTimestamp());
+                                    }
+
+                                    $popup = '
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/sejours/infos/id/'.$sejour->id.'" class="item"><i class="fa fa-share"></i> Voir la fiche</a></li>
+                                        <li><a href="/sejours/editer/id/'.$sejour->id.'" class="item"><i class="fa fa-edit"></i> Modifier</a></li>
+                                        <li><a href="#" class="modal-remove-link" data-id="'.$sejour->id.'" data-name="'.$sejour->name.'" data-toggle="modal" data-target="#modal-remove" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>
+                                    </ul>';
+
+                                    $date_from = new DateTime($sejour->date_from);
+                                    if($date_from->getTimestamp() != '-62169987600') {
+                                        $date_from = '<span class="sr-only">'.strftime("%Y%m%d", $date_from->getTimestamp()).'</span> '.strftime("%d %B %Y", $date_from->getTimestamp());
+                                    }
+
+                                    $date_to = new DateTime($sejour->date_to);
+                                    if($date_to->getTimestamp() != '-62169987600') {
+                                        $date_to = '<span class="sr-only">'.strftime("%Y%m%d", $date_to->getTimestamp()).'</span> '.strftime("%d %B %Y", $date_to->getTimestamp());
+                                    }
+
+                                    if($sejour->ref_hebergement) {
+                                        $hebergement = hebergement::get($sejour->ref_hebergement);
+                                        $hebergement = '<a href="/hebergements/infos/id/'.$hebergement->id.'"><span class="label label-default">'.$hebergement->name.'</span></a>';
+                                    }else {
+                                        $hebergement = EMPTYVAL;
+                                    }
+
+                                    $the_data = [
+                                    '<a href="/sejours/infos/id/'.$sejour->id.'">'.$sejour->name.'</a>'.$popup,
+                                    $date_from,
+                                    $date_to,
+                                    $hebergement,
+                                    count($inscriptions),
+                                    '<span class="label label-default">'.$sejour->capacity_min.'</span>',
+                                    '<span class="label label-default">'.$sejour->capacity_max.'</span>',
+                                    '<span class="label label-info">'.$sejour->price.'€</span>'
+                                    ];
+
+                                    array_push($the_datas, $the_data);
 
 
-                        $the_datas = array();
-                        $the_json = array();
-                        
-                        $past_sejours = sejour::getListPastSejour();
-
-                        foreach($past_sejours as $key => $past_sejour) {
-                            $inscriptions = inscription::getBySejour($past_sejour->id);
-
-                            $popup = '
-                            <ul class="dropdown-menu">
-                                <li><a href="/sejours/infos/id/'.$past_sejour->id.'" class="item"><i class="fa fa-share"></i> Voir la fiche</a></li>
-                                <li><a href="/sejours/editer/id/'.$past_sejour->id.'" class="item"><i class="fa fa-edit"></i> Modifier</a></li>
-                                <li><a href="#" class="modal-remove-link" data-id="'.$past_sejour->id.'" data-name="'.$past_sejour->name.'" data-toggle="modal" data-target="#modal-remove" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>
-                            </ul>';
-                            
-                            $date_from = new DateTime($past_sejour->date_from);
-                            if($date_from->getTimestamp() != '-62169987600') {
-                                $date_from = '<span class="sr-only">'.strftime('%Y%m%d', $date_from->getTimestamp()).'</span> '.strftime('%d %B %Y', $date_from->getTimestamp());
+                                }
+                                
                             }
+                                array_push($the_json, $the_datas);
 
-                            $date_to = new DateTime($past_sejour->date_to);
-                            if($date_to->getTimestamp() != '-62169987600') {
-                                $date_to = '<span class="sr-only">'.strftime('%Y%m%d', $date_to->getTimestamp()).'</span> '.strftime('%d %B %Y', $date_to->getTimestamp());
-                            }
-
-                            if($past_sejour->ref_hebergement) {
-                                $hebergement = hebergement::get($past_sejour->ref_hebergement);
-                                $hebergement = '<a href="/hebergements/infos/id/'.$hebergement->id.'"><span class="label label-default">'.$hebergement->name.'</span></a>';
-                            }else {
-                                $hebergement = EMPTYVAL;
-                            }
-
-                            $the_data = [
-                            '<a href="/sejours/infos/id/'.$past_sejour->id.'">'.$past_sejour->name.'</a>'.$popup,
-                            $date_from,
-                            $date_to,
-                            $hebergement,
-                            count($inscriptions),
-                            '<span class="label label-default">'.$past_sejour->capacity_min.'</span>',
-                            '<span class="label label-default">'.$past_sejour->capacity_max.'</span>',
-                            '<span class="label label-info">'.$past_sejour->price.'€</span>'
-                            ];
-
-                            array_push($the_datas, $the_data);
-                        }
-                        array_push($the_json, $the_datas);
                         ?>
 
                     </tbody>

@@ -20,19 +20,19 @@
     <div class="col-md-9">
         <div class="block-flat">
             <div class="content">
-                <form id="form-edit-children" method="post" action="/enfants/infos/id/<?=$enfant->id ?>" class="form-horizontal group-border-dashed maped-form" parsley-validate enctype="multipart/form-data">
+                <form id="form-edit-children" method="post" action="/enfants/infos/id/<?=$enfant->id ?>" class="form-horizontal group-border-dashed maped-form" data-parsley-validate enctype="multipart/form-data">
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="form-enfant-prenom">Prénom</label>
                         <div class="col-sm-6">
-                            <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le prénom de l'enfant." parsley-required="true" value="<?=$enfant->firstname; ?>">
+                            <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le prénom de l'enfant." data-parsley-required="true" value="<?=$enfant->firstname; ?>">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="form-enfant-nom">Nom</label>
                         <div class="col-sm-6">
-                            <input id="form-enfant-nom" name="form_enfant_nom" class="form-control" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le nom de l'enfant." parsley-required="true" value="<?=$enfant->lastname; ?>">
+                            <input id="form-enfant-nom" name="form_enfant_nom" class="form-control" type="text" data-toggle="tooltip" data-placement="right" title="Renseignez le nom de l'enfant." data-parsley-required="true" value="<?=$enfant->lastname; ?>">
                         </div>
                     </div>
 
@@ -59,7 +59,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label"  for="form-enfant-naissance">Date de naissance</label>
                         <div class="col-sm-6">
-                            <input parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" id="form-enfant-naissance"  name="form_enfant_naissance" type="text" class="form-control input-datepicker" placeholder="JJ/MM/AAAA" data-toggle="tooltip" data-placement="right" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa)." value="<?=tool::getDatefromDatetime($enfant->birthdate) ?>">
+                            <input data-parsley-pattern="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" id="form-enfant-naissance"  name="form_enfant_naissance" type="text" class="form-control input-datepicker" placeholder="JJ/MM/AAAA" data-toggle="tooltip" data-placement="right" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa)."<?php if (tool::check($enfant->birthdate)): ?> value="<?=tool::getDatefromDatetime($enfant->birthdate); ?><?php endif; ?>">
                         </div>
                     </div>
 
@@ -434,7 +434,7 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-assurance-validite">Date de fin de validité</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" value="<?=tool::getDatefromDatetime($enfant->self_assurance_expiration_date); ?>" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa).">
+                                <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" value="<?php if (tool::check($enfant->self_assurance_expiration_date)): ?> value="<?=tool::getDatefromDatetime($enfant->self_assurance_expiration_date); ?><?php endif; ?>" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa).">
                             </div>
                         </div>
                     </div>
@@ -455,7 +455,7 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-cpam-validite">Date de fin de validité</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-cpam-validite" name="form_enfant_cpam_validite" type="text" value="<?=tool::getDatefromDatetime($enfant->cpam_attestation_expiration_date); ?>" class="form-control input-datepicker" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'attestation CPAM (jj/mm/aaaa).">
+                                <input id="form-enfant-cpam-validite" name="form_enfant_cpam_validite" type="text" value="<?php if (tool::check($enfant->cpam_attestation_expiration_date)): ?> value="<?=tool::getDatefromDatetime($enfant->cpam_attestation_expiration_date); ?><?php endif; ?>" class="form-control input-datepicker" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'attestation CPAM (jj/mm/aaaa).">
                             </div>
                         </div>
                     </div>

@@ -21,7 +21,7 @@
 <div class="block-flat">
     <div class="content">
 
-        <form id="form-add-structure" action="/structures/infos/id/<?=$id ?>" class="form-horizontal group-border-dashed maped-form" method="post" parsley-validate>
+        <form id="form-add-structure" action="/structures/infos/id/<?=$id ?>" class="form-horizontal group-border-dashed maped-form" method="post" data-parsley-validate>
 
             <input type="hidden" value="<?=$id ?>" name="id" />
 
@@ -29,7 +29,7 @@
                 <label class="col-sm-4 control-label" for="form-structure-nom">Nom de la structure</label>
                 <div class="col-sm-6">
                     <input id="form-structure-name" name="form_structure_name" class="form-control" type="text" 
-                    data-toggle="tooltip" title="Renseignez le nom de la structure." parsley-required="true">
+                    data-toggle="tooltip" title="Renseignez le nom de la structure." data-parsley-required="true">
                 </div>
             </div>
 
@@ -52,16 +52,16 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-structure-email">Email</label>
                 <div class="col-sm-6">
-                    <input id="form-structure-email" name="form_structure_email" type="text" class="form-control"
+                    <input id="form-structure-email" name="form_structure_email" type="text" class="form-control input-email"
                     data-toggle="tooltip" title="Renseignez l'email de la structure." 
-                    parsley-type="email">
+                    data-parsley-type="email">
                 </div>
             </div>     
 
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-structure-phone">Téléphone</label>
                 <div class="col-sm-6">
-                    <input id="form-structure-phone" name="form_structure_telephone" type="text" class="form-control"
+                    <input id="form-structure-phone" name="form_structure_telephone" type="text" class="form-control input-phone"
                     data-toggle="tooltip" title="Renseignez le numéro de téléphone de la structure.">
                 </div>
             </div>
@@ -69,7 +69,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-structure-fax">Fax</label>
                 <div class="col-sm-6">
-                    <input id="form-structure-fax" name="form_structure_fax" type="text" class="form-control"
+                    <input id="form-structure-fax" name="form_structure_fax" type="text" class="form-control input-phone"
                     data-toggle="tooltip" title="Renseignez le numéro de fax de la structure.">
                 </div>
             </div>
@@ -129,7 +129,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="form-contact-nom">Nom</label>
                     <div class="col-sm-6">
-                        <input id="form-contact-nom" name="form_contact_lastname" class="form-control input-sm input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom du contact." parsley-required="true">
+                        <input id="form-contact-nom" name="form_contact_lastname" class="form-control input-sm input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom du contact.">
                     </div>
                 </div>
 
@@ -137,32 +137,31 @@
                     <label class="col-sm-4 control-label" for="form-contact-title">Titre</label>
                     <div class="col-sm-6">
                         <input id="form-contact-title" name="form_contact_title" class="form-control" type="text" 
-                        data-toggle="tooltip" title="Renseignez le titre de la contact." parsley-required="true">
+                        data-toggle="tooltip" title="Renseignez le titre de la contact.">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="form-contact-email">Email</label>
                     <div class="col-sm-6">
-                        <input id="form-contact-email" name="form_contact_email" type="text" class="form-control"
+                        <input id="form-contact-email" name="form_contact_email" type="text" class="form-control input-email"
                         data-toggle="tooltip" title="Renseignez l'email de la contact." 
-                        parsley-type="email">
+                        data-parsley-type="email">
                     </div>
                 </div>     
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="form-contact-phone">Téléphone</label>
                     <div class="col-sm-6">
-                        <input id="form-contact-phone" name="form_contact_telephone" type="text" class="form-control"
-                        data-toggle="tooltip" title="Renseignez le numéro de téléphone de la contact." 
-                        parsley-type="phone">
+                        <input id="form-contact-phone" name="form_contact_telephone" type="text" class="form-control input-phone"
+                        data-toggle="tooltip" title="Renseignez le numéro de téléphone de la contact." >
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="form-contact-mobile-phone">Téléphone mobile</label>
                     <div class="col-sm-6">
-                        <input id="form-contact-mobile-phone" name="form_contact_mobile_phone" type="text" class="form-control"
+                        <input id="form-contact-mobile-phone" name="form_contact_mobile_phone" type="text" class="form-control input-phone"
                         data-toggle="tooltip" title="Renseignez le numéro de téléphone mobile du contact.">
                     </div>
                 </div>
@@ -170,9 +169,8 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="form-contact-fax">Fax</label>
                     <div class="col-sm-6">
-                        <input id="form-contact-fax" name="form_contact_fax" type="text" class="form-control"
-                        data-toggle="tooltip" title="Renseignez le numéro de fax de la contact." 
-                        parsley-type="phone">
+                        <input id="form-contact-fax" name="form_contact_fax" type="text" class="form-control input-phone"
+                        data-toggle="tooltip" title="Renseignez le numéro de fax de la contact.">
                         </div>
                 </div>                        
 
@@ -203,7 +201,7 @@
 
         $('body').on('click', '#remove_contact', function(event) {
             event.preventDefault();
-            $('#panel_add_contact').addClass('hide');
+            $('#panel_add_contact').addClass('hide').find('input').val('');
             $(this).attr('id', 'add_contact').text('Afficher le formulaire d\'ajout');
         });
 

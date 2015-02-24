@@ -292,26 +292,33 @@
 
                         <?php else: ?>
 
-                            <div class="header">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h4><strong><?=$nb; ?> enfant(s)<?php if($opt > 0): ?> (et <?=$opt; ?> option(s))<?php endif; ?></strong> sont inscrits à ce séjour <?php if ($date_from->diff($date_to)->format('%d') != 2): ?> pour la semaine <?=$o; ?> <?php endif; ?></h4>
-                                    </div>
-                                    <div class="col-md-6 text-right" style="margin-top: 4px;">
-                                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-recapitulatif-mineurs-<?=$o?>">
-                                            Récapitulatif mineurs
-                                        </button>
-                                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-suivi-sanitaire-<?=$o?>">
-                                            Suivi sanitaire
-                                        </button>
-                                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-registre-des-mineurs-<?=$o?>">
-                                            Registre des mineurs
-                                        </button>
-                                    </div>
-                                </div>
+                            <div class="header text-right">
+                                <button class="btn btn-primary btn-sm btn-rad" data-toggle="modal" data-target="#modal-recapitulatif-mineurs-<?=$o?>">
+                                    Récapitulatif mineurs
+                                </button>
+                                <button class="btn btn-primary btn-sm btn-rad" data-toggle="modal" data-target="#modal-suivi-sanitaire-<?=$o?>">
+                                    Suivi sanitaire
+                                </button>
+                                <button class="btn btn-primary btn-sm btn-rad" data-toggle="modal" data-target="#modal-registre-des-mineurs-<?=$o?>">
+                                    Registre des mineurs
+                                </button>
                             </div>
-
+                            <hr>
                             <div class="content">
+
+                                <p class="lead">
+                                    <strong><?=$total; ?> enfant<?php if($total > 1): ?>s<?php endif ?><?php if($opt > 0): ?> (dont <?=$opt; ?> option(s))<?php endif; ?></strong> sont inscrits<?php if ($date_from->diff($date_to)->format('%d') != 2): ?> pour la semaine <?=$o; ?><?php endif; ?>.
+                                    <?php if ($total < $max): ?>
+                                        <?php $remain = $max - $total; ?>
+                                        Il reste <?=$remain; ?> place<?php if($remain > 1): ?>s<?php endif ?>.
+                                    <?php elseif ($total == $max): ?>
+                                        Le séjour est complet.
+                                    <?php else: ?>
+                                        <?php $overflow = $total - $max; ?>
+                                        Il y a <?=$overflow; ?> inscription<?php if($overflow > 1): ?>s<?php endif ?> au dessus du maximum.
+                                    <?php endif; ?>    
+                                </p>
+                                
                                 <?php
                                     if ($total > $max) {
                                         $base = $total;
@@ -336,14 +343,14 @@
 
                                 <div class="progress progress-striped active">
                                     <div class="labels">
-                                        <span class="zero" style="left:0;">0</span>
+                                        <?php if ($min > 0): ?><span class="zero" style="left:0;">0</span><?php endif ?>
                                         <span class="min" style="left:<?=$pos_min;?>%;"><small>min</small><br><?=$min;?></span>
                                         <span class="max" style="left:<?=$pos_max;?>%;"><small>max</small><br><?=$max;?></span>
                                     </div>
                                     <div class="progress-bar progress-bar-<?=$color; ?>" role="progressbar" aria-valuenow="<?=$pc_nb;?>" aria-valuemin="0" aria-valuemax="<?=$min;?>" style="width: <?=$pc_nb;?>%;">
                                         <span><?=$nb;?></span></div>
                                     <?php if ($opt > 0): ?>
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?=$opt;?>" style="width: <?=$pc_opt;?>%;">
+                                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="<?=$opt;?>" style="width: <?=$pc_opt;?>%;">
                                             <span><?=$opt;?></span>
                                         </div>
                                     <?php endif; ?>
@@ -371,8 +378,8 @@
                                             <tr>
                                                 <th>Dossier</th>
                                                 <th>Prénom</th>
-                                                <th><span class="line"></span>Nom</th>
-                                                <th><span class="line"></span>Dates</th>
+                                                <th>Nom</th>
+                                                <th>Dates</th>
                                                 <th>Statut</th>
                                                 <th>Prise en charge</th>
                                                 <th>Commentaires</th>
@@ -401,7 +408,7 @@
                                                         <td>
                                                             <?php $date_from = new DateTime($inscription->date_from); ?>
                                                             <?php $date_to = new DateTime($inscription->date_to); ?>
-                                                            du <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?> 
+                                                            <?=strftime('%d ', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?> 
                                                         </td>
                                                         <td>
                                                             <?php if ($inscription->finished): ?>
@@ -531,9 +538,10 @@
                                 }
                             ?>
 
+
                             <!-- modal-recapitulatif-mineurs -->
-                            <div class="modal fade modal-table" id="modal-recapitulatif-mineurs-<?=$o; ?>" tabindex="-1" role="dialog" aria-labelledby="modal-recapitulatif-mineurs-<?=$o; ?>" aria-hidden="true">
-                                <div class="modal-dialog">
+                            <div class="modal fade colored-header" id="modal-recapitulatif-mineurs-<?=$o; ?>" tabindex="-1" role="dialog" aria-labelledby="modal-recapitulatif-mineurs-<?=$o; ?>" aria-hidden="true">
+                                <div class="modal-dialog full-width">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -543,8 +551,8 @@
                                             </h4>
                                         </div>
                                         <div class="modal-body">
-                                            <table class="table table table-striped table-bordered" style="width:100%;">
-                                                <thead>
+                                            <table class="no-border">
+                                                <thead class="no-border">
                                                     <tr>
                                                         <th>Nom</th>
                                                         <th>Prénom</th>
@@ -552,7 +560,7 @@
                                                         <th>Age</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody class="no-border-x no-border-y">
                                                     <?php foreach($datas as $key => $data): ?>
                                                         <tr>
                                                             <td style="font-weight:bold;"><?=$data['Nom'] ?></td>
@@ -567,7 +575,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                                             <a href="/export/sejour/type/1/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp()?>" class="btn btn-primary">
-                                                <i class="icon icon-download-alt"></i> Télécharger le document
+                                                <i class="fa fa-download"></i> Télécharger le document
                                             </a>
                                         </div>
                                     </div>
@@ -575,8 +583,8 @@
                             </div><!-- /.modal-recapitulatif-mineurs -->
                             
                             <!-- modal-suivi-sanitaire -->
-                            <div class="modal fade modal-table" id="modal-suivi-sanitaire-<?=$o; ?>" tabindex="-1" role="dialog" aria-labelledby="modal-suivi-sanitaire-<?=$o; ?>" aria-hidden="true">
-                                <div class="modal-dialog">
+                            <div class="modal fade colored-header" id="modal-suivi-sanitaire-<?=$o; ?>" tabindex="-1" role="dialog" aria-labelledby="modal-suivi-sanitaire-<?=$o; ?>" aria-hidden="true">
+                                <div class="modal-dialog full-width">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -586,20 +594,20 @@
                                             </h4>
                                         </div>
                                         <div class="modal-body">
-                                            <table class="table table table-striped table-bordered" style="width:100%;">
-                                                <thead>
+                                            <table class="no-border">
+                                                <thead class="no-border">
                                                     <tr>
                                                         <th>Nom</th>
                                                         <th>Prénom</th>
                                                         <th>Date de naissance</th>
-                                                        <th>N° sécurité sociale</th>
+                                                        <th width="150">N° sécurité sociale</th>
                                                         <th>Carnet de vaccination</th>
                                                         <th>Traitement médical</th>
                                                         <th>Contre indications</th>
                                                         <th>Fiche sanitaire</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody class="no-border-x no-border-y">
                                                     <?php foreach($datas as $key => $data): ?>
                                                         <tr>
                                                             <td style="font-weight:bold;"><?=$data['Nom'] ?></td>
@@ -618,7 +626,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                                             <a href="/export/sejour/type/2/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp()?>" class="btn btn-primary">
-                                                <i class="icon icon-download-alt"></i> Télécharger le document
+                                                <i class="fa fa-download"></i> Télécharger le document
                                             </a>
                                         </div>
                                     </div>
@@ -626,35 +634,35 @@
                             </div><!-- /.modal-suivi-sanitaire -->
 
                             <!-- modal-registre-des-mineurs -->
-                            <div class="modal fade modal-table" id="modal-registre-des-mineurs-<?=$o; ?>" tabindex="-1" role="dialog" aria-labelledby="modal-registre-des-mineurs-<?=$o; ?>" aria-hidden="true">
-                                <div class="modal-dialog" style="width: 92%;">
+                            <div class="modal fade colored-header" id="modal-registre-des-mineurs-<?=$o; ?>" tabindex="-1" role="dialog" aria-labelledby="modal-registre-des-mineurs-<?=$o; ?>" aria-hidden="true">
+                                <div class="modal-dialog full-width">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                             <h4 class="modal-title" id="modal-label-registre-des-mineurs-<?=$o; ?>">
-                                                Registre des mineurs
+                                                <strong>Registre des mineurs</strong> - 
                                                 <span><?=$sejour->name;?> du <?=strftime('%d %B %Y', $date_from_query->getTimestamp()); ?> au <?=strftime('%d %B %Y', $date_to_query->getTimestamp()); ?></span>
                                             </h4>
                                         </div>
                                         <div class="modal-body">
-                                            <table class="table table table-striped table-bordered" style="width:100%;">
-                                                <thead>
+                                            <table class="no-border" style="font-size:12px;">
+                                                <thead class="no-border">
                                                     <tr>
                                                         <th>Nom</th>
                                                         <th>Prénom</th>
-                                                        <th >Date de naissance</th>
+                                                        <th>Date de naissance</th>
                                                         <th>Adresse de l'enfant</th>
                                                         <th>Famille d'accueil</th>
                                                         <th>Structure</th>
                                                         <th>Nom du contact</th>
-                                                        <th>Tél structure</th>
+                                                        <th width="105">Tél structure</th>
                                                         <th>Père</th>
-                                                        <th>Tél père</th>
+                                                        <th width="160">Tél père</th>
                                                         <th>Mère</th>
-                                                        <th>Tél mère</th>
+                                                        <th width="160">Tél mère</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody class="no-border-x no-border-y">
                                                     <?php foreach($datas as $key => $data): ?>
                                                         <tr>
                                                             <td style="font-weight:bold;"><?=$data['Nom'] ?></td>
@@ -677,13 +685,14 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                                             <a href="/export/sejour/type/3/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp()?>" class="btn btn-primary">
-                                                <i class="icon icon-download-alt"></i> Télécharger le document
+                                                <i class="fa fa-download"></i> Télécharger le document
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div><!-- /.modal-registre-des-mineurs -->
-                        
+
+
                         <?php endif; ?>
 
 
@@ -702,12 +711,14 @@
 
 
 
-    <div class="col-sm-3 side-right">
+    <div class="col-sm-3">
         <?php if (isset($hebergement )): ?>
             <?php $geo = tool::getLatLng($hebergement->address_number.' '.$hebergement->address_street.' '.$hebergement->address_postal_code.' '.$hebergement->address_city); ?>
             <div class="block-flat bars-widget">
                 <div class="gmap-sm">
-                    <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$geo[0]; ?>,<?=$geo[1]; ?>&zoom=12&size=210x200&scale=2&markers=<?=$geo[0]; ?>,<?=$geo[1]; ?>&sensor=false" width="100%" alt="">
+                    <a href="https://www.google.fr/maps/place/<?=$hebergement->address_number; ?>+<?=$hebergement->address_street; ?>,+<?=$hebergement->address_postal_code; ?>+<?=$hebergement->address_city; ?>/">
+                        <img src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$geo[0]; ?>,<?=$geo[1]; ?>&zoom=10&size=210x200&scale=2&markers=<?=$geo[0]; ?>,<?=$geo[1]; ?>&sensor=false" width="100%" alt="">
+                    </a>
                 </div>
 
                 <address>
@@ -751,20 +762,20 @@
 
                 <address>
                     <strong>Aulnay sous bois, au Parking d'Intermarché</strong><br>
-                    Départ : <?=$hour_departure[0] ?>h<?=$min_departure[0] ?><br>
-                    Retour : <?=$hour_return[0] ?>h<?=$min_return[0] ?>
+                    Départ : <?=(tool::check($hour_departure[0]))? $hour_departure[0].'h'.$min_departure[0] : EMPTYVAL; ?><br>
+                    Retour : <?=(tool::check($hour_return[0]))? $hour_return[0].'h'.$min_return[0] : EMPTYVAL; ?>
                 </address>
 
                 <address>
                     <strong>Aulnay sous Bois, au RER</strong><br>
-                    Départ : <?=$hour_departure[1] ?>h<?=$min_departure[1] ?><br>
-                    Retour : <?=$hour_return[1] ?>h<?=$min_return[1] ?>
+                    Départ : <?=(tool::check($hour_departure[1]))? $hour_departure[1].'h'.$min_departure[1] : EMPTYVAL; ?><br>
+                    Retour : <?=(tool::check($hour_return[1]))? $hour_return[1].'h'.$min_return[1] : EMPTYVAL; ?>
                 </address>
 
                 <address>
                     <strong>Bonneuil en Valois, au Gite</strong><br>
-                    Départ : <?=$hour_departure[2] ?>h<?=$min_departure[2] ?><br>
-                    Retour : <?=$hour_return[2] ?>h<?=$min_return[2] ?>
+                    Départ : <?=(tool::check($hour_departure[2]))? $hour_departure[2].'h'.$min_departure[2] : EMPTYVAL; ?><br>
+                    Retour : <?=(tool::check($hour_return[2]))? $hour_return[2].'h'.$min_return[2] : EMPTYVAL; ?>
                 </address>
             </div>
         <?php endif; ?>
@@ -774,7 +785,7 @@
 
 
 
-<div class="modal fade" id="modal-remove" tabindex="-1" role="dialog" aria-hidden="false">
+<div class="modal fade colored-header" id="modal-remove" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

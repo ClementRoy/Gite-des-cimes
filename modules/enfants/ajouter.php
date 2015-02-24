@@ -21,20 +21,20 @@
     <div class="col-md-9">
         <div class="block-flat">
             <div class="content">
-                <form id="form-add-children" method="post" action="/enfants/infos/id/<?=$id ?>" class="form-horizontal group-border-dashed maped-form" parsley-validate enctype="multipart/form-data">
+                <form id="form-add-children" method="post" action="/enfants/infos/id/<?=$id ?>" class="form-horizontal group-border-dashed maped-form" data-parsley-validate enctype="multipart/form-data">
                     <input type="hidden" value="<?=$id ?>" name="id" />
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="form-enfant-prenom">Prénom</label>
                         <div class="col-sm-6">
-                            <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." parsley-required="true">
+                            <input id="form-enfant-prenom" name="form_enfant_prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'enfant." data-parsley-required="true">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="form-enfant-nom">Nom</label>
                         <div class="col-sm-6">
-                            <input id="form-enfant-nom" name="form_enfant_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'enfant." parsley-required="true">
+                            <input id="form-enfant-nom" name="form_enfant_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'enfant." data-parsley-required="true">
                         </div>
                     </div>
 
@@ -48,7 +48,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label"  for="form-enfant-naissance">Date de naissance</label>
                         <div class="col-sm-6">
-                            <input parsley-regexp="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" id="form-enfant-naissance"  name="form_enfant_naissance" type="text" class="form-control input-datepicker" placeholder="JJ/MM/AAAA" data-toggle="tooltip" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa).">
+                            <input data-parsley-pattern="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" id="form-enfant-naissance"  name="form_enfant_naissance" type="text" class="form-control input-datepicker" placeholder="JJ/MM/AAAA" data-toggle="tooltip" title="Renseignez la date de naissance de l'enfant (jj/mm/aaaa).">
                         </div>
                     </div>
 
@@ -421,7 +421,7 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-assurance-validite">Date de fin de validité</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" value="15/06/2014" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa).">
+                                <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa).">
                             </div>
                         </div>
                     </div>
@@ -517,8 +517,8 @@
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="block-flat bars-widget" id="form-nav" data-spy="affix" data-offset-top="170" data-offset-bottom="101">
+    <div class="col-md-3" style="position:static;">
+        <div class="block-flat bars-widget" id="form-nav">
             <h4>Vue d'ensemble</h4>
             <ul class="nav form-map">
                 <li><a href="#form-enfant-prenom">Prénom</a></li>
@@ -850,8 +850,13 @@
         $form.on('keypress', 'input[type="text"]', function() {
             $(this).attr('data-original-value', $(this).val());
         });
-
+        $("#form-nav").affix({
+        offset: { 
+            top: 173
+        }
     });
+
+});
 </script>
 <?php $scripts .= ob_get_contents();
 ob_end_clean(); ?>

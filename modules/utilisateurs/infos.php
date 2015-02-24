@@ -121,7 +121,7 @@
 
 
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-9">
         <div class="block-flat">
             <table class="no-border no-strip information">
                 <tbody class="no-border-x no-border-y">

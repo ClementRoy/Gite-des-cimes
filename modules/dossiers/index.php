@@ -45,7 +45,7 @@
                             <th class="sortable" style="width: 270px;">Nom de l'enfant</th>
                             <th class="sortable">Séjour(s)</th>
                             <th class="sortable" width="155" style="width:155px;">Statut</th>
-                            <th class="sortable" width="155" style="width:155px;">Pris en charge</th>
+                            <th class="sortable" width="155" style="width:155px;">Prise en charge</th>
                             <th class="sortable" width="180" style="width:180px;">Modifié le</th>
                         </tr>
                     </thead>
@@ -57,7 +57,7 @@
 
                             // On tri les inscriptions de la plus récement modifiées à la plus ancienne
                             $dossiers = tool::array_sort($dossiers, 'edited', SORT_DESC);
-
+                            //tool::output($dossiers);
                             $the_datas = array();
 
                             foreach($dossiers as $key => $dossier) {

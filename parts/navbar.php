@@ -62,7 +62,7 @@ $navbar = array(
                         'ajouter' => 'Ajouter un accompagnateur'
                     )
     ),
-    'Stats' => array(
+    'stats' => array(
         'name' => 'Stats',
         'icon' => 'bar-chart',
     ),

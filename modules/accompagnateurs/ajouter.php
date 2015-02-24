@@ -21,7 +21,7 @@
 <div class="block-flat">
     <div class="content">
 
-        <form id="form-add-accompagnateur" method="post" action="/accompagnateurs/infos/id/<?=$id ?>" class="form-horizontal group-border-dashed maped-form" parsley-validate>
+        <form id="form-add-accompagnateur" method="post" action="/accompagnateurs/infos/id/<?=$id ?>" class="form-horizontal group-border-dashed maped-form" data-parsley-validate>
 
             <input type="hidden" value="<?=$id ?>" name="id" />
 
@@ -29,25 +29,25 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-accompagnateur-prenom">Prénom</label>
                 <div class="col-sm-6">
-                    <input id="form-accompagnateur-prenom" name="form_accompagnateur_prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'accompagnateur." parsley-required="true">
+                    <input id="form-accompagnateur-prenom" name="form_accompagnateur_prenom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le prénom de l'accompagnateur." data-parsley-required="true">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-accompagnateur-nom">Nom</label>
                 <div class="col-sm-6">
-                    <input id="form-accompagnateur-nom" name="form_accompagnateur_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'accompagnateur." parsley-required="true">
+                    <input id="form-accompagnateur-nom" name="form_accompagnateur_nom" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le nom de l'accompagnateur." data-parsley-required="true">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-accompagnateur-tel">Numéro de téléphone</label>
                 <div class="col-sm-6">
-                    <input id="form-accompagnateur-tel" name="form_accompagnateur_tel" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de l'accomagnateur." parsley-required="true">
+                    <input id="form-accompagnateur-tel" name="form_accompagnateur_tel" class="form-control input-phone" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone de l'accomagnateur.">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-accompagnateur-email">Adresse e-mail</label>
                 <div class="col-sm-6">
-                    <input id="form-accompagnateur-email" name="form_accompagnateur_email" class="form-control" type="email" data-toggle="tooltip" title="Renseignez l'adresse e-mail de l'accompagnateur." parsley-required="true">
+                    <input id="form-accompagnateur-email" name="form_accompagnateur_email" class="form-control input-email" type="email" data-toggle="tooltip" title="Renseignez l'adresse e-mail de l'accompagnateur.">
                 </div>
             </div>
             <?php /* ?>
