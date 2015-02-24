@@ -16,9 +16,9 @@ body {
 }
 
 .cl-sidebar, #pcont.container-fluid {
-	-webkit-transition: all .4s cubic-bezier(0.075, 0.820, 0.165, 1.000);
-	-o-transition: all .4s cubic-bezier(0.075, 0.820, 0.165, 1.000);
-	transition: all .4s cubic-bezier(0.075, 0.820, 0.165, 1.000);
+	-webkit-transition: all .3s cubic-bezier(0.075, 0.820, 0.165, 1.000);
+	-o-transition: all .3s cubic-bezier(0.075, 0.820, 0.165, 1.000);
+	transition: all .3s cubic-bezier(0.075, 0.820, 0.165, 1.000);
 }
 
 .cl-vnavigation > .parent > a:before,
@@ -26,9 +26,9 @@ body {
 	/*display: none;*/
 	opacity: 0;
 	filter: alpha(opacity=0);
-	-webkit-transition: all .4s;
-	-o-transition: all .4s;
-	transition: all .4s;
+	-webkit-transition: all .3s;
+	-o-transition: all .3s;
+	transition: all .3s;
 }
 .cl-sidebar:hover .cl-vnavigation > .parent > a:before,
 .cl-sidebar:hover .visible-hover {
