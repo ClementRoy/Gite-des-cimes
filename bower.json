@@ -32,7 +32,6 @@
   },
   "resolutions": {
     "jquery": "~1.10.2",
-    "bootstrap": ">= 3.0.0",
-    "moment": "~2.8.0"
+    "bootstrap": ">= 3.0.0"
   }
 }
