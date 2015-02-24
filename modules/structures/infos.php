@@ -43,15 +43,13 @@
         ?>
 
         <?php if($result): ?>
-            <div class="alert alert-success rounded">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <i class="fa fa-check-sign"></i>La structure <strong><?=$form_structure_name; ?></strong> a bien été ajoutée
-            </div>
+
+            <?php tpl::alert('success', 'La structure <strong>'.$form_structure_name.'</strong> a bien été créé. <a href="/structures/">Retourner à la liste des structures</a>'); ?>
+
         <?php else: ?>
-            <div class="alert alert-danger rounded">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <i class="fa fa-times-circle sign"></i>Une erreur s'est produite durant l'ajout de la structure, veuillez réessayer
-            </div>
+
+            <?php tpl::alert('danger', 'Une erreur s\'est produite durant la création de la structure, veuillez réessayer. <a href="/structures/ajouter/">Retourner au formulaire de modification</a>'); ?>
+
         <?php endif; ?>
 
 
@@ -83,23 +81,13 @@
 
         <?php if($result): ?>
 
-          <div class="alert alert-success rounded">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-              <i class="fa fa-check sign"></i>
-              La structure <strong><?=$form_structure_name; ?></strong> a bien été modifée<br>
-              <a href="/structures/">Retourner à la liste des structures</a>
-          </div>
+            <?php tpl::alert('success', 'La structure <strong>'.$form_structure_name.'</strong> a bien été modifié. <a href="/structures/">Retourner à la liste des structures</a>'); ?>
 
         <?php else: ?>
 
-          <div class="alert alert-danger">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-              <i class="fa fa-times-circle sign"></i>
-              Une erreur s'est produite durant la modification de la structure, veuillez réessayer<br>
-              <a href="/structures/editer/<?=$structure->id ?>">Retourner au formulaire d'édition</a>
-          </div>
+            <?php tpl::alert('danger', 'Une erreur s\'est produite durant la modification de la structure, veuillez réessayer. <a href="/structures/editer/'.$_GET['id'].'">Retourner au formulaire de modification</a>'); ?>
+            
         <?php endif; ?>
-
 
 
     <?php endif; ?>

@@ -17,11 +17,7 @@
 
 <?php if (isset($_POST['id']) && $_POST['action'] == 'supprimer' && $_POST['confirm'] == true): ?>
     <?php $dossier = dossier::get($_POST['id']); ?>
-    <div class="alert alert-success rounded">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <i class="fa fa-check sign"></i><strong>C'est fait !</strong> La dossier d'inscription <strong>n°<?=$dossier->id; ?></strong> a bien été supprimée !
-    </div>
-
+    <?php tool::alert('success', 'Le dossier d\'inscription <strong>n°'.$dossier->id.'</strong> a bien été supprimée !') ?>
     <?php dossier::remove($_POST['id']); ?>
 <?php endif; ?>
 

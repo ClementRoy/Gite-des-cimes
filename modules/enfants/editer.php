@@ -434,7 +434,7 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-assurance-validite">Date de fin de validité</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" value="<?php if (tool::check($enfant->self_assurance_expiration_date)): ?> value="<?=tool::getDatefromDatetime($enfant->self_assurance_expiration_date); ?><?php endif; ?>" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa).">
+                                <input id="form-enfant-assurance-validite" name="form_enfant_assurance_validite" type="text" class="form-control input-datepicker" <?php if (tool::check($enfant->self_assurance_expiration_date)): ?> value="<?=tool::getDatefromDatetime($enfant->self_assurance_expiration_date); ?>"<?php endif; ?> data-toggle="tooltip" title="Renseignez la date de fin de validité de l'assurance (jj/mm/aaaa).">
                             </div>
                         </div>
                     </div>
@@ -455,7 +455,7 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-cpam-validite">Date de fin de validité</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-cpam-validite" name="form_enfant_cpam_validite" type="text" value="<?php if (tool::check($enfant->cpam_attestation_expiration_date)): ?> value="<?=tool::getDatefromDatetime($enfant->cpam_attestation_expiration_date); ?><?php endif; ?>" class="form-control input-datepicker" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'attestation CPAM (jj/mm/aaaa).">
+                                <input id="form-enfant-cpam-validite" name="form_enfant_cpam_validite" type="text" <?php if (tool::check($enfant->cpam_attestation_expiration_date)): ?> value="<?=tool::getDatefromDatetime($enfant->cpam_attestation_expiration_date); ?>"<?php endif; ?> class="form-control input-datepicker" data-toggle="tooltip" title="Renseignez la date de fin de validité de l'attestation CPAM (jj/mm/aaaa).">
                             </div>
                         </div>
                     </div>
@@ -526,7 +526,7 @@
 
                     <div class="form-group actions text-center">
                         <div class="col-md-8 col-md-offset-2">
-                            <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-update" value="Modifier la fiche">
+                            <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-update" value="Enregistrer les modifications">
                             <span>OU</span>
                             <a href="/enfants/infos/id/<?=$enfant->id; ?>" class="reset">Annuler</a>
                         </div>

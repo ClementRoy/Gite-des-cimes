@@ -191,7 +191,7 @@
 
                         <div class="form-group actions text-center">
                             <div class="col-md-8 col-md-offset-2">
-                                <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-add" value="Ajouter le dossier">
+                                <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-add" value="Enregistrer le nouveau dossier d'inscription">
                                 <span>OU</span>
                                 <a href="/dossiers/" class="reset">Annuler</a>
                             </div>

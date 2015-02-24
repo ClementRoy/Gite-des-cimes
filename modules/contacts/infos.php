@@ -27,28 +27,12 @@
 
         <?php if($result): ?>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        Le contact <strong><?=$form_contact_firstname; ?> <?=$form_contact_lastname; ?></strong> a bien été ajoutée
-                    </div>
-                    <a href="/contacts/">Retourner à la liste des contacts</a>
+            <?php tpl::alert('success', 'La fiche du contact <strong>'.$form_contact_firstname.' '.$form_contact_lastname.'</strong> a bien été créé. <a href="/contacts/">Retourner à la liste des contacts</a>'); ?>
 
-                </div>
-            </div>
         <?php else: ?>
 
+            <?php tpl::alert('danger', 'Une erreur s\'est produite durant la création de la fiche contact, veuillez réessayer. <a href="/contacts/ajouter/">Retourner au formulaire de modification</a>'); ?>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant l'ajout de la contact, veuillez réessayer
-                    </div>
-                    <a href="/contacts/ajouter">Retourner au formulaire d'ajout</a>
-                </div>
-            </div>
         <?php endif; ?>
 
 
@@ -79,29 +63,13 @@
 
         <?php if($result): ?>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        Le contact <?=$form_contact_firstname; ?> <?=$form_contact_lastname ?> a bien été modifée
-                    </div>
-
-                </div>
-            </div>
+            <?php tpl::alert('success', 'La fiche du contact <strong>'.$form_contact_firstname.' '.$form_contact_lastname.'</strong> a bien été modifié. <a href="/contacts/">Retourner à la liste des contacts</a>'); ?>
 
         <?php else: ?>
 
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant la modification du contact, veuillez réessayer
-                    </div>
-                </div>
-            </div>
+            <?php tpl::alert('danger', 'Une erreur s\'est produite durant la modification de la fiche contact, veuillez réessayer. <a href="/contacts/editer/'.$_GET['id'].'">Retourner au formulaire de modification</a>'); ?>
+            
         <?php endif; ?>
-
 
 
     <?php endif; ?>

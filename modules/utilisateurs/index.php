@@ -21,11 +21,7 @@
 
 <?php if (isset($_POST['id']) && $_POST['action'] == 'supprimer' && $_POST['confirm'] == true): ?>
     <?php $user = user::get($_POST['id']); ?>
-    <div class="alert alert-success rounded">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <i class="fa fa-check sign"></i><strong>C'est fait !</strong> L'utilisateur <strong><?=$user->firstname ?> <?=$user->lastname ?></strong> a bien été supprimée !
-    </div>
-
+    <?php tpl::alert('success', 'L\'utilisateur <strong>'.$user->firstname.' '.$user->lastname.'</strong> a bien été supprimée !') ?>
     <?php user::remove($_POST['id']); ?>
 <?php endif; ?>
 

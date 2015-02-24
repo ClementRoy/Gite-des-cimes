@@ -17,10 +17,8 @@
 
 <?php if (isset($_POST['id']) && $_POST['action'] == 'supprimer' && $_POST['confirm'] == true): ?>
     <?php $enfant = enfant::get($_POST['id']); ?>
-    <div class="alert alert-success rounded">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <i class="fa fa-check sign"></i><strong>C'est fait !</strong> La fiche de <strong><?=$enfant->firstname ?> <?=$enfant->lastname ?></strong> a bien été supprimée !
-    </div>
+
+    <?php tpl::alert('success', 'La fiche de <strong>'.$enfant->firstname.' '.$enfant->lastname.'</strong> a bien été supprimée !'); ?>
 
     <?php enfant::remove($_POST['id']); ?>
 <?php endif; ?>

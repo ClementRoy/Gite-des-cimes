@@ -19,11 +19,7 @@
 
 <?php if (isset($_POST['id']) && $_POST['action'] == 'supprimer' && $_POST['confirm'] == true): ?>
     <?php $contact = contact::get($_POST['id']); ?>
-    <div class="alert alert-success rounded">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <i class="fa fa-check sign"></i><strong>C'est fait !</strong> La fiche contact de <strong><?=$contact->lastname ?> <?=$contact->firstname ?></strong> a bien été supprimée !
-    </div>
-
+    <?php tpl::alert('success', 'La fiche du contact <strong>'.$contact->lastname.' '.$contact->firstname.'</strong> a bien été supprimée !') ?>
     <?php contact::remove($_POST['id']); ?>
 <?php endif; ?>
 

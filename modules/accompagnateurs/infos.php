@@ -17,29 +17,15 @@
                 $result = accompagnateur::update($datas, $_GET['id']);
 
          ?>
-            <?php if($result): ?>
+        <?php if($result): ?>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-success">
-                            <i class="icon-ok-sign"></i> 
-                            L'accompagnateur <?=$form_accompagnateur_prenom; ?> <?=$form_accompagnateur_nom; ?> a bien été ajouté
-                        </div>
-                    </div>
-                </div>
+            <?php tpl::alert('success', 'La fiche de l\'accompagnateur <strong>'.$form_accompagnateur_prenom.' '.$form_accompagnateur_nom.'</strong> a bien été créé. <a href="/accompagnateurs/">Retourner à la liste des accompagnateurs</a>'); ?>
 
-            <?php else: ?>
+        <?php else: ?>
 
+            <?php tpl::alert('danger', 'Une erreur s\'est produite durant la création de la fiche de l\'accompagnateur, veuillez réessayer. <a href="/accompagnateurs/ajouter/">Retourner au formulaire de modification</a>'); ?>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-danger">
-                            <i class="icon-remove-sign"></i> 
-                            Une erreur s'est produite durant l'ajout de l'accompagnateur, veuillez réessayer
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
+        <?php endif; ?>
     <?php endif; ?>
 
 
@@ -58,17 +44,12 @@
         ?>
         <?php if($result): ?>
 
-            <div class="row">
-                <div class="col-md-12">
+            <?php tpl::alert('success', 'La fiche de l\'accompagnateur <strong>'.$form_accompagnateur_prenom.' '.$form_accompagnateur_nom.'</strong> a bien été modifié. <a href="/accompagnateurs/">Retourner à la liste des accompagnateurs</a>'); ?>
 
-                    <div class="alert alert-info">
-                        <i class="icon-exclamation-sign"></i>
-                        L'accompagnateur <strong><?=$form_accompagnateur_prenom; ?> <?=$form_accompagnateur_nom; ?></strong> a bien été modifié.
-                    </div>
-                </div>
-            </div>
         <?php else: ?>
 
+            <?php tpl::alert('danger', 'Une erreur s\'est produite durant la modification de la fiche de l\'accompagnateur, veuillez réessayer. <a href="/accompagnateurs/editer/'.$_GET['id'].'">Retourner au formulaire de modification</a>'); ?>
+            
         <?php endif; ?>
 
     <?php endif; ?>

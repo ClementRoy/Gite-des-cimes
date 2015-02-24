@@ -179,7 +179,7 @@
 
             <div class="form-group actions text-center">
                 <div class="col-md-8 col-md-offset-2">
-                    <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-add" value="Ajouter la structure">
+                    <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-add" value="Enregistrer la nouvelle structure">
                     <span>OU</span>
                     <a href="/structures/" class="reset">Annuler</a>
                 </div>

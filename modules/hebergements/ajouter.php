@@ -64,7 +64,7 @@
 
                 <div class="form-group actions text-center">
                     <div class="col-md-8 col-md-offset-2">
-                        <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-add" value="Ajouter l'hébergement">
+                        <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-add" value="Enregistrer le nouvel hébergement">
                         <span>OU</span>
                         <a href="/hebergements/" class="reset">Annuler</a>
                     </div>

@@ -43,7 +43,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="form-utilisateur-password">Mot de passe</label>
                 <div class="col-sm-6">
-                    <input id="form-utilisateur-password" name="form_utilisateur_password" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le mot de passe de l'utilisateur." data-parsley-required="true">
+                    <input id="form-utilisateur-password" name="form_utilisateur_password" class="form-control" type="text" data-toggle="tooltip" title="Renseignez le mot de passe de l'utilisateur.">
                 </div>
             </div>
             <div class="form-group">

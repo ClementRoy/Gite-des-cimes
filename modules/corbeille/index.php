@@ -26,10 +26,8 @@
         elseif($type == 'accompagnateur'){ accompagnateur::unarchive($id); }
     ?>
 
-    <div class="alert alert-success">
-        <i class="icon-ok-sign"></i> 
-        L'élément a bien été réactivé
-    </div>
+    <?php tpl::alert('success', 'L\'élément a bien été réactivé.'); ?>
+
 <?php endif; ?>
 
 
@@ -42,11 +40,8 @@
         elseif($type == 'sejour'){ sejour::delete($id); }
         elseif($type == 'accompagnateur'){ accompagnateur::delete($id); }
     ?>
-
-    <div class="alert alert-danger">
-        <i class="icon-remove-sign"></i> 
-        L'élément a bien été supprimé
-    </div>
+    
+    <?php tpl::alert('success', 'L\'élément a bien été supprimé.'); ?>
 
 <?php endif; ?>
 

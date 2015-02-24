@@ -29,25 +29,11 @@
 
     <?php if($result): ?>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-success">
-                    <i class="icon-ok-sign"></i> 
-                    Le commentaire a bien été enregistré
-                </div>
-            </div>
-        </div>
+        <?php tpl::alert('success', 'Le commentaire a bien été enregistré.'); ?>
 
     <?php else: ?>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-danger">
-                    <i class="icon-remove-sign"></i> 
-                    Une erreur s'est produite durant l'enregistrement du commentaire =(
-                </div>
-            </div>
-        </div>
+        <?php tpl::alert('danger', 'Une erreur s\'est produite durant l\'enregistrement du commentaire =(.'); ?>
 
     <?php endif; ?>
 <?php endif; ?>
@@ -194,49 +180,29 @@
 
     ?>
 
+
     <?php if (isset($_POST['submit-add'])): ?>
         <?php if($result): ?>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        L'enfant <strong><?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?></strong> a bien été ajouté
-                    </div>
-                </div>
-            </div>
+
+            <?php tpl::alert('success', 'La fiche de l\'enfant <strong>'.$form_enfant_prenom.' '.$form_enfant_nom.'</strong> a bien été créé. <a href="/enfants/">Retourner à la liste des enfants</a>'); ?>
+
         <?php else: ?>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
-                    </div>
-                </div>
-            </div>
+
+            <?php tpl::alert('danger', 'Une erreur s\'est produite durant la création de la fiche de l\'enfant, veuillez réessayer. <a href="/enfants/ajouter/">Retourner au formulaire d\'ajout</a>'); ?>
+
         <?php endif; ?>
     <?php endif; ?>
 
 
     <?php if (isset($_POST['submit-update'])): ?>
         <?php if($result): ?>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        L'enfant <strong><?=$form_enfant_prenom; ?> <?=$form_enfant_nom; ?></strong> a bien été modifié
-                    </div>
-                </div>
-            </div>
+
+            <?php tpl::alert('success', 'La fiche de l\'enfant <strong>'.$form_enfant_prenom.' '.$form_enfant_nom.'</strong> a bien été modifié. <a href="/enfants/">Retourner à la liste des enfants</a>'); ?>
+
         <?php else: ?>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
-                    </div>
-                    <a href="/enfants/ajouter" class="btn-flat default">Retourner au formulaire d'ajout</a>
-                </div>
-            </div>
+
+            <?php tpl::alert('danger', 'Une erreur s\'est produite durant la modification de la fiche de l\'enfant, veuillez réessayer. <a href="/enfants/editer/'.$_GET['id'].'">Retourner au formulaire de modification</a>'); ?>
+
         <?php endif; ?>
     <?php endif; ?>
 <?php endif; ?>

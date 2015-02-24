@@ -112,7 +112,7 @@
 
             <div class="form-group actions text-center">
                 <div class="col-md-8 col-md-offset-2">
-                    <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-add" value="Ajouter le contact">
+                    <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-add" value="Enregistrer le nouveau contact">
                     <span>OU</span>
                     <a href="/contacts/" class="reset">Annuler</a>
                 </div>

@@ -112,7 +112,7 @@
 
             <div class="form-group actions text-center">
                 <div class="col-md-8 col-md-offset-2">
-                    <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-update" value="Modifier le contact">
+                    <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-update" value="Enregister les modifications">
                     <span>OU</span>
                     <a href="/contacts/infos/id/<?=$contact->id ?>" class="reset">Annuler</a>
                 </div>

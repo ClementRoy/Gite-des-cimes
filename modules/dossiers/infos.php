@@ -44,25 +44,11 @@
 
     <?php if($result): ?>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-success">
-                    <i class="icon-ok-sign"></i> 
-                    L'inscription de <strong><?=$form_inscription_enfant; ?></strong> au séjour <strong></strong> a bien été ajoutée
-                </div>
-            </div>
-        </div>
+        <?php tpl::alert('success', 'L\'inscription de <strong>'.$form_inscription_enfant.'</strong> a bien été enregistré. <a href="/dossiers/">Retourner à la liste des dossiers</a>'); ?>
 
     <?php else: ?>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-danger">
-                    <i class="icon-remove-sign"></i> 
-                    Une erreur s'est produite durant la création de l'inscription, veuillez réessayer
-                </div>
-            </div>
-        </div>
+        <?php tpl::alert('danger', 'Une erreur s\'est produite durant l\'enregistrement de l\'inscription de <strong>'.$form_inscription_enfant.'</strong>. <a href="/dossiers/ajouter/">Retourner au formulaire de création</a>'); ?>
 
     <?php endif; ?>
 
@@ -112,28 +98,11 @@
 
     <?php if($result): ?>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-success">
-                    <i class="icon-ok-sign"></i> 
-                    Le dossier d'inscription de <strong><?=$form_inscription_enfant; ?></strong> au séjour <strong></strong> a bien été modifiée
-                </div>
-                <a href="/dossiers/">Retourner à la liste des dossiers d'inscription</a>
-            </div>
-        </div>
+        <?php tpl::alert('success', 'L\'inscription de <strong>'.$form_inscription_enfant.'</strong> a bien été modifié. <a href="/dossiers/">Retourner à la liste des dossiers</a>'); ?>
 
     <?php else: ?>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-danger">
-                    <i class="icon-remove-sign"></i> 
-                    Une erreur s'est produite durant la modification de l'inscription, veuillez réessayer
-                </div>
-                <a href="/dossiers/editer/id/<?=$inscription->id ?>">Retourner au formulaire de modification</a>
-            </div>
-        </div>
-
+        <?php tpl::alert('danger', 'Une erreur s\'est produite durant la modification de l\'inscription de <strong>'.$form_inscription_enfant.'</strong>. <a href="/dossiers/editer/'.$_GET['id'].'">Retourner au formulaire de modification</a>'); ?>
     <?php endif; ?>
 
 <?php endif; ?>

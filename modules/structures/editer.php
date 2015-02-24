@@ -101,7 +101,7 @@
 
             <div class="form-group actions text-center">
                 <div class="col-md-8 col-md-offset-2">
-                    <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-update" value="Modifier la structure">
+                    <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-update" value="Enregistrer les modifications">
                     <span>OU</span>
                     <a href="/structures/infos/id/<?=$structure->id; ?>" class="reset">Annuler</a>
                 </div>
