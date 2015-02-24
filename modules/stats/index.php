@@ -22,13 +22,98 @@
 <?php 
 
     global $db;
-    $from_2014 = new DateTime('2014-01-01');
-    $from_2014 = $from_2014->format("Y-m-d H:i:s");
-    $to_2014 = new DateTime('2104-12-31');
-    $to_2014 = $to_2014->format("Y-m-d H:i:s");
+
+
+    // Février,printemps, été, toussaints et week end cumulés
+
+    // Février
+    $from_fev = new DateTime('2014-02-01');
+    $to_fev = new DateTime('2014-03-01');
+
+    // Printemps
+    $from_printemps = new DateTime('2014-03-21');
+    $to_printemps = new DateTime('2014-05-31');
+
+    // Ete
+    $from_ete = new DateTime('2014-06-01');
+    $to_ete = new DateTime('2014-09-30');
+
+    // Toussaints
+    $from_toussaint = new DateTime('2014-10-01');
+    $to_toussaint = new DateTime('2014-11-30');
 
 
 
+    function getNbInscriptionsByPeriod($from, $to ){
+        global $db;
+        $number = 0;
+        $from = $from->format("Y-m-d H:i:s");
+        $to = $to->format("Y-m-d H:i:s");
+
+
+        $sql = 'SELECT DISTINCT COUNT(inscription.id) as nb  FROM inscription
+                LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
+                WHERE dossier.finished = 1 
+                AND inscription.date_from >= "'.$from.'" 
+                AND inscription.date_to <= "'.$to.'" 
+                AND DATE_ADD(inscription.date_from, INTERVAL 2 DAY) != inscription.date_to
+                ORDER BY inscription.id';
+
+        return $db->row($sql)->nb;
+    }
+
+    function getNbInscriptionsWeekEndByYear($year = '2014'){
+        global $db;
+        $from = new DateTime($year.'-01-01');
+        $from = $from->format("Y-m-d H:i:s");
+        $to = new DateTime($year.'-12-31');
+        $to = $to->format("Y-m-d H:i:s");
+        $sql = 'SELECT DISTINCT COUNT(inscription.id) as nb  FROM inscription
+                LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
+                WHERE dossier.finished = 1 
+                AND inscription.date_from >= "'.$from.'"
+                AND inscription.date_to <= "'.$to.'"
+                AND DATE_ADD(inscription.date_from, INTERVAL 2 DAY) = inscription.date_to
+                ORDER BY inscription.id';
+        return $db->row($sql)->nb;
+    }
+
+    echo 'février';
+    tool::output(getNbInscriptionsByPeriod($from_fev, $to_fev));
+
+    echo 'printemps';
+    tool::output(getNbInscriptionsByPeriod($from_printemps, $to_printemps));
+
+    echo 'été';
+    tool::output(getNbInscriptionsByPeriod($from_ete, $to_ete));
+
+    echo 'toussaint';
+    tool::output(getNbInscriptionsByPeriod($from_toussaint, $to_toussaint));
+
+    echo 'weekend';
+    tool::output(getNbInscriptionsWeekEndByYear());
+
+
+    function getNbInscriptionByStructureByYear($structure, $year = '2014'){
+        global $db;
+        $from = new DateTime($year.'-01-01');
+        $from = $from->format("Y-m-d H:i:s");
+        $to = new DateTime($year.'-12-31');
+        $to = $to->format("Y-m-d H:i:s");
+
+        $sql = 'SELECT DISTINCT enfant.id, COUNT(enfant.id) as nb FROM inscription
+                LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
+                LEFT JOIN enfant ON inscription.ref_enfant = enfant.id 
+                LEFT JOIN structure ON enfant.organization = structure.id 
+                WHERE structure.id  = "'.$structure->id.'" 
+                AND dossier.finished = 1 
+                AND inscription.date_from >= "'.$from.'" 
+                AND inscription.date_to <= "'.$to.'" 
+                ORDER BY inscription.id';
+
+        return $db->row($sql);
+
+    }
 ?>
 
 <div class="content content-table">
@@ -49,27 +134,11 @@
 
                             <?php foreach($structures as $key => $structure): ?>
 
-<?php 
+                            <?php 
 
-    // Ne pas faire un étoile ici ....
-    $sql = 'SELECT COUNT(*) as nb FROM inscription
-            LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
-            LEFT JOIN enfant ON inscription.ref_enfant = enfant.id 
-            LEFT JOIN structure ON enfant.organization = structure.id 
-            WHERE structure.id  = "'.$structure->id.'" AND dossier.finished = 1 AND inscription.date_from >= "'.$from_2014.'" AND inscription.date_to <= "'.$to_2014.'" ORDER BY inscription.id';
+                                $result2 = getNbInscriptionByStructureByYear($structure);
 
-    $result = $db->row($sql);
-
-    $sql2 = 'SELECT DISTINCT enfant.id , COUNT(enfant.id) as nb FROM inscription
-            LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
-            LEFT JOIN enfant ON inscription.ref_enfant = enfant.id 
-            LEFT JOIN structure ON enfant.organization = structure.id 
-            WHERE structure.id  = "'.$structure->id.'" AND dossier.finished = 1 AND inscription.date_from >= "'.$from_2014.'" AND inscription.date_to <= "'.$to_2014.'" ORDER BY inscription.id';
-
-    $result2 = $db->row($sql2);
-
-
-?>
+                            ?>
                             <?php if($result2->nb > 0): ?>
                             <tr>
                                 <td>
