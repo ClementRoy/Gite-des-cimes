@@ -91,7 +91,7 @@ $(function() {
     });
 
     $('.cl-sidebar').on('mouseleave', function () {
-        console.log($(this).find('.parent.open'));
+        // console.log($(this).find('.parent.open'));
         $(this).find('.parent.open').find('.sub-menu').stop().slideUp(200, 'swing', function() {
             $(this).parent().removeClass("open");
         });
