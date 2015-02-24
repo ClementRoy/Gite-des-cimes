@@ -66,12 +66,12 @@ $(function() {
     });
 
     $(".cl-vnavigation").delegate(".parent > a", "click", function(e) {
-        $(".cl-vnavigation .parent.open > ul").not($(this).parent().find("ul")).slideUp(300, 'swing', function() {
+        $(".cl-vnavigation .parent.open > ul").not($(this).parent().find("ul")).slideUp(200, 'swing', function() {
             $(this).parent().removeClass("open");
         });
 
         var ul = $(this).parent().find("ul");
-        ul.slideToggle(300, 'swing', function() {
+        ul.slideToggle(200, 'swing', function() {
             var p = $(this).parent();
             if (p.hasClass("open")) {
                 p.removeClass("open");
@@ -90,10 +90,16 @@ $(function() {
         e.preventDefault();
     });
 
+    $('.cl-sidebar').on('mouseleave', function () {
+        console.log($(this).find('.parent.open'));
+        $(this).find('.parent.open').find('.sub-menu').stop().slideUp(200, 'swing', function() {
+            $(this).parent().removeClass("open");
+        });
+    });
     /*Small devices toggle*/
     $(".cl-toggle").click(function(e) {
         var ul = $(".cl-vnavigation");
-        ul.slideToggle(300, 'swing', function() {});
+        ul.slideToggle(200, 'swing', function() {});
         e.preventDefault();
     });
 
