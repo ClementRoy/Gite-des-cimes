@@ -65,6 +65,7 @@ module.exports = function(grunt){
 				'assets/js/libs/fullcalendar.year.js',
 
 				'assets/js/libs/flatdream-core.js'
+				'assets/js/app.js'
 				],
 				dest: 'assets/js/gitedescimes.js',
 			}
@@ -82,7 +83,3 @@ module.exports = function(grunt){
 	grunt.registerTask('default', ['prod']);
 	grunt.registerTask('prod', ['cssmin','concat', 'uglify']);
 }
-
-
-
-
