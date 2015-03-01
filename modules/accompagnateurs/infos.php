@@ -81,7 +81,7 @@
         </div>
         <div class="col-md-4 text-right">
             <!-- <a href="#" data-toggle="modal" data-target="#modal-remove" class="item">Supprimer cette fiche</a> -->
-            <a href="/accompagnateurs/editer/id/<?=$accompagnateur->id; ?>" class="btn btn-primary btn-rad">Modifier ce contact</a>
+            <a href="/accompagnateurs/editer/id/<?=$accompagnateur->id; ?>" class="btn btn-primary btn-rad">Modifier cet accompagnateur</a>
         </div>
     </div>
 </div>

@@ -19,191 +19,202 @@
 <!-- /Page title -->
 
 
-<div class="title">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="block-flat">
-                <div class="content">
-                    <form id="form-add-dossier" method="post" action="/dossiers/infos/id/<?=$id ?>" class="form-horizontal group-border-dashed maped-form" data-parsley-validate enctype="multipart/form-data">
+<div class="row">
+    <div class="col-md-9">
+        <div class="block-flat">
+            <div class="content">
+                <form id="form-add-dossier" method="post" action="/dossiers/infos/id/<?=$id ?>" class="form-horizontal group-border-dashed maped-form" data-parsley-validate enctype="multipart/form-data">
 
-                        <input type="hidden" value="<?=$id ?>" name="id" />
+                    <input type="hidden" value="<?=$id ?>" name="id" />
 
 
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-enfant-select">Nom de l'enfant</label>
-                            <div class="col-sm-6" data-toggle="tooltip" title="Sélectionnez l'enfant à inscrire">
-                                <div class="ui-select">
-                                    <?php $enfants = enfant::getList(); ?>
-                                    <select class="form-control" id="form-inscription-enfant-select" name="form_inscription_enfant" data-parsley-required="true">
-                                        <option selected="selected" value="">Choisissez l'enfant</option>
-                                        <?php foreach($enfants as $enfant): ?>
-                                            <option <?php if( isset($_GET['enfant']) && $enfant->id == $_GET['enfant']): ?>selected="selected"<?php endif; ?> value="<?=$enfant->id ?>"><?=$enfant->lastname ?> <?=$enfant->firstname ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-enfant-select">Nom de l'enfant</label>
+                        <div class="col-sm-6" data-toggle="tooltip" title="Sélectionnez l'enfant à inscrire">
+                            <div class="ui-select">
+                                <?php $enfants = enfant::getList(); ?>
+                                <select class="form-control" id="form-inscription-enfant-select" name="form_inscription_enfant" data-parsley-required="true">
+                                    <option selected="selected" value="">Choisissez l'enfant</option>
+                                    <?php foreach($enfants as $enfant): ?>
+                                        <option <?php if( isset($_GET['enfant']) && $enfant->id == $_GET['enfant']): ?>selected="selected"<?php endif; ?> value="<?=$enfant->id ?>"><?=$enfant->lastname ?> <?=$enfant->firstname ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <?php $sejours = sejour::getListFuturSejour(); ?>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-sejour-select">Séjour(s)</label>
+                        <div class="col-sm-6">
+                            <div class="sejours-group">
+                                <div class="sejour-form init" style="display:none;">
+                                    <fieldset>
+                                        <select class="form-control input-sm" id="form-inscription-sejour-select" name="form_inscription_sejour[]">
+                                            <option value="">Choisissez un séjour</option>
+                                        </select>
+                                    </fieldset>
                                 </div>
                             </div>
-                        </div>
-
-
-                        <?php $sejours = sejour::getListFuturSejour(); ?>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-sejour-select">Séjour(s)</label>
-                            <div class="col-sm-6">
-                                <div class="sejours-group">
-                                    <div class="sejour-form init" style="display:none;">
-                                        <fieldset>
-                                            <select class="form-control input-sm" id="form-inscription-sejour-select" name="form_inscription_sejour[]">
-                                                <option value="">Choisissez un séjour</option>
-                                            </select>
-                                        </fieldset>
-                                    </div>
-                                </div>
-                                <div class="sejours-controls">
-                                    <button href="#" class="btn btn-default btn-sm delete-sejour" disabled="disabled">Supprimer ce séjour</button>
-                                    <button href="#" class="btn btn-primary btn-sm add-sejour" disabled="disabled">Ajouter un séjour</button>
-                                </div>
+                            <div class="sejours-controls">
+                                <button href="#" class="btn btn-default btn-sm delete-sejour" disabled="disabled">Supprimer ce séjour</button>
+                                <button href="#" class="btn btn-primary btn-sm add-sejour" disabled="disabled">Ajouter un séjour</button>
                             </div>
                         </div>
+                    </div>
 
 
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-structure-select">Centre payeur</label>
-                            <div class="col-sm-6" data-toggle="tooltip" title="Sélectionnez la structure qui s'occupe de cet enfant.">
-                                <div class="ui-select">
-                                    <?php $structures = structure::getPayerStructureList(); ?>
-                                    <select class="form-control" id="form-inscription-structure-select" name="form_inscription_structure">
-                                        <option value="" selected="selected">Choisissez la structure</option>
-                                        <?php foreach($structures as $structure): ?>
-                                            <option value="<?=$structure->id ?>"><?=$structure->name ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-structure-select">Centre payeur</label>
+                        <div class="col-sm-6" data-toggle="tooltip" title="Sélectionnez la structure qui s'occupe de cet enfant.">
+                            <div class="ui-select">
+                                <?php $structures = structure::getPayerStructureList(); ?>
+                                <select class="form-control" id="form-inscription-structure-select" name="form_inscription_structure">
+                                    <option value="" selected="selected">Choisissez la structure</option>
+                                    <?php foreach($structures as $structure): ?>
+                                        <option value="<?=$structure->id ?>"><?=$structure->name ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-centre-payeur">
-                                Autre centre payeur
-                                 <span class="help-block"><em>Si il n'est pas dans la liste</em></span>
-                                </label>
-                            <div class="col-sm-6">
-                                <input id="form-inscription-centre-payeur" name="form_inscription_structure_name" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom du centre payeur.">
-                                <input type="hidden" id="form-inscription-centre-payeur-hidden" name="form_inscription_structure_name" value="" disabled="disabled">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Prise en charge</label>
-                            <div class="col-sm-6">
-                                <label class="radio-inline" for="form-inscription-supported-oui"><input type="radio" class="icheck" name="form_inscription_supported" id="form-inscription-supported-oui" value="1"> Oui</label>
-                                <label class="radio-inline" for="form-inscription-supported-non"><input type="radio" class="icheck" name="form_inscription_supported" id="form-inscription-supported-non" value="0" checked="checked"> Non</label>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-lieu-select">Lieu de rendez-vous</label>
-                            <div class="col-sm-6" data-toggle="tooltip" title="Renseignez le lieu de rendez-vous.">
-                                <div class="ui-select">
-                                    <select class="form-control" id="form-inscription-lieu-select" name="form_inscription_lieu">
-                                        <option selected="selected" value="">Choisissez le lieu de rendez-vous</option>
-                                        <option value="Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle</option>
-                                        <option value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>
-                                        <option value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form_inscription_lieu_custom">
-                                Autre lieu de rendez-vous
-                                 <span class="help-block"><em>Si il n'est pas dans la liste</em></span>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-centre-payeur">
+                            Autre centre payeur
+                             <span class="help-block"><em>Si il n'est pas dans la liste</em></span>
                             </label>
-                            <div class="col-sm-6">
-                                <input id="form_inscription_lieu_custom" name="form_inscription_lieu_custom" class="form-control" type="text" data-toggle="tooltip" value="" placeholder="Ne renseigner que si le lieu n'est pas dans la liste.">
-                            </div>
-
+                        <div class="col-sm-6">
+                            <input id="form-inscription-centre-payeur" name="form_inscription_structure_name" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom du centre payeur.">
+                            <input type="hidden" id="form-inscription-centre-payeur-hidden" name="form_inscription_structure_name" value="" disabled="disabled">
                         </div>
+                    </div>
 
-
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-heure-aller">Heure de rendez-vous à l'aller</label>
-                            <div class="col-md-1">
-                                <input id="form-inscription-heure-aller" name="form_inscription_heure_aller" class="form-control pull-left input-hour" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
-                                <p class="input-suffix">h</p>
-                            </div>
-                            <div class="col-md-1">
-                                <input id="form-inscription-min-aller" name="form_inscription_min_aller" class="form-control input-minute" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
-                            </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Prise en charge</label>
+                        <div class="col-sm-6">
+                            <label class="radio-inline" for="form-inscription-supported-oui"><input type="radio" class="icheck" name="form_inscription_supported" id="form-inscription-supported-oui" value="1"> Oui</label>
+                            <label class="radio-inline" for="form-inscription-supported-non"><input type="radio" class="icheck" name="form_inscription_supported" id="form-inscription-supported-non" value="0" checked="checked"> Non</label>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-heure-retour">Heure de rendez-vous au retour</label>
-                            <div class="col-md-1 col-sm-5">
-                                <input id="form-inscription-heure-retour" name="form_inscription_heure_retour" class="form-control pull-left input-hour" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
-                                <p class="input-suffix">h</p>
-                            </div>
-                            <div class="col-md-1 col-sm-5">
-                                <input id="form-inscription-min-retour" name="form_inscription_min_retour" class="form-control input-minute" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-lieu-select">Lieu de rendez-vous</label>
+                        <div class="col-sm-6" data-toggle="tooltip" title="Renseignez le lieu de rendez-vous.">
+                            <div class="ui-select">
+                                <select class="form-control" id="form-inscription-lieu-select" name="form_inscription_lieu">
+                                    <option selected="selected" value="">Choisissez le lieu de rendez-vous</option>
+                                    <option value="Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle</option>
+                                    <option value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>
+                                    <option value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>
+                                </select>
                             </div>
                         </div>
+                    </div>
 
 
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Pique-nique</label>
-                            <div class="col-sm-6">
-                                <label class="radio-inline" for="form-inscription-pique-nique-oui"><input type="radio" class="icheck" name="form_inscription_pique_nique" id="form-inscription-pique-nique-oui" value="1"> Oui</label>
-                                <label class="radio-inline" for="form-inscription-pique-nique-non"><input type="radio" class="icheck" name="form_inscription_pique_nique" id="form-inscription-pique-nique-non" value="0" checked="checked"> Non</label>
-                            </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form_inscription_lieu_custom">
+                            Autre lieu de rendez-vous
+                             <span class="help-block"><em>Si il n'est pas dans la liste</em></span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input id="form_inscription_lieu_custom" name="form_inscription_lieu_custom" class="form-control" type="text" data-toggle="tooltip" value="" placeholder="Ne renseigner que si le lieu n'est pas dans la liste.">
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Sac de couchage</label>
-                            <div class="col-sm-6">
-                                <label class="radio-inline" for="form-inscription-sac-oui"><input type="radio" class="icheck" name="form_inscription_sac" id="form-inscription-sac-oui" value="1"> Oui</label>
-                                <label class="radio-inline" for="form-inscription-sac-non"><input type="radio" class="icheck" name="form_inscription_sac" id="form-inscription-sac-non" value="0" checked="checked"> Non</label>
-                            </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-heure-aller">Heure de rendez-vous à l'aller</label>
+                        <div class="col-md-1">
+                            <input id="form-inscription-heure-aller" name="form_inscription_heure_aller" class="form-control pull-left input-hour" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ.">
+                            <p class="input-suffix">h</p>
                         </div>
-
-
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-note">Notes</label>
-                            <div class="col-sm-6">
-                                <textarea id="form-inscription-note" name="form_inscription_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de l'inscription."></textarea>
-                            </div>
+                        <div class="col-md-1">
+                            <input id="form-inscription-min-aller" name="form_inscription_min_aller" class="form-control input-minute" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le départ.">
                         </div>
+                    </div>
 
-
-
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Inscription finalisée</label>
-                            <div class="col-sm-6">
-                                <label class="radio-inline" for="form-inscription-option-oui"><input type="radio" class="icheck" name="form_inscription_option" id="form-inscription-option-oui" value="1"> Oui</label>
-                                <label class="radio-inline" for="form-inscription-option-non"><input type="radio" class="icheck" name="form_inscription_option" id="form-inscription-option-non" value="0" checked="checked"> Non</label>
-                            </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-heure-retour">Heure de rendez-vous au retour</label>
+                        <div class="col-md-1 col-sm-5">
+                            <input id="form-inscription-heure-retour" name="form_inscription_heure_retour" class="form-control pull-left input-hour" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'.">
+                            <p class="input-suffix">h</p>
                         </div>
-
-
-                        <div class="form-group actions text-center">
-                            <div class="col-md-8 col-md-offset-2">
-                                <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-add" value="Enregistrer le nouveau dossier d'inscription">
-                                <span>OU</span>
-                                <a href="/dossiers/" class="reset">Annuler</a>
-                            </div>
+                        <div class="col-md-1 col-sm-5">
+                            <input id="form-inscription-min-retour" name="form_inscription_min_retour" class="form-control input-minute" type="text" data-toggle="tooltip" value="00" title="Renseignez l'heure de rendez-vous pour le retour'.">
                         </div>
+                    </div>
 
-                    </form>
 
-                </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Pique-nique</label>
+                        <div class="col-sm-6">
+                            <label class="radio-inline" for="form-inscription-pique-nique-oui"><input type="radio" class="icheck" name="form_inscription_pique_nique" id="form-inscription-pique-nique-oui" value="1"> Oui</label>
+                            <label class="radio-inline" for="form-inscription-pique-nique-non"><input type="radio" class="icheck" name="form_inscription_pique_nique" id="form-inscription-pique-nique-non" value="0" checked="checked"> Non</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Sac de couchage</label>
+                        <div class="col-sm-6">
+                            <label class="radio-inline" for="form-inscription-sac-oui"><input type="radio" class="icheck" name="form_inscription_sac" id="form-inscription-sac-oui" value="1"> Oui</label>
+                            <label class="radio-inline" for="form-inscription-sac-non"><input type="radio" class="icheck" name="form_inscription_sac" id="form-inscription-sac-non" value="0" checked="checked"> Non</label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-note">Notes</label>
+                        <div class="col-sm-6">
+                            <textarea id="form-inscription-note" name="form_inscription_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de l'inscription."></textarea>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Inscription finalisée</label>
+                        <div class="col-sm-6">
+                            <label class="radio-inline" for="form-inscription-option-oui"><input type="radio" class="icheck" name="form_inscription_option" id="form-inscription-option-oui" value="1"> Oui</label>
+                            <label class="radio-inline" for="form-inscription-option-non"><input type="radio" class="icheck" name="form_inscription_option" id="form-inscription-option-non" value="0" checked="checked"> Non</label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group actions text-center">
+                        <div class="col-md-8 col-md-offset-2">
+                            <input type="hidden" name="submit-add" value="Enregistrer le nouveau dossier d'inscription">
+                            <input type="submit" class="btn btn-primary btn-rad btn-lg" value="Enregistrer le nouveau dossier d'inscription">
+                            <span>OU</span>
+                            <a href="/dossiers/" class="reset">Annuler</a>
+                        </div>
+                    </div>
+
+                </form>
+
             </div>
         </div>
     </div>
+    <div class="col-md-3" style="position:static;">
+        <div id="neo-affix">
+            <div id="allias-submit" class="block-flat bars-widget">
+                <div class="form-group text-center">
+                    <button class="btn btn-primary btn-block btn-rad">Enregistrer le nouveau dossier</button>
+                    <a href="/dossiers/">Annuler</a>
+                </div>
+            </div>
 
+            <!-- <div id="form-nav" class="block-flat bars-widget">
+            </div> -->
+        </div>
+    </div>
 </div>
 
 

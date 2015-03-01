@@ -1,5 +1,4 @@
-
-<?php 
+<?php
 
 $navbar = array(
     'accueil' => array(
@@ -71,6 +70,14 @@ $navbar = array(
         'icon' => 'trash'
     ),
 );
+
+
+    $currentYear = date('Y');
+    for ($i=$currentYear; $i >= 2014 ; $i--) { 
+        $navbar['stats']['submenu']['index/annee/'.$i] =  'Année '.$i;
+    }
+
+
 /*
     'convocations' => array(
         'name' => 'Convocations',

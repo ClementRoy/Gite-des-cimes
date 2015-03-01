@@ -3,7 +3,6 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php $enfant = enfant::get($_GET['id']); ?>
 
-
 <?php // Ajout et mise à jour des commentaires ?>
 <?php if(isset($_POST['submit-note'])): ?>
     <?php  

@@ -130,8 +130,8 @@
                                 }
 
                                 $the_data = [
-                                    '<a href="/dossiers/infos/id/'.$dossier->dossier_id.'">#'.$dossier->dossier_id.'</a>',
-                                    '<a href="/enfants/infos/id/'.$enfant->id.'">'.$enfant->lastname.' '.$enfant->firstname.'</a>'.$popup,
+                                    '<a href="/dossiers/infos/id/'.$dossier->dossier_id.'">#'.$dossier->dossier_id.'</a>'.$popup,
+                                    '<a href="/enfants/infos/id/'.$enfant->id.'">'.$enfant->lastname.' '.$enfant->firstname.'</a>',
                                     $sejours,
                                     $finished,
                                     $supported,

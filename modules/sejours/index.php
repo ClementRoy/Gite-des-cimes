@@ -192,14 +192,14 @@ ob_end_clean(); ?>
                 <table id="datatable-present" class="table table-bordered">
                     <thead>
                         <tr>
-                            <th style="width: 200px;">Nom</th>
-                            <th>Date de début</th>
-                            <th>Date de fin</th>
-                            <th>Lieu</th>
+                            <th width="180">Nom</th>
+                            <th width="150">Date de début</th>
+                            <th width="150">Date de fin</th>
+                            <th width="170">Lieu</th>
                             <th>Nb enfants</th>
-                            <th>Capacité min</th>
-                            <th>Capacité max</th>
-                            <th>Tarif (€)</th>
+                            <th width="80">Capacité</th>
+                            <!-- <th>Capacité max</th> -->
+                            <th width="140">Tarif (€)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -244,6 +244,47 @@ ob_end_clean(); ?>
 
                                         $o = $i + 1;
 
+                                        $total = $nb;
+                                        $total_ok = $total - $opt;
+
+                                        if ($total > $max) {
+                                            $base = $total;
+                                        } else {
+                                            $base = $max;
+                                        }
+
+                                        $pc_nb = $total_ok * 100 / $base;
+                                        $pc_opt = $opt * 100 / $base;
+                                        $pos_min = $min * 100 / $base;
+                                        $pos_max = $max * 100 / $base;
+
+                                        $color = '';
+                                        if ($pc_nb < $pos_min) {
+                                            $color = 'warning';
+                                        } elseif ($pc_nb >= $pos_min && $pc_nb <= $pos_max) {
+                                            $color = 'success';
+                                        } elseif ($pc_nb > $pos_max) {
+                                            $color = 'danger';
+                                        }
+
+                                        if ($nb > 0) {
+                                            $graph = '<div class="progress-tb progress small progress-striped active">';
+                                            $graph .= '<div class="progress-bar progress-bar-'.$color.'" role="progressbar" aria-valuenow="'.$pc_nb.'" aria-valuemin="0" aria-valuemax="'.$min.'" style="width: '.$pc_nb.'%;"></div>';
+                                            if ($opt > 0) {
+                                                $graph .= '<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="'.$opt.'" style="width: '.$pc_opt.'%;"></div>';
+                                            }
+                                            $graph .= '</div>';
+                                        } else {
+                                            $graph = '';
+                                        }
+
+                                        if ($opt > 0) {
+                                            $numbers = '<span class="label label-default label-lg"><strong>'.$total.'</strong></span> / '.$max;
+                                        } else {
+                                            $numbers = '<span class="label label-default label-lg"><strong>'.$total_ok.'</strong></span> / '.$max;
+                                        }
+
+
                                         $popup = '
                                         <ul class="dropdown-menu">
                                             <li><a href="/sejours/infos/id/'.$sejour->id.'#week-'.$o.'" class="item"><i class="fa fa-share"></i> Voir la fiche</a></li>
@@ -252,16 +293,16 @@ ob_end_clean(); ?>
                                         </ul>';
 
                                         if($start_base->getTimestamp() != '-62169987600') {
-                                            $date_from = '<span class="sr-only">'.strftime("%Y%m%d", $start_base->getTimestamp()).'</span> '.strftime("%Y %B %Y", $start_base->getTimestamp());
+                                            $date_from = '<span class="sr-only">'.strftime("%Y%m%d", $start_base->getTimestamp()).'</span> '.strftime("%d %B %Y", $start_base->getTimestamp());
                                         }
 
                                         if($end_base->getTimestamp() != '-62169987600') {
-                                            $date_to = '<span class="sr-only">'.strftime("%Y%m%d",  $end_base->getTimestamp()).'</span> '.strftime("%Y %B %Y", $end_base->getTimestamp());
+                                            $date_to = '<span class="sr-only">'.strftime("%Y%m%d",  $end_base->getTimestamp()).'</span> '.strftime("%d %B %Y", $end_base->getTimestamp());
                                         }
 
                                         if($sejour->ref_hebergement) {
                                             $hebergement = hebergement::get($sejour->ref_hebergement);
-                                            $hebergement = '<a href="/hebergements/infos/id/'.$hebergement->id.'"><span class="label label-default">'.$hebergement->name.'</span></a>';
+                                            $hebergement = '<a href="/hebergements/infos/id/'.$hebergement->id.'">'.$hebergement->name.'</a>';
                                         } else {
                                             $hebergement = EMPTYVAL;
                                         }
@@ -271,10 +312,11 @@ ob_end_clean(); ?>
                                             $date_from,
                                             $date_to,
                                             $hebergement,
-                                            count($inscriptions),
-                                            '<span class="label label-default">'.$sejour->capacity_min.'</span>',
-                                            '<span class="label label-default">'.$sejour->capacity_max.'</span>',
-                                            '<span class="label label-info">'.$sejour->price.'€</span>'
+                                            $graph,
+                                            $numbers,
+                                            // '<span class="label label-default">'.$sejour->capacity_min.'</span>',
+                                            // '<span class="label label-default">'.$sejour->capacity_max.'</span>',
+                                            '<span class="label label-primary label-lg">'.$sejour->price.'€</span>'
                                         ];
 
                                         array_push($the_datas, $the_data);
@@ -297,6 +339,49 @@ ob_end_clean(); ?>
                                         $date_to = strftime("%d %B", $date_to->getTimestamp());
                                     }
 
+
+                                    $total = $nb;
+                                    $total_ok = $total - $opt;
+
+                                    if ($total > $max) {
+                                        $base = $total;
+                                    } else {
+                                        $base = $max;
+                                    }
+
+                                    $pc_nb = $total_ok * 100 / $base;
+                                    $pc_opt = $opt * 100 / $base;
+                                    $pos_min = $min * 100 / $base;
+                                    $pos_max = $max * 100 / $base;
+
+                                    $color = '';
+                                    if ($pc_nb < $pos_min) {
+                                        $color = 'warning';
+                                    } elseif ($pc_nb >= $pos_min && $pc_nb <= $pos_max) {
+                                        $color = 'success';
+                                    } elseif ($pc_nb > $pos_max) {
+                                        $color = 'danger';
+                                    }
+
+                                    if ($nb > 0) {
+                                        $graph = '<div class="progress-tb progress small progress-striped active">';
+                                        $graph .= '<div class="progress-bar progress-bar-'.$color.'" role="progressbar" aria-valuenow="'.$pc_nb.'" aria-valuemin="0" aria-valuemax="'.$min.'" style="width: '.$pc_nb.'%;"></div>';
+                                        if ($opt > 0) {
+                                            $graph .= '<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="'.$opt.'" style="width: '.$pc_opt.'%;"></div>';
+                                        }
+                                        $graph .= '</div>';
+                                    } else {
+                                        $graph = '';
+                                    }
+
+                                    if ($opt > 0) {
+                                        $numbers = '<span class="label label-default label-lg"><strong>'.$total.'</strong></span> / '.$max;
+                                    } else {
+                                        $numbers = '<span class="label label-default label-lg"><strong>'.$total_ok.'</strong></span> / '.$max;
+                                    }
+
+
+
                                     $popup = '
                                     <ul class="dropdown-menu">
                                         <li><a href="/sejours/infos/id/'.$sejour->id.'" class="item"><i class="fa fa-share"></i> Voir la fiche</a></li>
@@ -316,7 +401,7 @@ ob_end_clean(); ?>
 
                                     if($sejour->ref_hebergement) {
                                         $hebergement = hebergement::get($sejour->ref_hebergement);
-                                        $hebergement = '<a href="/hebergements/infos/id/'.$hebergement->id.'"><span class="label label-default">'.$hebergement->name.'</span></a>';
+                                        $hebergement = '<a href="/hebergements/infos/id/'.$hebergement->id.'">'.$hebergement->name.'</a>';
                                     }else {
                                         $hebergement = EMPTYVAL;
                                     }
@@ -326,10 +411,11 @@ ob_end_clean(); ?>
                                     $date_from,
                                     $date_to,
                                     $hebergement,
-                                    count($inscriptions),
-                                    '<span class="label label-default">'.$sejour->capacity_min.'</span>',
-                                    '<span class="label label-default">'.$sejour->capacity_max.'</span>',
-                                    '<span class="label label-info">'.$sejour->price.'€</span>'
+                                    $graph,
+                                    $numbers,
+                                    // '<span class="label label-default">'.$sejour->capacity_min.'</span>',
+                                    // '<span class="label label-default">'.$sejour->capacity_max.'</span>',
+                                    '<span class="label label-primary label-lg">'.$sejour->price.'€</span>'
                                     ];
 
                                     array_push($the_datas, $the_data);
@@ -368,13 +454,13 @@ ob_end_clean(); ?>
                 <table class="table table-bordered" id="datatable-past">
                     <thead>
                         <tr>
-                            <th style="width: 200px;">Nom</th>
+                            <th>Nom</th>
                             <th>Date de début</th>
                             <th>Date de fin</th>
                             <th>Lieu</th>
                             <th>Nb enfants</th>
-                            <th>Capacité min</th>
-                            <th>Capacité max</th>
+                            <th>Capacité</th>
+                            <!-- <th>Capacité max</th> -->
                             <th>Tarif (€)</th>
                         </tr>
                     </thead>
@@ -421,6 +507,46 @@ ob_end_clean(); ?>
 
                                         $o = $i + 1;
 
+                                        $total = $nb;
+                                        $total_ok = $total - $opt;
+
+                                        if ($total > $max) {
+                                            $base = $total;
+                                        } else {
+                                            $base = $max;
+                                        }
+
+                                        $pc_nb = $total_ok * 100 / $base;
+                                        $pc_opt = $opt * 100 / $base;
+                                        $pos_min = $min * 100 / $base;
+                                        $pos_max = $max * 100 / $base;
+
+                                        $color = '';
+                                        if ($pc_nb < $pos_min) {
+                                            $color = 'warning';
+                                        } elseif ($pc_nb >= $pos_min && $pc_nb <= $pos_max) {
+                                            $color = 'success';
+                                        } elseif ($pc_nb > $pos_max) {
+                                            $color = 'danger';
+                                        }
+
+                                        if ($nb > 0) {
+                                            $graph = '<div class="progress-tb progress small progress-striped active">';
+                                            $graph .= '<div class="progress-bar progress-bar-'.$color.'" role="progressbar" aria-valuenow="'.$pc_nb.'" aria-valuemin="0" aria-valuemax="'.$min.'" style="width: '.$pc_nb.'%;"></div>';
+                                            if ($opt > 0) {
+                                                $graph .= '<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="'.$opt.'" style="width: '.$pc_opt.'%;"></div>';
+                                            }
+                                            $graph .= '</div>';
+                                        } else {
+                                            $graph = '';
+                                        }
+
+                                        if ($opt > 0) {
+                                            $numbers = '<span class="label label-default label-lg"><strong>'.$total.'</strong></span> / '.$max;
+                                        } else {
+                                            $numbers = '<span class="label label-default label-lg"><strong>'.$total_ok.'</strong></span> / '.$max;
+                                        }
+
                                         $popup = '
                                         <ul class="dropdown-menu">
                                             <li><a href="/sejours/infos/id/'.$sejour->id.'#week-'.$o.'" class="item"><i class="fa fa-share"></i> Voir la fiche</a></li>
@@ -429,16 +555,16 @@ ob_end_clean(); ?>
                                         </ul>';
 
                                         if($start_base->getTimestamp() != '-62169987600') {
-                                            $date_from = '<span class="sr-only">'.strftime("%Y%m%d", $start_base->getTimestamp()).'</span> '.strftime("%Y %B %Y", $start_base->getTimestamp());
+                                            $date_from = '<span class="sr-only">'.strftime("%Y%m%d", $start_base->getTimestamp()).'</span> '.strftime("%d %B %Y", $start_base->getTimestamp());
                                         }
 
                                         if($end_base->getTimestamp() != '-62169987600') {
-                                            $date_to = '<span class="sr-only">'.strftime("%Y%m%d",  $end_base->getTimestamp()).'</span> '.strftime("%Y %B %Y", $end_base->getTimestamp());
+                                            $date_to = '<span class="sr-only">'.strftime("%Y%m%d",  $end_base->getTimestamp()).'</span> '.strftime("%d %B %Y", $end_base->getTimestamp());
                                         }
 
                                         if($sejour->ref_hebergement) {
                                             $hebergement = hebergement::get($sejour->ref_hebergement);
-                                            $hebergement = '<a href="/hebergements/infos/id/'.$hebergement->id.'"><span class="label label-default">'.$hebergement->name.'</span></a>';
+                                            $hebergement = '<a href="/hebergements/infos/id/'.$hebergement->id.'">'.$hebergement->name.'</a>';
                                         } else {
                                             $hebergement = EMPTYVAL;
                                         }
@@ -448,10 +574,11 @@ ob_end_clean(); ?>
                                             $date_from,
                                             $date_to,
                                             $hebergement,
-                                            count($inscriptions),
-                                            '<span class="label label-default">'.$sejour->capacity_min.'</span>',
-                                            '<span class="label label-default">'.$sejour->capacity_max.'</span>',
-                                            '<span class="label label-info">'.$sejour->price.'€</span>'
+                                            $graph,
+                                            $numbers,
+                                            // '<span class="label label-default">'.$sejour->capacity_min.'</span>',
+                                            // '<span class="label label-default">'.$sejour->capacity_max.'</span>',
+                                            '<span class="label label-primary label-lg">'.$sejour->price.'€</span>'
                                         ];
 
                                         array_push($the_datas, $the_data);
@@ -474,6 +601,47 @@ ob_end_clean(); ?>
                                         $date_to = strftime("%d %B", $date_to->getTimestamp());
                                     }
 
+                                    $total = $nb;
+                                    $total_ok = $total - $opt;
+
+                                    if ($total > $max) {
+                                        $base = $total;
+                                    } else {
+                                        $base = $max;
+                                    }
+
+                                    $pc_nb = $total_ok * 100 / $base;
+                                    $pc_opt = $opt * 100 / $base;
+                                    $pos_min = $min * 100 / $base;
+                                    $pos_max = $max * 100 / $base;
+
+                                    $color = '';
+                                    if ($pc_nb < $pos_min) {
+                                        $color = 'warning';
+                                    } elseif ($pc_nb >= $pos_min && $pc_nb <= $pos_max) {
+                                        $color = 'success';
+                                    } elseif ($pc_nb > $pos_max) {
+                                        $color = 'danger';
+                                    }
+
+                                    if ($nb > 0) {
+                                        $graph = '<div class="progress-tb progress small progress-striped active">';
+                                        $graph .= '<div class="progress-bar progress-bar-'.$color.'" role="progressbar" aria-valuenow="'.$pc_nb.'" aria-valuemin="0" aria-valuemax="'.$min.'" style="width: '.$pc_nb.'%;"></div>';
+                                        if ($opt > 0) {
+                                            $graph .= '<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="'.$opt.'" style="width: '.$pc_opt.'%;"></div>';
+                                        }
+                                        $graph .= '</div>';
+                                    } else {
+                                        $graph = '';
+                                    }
+
+                                    if ($opt > 0) {
+                                        $numbers = '<span class="label label-default label-lg"><strong>'.$total.'</strong></span> / '.$max;
+                                    } else {
+                                        $numbers = '<span class="label label-default label-lg"><strong>'.$total_ok.'</strong></span> / '.$max;
+                                    }
+
+
                                     $popup = '
                                     <ul class="dropdown-menu">
                                         <li><a href="/sejours/infos/id/'.$sejour->id.'" class="item"><i class="fa fa-share"></i> Voir la fiche</a></li>
@@ -493,7 +661,7 @@ ob_end_clean(); ?>
 
                                     if($sejour->ref_hebergement) {
                                         $hebergement = hebergement::get($sejour->ref_hebergement);
-                                        $hebergement = '<a href="/hebergements/infos/id/'.$hebergement->id.'"><span class="label label-default">'.$hebergement->name.'</span></a>';
+                                        $hebergement = '<a href="/hebergements/infos/id/'.$hebergement->id.'">'.$hebergement->name.'</a>';
                                     }else {
                                         $hebergement = EMPTYVAL;
                                     }
@@ -503,10 +671,11 @@ ob_end_clean(); ?>
                                     $date_from,
                                     $date_to,
                                     $hebergement,
-                                    count($inscriptions),
-                                    '<span class="label label-default">'.$sejour->capacity_min.'</span>',
-                                    '<span class="label label-default">'.$sejour->capacity_max.'</span>',
-                                    '<span class="label label-info">'.$sejour->price.'€</span>'
+                                    $graph,
+                                    $numbers,
+                                    // '<span class="label label-default">'.$sejour->capacity_min.'</span>',
+                                    // '<span class="label label-default">'.$sejour->capacity_max.'</span>',
+                                    '<span class="label label-primary label-lg">'.$sejour->price.'€</span>'
                                     ];
 
                                     array_push($the_datas, $the_data);

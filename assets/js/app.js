@@ -24,7 +24,77 @@ function testing(testingString) {
         $form.find('input[type="radio"][name="' + val + '"]').iCheck('uncheck').eq(testingString-1).iCheck('check');
     });
 }
+
+function neoAffix(elem, marginTop, marginBottom, breakpoint) {
+
+    var $elem = elem,
+        offsetTop = $elem.offset().top,
+        elemHeight = $elem.outerHeight(),
+        elemWidth = $elem.outerWidth(),
+        documentHeight = $(document).height();
+        $window = $(window);
+
+    if (typeof $elem.data('width') !== undefined) {
+        $elem.attr('data-width', elemWidth);
+    }
+
+
+    function neoProcessing(){
+        scrollTop = $window.scrollTop();
+
+        if ($window.width() <= breakpoint) { return false; }
+
+        if (scrollTop >= offsetTop - marginTop) {
+            var nearBottom = elemHeight + marginTop +  scrollTop + marginBottom;
+            if ( nearBottom >= documentHeight ) {
+                $elem.removeClass('neoaffix').addClass('neoaffix-bottom').css('width', elemWidth);
+            } else {
+                $elem.removeClass('neoaffix-top neoaffix-bottom').addClass('neoaffix').css('width', elemWidth);
+            }
+        } else {
+            $elem.removeClass('neoaffix').addClass('neoaffix-top');
+        }            
+    }
+
+    $window.scroll(function () {
+        neoProcessing();
+    });
+
+    neoProcessing();
+
+    $window.resize(function(event) {
+        $elem.removeAttr('style').removeClass('neoaffix-top neoaffix');
+        elemWidth = $elem.outerWidth();
+        $elem.attr('data-width', elemWidth);
+        neoProcessing();
+    });
+}
+
+
 $(function() {
+
+    $('#form-nav').on('click', 'a', function (event) {
+        event.preventDefault();
+
+        var href = $(this).attr('href'),
+            pos = $(href).offset().top - 200;
+
+        $("html, body").stop().animate({
+            scrollTop: pos
+        });
+
+        $(href).focus();
+        return false;
+    });
+    
+    if ($('#neo-affix').length > 0) {
+        neoAffix($('#neo-affix'), 30, 98, 992);
+    }
+    $('#allias-submit').on('click', 'button', function(event) {
+        event.preventDefault();
+        $('.block-flat form').submit();
+    });
+
     window.ParsleyValidator.setLocale('fr');
     if($('form').length > 0) {   
         $('form').parsley();
@@ -56,12 +126,12 @@ $(function() {
             $posX = event.pageX - offset.left - 20,
             $posY = event.pageY - offset.top + 10,
             $menu = $(this).find('.dropdown-menu');
-        
+
         $menus.stop().fadeOut(50);
         $menu.addClass('is-visible').css({
             top: $posY,
             left: $posX,
-        }).stop().fadeIn(300);
+        }).stop().fadeIn(150);
     });
     $('body').on('click', function () {
         if ($('.dropdown-menu.is-visible').length > 0) {

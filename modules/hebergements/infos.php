@@ -97,7 +97,7 @@
         </div>
         <div class="col-md-4 text-right">
             <!-- <a href="#" data-toggle="modal" data-target="#modal-remove" class="item">Supprimer cette fiche</a> -->
-            <a href="/hebergements/editer/id/<?=$hebergement->id; ?>" class="btn btn-primary btn-rad">Modifier cette fiche</a>
+            <a href="/hebergements/editer/id/<?=$hebergement->id; ?>" class="btn btn-primary btn-rad">Modifier cet hébergement</a>
         </div>
     </div>
 </div>

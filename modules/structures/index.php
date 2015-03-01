@@ -105,7 +105,6 @@ var the_datas = [];
 <?php foreach ($the_json as $key => $value): ?>
 the_datas.push(<?=json_encode($the_json[$key]);?>);
 <?php endforeach; ?>
-
 $('#datatable').dataTable({
     "bProcessing": true,
     "bDeferRender": true,
