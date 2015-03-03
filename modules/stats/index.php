@@ -99,6 +99,23 @@
     </div>
 </div>
 
+                            ?>
+                            <?php if($result2->nb > 0): ?>
+                            <tr>
+                                <td>
+                                    <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name; ?></a>
+                                </td>
+                                <td>
+                                    <?=$result2->nb ?>                                      
+                                </td>                                    
+                            </tr>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p><em>Cette corbeille est vide</em></p>
+            <?php endif; ?> 
 
 <div class="row">
     
