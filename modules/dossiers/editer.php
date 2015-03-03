@@ -5,7 +5,7 @@
 
 
 <?php $dossier = dossier::get($_GET['id']); ?>
-<?php print_r($dossier); ?>
+
 <!-- Page title -->
 <div class="page-head">
     <div class="row">

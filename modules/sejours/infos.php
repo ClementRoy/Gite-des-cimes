@@ -402,7 +402,7 @@
                             </div>
                             <?php ob_start(); ?>
                             <script>
-                                $('#datatable-<?=$o; ?>').dataTable({
+                                var table<?=$o; ?> = $('#datatable-<?=$o; ?>').dataTable({
                                     'bFilter': true,
                                     // 'bLengthChange': false,
                                     'iDisplayLength': 20,
@@ -416,6 +416,31 @@
                                         }
                                     }
                                 });
+
+                                 table<?=$o; ?>.$('[data-toggle=popover]').popover({
+                                    trigger:"click",
+                                    html: true,
+                                    placement: 'top',
+                                    container: 'body',
+                                    content: '<div class="popover-form clearfix"><form action="" method="post"><div class="form-group"><textarea class="form-control" name="note_message" cols="50" rows="5" placeholder="Entrez un commentaire"></textarea></div> <div class="pull-right"><a href="#" class="btn btn-default btn-sm btn-close">Annuler</a><button type="submit" name="submit-note" class="btn btn-primary btn-sm sumbit-comment">Enregistrer</button></div></form></div>'
+                                })
+                                 .on('click', function (e) {
+                                    e.preventDefault();
+                                    $('[data-toggle=popover]').not(this).popover('hide');
+                                })
+                                 .on('show.bs.popover', function () {
+                                    var note = $(this).data('note');
+                                    var note_id = $(this).data('note-id');
+                                    var ref_sejour = $(this).data('ref-sejour');
+                                    var ref_enfant = $(this).data('ref-enfant');
+                                    setTimeout(function() {
+                                        $('body').find('.popover:last-child').find('form').prepend('<input type="hidden" name="note_ref_sejour" value="'+ref_sejour+'">');
+                                        $('body').find('.popover:last-child').find('form').prepend('<input type="hidden" name="note_ref_enfant" value="'+ref_enfant+'">');
+                                        $('body').find('.popover:last-child').find('form').prepend('<input type="hidden" name="note_id" value="'+note_id+'">');
+                                        $('body').find('.popover:last-child').find('textarea').text(note);
+                                    }, 1);
+                                });
+
                             </script>
                             <?php $scripts .= ob_get_contents();
                             ob_end_clean(); ?>
@@ -784,29 +809,7 @@
 <script>
     $(function () {
 
-        $('[data-toggle=popover]').popover({
-            trigger:"click",
-            html: true,
-            placement: 'top',
-            container: 'body',
-            content: '<div class="popover-form clearfix"><form action="" method="post"><div class="form-group"><textarea class="form-control" name="note_message" cols="50" rows="5" placeholder="Entrez un commentaire"></textarea></div> <div class="pull-right"><a href="#" class="btn btn-default btn-sm btn-close">Annuler</a><button type="submit" name="submit-note" class="btn btn-primary btn-sm sumbit-comment">Enregistrer</button></div></form></div>'
-        });
-        $('[data-toggle=popover]').on('show.bs.popover', function () {
-            var note = $(this).data('note');
-            var note_id = $(this).data('note-id');
-            var ref_sejour = $(this).data('ref-sejour');
-            var ref_enfant = $(this).data('ref-enfant');
-            setTimeout(function() {
-                $('body').find('.popover:last-child').find('form').prepend('<input type="hidden" name="note_ref_sejour" value="'+ref_sejour+'">');
-                $('body').find('.popover:last-child').find('form').prepend('<input type="hidden" name="note_ref_enfant" value="'+ref_enfant+'">');
-                $('body').find('.popover:last-child').find('form').prepend('<input type="hidden" name="note_id" value="'+note_id+'">');
-                $('body').find('.popover:last-child').find('textarea').text(note);
-            }, 1);
-        });
-        $('[data-toggle=popover]').on('click', function (e) {
-            e.preventDefault();
-            $('[data-toggle=popover]').not(this).popover('hide');
-        });
+
         $('body').on('click', '.btn-close', function (e) {
             e.preventDefault();
             $('[data-toggle=popover]').popover('hide');
