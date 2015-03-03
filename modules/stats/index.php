@@ -144,11 +144,8 @@
                                 <td>
                                     <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name; ?></a>
                                 </td>
-                                <!--<td>
-                                    <?=$result2->nb ?>
-                                </td>-->
                                 <td>
-                                    <?=$result->nb ?>                                      
+                                    <?=$result2->nb ?>                                      
                                 </td>                                    
                             </tr>
                             <?php endif; ?>
