@@ -18,7 +18,7 @@
 
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-9">
         <div class="block-flat">
             <div class="content">
                 <form id="form-add-sejour" method="post" action="/sejours/infos/id/<?=$id ?>"  class="form-horizontal group-border-dashed maped-form" data-parsley-validate  enctype="multipart/form-data">
@@ -122,9 +122,7 @@
 
 
                     <div class="form-group">
-                        <div class="clearfix">
-                            <h5 class="col-sm-4 control-info">Aulnay sous bois, au Parking d'Intermarché : </h5>
-                        </div>
+                        <h5 class="control-info">Aulnay sous bois, au Parking d'Intermarché : </h5>
 
                         <div class="row">
                             <label class="col-md-4 control-label" for="form-inscription-heure-aller-1">Heure de rendez-vous à l'aller</label>
@@ -152,9 +150,7 @@
 
 
                     <div class="form-group">
-                        <div class="clearfix">
-                            <h5 class="col-sm-4 control-info">Aulnay-sous-Bois, au RER :</h5>
-                        </div>
+                        <h5 class="control-info">Aulnay-sous-Bois, au RER :</h5>
 
                         <div class="row">
                             <label class="col-md-4 control-label" for="form-inscription-heure-aller-2">Heure de rendez-vous à l'aller</label>
@@ -182,9 +178,7 @@
 
 
                     <div class="form-group">
-                        <div class="clearfix">
-                            <h5 class="col-sm-4 control-info">Bonneuil en Valois, au Gite :</h5>
-                        </div>
+                        <h5 class="control-info">Bonneuil en Valois, au Gite :</h5>
 
                         <div class="row">
                             <label class="col-md-4 control-label" for="form-inscription-heure-aller-3">Heure de rendez-vous à l'aller</label>
@@ -211,7 +205,8 @@
 
                     <div class="form-group actions text-center">
                         <div class="col-md-8 col-md-offset-2">
-                            <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-add" value="Ajouter le séjour">
+                            <input type="hidden" name="submit-add" value="Enregister le nouveau séjour">
+                            <input type="submit" class="btn btn-primary btn-rad btn-lg" value="Enregister le nouveau séjour">
                             <span>OU</span>
                             <a href="/sejours/" class="reset">Annuler</a>
                         </div>
@@ -219,6 +214,31 @@
 
                 </form>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3" style="position:static;">
+        <div id="neo-affix">
+            <div id="allias-submit" class="block-flat bars-widget">
+                <div class="form-group text-center">
+                    <button class="btn btn-primary btn-block btn-rad">Enregister le nouveau séjour</button>
+                    <a href="/sejours/">Annuler</a>
+                </div>
+            </div>
+
+            <div id="form-nav" class="block-flat bars-widget">
+                <h4>Vue d'ensemble</h4>
+                <ul class="nav form-map">
+                    <li><a href="#form-sejour-name">Nom du séjour</a></li>
+                    <li><a href="#form-sejour-date-debut">Dates</a></li>
+                    <li><a href="#form-sejour-hebergement-select">Hébergement</a></li>
+                    <li><a href="#form-sejour-capacite-min">Capacité</a></li>
+                    <li><a href="#form-sejour-numero">Numéro (Jeunesse & Sport)</a></li>
+                    <li><a href="#form-sejour-prix">Prix unitaire</a></li>
+                    <li><a href="#form-sejour-accompagnateur-1">Directeur du séjour</a></li>
+                    <li><a href="#form-inscription-heure-aller-1">Heures de rendez-vous</a></li>
+                </ul>
             </div>
         </div>
     </div>

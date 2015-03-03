@@ -23,11 +23,7 @@
 
 <?php if (isset($_POST['id']) && $_POST['action'] == 'supprimer' && $_POST['confirm'] == true): ?>
     <?php $accompagnateur = accompagnateur::get($_POST['id']); ?>
-    <div class="alert alert-success rounded">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <i class="fa fa-check sign"></i><strong>C'est fait !</strong> La fiche de l'accompagnateur <strong><?=$accompagnateur->firstname ?> <?=$accompagnateur->lastname ?></strong> a bien été supprimée !
-    </div>
-
+    <?php tpl::alert('success', 'La fiche de l\'accompagnateur <strong>'.$accompagnateur->firstname.' '.$accompagnateur->lastname.'</strong> a bien été supprimée !') ?>
     <?php accompagnateur::remove($_POST['id']); ?>
 <?php endif; ?>
 

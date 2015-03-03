@@ -14,7 +14,7 @@
         <div class="fd-tile detail tile-purple">
             <div class="content"><h1 class="text-left odometer" id="number-enfants">0</h1><p>enfants dans la base</p></div>
             <div class="icon"><i class="fa fa-group"></i></div>
-            <a class="details" href="#">Tout voir <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+            <a class="details" href="/enfants/">Tout voir <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
         </div>
     </div>
 
@@ -22,7 +22,7 @@
         <div class="fd-tile detail tile-orange">
             <div class="content"><h1 class="text-left odometer" id="number-sejours">0</h1><p>séjours dans la base</p></div>
             <div class="icon"><i class="fa fa-plane"></i></div>
-            <a class="details" href="#">Tout voir <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+            <a class="details" href="/sejours/">Tout voir <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
         </div>
     </div>
 
@@ -30,7 +30,7 @@
         <div class="fd-tile detail tile-prusia">
             <div class="content"><h1 class="text-left odometer" id="number-structures">0</h1><p>structures dans la base</p></div>
             <div class="icon"><i class="fa fa-building"></i></div>
-            <a class="details" href="#">Tout voir <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+            <a class="details" href="/structures/">Tout voir <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
         </div>
     </div>
 
@@ -38,7 +38,7 @@
         <div class="fd-tile detail tile-lemon">
             <div class="content"><h1 class="text-left odometer" id="number-dossiers">0</h1><p>inscriptions dans la base</p></div>
             <div class="icon"><i class="fa fa-folder-open"></i></div>
-            <a class="details" href="#">Tout voir <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+            <a class="details" href="/dossiers/">Tout voir <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
         </div>
     </div>
 </div>
@@ -59,7 +59,7 @@
         <div class="block-flat tb-special tb-no-options">
             <div class="content">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="datatable">
+                    <table class="table table-bordered" id="datatable1">
                         <thead>
                             <tr>
                                 <th>Nom de l'enfant</th>
@@ -72,27 +72,47 @@
                             <?php foreach ($notSupported as $key => $notSupportedDossier): ?>
                                 <?php
                                     $enfant = enfant::get($notSupportedDossier->ref_enfant);
-                                    $structure = structure::get($notSupportedDossier->ref_structure_payer);
+                                    // $structure = structure::get($notSupportedDossier->ref_structure_payer);
                                     $inscription = inscription::getByDossier($notSupportedDossier->id);
-
-                                    $date_from = new DateTime($inscription[0]->date_from);
-                                    if($date_from->getTimestamp() != '-62169987600') {
-                                        $date_from = '<span class="sr-only">'.strftime("%Y%m%d", $date_from->getTimestamp()).'</span> '.strftime("%d %B %Y", $date_from->getTimestamp());
-                                    }
-
-                                    $date_to = new DateTime($inscription[0]->date_to);
-                                    if($date_to->getTimestamp() != '-62169987600') {
-                                        $date_to = strftime("%Y%m%d", $date_to->getTimestamp()).'</span> '.strftime("%d %B %Y", $date_to->getTimestamp());
-                                    }
-
-                                    $sejour = sejour::get($inscription[0]->ref_sejour);
                                 ?>
-                                <tr>
-                                    <td><?=$enfant->firstname?> <?=$enfant->lastname?></td>
-                                    <td><a href="/sejours/infos/<?=$sejour->id; ?>"><?=$sejour->name; ?></a></td>
-                                    <td><?=$date_from; ?></td>
-                                </tr>
-                            <?php endforeach ?>
+                                <?php if ( count($inscription) > 1): ?>
+                                    <?php
+                                        $date_from = new DateTime($inscription[0]->date_from);
+                                        if($date_from->getTimestamp() != '-62169987600') {
+                                            $week = 60 * 60 * 24 * 7;
+                                            $alert = '';
+                                            if (($week * 2 + time()) >= $date_from->getTimestamp()) {
+                                                $alert = '<span class="label label-primary" style="padding:3px 6px 4px;float:left;display:block;margin-top:1px;margin-right:8px;">Bientôt</span> ';
+                                            }
+                                            if (($week + time()) >= $date_from->getTimestamp()) {
+                                                $alert = '<span class="label label-danger" style="padding:3px 6px 4px;float:left;display:block;margin-top:1px;margin-right:8px;">Urgent</span> ';
+                                            }
+                                            $date_from = '<span class="sr-only">'.strftime("%Y/%m/%d", $date_from->getTimestamp()).'</span> '.$alert.strftime("%d %B %Y", $date_from->getTimestamp());
+                                        }
+
+                                        
+
+                                        $date_to = new DateTime($inscription[0]->date_to);
+                                        if($date_to->getTimestamp() != '-62169987600') {
+                                            $date_to = strftime("%Y/%m/%d", $date_to->getTimestamp()).'</span> '.strftime("%d %B %Y", $date_to->getTimestamp());
+                                        }
+
+                                        $sejour = sejour::get($inscription[0]->ref_sejour);
+
+                                        $popup = '
+                                            <ul class="dropdown-menu">
+                                                <li><a href="/sejours/infos/id/'.$sejour->id.'" class="item"><i class="fa fa-share"></i> Voir le séjour</a></li>
+                                                <li><a href="/dossiers/infos/id/'.$notSupportedDossier->id.'" class="item"><i class="fa fa-share"></i> Voir le dossier</a></li>
+                                                <li><a href="/dossiers/editer/id/'.$notSupportedDossier->id.'" class="item"><i class="fa fa-edit"></i> Modifier l\'inscription</a></li>
+                                            </ul>';
+                                    ?>
+                                    <tr>
+                                        <td><a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname?> <?=$enfant->lastname?></a><?=$popup; ?></td>
+                                        <td><a href="/sejours/infos/<?=$sejour->id; ?>"><?=$sejour->name; ?></a></td>
+                                        <td><?=$date_from; ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -158,7 +178,7 @@
                             ?>
 
                             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                <div class="block-flat">
+                                <div class="block-flat block-piechart">
                                     <div class="content text-center">
                                         <div class="epie-chart" data-barcolor="<?=$colors[$y]?>" data-trackcolor="#F3F3F3" data-percent="<?=100 * $nb / $sejour->capacity_max; ?>">
                                             <span>
@@ -199,7 +219,7 @@
                         ?>
 
                             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                <div class="block-flat">
+                                <div class="block-flat block-piechart">
                                     <div class="content text-center">
                                         <div class="epie-chart" data-barcolor="<?=$colors[$y]?>" data-trackcolor="#F3F3F3" data-percent="<?=100 * $nb / $sejour->capacity_max; ?>">
                                             <span>
@@ -235,10 +255,15 @@
 
 
 <?php ob_start(); ?>
-<script type="text/javascript" src="/assets/js/libs/jquery.easy-pie-chart.min.js"></script>
-<script type="text/javascript" src="/assets/js/libs/odometer.min.js"></script>
+<?php if (APP_VERSION != 'dev'): ?>
+    <script type="text/javascript" src="/assets/js/dashboard.min.js"></script>
+<?php else: ?>
+    <script type="text/javascript" src="/assets/js/libs/jquery.easy-pie-chart.min.js"></script>
+    <script type="text/javascript" src="/assets/js/libs/odometer.min.js"></script>
+<?php endif; ?>
 <script>
     $(function() {
+
         $('.epie-chart').easyPieChart({
             easing: 'easeOutBounce',
             size: 140,
@@ -248,7 +273,6 @@
 
         setTimeout(function() {
             $('#number-enfants').text('<?php echo count(enfant::getList()); ?>');
-            // $('#number-contacts').text('<?php echo count(contact::getList()); ?>');
         }, 10);
         setTimeout(function() {
             $('#number-sejours').text('<?php echo count(sejour::getList()); ?>');
@@ -260,9 +284,10 @@
             $('#number-dossiers').text('<?php echo count(dossier::getList()); ?>');
         }, 900);
 
-        $('#datatable').DataTable({
+        $('#datatable1').DataTable({
             "bFilter": false,
             "bLengthChange": false,
+            "iDisplayLength": 1000,
             "oLanguage": {
                 "sInfo": "_START_ - _END_ sur _TOTAL_ ",
                 "oPaginate": {
@@ -271,7 +296,8 @@
                     "sNext": "",
                     "sLast": ""
                 }
-            }
+            },
+            "aaSorting": [[ 2, "asc" ]]
         });
     });
 </script>

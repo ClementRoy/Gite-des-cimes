@@ -30,15 +30,13 @@
         }
     ?>
     <?php if ($result): ?>
-        <div class="alert alert-success rounded">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <i class="fa fa-check-sign"></i><strong>C'est fait !</strong> Le commentaire a bien été enregistré.
-        </div>
+
+        <?php tpl::alert('success', 'Le commentaire a bien été enregistré.'); ?>
+
     <?php else: ?>
-        <div class="alert alert-danger rounded">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <i class="fa fa-times-circle sign"></i><strong>Erreur !</strong> Une erreur s'est produite durant l'enregistrement du commentaire =(
-        </div>
+
+        <?php tpl::alert('danger', 'Une erreur s\'est produite durant l\'enregistrement du commentaire =('); ?>
+
     <?php endif; ?>
 
 <?php endif; ?>
@@ -80,43 +78,11 @@
 
     <?php if ($result): ?>
 
-        <div class="title">
-            <div class="row header">
-                <div class="col-md-12">
-                    <h1>Ajouter un séjour</h1>
-                </div>
-            </div>
-        </div>
-        <div class="content action-page">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        Le séjour <strong><?=$form_sejour_name; ?></strong> a bien été ajouté
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php tpl::alert('success', 'Le séjour <strong>'.$form_sejour_name.' </strong> a bien été créé. <a href="/sejours/">Retourner à la liste des séjours</a>'); ?>
 
     <?php else: ?>
 
-        <div class="title">
-            <div class="row header">
-                <div class="col-md-12">
-                    <h1>Ajouter un séjour</h1>
-                </div>
-            </div>
-        </div>
-        <div class="content action-page">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant l'ajout du séjour, veuillez réessayer
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php tpl::alert('danger', ' Une erreur s\'est produite durant la création du séjour, veuillez réessayer. <a href="/sejours/ajouter/">Retourner au formulaire d\'ajout</a>'); ?>
 
     <?php endif; ?>
 
@@ -159,16 +125,13 @@
     ?>
 
     <?php if ($result): ?>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-info">
-                    <i class="icon-exclamation-sign"></i>
-                    Le séjour <strong><?=$form_sejour_name; ?></strong> a bien été modifié.
-                </div>
-                <a href="/sejours/">Retourner à la liste des séjours</a>
 
-            </div>
-        </div>
+        <?php tpl::alert('success', ' Le séjour <strong>'.$form_sejour_name.'</strong> a bien été modifié. <a href="/sejours/">Retourner à la liste des séjours</a>'); ?>
+
+    <?php else: ?>
+
+        <?php tpl::alert('danger', ' Une erreur s\'est produite durant la modification du séjour, veuillez réessayer. <a href="/sejours/editer/'.$_GET['id'].'">Retourner au formulaire de modification</a>'); ?>
+
     <?php endif; ?>
 
 <?php endif; ?>
@@ -216,7 +179,7 @@
         </div>
         <div class="col-md-4 text-right">
             <!-- <a href="#" data-toggle="modal" data-target="#modal-remove" class="item">Supprimer cette fiche</a> -->
-            <a href="/sejours/editer/id/<?=$sejour->id; ?>" class="btn btn-primary btn-rad">Modifier cette fiche</a>
+            <a href="/sejours/editer/id/<?=$sejour->id; ?>" class="btn btn-primary btn-rad">Modifier ce séjour</a>
         </div>
     </div>
 </div>

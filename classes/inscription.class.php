@@ -33,7 +33,7 @@ class inscription
                         );
         $sql = 'SELECT * FROM '.self::$table.' WHERE ref_dossier=:id';
         $result = $db->query($sql, $params);
-        return $result;        
+        return $result;
     }
 
 
@@ -45,7 +45,7 @@ class inscription
         $sql = 'SELECT DISTINCT ref_sejour FROM '.self::$table.' WHERE ref_dossier=:id ORDER BY date_from';
         //echo $sql;
         $result = $db->query($sql, $params);
-        return $result;        
+        return $result;
     }
 
     public static function getByEnfant($id){
@@ -55,7 +55,7 @@ class inscription
                         );
         $sql = 'SELECT * FROM '.self::$table.' WHERE ref_enfant=:id ORDER BY date_from DESC';
         $result = $db->query($sql, $params);
-        return $result;        
+        return $result;
     }
 
 
@@ -66,7 +66,7 @@ class inscription
                         );
         $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:id';
         $result = $db->query($sql, $params);
-        return $result;        
+        return $result;
     }
 
     public static function getBySejourAndDossier($sejour_id, $dossier_id){
@@ -77,7 +77,7 @@ class inscription
                         );
         $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:sejour_id AND ref_dossier = :dossier_id';
         $result = $db->query($sql, $params);
-        return $result;        
+        return $result;
     }
 
     public static function getBySejourAndEnfant($sejour_id, $enfant_id){
@@ -88,7 +88,7 @@ class inscription
                         );
         $sql = 'SELECT * FROM '.self::$table.' WHERE ref_sejour=:sejour_id AND ref_enfant = :enfant_id';
         $result = $db->query($sql, $params);
-        return $result;        
+        return $result;
     }
 
 
@@ -136,6 +136,19 @@ class inscription
         return $result;
     }
 
+    public static function getInscriptionBySeason($from, $to ){
+        global $db;
+        $number = 0;
+        $from = $from->format("Y-m-d H:i:s");
+        $to = $to->format("Y-m-d H:i:s");
+
+        // SELECT * FROM `inscription` WHERE `date_from` >= "'.$from.'" AND `date_to` <= "'.$to.'"'
+        $params = array();
+        $sql = "SELECT * FROM `inscription` WHERE `date_from` >= '".$from."' AND `date_to` <= '".$to."'";
+
+        $result = $db->query($sql, $params);
+        return $result;
+    }
 
     public static function getBySejourBetweenDatesFinished($id, $date_from = false, $date_to = false){
         global $db;

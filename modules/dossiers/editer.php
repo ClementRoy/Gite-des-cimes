@@ -5,6 +5,7 @@
 
 
 <?php $dossier = dossier::get($_GET['id']); ?>
+<?php print_r($dossier); ?>
 <!-- Page title -->
 <div class="page-head">
     <div class="row">
@@ -16,299 +17,310 @@
 <!-- /Page title -->
 
 
-<div class="title">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="block-flat">
-                <div class="content">
-                    <form id="form-edit-dossier" method="post" action="/dossiers/infos/id/<?=$dossier->id ?>" class="form-horizontal group-border-dashed maped-form" data-parsley-validate enctype="multipart/form-data">
+<div class="row">
+    <div class="col-md-9">
+        <div class="block-flat">
+            <div class="content">
+                <form id="form-edit-dossier" method="post" action="/dossiers/infos/id/<?=$dossier->id ?>" class="form-horizontal group-border-dashed maped-form" data-parsley-validate enctype="multipart/form-data">
 
-                        <?php if($dossier->finished): ?>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="alert alert-warning">
-                                        <i class="fa fa-warning-sign"></i> 
-                                        Attention ce dossier a déjà été signalé comme finalisé
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-enfant-select">Nom de l'enfant</label>
-                            <div class="col-sm-6" data-toggle="tooltip" title="Sélectionnez l'enfant à inscrire">
-                                <div class="ui-select">
-                                    <?php $enfants = enfant::getList(); ?>
-                                    <select class="form-control" id="form-inscription-enfant-select" name="form_inscription_enfant" data-parsley-required="true">
-                                        <option selected="selected" value="">Choisissez l'enfant</option>
-                                        <?php foreach($enfants as $enfant): ?>
-                                            <option <?php if( $enfant->id == $dossier->ref_enfant): ?>selected="selected"<?php endif; ?> value="<?=$enfant->id ?>"><?=$enfant->lastname ?> <?=$enfant->firstname ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
+                    <?php if($dossier->finished): ?>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-warning">
+                                    <i class="fa fa-warning-sign"></i> 
+                                    Attention ce dossier a déjà été signalé comme finalisé
                                 </div>
                             </div>
                         </div>
+                    <?php endif; ?>
 
-                        <?php $sejours = sejour::getListFuturSejour(); ?>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-sejour-select">Séjour(s)</label>
-                            <div class="col-sm-6">
-                                <div class="sejours-group">
-                                    <div class="sejour-form init" style="display:none;">
-                                        <fieldset>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-enfant-select">Nom de l'enfant</label>
+                        <div class="col-sm-6" data-toggle="tooltip" title="Sélectionnez l'enfant à inscrire">
+                            <div class="ui-select">
+                                <?php $enfants = enfant::getList(); ?>
+                                <select class="form-control" id="form-inscription-enfant-select" name="form_inscription_enfant" data-parsley-required="true">
+                                    <option selected="selected" value="">Choisissez l'enfant</option>
+                                    <?php foreach($enfants as $enfant): ?>
+                                        <option <?php if( $enfant->id == $dossier->ref_enfant): ?>selected="selected"<?php endif; ?> value="<?=$enfant->id ?>"><?=$enfant->lastname ?> <?=$enfant->firstname ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php $sejours = sejour::getListFuturSejour(); ?>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-sejour-select">Séjour(s)</label>
+                        <div class="col-sm-6">
+                            <div class="sejours-group">
+                                <div class="sejour-form init" style="display:none;">
+                                    <fieldset>
+                                        <select class="form-control input-sm" id="form-inscription-sejour-select" name="form_inscription_sejour[]">
+                                            <option value="">Choisissez un séjour</option>
+                                        </select>
+                                    </fieldset>
+                                </div>
+
+                                <?php $sejours = sejour::getList(); ?>
+                                <?php $sejours_linked = inscription::getLinkedSejours($dossier->id); ?>
+                                <?php $l = 0; ?>
+                                <?php foreach($sejours_linked as $sejour_linked): ?>
+                                    <div class="sejour-form">
+                                        <fieldset <?=(count($sejours_linked) > $l+1)? 'disabled' : ''; ?>>
                                             <select class="form-control input-sm" id="form-inscription-sejour-select" name="form_inscription_sejour[]">
                                                 <option value="">Choisissez un séjour</option>
+                                                <?php foreach($sejours as $sejour): ?>
+                                                    <?php $date_from = new DateTime($sejour->date_from); ?>
+                                                    <?php $date_to = new DateTime($sejour->date_to); ?>
+                                                    <?php $nb_weeks = tool::getNbWeeks($date_from, $date_to); ?>
+
+                                                    <?php if($date_to->getTimestamp() != '-62169987600'): ?>
+                                                        <?php $date_to_string = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
+                                                    <?php endif; ?>
+
+                                                    <?php if($date_from->getTimestamp() != '-62169987600'): ?>
+                                                        <?php $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
+                                                    <?php endif; ?>
+                                                    <option <?php if( $sejour_linked->ref_sejour == $sejour->id ): ?>selected="selected"<?php endif; ?> data-truc="<?=$sejour_linked->ref_sejour?>/<?=$sejour->id?>" value="<?=$sejour->id ?>">
+                                                        <?=$sejour->name ?> du <?=$date_from_string; ?> au <?=$date_to_string; ?>
+                                                    </option>
+                                                <?php endforeach; ?>
                                             </select>
+
+
+                                            <?php foreach($sejours as $sejour): ?>
+                                                <?php if( $sejour_linked->ref_sejour == $sejour->id ): ?>
+                                                    <?php $dates_inscriptions = inscription::getBySejourAndDossier($sejour_linked->ref_sejour, $dossier->id); ?>
+
+                                                    <?php $date_from = new DateTime($sejour->date_from); ?>
+                                                    <?php $date_to = new DateTime($sejour->date_to); ?>
+                                                    <?php $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
+                                                    <?php $date_to_string = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
+                                                    <?php $nb_weeks = tool::getNbWeeks($date_from, $date_to); ?>
+
+                                                    <?php if ($nb_weeks < 1): ?>
+                                                        <div class="checkbox">
+                                                            <label for="">
+                                                                <input type="checkbox" name="dates[]" value="<?=$date_from_string; ?>#<?=$date_to_string; ?>#<?=$sejour_linked->ref_sejour ?>" checked="checked"> 
+                                                                L'enfant est inscrit sur le week end en intégralité.
+                                                            </label>
+                                                        </div>
+                                                    <?php elseif($nb_weeks === 1): ?>
+                                                        <div class="checkbox">
+                                                            <label for="">
+                                                                <input type="checkbox" name="dates[]" value="<?=$date_from_string; ?>#<?=$date_to_string; ?>#<?=$sejour_linked->ref_sejour ?>" checked="checked" data-id="<?=$sejour->id ?>" data-start="<?=$date_from->getTimestamp(); ?>" data-end="<?=$date_to->getTimestamp(); ?>"> 
+                                                                L'nfant est inscrit sur le séjour en intégralité.
+                                                            </label>
+                                                        </div>
+
+
+                                                    <?php else: ?>
+                                                        <?php for ($i=0; $i < $nb_weeks; $i++): ?>
+
+                                                            <?php $date_from_timestamp = $date_from->getTimestamp(); ?>
+                                                            <?php $date_to_timestamp = $date_to->getTimestamp(); ?>
+
+                                                            <?php $weekStart = 604800 * $i; ?>
+                                                            <?php $weekStart = $date_from_timestamp + $weekStart; ?>
+
+                                                            <?php $weekEnd = $weekStart + 604800 + 5000; ?>
+
+                                                            <?php $weekStart_string = strftime('%d/%m/%Y', $weekStart); ?>
+
+                                                            <?php $weekEnd_string = strftime('%d/%m/%Y', $weekEnd); ?>
+
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <?php $input = '<input type="checkbox" name="dates[]" value="'.$weekStart_string.'#'.$weekEnd_string.'#'.$sejour->id.'" data-id="'.$sejour->id.'" data-start="'.$weekStart.'" data-end="'.$weekEnd.'"'; ?>
+                                                                    <?php foreach($dates_inscriptions as $key => $dates_inscription): ?>
+                                                                        <?php $dates_inscription_from = new DateTime($dates_inscription->date_from); ?>
+                                                                        <?php $dates_inscription_to = new DateTime($dates_inscription->date_to); ?>
+                                                                        <?php $dates_inscription_to_string = strftime('%d/%m/%Y', $dates_inscription_from->getTimestamp()); ?>
+                                                                        <?php $dates_inscription_from_string = strftime('%d/%m/%Y', $dates_inscription_to->getTimestamp()); ?>
+                                                                        <?php
+                                                                        $opt = '';
+                                                                        if ($weekStart_string == $dates_inscription_to_string) {
+                                                                            $opt .= ' checked';
+                                                                            break;
+                                                                        }
+                                                                        ?>
+                                                                    <?php endforeach; ?>
+                                                                    <?=$input.$opt.'/>'; ?>
+                                                                    <strong>Semaine <?=$i + 1; ?></strong> du <?=$weekStart_string?> au <?=$weekEnd_string;?>
+                                                                </label>
+                                                            </div>
+
+                                                        <?php endfor; ?>
+                                                    <?php endif ?>
+                                                <?php endif ?>
+                                            <?php endforeach; ?>
                                         </fieldset>
                                     </div>
+                                    <?php $l++; ?>
+                                <?php endforeach; ?>
+                            </div>
 
-                                    <?php $sejours = sejour::getList(); ?>
-                                    <?php $sejours_linked = inscription::getLinkedSejours($dossier->id); ?>
-                                    <?php $l = 0; ?>
-                                    <?php foreach($sejours_linked as $sejour_linked): ?>
-                                        <div class="sejour-form">
-                                            <fieldset <?=(count($sejours_linked) > $l+1)? 'disabled' : ''; ?>>
-                                                <select class="form-control input-sm" id="form-inscription-sejour-select" name="form_inscription_sejour[]">
-                                                    <option value="">Choisissez un séjour</option>
-                                                    <?php foreach($sejours as $sejour): ?>
-                                                        <?php $date_from = new DateTime($sejour->date_from); ?>
-                                                        <?php $date_to = new DateTime($sejour->date_to); ?>
-                                                        <?php $nb_weeks = tool::getNbWeeks($date_from, $date_to); ?>
+                            <div class="sejours-controls">
+                                <button href="#" class="btn btn-default btn-sm delete-sejour">Supprimer ce séjour</button>
+                                <button href="#" class="btn btn-primary btn-sm add-sejour">Ajouter un séjour</button>
+                            </div>
+                        </div>
+                    </div>
 
-                                                        <?php if($date_to->getTimestamp() != '-62169987600'): ?>
-                                                            <?php $date_to_string = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
-                                                        <?php endif; ?>
-
-                                                        <?php if($date_from->getTimestamp() != '-62169987600'): ?>
-                                                            <?php $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
-                                                        <?php endif; ?>
-                                                        <option <?php if( $sejour_linked->ref_sejour == $sejour->id ): ?>selected="selected"<?php endif; ?> data-truc="<?=$sejour_linked->ref_sejour?>/<?=$sejour->id?>" value="<?=$sejour->id ?>">
-                                                            <?=$sejour->name ?> du <?=$date_from_string; ?> au <?=$date_to_string; ?>
-                                                        </option>
-                                                    <?php endforeach; ?>
-                                                </select>
-
-
-                                                <?php foreach($sejours as $sejour): ?>
-                                                    <?php if( $sejour_linked->ref_sejour == $sejour->id ): ?>
-                                                        <?php $dates_inscriptions = inscription::getBySejourAndDossier($sejour_linked->ref_sejour, $dossier->id); ?>
-
-                                                        <?php $date_from = new DateTime($sejour->date_from); ?>
-                                                        <?php $date_to = new DateTime($sejour->date_to); ?>
-                                                        <?php $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
-                                                        <?php $date_to_string = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
-                                                        <?php $nb_weeks = tool::getNbWeeks($date_from, $date_to); ?>
-
-                                                        <?php if ($nb_weeks < 1): ?>
-                                                            <div class="checkbox">
-                                                                <label for="">
-                                                                    <input type="checkbox" name="dates[]" value="<?=$date_from_string; ?>#<?=$date_to_string; ?>#<?=$sejour_linked->ref_sejour ?>" checked="checked"> 
-                                                                    L'enfant est inscrit sur le week end en intégralité.
-                                                                </label>
-                                                            </div>
-                                                        <?php elseif($nb_weeks === 1): ?>
-                                                            <div class="checkbox">
-                                                                <label for="">
-                                                                    <input type="checkbox" name="dates[]" value="<?=$date_from_string; ?>#<?=$date_to_string; ?>#<?=$sejour_linked->ref_sejour ?>" checked="checked" data-id="<?=$sejour->id ?>" data-start="<?=$date_from->getTimestamp(); ?>" data-end="<?=$date_to->getTimestamp(); ?>"> 
-                                                                    L'nfant est inscrit sur le séjour en intégralité.
-                                                                </label>
-                                                            </div>
-
-
-                                                        <?php else: ?>
-                                                            <?php for ($i=0; $i < $nb_weeks; $i++): ?>
-
-                                                                <?php $date_from_timestamp = $date_from->getTimestamp(); ?>
-                                                                <?php $date_to_timestamp = $date_to->getTimestamp(); ?>
-
-                                                                <?php $weekStart = 604800 * $i; ?>
-                                                                <?php $weekStart = $date_from_timestamp + $weekStart; ?>
-
-                                                                <?php $weekEnd = $weekStart + 604800 + 5000; ?>
-
-                                                                <?php $weekStart_string = strftime('%d/%m/%Y', $weekStart); ?>
-
-                                                                <?php $weekEnd_string = strftime('%d/%m/%Y', $weekEnd); ?>
-
-                                                                <div class="checkbox">
-                                                                    <label>
-                                                                        <?php $input = '<input type="checkbox" name="dates[]" value="'.$weekStart_string.'#'.$weekEnd_string.'#'.$sejour->id.'" data-id="'.$sejour->id.'" data-start="'.$weekStart.'" data-end="'.$weekEnd.'"'; ?>
-                                                                        <?php foreach($dates_inscriptions as $key => $dates_inscription): ?>
-                                                                            <?php $dates_inscription_from = new DateTime($dates_inscription->date_from); ?>
-                                                                            <?php $dates_inscription_to = new DateTime($dates_inscription->date_to); ?>
-                                                                            <?php $dates_inscription_to_string = strftime('%d/%m/%Y', $dates_inscription_from->getTimestamp()); ?>
-                                                                            <?php $dates_inscription_from_string = strftime('%d/%m/%Y', $dates_inscription_to->getTimestamp()); ?>
-                                                                            <?php
-                                                                            $opt = '';
-                                                                            if ($weekStart_string == $dates_inscription_to_string) {
-                                                                                $opt .= ' checked';
-                                                                                break;
-                                                                            }
-                                                                            ?>
-                                                                        <?php endforeach; ?>
-                                                                        <?=$input.$opt.'/>'; ?>
-                                                                        <strong>Semaine <?=$i + 1; ?></strong> du <?=$weekStart_string?> au <?=$weekEnd_string;?>
-                                                                    </label>
-                                                                </div>
-
-                                                            <?php endfor; ?>
-                                                        <?php endif ?>
-                                                    <?php endif ?>
-                                                <?php endforeach; ?>
-                                            </fieldset>
-                                        </div>
-                                        <?php $l++; ?>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-structure-select">Centre payeur</label>
+                        <div class="col-sm-6" data-toggle="tooltip" title="Sélectionnez la structure qui s'occupe de cet enfant.">
+                            <div class="ui-select">
+                                <?php $structures = structure::getPayerStructureList(); ?>
+                                <select class="form-control" id="form-inscription-structure-select" name="form_inscription_structure">
+                                    <option value="" selected="selected">Choisissez la structure</option>
+                                    <?php foreach($structures as $structure): ?>
+                                        <option <?php if( $structure->id == $dossier->ref_structure_payer): ?>selected="selected"<?php endif; ?> value="<?=$structure->id ?>"><?=$structure->name ?></option>
                                     <?php endforeach; ?>
-                                </div>
-
-                                <div class="sejours-controls">
-                                    <button href="#" class="btn btn-default btn-sm delete-sejour">Supprimer ce séjour</button>
-                                    <button href="#" class="btn btn-primary btn-sm add-sejour">Ajouter un séjour</button>
-                                </div>
+                                </select>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-structure-select">Centre payeur</label>
-                            <div class="col-sm-6" data-toggle="tooltip" title="Sélectionnez la structure qui s'occupe de cet enfant.">
-                                <div class="ui-select">
-                                    <?php $structures = structure::getPayerStructureList(); ?>
-                                    <select class="form-control" id="form-inscription-structure-select" name="form_inscription_structure">
-                                        <option value="" selected="selected">Choisissez la structure</option>
-                                        <?php foreach($structures as $structure): ?>
-                                            <option <?php if( $structure->id == $dossier->ref_structure_payer): ?>selected="selected"<?php endif; ?> value="<?=$structure->id ?>"><?=$structure->name ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-centre-payeur">
-                                Autre centre payeur
-                                 <span class="help-block"><em>Si il n'est pas dans la liste</em></span>
-                                </label>
-                            <div class="col-sm-6">
-                                <input id="form-inscription-centre-payeur" name="form_inscription_structure_name" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom du centre payeur." value="<?=$dossier->structure_payer ?>">
-                                <input type="hidden" id="form-inscription-centre-payeur-hidden" name="form_inscription_structure_name" value="" disabled="disabled">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Prise en charge</label>
-                            <div class="col-sm-6">
-                                <label class="radio-inline" for="form-inscription-supported-oui"><input type="radio" class="icheck" name="form_inscription_supported" id="form-inscription-supported-oui" value="1" <?php if($dossier->supported == 1): ?>checked="checked"<?php endif; ?>> Oui</label>
-                                <label class="radio-inline" for="form-inscription-supported-non"><input type="radio" class="icheck" name="form_inscription_supported" id="form-inscription-supported-non" value="0" <?php if($dossier->supported == 0): ?>checked="checked"<?php endif; ?>> Non</label>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-lieu-select">Lieu de rendez-vous</label>
-                            <div class="col-sm-6" data-toggle="tooltip" title="Renseignez le lieu de rendez-vous.">
-                                <div class="ui-select">
-                                    <select class="form-control" id="form-inscription-lieu-select" name="form_inscription_lieu">
-                                        <option selected="selected" value="">Choisissez le lieu de rendez-vous</option>
-                                        <option <?php if( $dossier->place == "Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle"): ?>selected="selected"<?php endif; ?> value="Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle</option>
-                                        <option <?php if( $dossier->place == "Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle"): ?>selected="selected"<?php endif; ?> value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>
-                                        <option <?php if( $dossier->place == "Bonneuil en Valois, au Gite"): ?>selected="selected"<?php endif; ?> value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form_inscription_lieu_custom">
-                                Autre lieu de rendez-vous
-                                 <span class="help-block"><em>Si il n'est pas dans la liste</em></span>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-centre-payeur">
+                            Autre centre payeur
+                             <span class="help-block"><em>Si il n'est pas dans la liste</em></span>
                             </label>
-                            <div class="col-sm-6">
-                                <input id="form_inscription_lieu_custom" name="form_inscription_lieu_custom" class="form-control" type="text" data-toggle="tooltip" <?php if( $dossier->place != "Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle" && $dossier->place != "Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle" && $dossier->place != "Bonneuil en Valois, au Gite" ): ?>value="<?=$dossier->place ?>"<?php endif; ?> placeholder="Ne renseigner que si le lieu n'est pas dans la liste.">
-                            </div>
-
+                        <div class="col-sm-6">
+                            <input id="form-inscription-centre-payeur" name="form_inscription_structure_name" class="form-control input-sm" type="text" data-toggle="tooltip" title="Renseignez le nom du centre payeur." value="<?=$dossier->structure_payer ?>">
+                            <input type="hidden" id="form-inscription-centre-payeur-hidden" name="form_inscription_structure_name" value="" disabled="disabled">
                         </div>
+                    </div>
 
-
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-heure-aller">Heure de rendez-vous à l'aller</label>
-                            <div class="col-md-1">
-                                <?php $hour_departure = explode('h', $dossier->hour_departure); ?>
-                                <input id="form-inscription-heure-aller" name="form_inscription_heure_aller" class="form-control pull-left input-hour" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ." value="<?=$hour_departure['0'] ?>">
-                                <p class="input-suffix">h</p>
-                            </div>
-                            <div class="col-md-1">
-                                <input id="form-inscription-min-aller" name="form_inscription_min_aller" class="form-control input-minute" type="text" data-toggle="tooltip" value="<?=$hour_departure['1'] ?>" title="Renseignez l'heure de rendez-vous pour le départ.">
-                            </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Prise en charge</label>
+                        <div class="col-sm-6">
+                            <label class="radio-inline" for="form-inscription-supported-oui"><input type="radio" class="icheck" name="form_inscription_supported" id="form-inscription-supported-oui" value="1" <?php if($dossier->supported == 1): ?>checked="checked"<?php endif; ?>> Oui</label>
+                            <label class="radio-inline" for="form-inscription-supported-non"><input type="radio" class="icheck" name="form_inscription_supported" id="form-inscription-supported-non" value="0" <?php if($dossier->supported == 0): ?>checked="checked"<?php endif; ?>> Non</label>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-heure-retour">Heure de rendez-vous au retour</label>
-                            <div class="col-md-1 col-sm-5">
-                                <?php $hour_return = explode('h', $dossier->hour_return); ?>
-                                <input id="form-inscription-heure-retour" name="form_inscription_heure_retour" class="form-control pull-left input-hour" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'." value="<?=$hour_return['0'] ?>">
-                                <p class="input-suffix">h</p>
-                            </div>
-                            <div class="col-md-1 col-sm-5">
-                                <input id="form-inscription-min-retour" name="form_inscription_min_retour" class="form-control input-minute" type="text" data-toggle="tooltip" value="<?=$hour_return['1'] ?>" title="Renseignez l'heure de rendez-vous pour le retour'.">
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-lieu-select">Lieu de rendez-vous</label>
+                        <div class="col-sm-6" data-toggle="tooltip" title="Renseignez le lieu de rendez-vous.">
+                            <div class="ui-select">
+                                <select class="form-control" id="form-inscription-lieu-select" name="form_inscription_lieu"<?php if( $dossier->place == "Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle" || $dossier->place == "Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle" || $dossier->place == "Bonneuil en Valois, au Gite"): ?> data-selected="<?=$dossier->place; ?>"<?php endif; ?>>
+                                    <option selected="selected" value="">Choisissez le lieu de rendez-vous</option>
+                                    <option value="Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle</option>
+                                    <option value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>
+                                    <option value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>
+                                </select>
                             </div>
                         </div>
+                    </div>
 
 
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Pique-nique</label>
-                            <div class="col-sm-6">
-                                <label class="radio-inline" for="form-inscription-pique-nique-oui"><input type="radio" class="icheck" name="form_inscription_pique_nique" id="form-inscription-pique-nique-oui" value="1" <?php if($dossier->pique_nique == 1): ?>checked="checked"<?php endif; ?>> Oui</label>
-                                <label class="radio-inline" for="form-inscription-pique-nique-non"><input type="radio" class="icheck" name="form_inscription_pique_nique" id="form-inscription-pique-nique-non" value="0" <?php if($dossier->pique_nique == 0): ?>checked="checked"<?php endif; ?>> Non</label>
-                            </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form_inscription_lieu_custom">
+                            Autre lieu de rendez-vous
+                             <span class="help-block"><em>Si il n'est pas dans la liste</em></span>
+                        </label>
+                        <div class="col-sm-6">
+                            <input id="form_inscription_lieu_custom" name="form_inscription_lieu_custom" class="form-control" type="text" data-toggle="tooltip" <?php if( $dossier->place != "Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle" && $dossier->place != "Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle" && $dossier->place != "Bonneuil en Valois, au Gite" ): ?>value="<?=$dossier->place ?>" <?php else: ?> disabled="disabled"<?php endif; ?> placeholder="Ne renseigner que si le lieu n'est pas dans la liste.">
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Sac de couchage</label>
-                            <div class="col-sm-6">
-                                <label class="radio-inline" for="form-inscription-sac-oui"><input type="radio" class="icheck" name="form_inscription_sac" id="form-inscription-sac-oui" value="1" <?php if($dossier->sac == 1): ?>checked="checked"<?php endif; ?>> Oui</label>
-                                <label class="radio-inline" for="form-inscription-sac-non"><input type="radio" class="icheck" name="form_inscription_sac" id="form-inscription-sac-non" value="0" <?php if($dossier->sac == 0): ?>checked="checked"<?php endif; ?>> Non</label>
-                            </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-heure-aller">Heure de rendez-vous à l'aller</label>
+                        <div class="col-md-1">
+                            <?php $hour_departure = explode('h', $dossier->hour_departure); ?>
+                            <input id="form-inscription-heure-aller" name="form_inscription_heure_aller" class="form-control pull-left input-hour" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le départ." value="<?=$hour_departure['0'] ?>">
+                            <p class="input-suffix">h</p>
                         </div>
-
-
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-note">Notes</label>
-                            <div class="col-sm-6">
-                                <textarea id="form-inscription-note" name="form_inscription_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de l'inscription."><?=$dossier->note ?></textarea>
-                            </div>
+                        <div class="col-md-1">
+                            <input id="form-inscription-min-aller" name="form_inscription_min_aller" class="form-control input-minute" type="text" data-toggle="tooltip" value="<?=$hour_departure['1'] ?>" title="Renseignez l'heure de rendez-vous pour le départ.">
                         </div>
+                    </div>
 
-
-
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">Inscription finalisée</label>
-                            <div class="col-sm-6">
-                                <label class="radio-inline" for="form-inscription-option-oui"><input type="radio" class="icheck" name="form_inscription_option" id="form-inscription-option-oui" value="1" <?php if($dossier->finished == 1): ?>checked="checked"<?php endif; ?>> Oui</label>
-                                <label class="radio-inline" for="form-inscription-option-non"><input type="radio" class="icheck" name="form_inscription_option" id="form-inscription-option-non" value="0" <?php if($dossier->finished == 0): ?>checked="checked"<?php endif; ?>> Non</label>
-                            </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-heure-retour">Heure de rendez-vous au retour</label>
+                        <div class="col-md-1 col-sm-5">
+                            <?php $hour_return = explode('h', $dossier->hour_return); ?>
+                            <input id="form-inscription-heure-retour" name="form_inscription_heure_retour" class="form-control pull-left input-hour" type="text" data-toggle="tooltip" title="Renseignez l'heure de rendez-vous pour le retour'." value="<?=$hour_return['0'] ?>">
+                            <p class="input-suffix">h</p>
                         </div>
-
-
-                        <div class="form-group actions text-center">
-                            <div class="col-md-8 col-md-offset-2">
-                                <input type="submit" class="btn btn-primary btn-rad btn-lg" name="submit-update" value="Modifier le dossier d'inscription">
-                                <span>OU</span>
-                                <a href="/dossiers/infos/id/<?=$dossier->id; ?>" class="reset">Annuler</a>
-                            </div>
+                        <div class="col-md-1 col-sm-5">
+                            <input id="form-inscription-min-retour" name="form_inscription_min_retour" class="form-control input-minute" type="text" data-toggle="tooltip" value="<?=$hour_return['1'] ?>" title="Renseignez l'heure de rendez-vous pour le retour'.">
                         </div>
+                    </div>
 
-                    </form>
 
-                </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Pique-nique</label>
+                        <div class="col-sm-6">
+                            <label class="radio-inline" for="form-inscription-pique-nique-oui"><input type="radio" class="icheck" name="form_inscription_pique_nique" id="form-inscription-pique-nique-oui" value="1" <?php if($dossier->pique_nique == 1): ?>checked="checked"<?php endif; ?>> Oui</label>
+                            <label class="radio-inline" for="form-inscription-pique-nique-non"><input type="radio" class="icheck" name="form_inscription_pique_nique" id="form-inscription-pique-nique-non" value="0" <?php if($dossier->pique_nique == 0): ?>checked="checked"<?php endif; ?>> Non</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Sac de couchage</label>
+                        <div class="col-sm-6">
+                            <label class="radio-inline" for="form-inscription-sac-oui"><input type="radio" class="icheck" name="form_inscription_sac" id="form-inscription-sac-oui" value="1" <?php if($dossier->sac == 1): ?>checked="checked"<?php endif; ?>> Oui</label>
+                            <label class="radio-inline" for="form-inscription-sac-non"><input type="radio" class="icheck" name="form_inscription_sac" id="form-inscription-sac-non" value="0" <?php if($dossier->sac == 0): ?>checked="checked"<?php endif; ?>> Non</label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form-inscription-note">Notes</label>
+                        <div class="col-sm-6">
+                            <textarea id="form-inscription-note" name="form_inscription_note" class="form-control" rows="4" data-toggle="tooltip" title="Notes générales au sujet de l'inscription."><?=$dossier->note ?></textarea>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Inscription finalisée</label>
+                        <div class="col-sm-6">
+                            <label class="radio-inline" for="form-inscription-option-oui"><input type="radio" class="icheck" name="form_inscription_option" id="form-inscription-option-oui" value="1" <?php if($dossier->finished == 1): ?>checked="checked"<?php endif; ?>> Oui</label>
+                            <label class="radio-inline" for="form-inscription-option-non"><input type="radio" class="icheck" name="form_inscription_option" id="form-inscription-option-non" value="0" <?php if($dossier->finished == 0): ?>checked="checked"<?php endif; ?>> Non</label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group actions text-center">
+                        <div class="col-md-8 col-md-offset-2">
+                            <input type="hidden" name="submit-update" value="Enregistrer les modifications">
+                            <input type="submit" class="btn btn-primary btn-rad btn-lg" value="Enregistrer les modifications">
+                            <span>OU</span>
+                            <a href="/dossiers/infos/id/<?=$dossier->id; ?>" class="reset">Annuler</a>
+                        </div>
+                    </div>
+
+                </form>
+
             </div>
         </div>
     </div>
+    <div class="col-md-3" style="position:static;">
+        <div id="neo-affix">
+            <div id="allias-submit" class="block-flat bars-widget">
+                <div class="form-group text-center">
+                    <button class="btn btn-primary btn-block btn-rad">Enregistrer les modifications</button>
+                    <a href="/dossiers/infos/id/<?=$dossier->id; ?>">Annuler</a>
+                </div>
+            </div>
 
+            <!-- <div id="form-nav" class="block-flat bars-widget">
+            </div> -->
+        </div>
+    </div>
 </div>
 
 
@@ -504,10 +516,11 @@
                 $('#form-inscription-centre-payeur-hidden').removeAttr('disabled');
             }
         }).change();
+
         $('.sejours-group').on('change', '.sejour-form select', function(){
             var sejour_fieldset = $(this).parent(),
                 sejour_id = $(this).val(),
-                nb_select = $('.sejour-form select').length;
+                nb_select = $('.sejour-form:visible select').length;
 
             jQuery.ajax({
                 type: 'GET', // Le type de ma requete
@@ -521,7 +534,7 @@
                     if(data.hours_departure != ''){
                         //console.log(data.hours_departure.min);
                         //console.log(data.hours_departure.min['0']);
-                        $('#form-inscription-lieu-select').html('<option selected="selected" value="">Choisissez le lieu de rendez-vous</option>');
+                        $('#form-inscription-lieu-select').html('<option value="">Choisissez le lieu de rendez-vous</option>');
                         $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[0]+'" data-min-departure="'+data.hours_departure.min[0]+'" data-hour-return="'+data.hours_return.hours[0]+'" data-min-return="'+data.hours_return.min[0]+'" value="Aulnay sous bois, au Parking d\'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d\'Intermarché, avenue Antoine Bourdelle</option>');
                         $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[1]+'" data-min-departure="'+data.hours_departure.min[1]+'" data-hour-return="'+data.hours_return.hours[1]+'" data-min-return="'+data.hours_return.min[1]+'" value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>');
                         $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[2]+'" data-min-departure="'+data.hours_departure.min[2]+'" data-hour-return="'+data.hours_return.hours[2]+'" data-min-return="'+data.hours_return.min[2]+'" value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>');
@@ -531,6 +544,7 @@
                     console.log(errorThrown);
                 }
             }); 
+
             jQuery.ajax({
                 type: 'GET', // Le type de ma requete
                 url: '/ajax/get_nb_inscriptions.php', // L'url vers laquelle la requete sera envoyee
@@ -580,10 +594,47 @@
             // <option value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>
             // <option value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>
         });
+
+        $('.sejours-group').find('.sejour-form').last().find('select').each(function(index, el) {
+            var sejour_fieldset = $(el).parent(),
+                sejour_id = $(el).val(),
+                nb_select = $('.sejour-form:visible select').length;
+
+            jQuery.ajax({
+                type: 'GET', // Le type de ma requete
+                url: '/ajax/get_sejour.php', // L'url vers laquelle la requete sera envoyee
+                data: {
+                    id: sejour_id
+                },
+                dataType: 'json',
+                success: function(data, textStatus, jqXHR) {
+                    //console.log(data);
+                    if(data.hours_departure != ''){
+                        //console.log(data.hours_departure.min);
+                        //console.log(data.hours_departure.min['0']);
+                        $('#form-inscription-lieu-select').html('<option value="">Choisissez le lieu de rendez-vous</option>');
+                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[0]+'" data-min-departure="'+data.hours_departure.min[0]+'" data-hour-return="'+data.hours_return.hours[0]+'" data-min-return="'+data.hours_return.min[0]+'" value="Aulnay sous bois, au Parking d\'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d\'Intermarché, avenue Antoine Bourdelle</option>');
+                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[1]+'" data-min-departure="'+data.hours_departure.min[1]+'" data-hour-return="'+data.hours_return.hours[1]+'" data-min-return="'+data.hours_return.min[1]+'" value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>');
+                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[2]+'" data-min-departure="'+data.hours_departure.min[2]+'" data-hour-return="'+data.hours_return.hours[2]+'" data-min-return="'+data.hours_return.min[2]+'" value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>');
+                        
+                        if (typeof $('#form-inscription-lieu-select').data('selected') != undefined) {
+                            var selectedValue = $('#form-inscription-lieu-select').data('selected');
+                            $('#form-inscription-lieu-select').val(selectedValue).removeAttr('data-selected');
+                        }
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown, data) {
+                    console.log(errorThrown);
+                }
+            }); 
+
+        });
+
+
         $('#form-inscription-lieu-select').on('change', function(){
             //console.log('hello');
             var elem = $(this).find(":selected");
-                if(elem.data('hour-departure') != ''){
+            if(elem.data('hour-departure') != ''){
                 //console.log($(this).find(":selected").data('hour-departure'));
                 // Aller
                 $('#form-inscription-heure-aller').val(elem.data('hour-departure'));
@@ -591,6 +642,11 @@
                 // retour
                 $('#form-inscription-heure-retour').val(elem.data('hour-return'));
                 $('#form-inscription-min-retour').val(elem.data('min-return'));
+            }
+            if ($(this).val() != '') {
+                $('#form_inscription_lieu_custom').attr('disabled', 'disabled').val('');
+            } else {
+                $('#form_inscription_lieu_custom').removeAttr('disabled');
             }
         });
         

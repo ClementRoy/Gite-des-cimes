@@ -21,26 +21,12 @@
      ?>
         <?php if($result): ?>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <i class="icon-ok-sign"></i> 
-                        L'utilisateur <?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?> a bien été ajouté
-                    </div>
-                </div>
-            </div>
+            <?php tpl::alert('success', 'L\'utilisateur <strong>'.$form_utilisateur_prenom.' '.$form_utilisateur_nom.'</strong> a bien été créé. <a href="/utilisateurs/">Retourner à la liste des utilisateurs</a>'); ?>
 
         <?php else: ?>
 
+            <?php tpl::alert('danger', 'Une erreur s\'est produite durant la création de l\'utilisateur, veuillez réessayer. <a href="/utilisateurs/ajouter/">Retourner au formulaire de modification</a>'); ?>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        <i class="icon-remove-sign"></i> 
-                        Une erreur s'est produite durant l'ajout de l'enfant, veuillez réessayer
-                    </div>
-                </div>
-            </div>
         <?php endif; ?>
 <?php endif; ?>
 
@@ -59,16 +45,12 @@
     ?>
     <?php if($result): ?>
 
-        <div class="row">
-            <div class="col-md-12">
+        <?php tpl::alert('success', 'L\'utilisateur <strong>'.$form_utilisateur_prenom.' '.$form_utilisateur_nom.'</strong> a bien été modifié. <a href="/utilisateurs/">Retourner à la liste des utilisateurs</a>'); ?>
 
-                <div class="alert alert-info">
-                    <i class="icon-exclamation-sign"></i>
-                    L'utilisateur <strong><?=$form_utilisateur_prenom; ?> <?=$form_utilisateur_nom; ?></strong> a bien été modifié.
-                </div>
-            </div>
-        </div>
+    <?php else: ?>
 
+        <?php tpl::alert('danger', 'Une erreur s\'est produite durant la modification de l\'utilisateur, veuillez réessayer. <a href="/utilisateurs/editer/'.$_GET['id'].'">Retourner au formulaire de modification</a>'); ?>
+        
     <?php endif; ?>
 
 <?php endif; ?>

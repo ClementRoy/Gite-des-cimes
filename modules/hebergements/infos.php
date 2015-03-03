@@ -22,21 +22,11 @@
     ?>
     <?php if($result): ?>
 
-
-
-        <div class="alert alert-success rounded">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <i class="fa fa-check-sign"></i>
-            L'hébergement <?=$form_hebergement_name; ?> a bien été ajoutée
-        </div>
+        <?php tpl::alert('success', 'L\'hébergement '.$form_hebergement_name.' a bien été créé. <a href="/hebergements/">Retourner à la liste des hebergements</a>'); ?>
 
     <?php else: ?>
 
-        <div class="alert alert-danger rounded">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <i class="fa fa-check-sign"></i>
-            Une erreur s'est produite durant l'ajout de l'hébergement, veuillez réessayer
-        </div>
+        <?php tpl::alert('danger', 'Une erreur s\'est produite durant la création de l\'hébergement, veuillez réessayer. <a href="/hebergements/ajouter/">Retourner au formulaire de création</a>'); ?>
 
     <?php endif; ?>
 
@@ -62,27 +52,16 @@
         //tool::output($result);
     ?>
 
+
     <?php if($result): ?>
 
-        <div class="alert alert-success rounded">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <i class="fa fa-check-sign"></i>
-            L'hébergement <strong><?=$form_hebergement_name; ?></strong> a bien été modifée
-            <a href="/hebergements/">Retourner à la liste des hebergements</a>
-        </div>
+        <?php tpl::alert('success', 'L\'hébergement '.$form_hebergement_name.' a bien été modifié. <a href="/hebergements/">Retourner à la liste des hebergements</a>'); ?>
 
     <?php else: ?>
 
-
-        <div class="alert alert-danger rounded">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <i class="fa fa-check-sign"></i>
-            Une erreur s'est produite durant la modification de l'hébergement, veuillez réessayer
-            <a href="/hebergements/editer/<?=$hebergement->id ?>">Retourner au formulaire d'édition</a>
-        </div>
+        <?php tpl::alert('danger', 'Une erreur s\'est produite durant la modification de l\'hébergement, veuillez réessayer. <a href="/hebergements/editer/'.$_GET['id'].'">Retourner au formulaire de modification</a>'); ?>
 
     <?php endif; ?>
-
 
 
 <?php endif; ?>
@@ -118,7 +97,7 @@
         </div>
         <div class="col-md-4 text-right">
             <!-- <a href="#" data-toggle="modal" data-target="#modal-remove" class="item">Supprimer cette fiche</a> -->
-            <a href="/hebergements/editer/id/<?=$hebergement->id; ?>" class="btn btn-primary btn-rad">Modifier cette fiche</a>
+            <a href="/hebergements/editer/id/<?=$hebergement->id; ?>" class="btn btn-primary btn-rad">Modifier cet hébergement</a>
         </div>
     </div>
 </div>

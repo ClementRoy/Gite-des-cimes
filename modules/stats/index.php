@@ -4,45 +4,9 @@
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
 
-
-<div class="title">
-    <div class="row header">
-        <div class="col-md-12">
-            <h1>Corbeille</h1>
-            <h1>Satistiques</h1>
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#2014">2014</a></li>
-
-            </ul>
-        </div>
-    </div>
-</div>
-
-<?php $structures = structure::getList(); ?>
 <?php 
-
-    global $db;
-
-
-    // Février,printemps, été, toussaints et week end cumulés
-
-    // Février
-    $from_fev = new DateTime('2014-02-01');
-    $to_fev = new DateTime('2014-03-01');
-
-    // Printemps
-    $from_printemps = new DateTime('2014-03-21');
-    $to_printemps = new DateTime('2014-05-31');
-
-    // Ete
-    $from_ete = new DateTime('2014-06-01');
-    $to_ete = new DateTime('2014-09-30');
-
-    // Toussaints
-    $from_toussaint = new DateTime('2014-10-01');
-    $to_toussaint = new DateTime('2014-11-30');
-
-
+    
+    $structures = structure::getList();
 
     function getNbInscriptionsByPeriod($from, $to ){
         global $db;
@@ -78,22 +42,6 @@
         return $db->row($sql)->nb;
     }
 
-    echo 'février';
-    tool::output(getNbInscriptionsByPeriod($from_fev, $to_fev));
-
-    echo 'printemps';
-    tool::output(getNbInscriptionsByPeriod($from_printemps, $to_printemps));
-
-    echo 'été';
-    tool::output(getNbInscriptionsByPeriod($from_ete, $to_ete));
-
-    echo 'toussaint';
-    tool::output(getNbInscriptionsByPeriod($from_toussaint, $to_toussaint));
-
-    echo 'weekend';
-    tool::output(getNbInscriptionsWeekEndByYear());
-
-
     function getNbInscriptionByStructureByYear($structure, $year = '2014'){
         global $db;
         $from = new DateTime($year.'-01-01');
@@ -113,30 +61,43 @@
 
         return $db->row($sql);
 
+       
     }
+
+    $year = $_GET['annee'];
+    
+    $seasons = array(
+        'Février' => array(
+            'start' => new DateTime($year.'-02-01'),
+            'end' => new DateTime($year.'-03-01'),
+        ),
+        'Printemps' => array(
+            'start' => new DateTime($year.'-03-21'),
+            'end' => new DateTime($year.'-05-31'),
+        ),
+        'Été' => array(
+            'start' => new DateTime($year.'-06-01'),
+            'end' => new DateTime($year.'-09-30'),
+        ),
+        'Toussaints' => array(
+            'start' => new DateTime($year.'-10-01'),
+            'end' => new DateTime($year.'-11-30'),
+        )
+    );
+
 ?>
 
-<div class="content content-table">
+
+<div class="page-head">
     <div class="row">
-        <div class="col-md-12">
-            <div class="tab-content">
-                <div class="tab-pane active" id="2014">
-  
-            <?php if(count($structures)): ?>
-                <table class="datatable" data-sort="1" data-length="25">
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <!--<th class="sortable">Nombre d'enfant inscrit cette année</th>-->
-                            <th>Nombre d'inscriptions</th>
-                        </thead>
-                        <tbody>
-
-                            <?php foreach($structures as $key => $structure): ?>
-
-                            <?php 
-
-                                $result2 = getNbInscriptionByStructureByYear($structure);
+        <div class="col-md-8">
+            <h1>
+                Statistiques
+                <small>Année <?=$year; ?></small>
+            </h1>
+        </div>
+    </div>
+</div>
 
                             ?>
                             <?php if($result2->nb > 0): ?>
@@ -156,20 +117,239 @@
                 <p><em>Cette corbeille est vide</em></p>
             <?php endif; ?> 
 
+<div class="row">
+    
+    <div class="col-md-12">
+        <div class="section-head">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>Inscription par saison</h3>
                 </div>
             </div>
+        </div>
 
-                <script>
-                    $(function () {
-                        $('.nav-tabs a').click(function (e) {
-                            e.preventDefault();
-                            $(this).tab('show');
+        
+        <?php
+
+            $inscriptionsCount = array();
+
+            $inscriptionsCount['Week-end'] = getNbInscriptionsWeekEndByYear($year);
+
+            foreach ($seasons as $name => $season) {
+                $today = new DateTime('NOW');
+                if ($today->getTimestamp() > $season['end']->getTimestamp()) {
+                    $inscriptionSeason = getNbInscriptionsByPeriod($season['start'], $season['end']);
+                    $inscriptionsCount[$name] = $inscriptionSeason;
+                } else {
+                    $inscriptionsCount[$name] = 0;
+                }
+            }
+        ?>
+        <div class="block-flat">
+            <div class="content">
+                
+                <div id="statsYear" style="height: 400px; width:100%; padding: 0px; position: relative;"></div>
+                
+                <?php ob_start(); ?>
+                    <?php if (APP_VERSION != 'dev'): ?>
+                        <script type="text/javascript" src="/assets/js/stats.min.js"></script>
+                    <?php else: ?>
+                        <script type="text/javascript" src="/assets/libs/jquery-flot/jquery.flot.js"></script>
+                        <script type="text/javascript" src="/assets/libs/jquery-flot/jquery.flot.pie.js"></script>
+                        <script type="text/javascript" src="/assets/libs/jquery-flot/jquery.flot.resize.js"></script>
+                        <script type="text/javascript" src="/assets/libs/jquery-flot/jquery.flot.categories.js"></script>
+                    <?php endif; ?>
+                    <script>
+
+                    function showNumbersOnBars(elem, objectElem) {
+                        var $elem = $(elem);
+                        $elem.find('.flot-text-over').remove();
+                        $elem.append('<div class="flot-text-over"></div>');
+                        var flotTextOver = $elem.find('.flot-text-over'),
+                            datas = objectElem.getData()[0].data;
+                            datasLength = datas.length,
+                            overWidth = 100 / datasLength,
+                            valueMax = 0;
+
+                        $.each(datas, function(index, val) {
+                            if (val[1] > valueMax) {
+                                valueMax = val[1];
+                            }
                         });
+
+                        // La valeur max arrondi
+                        valueMaxRounded = Math.ceil(valueMax/50)*50;
+                        var textOverHeight = $('.flot-text-over').height(),
+                            textOverWidth = $('.flot-text-over').width();
+
+                        for (var i = 0; i < datas.length; i++) {
+                            if (datas[i][1] != 0) {
+                                var posY = textOverHeight * datas[i][1] / valueMaxRounded / 2;
+                                var posX = (textOverWidth / datasLength * i) + (textOverWidth / datasLength / 2);
+                                flotTextOver.append('<span style="width:' + 100 / datasLength + '%;left:' + 100 / datasLength * i + '%; bottom:' + Math.round(posY) + 'px;">' + datas[i][1] + '</span>');
+                                var span = flotTextOver.find('span').last();
+                                span.css('margin-bottom', '-' + span.outerHeight() / 2 + 'px');
+                            }
+                        };
+                    }
+
+
+                    var dataYear = [<?php foreach ($inscriptionsCount as $name => $nb): ?>["<?=$name; ?>", <?=$nb; ?>],<?php endforeach; ?>];
+
+                    $(function() {
+                        var statsYear = $.plot($("#statsYear"), [{
+                            data: dataYear,
+                            // label: "Unique Visits"
+                        }
+                        ], {
+                            series: {
+                                bars: {
+                                    show: true,
+                                    barWidth: 0.5,
+                                    lineWidth: 0,
+                                    fill: true,
+                                    hoverable: true,
+                                    align: "center",
+                                    fillColor: {
+                                        colors: [{
+                                                opacity: 1
+                                            }, {
+                                                opacity: 1
+                                            }
+                                        ]
+                                    } 
+                                },
+                                shadowSize: 2
+                            },
+                            legend:{
+                                show: false
+                            },
+                            grid: {
+                                labelMargin: 10,
+                                axisMargin: 500,
+                                hoverable: true,
+                                clickable: true,
+                                tickColor: "rgba(0,0,0,0.15)",
+                                borderWidth: 0
+                            },
+                            colors: ["#FD6A5E", "#FFFFFF", "#52e136"],
+                            xaxis: {
+                                autoscaleMargin: .05,
+                                mode: "categories",
+                                tickLength: 0,
+                                axisLabelUseCanvas: false,
+                                axisLabelFontSizePixels: 14,
+                            },
+                            yaxis: {
+                                ticks: 6,
+                                tickDecimals: 0
+                            }
+                        });
+
+
+                        showNumbersOnBars('#statsYear', statsYear);
+                        $(window).on('resize', function () {
+                            showNumbersOnBars('#statsYear', statsYear);
+                        });
+
                     });
-                </script>
+                    </script>
+                <?php $scripts .= ob_get_contents();
+                ob_end_clean(); ?>
+
+
 
             </div>
         </div>
+        
     </div>
+</div>
 
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
+
+<div class="row">
+    <div class="col-md-12">
+        
+
+        <?php 
+            $inscriptionStructures = array();
+            foreach($structures as $key => $structure) {
+                $result = getNbInscriptionByStructureByYear($structure, $year);
+                
+                if (!empty($result->id) && $result->nb != 0) {
+                    $inscriptionStructures[$structure->name] = $result->nb;
+                }
+            }
+            asort($inscriptionStructures);
+       ?>
+        <div class="section-head">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>Inscription par structure</h3>
+                </div>
+            </div>
+        </div>
+        <div class="block-flat tb-special tb-stats">
+            <div class="content">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="datatable">
+                        <thead>
+                            <tr>
+                                <th width="350">Struture</th>
+                                <th>Nombre d'inscription</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $the_json = array();
+
+                                $the_datas = array();
+                                $max = max($inscriptionStructures);
+
+                                foreach($inscriptionStructures as $name => $nb) {
+
+                                    $nb_text = '<span class="hide">'.sprintf("%04d", $nb).'</span>';
+                                    $width = $nb * 100 / $max;
+                                    $nb_text .= '<div class="progress ';
+                                    if ($nb == $max) {
+                                        $nb_text .= 'progress-striped active';
+                                    }
+                                    $nb_text .= ' progress-stats"><div class="progress-bar progress-bar-primary" style="width: '.$width.'%;"><span>'.$nb.'</span></div></div>';
+                                    $the_data = ['<div class="text-right" style="font-size:11px;">'.$name.'</div>', $nb_text];
+                                    array_push($the_datas, $the_data);
+                                }
+                                array_push($the_json, $the_datas);
+                            ?>
+                        </tbody>
+                    </table>
+                    
+                    <?php ob_start(); ?>
+                        <script>
+
+                            var the_datas = [];
+                            <?php foreach ($the_json as $key => $value): ?>
+                            the_datas.push(<?=json_encode($the_json[$key]);?>);
+                            <?php endforeach; ?>
+                            $('#datatable').dataTable({
+                                "bProcessing": true,
+                                "bDeferRender": true,
+                                "bStateSave": true,
+                                "aaData":   the_datas[0],
+                                "aaSorting": [[ 1, "desc" ]],
+                                "bLengthChange": false,
+                                "iDisplayLength": 1000,
+                                // "bPaginate": false,
+                                "bInfo": false
+                            });
+
+                        </script>
+                    <?php $scripts .= ob_get_contents();
+                    ob_end_clean(); ?>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>

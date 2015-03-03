@@ -18,11 +18,7 @@
 
 <?php if (isset($_POST['id']) && $_POST['action'] == 'supprimer' && $_POST['confirm'] == true): ?>
     <?php $structure = structure::get($_POST['id']); ?>
-    <div class="alert alert-success rounded">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <i class="fa fa-check sign"></i><strong>C'est fait !</strong> La structure de <strong><?=$structure->name ?></strong> a bien été supprimée !
-    </div>
-
+    <?php tpl::alert('success', 'La structure <strong>'.$structure->name.'</strong> a bien été supprimée !') ?>
     <?php structure::remove($_POST['id']); ?>
 <?php endif; ?>
 
@@ -109,7 +105,6 @@ var the_datas = [];
 <?php foreach ($the_json as $key => $value): ?>
 the_datas.push(<?=json_encode($the_json[$key]);?>);
 <?php endforeach; ?>
-
 $('#datatable').dataTable({
     "bProcessing": true,
     "bDeferRender": true,
