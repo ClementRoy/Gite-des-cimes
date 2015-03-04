@@ -64,6 +64,48 @@
        
     }
 
+    function getNbInscriptionByStructureByPeriod($structure, $from, $to ){
+        global $db;
+        $number = 0;
+        $from = $from->format("Y-m-d H:i:s");
+        $to = $to->format("Y-m-d H:i:s");
+
+        $sql = 'SELECT DISTINCT enfant.id, COUNT(enfant.id) as nb FROM inscription
+                LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
+                LEFT JOIN enfant ON inscription.ref_enfant = enfant.id 
+                LEFT JOIN structure ON enfant.organization = structure.id 
+                WHERE structure.id  = "'.$structure->id.'" 
+                AND dossier.finished = 1 
+                AND inscription.date_from >= "'.$from.'" 
+                AND inscription.date_to <= "'.$to.'" 
+                ORDER BY inscription.id';
+
+        return $db->row($sql);
+    }
+
+    function getNbInscriptionsbyStructureWeekEndByYear($structure, $year = '2014'){
+        global $db;
+        $from = new DateTime('2014-01-01');
+        $from = $from->format("Y-m-d H:i:s");
+        $to = new DateTime('2014-12-31');
+        $to = $to->format("Y-m-d H:i:s");
+
+        $sql = 'SELECT DISTINCT enfant.id, COUNT(enfant.id) as nb FROM inscription
+                LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
+                LEFT JOIN enfant ON inscription.ref_enfant = enfant.id 
+                LEFT JOIN structure ON enfant.organization = structure.id 
+                WHERE structure.id  = "'.$structure->id.'" 
+                AND dossier.finished = 1 
+                AND inscription.date_from >= "'.$from.'" 
+                AND inscription.date_to <= "'.$to.'" 
+                AND DATE_ADD(inscription.date_from, INTERVAL 2 DAY) = inscription.date_to
+                ORDER BY inscription.id';
+
+
+        return $db->row($sql)->nb;
+    }
+
+
     $year = $_GET['annee'];
     
     $seasons = array(
@@ -88,6 +130,7 @@
 ?>
 
 
+
 <div class="page-head">
     <div class="row">
         <div class="col-md-8">
@@ -98,24 +141,6 @@
         </div>
     </div>
 </div>
-
-                            ?>
-                            <?php if($result2->nb > 0): ?>
-                            <tr>
-                                <td>
-                                    <a href="/structures/infos/id/<?=$structure->id; ?>"><?=$structure->name; ?></a>
-                                </td>
-                                <td>
-                                    <?=$result2->nb ?>                                      
-                                </td>                                    
-                            </tr>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            <?php else: ?>
-                <p><em>Cette corbeille est vide</em></p>
-            <?php endif; ?> 
 
 <div class="row">
     
@@ -178,7 +203,7 @@
                         });
 
                         // La valeur max arrondi
-                        valueMaxRounded = Math.ceil(valueMax/50)*50;
+                        valueMaxRounded = Math.ceil(valueMax / 50) * 50;
                         var textOverHeight = $('.flot-text-over').height(),
                             textOverWidth = $('.flot-text-over').width();
 
@@ -252,6 +277,16 @@
                             showNumbersOnBars('#statsYear', statsYear);
                         });
 
+                        $("#statsYear").bind("plotclick", function (event, pos, item) {
+                            alert("You clicked at " + pos.x + ", " + pos.y);
+                            // axis coordinates for other axes, if present, are in pos.x2, pos.x3, ...
+                            // if you need global screen coordinates, they are pos.pageX, pos.pageY
+
+                            if (item) {
+                                highlight(item.series, item.datapoint);
+                                alert("You clicked a point!");
+                            }
+                        });
                     });
                     </script>
                 <?php $scripts .= ob_get_contents();
@@ -284,7 +319,7 @@
         <div class="section-head">
             <div class="row">
                 <div class="col-md-8">
-                    <h3>Inscription par structure</h3>
+                    <h3>Année <?=$year; ?></h3>
                 </div>
             </div>
         </div>
@@ -350,6 +385,189 @@
         </div>
     </div>
 </div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        
+
+
+
+        <?php
+            $inscriptions = array();
+
+            foreach($structures as $structure) {
+                $result = getNbInscriptionsbyStructureWeekEndByYear($structure, $year);
+                if (!empty($result) && $result != 0) {
+                    $inscriptions[$structure->name] = $result;
+                }
+            }
+            arsort($inscriptions);
+
+       ?>
+        <div class="section-head">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>Week-ends <?=$year; ?></h3>
+                </div>
+            </div>
+        </div>
+        <div class="block-flat tb-special tb-stats">
+            <div class="content">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="datatable-weekend">
+                        <thead>
+                            <tr>
+                                <th width="350">Struture</th>
+                                <th>Nombre d'inscription</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $the_json = array();
+
+                                $the_datas = array();
+                                $max = max($inscriptions);
+
+                                foreach($inscriptions as $name => $nb) {
+
+                                    $nb_text = '<span class="hide">'.sprintf("%04d", $nb).'</span>';
+                                    $width = $nb * 100 / $max;
+                                    $nb_text .= '<div class="progress ';
+                                    if ($nb == $max) {
+                                        $nb_text .= 'progress-striped active';
+                                    }
+                                    $nb_text .= ' progress-stats"><div class="progress-bar progress-bar-primary" style="width: '.$width.'%;"><span>'.$nb.'</span></div></div>';
+                                    $the_data = ['<div class="text-right" style="font-size:11px;">'.$name.'</div>', $nb_text];
+                                    array_push($the_datas, $the_data);
+                                }
+                                array_push($the_json, $the_datas);
+                            ?>
+                        </tbody>
+                    </table>
+                    
+                    <?php ob_start(); ?>
+                        <script>
+
+                            var the_datas = [];
+                            <?php foreach ($the_json as $key => $value): ?>
+                            the_datas.push(<?=json_encode($the_json[$key]);?>);
+                            <?php endforeach; ?>
+                            $('#datatable-weekend').dataTable({
+                                "bProcessing": true,
+                                "bDeferRender": true,
+                                "bStateSave": true,
+                                "aaData":   the_datas[0],
+                                "aaSorting": [[ 1, "desc" ]],
+                                "bLengthChange": false,
+                                "iDisplayLength": 1000,
+                                // "bPaginate": false,
+                                "bInfo": false
+                            });
+
+                        </script>
+                    <?php $scripts .= ob_get_contents();
+                    ob_end_clean(); ?>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<?php $a = 1; ?>
+<?php foreach ($seasons as $name => $season): ?>
+    <div class="row">
+        <div class="col-md-12">
+            
+
+
+
+            <?php
+                $inscriptions = array();
+
+                foreach($structures as $key => $structure) {
+                    $result = getNbInscriptionByStructureByPeriod($structure, $season['start'], $season['end'] );
+                    
+                    if (!empty($result->id) && $result->nb != 0) {
+                        $inscriptions[$structure->name] = $result->nb;
+                    }
+                }
+                arsort($inscriptions);
+
+           ?>
+            <div class="section-head">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3><?=$name; ?> <?=$year; ?></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="block-flat tb-special tb-stats">
+                <div class="content">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="datatable-<?=$a; ?>">
+                            <thead>
+                                <tr>
+                                    <th width="350">Struture</th>
+                                    <th>Nombre d'inscription</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    $the_json = array();
+
+                                    $the_datas = array();
+                                    $max = max($inscriptions);
+
+                                    foreach($inscriptions as $name => $nb) {
+
+                                        $nb_text = '<span class="hide">'.sprintf("%04d", $nb).'</span>';
+                                        $width = $nb * 100 / $max;
+                                        $nb_text .= '<div class="progress ';
+                                        if ($nb == $max) {
+                                            $nb_text .= 'progress-striped active';
+                                        }
+                                        $nb_text .= ' progress-stats"><div class="progress-bar progress-bar-primary" style="width: '.$width.'%;"><span>'.$nb.'</span></div></div>';
+                                        $the_data = ['<div class="text-right" style="font-size:11px;">'.$name.'</div>', $nb_text];
+                                        array_push($the_datas, $the_data);
+                                    }
+                                    array_push($the_json, $the_datas);
+                                ?>
+                            </tbody>
+                        </table>
+                        
+                        <?php ob_start(); ?>
+                            <script>
+
+                                var the_datas = [];
+                                <?php foreach ($the_json as $key => $value): ?>
+                                the_datas.push(<?=json_encode($the_json[$key]);?>);
+                                <?php endforeach; ?>
+                                $('#datatable-<?=$a; ?>').dataTable({
+                                    "bProcessing": true,
+                                    "bDeferRender": true,
+                                    "bStateSave": true,
+                                    "aaData":   the_datas[0],
+                                    "aaSorting": [[ 1, "desc" ]],
+                                    "bLengthChange": false,
+                                    "iDisplayLength": 1000,
+                                    // "bPaginate": false,
+                                    "bInfo": false
+                                });
+
+                            </script>
+                        <?php $scripts .= ob_get_contents();
+                        ob_end_clean(); ?>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php $a++; ?>
+<?php endforeach; ?>
 
 
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
