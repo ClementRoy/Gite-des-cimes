@@ -321,7 +321,7 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="form-enfant-telephone-fixe-famille">Téléphone fixe</label>
                             <div class="col-sm-6">
-                                <input id="form-enfant-pere-telephone" value="<?=$enfant->host_family_phone_home; ?>" name="form_enfant_telephone_fixe_famille" class="form-control input-phone input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe de la famille d'accueil.">
+                                <input id="form-enfant-telephone-fixe-famille" value="<?=$enfant->host_family_phone_home; ?>" name="form_enfant_telephone_fixe_famille" class="form-control input-phone input-sm" type="text" data-toggle="tooltip" title="Renseignez le numéro de téléphone fixe de la famille d'accueil.">
                             </div>
                         </div>
                         <div class="form-group">
@@ -560,12 +560,12 @@
                         <li><a href="#form-enfant-structure-select">Nom de la structure</a></li>
                         <li><a href="#form-enfant-contact-select">Nom du contact</a></li>
                     </div>
-                    <li><a href="#form-enfant-responsable-structure">Responsable légal de l'enfant</a></li>
+                    <li><a href="#form-enfant-responsable-defaut">Responsable légal de l'enfant</a></li>
                     <div data-responsable="parents">
                         <div data-responsable="pere">
                             <li><a href="#form-enfant-nom-pere">Nom du père</a></li>
                             <li><a href="#form-enfant-telephone-pere">Téléphone fixe</a></li>
-                            <li><a href="#form-enfant-telephone-pere">Téléphone portable</a></li>
+                            <li><a href="#form-enfant-portable-pere">Téléphone portable</a></li>
                             <li><a href="#form-enfant-professionnel-pere">Téléphone professionnel</a></li>
                             <li><a href="#form-enfant-adresse-numero-pere">Adresse du père</a></li>
                         </div>

@@ -329,8 +329,8 @@
                     <table class="table table-bordered" id="datatable">
                         <thead>
                             <tr>
-                                <th width="350">Struture</th>
-                                <th>Nombre d'inscription</th>
+                                <th width="350">Structure</th>
+                                <th>Nombre d'inscriptions par période</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -418,8 +418,8 @@
                     <table class="table table-bordered" id="datatable-weekend">
                         <thead>
                             <tr>
-                                <th width="350">Struture</th>
-                                <th>Nombre d'inscription</th>
+                                <th width="350">Structure</th>
+                                <th>Nombre d'inscriptions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -510,8 +510,8 @@
                         <table class="table table-bordered" id="datatable-<?=$a; ?>">
                             <thead>
                                 <tr>
-                                    <th width="350">Struture</th>
-                                    <th>Nombre d'inscription</th>
+                                    <th width="350">Structure</th>
+                                    <th>Nombre d'inscriptions</th>
                                 </tr>
                             </thead>
                             <tbody>
