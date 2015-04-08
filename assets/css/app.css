@@ -124,6 +124,10 @@ table.information td.category {
 .block-flat {
     margin-bottom: 30px;
 }
+.row:last-child > .col-md-12 > .block-flat:last-child,
+.row:last-child > .col-md-9 > .block-flat:last-child {
+    margin-bottom: 0;
+}
 .table td {
     position: relative;
 }
@@ -1091,4 +1095,7 @@ table td .progress-tb .progress-bar:last-child {
     font-size: 85%;
 border-radius: 3px;
 padding: 2px 5px;
+}
+#form-nav {
+    overflow: scroll;
 }

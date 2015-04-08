@@ -85,9 +85,9 @@
 
     function getNbInscriptionsbyStructureWeekEndByYear($structure, $year = '2014'){
         global $db;
-        $from = new DateTime('2014-01-01');
+        $from = new DateTime($year.'-01-01');
         $from = $from->format("Y-m-d H:i:s");
-        $to = new DateTime('2014-12-31');
+        $to = new DateTime($year.'-12-31');
         $to = $to->format("Y-m-d H:i:s");
 
         $sql = 'SELECT DISTINCT enfant.id, COUNT(enfant.id) as nb FROM inscription
@@ -309,6 +309,7 @@
             $inscriptionStructures = array();
             foreach($structures as $key => $structure) {
                 $result = getNbInscriptionByStructureByYear($structure, $year);
+                
                 
                 if (!empty($result->id) && $result->nb != 0) {
                     $inscriptionStructures[$structure->name] = $result->nb;

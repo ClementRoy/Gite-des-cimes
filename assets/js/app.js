@@ -25,13 +25,14 @@ function testing(testingString) {
     });
 }
 
+
 function neoAffix(elem, marginTop, marginBottom, breakpoint) {
 
     var $elem = elem,
         offsetTop = $elem.offset().top,
         elemHeight = $elem.outerHeight(),
         elemWidth = $elem.outerWidth(),
-        documentHeight = $(document).height();
+        documentHeight = $(document).height(),
         $window = $(window);
 
     if (typeof $elem.data('width') !== undefined) {
@@ -39,8 +40,15 @@ function neoAffix(elem, marginTop, marginBottom, breakpoint) {
     }
 
 
+    var windowHeight = $(window).height(),
+        otherElemHeight = 0,
+        uselessHeight = elemHeight - $('#form-nav').outerHeight();
+
+    $('#form-nav').css('height', windowHeight - 60 - uselessHeight);
+
+
     function neoProcessing(){
-        scrollTop = $window.scrollTop();
+        var scrollTop = $window.scrollTop();
 
         if ($window.width() <= breakpoint) { return false; }
 
@@ -66,6 +74,13 @@ function neoAffix(elem, marginTop, marginBottom, breakpoint) {
         $elem.removeAttr('style').removeClass('neoaffix-top neoaffix');
         elemWidth = $elem.outerWidth();
         $elem.attr('data-width', elemWidth);
+
+        windowHeight = $(window).height(),
+        otherElemHeight = 0,
+        uselessHeight = elemHeight - $('#form-nav').outerHeight();
+
+        $('#form-nav').css('height', windowHeight - 60 - uselessHeight);
+
         neoProcessing();
     });
 }

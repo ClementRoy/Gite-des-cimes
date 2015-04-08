@@ -13186,13 +13186,14 @@ if ('undefined' !== typeof window.ParsleyValidator)
         var context = this
 
         var settings = $.extend({
-            getHashCallback: function(hash, btn) { return hash }
+            getHashCallback: function(hash, btn) { return hash },
+            selectorAttribute: "href"
         }, options );
 
         // Show the tab corresponding with the hash in the URL, or the first tab.
         var showTabFromHash = function() {
-          var hash = window.location.hash;
-          var selector = hash ? 'a[href="' + hash + '"]' : 'li.active > a';
+          var hash = settings.selectorAttribute == "href" ? window.location.hash : window.location.hash.substring(1); //Omit the hash character ('#');
+          var selector = hash ? 'a[' + settings.selectorAttribute +'="' + hash + '"]' : 'li.active > a';
           $(selector, context).tab('show');
         }
 
@@ -20729,13 +20730,14 @@ $(function() {
     });
 }
 
+
 function neoAffix(elem, marginTop, marginBottom, breakpoint) {
 
     var $elem = elem,
         offsetTop = $elem.offset().top,
         elemHeight = $elem.outerHeight(),
         elemWidth = $elem.outerWidth(),
-        documentHeight = $(document).height();
+        documentHeight = $(document).height(),
         $window = $(window);
 
     if (typeof $elem.data('width') !== undefined) {
@@ -20743,8 +20745,15 @@ function neoAffix(elem, marginTop, marginBottom, breakpoint) {
     }
 
 
+    var windowHeight = $(window).height(),
+        otherElemHeight = 0,
+        uselessHeight = elemHeight - $('#form-nav').outerHeight();
+
+    $('#form-nav').css('height', windowHeight - 60 - uselessHeight);
+
+
     function neoProcessing(){
-        scrollTop = $window.scrollTop();
+        var scrollTop = $window.scrollTop();
 
         if ($window.width() <= breakpoint) { return false; }
 
@@ -20770,6 +20779,13 @@ function neoAffix(elem, marginTop, marginBottom, breakpoint) {
         $elem.removeAttr('style').removeClass('neoaffix-top neoaffix');
         elemWidth = $elem.outerWidth();
         $elem.attr('data-width', elemWidth);
+
+        windowHeight = $(window).height(),
+        otherElemHeight = 0,
+        uselessHeight = elemHeight - $('#form-nav').outerHeight();
+
+        $('#form-nav').css('height', windowHeight - 60 - uselessHeight);
+
         neoProcessing();
     });
 }

@@ -217,7 +217,6 @@
     </div>
 </div>
 
-
 <?php ob_start(); ?>
 <script>
     function toDate(timestamp) {

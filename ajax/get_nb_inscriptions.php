@@ -15,7 +15,7 @@ extract($_GET);
 //$sections = section::getByCP(substr($dept,0, 2));
 
 
-if(isset($_GET['sejour_id']) && !empty($_GET['sejour_id'])){
+if (isset($_GET['sejour_id']) && !empty($_GET['sejour_id'])) {
 	
 	header('Content-Type: application/json; charset=utf-8');
 	//echo $_GET['cp'];
@@ -25,7 +25,7 @@ if(isset($_GET['sejour_id']) && !empty($_GET['sejour_id'])){
 
 	$sejour = sejour::get($sejour_id);
 
-	if(count($result) >= $sejour->capacity_max){
+	if ( count($result) >= $sejour->capacity_max ){
 		echo 'true';
 	}
 	else {

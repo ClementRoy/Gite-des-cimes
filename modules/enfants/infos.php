@@ -265,7 +265,7 @@
                     <div class="tab-content">
                         <div id="about" class="tab-pane cont active">
 
-                             <? /*
+                             <?php /*
                             <?php if( $enfant->number_ss == 0 || $enfant->self_assurance <= 0 || $enfant->cpam_attestation <= 0 || empty($enfant->self_assurance_expiration_date) || $enfant->health_record <= 0 || $enfant->vaccination <= 0 ): ?>
                             <div class="alert alert-info alert-white rounded">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -295,7 +295,7 @@
                                 </div>
                             <?php endif; ?>
 
-                            <? /*
+                            <?php /*
                             <?php if($enfant->archived) :?>
                             <div class="alert alert-danger">
                                 <i class="icon-remove-sign"></i> Cette fiche est archivée voulez-vous la supprimer ?
