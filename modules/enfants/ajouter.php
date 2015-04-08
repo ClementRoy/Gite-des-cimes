@@ -539,12 +539,12 @@
                         <li><a href="#form-enfant-structure-select">Nom de la structure</a></li>
                         <li><a href="#form-enfant-contact-select">Nom du contact</a></li>
                     </div>
-                    <li><a href="#form-enfant-responsable-structure">Responsable légal de l'enfant</a></li>
+                    <li><a href="#form-enfant-responsable-defaut">Responsable légal de l'enfant</a></li>
                     <div data-responsable="parents">
                         <div data-responsable="pere">
                             <li><a href="#form-enfant-nom-pere">Nom du père</a></li>
                             <li><a href="#form-enfant-telephone-pere">Téléphone fixe</a></li>
-                            <li><a href="#form-enfant-telephone-pere">Téléphone portable</a></li>
+                            <li><a href="#form-enfant-portable-pere">Téléphone portable</a></li>
                             <li><a href="#form-enfant-professionnel-pere">Téléphone professionnel</a></li>
                             <li><a href="#form-enfant-adresse-numero-pere">Adresse du père</a></li>
                         </div>
