@@ -62,6 +62,7 @@
                     <table class="table table-bordered" id="datatable1">
                         <thead>
                             <tr>
+                                <th width="90">Dossier</th>
                                 <th>Nom de l'enfant</th>
                                 <th>Séjour</th>
                                 <th>À partir du</th>
@@ -75,8 +76,9 @@
                                     // $structure = structure::get($notSupportedDossier->ref_structure_payer);
                                     $inscription = inscription::getByDossier($notSupportedDossier->id);
                                 ?>
-                                <?php if ( count($inscription) > 1): ?>
+                                <?php if ( count($inscription) > 0): ?>
                                     <?php
+                                        $dossier = $notSupportedDossier->id;
                                         $date_from = new DateTime($inscription[0]->date_from);
                                         if($date_from->getTimestamp() != '-62169987600') {
                                             $week = 60 * 60 * 24 * 7;
@@ -107,7 +109,8 @@
                                             </ul>';
                                     ?>
                                     <tr>
-                                        <td><a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname?> <?=$enfant->lastname?></a><?=$popup; ?></td>
+                                        <td><a href="/dossiers/infos/id/<?=$dossier; ?>">#<?=$dossier; ?></a><?=$popup; ?></td>
+                                        <td><a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname?> <?=$enfant->lastname?></a></td>
                                         <td><a href="/sejours/infos/<?=$sejour->id; ?>"><?=$sejour->name; ?></a></td>
                                         <td><?=$date_from; ?></td>
                                     </tr>
