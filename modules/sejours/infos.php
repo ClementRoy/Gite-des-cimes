@@ -256,6 +256,9 @@
                         <?php else: ?>
 
                             <div class="header text-right">
+                                <button class="btn btn-primary btn-sm btn-rad" data-toggle="modal" data-target="#modal-recapitulatif-notes-enfants-<?=$o?>">
+                                    Récapitulatif des notes générales
+                                </button>
                                 <button class="btn btn-primary btn-sm btn-rad" data-toggle="modal" data-target="#modal-recapitulatif-mineurs-<?=$o?>">
                                     Récapitulatif mineurs
                                 </button>
@@ -268,7 +271,6 @@
                             </div>
                             <hr>
                             <div class="content">
-
                                 <p class="lead">
                                     <strong><?=$total; ?> enfant<?php if($total > 1): ?>s<?php endif ?><?php if($opt > 0): ?> (dont <?=$opt; ?> option(s))<?php endif; ?></strong> sont inscrits<?php if ($date_from->diff($date_to)->format('%d') != 2): ?> pour la semaine <?=$o; ?><?php endif; ?>.
                                     <?php if ($total < $max): ?>
@@ -526,6 +528,52 @@
                                 }
                             ?>
 
+
+                            <!-- modal-recapitulatif-mineurs -->
+                            <div class="modal fade colored-header" id="modal-recapitulatif-notes-enfants-<?=$o; ?>" tabindex="-1" role="dialog" aria-labelledby="modal-recapitulatif-notes-enfants-<?=$o; ?>" aria-hidden="true">
+                                <div class="modal-dialog full-width">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="modal-recapitulatif-notes-enfants-<?=$o; ?>">
+                                                Récapitulatif des notes générales de chaque enfant
+                                                - <span><?=$sejour->name;?> du <?=strftime('%d %B %Y', $date_from_query->getTimestamp()); ?> au <?=strftime('%d %B %Y', $date_to_query->getTimestamp()); ?></span>
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table class="no-border">
+                                                <thead class="no-border">
+                                                    <tr>
+                                                        <th>Prénom & nom</th>
+                                                        <th>Notes</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="no-border-x no-border-y">
+
+                                                    <?php foreach($inscriptions as $key => $inscription): ?>
+                                                        <?php if ($inscription->ref_enfant_id != ''): ?>
+                                                            <?php $enfant = enfant::get($inscription->ref_enfant_id); ?>
+                                                            <?php if (isset($enfant->note) && !empty(trim($enfant->note)) ): ?>
+                                                                <tr>
+                                                                    <td style="font-weight:bold;width:200px;" width="200px;"><?=$enfant->firstname; ?> <?=$enfant->lastname; ?></td>
+                                                                    <td><?=$enfant->note; ?></td>
+                                                                </tr>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                            <a href="/export/sejour/type/4/id/<?=$sejour->id ?>/datefrom/<?=$date_from_query->getTimestamp() ?>/dateto/<?=$date_to_query->getTimestamp()?>" class="btn btn-primary">
+                                                <i class="fa fa-download"></i> Télécharger le document
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /.modal-recapitulatif-mineurs -->
 
                             <!-- modal-recapitulatif-mineurs -->
                             <div class="modal fade colored-header" id="modal-recapitulatif-mineurs-<?=$o; ?>" tabindex="-1" role="dialog" aria-labelledby="modal-recapitulatif-mineurs-<?=$o; ?>" aria-hidden="true">

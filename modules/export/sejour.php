@@ -15,6 +15,7 @@ $date_from_query->setTimestamp($datefrom);
 $date_to_query = new DateTime();
 $date_to_query->setTimestamp($dateto);
 $inscriptions = inscription::getBySejourBetweenDatesFinished($id, $date_from_query, $date_to_query);
+$datas = array();
 
 if($type == 1) {
 	foreach ($inscriptions as $key => $inscription) {
@@ -40,9 +41,6 @@ if($type == 1) {
 	$filename = 'Récapitulatif mineurs par age - '.$sejour->name.' - ';
 	CSV::export($datas, $filename, $headline);
 } elseif($type == 2) {
-
-
-	$datas = array();
 
 	foreach ($inscriptions as $key => $inscription) {
                                 $enfant = enfant::get($inscription->ref_enfant);
@@ -74,10 +72,8 @@ if($type == 1) {
 
 } elseif($type == 3) {
 
-	$datas = array();
-
 	foreach ($inscriptions as $key => $inscription) {
-$enfant = enfant::get($inscription->ref_enfant);
+    $enfant = enfant::get($inscription->ref_enfant);
                                 $birthdate = new DateTime($enfant->birthdate);
                                 if( $enfant->birthdate != '0000-00-00 00:00:00') {
                                     $birthdate_string = strftime('%d/%m/%Y', $birthdate->getTimestamp());
@@ -155,6 +151,24 @@ $enfant = enfant::get($inscription->ref_enfant);
 	CSV::export($datas, $filename, $headline);
 // Registre des mineurs
 
-}
+} elseif($type == 4) {
 
+    foreach($inscriptions as $key => $inscription) {
+        if (!empty(trim($inscription->ref_enfant))) {
+            $enfant = enfant::get($inscription->ref_enfant);
+            if (isset($enfant->note) && !empty(trim($enfant->note)) ) {
+                $datas[] = array(
+                    utf8_decode('Prénom & nom') => utf8_decode($enfant->firstname. ' ' .$enfant->lastname),
+                    utf8_decode('Notes') => utf8_decode($enfant->note),
+                );
+            }
+        }
+    }
+
+    $headline = utf8_decode('Récapitulatif des notes générales de chaque enfant - '.$sejour->name.' du '.strftime('%d %B %Y', $date_from_query->getTimestamp()).' au '.strftime('%d %B %Y', $date_to_query->getTimestamp()));
+    $filename = 'Récapitulatif des notes générales de chaque enfant - '.$sejour->name.' - ';
+    CSV::export($datas, $filename, $headline);
+
+
+}
 ?>
