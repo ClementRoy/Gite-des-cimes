@@ -553,7 +553,7 @@
                                                     <?php foreach($inscriptions as $key => $inscription): ?>
                                                         <?php if ($inscription->ref_enfant_id != ''): ?>
                                                             <?php $enfant = enfant::get($inscription->ref_enfant_id); ?>
-                                                            <?php if (isset($enfant->note) && !empty(trim($enfant->note)) ): ?>
+                                                            <?php if ( isset($enfant->note) && trim($enfant->note) != ''): ?>
                                                                 <tr>
                                                                     <td style="font-weight:bold;width:200px;" width="200px;"><?=$enfant->firstname; ?> <?=$enfant->lastname; ?></td>
                                                                     <td><?=$enfant->note; ?></td>

@@ -3,10 +3,9 @@
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
 
-
 <?php 
     
-    $structures = structure::getList();
+    $structures = structure::getListAll();
 
     function getNbInscriptionsByPeriod($from, $to ){
         global $db;
@@ -15,9 +14,10 @@
         $to = $to->format("Y-m-d H:i:s");
 
 
-        $sql = 'SELECT DISTINCT COUNT(inscription.id) as nb  FROM inscription
+        $sql = 'SELECT COUNT(inscription.id) as nb  FROM inscription
                 LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
                 WHERE dossier.finished = 1 
+                AND dossier.archived = 0
                 AND inscription.date_from >= "'.$from.'" 
                 AND inscription.date_to <= "'.$to.'" 
                 AND DATE_ADD(inscription.date_from, INTERVAL 2 DAY) != inscription.date_to
@@ -34,7 +34,8 @@
         $to = $to->format("Y-m-d H:i:s");
         $sql = 'SELECT DISTINCT COUNT(inscription.id) as nb  FROM inscription
                 LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
-                WHERE dossier.finished = 1 
+                WHERE dossier.finished = 1
+                AND dossier.archived = 0 
                 AND inscription.date_from >= "'.$from.'"
                 AND inscription.date_to <= "'.$to.'"
                 AND DATE_ADD(inscription.date_from, INTERVAL 2 DAY) = inscription.date_to
@@ -49,12 +50,13 @@
         $to = new DateTime($year.'-12-31');
         $to = $to->format("Y-m-d H:i:s");
 
-        $sql = 'SELECT DISTINCT enfant.id, COUNT(enfant.id) as nb FROM inscription
+        $sql = 'SELECT inscription.id, COUNT(inscription.id) as nb FROM inscription
                 LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
                 LEFT JOIN enfant ON inscription.ref_enfant = enfant.id 
                 LEFT JOIN structure ON enfant.organization = structure.id 
                 WHERE structure.id  = "'.$structure->id.'" 
                 AND dossier.finished = 1 
+                AND dossier.archived = 0
                 AND inscription.date_from >= "'.$from.'" 
                 AND inscription.date_to <= "'.$to.'" 
                 ORDER BY inscription.id';
@@ -70,16 +72,17 @@
         $from = $from->format("Y-m-d H:i:s");
         $to = $to->format("Y-m-d H:i:s");
 
-        $sql = 'SELECT DISTINCT enfant.id, COUNT(enfant.id) as nb FROM inscription
+        $sql = 'SELECT inscription.id, COUNT(inscription.id) as nb FROM inscription
                 LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
                 LEFT JOIN enfant ON inscription.ref_enfant = enfant.id 
                 LEFT JOIN structure ON enfant.organization = structure.id 
                 WHERE structure.id  = "'.$structure->id.'" 
                 AND dossier.finished = 1 
+                AND dossier.archived = 0
                 AND inscription.date_from >= "'.$from.'" 
                 AND inscription.date_to <= "'.$to.'" 
+                AND DATE_ADD(inscription.date_from, INTERVAL 2 DAY) != inscription.date_to
                 ORDER BY inscription.id';
-
         return $db->row($sql);
     }
 
@@ -90,17 +93,17 @@
         $to = new DateTime($year.'-12-31');
         $to = $to->format("Y-m-d H:i:s");
 
-        $sql = 'SELECT DISTINCT enfant.id, COUNT(enfant.id) as nb FROM inscription
+        $sql = 'SELECT inscription.id, COUNT(inscription.id) as nb FROM inscription
                 LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
                 LEFT JOIN enfant ON inscription.ref_enfant = enfant.id 
                 LEFT JOIN structure ON enfant.organization = structure.id 
                 WHERE structure.id  = "'.$structure->id.'" 
                 AND dossier.finished = 1 
+                AND dossier.archived = 0
                 AND inscription.date_from >= "'.$from.'" 
                 AND inscription.date_to <= "'.$to.'" 
                 AND DATE_ADD(inscription.date_from, INTERVAL 2 DAY) = inscription.date_to
                 ORDER BY inscription.id';
-
 
         return $db->row($sql)->nb;
     }
@@ -110,8 +113,8 @@
     
     $seasons = array(
         'Février' => array(
-            'start' => new DateTime($year.'-02-01'),
-            'end' => new DateTime($year.'-03-01'),
+            'start' => new DateTime($year.'-02-05'),
+            'end' => new DateTime($year.'-03-04'),
         ),
         'Printemps' => array(
             'start' => new DateTime($year.'-03-21'),
@@ -162,13 +165,14 @@
 
             foreach ($seasons as $name => $season) {
                 $today = new DateTime('NOW');
-                if ($today->getTimestamp() > $season['end']->getTimestamp()) {
+                if ($today->getTimestamp() > $season['start']->getTimestamp()) {
                     $inscriptionSeason = getNbInscriptionsByPeriod($season['start'], $season['end']);
                     $inscriptionsCount[$name] = $inscriptionSeason;
                 } else {
                     $inscriptionsCount[$name] = 0;
                 }
             }
+
         ?>
         <div class="block-flat">
             <div class="content">
@@ -287,6 +291,39 @@
                                 alert("You clicked a point!");
                             }
                         });
+
+                        var total = 0;
+                        $('#datatable-weekend').find('.progress').find('span').each(function(index, el) {
+                        total = parseInt($(el).text()) + total;
+                        });
+                        console.log('weekend '+total);
+
+
+                        var total = 0;
+                        $('#datatable-1').find('.progress').find('span').each(function(index, el) {
+                        total = parseInt($(el).text()) + total;
+                        });
+                        console.log('fev '+total);
+
+                        var total = 0;
+                        $('#datatable-2').find('.progress').find('span').each(function(index, el) {
+                        total = parseInt($(el).text()) + total;
+                        });
+                        console.log('printemps '+total);
+
+
+                        var total = 0;
+                        $('#datatable-3').find('.progress').find('span').each(function(index, el) {
+                        total = parseInt($(el).text()) + total;
+                        });
+                        console.log('ete '+total);
+
+                        var total = 0;
+                        $('#datatable-4').find('.progress').find('span').each(function(index, el) {
+                        total = parseInt($(el).text()) + total;
+                        });
+                        console.log('toussaints '+total);
+
                     });
                     </script>
                 <?php $scripts .= ob_get_contents();
@@ -309,8 +346,6 @@
             $inscriptionStructures = array();
             foreach($structures as $key => $structure) {
                 $result = getNbInscriptionByStructureByYear($structure, $year);
-                
-                
                 if (!empty($result->id) && $result->nb != 0) {
                     $inscriptionStructures[$structure->name] = $result->nb;
                 }
@@ -487,15 +522,19 @@
 
             <?php
                 $inscriptions = array();
-
+                $nb_total = 0;
                 foreach($structures as $key => $structure) {
                     $result = getNbInscriptionByStructureByPeriod($structure, $season['start'], $season['end'] );
                     
                     if (!empty($result->id) && $result->nb != 0) {
                         $inscriptions[$structure->name] = $result->nb;
+                        $nb_total+=$result->nb;
                     }
                 }
+                $inscriptions['AUTRES - Particuliers'] = $inscriptionsCount[$name] - $nb_total;
                 arsort($inscriptions);
+
+                //tool::output($inscriptions);
 
            ?>
             <div class="section-head">

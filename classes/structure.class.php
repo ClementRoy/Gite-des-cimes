@@ -69,6 +69,12 @@ class structure
         return $result;
     }
 
+    public static function getListAll(){
+        global $db;
+        $result = $db->query('SELECT * FROM '.self::$table.' ORDER BY name');
+        return $result;
+    }
+
     /**
      * desc
      *

@@ -154,9 +154,10 @@ if($type == 1) {
 } elseif($type == 4) {
 
     foreach($inscriptions as $key => $inscription) {
-        if (!empty(trim($inscription->ref_enfant))) {
+        if (trim($inscription->ref_enfant) != '') {
             $enfant = enfant::get($inscription->ref_enfant);
-            if (isset($enfant->note) && !empty(trim($enfant->note)) ) {
+            
+            if ( isset($enfant->note) && trim($enfant->note) != '' ) {
                 $datas[] = array(
                     utf8_decode('Prénom & nom') => utf8_decode($enfant->firstname. ' ' .$enfant->lastname),
                     utf8_decode('Notes') => utf8_decode($enfant->note),
