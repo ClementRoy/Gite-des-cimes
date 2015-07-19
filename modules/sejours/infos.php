@@ -257,7 +257,7 @@
 
                             <div class="header text-right">
                                 <button class="btn btn-primary btn-sm btn-rad" data-toggle="modal" data-target="#modal-recapitulatif-notes-enfants-<?=$o?>">
-                                    Récapitulatif des notes générales
+                                    Récap. des notes d'enfant
                                 </button>
                                 <button class="btn btn-primary btn-sm btn-rad" data-toggle="modal" data-target="#modal-recapitulatif-mineurs-<?=$o?>">
                                     Récapitulatif mineurs
