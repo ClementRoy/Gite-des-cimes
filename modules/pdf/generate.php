@@ -111,11 +111,10 @@ ob_start(); ?>
 							
 
 							<?php $sejour = sejour::get($inscription->ref_sejour); ?>
-							<?php if ($numero_sejour != $sejour->numero): ?>
+							<?php if ($sejour->name !== 'Séjour Court' && $sejour->name !== 'Séjours courts'): ?>
 								<?php $hebergement = hebergement::get($sejour->ref_hebergement); ?>
 								<p style="margin:3px 0 0;"><?=$sejour->name ?> - <?=$sejour->numero ?><br>
 								<?=$hebergement->name.', '.$hebergement->address_postal_code.' '.$hebergement->address_city;?>
-								<?php $numero_sejour = $sejour->numero; ?>
 								</p>
 							<?php endif ?>
 						<?php endforeach ?>
