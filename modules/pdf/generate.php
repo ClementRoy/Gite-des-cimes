@@ -108,8 +108,6 @@ ob_start(); ?>
 						<strong>N° d’enregistrement du ou des séjours :</strong></p>
 						<?php $numero_sejour = ''; ?>
 						<?php foreach ($inscriptions as $key => $inscription): ?>
-							
-
 							<?php $sejour = sejour::get($inscription->ref_sejour); ?>
 							<?php if ($numero_sejour != $sejour->numero): ?>
 								<?php $hebergement = hebergement::get($sejour->ref_hebergement); ?>

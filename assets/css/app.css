@@ -281,6 +281,7 @@ table.information td.category {
     background: #E7E3F0;
     border-bottom: 1px solid #E7E3F0;
 }
+
 .tb-no-options .dataTables_wrapper > .row:first-child {
     display: none;
 }
@@ -311,6 +312,115 @@ table.information td.category {
     margin-top: 2px;
     float: left;
 }
+
+.table-form > tbody > tr {
+    border: 1px solid #ddd;
+}
+.table-form > tbody > tr > td {
+    vertical-align: middle;
+    padding: 10px 15px;
+    border-width: 0;
+}
+.table-form .input-sm {
+    font-size: 12px;
+    height: 26px;
+    width: 75px;
+    text-align: right;
+    display: inline-block;
+}
+.table-form label {
+    margin-bottom: 0;
+}
+.table-form > tbody > tr {
+    background-color: #fff;
+}
+.table-form > tbody > tr > .options {
+    width: 1%;
+    border-left-width: 1px;
+    text-align: center;
+}
+.table-form > tbody > tr > .options .label {
+    display: none;
+    font-size: 10px;
+    padding: 4px 7px;
+    letter-spacing: 0.01em;
+}
+.table-form > tbody > tr > .intouchable {
+    position: relative;
+}
+.table-form > tbody > tr > .intouchable:after {
+    content: '';
+    background-color: #fff;
+    opacity: .3;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.table-form > tbody > .disabled,
+.table-form > tbody > .selected {
+    opacity: .3;
+    background-color: #E0E0E0;
+}
+.table-form > tbody > .disabled > .options .label,
+.table-form > tbody > .selected > .options .label {
+    display: inline-block;
+}
+.table-form > tbody > .disabled > .options .btn,
+.table-form > tbody > .selected > .options .btn {
+    display: none;
+}
+.table-form > tbody > tr > .form {
+    text-align: right;
+}
+.table-form > tbody > tr > td p:last-child {
+    margin-bottom: 0;
+}
+.table-form .title {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.table-form .btn {
+    position: static;
+    margin: 0;
+}
+.block-flat .footer-form {
+    padding-top: 18px;
+}
+.block-flat.active .footer-form {
+    display: block;
+}
+.placeholder-form {
+    border: 2px dashed #DDDDDD;
+    text-align: center;
+    padding: 20px;
+    color: #919191;
+}
+.block-flat.active .placeholder-form {
+    display: none;
+}
+.tb-factures tr.child td:first-child {
+    padding-left: 10px;
+}
+.form-control.error {
+    border-color: #E24E4E;
+    color: #E24E4E;
+}
+.table-bon-commande > tbody > tr > .form {
+    text-align: left;
+}
+.table-bon-commande .input-sm {
+    width: 150px;
+}
+table.table-form {
+    margin-bottom: 25px !important;
+}
+table.table-form:last-child {
+    margin-bottom: 0 !important;
+}
+
 /* ========================================================= */
 /* ========================================================= */
 /* ========================================================= */

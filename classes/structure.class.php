@@ -91,6 +91,58 @@ class structure
     }
 
 
+   /**
+     *  On récupètre toutes les inscriptions d'une période classés par structure
+     *
+     * On lsite les structures qui ont des inscription par saisons
+     *
+     *
+     *
+     * SELECT ALL inscription 
+     * LEFT JOIN DOSSIER ref_dossier = dossier.id
+     * GROUP BY dossier.ref_structure_payer
+     */
+    public static function getPayerStructuresBySeason($season_id, $year){
+        global $db;
+        $number = 0;
+
+        $season = saison::getByYear($season_id, $year);
+
+        // tool::output( $season );
+        $from = $season['from']->format("Y-m-d H:i:s");
+        $to = $season['to']->format("Y-m-d H:i:s");
+
+        if($season['name'] == 'Weekend'){
+            $sql = 'SELECT structure.id, structure.name FROM structure
+                    LEFT JOIN dossier ON structure.id = dossier.ref_structure_payer 
+                    LEFT JOIN inscription ON dossier.id = inscription.ref_dossier 
+                    WHERE dossier.finished = 1 
+                    AND dossier.archived = 0
+                    AND inscription.date_from >= "'.$from.'" 
+                    AND inscription.date_to <= "'.$to.'" 
+                    AND DATE_ADD(inscription.date_from, INTERVAL 2 DAY) = inscription.date_to
+                    GROUP BY structure.id
+                    ORDER BY structure.name';
+        }
+        else {
+            $sql = 'SELECT structure.id, structure.name FROM structure
+                    LEFT JOIN dossier ON structure.id = dossier.ref_structure_payer 
+                    LEFT JOIN inscription ON dossier.id = inscription.ref_dossier 
+                    WHERE dossier.finished = 1 
+                    AND dossier.archived = 0
+                    AND inscription.date_from >= "'.$from.'" 
+                    AND inscription.date_to <= "'.$to.'" 
+                    AND DATE_ADD(inscription.date_from, INTERVAL 2 DAY) != inscription.date_to
+                    GROUP BY dossier.ref_structure_payer
+                    ORDER BY structure.name';
+        }
+        // echo $sql;
+        $result = $db->query($sql);
+        return $result;
+
+    }
+    
+
     public static function getFromTrash(){
         global $db;
         $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 1 ORDER BY name');

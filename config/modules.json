@@ -73,6 +73,6 @@
 	},
 	"pdf" : {
 		"name" : "pdf",
-		"views" : ["index", "generate", "generate-registre", "view", "export_notes", "export_note"]
+		"views" : ["index", "generate", "generate-registre", "view", "export_notes", "export_note", "facture"]
 	}
 }

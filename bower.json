@@ -28,10 +28,12 @@
     "odometer": "~0.4.7",
     "moment": "~2.9.0",
     "jquery-stickytabs": "*",
-    "jquery.gritter": "~1.7.4"
+    "jquery.gritter": "~1.7.4",
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.6.1"
   },
   "resolutions": {
     "jquery": "~1.10.2",
-    "bootstrap": ">= 3.0.0"
+    "bootstrap": "^3.3.6"
   }
 }

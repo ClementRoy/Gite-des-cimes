@@ -741,7 +741,7 @@
                                         <th>#</th>
                                         <th>Nom du séjour</th>
                                         <th>Dates</th>
-                                        <th>Satut</th>
+                                        <th>Statut</th>
                                         <th style="width:140px;">Commentaires</th>
                                     </tr>
                                 </thead>

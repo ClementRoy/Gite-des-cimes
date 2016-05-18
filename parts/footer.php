@@ -3,11 +3,16 @@
         </div> 
     </div>
 
-    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <?php if (APP_VERSION != 'dev'): ?>
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
         <script src="/assets/js/gitedescimes.min.js"></script>
     <?php else: ?>
+
+        <script src="/assets/libs/jquery/jquery.js"></script>
+        <script src="/assets/libs/bootstrap/dist/js/bootstrap.js"></script>
+
         <script src="/assets/libs/datatables/media/js/jquery.daTatables.js"></script>
         <script src="/assets/js/libs/datatables-bootstrap-adapter.js"></script>
         <script src="/assets/js/libs/datatables-french.js"></script>

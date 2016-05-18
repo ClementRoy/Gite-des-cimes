@@ -1,62 +1,143 @@
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
-    <?php //require($_SERVER["DOCUMENT_ROOT"] . '/parts/breadcrumb.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/header.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/navbar.php'); ?>
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/menu.php'); ?>
 
+<?php 
 
-    <!-- main container -->
-    <div class="content">
-<div id="pad-wrapper">
-            <div class="row header">
-                <div class="col-md-3">
-                    <h1>Les factures</h1>
-                </div>
-                <div class="col-md-9 text-right">
-                    <input type="text" id="table-enfant-search" class="col-md-5 search" placeholder="Tapez le numéro d'une facture..." autofocus="autofocus">
-                    <a href="/factures/ajouter" class="btn btn-primary"><span>+</span>
-                        Editer une nouvelle facture</a>
-                </div>
-            </div>
+    $year = $_GET['annee'];
 
-            <?php $factures = facture::getList(); ?>
+ 
 
+    /*
+        function getNbInscriptionByStructureByPeriod($structure, $from, $to ){
+            global $db;
+            $number = 0;
+            $from = $from->format("Y-m-d H:i:s");
+            $to = $to->format("Y-m-d H:i:s");
 
-            <div class="row">
-                <div class="col-md-12">
-                    <table id="table-enfant" class="table table-hover tablesorter extendlink">
-                        <thead>
-                            <tr>
-                                <th class="sortable">Nom</th>
-                                <th class="sortable"><span class="line"></span>Payeur</th>
-                                <th class="sortable"><span class="line"></span>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+            $sql = 'SELECT inscription.id, COUNT(inscription.id) as nb FROM inscription
+                    LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
+                    LEFT JOIN enfant ON inscription.ref_enfant = enfant.id 
+                    LEFT JOIN structure ON enfant.organization = structure.id 
+                    WHERE structure.id  = "'.$structure->id.'" 
+                    AND dossier.finished = 1 
+                    AND dossier.archived = 0
+                    AND inscription.date_from >= "'.$from.'" 
+                    AND inscription.date_to <= "'.$to.'" 
+                    AND DATE_ADD(inscription.date_from, INTERVAL 2 DAY) != inscription.date_to
+                    ORDER BY inscription.id';
+            return $db->row($sql);
+        }
 
-                        <!-- row -->
+     */
+    // Question comment on gère les inscriptions qui n'ont pas de centre payeur ?
 
-                        <?php foreach($factures as $key => $facture): ?>
-                        <tr>
-                            <td>
-                                <a href="/factures/infos/id/<?=$facture->id; ?>"><?=$facture->name; ?></a>
-                            </td>
-                            <td>
-                                 <a href="/factures/infos/id/<?=$facture->id; ?>"><?=$facture->payer; ?></a>
-                            </td>
-                            <td>
-                               <a href="/factures/infos/id/<?=$facture->id; ?>"><?=$facture->email; ?></a>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>                
-            </div>
+    $seasons = saison::getListAll();
 
-            <!-- end users table -->
+    // echo '<ul>';
+    // foreach ($seasons as $key => $season) {
+    //     echo '<li>'.$season->name.' - '.$year;
+    //     echo '<ul>';
+    //     $structures = structure::getPayerStructuresBySeason($season->id, $year);
+    //     foreach ($structures as $structure_key => $structure) {
+    //         echo '<li>';
+    //         echo '<a href="/factures/infos/annee/'.$year.'/season/'.$season->id.'/structure/'.$structure->id.'">'.$structure->name.'</a>';
+    //         echo '</li>';
+    //     }
+    //     echo '</ul>';
+    //     echo '</li>';
+
+    // }
+    // $structures = getPayerStructureByWeekend($year);
+    //  echo '<li>Week-ends - '.$year;
+    //   echo '<ul>';
+    //     foreach ($structures as $key => $structure) {
+    //         echo '<li>';
+    //         echo '<a href="/factures/infos/annee/'.$year.'/season/'.$name.'/structure/'.$structure->id.'">'.$structure->name.'</a>';
+    //         echo '</li>';
+    //     }
+    //   echo '</ul>';
+    //  echo '</li>';
+
+    // echo '</ul>';
+
+?>
+
+<div class="page-head">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Facturations</h1>
         </div>
-    </div><!-- /.container -->
+    </div>
+</div>
+
+<?php
+    //$factures = facture::getList();
+    // tool::output($factures);
+?>
+
+
+<div class="block-flat tb-special">
+    <div class="content">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="datatable">
+                <thead>
+                    <tr>
+                        <th><strong>Saison - Organisme</strong></th>
+                        <th style="width: 80px;"><strong>Statut</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $the_json = array();
+                        $the_datas = array();
+
+                        $seasons = saison::getListAll();
+
+                        foreach ($seasons as $key => $season) {
+                            $structures = structure::getPayerStructuresBySeason($season->id, $year);
+                            foreach ($structures as $structure_key => $structure) {
+                                $the_data = ['
+                                    <a href="/factures/infos/annee/'.$year.'/season/'.$season->id.'/structure/'.$structure->id.'">'.$season->name. ' ' .$year.' - '.$structure->name.'</a>',
+                                    '',
+                                ];
+                                array_push($the_datas, $the_data);
+                            }
+                        }
+                        array_push($the_json, $the_datas);
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<?php ob_start(); ?>
+<script>
+var the_datas = [];
+the_datas.push(<?=json_encode($the_datas);?>);
+
+$('#datatable').dataTable({
+    "bProcessing": true,
+    "bDeferRender": true,
+    "bStateSave": true,
+    "aaData":   the_datas[0]
+});
+$('.dropdown-menu').on('click', '.modal-remove-link', function(event) {
+    event.preventDefault();
+    /* Act on the event */
+    var $modal = $('#modal-remove'),
+        that = $(this),
+        _id = that.data('id'),
+        _name = that.data('name');
+
+    $modal.find('#remove-id').attr('value', _id);
+    $modal.find('#remove-name').html(_name);
+});
+</script>
+<?php $scripts .= ob_get_contents();
+ob_end_clean(); ?>
+
 <?php require($_SERVER["DOCUMENT_ROOT"] . '/parts/footer.php'); ?>
-
-
-

@@ -61,6 +61,10 @@ $navbar = array(
                         'ajouter' => 'Ajouter un accompagnateur'
                     )
     ),
+    'factures' => array(
+        'name' => 'Facturations',
+        'icon' => 'file-text-o'
+    ),
     'stats' => array(
         'name' => 'Stats',
         'icon' => 'bar-chart',
@@ -75,6 +79,7 @@ $navbar = array(
     $currentYear = date('Y');
     for ($i=$currentYear; $i >= 2014 ; $i--) { 
         $navbar['stats']['submenu']['index/annee/'.$i] =  'Année '.$i;
+        $navbar['factures']['submenu']['index/annee/'.$i] =  'Année '.$i;
     }
 
 
