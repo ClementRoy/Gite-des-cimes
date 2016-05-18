@@ -114,7 +114,7 @@
     $seasons = array(
         'Février' => array(
             'start' => new DateTime($year.'-02-05'),
-            'end' => new DateTime($year.'-03-04'),
+            'end' => new DateTime($year.'-03-10'),
         ),
         'Printemps' => array(
             'start' => new DateTime($year.'-03-21'),
