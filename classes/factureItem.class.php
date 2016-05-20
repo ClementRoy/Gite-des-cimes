@@ -21,6 +21,15 @@ class factureItem
         return $result;
     }
 
+    public static function getByInscription($id){
+        global $db;
+        $params = array(':id' => $id);
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_inscription=:id LIMIT 1';
+        $result = $db->row($sql, $params);
+        return $result;
+    }
+
+
     /**
      * Count the number of entries in the database table
      *

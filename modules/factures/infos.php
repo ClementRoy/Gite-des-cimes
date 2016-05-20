@@ -8,7 +8,7 @@
 	$year = $_GET['annee'];
 	$season_id = $_GET['season'];
 	$structure_id = $_GET['structure'];
-
+	$datetime_now = new DateTime();
 
 // $facture = facture::get(43);
 // $structure = structure::get($facture->ref_orga);
@@ -63,8 +63,14 @@
 	$enfants = facture::getInscriptionsByStructureAndSeason($structure_id, $season_id, $year);
 	// tool::output( $enfants );
 
+
 	if ( isset( $_POST['add_facture'] ) ) {
+
+		$last_number_id = facture::getLastNumberIdfromYear($datetime_now->format( 'Y' ));
+		$new_number_id = $last_number_id + 1;
 		
+		extract($_POST);
+
 		$result = false;
 		$total_amount = 0;
 		foreach ($_POST['amount'] as $amount) {
@@ -74,35 +80,95 @@
 		foreach ($_POST['payed_amount'] as $amount) {
 			$payed_amount += $amount;
 		}
-		$data = array(
-			':number' => uniqid(),
+
+		$datas = array(
+			':number' => 'F'.$datetime_now->format( 'y' ).'-'.$datetime_now->format( 'm' ).'-'.sprintf("%03d", $new_number_id).'-'.$season->code,
+			':number_year' => $datetime_now->format( 'Y' ),
+			':number_month' => $datetime_now->format( 'm' ),
+			':number_id' => $new_number_id,
+			':number_season' => $season->code,
 			':ref_orga' => $structure_id,
-			':status' => 'en attente',
+			':status' => 0,
 			':total_amount' => $total_amount,
 			':total_amount_facture' => $payed_amount,
 			':ref_season' => $season_id,
 			':year' => $year,
+			':amount_caf' => ( isset( $amount_caf ) ) ? $amount_caf : 0,
+			':status_caf' => ( isset( $amount_caf ) ) ? 0 : null,
+			':amount_family' => ( isset( $amount_family ) ) ? $amount_family : 0,
+			// ':ref_parent_facture' => ( isset( $ref_parent_facture ) ) ? $ref_parent_facture : null,
+			// ':family_name' => ( isset( $family_name ) ) ? $family_name : null,
+			':purchase_order' => ( isset( $purchase_order ) ) ? $purchase_order : null,
 		);
 
-		$result .= facture::add($data);
+		$result .= facture::add($datas);
 		$facture_id = facture::getLastID();
 
 		foreach ($_POST['inscription_id'] as $key => $item) {
 
-			$data = array(
+			$datas = array(
 				':ref_facture' => $facture_id,
 				':ref_inscription' => $item,
 				':amount' => $_POST['amount'][$key],
 				':payed_amount' => $_POST['payed_amount'][$key],
 			);
 
-			$result .= factureItem::add($data);
+			$result .= factureItem::add($datas);
 
 		}
+
+
+		// Si un reliquat famille est indiqué lors de la soumission
+		if (isset($amount_family) && !empty($amount_family) && $amount_family > 0) {
+
+
+			$last_number_id = facture::getLastNumberIdfromYear($datetime_now->format( 'Y' ));
+			$new_number_id = $last_number_id + 1;
+
+			$datas = array(
+				':number' => 'F'.$datetime_now->format( 'y' ).'-'.$datetime_now->format( 'm' ).'-'.sprintf("%03d", $new_number_id).'-'.$season->code,
+				':number_year' => $datetime_now->format( 'Y' ),
+				':number_month' => $datetime_now->format( 'm' ),
+				':number_id' => $new_number_id,
+				':number_season' => $season->code,
+				':ref_orga' => $structure_id,
+				':status' => 0,
+				':total_amount' => $total_amount,
+				':total_amount_facture' => $amount_family,
+				':ref_season' => $season_id,
+				':year' => $year,
+				// ':amount_caf' => ( isset( $amount_caf ) ) ? $amount_caf : 0,
+				// ':amount_family' => ( isset( $amount_family ) ) ? $amount_family : 0,
+				':ref_parent_facture' => $facture_id,
+				':family_name' => ( isset( $family_name ) ) ? $family_name : null,
+				// ':purchase_order' => ( isset( $purchase_order ) ) ? $purchase_order : null,
+			);
+
+			$result .= facture::add($datas);
+
+			$facture_familly_id = facture::getLastID();
+
+
+			$datas = array(
+				':ref_facture' => $facture_familly_id,
+				// ':ref_inscription' => $item,
+				':amount' => $total_amount,
+				':payed_amount' => $amount_family,
+			);
+
+			$result .= factureItem::add($datas);
+
+		}
+
+
 
 		if ($result) {
 
 			facture::generate($facture_id);
+
+			if (isset($facture_familly_id)) {
+				facture::generate($facture_familly_id);
+			}
 
         	tpl::alert('success', 'La facture a bien été enregistré.');
 		} else {
@@ -129,16 +195,6 @@
             </h1>
         </div>
     </div>
-</div>
-
-<div class="well">
-<ul>
-	
-	<li>Quels sont les différents statuts possibles pour les factures ?</li>
-	<li>Quels sont les différents statuts possibles pour les soldes ?</li>
-	<li>Concernant l'organisme "famille", il n'y a pas d'adresse</li>
-	<li>Notion de dossier confirmé qui peuvent être facturé alors qu'ils n'ont pas eu lieu. Doit-on les bloquer ?</li>
-</ul>
 </div>
 
 <div class="col-xs-12">
@@ -192,8 +248,8 @@
 						<table class="table table-form table-bon-commande">
 							<tr>
 								<td class="form">
-									<label for="number_commande">N° de bon de commande (facultatif) : </label>&nbsp;
-									<input name="number_commande" id="number_commande" type="text" class="form-control input-sm bon-de-commande">
+									<label for="purchase_order">N° de bon de commande (facultatif) : </label>&nbsp;
+									<input name="purchase_order" id="purchase_order" type="text" class="form-control input-sm bon-de-commande">
 								</td>
 							</tr>
 						</table>
@@ -242,12 +298,12 @@
 							<table class="table table-form table-reliquats">
 								<tr>
 									<td>
-										<label for="famille_name">Famille : </label>&nbsp;
-										<input disabled="disabled" name="famille_name" id="famille_name" type="text" class="form-control input-sm tarif" placeholder="Nom de famille" style="text-align:left;width: 170px;">
+										<label for="family_name">Famille : </label>&nbsp;
+										<input disabled="disabled" name="family_name" id="family_name" type="text" class="form-control input-sm tarif" placeholder="Nom de famille" style="text-align:left;width: 170px;">
 									</td>
 									<td class="form">
-										<label for="famille_amount">Reliquat : </label>&nbsp;
-										<input disabled="disabled" name="famille_amount" id="famille_amount" type="text" class="form-control input-sm tarif" value="0">
+										<label for="amount_family">Reliquat : </label>&nbsp;
+										<input disabled="disabled" name="amount_family" id="amount_family" type="text" class="form-control input-sm tarif" value="0">
 										/ <span class="selected-reliquat-amount">0</span>
 									</td>
 								</tr>
@@ -257,8 +313,8 @@
 										<label>Bon CAF</label>
 									</td>
 									<td class="form">
-										<label for="caf_amount">Reliquat : </label>&nbsp;
-										<input name="caf_amount" id="caf_amount" type="text" class="form-control input-sm tarif" value="0">
+										<label for="amount_caf">Reliquat : </label>&nbsp;
+										<input name="amount_caf" id="amount_caf" type="text" class="form-control input-sm tarif" value="0">
 										/ <span class="selected-reliquat-amount">0</span>
 									</td>
 								</tr>
@@ -275,73 +331,115 @@
 		</div>
 		
 	</div>
-	<div class="row">
-		<div class="col-xs-12 col-md-8">
 
-		    <div class="section-head">
-		        <div class="row">
-		            <div class="col-xs-12 col-md-8">
-		                <h3>Factures</h3>
-		            </div>
-		        </div>
-		    </div>
+	<?php $factures = facture::getByStructureAndSeason($structure_id, $season_id, $year); ?>
 
-		    <div class="block-flat tb-special tb-no-options tb-factures">
-		        <div class="content">
-		            <div class="table-responsive">
-		                <table class="table table-bordered">
-		                    <thead>
-		                        <tr>
-		                            <th style="min-width:150px;">Numéro de facture</th>
-		                            <th></th>
-		                            <th></th>
-		                            <th style="width:78px">Statut</th>
-		                            <th>Action</th>
-		                        </tr>
-		                    </thead>
-		                    <tbody>
-								<?php $factures = facture::getByStructureAndSeason($structure_id, $season_id, $year); ?>
-		                    	<?php foreach ($factures as $key => $facture): ?>
-			                    	<tr>
-			                    		<td><?php echo $facture->number; ?></td>
-			                    		<td>
-			                    			<a href="" target="_blank" class="btn btn-default btn-xs" title="">Modifer</a>
-			                    		</td>
-			                    		<td>
-			                    			<a href="/uploads/<?php echo $facture->number; ?>.pdf" target="_blank" class="btn btn-default btn-xs" title="">Voir la facture</a>
-			                    		</td>
-			                    		<td style="width: 100px;">
-			                    			<?php if ($facture->status == 'en attente'): ?>
-			                    				<span class="label label-warning">En attente d'édition</span>
-			                    			<?php else: ?>
-			                    				<span class="label label-success">Édité</span>
-			                    			<?php endif ?>
-			                            </td>
-			                    		<td style="width: 100px;">
-			                    			<a class="btn btn-default btn-xs" title="">Éditer</a>
-			                            </td>
-			                    	</tr>
-			                    	<?php if ($facture->total_amount > $facture->total_amount_facture): ?>
-				                    	<tr class="child">
-				                    		<td><i class="fa fa-arrow-right"></i> Solde : <?php echo $facture->total_amount - $facture->total_amount_facture; ?> €</td>
-				                    		<td></td>
-				                    		<td></td>
-				                    		<td>
-				                    			<span class="label label-warning">En attente</span>
-				                    			<?php /*<span class="label label-success">Soldée</span>*/ ?>
-				                    		</td>
-				                    		<td><a class="btn btn-default btn-xs" title=""> Soldé</a></td>
-				                    	</tr>
-			                    	<?php endif; ?>
-		                    	<?php endforeach; ?>
-		                    </tbody>
-		                </table>
-		            </div>
-		        </div>
-		    </div>
+	<?php if (!empty($factures)): ?>
+			
+		<div class="row">
+			<div class="col-xs-12 col-md-8">
 
+			    <div class="section-head">
+			        <div class="row">
+			            <div class="col-xs-12 col-md-8">
+			                <h3>Factures</h3>
+			            </div>
+			        </div>
+			    </div>
+
+			    <div id="factures-list" class="block-flat tb-special tb-no-options tb-factures">
+			        <div class="content">
+			            <div class="table-responsive">
+			                <table class="table table-bordered">
+			                    <thead>
+			                        <tr>
+			                            <th style="min-width:150px;">Numéro de facture</th>
+			                            <th style="width: 80px;padding-right: 15px;">Afficher</th>
+			                            <th style="width: 85px;padding-right: 15px;">Modifier</th>
+			                            <th style="width: 115px;padding-right: 15px;">Mettre à jour</th>
+			                            <th style="width:78px;padding-right: 15px;">Statut</th>
+			                        </tr>
+			                    </thead>
+			                    <tbody>
+			                    	<?php foreach ($factures as $key => $facture): ?>
+			                    		<?php if ( empty($facture->ref_parent_facture) ): ?>
+					                    	<tr>
+					                    		<td><strong><?php echo $facture->number; ?></strong></td>
+					                    			
+					                    		<td>
+					                    			<a href="/uploads/<?php echo $facture->number; ?>.pdf" target="_blank" class="btn btn-default btn-xs" title="">Afficher</a>
+					                    		</td>
+					                    		<td>
+					                    			<?php if ( $facture->status == 0 ): ?>
+					                    				<a href="" target="_blank" class="btn btn-default btn-xs btn-update" title="">Modifer</a>
+					                    			<?php endif; ?>
+					                    		</td>
+					                    		<td style="width: 100px;">
+					                    			<?php if ( $facture->status == 0 ): ?>
+					                    				<a href="/uploads/<?php echo $facture->number; ?>.pdf" target="_blank" class="btn btn-default btn-xs js-update-facture" data-id="<?php echo $facture->id; ?>">Édité</a>
+					                    			<?php endif; ?>
+					                            </td>
+					                    		<td style="width: 100px;">
+					                    			<?php if ($facture->status == 0): ?>
+					                    				<span class="label label-warning">En attente d'édition</span>
+					                    			<?php else: ?>
+					                    				<span class="label label-success">Édité</span>
+					                    			<?php endif; ?>
+					                            </td>
+					                    	</tr>
+			                    		
+					                    	<?php if ( !empty($facture->amount_caf) ): ?>
+						                    	<tr class="child">
+						                    		<td><span class="chariot">↳</span> CAF : <?php echo $facture->total_amount - $facture->total_amount_facture; ?> €</td>
+						                    		<td></td>
+						                    		<td></td>
+						                    		<td>
+						                    			<?php if ( $facture->status_caf == 0 ): ?>
+						                    				<button class="btn btn-default btn-xs js-update-caf" data-id="<?php echo $facture->id; ?>">Envoyé</button>
+						                    			<?php endif; ?>
+						                    		</td>
+						                    		<td>
+						                    			<?php if ($facture->status_caf == 0): ?>
+						                    				<span class="label label-warning">En attente d'envoi</span>
+						                    			<?php else: ?>
+						                    				<span class="label label-success">Envoyé</span>
+						                    			<?php endif; ?>
+						                    		</td>
+						                    	</tr>
+					                    	<?php endif; ?>
+
+				                    	<?php else: ?>
+					                    	<tr class="child">
+					                    		<td><span class="chariot">↳</span> Famille : <?php echo $facture->number; ?></td>
+					                    		<td>
+					                    			<a href="/uploads/<?php echo $facture->number; ?>.pdf" target="_blank" class="btn btn-default btn-xs" title="">Afficher</a>
+					                    		</td>
+					                    		<td></td>
+					                    		<td style="width: 100px;">
+					                    			<?php if ($facture->status == 0): ?>
+					                    				<a href="/uploads/<?php echo $facture->number; ?>.pdf" target="_blank" class="btn btn-default btn-xs js-update-facture" data-id="<?php echo $facture->id; ?>">Édité</a>
+					                    		<?php endif; ?>
+					                            </td>
+					                    		<td style="width: 100px;">
+					                    			<?php if ($facture->status == 0): ?>
+					                    				<span class="label label-warning">En attente d'édition</span>
+					                    			<?php else: ?>
+					                    				<span class="label label-success">Édité</span>
+					                    			<?php endif; ?>
+					                            </td>
+					                    	</tr>
+			                    		<?php endif; ?>
+			                    	<?php endforeach; ?>
+			                    </tbody>
+			                </table>
+			            </div>
+			        </div>
+			    </div>
+
+			</div>
 		</div>
-	</div>
+
+	<?php endif; ?>
 </div>
 
 <?php ob_start(); ?>
@@ -352,9 +450,9 @@ $(function() {
 	var $available = $('#js-table-available'),
 		$selected = $('#js-table-selected'),
 		$reliquats = $('#selected-reliquats'),
-		$familleAmount = $('#famille_amount'),
-		$familleName = $('#famille_name'),
-		$cafAmount = $('#caf_amount'),
+		$familleAmount = $('#amount_family'),
+		$familleName = $('#family_name'),
+		$cafAmount = $('#amount_caf'),
 		$btnReset = $('#js-btn-reset'),
 		$btnConfirm = $('#js-btn-confirm');
 
@@ -371,8 +469,8 @@ $(function() {
 			$btnConfirm.attr('disabled', 'disabled');
 
 			$reliquats.addClass('hide').find('.selected-reliquat-amount').text('0');
-			$('#famille_name, #famille_amount, #caf_amount').attr('disabled', 'disabled');
-			$('#famille_amount').removeAttr('value');
+			$('#family_name, #amount_family, #amount_caf').attr('disabled', 'disabled');
+			$('#amount_family').removeAttr('value');
 		}
 	}
 
@@ -384,10 +482,10 @@ $(function() {
 		event.preventDefault();
 		$available.find('tr').removeClass('selected');
 		$selected.find('tr').addClass('hide');
-		$('#famille_name').removeAttr('value');
+		$('#family_name').removeAttr('value');
 		$reliquats.addClass('hide').find('.selected-reliquat-amount').text('0');
-		$('#famille_name, #famille_amount, #caf_amount').attr('disabled', 'disabled');
-		$('#famille_amount').val('');
+		$('#family_name, #amount_family, #amount_caf').attr('disabled', 'disabled');
+		$('#amount_family').val('');
 		$('#number_commande').val('');
 		checkVisible();
 	});
@@ -464,14 +562,14 @@ $(function() {
 					reliquats += ($(el).data('init-tarif') * 1 - $(el).val() * 1);
 				});
 				$reliquats.removeClass('hide').find('.selected-reliquat-amount').text(reliquats);
-				$('#famille_name, #famille_amount, #caf_amount').removeAttr('disabled');
+				$('#family_name, #amount_family, #amount_caf').removeAttr('disabled');
 				$familleAmount.val(reliquats).attr('data-total-reliquats', reliquats);
 				$cafAmount.val(0).attr('data-total-reliquats', reliquats);
 
 			} else {
 				$reliquats.addClass('hide').find('.selected-reliquat-amount').text('0');
-				$('#famille_name, #famille_amount, #caf_amount').attr('disabled', 'disabled');
-				$('#famille_amount').removeAttr('value');
+				$('#family_name, #amount_family, #amount_caf').attr('disabled', 'disabled');
+				$('#amount_family').removeAttr('value');
 			}
 
 		$this.siblings('.solde').val( initTarif * 1 - newTarif * 1 );
@@ -554,6 +652,67 @@ $(function() {
 		} else {
 			$('#form-factures').submit();
 		}
+	});
+
+
+
+	// AJAX statut
+
+	var $facturesList = $('#factures-list'),
+		$updateFactureStatus = $facturesList.find('.js-update-facture'),
+		$updateCafStatus = $facturesList.find('.js-update-caf');
+
+	$updateFactureStatus.on('click', function(event) {
+		
+		var $this = $(this),
+			facture_id = $this.data('id'),
+			$row = $this.closest('tr');
+
+		$.ajax({
+            type: 'GET',
+            url: '/ajax/update_status_facture/id/' + facture_id + '/status/1',
+		})
+		.done(function() {
+			$this.remove();
+			$row.find('.btn-update').remove();
+			var $tdLabel = $row.find('.label').parent();
+			$tdLabel.find('.label').remove();
+			$tdLabel.html('<span class="label label-success">Édité</span>');
+		})
+		.fail(function() {
+			alert('Un erreur est survenue lors de la mise à jour de cette facture. Merci de réessayer ultérieurement.')
+		})
+		.always(function() {
+			// console.log("complete");
+		});
+		
+	});
+
+	$updateCafStatus.on('click', function(event) {
+		
+		console.log('ok');
+		var $this = $(this),
+			facture_id = $this.data('id'),
+			$row = $this.closest('tr');
+
+
+		$.ajax({
+            type: 'GET',
+            url: '/ajax/update_status_facture/id/' + facture_id + '/status/1/type/caf',
+		})
+		.done(function() {
+			$this.remove();
+			var $tdLabel = $row.find('.label').parent();
+			$tdLabel.find('.label').remove();
+			$tdLabel.html('<span class="label label-success">Envoyé</span>');
+		})
+		.fail(function() {
+			alert('Un erreur est survenue lors de la mise à jour de cet élément. Merci de réessayer ultérieurement.')
+		})
+		.always(function() {
+			// console.log("complete");
+		});
+		
 	});
 
 

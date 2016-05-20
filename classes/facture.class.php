@@ -170,6 +170,30 @@ class facture
         // return $result;
     }
 
+
+    /**
+     * Get back the last number Id from current year.
+     * If not exist, start from 01
+     *
+     * @return int number of the entries in the table
+     */
+    public static function getLastNumberIdfromYear($number_year){
+        global $db;
+        $params = array(':number_year' => $number_year);
+        $sql = 'SELECT * FROM '.self::$table.' WHERE number_year=:number_year ORDER BY id DESC LIMIT 1';
+        $result = $db->row($sql, $params);
+
+        if (empty($result)) {
+            $number_id = 0;
+        } else {
+            $number_id = $result->number_id;
+        }
+
+        return $number_id;
+    }
+
+
+
     /**
      * Count the number of entries in the database table
      *

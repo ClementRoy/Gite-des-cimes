@@ -57,7 +57,7 @@
 	},
 	"ajax" : {
 		"name" : "ajax",
-		"views" : ["get_contact"]
+		"views" : ["get_contact", "update_status_facture"]
 	},
 	"corbeille" : {
 		"name" : "corbeille",

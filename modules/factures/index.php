@@ -97,11 +97,77 @@
                         foreach ($seasons as $key => $season) {
                             $structures = structure::getPayerStructuresBySeason($season->id, $year);
                             foreach ($structures as $structure_key => $structure) {
+
+                                $factures = facture::getByStructureAndSeason($structure->id, $season->id, $year);
+
+
+
+
+                                $enfants = facture::getInscriptionsByStructureAndSeason($structure->id, $season->id, $year);
+                                $alreadyFactured = facture::getAlreadyFactured($structure->id, $season->id, $year);
+
+                                $status_str = '<span class="label label-warning">À facturer</span>';
+                                $nb_factured = 0;
+                                $nb_inscriptions = 0;
+                                $global_status = 0;
+
+                                foreach ($enfants as $enfant) {
+
+                                    $inscriptions = facture::getInscriptionByChildBySeason($enfant->id, $season->id, $year );
+                                    $nb_inscriptions = $nb_inscriptions + count($inscriptions) ;
+
+                                    foreach ($inscriptions as $key => $inscription) {
+
+                                        if (in_array($inscription->id, $alreadyFactured)) {
+                                            $nb_factured++;
+                                        }
+
+                                        $factureItem = factureItem::getByInscription($inscription->id);
+                                        if ( !empty($factureItem) ) {
+
+                                            $facture_inscription = facture::get( $factureItem->ref_facture );
+
+
+
+                                            if ($facture_inscription->status > 0 ) {
+                                                if ( $facture_inscription->amount_caf > 0 ) {
+                                                    if ($facture_inscription->status_caf > 0) {
+                                                        $global_status = 1;
+                                                    } else {
+                                                        $global_status = 0;
+                                                    }
+                                                } else {
+                                                    $global_status = 1;
+                                                }
+                                            } else {
+                                                $global_status = 0;
+                                            }
+                                        }
+
+
+                                    }
+
+                                }
+
+                                if ( $nb_factured == $nb_inscriptions && $global_status > 0 ) {
+                                    $status_str = '<span class="label label-success">Facturé/envoyé en totalité</span>';
+                                } elseif ( ($nb_factured < $nb_inscriptions && $nb_factured > 0) || ($nb_factured == $nb_inscriptions && $global_status == 0) ) {
+                                    $status_str = '<span class="label label-primary">Facturé/envoyé partiellement</span>';
+                                }
+
+
+
+                                $factures_str = '';
+                                foreach ($factures as $key => $facture) {
+                                    $factures_str .= $facture->number.' ';
+                                }
+
                                 $the_data = ['
-                                    <a href="/factures/infos/annee/'.$year.'/season/'.$season->id.'/structure/'.$structure->id.'">'.$season->name. ' ' .$year.' - '.$structure->name.'</a>',
-                                    '',
+                                    <a href="/factures/infos/annee/'.$year.'/season/'.$season->id.'/structure/'.$structure->id.'">'.$season->name. ' ' .$year.' - '.$structure->name.'</a> <span class="hide">' . $factures_str . '</span>',
+                                    $status_str,
                                 ];
                                 array_push($the_datas, $the_data);
+
                             }
                         }
                         array_push($the_json, $the_datas);
@@ -123,7 +189,8 @@ $('#datatable').dataTable({
     "bProcessing": true,
     "bDeferRender": true,
     "bStateSave": true,
-    "aaData":   the_datas[0]
+    "iDisplayLength": 100,
+    "aaData":   the_datas[0],
 });
 $('.dropdown-menu').on('click', '.modal-remove-link', function(event) {
     event.preventDefault();

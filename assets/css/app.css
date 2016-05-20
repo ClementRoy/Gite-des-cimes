@@ -401,8 +401,21 @@ table.information td.category {
 .block-flat.active .placeholder-form {
     display: none;
 }
+/*
 .tb-factures tr.child td:first-child {
-    padding-left: 10px;
+    padding-left: 20px;
+}
+*/
+.tb-factures .btn {
+min-width: 55px;
+    margin: 0;
+    top: 6px;
+    bottom: auto;
+    left: 15px;
+}
+.chariot {
+    font-weight: 900;
+    margin-right: 5px;
 }
 .form-control.error {
     border-color: #E24E4E;
