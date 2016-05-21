@@ -427,6 +427,9 @@ min-width: 55px;
 .table-bon-commande .input-sm {
     width: 150px;
 }
+.table-bon-commande .bon-de-commande {
+    text-align: left;
+}
 table.table-form {
     margin-bottom: 25px !important;
 }

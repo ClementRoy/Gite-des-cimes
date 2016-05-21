@@ -178,6 +178,157 @@
 	}
 
 
+	if ( isset( $_POST['update_facture'] ) ) {
+
+		extract($_POST);
+
+
+		$result = false;
+		$total_amount = 0;
+		foreach ($_POST['amount'] as $amount) {
+			$total_amount += $amount;
+		}
+		$payed_amount = 0;
+		foreach ($_POST['payed_amount'] as $amount) {
+			$payed_amount += $amount;
+		}
+
+
+		$facture = facture::get($facture_id);
+
+		$old_factureItems = factureItem::getByFacture($facture_id);
+		foreach ($old_factureItems as $key => $old_factureItem) {
+			factureItem::delete($old_factureItem->id);
+		}
+
+
+
+
+
+		$datas = array(
+			':status' => 0,
+			':total_amount' => $total_amount,
+			':total_amount_facture' => $payed_amount,
+			':amount_caf' => ( isset( $amount_caf ) ) ? $amount_caf : 0,
+			':status_caf' => ( isset( $amount_caf ) ) ? 0 : null,
+			':amount_family' => ( isset( $amount_family ) ) ? $amount_family : 0,
+			// ':ref_parent_facture' => ( isset( $ref_parent_facture ) ) ? $ref_parent_facture : null,
+			// ':family_name' => ( isset( $family_name ) ) ? $family_name : null,
+			':purchase_order' => ( isset( $purchase_order ) ) ? $purchase_order : null,
+		);
+
+		$result .= facture::update($datas, $facture_id);
+
+		foreach ($_POST['inscription_id'] as $key => $item) {
+
+			$datas = array(
+				':ref_facture' => $facture_id,
+				':ref_inscription' => $item,
+				':amount' => $_POST['amount'][$key],
+				':payed_amount' => $_POST['payed_amount'][$key],
+			);
+
+			$result .= factureItem::add($datas);
+
+		}
+
+
+		$facture_family = facture::getByParentFacture($facture->id);
+
+		// Si il n'y a plus de facture famille alors qu'il y en avait une avant
+		if ( (!isset($amount_family) || $amount_family < 1) && !empty($facture_family) ) {
+
+			// Il faut supprimer l'entrée dans la BDD et le fichier
+			$old_familyFactureItems = factureItem::getByFacture($facture_family->id);
+			foreach ($old_familyFactureItems as $key => $old_familyFactureItem) {
+				factureItem::delete($old_familyFactureItem->id);
+			}
+
+			facture::delete($facture_family->id);
+			unlink($_SERVER["DOCUMENT_ROOT"].'/uploads/'.$facture_family->number . '.pdf');
+
+		} elseif ( (isset($amount_family) && $amount_family > 1) && empty($facture_family) ) {
+			// il faut créer la facture famille
+
+			$last_number_id = facture::getLastNumberIdfromYear($datetime_now->format( 'Y' ));
+			$new_number_id = $last_number_id + 1;
+
+			$datas = array(
+				':number' => 'F'.$datetime_now->format( 'y' ).'-'.$datetime_now->format( 'm' ).'-'.sprintf("%03d", $new_number_id).'-'.$season->code,
+				':number_year' => $datetime_now->format( 'Y' ),
+				':number_month' => $datetime_now->format( 'm' ),
+				':number_id' => $new_number_id,
+				':number_season' => $season->code,
+				':ref_orga' => $structure_id,
+				':status' => 0,
+				':total_amount' => $total_amount,
+				':total_amount_facture' => $amount_family,
+				':ref_season' => $season_id,
+				':year' => $year,
+				':ref_parent_facture' => $facture_id,
+				':family_name' => ( isset( $family_name ) ) ? $family_name : null,
+			);
+
+			$result .= facture::add($datas);
+
+			$facture_familly_id = facture::getLastID();
+
+			$datas = array(
+				':ref_facture' => $facture_familly_id,
+				':amount' => $total_amount,
+				':payed_amount' => $amount_family,
+			);
+
+			$result .= factureItem::add($datas);
+
+
+		} elseif ( (isset($amount_family) || $amount_family > 0) && !empty($facture_family) ) {
+
+			// Si elle existait avant et maintenant également, on met à jour la BDD et on écrase le fichier
+			$old_familyFactureItems = factureItem::getByFacture($facture_family->id);
+			foreach ($old_familyFactureItems as $key => $old_familyFactureItem) {
+				factureItem::delete($old_familyFactureItem->id);
+			}
+
+			$facture_familly_id = $facture_family->id;
+
+			$datas = array(
+				':status' => 0,
+				':total_amount' => $total_amount,
+				':total_amount_facture' => $amount_family,
+				':ref_parent_facture' => $facture_id,
+				':family_name' => ( isset( $family_name ) ) ? $family_name : null,
+			);
+
+			$result .= facture::update($datas, $facture_family->id);
+
+			$datas = array(
+				':ref_facture' => $facture_familly_id,
+				':amount' => $total_amount,
+				':payed_amount' => $amount_family,
+			);
+
+			$result .= factureItem::add($datas);
+
+		}
+
+
+		if ($result) {
+
+			facture::generate($facture_id);
+
+			if (isset($facture_familly_id)) {
+				facture::generate($facture_familly_id);
+			}
+
+        	tpl::alert('success', 'La facture a bien été mise à jour.');
+		} else {
+			tpl::alert('danger', 'Une erreur s\'est produite durant la mise à jour de la facture =(.');
+		}
+
+	}
+
+
 	$alreadyFactured = facture::getAlreadyFactured($structure_id, $season_id, $year);
 
  ?>
@@ -363,7 +514,7 @@
 			                    <tbody>
 			                    	<?php foreach ($factures as $key => $facture): ?>
 			                    		<?php if ( empty($facture->ref_parent_facture) ): ?>
-					                    	<tr>
+					                    	<tr id="tr-facture-<?php echo $facture->id; ?>">
 					                    		<td><strong><?php echo $facture->number; ?></strong></td>
 					                    			
 					                    		<td>
@@ -371,12 +522,15 @@
 					                    		</td>
 					                    		<td>
 					                    			<?php if ( $facture->status == 0 ): ?>
-					                    				<a href="" target="_blank" class="btn btn-default btn-xs btn-update" title="">Modifer</a>
+					                    				<?php $facture_family = facture::getByParentFacture($facture->id); ?>
+					                    				<?php if (isset($facture_family) && $facture_family->status == 0): ?>
+					                    					<a href="/factures/editer/id/<?php echo $facture->id; ?>" class="btn btn-default btn-xs btn-update" title="">Modifer</a>
+					                    				<?php endif; ?>
 					                    			<?php endif; ?>
 					                    		</td>
 					                    		<td style="width: 100px;">
 					                    			<?php if ( $facture->status == 0 ): ?>
-					                    				<a href="/uploads/<?php echo $facture->number; ?>.pdf" target="_blank" class="btn btn-default btn-xs js-update-facture" data-id="<?php echo $facture->id; ?>">Édité</a>
+					                    				<a href="/uploads/<?php echo $facture->number; ?>.pdf" target="_blank" class="btn btn-default btn-xs js-update-facture" data-id="<?php echo $facture->id; ?>">Valider</a>
 					                    			<?php endif; ?>
 					                            </td>
 					                    		<td style="width: 100px;">
@@ -409,7 +563,7 @@
 					                    	<?php endif; ?>
 
 				                    	<?php else: ?>
-					                    	<tr class="child">
+					                    	<tr id="tr-facture-<?php echo $facture->id; ?>" class="child" data-facture-parent="<?php echo $facture->ref_parent_facture; ?>">
 					                    		<td><span class="chariot">↳</span> Famille : <?php echo $facture->number; ?></td>
 					                    		<td>
 					                    			<a href="/uploads/<?php echo $facture->number; ?>.pdf" target="_blank" class="btn btn-default btn-xs" title="">Afficher</a>
@@ -417,7 +571,7 @@
 					                    		<td></td>
 					                    		<td style="width: 100px;">
 					                    			<?php if ($facture->status == 0): ?>
-					                    				<a href="/uploads/<?php echo $facture->number; ?>.pdf" target="_blank" class="btn btn-default btn-xs js-update-facture" data-id="<?php echo $facture->id; ?>">Édité</a>
+					                    				<a href="/uploads/<?php echo $facture->number; ?>.pdf" target="_blank" class="btn btn-default btn-xs js-update-facture" data-id="<?php echo $facture->id; ?>">Valider</a>
 					                    		<?php endif; ?>
 					                            </td>
 					                    		<td style="width: 100px;">
@@ -523,12 +677,45 @@ $(function() {
 
 		var $this = $(this),
 			id = $this.data('id');
+			$tarif = $this.parents('tr').find('.tarif');
 
-		$this
-			.parents('tr').addClass('hide')
-			.find('.tarif, .amount, .inscription_id').attr('disabled', 'disabled');
+			if ($tarif.val() < $tarif.data('init-tarif')) {
+				
+				$tarif.val($tarif.data('init-tarif'));
 
-		$available.find('#available-' + id).removeClass('selected');
+				$this
+					.parents('tr').addClass('hide')
+					.find('.tarif, .amount, .inscription_id').attr('disabled', 'disabled');
+
+				var reliquats = 0;
+				$selected.find('.tarif').each(function(index, el) {
+					reliquats += ($(el).data('init-tarif') * 1) - ($(el).val() * 1);
+				});
+
+				if (reliquats === 0) {
+					$reliquats.addClass('hide').find('.selected-reliquat-amount').text(0);
+					$familleAmount.data('total-reliquats', '').val(0);
+					$cafAmount.data('total-reliquats', '').val(0);
+					$('#family_name, #amount_family, #amount_caf').attr('disabled', 'disabled');
+				} else {
+					$reliquats.removeClass('hide').find('.selected-reliquat-amount').text(reliquats);
+					$('#family_name, #amount_family, #amount_caf').removeAttr('disabled');
+					$familleAmount.val(reliquats).attr('data-total-reliquats', reliquats);
+					$cafAmount.val(0).attr('data-total-reliquats', reliquats);
+				}
+
+				console.log($familleAmount.data('total-reliquats') );
+			} else {
+
+				$this
+					.parents('tr').addClass('hide')
+					.find('.tarif, .amount, .inscription_id').attr('disabled', 'disabled');
+			}
+
+
+			$available.find('#available-' + id).removeClass('selected');
+
+
 
 		checkVisible();
 	});
@@ -559,12 +746,12 @@ $(function() {
 			if (newTarif < initTarif) {
 				var reliquats = 0;
 				$selected.find('.tarif').each(function(index, el) {
-					reliquats += ($(el).data('init-tarif') * 1 - $(el).val() * 1);
+					reliquats += ($(el).data('init-tarif') * 1) - ($(el).val() * 1);
 				});
 				$reliquats.removeClass('hide').find('.selected-reliquat-amount').text(reliquats);
 				$('#family_name, #amount_family, #amount_caf').removeAttr('disabled');
-				$familleAmount.val(reliquats).attr('data-total-reliquats', reliquats);
-				$cafAmount.val(0).attr('data-total-reliquats', reliquats);
+				$familleAmount.val(reliquats).data('total-reliquats', reliquats);
+				$cafAmount.val(0).data('total-reliquats', reliquats);
 
 			} else {
 				$reliquats.addClass('hide').find('.selected-reliquat-amount').text('0');
@@ -620,6 +807,7 @@ $(function() {
 		}
 	}, 150));
 
+
 	//
 	// WHEN SUBMIT FORM
 	//
@@ -663,7 +851,7 @@ $(function() {
 		$updateCafStatus = $facturesList.find('.js-update-caf');
 
 	$updateFactureStatus.on('click', function(event) {
-		
+		event.preventDefault();
 		var $this = $(this),
 			facture_id = $this.data('id'),
 			$row = $this.closest('tr');
@@ -678,9 +866,13 @@ $(function() {
 			var $tdLabel = $row.find('.label').parent();
 			$tdLabel.find('.label').remove();
 			$tdLabel.html('<span class="label label-success">Édité</span>');
+
+			if (typeof $row.data('facture-parent') !== 'undefined' ) {
+				$('#tr-facture-' + $row.data('facture-parent')).find('.btn-update').remove();
+			}
 		})
 		.fail(function() {
-			alert('Un erreur est survenue lors de la mise à jour de cette facture. Merci de réessayer ultérieurement.')
+			alert('Un erreur est survenue lors de la mise à jour de cette facture. Merci de réessayer ultérieurement.');
 		})
 		.always(function() {
 			// console.log("complete");
@@ -689,8 +881,8 @@ $(function() {
 	});
 
 	$updateCafStatus.on('click', function(event) {
-		
-		console.log('ok');
+		event.preventDefault();
+
 		var $this = $(this),
 			facture_id = $this.data('id'),
 			$row = $this.closest('tr');

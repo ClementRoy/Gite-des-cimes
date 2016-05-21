@@ -10,6 +10,13 @@ class factureItem
     public static function getList() {
 
     }
+    public static function get($id){
+        global $db;
+        $params = array(':id' => $id);
+        $sql = 'SELECT * FROM '.self::$table.' WHERE id=:id';
+        $result = $db->row($sql, $params);
+        return $result;
+    }
 
 
 

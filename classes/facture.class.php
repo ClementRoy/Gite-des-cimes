@@ -21,6 +21,14 @@ class facture
         return $result;
     }
 
+    public static function getByParentFacture($id){
+        global $db;
+        $params = array(':ref_parent_facture' => $id);
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_parent_facture=:ref_parent_facture LIMIT 1';
+        $result = $db->row($sql, $params);
+        return $result;
+    }
+
     public static function getByStructureAndSeason($structure_id, $season_id, $year){
         global $db;
         $params = array(

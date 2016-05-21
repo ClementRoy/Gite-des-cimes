@@ -517,12 +517,16 @@ foreach ($facture_items as $facture_item) {
 			</td>
 			<td style="width: 48%;">
 
-				<?php if ($structure->id == 226 || $structure->id == 227 && empty($facture->ref_parent_facture)): ?>
+				<?php if ( ($structure->id == 226 || $structure->id == 227) && empty($facture->ref_parent_facture)): ?>
 					<table class="special" bordercolor="#000000" border="1" cellspacing="0" style="max-width:100%;">
 							<?php if ($structure->id == 226 || $structure->id == 227): ?>
 							<tr>
-								<td style="text-align: center;width:100%;height:20px;padding:14px 7px;text-transform:uppercase;font-size: 12px;<?php if ($structure->id == 227): ?>border-bottom: none;padding-bottom:4px;<?php endif; ?>">
-										doit le <?php echo mb_strtoupper(trim($structure->name)); ?>, <?php echo mb_strtoupper(trim($structure->service)); ?>
+								<td style="text-align: center;width:100%;height:20px;padding:14px 7px;text-transform:uppercase;font-size: 12px;<?php if ($structure->id == 227): ?>border-bottom: none;padding-bottom:4px;<?php endif; ?>">			
+									<?php if ($structure->id == 227): ?>
+										DOIT LE DEPARTEMENT DE LA SEINE SAINT DENIS AIDE SOCIALE A L'ENFANCE LA SOMME DE : 
+									<?php elseif($structure->id == 226): ?>
+										DOIT LE DEPARTEMENT DU VAL D'OISE, DIRECTION DEPARTEMENTALE ADJOINTE CHARGEE DE LA SOLIDARITE
+									<?php endif; ?>
 								</td>
 							</tr>
 							<?php endif; ?>

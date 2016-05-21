@@ -13187,20 +13187,23 @@ if ('undefined' !== typeof window.ParsleyValidator)
 
         var settings = $.extend({
             getHashCallback: function(hash, btn) { return hash },
-            selectorAttribute: "href"
+            selectorAttribute: "href",
+            backToTop: false,
+            initialTab: $('li.active > a', context)
         }, options );
 
         // Show the tab corresponding with the hash in the URL, or the first tab.
         var showTabFromHash = function() {
-          var hash = settings.selectorAttribute == "href" ? window.location.hash : window.location.hash.substring(1); //Omit the hash character ('#');
-          var selector = hash ? 'a[' + settings.selectorAttribute +'="' + hash + '"]' : 'li.active > a';
+          var hash = settings.selectorAttribute == "href" ? window.location.hash : window.location.hash.substring(1);
+          var selector = hash ? 'a[' + settings.selectorAttribute +'="' + hash + '"]' : settings.initialTab;
           $(selector, context).tab('show');
+          setTimeout(backToTop, 1);
         }
 
         // We use pushState if it's available so the page won't jump, otherwise a shim.
         var changeHash = function(hash) {
           if (history && history.pushState) {
-            history.pushState(null, null, '#' + hash);
+            history.pushState(null, null, window.location.pathname + window.location.search + '#' + hash);
           } else {
             scrollV = document.body.scrollTop;
             scrollH = document.body.scrollLeft;
@@ -13210,8 +13213,14 @@ if ('undefined' !== typeof window.ParsleyValidator)
           }
         }
 
+        var backToTop = function() {
+          if (settings.backToTop === true) {
+            window.scrollTo(0, 0);
+          }
+        }
+
         // Set the correct tab when the page loads
-        showTabFromHash(context)
+        showTabFromHash();
 
         // Set the correct tab when a user uses their back/forward button
         $(window).on('hashchange', showTabFromHash);
@@ -13221,12 +13230,12 @@ if ('undefined' !== typeof window.ParsleyValidator)
           var hash = this.href.split('#')[1];
           var adjustedhash = settings.getHashCallback(hash, this);
           changeHash(adjustedhash);
+          setTimeout(backToTop, 1);
         });
 
         return this;
     };
-}( jQuery ));
-;/*!
+}( jQuery ));;/*!
  * FullCalendar v1.6.4
  * Docs & License: http://arshaw.com/fullcalendar/
  * (c) 2013 Adam Shaw
@@ -20703,7 +20712,40 @@ $(function() {
     //     $('#cl-wrapper').addClass('sb-collapsed');
     //     $('.fa',$('#sidebar-collapse')[0]).addClass('fa-angle-right').removeClass('fa-angle-left');
     // }
-});;function testing(testingString) {
+});;function debounce(callback, delay){
+    var timer;
+    return function(){
+        var args = arguments;
+        var context = this;
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+            callback.apply(context, args);
+        }, delay);
+    };
+}
+
+function throttle(callback, delay) {
+    var last;
+    var timer;
+    return function () {
+        var context = this;
+        var now = +new Date();
+        var args = arguments;
+        if (last && now < last + delay) {
+            // le délai n'est pas écoulé on reset le timer
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                last = now;
+                callback.apply(context, args);
+            }, delay);
+        } else {
+            last = now;
+            callback.apply(context, args);
+        }
+    };
+}
+
+function testing(testingString) {
     var $form = $('form');
 
     $form.find('input[type="text"]').val(testingString);
