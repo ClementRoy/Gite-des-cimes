@@ -89,6 +89,7 @@
                 </thead>
                 <tbody>
                     <?php
+
                         $the_json = array();
                         $the_datas = array();
 
@@ -122,7 +123,7 @@
                                             $nb_factured++;
                                         }
 
-                                        $factureItem = factureItem::getByInscription($inscription->id);
+                                        $factureItem = facture_item::getByInscription($inscription->id);
                                         if ( !empty($factureItem) ) {
 
                                             $facture_inscription = facture::get( $factureItem->ref_facture );

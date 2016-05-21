@@ -9,9 +9,9 @@ $facture = facture::get($id);
 $structure = structure::get($facture->ref_orga);
 
 if ( empty($facture->ref_parent_facture) ) {
-	$facture_items = factureItem::getByFacture($facture->id);
+	$facture_items = facture_item::getByFacture($facture->id);
 } else {
-	$facture_items = factureItem::getByFacture($facture->ref_parent_facture);
+	$facture_items = facture_item::getByFacture($facture->ref_parent_facture);
 }
 $saison = saison::getByYear($facture->ref_season, $facture->year);
 

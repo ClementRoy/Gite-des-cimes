@@ -22,7 +22,7 @@
 		$enfants = facture::getInscriptionsByStructureAndSeason($structure_id, $season_id, $year);
 		$alreadyFactured = facture::getAlreadyFactured($structure_id, $season_id, $year);
 
-		$factureItems = factureItem::getByFacture($facture_id);
+		$factureItems = facture_item::getByFacture($facture_id);
 
 
 		$factureItemsIds = array();
@@ -119,7 +119,7 @@
 										$inscriptions = facture::getInscriptionByChildBySeason($enfant->id, $season_id, $year );
 									 	foreach ($inscriptions as $key => $inscription): ?>
 										<?php if (in_array($inscription->id, $factureItemsIds)): ?>
-											<?php $selectedFactureItem = factureItem::getByInscription($inscription->id); ?>
+											<?php $selectedFactureItem = facture_item::getByInscription($inscription->id); ?>
 											<tr id="selected-<?php echo $inscription->id; ?>">
 												<td>
 													<div class="title"><?php echo $enfant->lastname.' '.$enfant->firstname; ?></div>

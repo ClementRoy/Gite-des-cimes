@@ -12,7 +12,7 @@
 
 // $facture = facture::get(43);
 // $structure = structure::get($facture->ref_orga);
-// $facture_items = factureItem::getByFacture($facture->id);
+// $facture_items = facture_item::getByFacture($facture->id);
 
 // $items = array();
 // foreach ($facture_items as $facture_item) {
@@ -113,7 +113,7 @@
 				':payed_amount' => $_POST['payed_amount'][$key],
 			);
 
-			$result .= factureItem::add($datas);
+			$result .= facture_item::add($datas);
 
 		}
 
@@ -156,7 +156,7 @@
 				':payed_amount' => $amount_family,
 			);
 
-			$result .= factureItem::add($datas);
+			$result .= facture_item::add($datas);
 
 		}
 
@@ -196,9 +196,9 @@
 
 		$facture = facture::get($facture_id);
 
-		$old_factureItems = factureItem::getByFacture($facture_id);
+		$old_factureItems = facture_item::getByFacture($facture_id);
 		foreach ($old_factureItems as $key => $old_factureItem) {
-			factureItem::delete($old_factureItem->id);
+			facture_item::delete($old_factureItem->id);
 		}
 
 
@@ -228,7 +228,7 @@
 				':payed_amount' => $_POST['payed_amount'][$key],
 			);
 
-			$result .= factureItem::add($datas);
+			$result .= facture_item::add($datas);
 
 		}
 
@@ -239,9 +239,9 @@
 		if ( (!isset($amount_family) || $amount_family < 1) && !empty($facture_family) ) {
 
 			// Il faut supprimer l'entrée dans la BDD et le fichier
-			$old_familyFactureItems = factureItem::getByFacture($facture_family->id);
+			$old_familyFactureItems = facture_item::getByFacture($facture_family->id);
 			foreach ($old_familyFactureItems as $key => $old_familyFactureItem) {
-				factureItem::delete($old_familyFactureItem->id);
+				facture_item::delete($old_familyFactureItem->id);
 			}
 
 			facture::delete($facture_family->id);
@@ -279,15 +279,15 @@
 				':payed_amount' => $amount_family,
 			);
 
-			$result .= factureItem::add($datas);
+			$result .= facture_item::add($datas);
 
 
 		} elseif ( (isset($amount_family) || $amount_family > 0) && !empty($facture_family) ) {
 
 			// Si elle existait avant et maintenant également, on met à jour la BDD et on écrase le fichier
-			$old_familyFactureItems = factureItem::getByFacture($facture_family->id);
+			$old_familyFactureItems = facture_item::getByFacture($facture_family->id);
 			foreach ($old_familyFactureItems as $key => $old_familyFactureItem) {
-				factureItem::delete($old_familyFactureItem->id);
+				facture_item::delete($old_familyFactureItem->id);
 			}
 
 			$facture_familly_id = $facture_family->id;
@@ -308,7 +308,7 @@
 				':payed_amount' => $amount_family,
 			);
 
-			$result .= factureItem::add($datas);
+			$result .= facture_item::add($datas);
 
 		}
 
@@ -523,9 +523,12 @@
 					                    		<td>
 					                    			<?php if ( $facture->status == 0 ): ?>
 					                    				<?php $facture_family = facture::getByParentFacture($facture->id); ?>
-					                    				<?php if (isset($facture_family) && $facture_family->status == 0): ?>
-					                    					<a href="/factures/editer/id/<?php echo $facture->id; ?>" class="btn btn-default btn-xs btn-update" title="">Modifer</a>
-					                    				<?php endif; ?>
+					                    				<?php if (isset($facture_family) && !empty($facture_family)): ?>
+					                    					
+						                    				<?php if ($facture_family->status == 0): ?>
+						                    					<a href="/factures/editer/id/<?php echo $facture->id; ?>" class="btn btn-default btn-xs btn-update" title="">Modifer</a>
+						                    				<?php endif; ?>
+					                    				<?php endif ?>
 					                    			<?php endif; ?>
 					                    		</td>
 					                    		<td style="width: 100px;">
