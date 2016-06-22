@@ -291,6 +291,9 @@ foreach ($facture_items as $facture_item) {
 							<?php if ( empty($facture->ref_parent_facture) ): ?>
 								
 								<?php echo $structure->name; ?><br>
+								<?php if(!empty( $structure->service ) ): ?>
+								<?php echo $structure->service; ?><br>
+								<?php endif; ?>
 								<?php echo $structure->address_number; ?> <?php echo $structure->address_street; ?><br>
 								<?php if (!empty($structure->address_comp)): ?>
 									<?php echo $structure->address_comp; ?><br>

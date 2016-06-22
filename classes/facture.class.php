@@ -60,7 +60,7 @@ class facture
 
          //echo $sql;
         $result = $db->query($sql);
-
+        
         $archived = array();
 
         foreach ($result as $key => $item) {

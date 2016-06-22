@@ -121,7 +121,6 @@
 		// Si un reliquat famille est indiqué lors de la soumission
 		if (isset($amount_family) && !empty($amount_family) && $amount_family > 0) {
 
-
 			$last_number_id = facture::getLastNumberIdfromYear($datetime_now->format( 'Y' ));
 			$new_number_id = $last_number_id + 1;
 
@@ -147,7 +146,6 @@
 			$result .= facture::add($datas);
 
 			$facture_familly_id = facture::getLastID();
-
 
 			$datas = array(
 				':ref_facture' => $facture_familly_id,
@@ -330,7 +328,7 @@
 
 
 	$alreadyFactured = facture::getAlreadyFactured($structure_id, $season_id, $year);
-
+	// tool::output( $alreadyFactured );
  ?>
 
 <div class="page-head">

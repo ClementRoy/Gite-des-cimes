@@ -176,8 +176,6 @@
 
                                             $facture_inscription = facture::get( $factureItem->ref_facture );
 
-
-
                                             if ($facture_inscription->status > 0 ) {
                                                 if ( $facture_inscription->amount_caf > 0 ) {
                                                     if ($facture_inscription->status_caf > 0) {
