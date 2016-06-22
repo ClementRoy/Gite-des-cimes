@@ -20,6 +20,13 @@ class facture
         $result = $db->row($sql, $params);
         return $result;
     }
+    public static function getListByYear($year){
+        global $db;
+        $params = array(':year' => $year);
+        $sql = 'SELECT * FROM '.self::$table.' WHERE year=:year';
+        $result = $db->query($sql, $params);
+        return $result;
+    }
 
     public static function getByParentFacture($id){
         global $db;
