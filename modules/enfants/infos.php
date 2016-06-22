@@ -769,7 +769,7 @@
                                                 du <?=strftime('%d %B %Y', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?> 
                                             </td>
                                             <td>
-                                                <?php $factureItem = factureItem::getByInscription($inscription->id); ?>
+                                                <?php $factureItem = facture_item::getByInscription($inscription->id); ?>
                                                 <?php if ( !empty($factureItem) ): ?>
                                                     <?php $facture = facture::get($factureItem->ref_facture); ?>
                                                     <a href="/factures/infos/annee/<?php echo $facture->year; ?>/season/<?php echo $facture->ref_season; ?>/structure/<?php echo $facture->ref_orga; ?>"><?php echo $facture->number; ?></a>

@@ -22,6 +22,7 @@
     <div class="content">
         <h2>Version</h2>
 		<p>Dev</p>
+        <?php phpinfo(); ?>
     </div>
 </div>
 
