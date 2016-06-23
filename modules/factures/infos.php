@@ -104,11 +104,11 @@
 		$result .= facture::add($datas);
 		$facture_id = facture::getLastID();
 
-		foreach ($_POST['inscription_id'] as $key => $item) {
+		foreach ($_POST['inscription_id'] as $key => $inscription_id) {
 
 			$datas = array(
 				':ref_facture' => $facture_id,
-				':ref_inscription' => $item,
+				':ref_inscription' => $inscription_id,
 				':amount' => $_POST['amount'][$key],
 				':payed_amount' => $_POST['payed_amount'][$key],
 			);
@@ -217,11 +217,11 @@
 
 		$result .= facture::update($datas, $facture_id);
 
-		foreach ($_POST['inscription_id'] as $key => $item) {
-
+		foreach ($_POST['inscription_id'] as $key => $inscription_id) {
+			tool::output( $inscription_id );
 			$datas = array(
 				':ref_facture' => $facture_id,
-				':ref_inscription' => $item,
+				':ref_inscription' => $inscription_id,
 				':amount' => $_POST['amount'][$key],
 				':payed_amount' => $_POST['payed_amount'][$key],
 			);
@@ -356,11 +356,10 @@
 				<div class="content">
 					<table class="table table-form" id="js-table-available">
 						<?php foreach ($enfants as $key => $enfant): ?>
-							<?php
-								$inscriptions = facture::getInscriptionByChildBySeason($enfant->id, $season_id, $year );
-							 	foreach ($inscriptions as $key => $inscription):
-							?>
-								<tr id="available-<?php echo $inscription->id; ?>"<?php if (in_array($inscription->id, $alreadyFactured)): ?> class="disabled"<?php endif; ?>>
+							<?php $inscriptions = facture::getInscriptionByChildBySeason($enfant->id, $season_id, $year ); ?>
+							 <?php foreach ($inscriptions as $key => $inscription): ?>
+								<?php if (!in_array($inscription->id, $alreadyFactured)): ?>
+								<tr id="available-<?php echo $inscription->id; ?>">
 									<td>
 										<div class="title"><?php echo $enfant->lastname.' '.$enfant->firstname; ?></div>
 										<?php
@@ -370,15 +369,35 @@
 										<div><?php echo $inscription->name; ?> du <?php echo strftime('%d %B', $date_from->getTimestamp()) ?> au <?php echo strftime('%d %B', $date_to->getTimestamp()) ?></div>
 									</td>
 									<td class="options">
-										<?php if (in_array($inscription->id, $alreadyFactured)): ?>
-											<span class="label label-primary">Déja facturé</span>
-										<?php else: ?>
-											<span class="label label-success">Ajouté</span>
-										<?php endif; ?>
+										<span class="label label-success">Ajouté</span>
 										<button class="btn btn-default btn-sm btn-add" data-id="<?php echo $inscription->id; ?>" data-tarif="<?php echo $inscription->price; ?>">Ajouter</button>
 									</td>
 								</tr>
+								<?php endif; ?>
 							<?php endforeach; ?>
+
+						<?php endforeach; ?>
+						<?php foreach ($enfants as $key => $enfant): ?>
+							<?php $inscriptions = facture::getInscriptionByChildBySeason($enfant->id, $season_id, $year ); ?>
+
+							<?php foreach ($inscriptions as $key => $inscription): ?>
+								<?php if (in_array($inscription->id, $alreadyFactured)): ?>
+								<tr id="available-<?php echo $inscription->id; ?>" class="disabled">
+									<td>
+										<div class="title"><?php echo $enfant->lastname.' '.$enfant->firstname; ?></div>
+										<?php
+											$date_from = new DateTime($inscription->date_from);
+											$date_to = new DateTime($inscription->date_to);
+										?>
+										<div><?php echo $inscription->name; ?> du <?php echo strftime('%d %B', $date_from->getTimestamp()) ?> au <?php echo strftime('%d %B', $date_to->getTimestamp()) ?></div>
+									</td>
+									<td class="options">
+										<span class="label label-primary">Déja facturé</span>
+									</td>
+								</tr>
+								<?php endif; ?>
+							<?php endforeach; ?>
+
 						<?php endforeach; ?>
 					</table>						
 				</div>
@@ -521,12 +540,9 @@
 					                    		<td>
 					                    			<?php if ( $facture->status == 0 ): ?>
 					                    				<?php $facture_family = facture::getByParentFacture($facture->id); ?>
-					                    				<?php if (isset($facture_family) && !empty($facture_family)): ?>
-					                    					
-						                    				<?php if ($facture_family->status == 0): ?>
-						                    					<a href="/factures/editer/id/<?php echo $facture->id; ?>" class="btn btn-default btn-xs btn-update" title="">Modifer</a>
-						                    				<?php endif; ?>
-					                    				<?php endif ?>
+					                    				<?php if (empty($facture_family) || $facture_family->status == 0): ?>
+						                    				<a href="/factures/editer/id/<?php echo $facture->id; ?>" class="btn btn-default btn-xs btn-update" title="">Modifer</a>
+					                    				<?php endif; ?>
 					                    			<?php endif; ?>
 					                    		</td>
 					                    		<td style="width: 100px;">

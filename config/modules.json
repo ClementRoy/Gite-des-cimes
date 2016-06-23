@@ -29,7 +29,7 @@
 	},
 	"factures" : {
 		"name" : "factures",
-		"views" : ["index", "infos", "editer"]
+		"views" : ["index", "infos", "editer", "debug"]
 	},
 	"animateurs" : {
 		"name" : "animateurs",

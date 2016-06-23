@@ -1230,3 +1230,15 @@ padding: 2px 5px;
 .cl-sidebar {
     position: absolute;
 }
+
+
+.page-head i.fa-cog {
+    font-size: 21px;
+    margin: 25px 10px;
+    display: block;
+    color: rgba(0,0,0,.3);
+}
+.page-head i.fa-cog:hover {
+    color: rgba(0,0,0,.7);
+
+}
