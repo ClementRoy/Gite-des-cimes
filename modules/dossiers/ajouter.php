@@ -99,6 +99,14 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Contrat retourné</label>
+                        <div class="col-sm-6">
+                            <label class="radio-inline" for="form-inscription-returned-contract-oui"><input type="radio" class="icheck" name="form_inscription_returned_contract" id="form-inscription-returned-contract-oui" value="1"> Oui</label>
+                            <label class="radio-inline" for="form-inscription-returned-contract-non"><input type="radio" class="icheck" name="form_inscription_returned_contract" id="form-inscription-returned-contract-non" value="0" checked="checked"> Non</label>
+                        </div>
+                    </div>
+
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="form-inscription-lieu-select">Lieu de rendez-vous</label>

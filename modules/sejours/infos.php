@@ -255,19 +255,35 @@
 
                         <?php else: ?>
 
-                            <div class="header text-right">
-                                <button class="btn btn-primary btn-sm btn-rad" data-toggle="modal" data-target="#modal-recapitulatif-notes-enfants-<?=$o?>">
-                                    Récap. des notes d'enfant
-                                </button>
-                                <button class="btn btn-primary btn-sm btn-rad" data-toggle="modal" data-target="#modal-recapitulatif-mineurs-<?=$o?>">
-                                    Récapitulatif mineurs
-                                </button>
-                                <button class="btn btn-primary btn-sm btn-rad" data-toggle="modal" data-target="#modal-suivi-sanitaire-<?=$o?>">
-                                    Suivi sanitaire
-                                </button>
-                                <button class="btn btn-primary btn-sm btn-rad" data-toggle="modal" data-target="#modal-registre-des-mineurs-<?=$o?>">
-                                    Registre des mineurs
-                                </button>
+                            <div class="header clearfix">
+                                <div class="pull-left">
+                                    <?php /*
+                                        <button class="btn btn-info btn-sm btn-rad" data-toggle="modal" data-target="#modal-recapitulatif-dossiers-incomplets-<?=$o?>">
+                                            Récap. dossier incomplet (sur la saison)
+                                        </button>
+                                    */ ?>
+                                    <?php
+                                        $sejour_season = saison::getBySejour($sejour->id);
+                                        $year = strftime('%Y', $date_from_query->getTimestamp() );
+                                    ?>
+                                    <a href="/export/saison/type/1/id/<?php echo $sejour_season->id ?>/year/<?php echo $year; ?>" class="btn btn-info btn-sm btn-rad">
+                                        Télécharger récap. dossiers saison
+                                    </a>
+                                </div>
+                                <div class="pull-right">
+                                    <button class="btn btn-primary btn-sm btn-rad" data-toggle="modal" data-target="#modal-recapitulatif-notes-enfants-<?=$o?>">
+                                        Récap. des notes d'enfant
+                                    </button>
+                                    <button class="btn btn-primary btn-sm btn-rad" data-toggle="modal" data-target="#modal-recapitulatif-mineurs-<?=$o?>">
+                                        Récapitulatif mineurs
+                                    </button>
+                                    <button class="btn btn-primary btn-sm btn-rad" data-toggle="modal" data-target="#modal-suivi-sanitaire-<?=$o?>">
+                                        Suivi sanitaire
+                                    </button>
+                                    <button class="btn btn-primary btn-sm btn-rad" data-toggle="modal" data-target="#modal-registre-des-mineurs-<?=$o?>">
+                                        Registre des mineurs
+                                    </button>
+                                </div>
                             </div>
                             <hr>
                             <div class="content">
@@ -353,11 +369,13 @@
                                         <tbody>
                                             <?php foreach($inscriptions as $key => $inscription): ?>
                                                 <?php if ($inscription->ref_enfant_id != ''): ?>
-                                                    <?php $enfant = enfant::get($inscription->ref_enfant_id); ?>
-                                                    <?php $dossier = dossier::get($inscription->ref_dossier); ?>
+                                                    <?php 
+                                                        $enfant = enfant::get($inscription->ref_enfant_id);
+                                                        $dossier = dossier::get($inscription->ref_dossier);
+                                                    ?>
                                                     <tr>
                                                         <td>
-                                                            <a href="/dossiers/infos/id/<?=$dossier->id; ?>"><strong>#<?=$dossier->id ?></strong></a>
+                                                            <a href="/dossiers/infos/id/<?php echo $dossier->id; ?>"><strong>#<?php echo $dossier->id ?></strong></a>
                                                             <ul class="dropdown-menu">
                                                                 <li><a href="/dossiers/infos/id/<?=$dossier->id; ?>" class="item"><i class="fa fa-folder-open"></i> Voir le dossier d'inscription</a></li>
                                                                 <li><a href="/enfants/infos/id/<?=$enfant->id; ?>" class="item"><i class="fa fa-user"></i> Voir la fiche de l'enfant</a></li>
@@ -527,6 +545,145 @@
                                     );
                                 }
                             ?>
+                            
+                            <?php /*
+                            <!-- modal-recapitulatif-dossiers-incomplets -->
+                            <?php $sejours_saison = sejour::getBySaison($sejour_season->id, $year); ?>
+                            <div class="modal fade colored-header" id="modal-recapitulatif-dossiers-incomplets-<?=$o; ?>" tabindex="-1" role="dialog" aria-labelledby="modal-recapitulatif-dossiers-incomplets-<?=$o; ?>" aria-hidden="true">
+                                <div class="modal-dialog full-width">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="modal-label-recapitulatif-dossiers-incomplets-<?=$o; ?>">
+                                                Récapitulatif des dossiers pour la saison <span><?php echo $sejour_season->name; ?></span>
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table class="no-border">
+                                                <thead class="no-border">
+                                                    <tr>
+                                                        <th>Prénom</th>
+                                                        <th>Nom</th>
+                                                        <th>Séjour</th>
+                                                        <th>N° de sécurité sociale</th>
+                                                        <th>Assurance (RC) (validité)</th>
+                                                        <th>Attestation CPAM</th>
+                                                        <th>Fiche sanitaire de liaison</th>
+                                                        <th>Carnet de vaccination</th>
+                                                        <th>Fiche de séjour</th>
+                                                        <th>Structure</th>
+                                                        <th>Contact</th>
+                                                        <th>Tél</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="no-border-x no-border-y">
+
+                                                    <?php foreach($sejours_saison as $sejour_saison): ?>
+                                                        <?php
+                                                            $inscriptions = inscription::getBySejour($sejour_saison->id);
+                                                            $enfants_id = array();
+                                                        ?>
+                                                        <?php foreach ($inscriptions as $inscription): ?>
+                                                            <?php
+                                                                $enfant = enfant::get($inscription->ref_enfant);
+                                                                $sejour = sejour::get($inscription->ref_sejour);
+                                                            ?>
+                                                            <?php if ( !in_array($enfant->id, $enfants_id) ): ?>
+                                                                <?php $enfants_id[] = $enfant->id; ?>
+                                                                <tr>
+                                                                    <td style="font-weight:bold;width:200px;" width="200px;">
+                                                                        <?php echo $enfant->firstname; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $enfant->lastname; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php
+                                                                            $date_from = new DateTime($sejour->date_from);
+                                                                            $date_to = new DateTime($sejour->date_to);
+                                                                            echo $sejour->name;
+                                                                        ?>
+                                                                        (<?php echo strftime('%d %B', $date_from->getTimestamp()); ?>  au <?=strftime('%d %B %Y', $date_to->getTimestamp()); ?>)
+                                                                    </td>
+
+                                                                    <?php if ($enfant->number_ss): ?>
+                                                                        <td><?php echo $enfant->number_ss; ?></td>
+                                                                    <?php else: ?>
+                                                                        <td><i class="fa fa-times-circle"></i></td>
+                                                                    <?php endif ?>
+
+                                                                    <?php if ($enfant->self_assurance): ?>
+                                                                        <td><i class="fa fa-check-circle"></i> <?php if (!empty( $enfant->self_assurance_expiration_date ) ): ?>(<?php echo $enfant->self_assurance_expiration_date; ?>)<?php endif ?></td>
+                                                                    <?php else: ?>
+                                                                        <td><i class="fa fa-times-circle"></i></td>
+                                                                    <?php endif; ?>
+
+                                                                    <?php if ($enfant->cpam_attestation): ?>
+                                                                        <td><i class="fa fa-check-circle"></i> <?php if (!empty($enfant->cpam_attestation_expiration_date)): ?>(<?php echo $enfant->self_assurance_expiration_date; ?>)<?php endif ?></td>
+                                                                    <?php else: ?>
+                                                                        <td><i class="fa fa-times-circle"></i></td>
+                                                                    <?php endif; ?>
+
+                                                                    <?php if ($enfant->health_record): ?>
+                                                                        <td><i class="fa fa-check-circle"></i></td>
+                                                                    <?php else: ?>
+                                                                        <td><i class="fa fa-times-circle"></i></td>
+                                                                    <?php endif; ?>
+
+                                                                    <?php if ($enfant->vaccination): ?>
+                                                                        <td><i class="fa fa-check-circle"></i></td>
+                                                                    <?php else: ?>
+                                                                        <td><i class="fa fa-times-circle"></i></td>
+                                                                    <?php endif; ?>
+
+                                                                    <?php if ($enfant->stay_record): ?>
+                                                                        <td><i class="fa fa-check-circle"></i></td>
+                                                                    <?php else: ?>
+                                                                        <td><i class="fa fa-times-circle"></i></td>
+                                                                    <?php endif; ?>
+                                                                    
+                                                                    <td>
+                                                                        <?php
+                                                                            $structure = structure::get($enfant->organization);
+                                                                            if (!empty($structure)) {
+                                                                                echo $structure->name;
+                                                                            }
+                                                                        ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php
+                                                                            $contact = contact::get($enfant->contact);
+                                                                            if (!empty($contact)) {
+                                                                                echo $contact->civility . ' ' . $contact->firstname . ' ' . $contact->lastname;
+                                                                            }
+                                                                        ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php
+                                                                            if (!empty($contact)) {
+                                                                                echo $contact->phone;
+                                                                            }
+                                                                        ?>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
+                                                    <?php endforeach; ?>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                            <a href="/export/saison/type/1/id/<?php echo $sejour_season->id ?>/year/<?php echo $year; ?>" class="btn btn-primary">
+                                                <i class="fa fa-download"></i> Télécharger le document
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /.modal-recapitulatif-dossiers-incomplets -->
+                            */ ?>
 
 
                             <!-- modal-recapitulatif-mineurs -->
@@ -535,7 +692,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title" id="modal-recapitulatif-notes-enfants-<?=$o; ?>">
+                                            <h4 class="modal-title" id="modal-label-recapitulatif-notes-enfants-<?=$o; ?>">
                                                 Récapitulatif des notes générales de chaque enfant
                                                 - <span><?=$sejour->name;?> du <?=strftime('%d %B %Y', $date_from_query->getTimestamp()); ?> au <?=strftime('%d %B %Y', $date_to_query->getTimestamp()); ?></span>
                                             </h4>

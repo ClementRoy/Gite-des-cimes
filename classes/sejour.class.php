@@ -76,6 +76,44 @@ class sejour
     }
 
 
+    public static function getBySaison($saison_id, $year){
+        global $db;
+        $season = saison::get($saison_id);
+        // tool::output( $season );
+
+        $date_from = $year . '-' . str_pad($season->month_from, 2, '0', STR_PAD_LEFT) . '-' . str_pad($season->day_from, 2, '0', STR_PAD_LEFT) . ' 00:00:00';
+        $date_to = $year . '-' . str_pad($season->month_to, 2, '0', STR_PAD_LEFT) . '-' . str_pad($season->day_to, 2, '0', STR_PAD_LEFT) . ' 00:00:00';
+
+        // tool::output( $date_from );
+        // tool::output( $date_to );
+
+        $results = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 AND date_from >= "'.$date_from.'"  AND date_to <= "'.$date_to.'" ORDER BY date_from');
+
+
+
+
+            
+        $new_results = array();
+        for ($i=0; $i < count($results) - 1; $i++) {
+           $date_from = new DateTime($results[$i]->date_from);
+           $date_to = new DateTime($results[$i]->date_to);
+
+            if ($season->name != 'Weekend') {
+                if ( ( $date_to->getTimestamp() - $date_from->getTimestamp() ) > 172800) {
+                    array_push($new_results, $results[$i]);
+                }
+            } else {
+                if ( ( $date_to->getTimestamp() - $date_from->getTimestamp() ) < 172800) {
+                    array_push($new_results, $results[$i]);
+                }
+            }
+
+        }
+
+        return $new_results;
+    }
+
+
     public static function getListByHebergement(){
         return false;
     }
