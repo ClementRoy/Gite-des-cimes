@@ -97,7 +97,7 @@ class facture
                     AND inscription.date_to <= "'.$to.'" 
                     AND DATE_ADD(inscription.date_from, INTERVAL 2 DAY) = inscription.date_to
                     GROUP BY enfant.id
-                    ORDER BY enfant.firstname';
+                    ORDER BY enfant.lastname';
         } else {
             $sql = 'SELECT enfant.id, enfant.firstname, enfant.lastname FROM enfant
                     LEFT JOIN dossier ON enfant.id = dossier.ref_enfant 
@@ -109,7 +109,7 @@ class facture
                     AND inscription.date_to <= "'.$to.'" 
                     AND DATE_ADD(inscription.date_from, INTERVAL 2 DAY) != inscription.date_to
                     GROUP BY enfant.id
-                    ORDER BY enfant.firstname';
+                    ORDER BY enfant.lastname';
          }
          //echo $sql;
         $result = $db->query($sql);

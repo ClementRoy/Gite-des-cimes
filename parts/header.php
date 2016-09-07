@@ -23,6 +23,7 @@
 
     <link rel="stylesheet" href="/assets/libs/jquery.easy-pie-chart/jquery.easy-pie-chart.css">
     <link rel="stylesheet" href="/assets/libs/odometer/themes/odometer-theme-default.css">
+    <!-- <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css"> -->
     <link rel="stylesheet" href="/assets/css/datatables-bootstrap-adapter.css">
 
     <link rel="stylesheet" href="/assets/libs/jquery.gritter/css/jquery.gritter.css">

@@ -350,8 +350,15 @@
 	<div class="row">
 		<div class="col-xs-6">
 			<div class="block-flat">
-				<div class="header">							
-					<h3>À facturer</h3>
+				<div class="header">
+					<div class="row">
+						<div class="col-xs-12 col-md-7">
+							<h3>À facturer</h3>
+						</div>
+						<div class="col-xs-12 col-md-5">
+							<input type="text" id="js-search-available" class="form-control input-sm" placeholder="Rechercher un enfant...">
+						</div>
+					</div>
 				</div>
 				<div class="content">
 					<table class="table table-form" id="js-table-available">
@@ -618,7 +625,10 @@
 
 $(function() {
 	
+
+
 	var $available = $('#js-table-available'),
+		$searchAvailable = $('#js-search-available'),
 		$selected = $('#js-table-selected'),
 		$reliquats = $('#selected-reliquats'),
 		$familleAmount = $('#amount_family'),
@@ -627,7 +637,20 @@ $(function() {
 		$btnReset = $('#js-btn-reset'),
 		$btnConfirm = $('#js-btn-confirm');
 
+	$searchAvailable.on('keyup', debounce(function(e){
+		var val = $(this).val().toLowerCase();
+		$available.find('tr').show();
 
+		if (val.length > 1) {
+			$available.find('.title').each(function(index, el) {
+				var $el = $(el),
+					text = $el.text().toLowerCase();
+				if (text.indexOf(val) == -1) {
+					$el.parents('tr').hide();
+				}
+			});
+		}
+	}, 100));
 
 	function checkVisible() {
 		if( $selected.find('tr:visible').length ) {

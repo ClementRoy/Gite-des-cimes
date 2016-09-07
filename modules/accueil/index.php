@@ -9,7 +9,7 @@
 <!-- /Page title -->
 
 <!-- Chiffres -->
-<div class="row">
+<div class="row hidden-xs">
     <div class="col-md-3 col-sm-6">
         <div class="fd-tile detail tile-purple">
             <div class="content"><h1 class="text-left odometer" id="number-enfants">0</h1><p>enfants dans la base</p></div>

@@ -16,6 +16,7 @@
         <script src="/assets/libs/datatables/media/js/jquery.daTatables.js"></script>
         <script src="/assets/js/libs/datatables-bootstrap-adapter.js"></script>
         <script src="/assets/js/libs/datatables-french.js"></script>
+        <!-- <script src="//cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script> -->
 
         <script src="/assets/libs/jquery.gritter/js/jquery.gritter.js"></script>
         

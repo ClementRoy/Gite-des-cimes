@@ -2331,4 +2331,40 @@ table td .progress-tb .progress-bar:last-child {
     #head-nav {
         display: none;
     }
+
+    .table-responsive {
+        position: relative;
+        margin-bottom: 20px;
+        overflow: hidden;
+        border-right: 1px solid red;
+    }
+    .table-responsive .dataTables_wrapper {
+    overflow: scroll;
+    overflow-y: hidden;
+    }
+    .table {
+        width: auto;
+    }
+    .table th {
+            width: auto !important;
+    }
+}
+/*
+.dataTable > tbody > tr > td,
+.dataTable > tbody > tr > td,
+.dataTable > thead > tr > th {
+        display: none;
+        width: auto !important;
+}
+.dataTable > tbody > tr > td:nth-child(1),
+.dataTable > tbody > tr > td:nth-child(2),
+.dataTable > thead > tr > th:nth-child(1),
+.dataTable > thead > tr > th:nth-child(2) {
+        display: table-cell;
+}
+*/
+
+.header .form-control {
+    font-size: 12px;
+    height: 31px;
 }

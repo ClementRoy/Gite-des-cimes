@@ -151,7 +151,8 @@ $('#datatable').dataTable({
     "bProcessing": true,
     "bDeferRender": true,
     "bStateSave": true,
-    "aaData":   the_datas[0]
+    "aaData":   the_datas[0],
+    "responsive": true
 });
 $('.dropdown-menu').on('click', '.modal-remove-link', function(event) {
     event.preventDefault();
