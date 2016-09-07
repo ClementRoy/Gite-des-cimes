@@ -7,7 +7,7 @@
     <title>Gîte des Cîmes - Outil de gestion</title>
     <meta name="robots" CONTENT="noindex, nofollow">
     
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,300">
+    <!-- <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,300"> -->
 
     <?php if (APP_VERSION != 'dev'): ?>
 
