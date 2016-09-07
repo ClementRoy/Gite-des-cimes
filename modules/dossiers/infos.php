@@ -15,6 +15,7 @@
             ':ref_structure_payer' => $form_inscription_structure,
             ':structure_payer' => $form_inscription_structure_name,
             ':supported' => $form_inscription_supported,
+            ':returned_contract' => $form_inscription_returned_contract,
             ':note' => $form_inscription_note,
             ':place' => (!empty($form_inscription_lieu_custom))? $form_inscription_lieu_custom : $form_inscription_lieu,
             ':hour_departure' => $form_inscription_heure_aller.'h'.$form_inscription_min_aller,
@@ -72,6 +73,7 @@
             ':ref_structure_payer' => $form_inscription_structure,
             ':structure_payer' => $form_inscription_structure_name,
             ':supported' => $form_inscription_supported,
+            ':returned_contract' => $form_inscription_returned_contract,
             ':note' => $form_inscription_note,
             ':place' => $place,
             ':hour_departure' => $form_inscription_heure_aller.'h'.$form_inscription_min_aller,
@@ -177,6 +179,15 @@
                             <?php endif; ?>
 
 
+                            <?php if(!$dossier->returned_contract): ?>
+                                <div class="alert alert-warning alert-white rounded">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <div class="icon"><i class="fa fa-warning"></i></div>
+                                    Le contrat n'a pas ecnore été retourné
+                                </div>
+                            <?php endif; ?>
+
+
                             <table class="no-border no-strip information">
                                 <tbody class="no-border-x no-border-y">
 
@@ -214,7 +225,10 @@
                                         <td>
                                             <table class="no-border no-strip skills">
                                                 <tbody class="no-border-x no-border-y">
-                                                    <?php $enfant = enfant::get($dossier->ref_enfant); ?>
+                                                    <?php 
+                                                        $enfant = enfant::get($dossier->ref_enfant);
+                                                        $structure_payer = structure::get($dossier->ref_structure_payer);
+                                                    ?>
                                                     <tr>
                                                         <td style="width:20%;">Nom et prénom</td>
                                                         <td><a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname; ?> <?=$enfant->lastname; ?></a></td>
@@ -222,12 +236,15 @@
 
                                                     <tr>
                                                         <td style="width: 20%;">Prise en charge :</td>
-                                                        <?php $structure_payer = structure::get($dossier->ref_structure_payer); ?>
                                                         <td><?=($dossier->supported) ? '<i class="fa fa-check-circle"></i>':'<i class="fa fa-times-circle"></i>'; ?></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="width: 20%;">Contract retourné :</td>
+                                                        <td><?=($dossier->returned_contract) ? '<i class="fa fa-check-circle"></i>':'<i class="fa fa-times-circle"></i>'; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td style="width: 20%;">Centre payeur :</td>
-                                                        <?php $structure_payer = structure::get($dossier->ref_structure_payer); ?>
                                                         <td><?=(!empty($structure_payer)) ? '<a href="/structures/infos/id/'.$structure_payer->id.'">'.$structure_payer->name.'</a>':EMPTYVAL; ?></td>
                                                     </tr>
 
@@ -248,7 +265,7 @@
                                                     <?php $date_from = new DateTime($inscription->date_from); ?>
                                                     <?php $date_to = new DateTime($inscription->date_to); ?>
                                                     <tr>
-                                                        <td colspan="2"><a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a> du <?=strftime("%d %B %Y", $date_from->getTimestamp()) ?> au <?=strftime("%d %B %Y", $date_to->getTimestamp()) ?> <!--- <?php echo $inscription->id; ?>--></td>
+                                                        <td colspan="2"><a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a> du <?=strftime("%d %B %Y", $date_from->getTimestamp()) ?> au <?=strftime("%d %B %Y", $date_to->getTimestamp()) ?> - <?php echo $inscription->id; ?></td>
                                                     </tr>
                                                     <?php endforeach; ?>
 

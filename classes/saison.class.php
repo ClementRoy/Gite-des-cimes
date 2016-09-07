@@ -41,6 +41,51 @@ class saison
      * @param int id of the object
      * @return object result of the query
      */
+    public static function getBySejour($sejour_id){
+
+        $seasons = saison::getListAll();
+        $sejour = sejour::get($sejour_id);
+        // tool::output( $seasons );
+        $date_from = new DateTime($sejour->date_from);
+        $date_from_day = strftime('%d', $date_from->getTimestamp());
+        $date_from_month = strftime('%m', $date_from->getTimestamp());
+
+        $date_to = new DateTime($sejour->date_to);
+        $date_to_day = strftime('%d', $date_to->getTimestamp());
+        $date_to_month = strftime('%m', $date_to->getTimestamp());
+
+        $sejour_season = false;
+
+        // tool::output( $date_from_day );
+        // tool::output( $date_from_month );
+
+        if ( ( $date_to->getTimestamp() - $date_from->getTimestamp() ) > 172800) {
+
+            foreach ($seasons as $season) {
+                if ($date_from_day >= $season->day_from 
+                    && $date_from_month >= $season->month_from
+                    && $date_to_day <= $season->day_to
+                    && $date_to_month <= $season->month_to
+                    && $season->id != 5 ) {
+
+                        $sejour_season = $season;
+                }
+            }
+
+        } else {
+            $sejour_season = $seasons[4];
+        }
+        
+        return $sejour_season;
+    }
+
+
+    /**
+     * Get an object from its id
+     *
+     * @param int id of the object
+     * @return object result of the query
+     */
     public static function getByYear($saison_id, $year){
         global $db;
         $params = array(':id' => $saison_id);
