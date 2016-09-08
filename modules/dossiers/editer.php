@@ -50,124 +50,162 @@
                         </div>
                     </div>
 
-                    <?php $sejours = sejour::getListFuturSejour(); ?>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label" for="form-inscription-sejour-select">Séjour(s)</label>
-                        <div class="col-sm-6">
-                            <div class="sejours-group">
-                                <div class="sejour-form init" style="display:none;">
-                                    <fieldset>
-                                        <select class="form-control input-sm" id="form-inscription-sejour-select" name="form_inscription_sejour[]">
-                                            <option value="">Choisissez un séjour</option>
-                                        </select>
-                                    </fieldset>
-                                </div>
 
-                                <?php $sejours = sejour::getList(); ?>
-                                <?php $sejours_linked = inscription::getLinkedSejours($dossier->id); ?>
-                                <?php $l = 0; ?>
-                                <?php foreach($sejours_linked as $sejour_linked): ?>
-                                    <div class="sejour-form">
-                                        <fieldset <?=(count($sejours_linked) > $l+1)? 'disabled' : ''; ?>>
+                    <?php
+                        $sejours = sejour::getListFuturSejour();
+                        $inscriptions = inscription::getByDossier($dossier->id);
+                        $inscriptions_ids = array();
+                        foreach ($inscriptions as $inscription) {
+                            array_push($inscriptions_ids, $inscription->id);
+                        }
+                        $facture_inscriptions = facture_item::getByInscriptions($inscriptions_ids);
+                    ?>
+                    <?php if ( count($facture_inscriptions) > 0 ): ?>
+                        <input type="hidden" name="already_factured" value="1">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Séjour(s)</label>
+                            <div class="col-sm-6">
+
+                                <ul class="list-group">
+
+                                    <?php foreach($inscriptions as $inscription): ?>
+                                    <?php $sejour = sejour::get($inscription->ref_sejour); ?>
+                                    <?php $date_from = new DateTime($inscription->date_from); ?>
+                                    <?php $date_to = new DateTime($inscription->date_to); ?>
+                                    <li class="list-group-item">
+                                        <a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a> du <?=strftime("%d %B %Y", $date_from->getTimestamp()) ?> au <?=strftime("%d %B %Y", $date_to->getTimestamp()) ?>
+                                    </li>
+                                    <?php endforeach; ?>
+
+                                </ul>
+
+                                <div class="alert alert-warning">Ces inscriptions sont déjà facturées, vous ne pouvez donc plus les modifier.</div>
+
+                            </div>
+                        </div>
+
+                    <?php else: ?>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="form-inscription-sejour-select">Séjour(s)</label>
+                            <div class="col-sm-6">
+                                <div class="sejours-group">
+                                    <div class="sejour-form init" style="display:none;">
+                                        <fieldset>
                                             <select class="form-control input-sm" id="form-inscription-sejour-select" name="form_inscription_sejour[]">
                                                 <option value="">Choisissez un séjour</option>
-                                                <?php foreach($sejours as $sejour): ?>
-                                                    <?php $date_from = new DateTime($sejour->date_from); ?>
-                                                    <?php $date_to = new DateTime($sejour->date_to); ?>
-                                                    <?php $nb_weeks = tool::getNbWeeks($date_from, $date_to); ?>
-
-                                                    <?php if($date_to->getTimestamp() != '-62169987600'): ?>
-                                                        <?php $date_to_string = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
-                                                    <?php endif; ?>
-
-                                                    <?php if($date_from->getTimestamp() != '-62169987600'): ?>
-                                                        <?php $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
-                                                    <?php endif; ?>
-                                                    <option <?php if( $sejour_linked->ref_sejour == $sejour->id ): ?>selected="selected"<?php endif; ?> data-truc="<?=$sejour_linked->ref_sejour?>/<?=$sejour->id?>" value="<?=$sejour->id ?>">
-                                                        <?=$sejour->name ?> du <?=$date_from_string; ?> au <?=$date_to_string; ?>
-                                                    </option>
-                                                <?php endforeach; ?>
                                             </select>
+                                        </fieldset>
+                                    </div>
+
+                                    <?php
+                                        $sejours = sejour::getList();
+                                        $sejours_linked = inscription::getLinkedSejours($dossier->id);
+                                        $l = 0;
+                                    ?>
+                                    <?php foreach($sejours_linked as $sejour_linked): ?>
+                                        <div class="sejour-form">
+                                            <fieldset <?=(count($sejours_linked) > $l+1)? 'disabled' : ''; ?>>
+                                                <select class="form-control input-sm" id="form-inscription-sejour-select" name="form_inscription_sejour[]">
+                                                    <option value="">Choisissez un séjour</option>
+                                                    <?php foreach($sejours as $sejour): ?>
+                                                        <?php $date_from = new DateTime($sejour->date_from); ?>
+                                                        <?php $date_to = new DateTime($sejour->date_to); ?>
+                                                        <?php $nb_weeks = tool::getNbWeeks($date_from, $date_to); ?>
+
+                                                        <?php if($date_to->getTimestamp() != '-62169987600'): ?>
+                                                            <?php $date_to_string = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
+                                                        <?php endif; ?>
+
+                                                        <?php if($date_from->getTimestamp() != '-62169987600'): ?>
+                                                            <?php $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
+                                                        <?php endif; ?>
+                                                        <option <?php if( $sejour_linked->ref_sejour == $sejour->id ): ?>selected="selected"<?php endif; ?> data-truc="<?=$sejour_linked->ref_sejour?>/<?=$sejour->id?>" value="<?=$sejour->id ?>">
+                                                            <?=$sejour->name ?> du <?=$date_from_string; ?> au <?=$date_to_string; ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
 
 
-                                            <?php foreach($sejours as $sejour): ?>
-                                                <?php if( $sejour_linked->ref_sejour == $sejour->id ): ?>
-                                                    <?php $dates_inscriptions = inscription::getBySejourAndDossier($sejour_linked->ref_sejour, $dossier->id); ?>
+                                                <?php foreach($sejours as $sejour): ?>
+                                                    <?php if( $sejour_linked->ref_sejour == $sejour->id ): ?>
+                                                        <?php $dates_inscriptions = inscription::getBySejourAndDossier($sejour_linked->ref_sejour, $dossier->id); ?>
 
-                                                    <?php $date_from = new DateTime($sejour->date_from); ?>
-                                                    <?php $date_to = new DateTime($sejour->date_to); ?>
-                                                    <?php $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
-                                                    <?php $date_to_string = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
-                                                    <?php $nb_weeks = tool::getNbWeeks($date_from, $date_to); ?>
+                                                        <?php $date_from = new DateTime($sejour->date_from); ?>
+                                                        <?php $date_to = new DateTime($sejour->date_to); ?>
+                                                        <?php $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
+                                                        <?php $date_to_string = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
+                                                        <?php $nb_weeks = tool::getNbWeeks($date_from, $date_to); ?>
 
-                                                    <?php if ($nb_weeks < 1): ?>
-                                                        <div class="checkbox">
-                                                            <label for="">
-                                                                <input type="checkbox" name="dates[]" value="<?=$date_from_string; ?>#<?=$date_to_string; ?>#<?=$sejour_linked->ref_sejour ?>" checked="checked"> 
-                                                                L'enfant est inscrit sur le week end en intégralité.
-                                                            </label>
-                                                        </div>
-                                                    <?php elseif($nb_weeks === 1): ?>
-                                                        <div class="checkbox">
-                                                            <label for="">
-                                                                <input type="checkbox" name="dates[]" value="<?=$date_from_string; ?>#<?=$date_to_string; ?>#<?=$sejour_linked->ref_sejour ?>" checked="checked" data-id="<?=$sejour->id ?>" data-start="<?=$date_from->getTimestamp(); ?>" data-end="<?=$date_to->getTimestamp(); ?>"> 
-                                                                L'nfant est inscrit sur le séjour en intégralité.
-                                                            </label>
-                                                        </div>
-
-
-                                                    <?php else: ?>
-                                                        <?php for ($i=0; $i < $nb_weeks; $i++): ?>
-
-                                                            <?php $date_from_timestamp = $date_from->getTimestamp(); ?>
-                                                            <?php $date_to_timestamp = $date_to->getTimestamp(); ?>
-
-                                                            <?php $weekStart = 604800 * $i; ?>
-                                                            <?php $weekStart = $date_from_timestamp + $weekStart; ?>
-
-                                                            <?php $weekEnd = $weekStart + 604800 + 5000; ?>
-
-                                                            <?php $weekStart_string = strftime('%d/%m/%Y', $weekStart); ?>
-
-                                                            <?php $weekEnd_string = strftime('%d/%m/%Y', $weekEnd); ?>
-
+                                                        <?php if ($nb_weeks < 1): ?>
                                                             <div class="checkbox">
-                                                                <label>
-                                                                    <?php $input = '<input type="checkbox" name="dates[]" value="'.$weekStart_string.'#'.$weekEnd_string.'#'.$sejour->id.'" data-id="'.$sejour->id.'" data-start="'.$weekStart.'" data-end="'.$weekEnd.'"'; ?>
-                                                                    <?php foreach($dates_inscriptions as $key => $dates_inscription): ?>
-                                                                        <?php $dates_inscription_from = new DateTime($dates_inscription->date_from); ?>
-                                                                        <?php $dates_inscription_to = new DateTime($dates_inscription->date_to); ?>
-                                                                        <?php $dates_inscription_to_string = strftime('%d/%m/%Y', $dates_inscription_from->getTimestamp()); ?>
-                                                                        <?php $dates_inscription_from_string = strftime('%d/%m/%Y', $dates_inscription_to->getTimestamp()); ?>
-                                                                        <?php
-                                                                        $opt = '';
-                                                                        if ($weekStart_string == $dates_inscription_to_string) {
-                                                                            $opt .= ' checked';
-                                                                            break;
-                                                                        }
-                                                                        ?>
-                                                                    <?php endforeach; ?>
-                                                                    <?=$input.$opt.'/>'; ?>
-                                                                    <strong>Semaine <?=$i + 1; ?></strong> du <?=$weekStart_string?> au <?=$weekEnd_string;?>
+                                                                <label for="">
+                                                                    <input type="checkbox" name="dates[]" value="<?=$date_from_string; ?>#<?=$date_to_string; ?>#<?=$sejour_linked->ref_sejour ?>" checked="checked"> 
+                                                                    L'enfant est inscrit sur le week end en intégralité.
+                                                                </label>
+                                                            </div>
+                                                        <?php elseif($nb_weeks === 1): ?>
+                                                            <div class="checkbox">
+                                                                <label for="">
+                                                                    <input type="checkbox" name="dates[]" value="<?=$date_from_string; ?>#<?=$date_to_string; ?>#<?=$sejour_linked->ref_sejour ?>" checked="checked" data-id="<?=$sejour->id ?>" data-start="<?=$date_from->getTimestamp(); ?>" data-end="<?=$date_to->getTimestamp(); ?>"> 
+                                                                    L'nfant est inscrit sur le séjour en intégralité.
                                                                 </label>
                                                             </div>
 
-                                                        <?php endfor; ?>
-                                                    <?php endif ?>
-                                                <?php endif ?>
-                                            <?php endforeach; ?>
-                                        </fieldset>
-                                    </div>
-                                    <?php $l++; ?>
-                                <?php endforeach; ?>
-                            </div>
 
-                            <div class="sejours-controls">
-                                <button href="#" class="btn btn-default btn-sm delete-sejour">Supprimer ce séjour</button>
-                                <button href="#" class="btn btn-primary btn-sm add-sejour">Ajouter un séjour</button>
+                                                        <?php else: ?>
+                                                            <?php for ($i=0; $i < $nb_weeks; $i++): ?>
+
+                                                                <?php $date_from_timestamp = $date_from->getTimestamp(); ?>
+                                                                <?php $date_to_timestamp = $date_to->getTimestamp(); ?>
+
+                                                                <?php $weekStart = 604800 * $i; ?>
+                                                                <?php $weekStart = $date_from_timestamp + $weekStart; ?>
+
+                                                                <?php $weekEnd = $weekStart + 604800 + 5000; ?>
+
+                                                                <?php $weekStart_string = strftime('%d/%m/%Y', $weekStart); ?>
+
+                                                                <?php $weekEnd_string = strftime('%d/%m/%Y', $weekEnd); ?>
+
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <?php $input = '<input type="checkbox" name="dates[]" value="'.$weekStart_string.'#'.$weekEnd_string.'#'.$sejour->id.'" data-id="'.$sejour->id.'" data-start="'.$weekStart.'" data-end="'.$weekEnd.'"'; ?>
+                                                                        <?php foreach($dates_inscriptions as $key => $dates_inscription): ?>
+                                                                            <?php $dates_inscription_from = new DateTime($dates_inscription->date_from); ?>
+                                                                            <?php $dates_inscription_to = new DateTime($dates_inscription->date_to); ?>
+                                                                            <?php $dates_inscription_to_string = strftime('%d/%m/%Y', $dates_inscription_from->getTimestamp()); ?>
+                                                                            <?php $dates_inscription_from_string = strftime('%d/%m/%Y', $dates_inscription_to->getTimestamp()); ?>
+                                                                            <?php
+                                                                            $opt = '';
+                                                                            if ($weekStart_string == $dates_inscription_to_string) {
+                                                                                $opt .= ' checked';
+                                                                                break;
+                                                                            }
+                                                                            ?>
+                                                                        <?php endforeach; ?>
+                                                                        <?=$input.$opt.'/>'; ?>
+                                                                        <strong>Semaine <?=$i + 1; ?></strong> du <?=$weekStart_string?> au <?=$weekEnd_string;?>
+                                                                    </label>
+                                                                </div>
+
+                                                            <?php endfor; ?>
+                                                        <?php endif ?>
+                                                    <?php endif ?>
+                                                <?php endforeach; ?>
+                                            </fieldset>
+                                        </div>
+                                        <?php $l++; ?>
+                                    <?php endforeach; ?>
+                                    
+                                </div>
+
+                                <div class="sejours-controls">
+                                    <button href="#" class="btn btn-default btn-sm delete-sejour">Supprimer ce séjour</button>
+                                    <button href="#" class="btn btn-primary btn-sm add-sejour">Ajouter un séjour</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endif ?>
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="form-inscription-structure-select">Centre payeur</label>

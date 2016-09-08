@@ -84,23 +84,25 @@
             //tool::output($datas);
         $result = dossier::update($datas, $_GET['id']);
 
-        $inscription = inscription::deleteByDossier($_GET['id']);
+        if ( !isset( $_POST['already_factured'] ) ) {
+            $inscription = inscription::deleteByDossier($_GET['id']);
 
-            //tool::output($form_inscription_sejour);
-        foreach($dates as $key => $inscription_entry){
+                //tool::output($form_inscription_sejour);
+            foreach($dates as $key => $inscription_entry) {
 
-            $inscription_entry = explode('#', $inscription_entry);
-            $form_inscription_date_debut = tool::generateDatetime($inscription_entry[0]);
-            $form_inscription_date_fin = tool::generateDatetime($inscription_entry[1]);
-            $datas = array(
-                ':ref_enfant' => $form_inscription_enfant,
-                ':ref_sejour' => $inscription_entry['2'],
-                ':ref_dossier' => $_GET['id'],
-                ':date_from' => $form_inscription_date_debut,
-                ':date_to' => $form_inscription_date_fin
-                );
-                //tool::output($datas);
-            $result = inscription::add($datas);
+                $inscription_entry = explode('#', $inscription_entry);
+                $form_inscription_date_debut = tool::generateDatetime($inscription_entry[0]);
+                $form_inscription_date_fin = tool::generateDatetime($inscription_entry[1]);
+                $datas = array(
+                    ':ref_enfant' => $form_inscription_enfant,
+                    ':ref_sejour' => $inscription_entry['2'],
+                    ':ref_dossier' => $_GET['id'],
+                    ':date_from' => $form_inscription_date_debut,
+                    ':date_to' => $form_inscription_date_fin
+                    );
+                    //tool::output($datas);
+                $result = inscription::add($datas);
+            }
         }
     ?>
 
@@ -178,15 +180,13 @@
                                 </div>
                             <?php endif; ?>
 
-
                             <?php if(!$dossier->returned_contract): ?>
                                 <div class="alert alert-warning alert-white rounded">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                     <div class="icon"><i class="fa fa-warning"></i></div>
-                                    Le contrat n'a pas ecnore été retourné
+                                    Le contrat n'a pas encore été retourné
                                 </div>
                             <?php endif; ?>
-
 
                             <table class="no-border no-strip information">
                                 <tbody class="no-border-x no-border-y">
@@ -265,7 +265,7 @@
                                                     <?php $date_from = new DateTime($inscription->date_from); ?>
                                                     <?php $date_to = new DateTime($inscription->date_to); ?>
                                                     <tr>
-                                                        <td colspan="2"><a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a> du <?=strftime("%d %B %Y", $date_from->getTimestamp()) ?> au <?=strftime("%d %B %Y", $date_to->getTimestamp()) ?> - <?php echo $inscription->id; ?></td>
+                                                        <td colspan="2"><a href="/sejours/infos/id/<?=$sejour->id; ?>"><?=$sejour->name; ?></a> du <?=strftime("%d %B %Y", $date_from->getTimestamp()) ?> au <?=strftime("%d %B %Y", $date_to->getTimestamp()) ?></td>
                                                     </tr>
                                                     <?php endforeach; ?>
 

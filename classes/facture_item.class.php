@@ -36,6 +36,19 @@ class facture_item
         return $result;
     }
 
+    public static function getByInscriptions($id_array){
+        global $db;
+        if ( count($id_array) > 1) {
+            $id_array = implode(",", $id_array );
+        } else {
+            $id_array = $id_array[0];
+        }
+        $params = array(':id' => '('.$id_array.')');
+        $sql = 'SELECT * FROM '.self::$table.' WHERE ref_inscription IN '.'('.$id_array.')';
+        $result = $db->query($sql);
+        return $result;
+    }
+
 
     /**
      * Count the number of entries in the database table

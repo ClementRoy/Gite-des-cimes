@@ -110,10 +110,13 @@ ob_start(); ?>
 						<?php foreach ($inscriptions as $key => $inscription): ?>
 							<?php $sejour = sejour::get($inscription->ref_sejour); ?>
 							<?php if ($sejour->name !== 'Séjour Court' && $sejour->name !== 'Séjours courts'): ?>
-								<?php $hebergement = hebergement::get($sejour->ref_hebergement); ?>
-								<p style="margin:3px 0 0;"><?=$sejour->name ?> - <?=$sejour->numero ?><br>
-								<?=$hebergement->name.', '.$hebergement->address_postal_code.' '.$hebergement->address_city;?>
-								</p>
+								<?php if ($numero_sejour != $sejour->numero): ?>
+									<?php $hebergement = hebergement::get($sejour->ref_hebergement); ?>
+									<p style="margin:3px 0 0;"><?=$sejour->name ?> - <?=$sejour->numero ?><br>
+									<?=$hebergement->name.', '.$hebergement->address_postal_code.' '.$hebergement->address_city;?>
+									</p>
+								<?php endif; ?>
+								<?php $numero_sejour = $sejour->numero; ?>
 							<?php endif ?>
 						<?php endforeach ?>
 				</td>
