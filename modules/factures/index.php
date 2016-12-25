@@ -65,7 +65,7 @@
         <div class="col-md-8">
             <h1>Facturations</h1>
         </div>
-        <div class="col-md-4 text-right">
+        <div class="col-md-4 text-right hidden-xs hiden-sm">
             <a href="/factures/debug/annee/2016/"><i class="fa fa-cog"></i></a>
         </div>
     </div>

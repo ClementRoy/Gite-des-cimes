@@ -22,11 +22,9 @@
     <?php sejour::remove($_POST['id']); ?>
 <?php endif; ?>
 
-<div class="block-flat tb-calendar">
+<div class="block-flat tb-calendar hidden-xs hidden-sm">
     <div class="content">
-        <div id='calendar'>
-
-        </div>
+        <div id='calendar'></div>
     </div>                
 </div>
 
@@ -175,7 +173,7 @@
 <?php $scripts .= ob_get_contents();
 ob_end_clean(); ?>
 
-<hr>
+<hr class="hidden-xs hidden-sm">
 
 
 
