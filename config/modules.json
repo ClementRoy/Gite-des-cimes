@@ -69,7 +69,7 @@
 	},
 	"export" : {
 		"name" : "export",
-		"views" : ["index", "sejour", "saison"]
+		"views" : ["index", "sejour", "saison", "structures", "contacts"]
 	},
 	"pdf" : {
 		"name" : "pdf",

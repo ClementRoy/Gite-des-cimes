@@ -24,7 +24,9 @@
     <link rel="stylesheet" href="/assets/libs/jquery.easy-pie-chart/jquery.easy-pie-chart.css">
     <link rel="stylesheet" href="/assets/libs/odometer/themes/odometer-theme-default.css">
     <!-- <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css"> -->
+        <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css"/> -->
     <link rel="stylesheet" href="/assets/css/datatables-bootstrap-adapter.css">
+        <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.bootstrap.min.css"/> -->
 
     <link rel="stylesheet" href="/assets/libs/jquery.gritter/css/jquery.gritter.css">
     <link rel="stylesheet" href="/assets/libs/jquery-icheck/skins/flat/purple.css">
@@ -33,6 +35,7 @@
     <link rel="stylesheet" href="/assets/css/flatdream.css">
     
     <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
 
     <?php endif; ?>
 

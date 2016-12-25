@@ -8,7 +8,7 @@ $.extend($.fn.dataTable.defaults.oLanguage, {
     "sInfoPostFix":    "",
     "sLoadingRecords": "Chargement en cours...",
     "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-    "sEmptyTable":     "Aucune donnée disponible dans le tableau"
+    "sEmptyTable":     "Aucune donnée disponible dans le tableau",
 });
 $.extend($.fn.dataTable.defaults.oLanguage.oPaginate, {
     "sFirst":      "Premier",

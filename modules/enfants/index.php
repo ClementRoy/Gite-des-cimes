@@ -147,12 +147,19 @@ var the_datas = [];
 the_datas.push(<?=json_encode($the_json[$key]);?>);
 <?php endforeach; ?>
 
-$('#datatable').dataTable({
+$('#datatable')
+    .on( 'draw.dt', function () {
+        if ($(window).width() < 768) {
+            $(this).find('tr').each(function(index, el) {
+                $(el).find('td, th').filter(':eq(2), :eq(3), :eq(4), :eq(5), :eq(6)').hide();
+            });
+        }
+    } ).dataTable({
     "bProcessing": true,
     "bDeferRender": true,
     "bStateSave": true,
     "aaData":   the_datas[0],
-    "responsive": true
+    // "responsive": true,
 });
 $('.dropdown-menu').on('click', '.modal-remove-link', function(event) {
     event.preventDefault();

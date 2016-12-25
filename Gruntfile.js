@@ -24,7 +24,8 @@ module.exports = function(grunt){
 						'assets/libs/fullcalendar/fullcalendar.css',
 						'assets/css/datatables-bootstrap-adapter.css',
 						'assets/css/flatdream.css',
-						'assets/css/app.css'
+						'assets/css/app.css',
+						'assets/css/responsive.css'
 					]
 				}
 			}

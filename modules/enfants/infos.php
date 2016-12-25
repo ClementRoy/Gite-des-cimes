@@ -265,14 +265,14 @@
                     <div class="tab-content">
                         <div id="about" class="tab-pane cont active">
 
-                             <?php /*
-                            <?php if( $enfant->number_ss == 0 || $enfant->self_assurance <= 0 || $enfant->cpam_attestation <= 0 || empty($enfant->self_assurance_expiration_date) || $enfant->health_record <= 0 || $enfant->vaccination <= 0 ): ?>
-                            <div class="alert alert-info alert-white rounded">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                <div class="icon"><i class="fa fa-info-circle"></i></div>
-                                <strong>Information !</strong> La fiche de l'enfant est pour le moment incomplète.
-                            </div>
-                            <?php endif; ?>
+                            <?php /*
+                                <?php if( $enfant->number_ss == 0 || $enfant->self_assurance <= 0 || $enfant->cpam_attestation <= 0 || empty($enfant->self_assurance_expiration_date) || $enfant->health_record <= 0 || $enfant->vaccination <= 0 ): ?>
+                                <div class="alert alert-info alert-white rounded">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <div class="icon"><i class="fa fa-info-circle"></i></div>
+                                    <strong>Information !</strong> La fiche de l'enfant est pour le moment incomplète.
+                                </div>
+                                <?php endif; ?>
                              */ ?>
 
                             <?php if(isset($_POST['activate'])): ?>
@@ -872,7 +872,7 @@
                                         <th>Dates</th>
                                         <th>Commentaire</th>
                                         <th>Auteur</th>
-                                        <th style="width:140px;">Export</th>
+                                        <th style="width:140px;" class="hidden-xs hidden-sm">Export</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -897,7 +897,7 @@
                                             <td>
                                                 Par <?=$note_editor->firstname ?> <?=substr($note_editor->lastname, 0, 1) ?>., le <?=strftime('%d %B %Y', $note_date_edited->getTimestamp()); ?>
                                             </td>
-                                            <td style="width:140px;">
+                                            <td style="width:140px;" class="hidden-xs hidden-sm">
                                                 <a href="/pdf/export_note/enfant/<?=$enfant->id; ?>/sejour/<?=$sejour->id ?>"class="btn btn-default btn-xs">
                                                     <i class="fa fa-external-link"></i> Exporter la note
                                                 </a>
