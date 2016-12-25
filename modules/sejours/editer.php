@@ -145,7 +145,7 @@
 
 
                     <div class="form-group">
-                        <h5 class="control-info">Aulnay-sous-Bois, au RER :</h5>
+                        <h5 class="control-info">Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte :</h5>
 
                         <div class="row">
                             <label class="col-md-4 control-label" for="form-inscription-heure-aller-2">Heure de rendez-vous à l'aller</label>
