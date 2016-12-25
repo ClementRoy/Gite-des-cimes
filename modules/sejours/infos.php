@@ -960,7 +960,7 @@
                 </address>
 
                 <address>
-                    <strong>Aulnay sous Bois, au RER</strong><br>
+                    <strong>Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte</strong><br>
                     Départ : <?=(tool::check($hour_departure[1]))? $hour_departure[1].'h'.$min_departure[1] : EMPTYVAL; ?><br>
                     Retour : <?=(tool::check($hour_return[1]))? $hour_return[1].'h'.$min_return[1] : EMPTYVAL; ?>
                 </address>
