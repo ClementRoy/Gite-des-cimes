@@ -253,10 +253,10 @@
                         <label class="col-sm-4 control-label" for="form-inscription-lieu-select">Lieu de rendez-vous</label>
                         <div class="col-sm-6" data-toggle="tooltip" title="Renseignez le lieu de rendez-vous.">
                             <div class="ui-select">
-                                <select class="form-control" id="form-inscription-lieu-select" name="form_inscription_lieu"<?php if( $dossier->place == "Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle" || $dossier->place == "Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle" || $dossier->place == "Bonneuil en Valois, au Gite"): ?> data-selected="<?=$dossier->place; ?>"<?php endif; ?>>
+                                <select class="form-control" id="form-inscription-lieu-select" name="form_inscription_lieu"<?php if( $dossier->place == "Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle" || $dossier->place == "Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte" || $dossier->place == "Bonneuil en Valois, au Gite"): ?> data-selected="<?=$dossier->place; ?>"<?php endif; ?>>
                                     <option selected="selected" value="">Choisissez le lieu de rendez-vous</option>
                                     <option value="Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle</option>
-                                    <option value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>
+                                    <option value="Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte">Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte</option>
                                     <option value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>
                                 </select>
                             </div>
@@ -270,7 +270,7 @@
                              <span class="help-block"><em>Si il n'est pas dans la liste</em></span>
                         </label>
                         <div class="col-sm-6">
-                            <input id="form_inscription_lieu_custom" name="form_inscription_lieu_custom" class="form-control" type="text" data-toggle="tooltip" <?php if( $dossier->place != "Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle" && $dossier->place != "Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle" && $dossier->place != "Bonneuil en Valois, au Gite" ): ?>value="<?=$dossier->place ?>" <?php else: ?> disabled="disabled"<?php endif; ?> placeholder="Ne renseigner que si le lieu n'est pas dans la liste.">
+                            <input id="form_inscription_lieu_custom" name="form_inscription_lieu_custom" class="form-control" type="text" data-toggle="tooltip" <?php if( $dossier->place != "Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle" && $dossier->place != "Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte" && $dossier->place != "Bonneuil en Valois, au Gite" ): ?>value="<?=$dossier->place ?>" <?php else: ?> disabled="disabled"<?php endif; ?> placeholder="Ne renseigner que si le lieu n'est pas dans la liste.">
                         </div>
 
                     </div>
@@ -581,7 +581,7 @@
                         //console.log(data.hours_departure.min['0']);
                         $('#form-inscription-lieu-select').html('<option value="">Choisissez le lieu de rendez-vous</option>');
                         $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[0]+'" data-min-departure="'+data.hours_departure.min[0]+'" data-hour-return="'+data.hours_return.hours[0]+'" data-min-return="'+data.hours_return.min[0]+'" value="Aulnay sous bois, au Parking d\'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d\'Intermarché, avenue Antoine Bourdelle</option>');
-                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[1]+'" data-min-departure="'+data.hours_departure.min[1]+'" data-hour-return="'+data.hours_return.hours[1]+'" data-min-return="'+data.hours_return.min[1]+'" value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>');
+                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[1]+'" data-min-departure="'+data.hours_departure.min[1]+'" data-hour-return="'+data.hours_return.hours[1]+'" data-min-return="'+data.hours_return.min[1]+'" value="Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte">Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte</option>');
                         $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[2]+'" data-min-departure="'+data.hours_departure.min[2]+'" data-hour-return="'+data.hours_return.hours[2]+'" data-min-return="'+data.hours_return.min[2]+'" value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>');
                     }
                 },
@@ -636,7 +636,7 @@
                 }); 
             }
             // <option value="Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle</option>
-            // <option value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>
+            // <option value="Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte">Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte</option>
             // <option value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>
         });
 
@@ -659,7 +659,7 @@
                         //console.log(data.hours_departure.min['0']);
                         $('#form-inscription-lieu-select').html('<option value="">Choisissez le lieu de rendez-vous</option>');
                         $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[0]+'" data-min-departure="'+data.hours_departure.min[0]+'" data-hour-return="'+data.hours_return.hours[0]+'" data-min-return="'+data.hours_return.min[0]+'" value="Aulnay sous bois, au Parking d\'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d\'Intermarché, avenue Antoine Bourdelle</option>');
-                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[1]+'" data-min-departure="'+data.hours_departure.min[1]+'" data-hour-return="'+data.hours_return.hours[1]+'" data-min-return="'+data.hours_return.min[1]+'" value="Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle">Aulnay sous Bois, au RER, Dépôt Minute, Place du Général de Gaulle</option>');
+                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[1]+'" data-min-departure="'+data.hours_departure.min[1]+'" data-hour-return="'+data.hours_return.hours[1]+'" data-min-return="'+data.hours_return.min[1]+'" value="Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte">Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte</option>');
                         $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[2]+'" data-min-departure="'+data.hours_departure.min[2]+'" data-hour-return="'+data.hours_return.hours[2]+'" data-min-return="'+data.hours_return.min[2]+'" value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>');
                         
                         if (typeof $('#form-inscription-lieu-select').data('selected') != undefined) {

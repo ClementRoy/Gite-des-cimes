@@ -265,6 +265,7 @@
                                     <?php
                                         $sejour_season = saison::getBySejour($sejour->id);
                                         $year = strftime('%Y', $date_from_query->getTimestamp() );
+                                        tool::output( $sejour_season );
                                     ?>
                                     <a href="/export/saison/type/1/id/<?php echo $sejour_season->id ?>/year/<?php echo $year; ?>" class="btn btn-info btn-sm btn-rad">
                                         Télécharger récap. dossiers saison
