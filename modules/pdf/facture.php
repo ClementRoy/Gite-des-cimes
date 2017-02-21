@@ -196,124 +196,142 @@ foreach ($facture_items as $facture_item) {
 
 	<table bordercolor="#000000" border="0" cellpadding="0" cellspacing="0">
 		<tr>
-			<td style="width:50%;">
+			<td style="width:50%;line-height: 18px;">
 				<p><strong>GITE DES CÎMES<br>
 					607 RUE DU CHÂTEAU D'EAU<br>
 					60123 BONNEUIL EN VALOIS</strong>
 				</p>
-				
+				<p>
+					N° du Tiers IGDA : 108501
+				</p>
 				<p>
 					Tél : 03.44.88.51.13<br>
 					<strong>Fax : 03.44.87.57.68</strong> <span style="margin-left: 20px;">Port : 06.50.31.22.88</span><br>
-					<strong>n° siret : 530 369 982 00018</strong>
+					<strong>SIRET : 530 369 982 00018</strong><br>
+					<strong>APE : [A RENSEIGNER]</strong>
 				</p>
 
 			</td>
-			<td style="width:50%;padding:0 0 0 50px;">
-				<table style="border: 1px solid #000;background-color: #eaeaea;">
+			<td style="width:50%;">
+				<table bordercolor="#000000" border="0" cellpadding="0" cellspacing="0">
+					
 					<tr>
-						<td style="padding: 7px 10px;width: 100%;">
-							FACTURE N° <?php echo $facture->number; ?>
-							<br>
-							<br>
-							<br>
-							<?php $date = new DateTime($facture->created) ?>
-							DATE : <?php echo $date->format("d/m/Y"); ?>
-							<br>
-							<br>
+						<td style="width:100%;padding:0 0 15px 50px;">
+							<table style="border: 1px solid #000;background-color: #eaeaea;">
+								<tr>
+									<td style="padding: 7px 10px;width: 100%;">
+										FACTURE N° <?php echo $facture->number; ?>
+										<br>
+										<br>
+										<?php $date = new DateTime($facture->created) ?>
+										DATE : <?php echo $date->format("d/m/Y"); ?>
+									</td>
+								</tr>
+							</table>
 						</td>
 					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
 
-	<br>
-
-	<table bordercolor="#000000" border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td style="width:45%;">
-			</td>
-			<td style="width:55%;">
-				<table style="border: 1px solid #000;background-color: #eaeaea;line-height: 18px;">
 					<tr>
-						<td style="padding: 7px 10px;width: 100%;">
-						<?php if ($facture->ref_orga == 235): ?>
-							<?php if ($enfant->guardian == 'mere'): ?>
-								<?php echo $enfant->mother_name; ?><br>
-								<?php echo $enfant->mother_address_number; ?> <?php echo $enfant->mother_address_street; ?><br>
-								<?php echo $enfant->mother_address_postal_code; ?> <?php echo $enfant->mother_address_city; ?>
-							<?php elseif ($enfant->guardian == 'pere'): ?>
-								<?php echo $enfant->father_name; ?><br>
-								<?php echo $enfant->father_address_number; ?> <?php echo $enfant->father_address_street; ?><br>
-								<?php echo $enfant->father_address_postal_code; ?> <?php echo $enfant->father_address_city; ?>
-							<?php elseif ($enfant->guardian == 'parents'): ?>
+						<td style="width:100%;padding:0 0 15px 0;">
+							<table style="border: 1px solid #000;background-color: #eaeaea;line-height: 18px;">
+								<tr>
+									<td style="padding: 7px 10px;width: 100%;">
+									<?php if ($facture->ref_orga == 235): ?>
+										<?php if ($enfant->guardian == 'mere'): ?>
+											<?php echo $enfant->mother_name; ?><br>
+											<?php echo $enfant->mother_address_number; ?> <?php echo $enfant->mother_address_street; ?><br>
+											<?php echo $enfant->mother_address_postal_code; ?> <?php echo $enfant->mother_address_city; ?>
+										<?php elseif ($enfant->guardian == 'pere'): ?>
+											<?php echo $enfant->father_name; ?><br>
+											<?php echo $enfant->father_address_number; ?> <?php echo $enfant->father_address_street; ?><br>
+											<?php echo $enfant->father_address_postal_code; ?> <?php echo $enfant->father_address_city; ?>
+										<?php elseif ($enfant->guardian == 'parents'): ?>
 
-								<?php if (!empty($enfant->father_name) && !empty($enfant->mother_name)): ?>
-									<?php echo $enfant->father_name; ?> et <?php echo $enfant->mother_name; ?><br>
-								<?php else: ?>
-									<?php if (!empty($enfant->father_name)): ?>
-										<?php echo $enfant->father_name; ?><br>
+											<?php if (!empty($enfant->father_name) && !empty($enfant->mother_name)): ?>
+												<?php echo $enfant->father_name; ?> et <?php echo $enfant->mother_name; ?><br>
+											<?php else: ?>
+												<?php if (!empty($enfant->father_name)): ?>
+													<?php echo $enfant->father_name; ?><br>
+												<?php else: ?>
+													<?php echo $enfant->mother_name; ?><br>
+												<?php endif; ?>
+											<?php endif ?>
+
+											<?php if ( !empty($enfant->father_address_number) ||
+														!empty($enfant->father_address_street) ||
+														!empty($enfant->father_address_postal_code) ||
+														!empty($enfant->father_address_city) ): ?>
+
+											<?php echo $enfant->father_address_number; ?> <?php echo $enfant->father_address_street; ?><br>
+											<?php echo $enfant->father_address_postal_code; ?> <?php echo $enfant->father_address_city; ?>
+
+											<?php elseif ( !empty($enfant->mother_address_number) ||
+														!empty($enfant->mother_address_street) ||
+														!empty($enfant->mother_address_postal_code) ||
+														!empty($enfant->mother_address_city) ): ?>
+
+											<?php echo $enfant->mother_address_number; ?> <?php echo $enfant->mother_address_street; ?><br>
+											<?php echo $enfant->mother_address_postal_code; ?> <?php echo $enfant->mother_address_city; ?>
+
+											<?php else: ?>
+												<br>
+												<br>
+											<?php endif ?>
+
+										<?php else: ?>
+												<br>
+												<br>
+												<br>
+										<?php endif; ?>
+
+
 									<?php else: ?>
-										<?php echo $enfant->mother_name; ?><br>
+										<?php if ( empty($facture->ref_parent_facture) ): ?>
+											
+											<?php echo $structure->name; ?><br>
+											<?php if(!empty( $structure->service ) ): ?>
+											<?php echo $structure->service; ?><br>
+											<?php endif; ?>
+											<?php echo $structure->address_number; ?> <?php echo $structure->address_street; ?><br>
+											<?php if (!empty($structure->address_comp)): ?>
+												<?php echo $structure->address_comp; ?><br>
+											<?php endif; ?>
+											<?php echo $structure->address_postal_code; ?> <?php echo $structure->address_city; ?>
+										<?php else: ?>
+
+											<?php echo $facture->family_name; ?><br>
+											<br>
+											<br>
+
+										<?php endif; ?>
 									<?php endif; ?>
-								<?php endif ?>
 
-								<?php if ( !empty($enfant->father_address_number) ||
-											!empty($enfant->father_address_street) ||
-											!empty($enfant->father_address_postal_code) ||
-											!empty($enfant->father_address_city) ): ?>
-
-								<?php echo $enfant->father_address_number; ?> <?php echo $enfant->father_address_street; ?><br>
-								<?php echo $enfant->father_address_postal_code; ?> <?php echo $enfant->father_address_city; ?>
-
-								<?php elseif ( !empty($enfant->mother_address_number) ||
-											!empty($enfant->mother_address_street) ||
-											!empty($enfant->mother_address_postal_code) ||
-											!empty($enfant->mother_address_city) ): ?>
-
-								<?php echo $enfant->mother_address_number; ?> <?php echo $enfant->mother_address_street; ?><br>
-								<?php echo $enfant->mother_address_postal_code; ?> <?php echo $enfant->mother_address_city; ?>
-
-								<?php else: ?>
 									<br>
-									<br>
-								<?php endif ?>
 
-							<?php else: ?>
-									<br>
-									<br>
-									<br>
-							<?php endif; ?>
+									N°engagement : [A RENSEIGNER]
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
 
-
-						<?php else: ?>
-							<?php if ( empty($facture->ref_parent_facture) ): ?>
-								
-								<?php echo $structure->name; ?><br>
-								<?php if(!empty( $structure->service ) ): ?>
-								<?php echo $structure->service; ?><br>
-								<?php endif; ?>
-								<?php echo $structure->address_number; ?> <?php echo $structure->address_street; ?><br>
-								<?php if (!empty($structure->address_comp)): ?>
-									<?php echo $structure->address_comp; ?><br>
-								<?php endif; ?>
-								<?php echo $structure->address_postal_code; ?> <?php echo $structure->address_city; ?>
-							<?php else: ?>
-
-								<?php echo $facture->family_name; ?><br>
-								<br>
-								<br>
-
-							<?php endif; ?>
-						<?php endif; ?>
+					<tr>
+						<td style="width:100%;padding:0 0 15px 0;">
+							<table style="border: 1px solid #000;background-color: #eaeaea;">
+								<tr>
+									<td style="padding: 7px 0 7px 10px;width: 100%;">
+										Prestation : Hébérgement<br>
+										Type d'accueil : Séjours de vacances ou we hors colonie
+									</td>
+								</tr>
+							</table>
 						</td>
 					</tr>
 				</table>
 			</td>
 		</tr>
 	</table>
-	
+
 	<br>
 
 	<?php if ( !empty($facture->purchase_order) ): ?>
@@ -503,6 +521,7 @@ foreach ($facture_items as $facture_item) {
 							N° de cpte : <span style="margin-left: 15px;">0000117192K</span> <span style="margin-left: 40px;">Clé :</span> <span style="margin-left: 15px;">15</span><br>
 							<br>
 							<span style="color:#C92626;">IBAN : FR35 3000 2084 3400 0011 7192 K15</span><br>
+							<span style="color:#C92626;">BIC : [A RENSEIGNER]</span><br>
 							<br>
 							<strong style="color:#8B3636;">Réf à rappeler impérativement lors du paiement : <?php echo $facture->number; ?></strong>
 						</td>
