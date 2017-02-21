@@ -46,8 +46,8 @@ module.exports = function(grunt){
 			},
 			main: {
 				src: [
-					'assets/libs/datatables/media/js/jquery.daTatables.js',
-					'assets/js/libs/datatables-bootstrap-adapter.js',
+					// 'assets/libs/datatables/media/js/jquery.daTatables.js',
+					// 'assets/js/libs/datatables-bootstrap-adapter.js',
 					'assets/js/libs/datatables-french.js',
 
 					'assets/libs/jquery.gritter/js/jquery.gritter.js',

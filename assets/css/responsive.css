@@ -309,7 +309,8 @@
     }
     h1,
     .h1 {
-        font-size: 30px;
+        /*font-size: 30px;*/
+        font-size: 24px;
     }
     h3,
     .h3 {
@@ -321,12 +322,110 @@
     /* Table */
     .table-responsive {
         position: relative;
-        margin-bottom: 20px;
+        /*margin-bottom: 20px;*/
+        margin-bottom: 0;
         overflow: hidden;
         border: 0;
     }
+    .tb-special .table > tbody > tr > td {
+        /*min-width: 130px;*/
+        white-space: nowrap;
+    }
+
+    .dataTables_length {
+        display: none;
+    }
+    div.dataTables_filter label {
+        display: block;
+        float: none;
+        margin-bottom: 3px;
+    }
+    .tb-special .dataTables_filter input {
+        margin: 0;
+        height: 30px;
+    }
+    .dataTables_wrapper > .row > .col-sm-12 {
+        overflow: auto;
+    }
+    .table > thead th {
+        white-space: nowrap;
+    }
+    .dataTables_info {
+        display: none;
+    }
+    div.dataTables_paginate {
+        float: none;
+    }
+    .dataTables_paginate .pagination {
+        display: table;
+        width: 100%;
+    }
+    .dataTables_paginate .pagination > li {
+        display: table-cell;
+        width: auto;
+    }
+    .dataTables_paginate .pagination > li > a,
+    .dataTables_paginate .pagination > li > span {
+        margin: 0;
+        display: block;
+        width: calc(100% + 1px);
+    }
 
 
+
+    table.information table.skills {
+        margin-bottom: 10px;
+    }
+    table.information td.category {
+        padding-bottom: 5px;
+    }
+    table.information table.skills td {
+        padding: 5px 0;
+        line-height: 1.3;
+    }
+    table.information table.skills td:first-child {
+        width: 45% !important;
+        padding-right: 10px;
+    }
+    table.information > tbody > tr > td {
+        display: block;
+        padding: 0;
+        width: auto !important;
+    }
+    #dossier table.information table.skills td:first-child {
+        width: 80% !important;
+    }
+    table.skills > tbody > tr > td .btn {
+        margin-bottom: 5px !important;
+
+    }
+
+
+
+
+    .page-head .dropdown-toggle,
+    .page-head .dropdown-menu {
+        display: none;
+    }
+    .page-head h1 > small {
+        font-size: 15px;
+    }
+
+
+    .nav-tabs {
+        display: table;
+        width: 100%;
+        border: none;
+    }
+    .nav-tabs > li {
+        margin: 0;
+        max-width: 33.33%;
+        display: table-cell;
+    }
+    .nav-tabs > li > a {
+        font-size: 13px;
+    }
+/*
     .tb-special .table > thead > tr > th,
     .tb-special .table > tbody > tr > th,
     .tb-special .table > tfoot > tr > th,
@@ -401,14 +500,13 @@
     }
     div.dataTables_paginate {
         float: none;
-        /*display: block;*/
+        display: block;
     }
     .dataTables_paginate .pagination {
         display: table;
         width: 100%;
     }
     .dataTables_paginate .pagination > li {
-        /*display: inline;*/
         display: table-cell;
         width: 1%;
     }
@@ -478,5 +576,5 @@
     table.skills > tbody > tr > td .btn {
         margin-bottom: 5px !important;
 
-    }
+    }*/
 }
