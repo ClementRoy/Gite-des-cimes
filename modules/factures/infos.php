@@ -568,7 +568,7 @@
 			                    		
 					                    	<?php if ( !empty($facture->amount_caf) ): ?>
 						                    	<tr class="child">
-						                    		<td><span class="chariot">↳</span> CAF : <?php echo $facture->total_amount - $facture->total_amount_facture; ?> €</td>
+						                    		<td><span class="chariot">↳</span> CAF : <?php echo $facture->amount_caf; ?> €</td>
 						                    		<td></td>
 						                    		<td></td>
 						                    		<td>

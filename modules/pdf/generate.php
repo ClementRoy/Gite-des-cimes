@@ -107,16 +107,18 @@ ob_start(); ?>
 					<p style="margin-bottom:0;">
 						<strong>N° d’enregistrement du ou des séjours :</strong></p>
 						<?php $numero_sejour = ''; ?>
+						<?php $nom_sejour = ''; ?>
 						<?php foreach ($inscriptions as $key => $inscription): ?>
 							<?php $sejour = sejour::get($inscription->ref_sejour); ?>
 							<?php if ($sejour->name !== 'Séjour Court' && $sejour->name !== 'Séjours courts'): ?>
-								<?php if ($numero_sejour != $sejour->numero): ?>
+								<?php if ($numero_sejour != $sejour->numero || $nom_sejour != $sejour->name): ?>
 									<?php $hebergement = hebergement::get($sejour->ref_hebergement); ?>
 									<p style="margin:3px 0 0;"><?=$sejour->name ?> - <?=$sejour->numero ?><br>
 									<?=$hebergement->name.', '.$hebergement->address_postal_code.' '.$hebergement->address_city;?>
 									</p>
 								<?php endif; ?>
 								<?php $numero_sejour = $sejour->numero; ?>
+								<?php $nom_sejour = $sejour->name; ?>
 							<?php endif ?>
 						<?php endforeach ?>
 				</td>

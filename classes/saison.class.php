@@ -45,6 +45,7 @@ class saison
 
         $seasons = saison::getListAll();
         $sejour = sejour::get($sejour_id);
+        // tool::output( $sejour );
         // tool::output( $seasons );
         $date_from = new DateTime($sejour->date_from);
         $date_from_day = strftime('%d', $date_from->getTimestamp());
@@ -56,18 +57,11 @@ class saison
 
         $sejour_season = false;
 
-        // tool::output( $date_from_day );
-        // tool::output( $date_from_month );
-
         if ( ( $date_to->getTimestamp() - $date_from->getTimestamp() ) > 172800) {
-
             foreach ($seasons as $season) {
-                if ($date_from_day >= $season->day_from 
-                    && $date_from_month >= $season->month_from
-                    && $date_to_day <= $season->day_to
-                    && $date_to_month <= $season->month_to
-                    && $season->id != 5 ) {
-
+                if ( intval($date_from_month) >= intval($season->month_from)
+                    && intval($date_to_month) <= intval($season->month_to)
+                    && intval($season->id) !== 5 ) {
                         $sejour_season = $season;
                 }
             }
