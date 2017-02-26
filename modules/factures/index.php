@@ -143,9 +143,9 @@
                                 }
 
                                 if ( $nb_factured == $nb_inscriptions && $global_status > 0 ) {
-                                    $status_str = '<span class="label label-success">Facturé/envoyé en totalité</span>';
+                                    $status_str = '<span class="label label-success">Payé en totalité</span>';
                                 } elseif ( ($nb_factured < $nb_inscriptions && $nb_factured > 0) || ($nb_factured == $nb_inscriptions && $global_status == 0) ) {
-                                    $status_str = '<span class="label label-primary">Facturé/envoyé partiellement</span>';
+                                    $status_str = '<span class="label label-primary">Facturé/payé partiellement</span>';
                                 }
 
 

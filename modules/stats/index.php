@@ -14,7 +14,7 @@
         $to = $to->format("Y-m-d H:i:s");
 
 
-        $sql = 'SELECT COUNT(inscription.id) as nb  FROM inscription
+        $sql = 'SELECT COUNT(inscription.id) as nb FROM inscription
                 LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
                 WHERE dossier.finished = 1 
                 AND dossier.archived = 0
@@ -23,23 +23,6 @@
                 AND DATE_ADD(inscription.date_from, INTERVAL 2 DAY) != inscription.date_to
                 ORDER BY inscription.id';
 
-        return $db->row($sql)->nb;
-    }
-
-    function getNbInscriptionsWeekEndByYear($year = '2014'){
-        global $db;
-        $from = new DateTime($year.'-01-01');
-        $from = $from->format("Y-m-d H:i:s");
-        $to = new DateTime($year.'-12-31');
-        $to = $to->format("Y-m-d H:i:s");
-        $sql = 'SELECT DISTINCT COUNT(inscription.id) as nb  FROM inscription
-                LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
-                WHERE dossier.finished = 1
-                AND dossier.archived = 0 
-                AND inscription.date_from >= "'.$from.'"
-                AND inscription.date_to <= "'.$to.'"
-                AND DATE_ADD(inscription.date_from, INTERVAL 2 DAY) = inscription.date_to
-                ORDER BY inscription.id';
         return $db->row($sql)->nb;
     }
 
@@ -86,49 +69,29 @@
         return $db->row($sql);
     }
 
-    function getNbInscriptionsbyStructureWeekEndByYear($structure, $year = '2014'){
-        global $db;
-        $from = new DateTime($year.'-01-01');
-        $from = $from->format("Y-m-d H:i:s");
-        $to = new DateTime($year.'-12-31');
-        $to = $to->format("Y-m-d H:i:s");
-
-        $sql = 'SELECT inscription.id, COUNT(inscription.id) as nb FROM inscription
-                LEFT JOIN dossier ON inscription.ref_dossier = dossier.id 
-                LEFT JOIN enfant ON inscription.ref_enfant = enfant.id 
-                LEFT JOIN structure ON enfant.organization = structure.id 
-                WHERE structure.id  = "'.$structure->id.'" 
-                AND dossier.finished = 1 
-                AND dossier.archived = 0
-                AND inscription.date_from >= "'.$from.'" 
-                AND inscription.date_to <= "'.$to.'" 
-                AND DATE_ADD(inscription.date_from, INTERVAL 2 DAY) = inscription.date_to
-                ORDER BY inscription.id';
-
-        return $db->row($sql)->nb;
-    }
-
 
     $year = $_GET['annee'];
     
-    $seasons = array(
-        'Février' => array(
-            'start' => new DateTime($year.'-02-05'),
-            'end' => new DateTime($year.'-03-10'),
-        ),
-        'Printemps' => array(
-            'start' => new DateTime($year.'-03-21'),
-            'end' => new DateTime($year.'-05-31'),
-        ),
-        'Été' => array(
-            'start' => new DateTime($year.'-06-01'),
-            'end' => new DateTime($year.'-09-30'),
-        ),
-        'Toussaints' => array(
-            'start' => new DateTime($year.'-10-01'),
-            'end' => new DateTime($year.'-11-30'),
-        )
-    );
+    $seasons = saison::getListAll();
+
+    // $seasons = array(
+    //     'Février' => array(
+    //         'start' => new DateTime($year.'-02-05'),
+    //         'end' => new DateTime($year.'-03-10'),
+    //     ),
+    //     'Printemps' => array(
+    //         'start' => new DateTime($year.'-03-21'),
+    //         'end' => new DateTime($year.'-05-31'),
+    //     ),
+    //     'Été' => array(
+    //         'start' => new DateTime($year.'-06-01'),
+    //         'end' => new DateTime($year.'-09-30'),
+    //     ),
+    //     'Toussaints' => array(
+    //         'start' => new DateTime($year.'-10-01'),
+    //         'end' => new DateTime($year.'-11-30'),
+    //     )
+    // );
 
 ?>
 
@@ -161,15 +124,16 @@
 
             $inscriptionsCount = array();
 
-            $inscriptionsCount['Week-end'] = getNbInscriptionsWeekEndByYear($year);
-
-            foreach ($seasons as $name => $season) {
+            foreach ( $seasons as $season ) {
                 $today = new DateTime('NOW');
-                if ($today->getTimestamp() > $season['start']->getTimestamp()) {
-                    $inscriptionSeason = getNbInscriptionsByPeriod($season['start'], $season['end']);
-                    $inscriptionsCount[$name] = $inscriptionSeason;
+                $season_start = new DateTime($year.'-' . $season->month_from . '-' . $season->day_from);
+                $season_end = new DateTime($year.'-' . $season->month_to . '-' . $season->day_to);
+                if ( $today->getTimestamp() > $season_start->getTimestamp() ) {
+                    $inscriptionSeason = getNbInscriptionsByPeriod( $season_start, $season_end );
+                    // tool::output( $inscriptionSeason );
+                    $inscriptionsCount[$season->name] = $inscriptionSeason;
                 } else {
-                    $inscriptionsCount[$name] = 0;
+                    $inscriptionsCount[$season->name] = 0;
                 }
             }
 
@@ -296,33 +260,33 @@
                         $('#datatable-weekend').find('.progress').find('span').each(function(index, el) {
                         total = parseInt($(el).text()) + total;
                         });
-                        console.log('weekend '+total);
+                        // console.log('weekend '+total);
 
 
                         var total = 0;
                         $('#datatable-1').find('.progress').find('span').each(function(index, el) {
                         total = parseInt($(el).text()) + total;
                         });
-                        console.log('fev '+total);
+                        // console.log('fev '+total);
 
                         var total = 0;
                         $('#datatable-2').find('.progress').find('span').each(function(index, el) {
                         total = parseInt($(el).text()) + total;
                         });
-                        console.log('printemps '+total);
+                        // console.log('printemps '+total);
 
 
                         var total = 0;
                         $('#datatable-3').find('.progress').find('span').each(function(index, el) {
                         total = parseInt($(el).text()) + total;
                         });
-                        console.log('ete '+total);
+                        // console.log('ete '+total);
 
                         var total = 0;
                         $('#datatable-4').find('.progress').find('span').each(function(index, el) {
                         total = parseInt($(el).text()) + total;
                         });
-                        console.log('toussaints '+total);
+                        // console.log('toussaints '+total);
 
                     });
                     </script>
@@ -423,189 +387,100 @@
 </div>
 
 
-<div class="row">
-    <div class="col-md-12">
-        
-
-
-
-        <?php
-            $inscriptions = array();
-
-            foreach($structures as $structure) {
-                $result = getNbInscriptionsbyStructureWeekEndByYear($structure, $year);
-                if (!empty($result) && $result != 0) {
-                    $inscriptions[$structure->name] = $result;
-                }
-            }
-            arsort($inscriptions);
-
-       ?>
-        <div class="section-head">
-            <div class="row">
-                <div class="col-md-8">
-                    <h3>Week-ends <?=$year; ?></h3>
-                </div>
-            </div>
-        </div>
-        <div class="block-flat tb-special tb-stats">
-            <div class="content">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="datatable-weekend">
-                        <thead>
-                            <tr>
-                                <th width="350">Structure</th>
-                                <th>Nombre d'inscriptions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                                $the_json = array();
-
-                                $the_datas = array();
-                                $max = max($inscriptions);
-
-                                foreach($inscriptions as $name => $nb) {
-
-                                    $nb_text = '<span class="hide">'.sprintf("%04d", $nb).'</span>';
-                                    $width = $nb * 100 / $max;
-                                    $nb_text .= '<div class="progress ';
-                                    if ($nb == $max) {
-                                        $nb_text .= 'progress-striped active';
-                                    }
-                                    $nb_text .= ' progress-stats"><div class="progress-bar progress-bar-primary" style="width: '.$width.'%;"><span>'.$nb.'</span></div></div>';
-                                    $the_data = ['<div class="text-right" style="font-size:11px;">'.$name.'</div>', $nb_text];
-                                    array_push($the_datas, $the_data);
-                                }
-                                array_push($the_json, $the_datas);
-                            ?>
-                        </tbody>
-                    </table>
-                    
-                    <?php ob_start(); ?>
-                        <script>
-
-                            var the_datas = [];
-                            <?php foreach ($the_json as $key => $value): ?>
-                            the_datas.push(<?=json_encode($the_json[$key]);?>);
-                            <?php endforeach; ?>
-                            $('#datatable-weekend').dataTable({
-                                "bProcessing": true,
-                                "bDeferRender": true,
-                                "bStateSave": true,
-                                "aaData":   the_datas[0],
-                                "aaSorting": [[ 1, "desc" ]],
-                                "bLengthChange": false,
-                                "iDisplayLength": 1000,
-                                // "bPaginate": false,
-                                "bInfo": false
-                            });
-
-                        </script>
-                    <?php $scripts .= ob_get_contents();
-                    ob_end_clean(); ?>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <?php $a = 1; ?>
-<?php foreach ($seasons as $name => $season): ?>
-    <div class="row">
-        <div class="col-md-12">
-            
+<?php foreach ($seasons as $season): ?>
+    <?php
+        $season_start = new DateTime($year.'-' . $season->month_from . '-' . $season->day_from);
+        $season_end = new DateTime($year.'-' . $season->month_to . '-' . $season->day_to);
 
+        $inscriptions = array();
+        $nb_total = 0;
+        foreach($structures as $structure) {
+            $result = getNbInscriptionByStructureByPeriod($structure, $season_start, $season_end );
+            if ( !empty($result->id) && $result->nb != 0 ) {
+                $inscriptions[$structure->name] = $result->nb;
+                $nb_total += $result->nb;
+            }
+        }
+        
+        if( $nb_total > 0 ) {
+            $inscriptions['AUTRES - Particuliers'] = $inscriptionsCount[$season->name] - $nb_total;
+        }
+        arsort($inscriptions);
 
-
-            <?php
-                $inscriptions = array();
-                $nb_total = 0;
-                foreach($structures as $key => $structure) {
-                    $result = getNbInscriptionByStructureByPeriod($structure, $season['start'], $season['end'] );
-                    
-                    if (!empty($result->id) && $result->nb != 0) {
-                        $inscriptions[$structure->name] = $result->nb;
-                        $nb_total+=$result->nb;
-                    }
-                }
-                $inscriptions['AUTRES - Particuliers'] = $inscriptionsCount[$name] - $nb_total;
-                arsort($inscriptions);
-
-                //tool::output($inscriptions);
-
-           ?>
-            <div class="section-head">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h3><?=$name; ?> <?=$year; ?></h3>
+   ?>
+   <?php if( $nb_total > 0 ):  ?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-head">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3><?php echo $season->name; ?> <?=$year; ?></h3>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="block-flat tb-special tb-stats">
-                <div class="content">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="datatable-<?=$a; ?>">
-                            <thead>
-                                <tr>
-                                    <th width="350">Structure</th>
-                                    <th>Nombre d'inscriptions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    $the_json = array();
+                <div class="block-flat tb-special tb-stats">
+                    <div class="content">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="datatable-<?=$a; ?>">
+                                <thead>
+                                    <tr>
+                                        <th width="350">Structure</th>
+                                        <th>Nombre d'inscriptions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        $the_json = array();
 
-                                    $the_datas = array();
-                                    $max = max($inscriptions);
+                                        $the_datas = array();
+                                        $max = max($inscriptions);
+                                        foreach($inscriptions as $name => $nb) {
 
-                                    foreach($inscriptions as $name => $nb) {
-
-                                        $nb_text = '<span class="hide">'.sprintf("%04d", $nb).'</span>';
-                                        $width = $nb * 100 / $max;
-                                        $nb_text .= '<div class="progress ';
-                                        if ($nb == $max) {
-                                            $nb_text .= 'progress-striped active';
+                                            $nb_text = '<span class="hide">'.sprintf("%04d", $nb).'</span>';
+                                            $width = $nb * 100 / $max;
+                                            $nb_text .= '<div class="progress ';
+                                            if ($nb == $max) {
+                                                $nb_text .= 'progress-striped active';
+                                            }
+                                            $nb_text .= ' progress-stats"><div class="progress-bar progress-bar-primary" style="width: '.$width.'%;"><span>'.$nb.'</span></div></div>';
+                                            $the_data = ['<div class="text-right" style="font-size:11px;">'.$name.'</div>', $nb_text];
+                                            array_push($the_datas, $the_data);
                                         }
-                                        $nb_text .= ' progress-stats"><div class="progress-bar progress-bar-primary" style="width: '.$width.'%;"><span>'.$nb.'</span></div></div>';
-                                        $the_data = ['<div class="text-right" style="font-size:11px;">'.$name.'</div>', $nb_text];
-                                        array_push($the_datas, $the_data);
-                                    }
-                                    array_push($the_json, $the_datas);
-                                ?>
-                            </tbody>
-                        </table>
-                        
-                        <?php ob_start(); ?>
-                            <script>
+                                        array_push($the_json, $the_datas);
+                                    ?>
+                                </tbody>
+                            </table>
+                            
+                            <?php ob_start(); ?>
+                                <script>
 
-                                var the_datas = [];
-                                <?php foreach ($the_json as $key => $value): ?>
-                                the_datas.push(<?=json_encode($the_json[$key]);?>);
-                                <?php endforeach; ?>
-                                $('#datatable-<?=$a; ?>').dataTable({
-                                    "bProcessing": true,
-                                    "bDeferRender": true,
-                                    "bStateSave": true,
-                                    "aaData":   the_datas[0],
-                                    "aaSorting": [[ 1, "desc" ]],
-                                    "bLengthChange": false,
-                                    "iDisplayLength": 1000,
-                                    // "bPaginate": false,
-                                    "bInfo": false
-                                });
+                                    var the_datas = [];
+                                    <?php foreach ($the_json as $key => $value): ?>
+                                    the_datas.push(<?=json_encode($the_json[$key]);?>);
+                                    <?php endforeach; ?>
+                                    $('#datatable-<?=$a; ?>').dataTable({
+                                        "bProcessing": true,
+                                        "bDeferRender": true,
+                                        "bStateSave": true,
+                                        "aaData":   the_datas[0],
+                                        "aaSorting": [[ 1, "desc" ]],
+                                        "bLengthChange": false,
+                                        "iDisplayLength": 1000,
+                                        // "bPaginate": false,
+                                        "bInfo": false
+                                    });
 
-                            </script>
-                        <?php $scripts .= ob_get_contents();
-                        ob_end_clean(); ?>
+                                </script>
+                            <?php $scripts .= ob_get_contents();
+                            ob_end_clean(); ?>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php endif; ?>
 <?php $a++; ?>
 <?php endforeach; ?>
 

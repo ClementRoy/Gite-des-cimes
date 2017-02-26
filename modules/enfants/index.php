@@ -146,21 +146,21 @@ var the_datas = [];
 <?php foreach ($the_json as $key => $value): ?>
 the_datas.push(<?=json_encode($the_json[$key]);?>);
 <?php endforeach; ?>
+the_datas = the_datas[0];
 
-$('#datatable')
-    .on( 'draw.dt', function () {
-        if ($(window).width() < 768) {
-            $(this).find('tr').each(function(index, el) {
-                $(el).find('td, th').filter(':eq(2), :eq(3), :eq(4), :eq(5), :eq(6)').hide();
-            });
-        }
-    } ).dataTable({
-    "bProcessing": true,
-    "bDeferRender": true,
-    "bStateSave": true,
-    "aaData":   the_datas[0],
-    // "responsive": true,
-});
+var options = {
+        "bProcessing"    : true,
+        "bDeferRender"   : true,
+        "aaData"         : the_datas
+    };
+
+if ( $(window).width() < 768 ) {
+    options.pageLength = the_datas.length / 3;
+} else {
+    options.bStateSave = true;
+}
+$('#datatable').dataTable(options);
+
 $('.dropdown-menu').on('click', '.modal-remove-link', function(event) {
     event.preventDefault();
     /* Act on the event */

@@ -559,9 +559,9 @@
 					                            </td>
 					                    		<td style="width: 100px;">
 					                    			<?php if ($facture->status == 0): ?>
-					                    				<span class="label label-warning">En attente d'édition</span>
+					                    				<span class="label label-warning">En attente de paiement</span>
 					                    			<?php else: ?>
-					                    				<span class="label label-success">Édité</span>
+					                    				<span class="label label-success">Payé</span>
 					                    			<?php endif; ?>
 					                            </td>
 					                    	</tr>
@@ -573,14 +573,14 @@
 						                    		<td></td>
 						                    		<td>
 						                    			<?php if ( $facture->status_caf == 0 ): ?>
-						                    				<button class="btn btn-default btn-xs js-update-caf" data-id="<?php echo $facture->id; ?>">Envoyé</button>
+						                    				<button class="btn btn-default btn-xs js-update-caf" data-id="<?php echo $facture->id; ?>">Payé</button>
 						                    			<?php endif; ?>
 						                    		</td>
 						                    		<td>
 						                    			<?php if ($facture->status_caf == 0): ?>
-						                    				<span class="label label-warning">En attente d'envoi</span>
+						                    				<span class="label label-warning">En attente de paiement</span>
 						                    			<?php else: ?>
-						                    				<span class="label label-success">Envoyé</span>
+						                    				<span class="label label-success">Payé</span>
 						                    			<?php endif; ?>
 						                    		</td>
 						                    	</tr>
@@ -600,9 +600,9 @@
 					                            </td>
 					                    		<td style="width: 100px;">
 					                    			<?php if ($facture->status == 0): ?>
-					                    				<span class="label label-warning">En attente d'édition</span>
+					                    				<span class="label label-warning">En attente de paiement</span>
 					                    			<?php else: ?>
-					                    				<span class="label label-success">Édité</span>
+					                    				<span class="label label-success">Payé</span>
 					                    			<?php endif; ?>
 					                            </td>
 					                    	</tr>
@@ -905,7 +905,7 @@ $(function() {
 			$row.find('.btn-update').remove();
 			var $tdLabel = $row.find('.label').parent();
 			$tdLabel.find('.label').remove();
-			$tdLabel.html('<span class="label label-success">Édité</span>');
+			$tdLabel.html('<span class="label label-success">Payé</span>');
 
 			if (typeof $row.data('facture-parent') !== 'undefined' ) {
 				$('#tr-facture-' + $row.data('facture-parent')).find('.btn-update').remove();
@@ -936,7 +936,7 @@ $(function() {
 			$this.remove();
 			var $tdLabel = $row.find('.label').parent();
 			$tdLabel.find('.label').remove();
-			$tdLabel.html('<span class="label label-success">Envoyé</span>');
+			$tdLabel.html('<span class="label label-success">Payé</span>');
 		})
 		.fail(function() {
 			alert('Un erreur est survenue lors de la mise à jour de cet élément. Merci de réessayer ultérieurement.')
