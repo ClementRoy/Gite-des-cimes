@@ -371,41 +371,6 @@
 
 <?php ob_start(); ?>
 <script>
-    function toDate(timestamp) {
-        var date = new Date( timestamp*1000);
-        if (date.getDate() < 10) {
-            var day = '0' + date.getDate();
-        } else {
-            var day = date.getDate();
-        }
-        if ((date.getMonth()+1) < 10) {
-            var month = '0' + (date.getMonth()+1);
-        } else {
-            var month = (date.getMonth()+1);
-        }
-        date = day + '/' + month + '/' + date.getFullYear();
-        return date;
-    }
-    function toTimestamp(date) {
-        date = date.split('/');
-        var date = date[1] + ',' + date[0] + ',' + date[2];
-        return new Date(date).getTime()/1000;
-    }
-    function countWeeks(start, end) {
-        var period = end - start;
-        if ( period < 604800) {
-            return 0;
-        } else {
-            return Math.floor(period/604800);
-        }
-    }
-    function findWithAttr(array, attr, value) {
-        for(var i = 0; i < array.length; i += 1) {
-            if(array[i][attr] == value) {
-                return i;
-            }
-        }
-    }
     function setControls() {
         var add = $('.sejours-controls').find('.add-sejour');
         var remove = $('.sejours-controls').find('.delete-sejour');
