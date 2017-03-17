@@ -214,7 +214,7 @@ foreach ($facture_items as $facture_item) {
 					</p>
 					<p>
 						SIRET : 530 369 982 00018<br>
-						APE : [A RENSEIGNER]
+						APE : 5520Z
 					</p>
 
 				</td>
@@ -518,7 +518,7 @@ foreach ($facture_items as $facture_item) {
 							<td style="text-align: left;padding: 12px 7px;width:100%;line-height: 18px;">
 								<strong style="font-size: 13px;">Compte ouvert au nom : Gite des Cimes</strong><br>
 								<span style="color:#C92626;">IBAN : FR35 3000 2084 3400 0011 7192 K15</span><br>
-								<span style="color:#C92626;">BIC : [A RENSEIGNER]</span><br>
+								<span style="color:#C92626;">BIC : CRLYFRPP</span><br>
 								<br>
 								<strong style="color:#8B3636;">Réf à rappeler impérativement lors du paiement : <?php echo $facture->number; ?></strong>
 							</td>
