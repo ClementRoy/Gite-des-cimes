@@ -200,8 +200,8 @@
                                 </div>
 
                                 <div class="sejours-controls">
-                                    <button href="#" class="btn btn-default btn-sm delete-sejour">Supprimer ce séjour</button>
-                                    <button href="#" class="btn btn-primary btn-sm add-sejour">Ajouter un séjour</button>
+                                    <button id="js_remove_sejour" class="btn btn-default btn-sm delete-sejour">Supprimer ce séjour</button>
+                                    <button id="js_add_sejour" class="btn btn-primary btn-sm add-sejour">Ajouter un séjour</button>
                                 </div>
                             </div>
                         </div>
@@ -255,7 +255,9 @@
                             <div class="ui-select">
                                 <select class="form-control" id="form-inscription-lieu-select" name="form_inscription_lieu"<?php if( $dossier->place == "Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle" || $dossier->place == "Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte" || $dossier->place == "Bonneuil en Valois, au Gite"): ?> data-selected="<?=$dossier->place; ?>"<?php endif; ?>>
                                     <option selected="selected" value="">Choisissez le lieu de rendez-vous</option>
-                                    <option value="Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle</option>
+                                    <?php if ( $dossier->place == 'Aulnay sous bois, au Parking d\'Intermarché, avenue Antoine Bourdelle' ): ?>
+                                        <option value="Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle</option>
+                                    <?php endif; ?>
                                     <option value="Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte">Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte</option>
                                     <option value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>
                                 </select>
@@ -371,34 +373,82 @@
 
 <?php ob_start(); ?>
 <script>
+
+
+    var dataSejours = [
+        <?php $i = 0; ?>
+        <?php foreach ($sejours as $key => $sejour): ?>
+        {
+            <?php $date_from = new DateTime($sejour->date_from); ?>
+            <?php $date_to = new DateTime($sejour->date_to); ?>
+            <?php if($date_to->getTimestamp() != '-62169987600'): ?>
+                <?php $date_to = $date_to->getTimestamp(); ?>
+            <?php endif; ?>
+            <?php if($date_from->getTimestamp() != '-62169987600'): ?>
+                <?php $date_from = $date_from->getTimestamp(); ?>
+            <?php endif; ?>
+            id: <?=$sejour->id; ?>,
+            name: '<?=addslashes($sejour->name); ?>',
+            start: '<?=$date_from; ?>',
+            end: '<?=$date_to; ?>',
+            rendez_vous: {
+                hours_departure: <?php echo json_encode( unserialize( $sejour->hours_departure ) ); ?>,
+                hours_intermediate_return : <?php echo json_encode( unserialize( $sejour->hours_intermediate_return ) ); ?>,
+                hours_intermediate_departure : <?php echo json_encode( unserialize( $sejour->hours_intermediate_departure ) ); ?>,
+                hours_return : <?php echo json_encode( unserialize( $sejour->hours_return ) ); ?>
+            }
+            <?php $i++; ?>
+        }<?=(count($sejours) != $i)? ',' : '' ; ?>
+        <?php endforeach; ?>
+    ];
+
+
+    var $sejoursGroup = $('.sejours-group'),
+        $add_sejour = $('#js_add_sejour'),
+        $remove_sejour = $('#js_remove_sejour'),
+        $rdvPlace = $('#form-inscription-lieu-select'),
+        $rdvPlaceCustom = $('#form_inscription_lieu_custom'),
+        $rdvDepartureHour = $('#form-inscription-heure-aller'),
+        $rdvDepartureMin = $('#form-inscription-min-aller'),
+        $rdvReturnHour = $('#form-inscription-heure-retour'),
+        $rdvReturnMin = $('#form-inscription-min-retour');
+
+
+
+    /*
+    * Active ou désactive les controles pour ajouter ou supprimer des séjours
+    */
     function setControls() {
-        var add = $('.sejours-controls').find('.add-sejour');
-        var remove = $('.sejours-controls').find('.delete-sejour');
         if ( $('.sejour-form').length < 3 ) {
-            remove.attr('disabled', 'disabled');
+            $remove_sejour.attr('disabled', 'disabled');
         } else {
-            remove.removeAttr('disabled');
+            $remove_sejour.removeAttr('disabled');
         }
         if ( $('.sejour-form:last-child').find('select').val() != '' ) {
             if ( $('.sejour-form:last-child').find('[type="checkbox"]:checked').length ) {
-                add.removeAttr('disabled');
+                $add_sejour.removeAttr('disabled');
             } else {
-                add.attr('disabled', 'disabled');
+                $add_sejour.attr('disabled', 'disabled');
             }
         } else {
-            add.attr('disabled', 'disabled');
+            $add_sejour.attr('disabled', 'disabled');
         }
     }
+
+    /*
+    * Ajoute un nouveau groupe de séjours
+    */
     function addGroupField(data) {
         var forms = $('.sejour-form').not('.init'),
-            cloned = $('.sejours-group').find('.init').clone();
+            cloned = $sejoursGroup.find('.init').clone();
 
         if ($('.sejour-form:visible').length < 1) {
             cloned.find('select').attr('data-parsley-required', 'true');
         }
         forms.find('fieldset').attr('disabled', 'disabled');
-        $('.sejours-group').append( cloned );
+        $sejoursGroup.append( cloned );
         setControls();
+
         var newSejour = $('.sejour-form:last-child');
         newSejour.removeClass('init').fadeIn();
         var selectSejour = newSejour.find('select');
@@ -406,12 +456,22 @@
             selectSejour.append('<option value="' + data[i].id + '">' + data[i].name + ' du ' + toDate(data[i].start) + ' au ' + toDate(data[i].end) + '</option>');
         }
     }
+
+    /*
+    * Supprime le dernier groupe de séjours
+    */
     function removeLastGroupField() {
         $('.sejour-form:last-child').remove();
         $('.sejour-form:last-child').find('fieldset').removeAttr('disabled');
         
         setControls();
     }
+
+
+
+    /*
+    * Génére les checkboxs pour un groupe de séjours
+    */
     function setCheckbox(selectValue, dataSejours) {
         var disabledBefore = 0;
         if ( $('.sejour-form').length > 2 ) {
@@ -446,35 +506,164 @@
         }
         setControls();
     }
+
+
+    /*
+    * Retourne les informations d'un séjour via un ID
+    */
+    function getSejourById(id) {
+        for (var i = 0; i < dataSejours.length; i++) {
+            if (dataSejours[i].id == id) {
+                return dataSejours[i];
+                break;
+            }
+        }
+    }
+
+
+    /*
+    * Vide les champs liés au lieu et aux horaires de rendez-vous
+    */
+    function cleanRendezVous(id) {
+        if ($rdvPlace.val() !== '') {
+            $rdvPlace.val('');
+            $rdvDepartureHour.val('');
+            $rdvDepartureMin.val('');
+            $rdvReturnHour.val('');
+            $rdvReturnMin.val('');
+        }
+    }
+
+
+    /*
+    * Rempli automatiquement les champs des Rendez-vous en fonction des séjours sélectionnés.
+    */
+    function setRendezVous(place) {
+
+        if (place !== '' && $sejoursGroup.find('.sejour-form').not('.init').last().find('select').val() !== '') {
+
+            var hoursDeparture = 0,
+                minDeparture = 0,
+                hoursReturn = 0,
+                minReturn = 0;
+
+
+            $sejoursGroups = $sejoursGroup.find('.sejour-form').not('.init');
+
+            // Pour les dates de départ
+            var sejourFirst = $sejoursGroups.first().find('select').val(),
+                $checkboxes = $sejoursGroups.first().find('.checkbox'),
+                checkedIndex = 0;
+
+            var sejourData = getSejourById(sejourFirst);
+
+            // On regarde quelle est la position de la première checkbox activé
+            for (var i = 0; i < $checkboxes.length; i++) {
+                if ( $checkboxes.eq(i).find('input[type="checkbox"]').is(':checked') ) {
+                    checkedIndex = i;
+                    break;
+                }
+            }
+
+            // Si c'est la première (index 0)
+            if ( checkedIndex == 0 || sejourData.rendez_vous.hours_intermediate_departure === false ) {
+                // Alors les dates de rendez-vous à l'aller sont les premières
+
+                if ( place == 'Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte' ) {
+                    // 1 
+                    hoursDeparture = sejourData.rendez_vous.hours_departure.hours[1];
+                    minDeparture = sejourData.rendez_vous.hours_departure.min[1];
+                } else if ( place == 'Bonneuil en Valois, au Gite' ) {
+                    // 2 
+                    hoursDeparture = sejourData.rendez_vous.hours_departure.hours[2];
+                    minDeparture = sejourData.rendez_vous.hours_departure.min[2];
+                }
+
+            } else {
+                // Sinon ce sont les dates intermédiaires.
+                if ( place == 'Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte' ) {
+                    hoursDeparture = sejourData.rendez_vous.hours_intermediate_departure.hours[1];
+                    minDeparture = sejourData.rendez_vous.hours_intermediate_departure.min[1];
+                } else if ( place == 'Bonneuil en Valois, au Gite' ) {
+                    hoursDeparture = sejourData.rendez_vous.hours_intermediate_departure.hours[2];
+                    minDeparture = sejourData.rendez_vous.hours_intermediate_departure.min[2];
+                }
+
+            }
+
+
+            $rdvDepartureHour.val(hoursDeparture);
+            $rdvDepartureMin.val(minDeparture);
+
+
+            ///////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////
+
+            // Pour les dates de retour
+            var sejourLast = $sejoursGroups.last().find('select').val(),
+                $checkboxes = $sejoursGroups.last().find('.checkbox'),
+                checkedIndex = 0;
+
+            var sejourData = getSejourById(sejourLast);
+
+            // On regarde quelle est la position de la première checkbox activé
+            for (var i = $checkboxes.length - 1; i >= 0; i--) {
+                if ( $checkboxes.eq(i).find('input[type="checkbox"]').is(':checked') ) {
+                    checkedIndex = i;
+                    break;
+                }
+            }
+
+
+            // Si c'est la première (index 0)
+            if ( (checkedIndex + 1) == $checkboxes.length || sejourData.rendez_vous.hours_intermediate_return === false ) {
+                // Alors les dates de rendez-vous à l'aller sont les premières
+
+                if ( place == 'Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte' ) {
+                    // 1 
+                    hoursReturn = sejourData.rendez_vous.hours_return.hours[1];
+                    minReturn = sejourData.rendez_vous.hours_return.min[1];
+                } else if ( place == 'Bonneuil en Valois, au Gite' ) {
+                    // 2 
+                    hoursReturn = sejourData.rendez_vous.hours_return.hours[2];
+                    minReturn = sejourData.rendez_vous.hours_return.min[2];
+                }
+
+            } else {
+                // Sinon ce sont les dates intermédiaires.
+                if ( place == 'Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte' ) {
+                    hoursReturn = sejourData.rendez_vous.hours_intermediate_return.hours[1];
+                    minReturn = sejourData.rendez_vous.hours_intermediate_return.min[1];
+                } else if ( place == 'Bonneuil en Valois, au Gite' ) {
+                    hoursReturn = sejourData.rendez_vous.hours_intermediate_return.hours[2];
+                    minReturn = sejourData.rendez_vous.hours_intermediate_return.min[2];
+                }
+
+            }
+            
+            $rdvReturnHour.val(hoursReturn);
+            $rdvReturnMin.val(minReturn);
+
+        }
+
+        if ( place !== '' ) {
+            $rdvPlaceCustom.attr('disabled', 'disabled');
+        } else {
+            cleanRendezVous();
+            $rdvPlaceCustom.removeAttr('disabled');
+        }
+    }
+
+
     $(function () {
-        $('.sejour-form:visible').eq(0).find('select').attr('data-parsley-required', 'true');
-        var dataSejours = [
-            <?php $i = 0; ?>
-            <?php foreach ($sejours as $key => $sejour): ?>
-            {
-                <?php $date_from = new DateTime($sejour->date_from); ?>
-                <?php $date_to = new DateTime($sejour->date_to); ?>
-                <?php if($date_to->getTimestamp() != '-62169987600'): ?>
-                    <?php $date_to = $date_to->getTimestamp(); ?>
-                <?php endif; ?>
-                <?php if($date_from->getTimestamp() != '-62169987600'): ?>
-                    <?php $date_from = $date_from->getTimestamp(); ?>
-                <?php endif; ?>
-                id: <?=$sejour->id; ?>,
-                name: '<?=addslashes($sejour->name); ?>',
-                start: '<?=$date_from; ?>',
-                end: '<?=$date_to; ?>'
-                <?php $i++; ?>
-            }<?=(count($sejours) != $i)? ',' : '' ; ?>
-            <?php endforeach; ?>
-        ];
-        $('.sejours-controls').on('click', '.add-sejour', function(e) {
+
+        $add_sejour.on('click', function(e) {
             e.preventDefault();
             newDataSejours = [];
-            var lastChecked = $('.sejour-form:last-child').find('input[type="checkbox"]:checked').last();
-            var start = lastChecked.data('start');
-            var end = lastChecked.data('end');
-            var id = lastChecked.data('id');
+            var lastChecked = $('.sejour-form:last-child').find('input[type="checkbox"]:checked').last(),
+                start = lastChecked.data('start'),
+                end = lastChecked.data('end'),
+                id = lastChecked.data('id');
             if( countWeeks(start, end) < 1 ) {
                 for (var i = 0; i < dataSejours.length; i++) {
                     if (dataSejours[i].start > end && dataSejours[i].id != id && countWeeks(dataSejours[i].start, dataSejours[i].end) < 1) {
@@ -502,163 +691,43 @@
             }
             addGroupField( newDataSejours );
         });
-        $('.sejours-controls').on('click', '.delete-sejour', function(e) {
+
+        $remove_sejour.on('click', function(e) {
             e.preventDefault();
             removeLastGroupField();
+            setRendezVous($rdvPlace.val());
         });
-        $('.sejours-group').on('change', 'select', function() {
+
+        $sejoursGroup.on('change', 'select', function() {
             setCheckbox( $(this).val(), dataSejours);
+            setRendezVous($rdvPlace.val());
         });
-        $('.sejours-group').on('change', '[type="checkbox"]', function() {
+
+        $sejoursGroup.on('change', '[type="checkbox"]', function() {
             setControls();
+            setRendezVous($rdvPlace.val());
         });
-        // addGroupField( dataSejours );
+
         $('form').submit(function() {
             $('[disabled]').removeAttr('disabled');
         });
-        $('#form-inscription-structure-select').change( function () {
+
+        $('#form-inscription-structure-select').on('change', function () {
             if( $(this).val() == '' ){
                 $('#form-inscription-centre-payeur').removeAttr('disabled'); 
                 $('#form-inscription-centre-payeur-hidden').attr('disabled', 'disabled'); 
             } else {
-                $('#form-inscription-centre-payeur').val('');
-                $('#form-inscription-centre-payeur').attr('disabled','disabled');
+                $('#form-inscription-centre-payeur').val('').attr('disabled','disabled');
                 $('#form-inscription-centre-payeur-hidden').removeAttr('disabled');
             }
-        }).change();
-
-        $('.sejours-group').on('change', '.sejour-form select', function(){
-            var sejour_fieldset = $(this).parent(),
-                sejour_id = $(this).val(),
-                nb_select = $('.sejour-form:visible select').length;
-
-            jQuery.ajax({
-                type: 'GET', // Le type de ma requete
-                url: '/ajax/get_sejour.php', // L'url vers laquelle la requete sera envoyee
-                data: {
-                    id: sejour_id
-                },
-                dataType: 'json',
-                success: function(data, textStatus, jqXHR) {
-                    //console.log(data);
-                    if(data.hours_departure != ''){
-                        //console.log(data.hours_departure.min);
-                        //console.log(data.hours_departure.min['0']);
-                        $('#form-inscription-lieu-select').html('<option value="">Choisissez le lieu de rendez-vous</option>');
-                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[0]+'" data-min-departure="'+data.hours_departure.min[0]+'" data-hour-return="'+data.hours_return.hours[0]+'" data-min-return="'+data.hours_return.min[0]+'" value="Aulnay sous bois, au Parking d\'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d\'Intermarché, avenue Antoine Bourdelle</option>');
-                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[1]+'" data-min-departure="'+data.hours_departure.min[1]+'" data-hour-return="'+data.hours_return.hours[1]+'" data-min-return="'+data.hours_return.min[1]+'" value="Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte">Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte</option>');
-                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[2]+'" data-min-departure="'+data.hours_departure.min[2]+'" data-hour-return="'+data.hours_return.hours[2]+'" data-min-return="'+data.hours_return.min[2]+'" value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>');
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown, data) {
-                    console.log(errorThrown);
-                }
-            }); 
-
-            jQuery.ajax({
-                type: 'GET', // Le type de ma requete
-                url: '/ajax/get_nb_inscriptions.php', // L'url vers laquelle la requete sera envoyee
-                data: {
-                    sejour_id: sejour_id,
-                },
-                dataType: 'json',
-                success: function(data, textStatus, jqXHR) {
-                    //console.log(data);
-                    if(data == true){
-                        sejour_fieldset.find('.error_nb').remove();
-                        sejour_fieldset.prepend('<div class="error_nb alert alert-warning alert-white-alt"><div class="icon"><i class="fa fa-warning"></i></div> <strong>Attention</strong>, il n\y a plus de place sur ce séjour.</div>');
-                    }
-                    else {
-                        sejour_fieldset.find('.error_nb').remove();
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown, data) {
-                    console.log(errorThrown);
-                }
-            }); 
-            var enfant_id = $('#form-inscription-enfant-select').val();
-            if(enfant_id != ''){
-                jQuery.ajax({
-                    type: 'GET', // Le type de ma requete
-                    url: '/ajax/check_register.php', // L'url vers laquelle la requete sera envoyee
-                    data: {
-                        sejour_id: sejour_id,
-                        enfant_id: enfant_id
-                    },
-                    dataType: 'json',
-                    success: function(data, textStatus, jqXHR) {
-                         if(data == true){
-                            sejour_fieldset.find('.error_check').remove();
-                            sejour_fieldset.prepend('<div class="error_check alert alert-danger alert-white-alt"><div class="icon"><i class="fa fa-warning"></i></div> <strong>Attention</strong>, l\'enfant est déjà inscrit à ce séjour.</div>');
-                        }
-                        else{
-                            sejour_fieldset.find('.error_check').remove();
-                        }
-                    },
-                    error: function(jqXHR, textStatus, errorThrown, data) {
-                        console.log(errorThrown);
-                    }
-                }); 
-            }
-            // <option value="Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d'Intermarché, avenue Antoine Bourdelle</option>
-            // <option value="Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte">Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte</option>
-            // <option value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>
-        });
-
-        $('.sejours-group').find('.sejour-form').last().find('select').each(function(index, el) {
-            var sejour_fieldset = $(el).parent(),
-                sejour_id = $(el).val(),
-                nb_select = $('.sejour-form:visible select').length;
-
-            jQuery.ajax({
-                type: 'GET', // Le type de ma requete
-                url: '/ajax/get_sejour.php', // L'url vers laquelle la requete sera envoyee
-                data: {
-                    id: sejour_id
-                },
-                dataType: 'json',
-                success: function(data, textStatus, jqXHR) {
-                    //console.log(data);
-                    if(data.hours_departure != ''){
-                        //console.log(data.hours_departure.min);
-                        //console.log(data.hours_departure.min['0']);
-                        $('#form-inscription-lieu-select').html('<option value="">Choisissez le lieu de rendez-vous</option>');
-                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[0]+'" data-min-departure="'+data.hours_departure.min[0]+'" data-hour-return="'+data.hours_return.hours[0]+'" data-min-return="'+data.hours_return.min[0]+'" value="Aulnay sous bois, au Parking d\'Intermarché, avenue Antoine Bourdelle">Aulnay sous bois, au Parking d\'Intermarché, avenue Antoine Bourdelle</option>');
-                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[1]+'" data-min-departure="'+data.hours_departure.min[1]+'" data-hour-return="'+data.hours_return.hours[1]+'" data-min-return="'+data.hours_return.min[1]+'" value="Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte">Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte</option>');
-                        $('#form-inscription-lieu-select').append('<option data-hour-departure="'+data.hours_departure.hours[2]+'" data-min-departure="'+data.hours_departure.min[2]+'" data-hour-return="'+data.hours_return.hours[2]+'" data-min-return="'+data.hours_return.min[2]+'" value="Bonneuil en Valois, au Gite">Bonneuil en Valois, au Gite</option>');
-                        
-                        if (typeof $('#form-inscription-lieu-select').data('selected') != undefined) {
-                            var selectedValue = $('#form-inscription-lieu-select').data('selected');
-                            $('#form-inscription-lieu-select').val(selectedValue).removeAttr('data-selected');
-                        }
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown, data) {
-                    console.log(errorThrown);
-                }
-            }); 
-
         });
 
 
-        $('#form-inscription-lieu-select').on('change', function(){
-            //console.log('hello');
-            var elem = $(this).find(":selected");
-            if(elem.data('hour-departure') != ''){
-                //console.log($(this).find(":selected").data('hour-departure'));
-                // Aller
-                $('#form-inscription-heure-aller').val(elem.data('hour-departure'));
-                $('#form-inscription-min-aller').val(elem.data('min-departure'));
-                // retour
-                $('#form-inscription-heure-retour').val(elem.data('hour-return'));
-                $('#form-inscription-min-retour').val(elem.data('min-return'));
-            }
-            if ($(this).val() != '') {
-                $('#form_inscription_lieu_custom').attr('disabled', 'disabled').val('');
-            } else {
-                $('#form_inscription_lieu_custom').removeAttr('disabled');
-            }
+        $rdvPlace.on('change', function(){
+            var $elem = $(this).find(":selected");
+            setRendezVous($elem.val());
         });
+
         
     });
 </script>
