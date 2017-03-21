@@ -104,6 +104,9 @@
         $hours_departure = serialize(array( 'hours' => $form_sejour_heure_aller, 'min' => $form_sejour_min_aller));
         $hours_return = serialize(array( 'hours' => $form_sejour_heure_retour, 'min' => $form_sejour_min_retour));
         
+        $hours_intermediate_departure = serialize(array( 'hours' => $form_sejour_heure_aller_intermediaire, 'min' => $form_sejour_min_aller_intermediaire));
+        $hours_intermediate_return = serialize(array( 'hours' => $form_sejour_heure_retour_intermediaire, 'min' => $form_sejour_min_retour_intermediaire));
+
         $datas = array(
             ':name' => $form_sejour_name,
             ':date_from' => $form_sejour_date_debut,
@@ -115,6 +118,8 @@
             ':price' => $form_sejour_prix,
             ':hours_departure' => $hours_departure,
             ':hours_return' => $hours_return,
+            ':hours_intermediate_departure' => $hours_intermediate_departure,
+            ':hours_intermediate_return' => $hours_intermediate_return,
             );
 
         $result = sejour::update($datas, $_GET['id']);
