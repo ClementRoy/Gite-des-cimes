@@ -1,4 +1,10 @@
 @media (max-width: 767px) {
+    .block-flat .content {
+        padding: 0;
+    }
+    .sidebar-logo {
+
+    }
     #cl-wrapper {
         margin-top: 0;
         display: block;
@@ -264,14 +270,31 @@
         max-width: 45%;
     }
     /*Forms*/
-    .form-horizontal.group-border .form-group {
-        padding: 5px 0 15px 0;
+    .form-horizontal .control-label {
+        padding-top: 0;
+    }
+    .form-horizontal.group-border .form-group,
+    .form-horizontal.group-border-dashed .form-group {
+        padding: 10px 0 15px;
+        margin: 0 -15px;
     }
     .form-horizontal.group-border .form-group label {
         margin-bottom: 7px;
+        padding-top: 0;
     }
     .form-horizontal.group-border-dashed .form-group label {
         margin-bottom: 7px;
+    }
+    .radio label, .checkbox label {
+        padding-left: 0;
+    }
+    .radio-inline:first-child, .checkbox-inline:first-child {
+        padding-left: 0;
+    }
+    .block-flat .actions span {
+        display: block;
+        text-align: center;
+        margin: 5px 0;
     }
     /*Buttons*/
     /*Login*/
@@ -369,6 +392,7 @@
         margin: 0;
         display: block;
         width: calc(100% + 1px);
+        text-align: center;
     }
 
 
@@ -402,13 +426,52 @@
 
 
 
-
+    .page-head {
+        padding-bottom: 7px;
+        position: relative;
+    }
     .page-head .dropdown-toggle,
     .page-head .dropdown-menu {
         display: none;
     }
+    .page-head h1 {
+        padding-right: 55px;
+    }
     .page-head h1 > small {
         font-size: 15px;
+    }
+    .page-head .btn {
+        position: absolute;
+        top: 0;
+        right: 15px;
+    }
+    .page-head .btn i {
+        font-size: 18px;
+        margin: 0;
+    }
+    .page-head .btn span {
+        display: none;
+    }
+    .page-head .btn {
+        margin-top: 0;
+    }
+
+    .section-head {
+        position: relative;
+    }
+    .section-head h3 {
+        padding-right: 55px;
+        margin-top: 0;
+        float: left;
+    }
+    .section-head .btn {
+        position: absolute;
+        top: 0;
+        right: 15px;
+        margin-top: 0;
+    }
+    .section-head .btn span {
+        display: none;
     }
 
 

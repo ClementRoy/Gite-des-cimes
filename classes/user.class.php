@@ -230,7 +230,6 @@ class user
         return $_SESSION['Auth']['id'];
     }
 
-
     public static function remove($id){
         global $db;
         // $data = array(':id' => $id);
@@ -281,6 +280,37 @@ class user
         $sql = 'DELETE FROM '.self::$table.' WHERE firstname = ""';
         $result = $db->delete($sql);
         return $result;
+    }
+
+
+    public static function canCurrentSeePage(){
+
+        $userID = self::getCurrentUser();
+        $user = self::get($userID);
+
+        // Build active element from REQUEST URI
+        $path_array = explode('/', $_SERVER['REQUEST_URI'] );
+        // tool::output( $path_array );
+
+        // Set default path
+        if ( $path_array['1'] == '' ) {
+            $path_array['1']  = 'accueil';
+        }
+        
+        $navbar = menu::getNavbar();
+
+        foreach ( $navbar as $name => $navbar_item ) {
+            if ( $name == $path_array[1] && $user->rank < $navbar_item['min_rank'] ) {
+                return false;
+            } elseif ( isset( $navbar_item['submenu'] ) && isset( $path_array[2] ) ) {
+                foreach ( $navbar_item['submenu'] as $submenu_name => $submenu_item ) {
+                    if ( $name == $path_array[1] && $submenu_name == $path_array[2] && $user->rank < $submenu_item['min_rank'] ) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
     
 

@@ -10,7 +10,7 @@
 <!-- Page title -->
 <div class="page-head">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-xs-12 col-md-8">
             <h1>Ajouter un enfant</h1>
         </div>
     </div>
@@ -18,7 +18,7 @@
 <!-- /Page title -->
 
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-xs-12 col-md-9">
         <div class="block-flat">
             <div class="content">
                 <form id="form-add-children" method="post" action="/enfants/infos/id/<?=$id ?>" class="form-horizontal group-border-dashed maped-form" data-parsley-validate enctype="multipart/form-data">
@@ -518,7 +518,7 @@
         </div>
     </div>
 
-    <div class="col-md-3" style="position:static;">
+    <div class="col-xs-12 col-md-3 visible-md visible-md" style="position:static;">
         <div id="neo-affix">
             <div id="allias-submit" class="block-flat bars-widget">
                 <div class="form-group text-center">

@@ -1,6 +1,6 @@
 
             </div>
-        </div> 
+        </div>
     </div>
 
     <?php if (APP_VERSION != 'dev'): ?>

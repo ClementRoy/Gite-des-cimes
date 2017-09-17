@@ -67,13 +67,19 @@
                             </div>
                             <div class="radio">
                                 <label class="radio" for="form-utilisateur-lvl-2">
-                                    <input class="icheck" type="radio" name="form_utilisateur_lvl" id="form-utilisateur-lvl-2" value="3">
-                                    Gestionnaire
+                                    <input class="icheck" type="radio" name="form_utilisateur_lvl" id="form-utilisateur-lvl-2" value="2">
+                                    Secrétaire
                                 </label>
                             </div>
                             <div class="radio">
                                 <label class="radio" for="form-utilisateur-lvl-3">
-                                    <input class="icheck" type="radio" name="form_utilisateur_lvl" id="form-utilisateur-lvl-3" value="5">
+                                    <input class="icheck" type="radio" name="form_utilisateur_lvl" id="form-utilisateur-lvl-3" value="3">
+                                    Gestionnaire
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label class="radio" for="form-utilisateur-lvl-4">
+                                    <input class="icheck" type="radio" name="form_utilisateur_lvl" id="form-utilisateur-lvl-4" value="5">
                                     Administrateur
                                 </label>
                             </div>

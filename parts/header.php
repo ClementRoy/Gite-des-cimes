@@ -46,3 +46,9 @@
 </head>
 <body>
    <div id="cl-wrapper">
+        
+
+        <?php if ( !user::canCurrentSeePage() ): ?>
+            <?php die('Vous n\'avez pas les droits pour afficher cette page.'); ?>
+        <?php endif; ?>
+            
