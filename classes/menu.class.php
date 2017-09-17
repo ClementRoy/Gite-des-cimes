@@ -49,6 +49,11 @@ class menu
                         'min_rank' => 1,
                         'display' => true,
                     ),
+                    'editer' => array(
+                        'name' => 'Modifier un enfant',
+                        'min_rank' => 1,
+                        'display' => false,
+                    ),
                 )
             ),
             'sejours' => array(
@@ -66,6 +71,11 @@ class menu
                         'name' => 'Ajouter un séjour',
                         'min_rank' => 1,
                         'display' => true,
+                    ),
+                    'editer' => array(
+                        'name' => 'Modifier un séjour',
+                        'min_rank' => 1,
+                        'display' => false,
                     ),
                 )
             ),
@@ -85,6 +95,11 @@ class menu
                         'min_rank' => 1,
                         'display' => true,
                     ),
+                    'editer' => array(
+                        'name' => 'Modifier un dossier',
+                        'min_rank' => 1,
+                        'display' => false,
+                    ),
                 )
             ),
             'hebergements' => array(
@@ -102,6 +117,11 @@ class menu
                         'name' => 'Ajouter un hébergement',
                         'min_rank' => 1,
                         'display' => true,
+                    ),
+                    'editer' => array(
+                        'name' => 'Modifier un hébergement',
+                        'min_rank' => 1,
+                        'display' => false,
                     ),
                 )
             ),
@@ -121,6 +141,11 @@ class menu
                         'min_rank' => 1,
                         'display' => true,
                     ),
+                    'editer' => array(
+                        'name' => 'Modifier une structure',
+                        'min_rank' => 1,
+                        'display' => false,
+                    ),
                 )
             ),
             'contacts' => array(
@@ -139,6 +164,11 @@ class menu
                         'min_rank' => 1,
                         'display' => true,
                     ),
+                    'editer' => array(
+                        'name' => 'Modifier un contact',
+                        'min_rank' => 1,
+                        'display' => false,
+                    ),
                 )
             ),
             'accompagnateurs' => array(
@@ -156,6 +186,11 @@ class menu
                         'name' => 'Ajouter un accompagnateur',
                         'min_rank' => 1,
                         'display' => true,
+                    ),
+                    'editer' => array(
+                        'name' => 'Modifier un accompagnateur',
+                        'min_rank' => 1,
+                        'display' => false,
                     ),
                 )
             ),
