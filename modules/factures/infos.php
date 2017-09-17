@@ -218,7 +218,7 @@
 		$result .= facture::update($datas, $facture_id);
 
 		foreach ($_POST['inscription_id'] as $key => $inscription_id) {
-			tool::output( $inscription_id );
+			// tool::output( $inscription_id );
 			$datas = array(
 				':ref_facture' => $facture_id,
 				':ref_inscription' => $inscription_id,
@@ -280,7 +280,7 @@
 			$result .= facture_item::add($datas);
 
 
-		} elseif ( (isset($amount_family) || $amount_family > 0) && !empty($facture_family) ) {
+		} elseif ( ( isset($amount_family) && $amount_family > 0) && !empty($facture_family) ) {
 
 			// Si elle existait avant et maintenant également, on met à jour la BDD et on écrase le fichier
 			$old_familyFactureItems = facture_item::getByFacture($facture_family->id);

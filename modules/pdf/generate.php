@@ -105,22 +105,22 @@ ob_start(); ?>
 					</p>
 
 					<p style="margin-bottom:0;">
-						<strong>N° d’enregistrement du ou des séjours :</strong></p>
-						<?php $numero_sejour = ''; ?>
-						<?php $nom_sejour = ''; ?>
-						<?php foreach ($inscriptions as $key => $inscription): ?>
-							<?php $sejour = sejour::get($inscription->ref_sejour); ?>
-							<?php if ($sejour->name !== 'Séjour Court' && $sejour->name !== 'Séjours courts'): ?>
-								<?php if ($numero_sejour != $sejour->numero || $nom_sejour != $sejour->name): ?>
-									<?php $hebergement = hebergement::get($sejour->ref_hebergement); ?>
-									<p style="margin:3px 0 0;"><?=$sejour->name ?> - <?=$sejour->numero ?><br>
-									<?=$hebergement->name.', '.$hebergement->address_postal_code.' '.$hebergement->address_city;?>
-									</p>
-								<?php endif; ?>
-								<?php $numero_sejour = $sejour->numero; ?>
-								<?php $nom_sejour = $sejour->name; ?>
-							<?php endif ?>
-						<?php endforeach ?>
+					<strong>N° d’enregistrement du ou des séjours :</strong></p>
+					<?php $numero_sejour = ''; ?>
+					<?php $hebergement_sejour = ''; ?>
+					<?php foreach ($inscriptions as $key => $inscription): ?>
+						<?php $sejour = sejour::get($inscription->ref_sejour); ?>
+						<?php $hebergement = hebergement::get($sejour->ref_hebergement); ?>
+
+						<?php if ( $sejour->ref_hebergement !== $hebergement_sejour || $sejour->numero !== $numero_sejour ): ?>
+								<?php $hebergement = hebergement::get($sejour->ref_hebergement); ?>
+								<p style="margin:3px 0 0;">
+								<?php echo $sejour->numero; ?> - <?php echo $hebergement->name.', '.$hebergement->address_postal_code.' '.$hebergement->address_city; ?>
+								</p>
+							<?php $numero_sejour = $sejour->numero; ?>
+							<?php $hebergement_sejour = $sejour->ref_hebergement; ?>
+						<?php endif; ?>
+					<?php endforeach ?>
 				</td>
 				<td style="width:50%;padding:15px 15px 5px;" border="1">
 					<h4>LE RESPONSABLE LEGAL EFFECTUANT L’INSCRIPTION</h4>
@@ -287,17 +287,17 @@ ob_start(); ?>
 							$date_to = strftime('%d/%m/%Y', $date_to->getTimestamp());
 						endif; 
 
-						$temp = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $date_from, $date_to, $sejour->price);
+						$temp = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $date_from, $date_to, $sejour->price );
 
-						if (!empty($sejours_temp)) {
-							if ($sejours_temp[$sejour_index-1][0] == $temp[0] && $sejours_temp[$sejour_index-1][6] == $temp[5]) {
-								$sejours_temp[$sejour_index-1] = array($sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $sejours_temp[$sejour_index-1][5], $date_to, $sejour->price+$sejours_temp[$sejour_index-1][7]);
+						if ( !empty( $sejours_temp ) ) {
+							if ( $sejours_temp[$sejour_index-1][0] == $temp[0] && $sejours_temp[$sejour_index-1][6] == $temp[5] && $sejours_temp[$sejour_index-1][1] == $temp[1] ) {
+								$sejours_temp[$sejour_index-1] = array( $sejour->numero, $sejour->name, $hebergement->name, $hebergement->address_postal_code, $hebergement->address_city, $sejours_temp[$sejour_index-1][5], $date_to, $sejour->price+$sejours_temp[$sejour_index-1][7] );
 							} else {
-								array_push($sejours_temp, $temp);
+								array_push( $sejours_temp, $temp );
 								$sejour_index++;
 							}
 						} else {
-							array_push($sejours_temp, $temp);
+							array_push( $sejours_temp, $temp );
 							$sejour_index++;
 						}
 

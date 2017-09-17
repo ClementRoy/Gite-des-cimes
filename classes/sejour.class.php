@@ -88,23 +88,20 @@ class sejour
         // tool::output( $date_to );
 
         $results = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 AND date_from >= "'.$date_from.'"  AND date_to <= "'.$date_to.'" ORDER BY date_from');
-
-
-
-
             
         $new_results = array();
-        for ($i=0; $i < count($results) - 1; $i++) {
-           $date_from = new DateTime($results[$i]->date_from);
-           $date_to = new DateTime($results[$i]->date_to);
+        //for ($i=0; $i < count($results); $i++) {
+        foreach ($results as $key => $result) {
+           $date_from = new DateTime($result->date_from);
+           $date_to = new DateTime($result->date_to);
 
             if ($season->name != 'Weekend') {
                 if ( ( $date_to->getTimestamp() - $date_from->getTimestamp() ) > 172800) {
-                    array_push($new_results, $results[$i]);
+                    array_push($new_results, $result);
                 }
             } else {
                 if ( ( $date_to->getTimestamp() - $date_from->getTimestamp() ) < 172800) {
-                    array_push($new_results, $results[$i]);
+                    array_push($new_results, $result);
                 }
             }
 
