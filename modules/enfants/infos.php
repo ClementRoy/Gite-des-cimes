@@ -218,7 +218,7 @@
 
 <div class="page-head">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-xs-12 col-md-8">
              <a href="#" class="trigger dropdown-toggle" data-toggle="dropdown">
                 <?php if(!empty($enfant->ref_picture)): ?>
                     <?php $picture = media::get($enfant->ref_picture); ?>
@@ -246,7 +246,7 @@
         </div>
         <div class="col-md-4 text-right">
             <!-- <a href="#" data-toggle="modal" data-target="#modal-remove" class="item">Supprimer cette fiche</a> -->
-            <a href="/enfants/editer/id/<?=$enfant->id; ?>" class="btn btn-primary btn-rad">Modifier cette fiche</a>
+            <a href="/enfants/editer/id/<?=$enfant->id; ?>" class="btn btn-primary btn-rad"><i class="fa fa-fw fa-pencil"></i> <span>Modifier cette fiche</span></a>
         </div>
     </div>
 </div>
@@ -661,7 +661,7 @@
                                                     <tr>
                                                         <td style="width:30%;"><b>Assurance (RC)</b>
                                                         <?php if ($enfant->self_assurance > 0): ?>
-                                                        <br><small>Validité : <?=(!empty($enfant->self_assurance_expiration_date))? $enfant->self_assurance_expiration_date : EMPTYVAL; ?></small>
+                                                        <br><small>Validité : <?=(!empty($enfant->self_assurance_expiration_date) &&  strtotime($enfant->self_assurance_expiration_date) != '-62169984561' )? date("d/m/Y", strtotime($enfant->self_assurance_expiration_date)) : EMPTYVAL; ?></small>
                                                         <?php endif ?>
                                                         </td>
                                                         <td>
@@ -671,7 +671,7 @@
                                                     <tr>
                                                         <td style="width:30%;"><b>Attestation CPAM</b>
                                                         <?php if ($enfant->cpam_attestation > 0): ?>
-                                                        <br><small>Validité : <?=(!empty($enfant->cpam_attestation_expiration_date))? $enfant->cpam_attestation_expiration_date : EMPTYVAL; ?></small>
+                                                        <br><small>Validité : <?=( !empty($enfant->cpam_attestation_expiration_date) && strtotime($enfant->cpam_attestation_expiration_date) != '-62169984561' ) ? $enfant->cpam_attestation_expiration_date : EMPTYVAL; ?></small>
                                                         <?php endif ?>
                                                         </td>
                                                         <td>
@@ -721,11 +721,11 @@
             <div class="col-sm-12">
                 <div class="section-head">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-xs-12 col-md-8">
                             <h3>Séjours de l'enfant</h3>
                         </div>
-                        <div class="col-md-4 text-right">
-                            <a href="/dossiers/ajouter/enfant/<?=$enfant->id; ?>" class="btn btn-primary"><span>+</span> Inscrire l'enfant à un séjour</a>
+                        <div class="col-xs-12 col-md-4 text-right">
+                            <a href="/dossiers/ajouter/enfant/<?=$enfant->id; ?>" class="btn btn-primary"><i class="fa fa-plus"></i> <span>Inscrire l'enfant à un séjour</span></a>
                         </div>
                     </div>
                 </div>

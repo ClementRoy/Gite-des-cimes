@@ -54,30 +54,38 @@
                         </div>
                     </div>
 
-
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Niveau</label>
-                        <div class="col-sm-6" data-toggle="tooltip" title="Précisez le niveau d'administration de l'utilisateur">
-                            <div class="radio">
-                                <label class="radio" for="form-utilisateur-lvl-1">
-                                    <input class="icheck" type="radio" name="form_utilisateur_lvl" id="form-utilisateur-lvl-1" value="1" <?php if($utilisateur->rank == '1'): ?> checked="checked"<?php endif; ?>>
-                                    Utilisateur
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label class="radio" for="form-utilisateur-lvl-2">
-                                    <input class="icheck" type="radio" name="form_utilisateur_lvl" id="form-utilisateur-lvl-2" value="3" <?php if($utilisateur->rank == '3'): ?> checked="checked"<?php endif; ?>>
-                                    Gestionnaire
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label class="radio" for="form-utilisateur-lvl-3">
-                                    <input class="icheck" type="radio" name="form_utilisateur_lvl" id="form-utilisateur-lvl-3" value="5" <?php if($utilisateur->rank == '5'): ?> checked="checked"<?php endif; ?>>
-                                    Administrateur
-                                </label>
+                    <?php if ( $utilisateur->rank > 2 ): ?>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Niveau</label>
+                            <div class="col-sm-6" data-toggle="tooltip" title="Précisez le niveau d'administration de l'utilisateur">
+                                <div class="radio">
+                                    <label class="radio" for="form-utilisateur-lvl-1">
+                                        <input class="icheck" type="radio" name="form_utilisateur_lvl" id="form-utilisateur-lvl-1" value="1" <?php if($utilisateur->rank == '1'): ?> checked="checked"<?php endif; ?>>
+                                        Utilisateur
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label class="radio" for="form-utilisateur-lvl-2">
+                                        <input class="icheck" type="radio" name="form_utilisateur_lvl" id="form-utilisateur-lvl-2" value="2" <?php if($utilisateur->rank == '2'): ?> checked="checked"<?php endif; ?>>
+                                        Secrétaire
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label class="radio" for="form-utilisateur-lvl-3">
+                                        <input class="icheck" type="radio" name="form_utilisateur_lvl" id="form-utilisateur-lvl-3" value="3" <?php if($utilisateur->rank == '3'): ?> checked="checked"<?php endif; ?>>
+                                        Gestionnaire
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label class="radio" for="form-utilisateur-lvl-4">
+                                        <input class="icheck" type="radio" name="form_utilisateur_lvl" id="form-utilisateur-lvl-4" value="5" <?php if($utilisateur->rank == '5'): ?> checked="checked"<?php endif; ?>>
+                                        Administrateur
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endif; ?>
 
                     <div class="form-group actions text-center">
                         <div class="col-md-8 col-md-offset-2">

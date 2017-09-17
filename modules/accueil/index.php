@@ -180,7 +180,7 @@
 
                             ?>
 
-                            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
                                 <div class="block-flat block-piechart">
                                     <div class="content text-center">
                                         <div class="epie-chart" data-barcolor="<?=$colors[$y]?>" data-trackcolor="#F3F3F3" data-percent="<?=100 * $nb / $sejour->capacity_max; ?>">
@@ -221,7 +221,7 @@
 
                         ?>
 
-                            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
                                 <div class="block-flat block-piechart">
                                     <div class="content text-center">
                                         <div class="epie-chart" data-barcolor="<?=$colors[$y]?>" data-trackcolor="#F3F3F3" data-percent="<?=100 * $nb / $sejour->capacity_max; ?>">

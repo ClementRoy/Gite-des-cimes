@@ -9,7 +9,7 @@
 <!-- Page title -->
 <div class="page-head">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-xs-12 col-md-8">
             <h1>Editer <?=$enfant->firstname.' '.$enfant->lastname; ?></h1>
         </div>
     </div>
@@ -17,7 +17,7 @@
 <!-- /Page title -->
 
 <div class="row">
-    <div class="col-md-9">
+    <div class=" col-xs-12 col-md-9">
         <div class="block-flat">
             <div class="content">
                 <form id="form-edit-children" method="post" action="/enfants/infos/id/<?=$enfant->id ?>" class="form-horizontal group-border-dashed maped-form" data-parsley-validate enctype="multipart/form-data">
@@ -537,7 +537,7 @@
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-xs-12 col-md-3 visible-md visible-md">
         <div id="neo-affix">
             <div id="allias-submit" class="block-flat bars-widget">
                 <div class="form-group text-center">

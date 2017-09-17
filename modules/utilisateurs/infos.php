@@ -123,6 +123,8 @@
                                         <td>
                                             <?php if ($utilisateur->rank == 1): ?>
                                                 Utilisateur
+                                            <?php elseif ($utilisateur->rank == 2): ?>
+                                                Secrétaire
                                             <?php elseif ($utilisateur->rank == 3): ?>
                                                 Gestionnaire
                                             <?php elseif ($utilisateur->rank == 5): ?>

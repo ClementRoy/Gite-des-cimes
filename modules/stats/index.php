@@ -137,6 +137,8 @@
                 }
             }
 
+            tool::output( $inscriptionsCount );
+
         ?>
         <div class="block-flat">
             <div class="content">
@@ -159,7 +161,7 @@
                         $elem.find('.flot-text-over').remove();
                         $elem.append('<div class="flot-text-over"></div>');
                         var flotTextOver = $elem.find('.flot-text-over'),
-                            datas = objectElem.getData()[0].data;
+                            datas = objectElem.getData()[0].data,
                             datasLength = datas.length,
                             overWidth = 100 / datasLength,
                             valueMax = 0;
@@ -176,14 +178,14 @@
                             textOverWidth = $('.flot-text-over').width();
 
                         for (var i = 0; i < datas.length; i++) {
-                            if (datas[i][1] != 0) {
+                            if (datas[i][1] !== 0) {
                                 var posY = textOverHeight * datas[i][1] / valueMaxRounded / 2;
                                 var posX = (textOverWidth / datasLength * i) + (textOverWidth / datasLength / 2);
                                 flotTextOver.append('<span style="width:' + 100 / datasLength + '%;left:' + 100 / datasLength * i + '%; bottom:' + Math.round(posY) + 'px;">' + datas[i][1] + '</span>');
                                 var span = flotTextOver.find('span').last();
                                 span.css('margin-bottom', '-' + span.outerHeight() / 2 + 'px');
                             }
-                        };
+                        }
                     }
 
 
