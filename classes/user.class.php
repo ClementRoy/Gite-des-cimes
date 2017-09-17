@@ -56,12 +56,13 @@ class user
 		        'password' => md5($password)
 		    	));
 
-		if($user){
+
+		if ( $user ) {
 		    $_SESSION['Auth'] = (array)$user;
 		    // if $remember
 		    	// create cookie
-		    header('Location:'.$redirect);
-		}else{
+		    header( 'Location:'.$redirect );
+		} else {
 		    $error = true;
 		}
 		

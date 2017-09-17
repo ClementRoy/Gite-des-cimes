@@ -209,7 +209,7 @@ class menu
              'utilisateurs' => array(
                 'name' => 'Utilisateurs',
                 'icon' => 'user',
-                'min_rank' => 2,
+                'min_rank' => 1,
                 'display' => false,
                 'submenu' => array(
                     'index' => array(

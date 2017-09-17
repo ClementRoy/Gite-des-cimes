@@ -40,6 +40,10 @@
         ':rank' => $form_utilisateur_lvl,
     );
 
+    if ( isset( $form_utilisateur_password ) && !empty( $form_utilisateur_password ) ) {
+        $datas[':password'] = md5($form_utilisateur_password);
+    }
+
     $result = user::update($datas, $_GET['id']);
 
     ?>
