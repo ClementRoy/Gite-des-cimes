@@ -742,7 +742,7 @@
         var $form = $('#form-edit-children');
 
         $form.on('ifChanged', 'input[name="form_enfant_inscription"]', function() {
-            console.log('changeemnt');
+            // console.log('changeemnt');
             $('[data-group]')
             .hide()
             .find('input[type="text"]').each(function() {

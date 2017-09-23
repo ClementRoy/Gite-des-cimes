@@ -186,7 +186,8 @@ $(function() {
         $(".input-datepicker").mask("99/99/9999");
         $.mask.definitions['z'] = '[0]';
         $(".input-phone").mask("z9 99 99 99 99");
-        $.mask.definitions['g'] = '[1-2]';
+        $.mask.definitions['g'] = '[1-2-7]';
+        console.log($.mask.definitions['g'])
         $(".input-securite-social").mask("g 99 99 99 999 999 99");
          $(".input-hour, .input-minute").mask("99");
     }
