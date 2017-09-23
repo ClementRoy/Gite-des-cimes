@@ -518,7 +518,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-md-3 visible-md visible-md" style="position:static;">
+    <div class="col-xs-12 col-md-3 visible-md visible-lg" style="position:static;">
         <div id="neo-affix">
             <div id="allias-submit" class="block-flat bars-widget">
                 <div class="form-group text-center">
