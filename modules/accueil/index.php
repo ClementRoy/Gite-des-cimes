@@ -117,7 +117,7 @@
                                         <td style="width:114px;" width="114" class="text-center">
                                             <?php $note = trim($notSupportedDossier->note) ?>
                                             <?php if ($notSupportedDossier->note): ?>  
-                                                <button type="button" class="btn btn-xs btn-default" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="<?php echo $notSupportedDossier->note; ?>"><i class="fa fa-commenting-o"></i> Notes</button>
+                                                <button type="button" class="btn btn-xs btn-default" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="<?php echo $notSupportedDossier->note; ?>"><i class="fa fa-pencil"></i> Notes</button>
                                             <?php else: ?>
                                             <span class="empty-value">/</span>
                                             <?php endif; ?>

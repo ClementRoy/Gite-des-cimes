@@ -401,14 +401,19 @@ table.information td.category {
 }
 
 .table .btn i {
-    font-size: 14px;
+    font-size: 13px;
     margin-right: 1px;
     display: inline-block;
     min-width: 7px;
-    margin-left: -3px;
-    margin-top: 2px;
+    margin-left: -5px;
+    margin-top: 1px;
     float: left;
+    margin-right: 2px;
 }
+.table .btn i.fa-external-link {
+    margin-top: 3px;
+}
+
 
 .table-form > tbody > tr {
     border: 1px solid #ddd;

@@ -785,7 +785,7 @@
                                             <td style="width:140px;">
                                                 <?php $note = note::get($enfant->id, $sejour->id) ?>
                                                 <a class="btn btn-default btn-xs" data-toggle="popover" data-note="<?php if(!empty($note)): ?><?=$note->message ?><?php endif; ?>" data-note-id="<?php if(!empty($note)): ?><?=$note->id ?><?php endif; ?>" data-ref-sejour="<?=$sejour->id ?>" data-ref-enfant="<?=$enfant->id ?>"> 
-                                                    <i class="fa fa-comments"></i> <?=(!empty($note))? 'Modifier la note' : 'Ajouter une note'; ?>
+                                                    <i class="fa fa-pencil"></i> <?=(!empty($note))? 'Modifier la note' : 'Ajouter une note'; ?>
                                                 </a>
                                             </td>
                                         </tr>
