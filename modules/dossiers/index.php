@@ -115,8 +115,10 @@
 
 
                                 $supported = '';
-                                if ($dossier->supported) {
+                                if ( $dossier->supported == 1) {
                                     $supported = '<span class="label label-success">Oui</span>';
+                                } elseif ( $dossier->supported == 2) {
+                                    $supported = '<span class="label label-primary">Partielle</span>';
                                 } else {
                                     $supported = '<span class="label label-warning">Non</span>';
                                 }
@@ -243,8 +245,10 @@
 
 
                                 $supported = '';
-                                if ($dossier->supported) {
+                                if ( $dossier->supported == 1) {
                                     $supported = '<span class="label label-success">Oui</span>';
+                                } elseif ( $dossier->supported == 2) {
+                                    $supported = '<span class="label label-primary">Partielle</span>';
                                 } else {
                                     $supported = '<span class="label label-warning">Non</span>';
                                 }

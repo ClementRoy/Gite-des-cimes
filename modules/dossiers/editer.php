@@ -238,6 +238,7 @@
                         <div class="col-sm-6">
                             <label class="radio-inline" for="form-inscription-supported-oui"><input type="radio" class="icheck" name="form_inscription_supported" id="form-inscription-supported-oui" value="1" <?php if($dossier->supported == 1): ?>checked="checked"<?php endif; ?>> Oui</label>
                             <label class="radio-inline" for="form-inscription-supported-non"><input type="radio" class="icheck" name="form_inscription_supported" id="form-inscription-supported-non" value="0" <?php if($dossier->supported == 0): ?>checked="checked"<?php endif; ?>> Non</label>
+                            <label class="radio-inline" for="form-inscription-supported-partielle"><input type="radio" class="icheck" name="form_inscription_supported" id="form-inscription-supported-partielle" value="2" <?php if($dossier->supported == 2): ?>checked="checked"<?php endif; ?>> Partielle</label>
                         </div>
                     </div>
 

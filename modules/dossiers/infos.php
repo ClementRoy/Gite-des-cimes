@@ -164,7 +164,7 @@
                         <div id="essentiel" class="tab-pane cont active">
 
 
-                            <?php if(!$dossier->finished): ?>
+                            <?php if( !$dossier->finished ): ?>
                                 <div class="alert alert-warning alert-white rounded">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                     <div class="icon"><i class="fa fa-warning"></i></div>
@@ -172,7 +172,7 @@
                                 </div>
                             <?php endif; ?>
 
-                            <?php if(!$dossier->supported): ?>
+                            <?php if( !$dossier->supported ): ?>
                                 <div class="alert alert-warning alert-white rounded">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                     <div class="icon"><i class="fa fa-warning"></i></div>
@@ -180,7 +180,7 @@
                                 </div>
                             <?php endif; ?>
 
-                            <?php if(!$dossier->returned_contract): ?>
+                            <?php if( !$dossier->returned_contract ): ?>
                                 <div class="alert alert-warning alert-white rounded">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                     <div class="icon"><i class="fa fa-warning"></i></div>
@@ -236,7 +236,15 @@
 
                                                     <tr>
                                                         <td style="width: 20%;">Prise en charge :</td>
-                                                        <td><?=($dossier->supported) ? '<i class="fa fa-check-circle"></i>':'<i class="fa fa-times-circle"></i>'; ?></td>
+                                                        <td>
+                                                            <?php if ( $dossier->supported == 1 ): ?>
+                                                                <i class="fa fa-times-circle"></i>
+                                                            <?php elseif ( $dossier->supported == 2 ): ?>
+                                                                <i class="fa fa-adjust"></i>
+                                                            <?php else: ?>
+                                                                <i class="fa fa-times-circle"></i>
+                                                            <?php endif; ?>
+                                                        </td>
                                                     </tr>
 
                                                     <tr>

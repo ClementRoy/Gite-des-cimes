@@ -96,6 +96,7 @@
                         <div class="col-sm-6">
                             <label class="radio-inline" for="form-inscription-supported-oui"><input type="radio" class="icheck" name="form_inscription_supported" id="form-inscription-supported-oui" value="1"> Oui</label>
                             <label class="radio-inline" for="form-inscription-supported-non"><input type="radio" class="icheck" name="form_inscription_supported" id="form-inscription-supported-non" value="0" checked="checked"> Non</label>
+                            <label class="radio-inline" for="form-inscription-supported-partielle"><input type="radio" class="icheck" name="form_inscription_supported" id="form-inscription-supported-partielle" value="2" checked="checked"> Partielle</label>
                         </div>
                     </div>
 

@@ -66,6 +66,7 @@
                                 <th>Nom de l'enfant</th>
                                 <th>Séjour</th>
                                 <th>À partir du</th>
+                                <th width="114">Notes</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,6 +114,14 @@
                                         <td><a href="/enfants/infos/id/<?=$enfant->id; ?>"><?=$enfant->firstname?> <?=$enfant->lastname?></a></td>
                                         <td><a href="/sejours/infos/<?=$sejour->id; ?>"><?=$sejour->name; ?></a></td>
                                         <td><?=$date_from; ?></td>
+                                        <td style="width:114px;" width="114" class="text-center">
+                                            <?php $note = trim($notSupportedDossier->note) ?>
+                                            <?php if ($notSupportedDossier->note): ?>  
+                                                <button type="button" class="btn btn-xs btn-default" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="<?php echo $notSupportedDossier->note; ?>"><i class="fa fa-commenting-o"></i> Notes</button>
+                                            <?php else: ?>
+                                            <span class="empty-value">/</span>
+                                            <?php endif; ?>
+                                        </td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>
@@ -302,6 +311,8 @@
             },
             "aaSorting": [[ 2, "asc" ]]
         });
+
+        $('[data-toggle="popover"]').popover();
     });
 </script>
 <?php $scripts .= ob_get_contents();
