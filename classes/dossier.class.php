@@ -85,7 +85,7 @@ class dossier
      */
     public static function getListNotSupported(){
         global $db;
-        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 AND supported = 0 ORDER BY id');
+        $result = $db->query('SELECT * FROM '.self::$table.' WHERE archived = 0 AND (supported = 0 OR supported = 2) ORDER BY id');
         return $result;
     }
 
