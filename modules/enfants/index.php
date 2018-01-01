@@ -126,7 +126,7 @@ foreach($enfants as $key => $enfant) {
 
 
     $the_data = ['
-    <a href="/enfants/infos/id/'.$enfant->id.'">'.$enfant->lastname.'</a>'.$popup,
+    <a href="/enfants/infos/id/'.$enfant->id.'">'.$enfant->lastname.'</a>',
     '<a href="/enfants/infos/id/'.$enfant->id.'">'.$enfant->firstname.'</a>',
     $sex,
     $birth,
@@ -161,17 +161,6 @@ if ( $(window).width() < 768 ) {
 }
 $('#datatable').dataTable(options);
 
-$('.dropdown-menu').on('click', '.modal-remove-link', function(event) {
-    event.preventDefault();
-    /* Act on the event */
-    var $modal = $('#modal-remove'),
-        that = $(this),
-        _id = that.data('id'),
-        _name = that.data('name');
-
-    $modal.find('#remove-id').attr('value', _id);
-    $modal.find('#remove-name').html(_name);
-});
 </script>
 <?php $scripts .= ob_get_contents();
 ob_end_clean(); ?>

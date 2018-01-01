@@ -211,17 +211,27 @@ table.information td.category {
 
 .tb-special .dataTables_filter,
 .tb-special .dataTables_length {
-    padding: 10px 15px;
+    padding: 7px 15px;
     overflow: hidden;
     font-size: 12px;
 }
 
-.tb-special .dataTables_filter {
+.tb-special .dataTables_length,
+.tb-special .dt-buttons {
+    display: inline-block;
+    vertical-align: top;
+}
+.tb-special .dt-buttons .btn {
+    margin-bottom: 0 !important;
+}
+
+.tb-special .dataTables_filter,
+.tb-special .dt-buttons {
     padding: 8px 15px;
 }
 
 .tb-special .dataTables_filter input {
-    height: 25px;
+    height: 28px;
     min-width: 160px;
     border-radius: 2px;
     margin-left: 6px;
@@ -263,8 +273,9 @@ table.information td.category {
 .tb-special .table > thead > tr > th {
     text-transform: uppercase;
     font-size: 10px;
-    padding: 12px 25px 12px 15px;
+    padding: 15px 25px 15px 15px;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .tb-special div.dataTables_info {
@@ -351,7 +362,7 @@ table.information td.category {
     display: block;
     position: absolute;
     z-index: 10;
-    top: 38px;
+    top: 44px;
     background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.075) 0%, rgba(0, 0, 0, 0) 100%);
     /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.075)), color-stop(100%, rgba(0, 0, 0, 0)));
@@ -369,6 +380,9 @@ table.information td.category {
 .tb-special tbody tr:hover {
     background: #E7E3F0;
     border-bottom: 1px solid #E7E3F0;
+}
+.tb-special .table {
+    min-width: 100%;
 }
 
 .tb-no-options .dataTables_wrapper > .row:first-child {
@@ -2054,3 +2068,21 @@ table td .progress-tb .progress-bar:last-child {
 .empty-value {
     color: lightgray;
 }
+
+.dt-button-info {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    max-width: 320px;
+    margin: auto;
+    padding: 25px 30px 30px;
+    box-shadow: 0 0 50px rgba(0,0,0,.1);
+    z-index: 10000;
+    margin-top: -60px;
+    border-top: 4px solid #7761a7;
+}
+
+/*<div id="datatables_buttons_info" class="dt-button-info" style=""><h2>Copy to clipboard</h2><div>Copied 463 rows to clipboard</div></div>*/
+

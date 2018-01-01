@@ -31,6 +31,22 @@ function throttle(callback, delay) {
     };
 }
 
+function getTodayDateForFile() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if(dd<10)
+        dd = '0'+dd
+
+    if(mm<10)
+        mm = '0'+mm
+
+    today = yyyy + mm + dd;
+    return today;
+}
+
 function toDate(timestamp) {
     var date = new Date( timestamp*1000);
     if (date.getDate() < 10) {
@@ -46,11 +62,13 @@ function toDate(timestamp) {
     date = day + '/' + month + '/' + date.getFullYear();
     return date;
 }
+
 function toTimestamp(date) {
     date = date.split('/');
     var date = date[1] + ',' + date[0] + ',' + date[2];
     return new Date(date).getTime()/1000;
 }
+
 function countWeeks(start, end) {
     var period = end - start;
     if ( period < 604800) {
@@ -59,6 +77,7 @@ function countWeeks(start, end) {
         return Math.floor(period/604800);
     }
 }
+
 function findWithAttr(array, attr, value) {
     for(var i = 0; i < array.length; i += 1) {
         if(array[i][attr] == value) {
@@ -154,6 +173,47 @@ function neoAffix(elem, marginTop, marginBottom, breakpoint) {
     });
 }
 
+function dataTableForIndexPages( $element, data, pageName ) {
+    $element.dataTable({
+        bProcessing: true,
+        bDeferRender: true,
+        bStateSave: true,
+
+        dom:    "<'row'<'col-sm-6'lB><'col-sm-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [
+            {
+                extend: 'copyHtml5',
+                text: 'Copier',
+                className: 'btn btn-default btn-sm'
+            },
+            {
+                extend: 'excelHtml5',
+                title: getTodayDateForFile() + ' - ' + pageName,
+                text: 'Exporter',
+                className: 'btn btn-default btn-sm'
+            },
+            {
+                extend: 'print',
+                text: 'Imprimer',
+                className: 'btn btn-default btn-sm'
+            },
+        ],
+        language: {
+            buttons: {
+                copyTitle: 'Tableau copié !',
+                copyKeys: 'Appuyez sur <i>ctrl</i> ou <i>\u2318</i> + <i>C</i> pour copier les données du tableau à votre presse-papiers. <br><br>Pour annuler, cliquez sur ce message ou appuyez sur Echap.',
+                copySuccess: {
+                    _: '%d lignes copiées',
+                    1: '1 ligne copiée'
+                }
+            }
+        },
+
+        aaData: data
+    });
+}
 
 $(function() {
 

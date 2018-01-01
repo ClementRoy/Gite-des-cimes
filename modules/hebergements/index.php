@@ -51,7 +51,7 @@
 
 
                             $the_data = ['
-                            <a href="/hebergements/infos/id/'.$hebergement->id.'">'.$hebergement->name.'</a>'.$popup,
+                            <a href="/hebergements/infos/id/'.$hebergement->id.'">'.$hebergement->name.'</a>',
                             $hebergement->address_city
                             ];
                             array_push($the_datas, $the_data);
@@ -96,29 +96,11 @@
 
 <?php ob_start(); ?>
 <script>
-var the_datas = [];
-<?php foreach ($the_json as $key => $value): ?>
-the_datas.push(<?=json_encode($the_json[$key]);?>);
-<?php endforeach; ?>
-
-$('#datatable').dataTable({
-    "bProcessing": true,
-    "bDeferRender": true,
-    "bStateSave": true,
-    "aaData":   the_datas[0],
-    "sort": 0
-});
-$('.dropdown-menu').on('click', '.modal-remove-link', function(event) {
-    event.preventDefault();
-    /* Act on the event */
-    var $modal = $('#modal-remove'),
-        that = $(this),
-        _id = that.data('id'),
-        _name = that.data('name');
-
-    $modal.find('#remove-id').attr('value', _id);
-    $modal.find('#remove-name').html(_name);
-});
+    var the_datas = [];
+    <?php foreach ($the_json as $key => $value): ?>
+    the_datas.push(<?=json_encode($the_json[$key]);?>);
+    <?php endforeach; ?>
+    dataTableForIndexPages( $('#datatable'), the_datas[0], 'Liste des hébergements' );
 </script>
 <?php $scripts .= ob_get_contents();
 ob_end_clean(); ?>

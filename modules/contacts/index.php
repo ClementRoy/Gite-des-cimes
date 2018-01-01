@@ -69,10 +69,12 @@
 
 
                             $the_data = ['
-                                <a href="/contacts/infos/id/'.$contact->id.'">'.trim($contact->lastname).'</a>'.$popup,
+                                <a href="/contacts/infos/id/'.$contact->id.'">'.trim($contact->lastname).'</a>',
                                 '<a href="/contacts/infos/id/'.$contact->id.'">'.$contact->firstname.'</a>',
-                                '<span class="sr-only">'.tool::removeSpaces($contact->phone).'</span>'.tool::formatTel($contact->phone),
-                                '<span class="sr-only">'.tool::removeSpaces($contact->mobile_phone).'</span>'.tool::formatTel($contact->mobile_phone),
+                                // '<span class="sr-only">'.tool::removeSpaces($contact->phone).'</span>'.tool::formatTel($contact->phone),
+                                // '<span class="sr-only">'.tool::removeSpaces($contact->mobile_phone).'</span>'.tool::formatTel($contact->mobile_phone),
+                                tool::formatTel($contact->phone),
+                                tool::formatTel($contact->mobile_phone),
                                 '<a href="mailto:'.$contact->email.'">'.$contact->email.'</a>',
                                 $contact_structure,
                                 count($enfants)
@@ -124,23 +126,8 @@ var the_datas = [];
 the_datas.push(<?=json_encode($the_json[$key]);?>);
 <?php endforeach; ?>
 
-$('#datatable').dataTable({
-    "bProcessing": true,
-    "bDeferRender": true,
-    "bStateSave": true,
-    "aaData":   the_datas[0]
-});
-$('.dropdown-menu').on('click', '.modal-remove-link', function(event) {
-    event.preventDefault();
-    /* Act on the event */
-    var $modal = $('#modal-remove'),
-        that = $(this),
-        _id = that.data('id'),
-        _name = that.data('name');
+dataTableForIndexPages( $('#datatable'), the_datas[0], 'Liste des contacts' );
 
-    $modal.find('#remove-id').attr('value', _id);
-    $modal.find('#remove-name').html(_name);
-});
 </script>
 <?php $scripts .= ob_get_contents();
 ob_end_clean(); ?>
