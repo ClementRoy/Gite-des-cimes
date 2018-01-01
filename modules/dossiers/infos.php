@@ -238,7 +238,7 @@
                                                         <td style="width: 20%;">Prise en charge :</td>
                                                         <td>
                                                             <?php if ( $dossier->supported == 1 ): ?>
-                                                                <i class="fa fa-times-circle"></i>
+                                                                <i class="fa fa-check-circle"></i>
                                                             <?php elseif ( $dossier->supported == 2 ): ?>
                                                                 <i class="fa fa-adjust"></i>
                                                             <?php else: ?>
