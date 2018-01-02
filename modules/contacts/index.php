@@ -36,6 +36,7 @@
                         <th>Téléphone portable</th>
                         <th width="300" style="width:300px;">Email</th>
                         <th width="300" style="width:300px;">Structure</th>
+                        <th width="300" style="width:300px;">Adresse</th>
                         <th width="180" style="width:180px;">Enfants à charge</th>
                     </tr>
                 </thead>
@@ -60,13 +61,16 @@
                                 </ul>';
 
 
-                            
+                            // tool::output( $structure );
                             if(isset($structure) && !empty($structure)) {
                                 $contact_structure = '<a href="/structures/infos/id/'.$structure->id.'">'.$structure->name.'</a>';
+                                $structure_address =    $structure->address_number . ' ' . $structure->address_street . ' ' .
+                                                        $structure->address_comp . ( ( !empty( $structure->address_comp ) ) ? ' ' : '' ) .
+                                                        $structure->address_postal_code . ' ' . $structure->address_city;
                             } else {
                                 $contact_structure = '';
+                                $structure_address = '';
                             }
-
 
                             $the_data = ['
                                 <a href="/contacts/infos/id/'.$contact->id.'">'.trim($contact->lastname).'</a>',
@@ -77,6 +81,7 @@
                                 tool::formatTel($contact->mobile_phone),
                                 '<a href="mailto:'.$contact->email.'">'.$contact->email.'</a>',
                                 $contact_structure,
+                                $structure_address,
                                 count($enfants)
                             ];
                             array_push($the_datas, $the_data);

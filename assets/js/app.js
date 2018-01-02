@@ -182,7 +182,13 @@ function dataTableForIndexPages( $element, data, pageName ) {
         dom:    "<'row'<'col-sm-6'lB><'col-sm-6'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+
         buttons: [
+            {
+                extend: 'colvis',
+                text: 'Colonnes',
+                className: 'btn btn-default btn-sm'
+            },
             {
                 extend: 'copyHtml5',
                 text: 'Copier',
@@ -200,6 +206,7 @@ function dataTableForIndexPages( $element, data, pageName ) {
                 className: 'btn btn-default btn-sm'
             },
         ],
+
         language: {
             buttons: {
                 copyTitle: 'Tableau copié !',
