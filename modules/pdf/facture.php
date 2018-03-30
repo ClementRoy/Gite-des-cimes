@@ -241,9 +241,9 @@ foreach ($facture_items as $facture_item) {
 								<table style="border: 1px solid #666;background-color: #eaeaea;border-radius: 5px;line-height: 18px;">
 									<tr>
 										<td style="padding: 7px 0 7px 10px;width: 100%;">
-											N°engagement : 2017-008021<br>
+											N°engagement : 2018-002416<br>
 											Prestation : Hébérgement<br>
-											Type d'accueil : Séjours de vacances ou we hors colonie
+											Type d'accueil : Colonie
 										</td>
 									</tr>
 								</table>
