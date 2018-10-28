@@ -73,7 +73,7 @@
                                     $popup .= '<li><a href="#" class="modal-remove-link" data-id="'.$dossier->dossier_id.'" data-name="'.$enfant->firstname.' '.$enfant->lastname.'" data-toggle="modal" data-target="#modal-remove" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>';
                                 }
 
-                                $popup .+ '</ul>';
+                                $popup .= '</ul>';
 
                                 $last_inscription = end($inscriptions_dossier);
                                 if ($last_inscription != '') {
