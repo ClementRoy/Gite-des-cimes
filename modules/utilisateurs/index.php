@@ -54,9 +54,11 @@
                                 </ul>';
 
                             $rank = '<span class="label label-info">';
-
                            if ($user->rank == 1) {
                                 $rank .= 'Utilisateur';
+                           }
+                           elseif ($user->rank == 2) {
+                                $rank .= 'Secrétaire';
                            }
                            elseif ($user->rank == 3) {
                                 $rank .= 'Gestionnaire';
