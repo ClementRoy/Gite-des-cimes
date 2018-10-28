@@ -15,10 +15,14 @@
     </div>
 </div>
 
-<?php if (isset($_POST['id']) && $_POST['action'] == 'supprimer' && $_POST['confirm'] == true): ?>
-    <?php $dossier = dossier::get($_POST['id']); ?>
-    <?php tpl::alert('success', 'Le dossier d\'inscription <strong>n°'.$dossier->id.'</strong> a bien été supprimée !') ?>
-    <?php dossier::remove($_POST['id']); ?>
+<?php if ( isset($_POST['id']) && $_POST['action'] == 'supprimer' && $_POST['confirm'] == true ): ?>
+    <?php if ( $user->rank > 2 ): ?>
+        <?php $dossier = dossier::get($_POST['id']); ?>
+        <?php tpl::alert('success', 'Le dossier d\'inscription <strong>n°'.$dossier->id.'</strong> a bien été supprimée !') ?>
+        <?php dossier::remove($_POST['id']); ?>
+    <?php else: ?>
+        <?php tpl::alert('danger', 'Vous n\'avez pas de droits suffisants pour supprimer un dossier d\'inscription.'); ?>
+    <?php endif; ?>
 <?php endif; ?>
 
 
@@ -63,9 +67,13 @@
                                 $popup = '
                                 <ul class="dropdown-menu">
                                     <li><a href="/dossiers/infos/id/'.$dossier->dossier_id.'" class="item"><i class="fa fa-share"></i> Voir la fiche</a></li>
-                                    <li><a href="/dossiers/editer/id/'.$dossier->dossier_id.'" class="item"><i class="fa fa-edit"></i> Modifier</a></li>
-                                    <li><a href="#" class="modal-remove-link" data-id="'.$dossier->dossier_id.'" data-name="'.$enfant->firstname.' '.$enfant->lastname.'" data-toggle="modal" data-target="#modal-remove" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>
-                                </ul>';
+                                    <li><a href="/dossiers/editer/id/'.$dossier->dossier_id.'" class="item"><i class="fa fa-edit"></i> Modifier</a></li>';
+                                
+                                if ( $user->rank > 2 ) {
+                                    $popup .= '<li><a href="#" class="modal-remove-link" data-id="'.$dossier->dossier_id.'" data-name="'.$enfant->firstname.' '.$enfant->lastname.'" data-toggle="modal" data-target="#modal-remove" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>';
+                                }
+
+                                $popup .= '</ul>';
 
                                 $last_inscription = end($inscriptions_dossier);
                                 if ($last_inscription != '') {
@@ -191,9 +199,12 @@
                                 $popup = '
                                 <ul class="dropdown-menu">
                                     <li><a href="/dossiers/infos/id/'.$dossier->dossier_id.'" class="item"><i class="fa fa-share"></i> Voir la fiche</a></li>
-                                    <li><a href="/dossiers/editer/id/'.$dossier->dossier_id.'" class="item"><i class="fa fa-edit"></i> Modifier</a></li>
-                                    <li><a href="#" class="modal-remove-link" data-id="'.$dossier->dossier_id.'" data-name="'.$dossier->dossier_id.'" data-toggle="modal" data-target="#modal-remove" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>
-                                </ul>';
+                                    <li><a href="/dossiers/editer/id/'.$dossier->dossier_id.'" class="item"><i class="fa fa-edit"></i> Modifier</a></li>';
+                                if ( $user->rank > 2 ) {
+                                    $popup .= '<li><a href="#" class="modal-remove-link" data-id="'.$dossier->dossier_id.'" data-name="'.$dossier->dossier_id.'" data-toggle="modal" data-target="#modal-remove" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>';
+                                }
+
+                                $popup .= '</ul>';
                                 
                                 $last_inscription = end($inscriptions_dossier);
                                 if ($last_inscription != '') {
@@ -299,35 +310,36 @@
     </div>
 </div>
 
-
-<div class="modal fade" id="modal-remove" tabindex="-1" role="dialog" aria-hidden="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="text-center">
-                    <div class="i-circle warning"><i class="fa fa-warning"></i></div>
-                    <h4>Attention !</h4>
-                    <p>
-                        Vous êtes sur le point de supprimer le dossier d'inscription <strong>n°<span id="remove-id-2"></span></strong><br> concernant <strong id="remove-name"></strong>.<br>
-                        Êtes-vous sur de vouloir effectuer cette opération ?
-                    </p>
+<?php if ( $user->rank > 2 ) : ?>
+    <div class="modal fade" id="modal-remove" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <form id="form-remove-dossier" action="/dossiers" method="post">
-                    <a href="#" class="btn btn-default btn-flat" data-dismiss="modal">Annuler</a>
-                    <input id="remove-id" type="hidden" name="id" value="0">
-                    <input type="hidden" name="action" value="supprimer">
-                    <input type="hidden" name="confirm" value="true">
-                    <input type="submit" class="btn btn-warning btn-flat" value="Supprimer la fiche">
-                </form>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <div class="i-circle warning"><i class="fa fa-warning"></i></div>
+                        <h4>Attention !</h4>
+                        <p>
+                            Vous êtes sur le point de supprimer le dossier d'inscription <strong>n°<span id="remove-id-2"></span></strong><br> concernant <strong id="remove-name"></strong>.<br>
+                            Êtes-vous sur de vouloir effectuer cette opération ?
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <form id="form-remove-dossier" action="/dossiers" method="post">
+                        <a href="#" class="btn btn-default btn-flat" data-dismiss="modal">Annuler</a>
+                        <input id="remove-id" type="hidden" name="id" value="0">
+                        <input type="hidden" name="action" value="supprimer">
+                        <input type="hidden" name="confirm" value="true">
+                        <input type="submit" class="btn btn-warning btn-flat" value="Supprimer la fiche">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+<?php endif; ?>
 
 
 
