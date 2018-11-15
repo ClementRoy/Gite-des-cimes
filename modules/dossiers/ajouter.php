@@ -245,6 +245,7 @@
             name: '<?=addslashes($sejour->name); ?>',
             start: '<?=$date_from; ?>',
             end: '<?=$date_to; ?>',
+            entire: <?=$sejour->entire; ?>,
             rendez_vous: {
                 hours_departure: <?php echo json_encode( unserialize( $sejour->hours_departure ) ); ?>,
                 hours_intermediate_return : <?php echo json_encode( unserialize( $sejour->hours_intermediate_return ) ); ?>,
@@ -278,9 +279,16 @@
         } else {
             $remove_sejour.removeAttr('disabled');
         }
+        // Si le dernier champ est rempli
         if ( $('.sejour-form:last-child').find('select').val() != '' ) {
+            // Si il y a au moins une case à cocher
             if ( $('.sejour-form:last-child').find('[type="checkbox"]:checked').length ) {
-                $add_sejour.removeAttr('disabled');
+                // console.log( $('.sejour-form:last-child').find('option:selected').attr('data-entire') == 1 )
+                if ( $('.sejour-form:last-child').find('option:selected').attr('data-entire') == 1  ) {
+                    $add_sejour.attr('disabled', 'disabled');
+                } else {
+                    $add_sejour.removeAttr('disabled');
+                }
             } else {
                 $add_sejour.attr('disabled', 'disabled');
             }
@@ -338,8 +346,9 @@
             var start = dataSejours[selectedId].start;
             var end = dataSejours[selectedId].end;
             var id = dataSejours[selectedId].id;
+            var entire = dataSejours[selectedId].entire;
             var nbWeeks = countWeeks( start, end );
-            if ( nbWeeks < 1 ) {
+            if ( nbWeeks < 1 || entire ) {
                 $('.sejour-form:last-child').find('fieldset').append('<div class="checkbox"><label><input type="checkbox" name="dates[]" value="' + toDate(start) + '#' + toDate(end) + '#' + id + '" data-id="' + id + '" data-start="' + start + '" data-end="' + end + '" disabled checked /> L\'enfant est inscrit sur le week end en intégralité.</label></div>');
             } else if ( nbWeeks === 1 ) {
                 $('.sejour-form:last-child').find('fieldset').append('<div class="checkbox"><label><input type="checkbox" name="dates[]" value="' + toDate(start) + '#' + toDate(end) + '#' + id + '" data-id="' + id + '" data-start="' + start + '" data-end="' + end + '" disabled checked /> L\'enfant est inscrit sur le séjour en intégralité.</label></div>');
@@ -510,7 +519,7 @@
 
 
     $(function () {
-
+        setControls();
         $add_sejour.on('click', function(e) {
             e.preventDefault();
             newDataSejours = [];
@@ -582,8 +591,7 @@
             setRendezVous($elem.val());
         });
 
-
-    
+        
         addGroupField( dataSejours );
         
     });

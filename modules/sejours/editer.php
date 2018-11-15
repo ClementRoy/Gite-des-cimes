@@ -10,12 +10,13 @@
             <div class="content">
                 <form id="form-edit-sejour" method="post" action="/sejours/infos/id/<?=$sejour->id; ?>" class="form-horizontal group-border-dashed maped-form" data-parsley-validate  enctype="multipart/form-data">
 
-                     <div class="form-group">
+                    <div class="form-group">
                         <label class="col-md-4 control-label" for="form-sejour-name">Nom du séjour</label>
                         <div class="col-sm-6">
                             <input id="form-sejour-name" name="form_sejour_name" class="form-control" type="text" title="Renseignez le nom du séjour." data-parsley-required="true" value="<?=$sejour->name; ?>">
                         </div>   
                     </div>
+
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="form-sejour-date-debut">Dates</label>
                         <div class="col-sm-6">
@@ -29,6 +30,16 @@
                                     <input id="form-sejour-date-fin" name="form_sejour_date_fin" type="text" class="form-control input-datepicker" 
                                     placeholder="Date de fin" title="Renseignez la date à laquelle se termine le séjour (jj/mm/aaaa)." 
                                     data-parsley-pattern="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" value="<?=tool::getDatefromDatetime($sejour->date_to); ?>"><!-- data-parsley-afterdate="#form-sejour-date-debut" CR : not working properly with french dates -->
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="checkbox">
+                                        <div class="checkbox">
+                                            <label for="form-sejour-entire">
+                                                <input class="icheck" type="checkbox" name="form_sejour_entier" id="form-sejour-entire" value="1"<?php if ($sejour->entire): ?> checked="checked"<?php endif; ?>>
+                                                Séjour entier <small>(ce séjour ne repose pas sur le découpage par semaine)</small>
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -89,18 +100,16 @@
                         <label class="col-sm-4 control-label">Directeur du séjour</label>
                         <?php $accompagnateurs = accompagnateur::getList(); ?>
                         <div class="col-sm-6">
+                            <?php $i = 0; ?>
+                            <?php foreach($accompagnateurs as $key => $accompagnateur): ?>
                             <div class="radio">
-                                <?php $i = 0; ?>
-                                <?php foreach($accompagnateurs as $key => $accompagnateur): ?>
-                                <div class="radio">
-                                    <label for="form-sejour-accompagnateur-<?=$i; ?>">
-                                        <input class="icheck" type="radio" name="form_sejour_accompagnateur" id="form-sejour-accompagnateur-<?=$i; ?>" value="<?=$accompagnateur->id ?>" <?php if( isset($ref_accompagnateur->ref_accompagnateur) && $ref_accompagnateur->ref_accompagnateur == $accompagnateur->id ): ?>checked<?php endif; ?>>
-                                        <?=$accompagnateur->lastname ?> <?=$accompagnateur->firstname ?>
-                                    </label>
-                                </div>
-                                <?php $i++; ?>
-                                <?php endforeach; ?>
+                                <label for="form-sejour-accompagnateur-<?=$i; ?>">
+                                    <input class="icheck" type="radio" name="form_sejour_accompagnateur" id="form-sejour-accompagnateur-<?=$i; ?>" value="<?=$accompagnateur->id ?>" <?php if( isset($ref_accompagnateur->ref_accompagnateur) && $ref_accompagnateur->ref_accompagnateur == $accompagnateur->id ): ?>checked<?php endif; ?>>
+                                    <?=$accompagnateur->lastname ?> <?=$accompagnateur->firstname ?>
+                                </label>
                             </div>
+                            <?php $i++; ?>
+                            <?php endforeach; ?>
                         </div>
         
                     </div>

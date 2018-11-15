@@ -86,12 +86,12 @@
 
                     <?php else: ?>
                         <div class="form-group">
-                            <label class="col-sm-4 control-label" for="form-inscription-sejour-select">Séjour(s)</label>
+                            <label class="col-sm-4 control-label">Séjour(s)</label>
                             <div class="col-sm-6">
                                 <div class="sejours-group">
                                     <div class="sejour-form init" style="display:none;">
                                         <fieldset>
-                                            <select class="form-control input-sm" id="form-inscription-sejour-select" name="form_inscription_sejour[]">
+                                            <select class="form-control input-sm" name="form_inscription_sejour[]">
                                                 <option value="">Choisissez un séjour</option>
                                             </select>
                                         </fieldset>
@@ -105,7 +105,7 @@
                                     <?php foreach($sejours_linked as $sejour_linked): ?>
                                         <div class="sejour-form">
                                             <fieldset <?=(count($sejours_linked) > $l+1)? 'disabled' : ''; ?>>
-                                                <select class="form-control input-sm" id="form-inscription-sejour-select" name="form_inscription_sejour[]">
+                                                <select class="form-control input-sm" name="form_inscription_sejour[]">
                                                     <option value="">Choisissez un séjour</option>
                                                     <?php foreach($sejours as $sejour): ?>
                                                         <?php $date_from = new DateTime($sejour->date_from); ?>
@@ -119,7 +119,7 @@
                                                         <?php if($date_from->getTimestamp() != '-62169987600'): ?>
                                                             <?php $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
                                                         <?php endif; ?>
-                                                        <option <?php if( $sejour_linked->ref_sejour == $sejour->id ): ?>selected="selected"<?php endif; ?> data-truc="<?=$sejour_linked->ref_sejour?>/<?=$sejour->id?>" value="<?=$sejour->id ?>">
+                                                        <option <?php if( $sejour_linked->ref_sejour == $sejour->id ): ?>selected="selected"<?php endif; ?> data-entire="<?=$sejour->entire; ?>" data-truc="<?=$sejour_linked->ref_sejour?>/<?=$sejour->id?>" value="<?=$sejour->id ?>">
                                                             <?=$sejour->name ?> du <?=$date_from_string; ?> au <?=$date_to_string; ?>
                                                         </option>
                                                     <?php endforeach; ?>
@@ -128,18 +128,24 @@
 
                                                 <?php foreach($sejours as $sejour): ?>
                                                     <?php if( $sejour_linked->ref_sejour == $sejour->id ): ?>
-                                                        <?php $dates_inscriptions = inscription::getBySejourAndDossier($sejour_linked->ref_sejour, $dossier->id); ?>
+                                                        <?php
+                                                            $dates_inscriptions = inscription::getBySejourAndDossier($sejour_linked->ref_sejour, $dossier->id);
+                                                            $date_from = new DateTime($sejour->date_from);
+                                                            $date_to = new DateTime($sejour->date_to);
+                                                            $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp());
+                                                            $date_to_string = strftime('%d/%m/%Y', $date_to->getTimestamp());
 
-                                                        <?php $date_from = new DateTime($sejour->date_from); ?>
-                                                        <?php $date_to = new DateTime($sejour->date_to); ?>
-                                                        <?php $date_from_string = strftime('%d/%m/%Y', $date_from->getTimestamp()); ?>
-                                                        <?php $date_to_string = strftime('%d/%m/%Y', $date_to->getTimestamp()); ?>
-                                                        <?php $nb_weeks = tool::getNbWeeks($date_from, $date_to); ?>
+                                                            if ( $sejour->entire ) {
+                                                                $nb_weeks = 0;
+                                                            } else {
+                                                                $nb_weeks = tool::getNbWeeks($date_from, $date_to);
+                                                            }
+                                                        ?>
 
                                                         <?php if ($nb_weeks < 1): ?>
                                                             <div class="checkbox">
                                                                 <label for="">
-                                                                    <input type="checkbox" name="dates[]" value="<?=$date_from_string; ?>#<?=$date_to_string; ?>#<?=$sejour_linked->ref_sejour ?>" checked="checked"> 
+                                                                    <input type="checkbox" disabled="disabled" name="dates[]" value="<?=$date_from_string; ?>#<?=$date_to_string; ?>#<?=$sejour_linked->ref_sejour ?>" checked="checked"> 
                                                                     L'enfant est inscrit sur le week end en intégralité.
                                                                 </label>
                                                             </div>
@@ -392,6 +398,7 @@
             name: '<?=addslashes($sejour->name); ?>',
             start: '<?=$date_from; ?>',
             end: '<?=$date_to; ?>',
+            entire: <?=$sejour->entire; ?>,
             rendez_vous: {
                 hours_departure: <?php echo json_encode( unserialize( $sejour->hours_departure ) ); ?>,
                 hours_intermediate_return : <?php echo json_encode( unserialize( $sejour->hours_intermediate_return ) ); ?>,
@@ -425,9 +432,16 @@
         } else {
             $remove_sejour.removeAttr('disabled');
         }
+        // Si le dernier champ est rempli
         if ( $('.sejour-form:last-child').find('select').val() != '' ) {
+            // Si il y a au moins une case à cocher
             if ( $('.sejour-form:last-child').find('[type="checkbox"]:checked').length ) {
-                $add_sejour.removeAttr('disabled');
+                // console.log( $('.sejour-form:last-child').find('option:selected').attr('data-entire') == 1 )
+                if ( $('.sejour-form:last-child').find('option:selected').attr('data-entire') == 1  ) {
+                    $add_sejour.attr('disabled', 'disabled');
+                } else {
+                    $add_sejour.removeAttr('disabled');
+                }
             } else {
                 $add_sejour.attr('disabled', 'disabled');
             }
@@ -485,8 +499,9 @@
             var start = dataSejours[selectedId].start;
             var end = dataSejours[selectedId].end;
             var id = dataSejours[selectedId].id;
+            var entire = dataSejours[selectedId].entire;
             var nbWeeks = countWeeks( start, end );
-            if ( nbWeeks < 1 ) {
+            if ( nbWeeks < 1 || entire ) {
                 $('.sejour-form:last-child').find('fieldset').append('<div class="checkbox"><label><input type="checkbox" name="dates[]" value="' + toDate(start) + '#' + toDate(end) + '#' + id + '" data-id="' + id + '" data-start="' + start + '" data-end="' + end + '" disabled checked /> L\'enfant est inscrit sur le week end en intégralité.</label></div>');
             } else if ( nbWeeks === 1 ) {
                 $('.sejour-form:last-child').find('fieldset').append('<div class="checkbox"><label><input type="checkbox" name="dates[]" value="' + toDate(start) + '#' + toDate(end) + '#' + id + '" data-id="' + id + '" data-start="' + start + '" data-end="' + end + '" disabled checked /> L\'enfant est inscrit sur le séjour en intégralité.</label></div>');
@@ -657,7 +672,7 @@
 
 
     $(function () {
-
+        setControls();
         $add_sejour.on('click', function(e) {
             e.preventDefault();
             newDataSejours = [];
@@ -728,7 +743,6 @@
             var $elem = $(this).find(":selected");
             setRendezVous($elem.val());
         });
-
         
     });
 </script>

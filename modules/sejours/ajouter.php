@@ -45,6 +45,16 @@
                                     placeholder="Date de fin" title="Renseignez la date à laquelle se termine le séjour (jj/mm/aaaa)." 
                                     data-parsley-pattern="([0-3][0-9]|[1-9])/([1-9]|1[0-2]|0[1-9])/([1-2][0|9][0-9]{2})" >
                                 </div>
+                                <div class="col-xs-12">
+                                    <div class="checkbox">
+                                        <div class="checkbox">
+                                            <label for="form-sejour-entire">
+                                                <input class="icheck" type="checkbox" name="form_sejour_entier" id="form-sejour-entire" value="1">
+                                                Séjour entier <small>(ce séjour ne repose pas sur le découpage par semaine)</small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

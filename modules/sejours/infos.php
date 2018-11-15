@@ -58,6 +58,7 @@
             ':name' => $form_sejour_name,
             ':date_from' => $form_sejour_date_debut,
             ':date_to' => $form_sejour_date_fin,
+            ':entire' => $form_sejour_entier,
             ':ref_hebergement' => $form_sejour_hebergement,
             ':capacity_max' => $form_sejour_capacite_max,
             ':capacity_min' => $form_sejour_capacite_min,
@@ -111,6 +112,7 @@
             ':name' => $form_sejour_name,
             ':date_from' => $form_sejour_date_debut,
             ':date_to' => $form_sejour_date_fin,
+            ':entire' => $form_sejour_entier,
             ':ref_hebergement' => $form_sejour_hebergement,
             ':capacity_max' => $form_sejour_capacite_max,
             ':capacity_min' => $form_sejour_capacite_min,
@@ -161,11 +163,17 @@
 
     $date_from = new DateTime($sejour->date_from);
     $date_to = new DateTime($sejour->date_to);
-
-    $nb_weeks = tool::getNbWeeks($date_from, $date_to);
-    if ($nb_weeks == 0) {
+    
+    if ( $sejour->entire ) {
         $nb_weeks = 1;
+    } else {
+
+        $nb_weeks = tool::getNbWeeks($date_from, $date_to);
+        if ($nb_weeks == 0) {
+            $nb_weeks = 1;
+        }
     }
+
 ?>
 
 
@@ -203,7 +211,7 @@
 
         <div class="tab-container">
 
-            <?php if ($nb_weeks > 1): ?>
+            <?php if ( $nb_weeks > 1 ) : ?>
                 <ul class="nav nav-tabs">
 
                     <?php for ($i=1; $i <= $nb_weeks; $i++) : ?>
@@ -226,7 +234,7 @@
                 </ul>
             <?php endif; ?>
             <div class="tab-content">
-
+                
                 <?php for ($o=1; $o <= $nb_weeks; $o++) : ?>
                     <?php 
                         $date_from_query = new DateTime($sejour->date_from);

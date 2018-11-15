@@ -2145,3 +2145,11 @@ div.dt-button-background {
     background: radial-gradient(ellipse farthest-corner at center, rgba(50,50,50, .4) 0%, rgba(50,50,50, .5) 100%);
     z-index: 2001;
 }
+
+
+.iradio_flat-purple,
+.icheckbox_flat-purple {
+    margin-right: 5px;
+    margin-top: -2px;
+    margin-left: -20px;
+}

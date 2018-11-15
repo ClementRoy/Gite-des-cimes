@@ -71,11 +71,19 @@
 
                         $i++;
 
-                        $nb_weeks = tool::getNbWeeks(new DateTime($sejour->date_from), new DateTime($sejour->date_to));
+                        if ( $sejour->entire ) {
+                            $nb_weeks = 0;
+                        } else {
+                            $nb_weeks = tool::getNbWeeks(new DateTime($sejour->date_from), new DateTime($sejour->date_to));
+                        }
 
                         $type = '';
                         if ($nb_weeks < 1) {
-                            $stay_kind = 'week-end';
+                            if ( $sejour->entire ) {
+                                $stay_kind = 'séjour entier';
+                            } else {
+                                $stay_kind = 'week-end';
+                            }
                         } else {
                             $stay_kind = 'semaine';
                         }
@@ -214,7 +222,12 @@ ob_end_clean(); ?>
                                 $date_from = new DateTime($sejour->date_from);
                                 $date_to = new DateTime($sejour->date_to);
 
-                                $nb_weeks = tool::getNbWeeks(new DateTime($sejour->date_from), new DateTime($sejour->date_to));
+                                if ( $sejour->entire ) {
+                                    $nb_weeks = 0;
+                                } else {
+                                    $nb_weeks = tool::getNbWeeks(new DateTime($sejour->date_from), new DateTime($sejour->date_to));
+                                }
+
 
                                 $min = $sejour->capacity_min;
                                 $max = $sejour->capacity_max;
@@ -477,7 +490,12 @@ ob_end_clean(); ?>
                                 $date_from = new DateTime($sejour->date_from);
                                 $date_to = new DateTime($sejour->date_to);
 
-                                $nb_weeks = tool::getNbWeeks(new DateTime($sejour->date_from), new DateTime($sejour->date_to));
+                                if ( $sejour->entire ) {
+                                    $nb_weeks = 0;
+                                } else {
+                                    $nb_weeks = tool::getNbWeeks(new DateTime($sejour->date_from), new DateTime($sejour->date_to));
+                                }
+
 
                                 $min = $sejour->capacity_min;
                                 $max = $sejour->capacity_max;
