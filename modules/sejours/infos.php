@@ -966,8 +966,21 @@
                     $hours_departure =  unserialize($sejour->hours_departure);
                     $hours_return =  unserialize($sejour->hours_return);
 
+
                     $hours_intermediate_departure =  unserialize($sejour->hours_intermediate_departure);
                     $hours_intermediate_return =  unserialize($sejour->hours_intermediate_return);
+
+                    // tool::output( $hours_departure['hours'][1] . 'h' . $hours_departure['min'][1] );
+                    // tool::output( $hours_intermediate_return['hours'][1] . 'h' . $hours_intermediate_return['min'][1] );
+                    // tool::output( $hours_intermediate_departure['hours'][1] . 'h' . $hours_intermediate_departure['min'][1] );
+                    // tool::output( $hours_return['hours'][1] . 'h' . $hours_return['min'][1] );
+
+
+                    // tool::output( $hours_departure['hours'][2] . 'h' . $hours_departure['min'][2] );
+                    // tool::output( $hours_intermediate_return['hours'][2] . 'h' . $hours_intermediate_return['min'][2] );
+                    // tool::output( $hours_intermediate_departure['hours'][2] . 'h' . $hours_intermediate_departure['min'][2] );
+                    // tool::output( $hours_return['hours'][2] . 'h' . $hours_return['min'][2] );
+
 
                     $hour_departure = $hours_departure['hours'];
                     $min_departure = $hours_departure['min'];
@@ -991,16 +1004,16 @@
                 <address>
                     <strong>Gare de Villepinte, Rue Camille Pissarro 93420 Villepinte</strong><br>
                     Départ : <?=(tool::check($hour_departure[1]))? $hour_departure[1].'h'.$min_departure[1] : EMPTYVAL; ?><br>
-                    <?php if ( tool::check( $hour_intermediate_return[1] ) ): ?>Retour (intermédiaire) : <?php echo $hour_intermediate_return[1]; ?>h<?php echo $min_intermediate_departure[1]; ?><br><?php endif; ?>
-                    <?php if ( tool::check( $hour_intermediate_departure[1] ) ): ?>Départ (intermédiaire) : <?php echo $hour_intermediate_departure[1]; ?>h<?php echo $min_intermediate_return[1]; ?><br><?php endif; ?>
+                    <?php if ( tool::check( $hour_intermediate_return[1] ) ): ?>Retour (intermédiaire) : <?php echo $hour_intermediate_return[1]; ?>h<?php echo $min_intermediate_return[1]; ?><br><?php endif; ?>
+                    <?php if ( tool::check( $hour_intermediate_departure[1] ) ): ?>Départ (intermédiaire) : <?php echo $hour_intermediate_departure[1]; ?>h<?php echo $min_intermediate_departure[1]; ?><br><?php endif; ?>
                     Retour : <?=(tool::check($hour_return[1]))? $hour_return[1].'h'.$min_return[1] : EMPTYVAL; ?>
                 </address>
 
                 <address>
                     <strong>Bonneuil en Valois, au Gite</strong><br>
                     Départ : <?=(tool::check($hour_departure[2]))? $hour_departure[2].'h'.$min_departure[2] : EMPTYVAL; ?><br>
-                    <?php if ( tool::check( $hour_intermediate_return[2] ) ): ?>Retour (intermédiaire) : <?php echo $hour_intermediate_return[2]; ?>h<?php echo $min_intermediate_departure[2]; ?><br><?php endif; ?>
-                    <?php if ( tool::check( $hour_intermediate_departure[2] ) ): ?>Départ (intermédiaire) : <?php echo $hour_intermediate_departure[2]; ?>h<?php echo $min_intermediate_return[2]; ?><br><?php endif; ?>
+                    <?php if ( tool::check( $hour_intermediate_return[2] ) ): ?>Retour (intermédiaire) : <?php echo $hour_intermediate_return[2]; ?>h<?php echo $min_intermediate_return[2]; ?><br><?php endif; ?>
+                    <?php if ( tool::check( $hour_intermediate_departure[2] ) ): ?>Départ (intermédiaire) : <?php echo $hour_intermediate_departure[2]; ?>h<?php echo $min_intermediate_departure[2]; ?><br><?php endif; ?>
                     Retour : <?=(tool::check($hour_return[2]))? $hour_return[2].'h'.$min_return[2] : EMPTYVAL; ?>
                 </address>
             </div>
