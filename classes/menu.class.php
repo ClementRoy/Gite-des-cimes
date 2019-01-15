@@ -100,6 +100,11 @@ class menu
                         'min_rank' => 1,
                         'display' => false,
                     ),
+                    'archives' => array(
+                        'name' => 'Archives',
+                        'min_rank' => 1,
+                        'display' => true,
+                    ),
                 )
             ),
             'hebergements' => array(

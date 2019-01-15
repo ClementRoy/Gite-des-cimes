@@ -85,10 +85,12 @@ class saison
         $params = array(':id' => $saison_id);
         $sql = 'SELECT * FROM '.self::$table.' WHERE id=:id';
         $result = $db->row($sql, $params);
+
+
         $season = array(
                 'name' => $result->name,
-                'from' => new DateTime($year . '-' . $result->month_from . '-' . $result->day_from ),
-                'to' => new DateTime($year . '-' . $result->month_to . '-' . $result->day_to ),
+                'from' => new DateTime( $year . '-' . $result->month_from . '-' . $result->day_from ),
+                'to' => new DateTime( ( $result->month_from > $result->month_to ) ? $year + 1 : $year . '-' . $result->month_to . '-' . $result->day_to ),
             );
 
         return $season;

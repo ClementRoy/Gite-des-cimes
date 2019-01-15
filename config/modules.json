@@ -17,7 +17,7 @@
 	},
 	"dossiers" : {
 		"name" :  "dossiers",
-		"views" : ["index", "editer", "supprimer", "ajouter", "infos"]
+		"views" : ["index", "archives", "editer", "supprimer", "ajouter", "infos"]
 	},
 	"structures" : {
 		"name" : "structures",

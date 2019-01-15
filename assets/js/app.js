@@ -317,8 +317,10 @@ $(function() {
         return false;
     });
     $('.nav-tabs a').click(function (e) {
-        e.preventDefault();
-        $(this).tab('show');
+        if ( /^#/.test($(this).attr('href') ) ) {
+            e.preventDefault();
+            $(this).tab('show');
+        }
     });
 
     $('.icheck').iCheck({

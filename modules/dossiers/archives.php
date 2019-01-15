@@ -30,32 +30,26 @@
 
 <div class="tab-container">
     <div class="tb-special">
-        <div id="present">
+        <div id="past">
             <div class="table-responsive">
-                <table id="datatable-present" class="table table-bordered">
+                <table class="table table-bordered" id="datatable-past">
                     <thead>
-                        <tr>
                         <tr>
                             <th class="sortable" style="width: 65px;">N°</th>
                             <th class="sortable" style="width: 270px;">Nom de l'enfant</th>
                             <th class="sortable">Séjour(s)</th>
-                            <th class="sortable" width="155" style="width:155px;">Statut</th>
-                            <th class="sortable" width="155" style="width:155px;">Prise en charge</th>
-                            <th class="sortable" width="180" style="width:180px;">Modifié le</th>
+                            <th class="sortable" width="170" style="width:170px;">Statut</th>
+                            <th class="sortable" width="170" style="width:170px;">Pris en charge</th>
+                            <th class="sortable" width="200" style="width:200px;">Modifié le</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <?php
-                            $the_json = array();
-
-                            $dossiers = dossier::getListPresent(); 
-
-                            // On tri les inscriptions de la plus récement modifiées à la plus ancienne
-                            $dossiers = tool::array_sort($dossiers, 'edited', SORT_DESC);
-                            //tool::output($dossiers);
+                            $the_json_past = array();
+                            $dossiers_past = dossier::getListPast(); 
                             $the_datas = array();
-
-                            foreach($dossiers as $key => $dossier) {
+                            foreach($dossiers_past as $key => $dossier) {
                                 $enfant = enfant::get($dossier->dossier_ref_enfant);
                                 $inscriptions_dossier = inscription::getByDossier($dossier->dossier_id);
 
@@ -63,13 +57,12 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="/dossiers/infos/id/'.$dossier->dossier_id.'" class="item"><i class="fa fa-share"></i> Voir la fiche</a></li>
                                     <li><a href="/dossiers/editer/id/'.$dossier->dossier_id.'" class="item"><i class="fa fa-edit"></i> Modifier</a></li>';
-                                
                                 if ( $user->rank > 2 ) {
-                                    $popup .= '<li><a href="#" class="modal-remove-link" data-id="'.$dossier->dossier_id.'" data-name="'.$enfant->firstname.' '.$enfant->lastname.'" data-toggle="modal" data-target="#modal-remove" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>';
+                                    $popup .= '<li><a href="#" class="modal-remove-link" data-id="'.$dossier->dossier_id.'" data-name="'.$dossier->dossier_id.'" data-toggle="modal" data-target="#modal-remove" class="item"><i class="fa fa-remove"></i> Supprimer</a></li>';
                                 }
 
                                 $popup .= '</ul>';
-
+                                
                                 $last_inscription = end($inscriptions_dossier);
                                 if ($last_inscription != '') {
                                     $sejours = '<span class="hide">'.$last_inscription->date_to.'</span>';
@@ -79,6 +72,7 @@
 
                                 $i = 0;
                                 $l = count($inscriptions_dossier);
+
 
                                 $sejours .= '<ul class="list-unstyled">';
                                 foreach($inscriptions_dossier as $inscription_dossier) {
@@ -97,7 +91,6 @@
                                     if ($date_to->getTimestamp() != '-62169987600') {
 
                                         $sejours .= strftime('%d %B %Y', $date_to->getTimestamp());
-                                        $sejours .= '</li>';
                                     }
                                     $i++;
 
@@ -105,8 +98,10 @@
                                         // $sejours .= ' <br> ';
                                         // $sejours .= ' &nbsp;&#10141;&nbsp; ';
                                     }
+                                    $sejours .= '</li>';
                                 }
                                 $sejours .= '</ul>';
+
 
                                 $finished = '';
                                 if ($dossier->finished) {
@@ -126,6 +121,7 @@
                                     $supported = '<span class="label label-warning">Non</span>';
                                 }
 
+
                                 $edited = '<span class="hide">'.$dossier->edited.'</span>';
                                 $edited_date = new DateTime($dossier->edited);
                                 if ($edited_date->getTimestamp() != '-62169987600') {
@@ -135,8 +131,8 @@
                                 }
 
                                 $the_data = [
-                                    '<a href="/dossiers/infos/id/'.$dossier->dossier_id.'">#'.$dossier->dossier_id.'</a>'.$popup,
-                                    '<a href="/enfants/infos/id/'.$enfant->id.'">'.$enfant->lastname.' '.$enfant->firstname.'</a>',
+                                    '<a href="/dossiers/infos/id/'.$dossier->dossier_id.'">#'.$dossier->dossier_id.'</a>',
+                                    '<a href="/enfants/infos/id/'.$enfant->id.'">'.$enfant->lastname.' '.$enfant->firstname.'</a>'.$popup,
                                     $sejours,
                                     $finished,
                                     $supported,
@@ -144,24 +140,24 @@
                                 ];
                                 array_push($the_datas, $the_data);
                             }
-                            array_push($the_json, $the_datas);
+                            array_push($the_json_past, $the_datas);
                         ?>
                     </tbody>
+
                 </table>
                 <?php ob_start(); ?>
                 <script>
-                var the_future_datas = [];
-                <?php foreach ($the_json as $key => $value): ?>
-                    the_future_datas.push(<?=json_encode($the_json[$key]);?>);
+                var the_past_datas = [];
+                <?php foreach ($the_json_past as $key => $value): ?>
+                    the_past_datas.push(<?=json_encode($the_json_past[$key]);?>);
                 <?php endforeach; ?>
 
-                $('#datatable-present').dataTable({
+                $('#datatable-past').dataTable({
                     "bProcessing": true,
                     "bDeferRender": true,
                     "bStateSave": true,
-                    "aaData":   the_future_datas[0]
+                    "aaData":   the_past_datas[0]
                 });
-                </script>
                 </script>
                 <?php $scripts .= ob_get_contents();
                 ob_end_clean(); ?>

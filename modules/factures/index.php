@@ -29,7 +29,8 @@
      */
     // Question comment on gère les inscriptions qui n'ont pas de centre payeur ?
 
-    $seasons = saison::getListAll();
+    // $seasons = saison::getListAll();
+    // tool::output( $seasons );
 
     // echo '<ul>';
     // foreach ($seasons as $key => $season) {
@@ -94,8 +95,6 @@
                             foreach ($structures as $structure_key => $structure) {
 
                                 $factures = facture::getByStructureAndSeason($structure->id, $season->id, $year);
-
-
 
 
                                 $enfants = facture::getInscriptionsByStructureAndSeason($structure->id, $season->id, $year);
